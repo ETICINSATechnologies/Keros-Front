@@ -12,6 +12,10 @@ export function catRouter(): Router {
   const router: Router = Router();
 
   router.get("", catController.viewCats);
+  // Que les routes en chat/{id} avec id un nombre (c'est un regex)
+  router.get("/:id(\\d+)/", catController.viewCat);
+  router.get("/create", catController.viewCatForm);
+  router.post("/create", catController.postCatForm);
 
   return router;
 }

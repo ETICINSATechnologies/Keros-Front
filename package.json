@@ -10,6 +10,7 @@
     "nodemon": "nodemon ./bin/www",
     "watch": "grunt watch",
     "dev": "npm-run-all --sequential build --parallel watch nodemon",
+    "devmock": "cross-env NODE_ENV=mock npm-run-all --sequential build --parallel watch nodemon",
     "clean": "rimraf dist",
     "test": "npm-run-all --sequential build mocha",
     "mocha": "cross-env NODE_ENV=testing mocha dist/test --recursive --exit"
