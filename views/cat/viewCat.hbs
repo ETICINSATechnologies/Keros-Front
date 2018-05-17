@@ -1,0 +1,45 @@
+<body class="hold-transition skin-green fixed sidebar-mini">
+<div class="wrapper">
+  {{> template/header}}
+  {{> template/sidebar}}
+
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Voir les chats
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-angellist"></i>Chat</a></li>
+        <li class="active">Voir les chats</li>
+      </ol>
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">{{cat.name}}</h3>
+            </div>
+            <div class="box-body">
+              Le chat {{cat.name}} a l'ID {{cat.id}} et fait {{cat.height}}cm de hauteur.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><a href="/cat">Revenir à la liste des chats</a> </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  {{> template/footer}}
+</div>
+{{> template/scripts}}
+</body>

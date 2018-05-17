@@ -6,26 +6,64 @@
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        View Cats
+        Voir les chats
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-home"></i>Cat</a></li>
-        <li class="active">View Cats</li>
+        <li><a href="#"><i class="fa fa-angellist"></i>Chat</a></li>
+        <li class="active">Voir les chats</li>
       </ol>
     </section>
-
-    <!-- Main content -->
     <section class="content">
-        {{#if cats}}
-        <label>Cats :</label>
-        <ul>
-            {{#each cats}}
-                <li>{{id}} : {{name}} is {{height}}cm.</li>
-            {{/each}}
-        </ul>
-        {{else}}
-            <p>No cats available, sorry !</p>
-        {{/if}}
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Les chats</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered">
+                <tbody>
+                <tr>
+                  <th>ID</th>
+                  <th>Nom</th>
+                  <th>Hauteur</th>
+                  <th>Voir</th>
+                </tr>
+                {{#each cats}}
+                  <tr>
+                    <td>{{id}}</td>
+                    <td>{{name}}</td>
+                    <td>{{height}}</td>
+                    <td><a href="/cat/{{id}}" class="fa fa-hand-pointer-o"></a></td>
+                  </tr>
+                {{/each}}
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+              <ul class="pagination pagination-sm no-margin pull-right">
+                <li><a href="#">«</a></li>
+                <li><a href="#">Pages</a></li>
+                <li><a href="#">à</a></li>
+                <li><a href="#">faire</a></li>
+                <li><a href="#">»</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><a href="/cat/create">Créer un chat</a> </h3>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   </div>
 

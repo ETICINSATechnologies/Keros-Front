@@ -5,16 +5,25 @@ import { DefaultStagingConfig } from "./defaultStagingConfig";
 import { DefaultProductionConfig } from "./defaultProductionConfig";
 import { Environment } from "./environment";
 import * as winston from "winston";
+import { DefaultMockConfig } from "./defaultMockConfig";
 
 export class Config {
 
   private static activeConfig: IConfig;
 
   public static bootstrap() {
+    // Don't bootstrap if config is already loaded
+    if(this.activeConfig){
+      return;
+    }
+
     const nodeEnv = process.env["NODE_ENV"];
     switch (nodeEnv) {
       case "development":
         this.activeConfig = new DefaultDevelopmentConfig();
+        break;
+      case "mock":
+        this.activeConfig = new DefaultMockConfig();
         break;
       case "testing":
         this.activeConfig = new DefaultTestingConfig();
