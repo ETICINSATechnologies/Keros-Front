@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+"use strict";
+const server = require("../dist/src/server");
+const app = server.Server.bootstrap().app;

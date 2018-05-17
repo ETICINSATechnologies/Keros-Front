@@ -1,0 +1,35 @@
+<body class="hold-transition skin-green fixed sidebar-mini">
+<div class="wrapper">
+  {{> template/header}}
+  {{> template/sidebar}}
+
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        View Cats
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-home"></i>Cat</a></li>
+        <li class="active">View Cats</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        {{#if cats}}
+        <label>Cats :</label>
+        <ul>
+            {{#each cats}}
+                <li>{{id}} : {{name}} is {{height}}cm.</li>
+            {{/each}}
+        </ul>
+        {{else}}
+            <p>No cats available, sorry !</p>
+        {{/if}}
+    </section>
+  </div>
+
+  {{> template/footer}}
+</div>
+{{> template/scripts}}
+</body>
