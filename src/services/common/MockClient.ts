@@ -1,6 +1,8 @@
 import { IClient } from "./BaseService";
 import { IRestResponse, IRequestOptions } from "typed-rest-client/RestClient";
 import { Cat } from "../../models/cat/Cat";
+import { LoginResponse } from "../../models/auth/LoginResponse";
+import HttpError from "../../util/httpError";
 
 export class MockResponse<T> implements IRestResponse<T> {
   constructor(
@@ -17,6 +19,13 @@ export class MockClient implements IClient {
       case "cat":
         mockObj = <T> new Cat(1, "tom", 7.42);
         status = 200;
+        break;
+      case "auth/login":
+        if(resources.username === "cbreeze" && resources.password === "hunter11") {
+          mockObj = <T> new LoginResponse("tokenIsHere");
+          status = 200;
+        } else
+          throw new HttpError("Authentification échouée", 401);
         break;
     }
     return Promise.resolve(new MockResponse(mockObj, status));
