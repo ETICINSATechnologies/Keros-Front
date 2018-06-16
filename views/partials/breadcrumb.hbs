@@ -1,0 +1,15 @@
+<ol class="breadcrumb">
+  {{#if (eq (toUpper tab) "GRC") }}
+    <li><a href="/grc"><i class="fa fa-comments"></i>GRC</a></li>
+  {{else if (eq (toUpper tab) "RH") }}
+    <li><a href="/rh"><i class="fa fa-user-circle-o"></i>RH</a></li>
+  {{else if (eq (toUpper tab) "ACCUEIL") }}
+    <li><a href="/"><i class="fa fa-home"></i>Accueil</a></li>
+  {{else if (eq (toUpper tab) "SUPPORT") }}
+    <li><a href="/support"><i class="fa fa-support"></i>Support</a></li>
+  {{/if}}
+
+  {{#each (split path ",")}}
+    <li {{#if @last}}class="active"{{/if}}>{{.}}</li>
+  {{/each}}
+</ol>
