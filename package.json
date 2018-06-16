@@ -6,6 +6,7 @@
   "author": "ETIC INSA Technologies",
   "scripts": {
     "start": "node ./bin/www",
+    "startmock": "cross-env NODE_ENV=mock node ./bin/www",
     "build": "grunt",
     "nodemon": "nodemon ./bin/www",
     "watch": "grunt watch",
