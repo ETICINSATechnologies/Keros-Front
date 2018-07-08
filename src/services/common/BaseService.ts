@@ -2,7 +2,7 @@ import { IRequestOptions, IRestResponse } from "typed-rest-client/RestClient";
 import HttpError from "../../util/httpError";
 import { Config } from "../../config/config";
 import { KerosRestClient } from "./KerosRestClient";
-import { MockClient } from "./MockClient";
+import { MockClient } from "./mock/MockClient";
 
 export interface IClient {
   options<T>(requestUrl: string, options?: IRequestOptions): Promise<IRestResponse<T>>;
