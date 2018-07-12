@@ -28,8 +28,8 @@ describe("Login tests", function () {
     request
       .post("/auth/login")
       .send({
-        username: 'cbreeze',
-        password: 'hunter11'
+        username: 'username',
+        password: 'password'
       })
       .set("Accept", "text/html")
       .expect("Content-Type", "text/html; charset=utf-8")
