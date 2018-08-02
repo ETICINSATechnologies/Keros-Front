@@ -4,10 +4,12 @@ import { AuthMock } from "./auth/AuthMock";
 import { CatMock } from "./cat/CatMock";
 import { IMock } from "./IMock";
 import { MemberMock } from "./member/MemberMock";
+import { FirmMock } from "./firm/FirmMock";
 
 const MOCKS: IMock[] = [
     new AuthMock(),
     new MemberMock(),
+    new FirmMock(),
     new CatMock()
 ];
 
