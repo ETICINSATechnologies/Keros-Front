@@ -1,11 +1,11 @@
 import { IMock } from "../IMock";
 import { MockResponse } from "../MockClient";
 import { IRestResponse, IRequestOptions } from "typed-rest-client/RestClient";
-import {Member} from "../../../../models/core/Member";
-import {Page} from "../../../../models/core/Page";
-import { Gender} from "../../../../models/core/Core";
-import {SchoolYear} from "../../../../models/core/Core";
-import {Meta} from "../../../../models/core/Meta";
+import { Member } from "../../../../models/core/Member";
+import { Page } from "../../../../models/core/Page";
+import { Gender } from "../../../../models/core/Core";
+import { SchoolYear } from "../../../../models/core/Core";
+import { Meta } from "../../../../models/core/Meta";
 
 export class MemberMock implements IMock {
     create<T>(resource: string, resources: any, options?: IRequestOptions): IRestResponse<T> | null {

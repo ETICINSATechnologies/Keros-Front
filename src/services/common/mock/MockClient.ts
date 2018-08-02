@@ -1,10 +1,12 @@
 import { IClient } from "../BaseService";
 import { IRequestOptions, IRestResponse } from "typed-rest-client/RestClient";
+import { AuthMock } from "./auth/AuthMock";
 import { CatMock } from "./cat/CatMock";
 import { IMock } from "./IMock";
 import { MemberMock } from "./member/MemberMock";
 
 const MOCKS: IMock[] = [
+    new AuthMock(),
     new MemberMock(),
     new CatMock()
 ];
