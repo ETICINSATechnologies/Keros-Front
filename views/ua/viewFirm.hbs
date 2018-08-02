@@ -1,0 +1,51 @@
+<body class="hold-transition skin-green fixed sidebar-mini">
+<div class="wrapper">
+  {{> template/header}}
+  {{> template/sidebar}}
+
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Voir les sociétés
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-angellist"></i>Société</a></li>
+        <li class="active">Voir les sociétés</li>
+      </ol>
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">{{firm.name}}</h3>
+            </div>
+            <div class="box-body">
+              <ul>
+                <li>Nom : {{firm.name}}</li>
+                <li>Siret : {{firm.siret}}</li>
+                <li>Adresse : {{firm.addressId}}</li>
+                <li>Type : {{firm.typeId}}</li>
+              </ul>
+            </div>
+            <a href="/ua/firm/update/{{firm.id}}">Modifiez</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><a href="/ua/firm">Revenir à la liste des sociétés</a> </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  {{> template/footer}}
+</div>
+{{> template/scripts}}
+</body>

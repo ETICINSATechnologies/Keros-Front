@@ -1,0 +1,103 @@
+<body class="hold-transition skin-green fixed sidebar-mini">
+<div class="wrapper">
+  {{> template/header}}
+  {{> template/sidebar}}
+
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+          {{#if firm}}Modification d'une société{{else}}Création d'une société{{/if}}
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/ua/firm"><i class="fa fa-angellist"></i>Société</a></li>
+        {{#if firm}}
+          <li class="active">Modification de société</li>
+        {{else}}
+          <li class="active">Création de société</li>
+        {{/if}}
+      </ol>
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <section class="content">
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title">
+                  {{#if firm}}Modifiez une société{{else}}Inscrivez une société</h3>{{/if}}
+                </h3>
+              </div>
+              <form role="form" {{#if firm}}method="post" action="/ua/firm/update"{{else}}method="post" action="/ua/firm/create"{{/if}}>
+                <div class="box-body">
+                  <div class="form-group">
+                    <label for="name">Nom</label>
+                    <input type="text" class="form-control" id="name" name="name"
+                           {{#if firm}}value="{{firm.name}}"{{else}}placeholder="Entrez le nom"{{/if}} required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="siret">Siret</label>
+                    <input type="text" class="form-control" id="siret" name="siret" maxlength="20"
+                           {{#if firm}}value="{{firm.siret}}"{{else}}placeholder="Entrez le siret"{{/if}} required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="line1">Adresse</label>
+                    <input type="string" class="form-control" id="line1" name="line1"
+                           placeholder="Entrez l'adresse 1" required>
+                  </div>
+
+                  <div class="form-group">
+                      <input type="string" class="form-control" id="line2" name="line2"
+                           placeholder="Entrez l'adresse 2">
+                  </div>
+
+                  <div class="form-group">
+                      <label for="city">Ville</label>
+                      <input type="string" class="form-control" id="city" name="city"
+                           placeholder="Entrez la ville" required>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="postalCode">Code postal</label>
+                      <input type="string" class="form-control" id="postalCode" name="postalCode"
+                           placeholder="Entrez le code postal" required>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="countryId">Pays</label>
+                      <select class="form-control" id="countryId" name="countryId" required>
+                          <option value="1">France</option>
+                          <option value="2">Suisse</option>
+                          <option value="3">Allemagne</option>
+                          <option value="4">Espagne</option>
+                      </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="typeId">Type</label>
+                    <select class="form-control" id="typeId" name="typeId" required>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                  </div>
+
+                </div>
+
+                <div class="box-footer">
+                  <button type="submit" class="btn btn-primary">Envoyer</button>
+                </div>
+              </form>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  {{> template/footer}}
+</div>
+{{> template/scripts}}
+</body>

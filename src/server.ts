@@ -10,6 +10,8 @@ import handlebars from "./util/handlebars";
 import * as http from "http";
 import { Config } from "./config/config";
 import { catRouter } from "./control/cat/catRouter";
+import  { coreRouter } from "./control/core/coreRouter";
+import {firmRouter} from "./control/ua/firmRouter";
 
 /**
  * The server - contains the express server
@@ -67,6 +69,8 @@ export class Server {
     this.app.use(cookieParser("156daf75-d51b-4918-a1b5-e158126b0cbd"));
 
     this.app.use("/cat", catRouter());
+    this.app.use("/core/member", coreRouter());
+    this.app.use("/ua/firm", firmRouter());
 
     // Catch 404 and forward to error handler
     this.app.use(function (req: express.Request, res: express.Response, next: express.NextFunction) {
