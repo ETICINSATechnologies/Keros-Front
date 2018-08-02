@@ -11,6 +11,7 @@ import * as http from "http";
 import { Config } from "./config/config";
 import { catRouter } from "./control/cat/catRouter";
 import { authRouter } from "./control/auth/authRouter";
+import  { coreRouter } from "./control/core/coreRouter";
 
 /**
  * The Launcher - contains the express Application as well as methods to launch a server on that
@@ -70,6 +71,7 @@ export class Launcher {
 
     this.app.use("/auth", authRouter());
     this.app.use("/cat", catRouter());
+	this.app.use("/core/member", coreRouter());
 
     this.app.get("", function (req, res) {
       res.redirect('/cat');
