@@ -1,0 +1,94 @@
+<body class="hold-transition skin-green fixed sidebar-mini">
+<div class="wrapper">
+  {{> template/header}}
+  {{> template/sidebar}}
+
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Voir les membres
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/core/member"><i class="fa fa-angellist"></i>Membre</a></li>
+        <li class="active">Voir les membres</li>
+      </ol>
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-md-3">
+            <a href="/core/member/inscription" style="color: white;"><button type="button" class="btn btn-block btn-success btn-lg box">Nouveau membre</button></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Les membres</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            <div class="dataTables_wrapper form-inline dt-bootstrap">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="dataTables_length">
+                    <label>
+                      Voir
+                      <select name="user_length" class="form-control input-sm" id="pageSize">
+                        <option value="" id="test" disabled selected>{{members.meta.itemPerPage}}</option>
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                      </select>
+                      entrées
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="dataTables_filter">
+                      <label>
+                        Rechercher:
+                        <input type="search" class="form-control input-sm" id="searching" name="search">
+                      </label>
+                    </div>
+                </div>
+              </div>
+              <table class="table table-bordered dataTable">
+                <tbody>
+                <tr>
+                  <th>Nom d'utilisateur <a href="#" id="username" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                  <th>Nom<a href="#" id="name" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                  <th>Prénom<a href="#" id="firstname" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                  <th>Id position<a href="#" id="positionId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                  <th>Email<a href="#" id="email" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                  <th>Voir</th>
+                  <th>Modifier</th>
+                </tr>
+                {{#each members.content}}
+                  <tr>
+                    <td>{{username}}</td>
+                    <td>{{lastName}}</td>
+                    <td>{{firstName}}</td>
+                    <td>{{positionId}}</td>
+                    <td>{{email}}</td>
+                    <td><a href="/core/member/{{id}}" class="fa fa-hand-pointer-o"></a></td>
+                    <td><a href="/core/member/update/{{id}}">Modifier</a></td>
+                  </tr>
+                {{/each}}
+                </tbody>
+              </table>
+              </div>
+            </div>
+            <div class="box-footer">
+            {{> template/pagination meta=members.meta}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  {{> template/footer}}
+</div>
+{{> template/scripts}}
+</body>
