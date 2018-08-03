@@ -1,0 +1,57 @@
+<body class="hold-transition skin-green fixed sidebar-mini">
+<div class="wrapper">
+  {{> template/header}}
+  {{> template/sidebar}}
+
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Voir les membres
+      </h1>
+      {{> breadcrumb tab="SG" path="Membres,Voir les membres"}}
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">{{member.name}}</h3>
+            </div>
+            <div class="box-body">
+              <b>{{member.firstName}} {{member.lastName}}</b>
+              <ul>
+                <li>Nom d'utilisateur : {{member.username}}</li>
+                <li>Genre : {{member.gender}}</li>
+                <li>Email : {{member.email}}</li>
+                <li>Date d'anniversaire : {{member.birthday}}</li>
+                <li>Id de département : {{member.deparmentId}}</li>
+                <li>Année d'étude : {{member.schoolYear}}e année</li>
+                <li>Numéro de téléphone : {{member.telephone}}</li>
+                <li>Adresse : {{member.addressId}}</li>
+                <!--<li>Ville : {{member.city}}</li>
+                <li>Code postal : {{member.postalCode}}</li>
+                <li>Id de pays : {{member.CountryId}}</li>-->
+                <li>Id de position : {{member.positionId}}</li>
+                </ul>
+            </div>
+            <a href="/core/member/update/{{member.id}}">Modifier</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><a href="/core/member">Revenir à la liste des membres</a> </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  {{> template/footer}}
+</div>
+{{> template/scripts}}
+</body>

@@ -1,0 +1,46 @@
+<body class="hold-transition skin-green fixed sidebar-mini">
+<div class="wrapper">
+  {{> template/header}}
+  {{> template/sidebar}}
+
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Voir les études
+      </h1>
+      {{> breadcrumb tab="UA" path="Etudes,Voir les études"}}
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">{{study.name}}</h3>
+            </div>
+            <div class="box-body">
+              <ul>
+                <li>Nom : {{study.name}}</li>
+                <li>Id : {{study.id}}</li>
+              </ul>
+            </div>
+            <a href="/ua/study/update/{{study.id}}">Modifier</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><a href="/ua/study">Revenir à la liste des études</a> </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  {{> template/footer}}
+</div>
+{{> template/scripts}}
+</body>
