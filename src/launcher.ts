@@ -13,6 +13,7 @@ import { catRouter } from "./control/cat/catRouter";
 import { authRouter } from "./control/auth/authRouter";
 import  { coreRouter } from "./control/core/coreRouter";
 import { firmRouter } from "./control/ua/firmRouter";
+import { studyRouter } from "./control/ua/studyRouter";
 
 /**
  * The Launcher - contains the express Application as well as methods to launch a server on that
@@ -74,6 +75,7 @@ export class Launcher {
     this.app.use("/cat", catRouter());
     this.app.use("/core/member", coreRouter());
     this.app.use("/ua/firm", firmRouter());
+    this.app.use("/ua/study", studyRouter());
 
     this.app.get("", function (req, res) {
       res.redirect("/cat");

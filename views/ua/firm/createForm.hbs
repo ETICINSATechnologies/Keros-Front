@@ -8,14 +8,11 @@
       <h1>
           {{#if firm}}Modification d'une société{{else}}Création d'une société{{/if}}
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="/ua/firm"><i class="fa fa-angellist"></i>Sociétés</a></li>
-        {{#if firm}}
-          <li class="active">Modification de société</li>
-        {{else}}
-          <li class="active">Création de société</li>
-        {{/if}}
-      </ol>
+    {{#if firm}}
+    {{> breadcrumb tab="UA" path="Sociétés,Modification d'une société"}}
+    {{else}}
+    {{> breadcrumb tab="UA" path="Sociétés,Création d'une société"}}
+    {{/if}}
     </section>
     <section class="content">
       <div class="row">

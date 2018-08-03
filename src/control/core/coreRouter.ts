@@ -14,7 +14,7 @@ export function coreRouter(): Router {
 
     router.get("", memberController.viewMembers);
     router.get("/:id(\\d+)/", memberController.viewMember);
-    router.get("/inscription", memberController.viewMemberForm);
+    router.get("/signin", memberController.viewMemberForm);
     router.post("/create", memberController.postMemberForm);
     router.get("/update/:id(\\d+)/", memberController.viewMemberForm);
 

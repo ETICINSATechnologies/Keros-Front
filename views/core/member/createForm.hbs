@@ -8,14 +8,11 @@
       <h1>
           {{#if member}}Modification d'un membre{{else}}Page d'inscription{{/if}}
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="/core/member"><i class="fa fa-angellist"></i>Membre</a></li>
-        {{#if member}}
-          <li class="active">Modification de membres</li>
-        {{else}}
-          <li class="active">Page d'inscription</li>
-        {{/if}}
-      </ol>
+      {{#if member}}
+          {{> breadcrumb tab="SG" path="Membres,Modification d'un membre"}}
+      {{else}}
+          {{> breadcrumb tab="SG" path="Membres,Création d'un membre"}}
+      {{/if}}
     </section>
     <section class="content">
       <div class="row">
@@ -86,7 +83,7 @@
                   <div class="form-group">
                     <label for="schoolYear">Année scolaire</label>
                     <select class="form-control" id="schoolYear" name="schoolYear">
-                      {{#if member}}<option value="" disabled selected>{{member.SchoolYear}}e année{{/if}}
+                      {{#if member}}<option value="" disabled selected>{{member.schoolYear}}e année{{/if}}
                       <option value="1">1ere année</option>
                       <option value="2">2e année</option>
                       <option value="3">3e année</option>
@@ -138,8 +135,8 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="nameInput">Id de position</label>
-                    <input type="text" class="form-control" id="firstName" name="firstName"
+                    <label for="positionId">Id de position</label>
+                    <input type="text" class="form-control" id="positionId" name="positionId"
                            {{#if member}}value="{{member.positionId}}"{{else}}placeholder="Entrez la position"{{/if}} required>
                   </div>
 

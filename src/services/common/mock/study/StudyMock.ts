@@ -1,23 +1,24 @@
 import { IMock } from "../IMock";
 import { IRestResponse, IRequestOptions } from "typed-rest-client/RestClient";
-import { Firm } from "../../../../models/ua/Firm";
+import { Study } from "../../../../models/ua/Study";
 import { Page } from "../../../../models/core/Page";
 import { MockResponse } from "../MockClient";
 import { Meta } from "../../../../models/core/Meta";
 
-export class FirmMock implements IMock {
+export class StudyMock implements IMock {
     create<T>(resource: string, resources: any, options?: IRequestOptions): IRestResponse<T> | null {
         let mockObj: T | null = null;
         let status: number = 500;
         switch (resource) {
-            case "firm":
-                mockObj = <T> new Firm(1, "9999999");
+            case "study":
+                mockObj = <T> new Study(1, "Etude 1");
                 status = 200;
                 return new MockResponse(mockObj, status);
         }
         return null;
     }
 
+    // TODO implement when real delete is used
     del<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null{
         return null;
     }
@@ -26,16 +27,16 @@ export class FirmMock implements IMock {
         let mockObj: T | null = null;
         let status: number = 500;
         switch (resource) {
-            case "firm/1":
-                mockObj = <T> new Firm(1, "99999999", "Dupont", 4, 2);
+            case "study/1":
+                mockObj = <T> new Study(1, "Etude 1");
                 status = 200;
                 return new MockResponse(mockObj, status);
-            case "firm/2":
-                mockObj = <T> new Firm(2, "1111111", "Henry", 2, 6);
+            case "study/2":
+                mockObj = <T> new Study(2, "Etude 2");
                 status = 200;
                 return new MockResponse(mockObj, status);
-            case "firm":
-                mockObj = <T> new Page(<T[]> [new Firm(1, "99999999", "Dupont", 4, 2), new Firm(2, "11111111", "Henry", 2, 6)], new Meta (0,1,2 ,25))
+            case "study":
+                mockObj = <T> new Page(<T[]> [new Study(1, "Etude 1"), new Study(2, "Etude 2")], new Meta (0, 1, 2 , 25))
                 status = 200;
                 return new MockResponse(mockObj, status);
         }
@@ -46,18 +47,20 @@ export class FirmMock implements IMock {
         let mockObj: T[] | null = null;
         let status: number = 500;
         switch (resource) {
-            case "firm":
-                mockObj = <T[]> [ <T> new Firm(1, "99999999", "Dupont", 4, 2), new Firm(2, "11111111", "Henry", 2, 6)];
+            case "study":
+                mockObj = <T[]> [ <T> new Study(1, "Etude 1"), new Study(2, "Etude 2")];
                 status = 200;
                 return new MockResponse(mockObj, status);
         }
         return null;
     }
 
+    // TODO implement when real options is used
     options<T>(requestUrl: string, options?: IRequestOptions): IRestResponse<T> | null {
         return null;
     }
 
+    // TODO implement when real update is used
     update<T>(resource: string, resources: any, options?: IRequestOptions): IRestResponse<T> | null {
         return null;
     }

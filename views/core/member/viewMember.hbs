@@ -8,10 +8,7 @@
       <h1>
         Voir les membres
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="/core/member"><i class="fa fa-angellist"></i>Membre</a></li>
-        <li class="active">Voir les membres</li>
-      </ol>
+      {{> breadcrumb tab="SG" path="Membres,Voir les membres"}}
     </section>
     <section class="content">
       <div class="row">
@@ -28,7 +25,7 @@
                 <li>Email : {{member.email}}</li>
                 <li>Date d'anniversaire : {{member.birthday}}</li>
                 <li>Id de département : {{member.deparmentId}}</li>
-                <li>Année d'étude : {{member.SchoolYear}}e année</li>
+                <li>Année d'étude : {{member.schoolYear}}e année</li>
                 <li>Numéro de téléphone : {{member.telephone}}</li>
                 <li>Adresse : {{member.addressId}}</li>
                 <!--<li>Ville : {{member.city}}</li>
@@ -37,7 +34,7 @@
                 <li>Id de position : {{member.positionId}}</li>
                 </ul>
             </div>
-            <a href="/core/member/update/{{member.id}}">Modifiez</a>
+            <a href="/core/member/update/{{member.id}}">Modifier</a>
           </div>
         </div>
       </div>

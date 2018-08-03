@@ -8,15 +8,12 @@
       <h1>
         Voir les membres
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="/core/member"><i class="fa fa-angellist"></i>Membre</a></li>
-        <li class="active">Voir les membres</li>
-      </ol>
+      {{> breadcrumb tab="SG" path="Membres,Voir les membres"}}
     </section>
     <section class="content">
       <div class="row">
         <div class="col-md-3">
-            <a href="/core/member/inscription" style="color: white;"><button type="button" class="btn btn-block btn-success btn-lg box">Nouveau membre</button></a>
+            <a href="/core/member/signin" style="color: white;"><button type="button" class="btn btn-block btn-success btn-lg box">Nouveau membre</button></a>
         </div>
       </div>
       <div class="row">
@@ -28,31 +25,7 @@
             <!-- /.box-header -->
             <div class="box-body">
             <div class="dataTables_wrapper form-inline dt-bootstrap">
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="dataTables_length">
-                    <label>
-                      Voir
-                      <select name="user_length" class="form-control input-sm" id="pageSize">
-                        <option value="" id="test" disabled selected>{{members.meta.itemPerPage}}</option>
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                      </select>
-                      entrées
-                    </label>
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="dataTables_filter">
-                      <label>
-                        Rechercher:
-                        <input type="search" class="form-control input-sm" id="searching" name="search">
-                      </label>
-                    </div>
-                </div>
-              </div>
+              {{> template/itemPerPage meta=members.meta}}
               <table class="table table-bordered dataTable">
                 <tbody>
                 <tr>

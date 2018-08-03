@@ -8,10 +8,7 @@
       <h1>
         Voir les sociétés
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="/ua/firm"><i class="fa fa-angellist"></i>Sociétés</a></li>
-        <li class="active">Voir les sociétés</li>
-      </ol>
+      {{> breadcrumb tab="UA" path="Sociétés,Voir les sociétés"}}
     </section>
     <section class="content">
       <div class="row">
@@ -28,7 +25,7 @@
                 <li>Type : {{firm.typeId}}</li>
               </ul>
             </div>
-            <a href="/ua/firm/update/{{firm.id}}">Modifiez</a>
+            <a href="/ua/firm/update/{{firm.id}}">Modifier</a>
           </div>
         </div>
       </div>

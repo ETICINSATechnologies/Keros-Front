@@ -1,5 +1,4 @@
 import { Gender } from "./Core";
-import { SchoolYear } from "./Core";
 
 export class Member {
     constructor(
@@ -11,7 +10,7 @@ export class Member {
         private email ?: string,
         private birthday ?: Date,
         private deparmentId ?: number,
-        private SchoolYear ?: SchoolYear,
+        private schoolYear ?: number,
         private telephone ?: string,
         private addressId ?: number,
         private positionId ?: number[],

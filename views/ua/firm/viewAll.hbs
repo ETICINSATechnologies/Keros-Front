@@ -8,15 +8,12 @@
       <h1>
         Voir les sociétés
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-angellist"></i>Sociétés</a></li>
-        <li class="active">Voir les sociétés</li>
-      </ol>
+      {{> breadcrumb tab="UA" path="Sociétés,Voir les sociétés"}}
     </section>
     <section class="content">
       <div class="row">
         <div class="col-md-3">
-            <a href="/ua/firm/inscription" style="color: white;"><button type="button" class="btn btn-block btn-success btn-lg box">Nouvelle société</button></a>
+            <a href="/ua/firm/create" style="color: white;"><button type="button" class="btn btn-block btn-success btn-lg box">Nouvelle société</button></a>
         </div>
       </div>
       <div class="row">
@@ -28,31 +25,7 @@
             <!-- /.box-header -->
             <div class="box-body">
             <div class="dataTables_wrapper form-inline dt-bootstrap">
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="dataTables_length">
-                    <label>
-                      Voir
-                      <select name="user_length" class="form-control input-sm" id="pageSize">
-                        <option value="" id="test" disabled selected>{{firms.meta.itemPerPage}}</option>
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                      </select>
-                      entrées
-                    </label>
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="dataTables_filter">
-                      <label>
-                        Rechercher:
-                        <input type="search" class="form-control input-sm" id="searching" name="search">
-                      </label>
-                    </div>
-                </div>
-              </div>
+              {{> template/itemPerPage meta=firms.meta}}
               <table class="table table-bordered dataTable">
                 <tbody>
                 <tr>

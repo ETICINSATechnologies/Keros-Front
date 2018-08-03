@@ -17,7 +17,7 @@ export class MemberController {
                 members: page,
             };
 
-            res.render("core/viewAll", options);
+            res.render("core/member/viewAll", options);
         });
     }
 
@@ -25,7 +25,7 @@ export class MemberController {
         winston.info("Getting create member form");
         if (req.params.id == null)
         {
-            res.render("core/createForm");
+            res.render("core/member/createForm");
         }
         else {
             winston.info("Params = " + req.params.id );
@@ -41,7 +41,7 @@ export class MemberController {
                 };
 
                 // On peut passer un objet directement si c'est assez facile à lire / comprendre
-                res.render("core/createForm", options);
+                res.render("core/member/createForm", options);
             });
         }
     }
@@ -59,19 +59,33 @@ export class MemberController {
             };
 
             // On peut passer un objet directement si c'est assez facile à lire / comprendre
-            res.render("core/viewMember", options);
+            res.render("core/member/viewMember", options);
         });
     }
 
     public postMemberForm(req: Request, res: Response, next: NextFunction) {
-        let name = req.body.name;
-        //let height = req.body.height;
-        let user = new Member(undefined, name);
-        MemberService.createMember(user, function(err){
+        let lastName = req.body.lastName;
+        let firstName = req.body.firstName;
+        let userName = req.body.userName;
+        let gender = req.body.gender;
+        let email = req.body.email;
+        let birthday = req.body.birthday;
+        let departmentId = req.body.departmentId;
+        let schoolYear = req.body.schoolYear;
+        let telephone = req.body.telephone;
+        let line1 = req.body.line1;
+        let line2 = req.body.line2;
+        let city = req.body.city;
+        let postalCode = req.body.postalCode;
+        let countryId = req.body.countryId;
+        let positionId = req.body.positionId;
+
+        let user = new Member(undefined, firstName, lastName, userName, gender, email, birthday, departmentId, schoolYear, telephone, 1, positionId);
+        MemberService.createMember(user, function(err) {
             if (err) {
                 return next(err);
             }
-            res.redirect("/core/member")
+            res.redirect("/core/member");
         });
     }
 }
