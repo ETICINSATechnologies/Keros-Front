@@ -1,6 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { MemberService } from "../../services/core/MemberService";
+import { AddressService } from "../../services/core/AddressService";
 import { Member } from "../../models/core/Member";
+import { Address } from "../../models/core/Address";
 import { Meta } from "../../models/core/Meta";
 import * as winston from "winston";
 import {Page} from "../../models/core/Page";
@@ -80,6 +82,12 @@ export class MemberController {
         let countryId = req.body.countryId;
         let positionId = req.body.positionId;
 
+        let address = new Address(undefined, line1, line2, city, postalCode, countryId);
+        AddressService.getAddressId(address, function (err) {
+            if (err) {
+                return next(err);
+            }
+        });
         let user = new Member(undefined, firstName, lastName, userName, gender, email, birthday, departmentId, schoolYear, telephone, 1, positionId);
         MemberService.createMember(user, function(err) {
             if (err) {
