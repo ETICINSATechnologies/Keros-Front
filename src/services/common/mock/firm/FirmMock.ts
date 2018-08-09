@@ -1,64 +1,64 @@
 import { IMock } from "../IMock";
-import { IRestResponse, IRequestOptions } from "typed-rest-client/RestClient";
+import { IRequestOptions, IRestResponse } from "typed-rest-client/RestClient";
 import { Firm } from "../../../../models/ua/Firm";
 import { Page } from "../../../../models/core/Page";
 import { MockResponse } from "../MockClient";
 import { Meta } from "../../../../models/core/Meta";
 
 export class FirmMock implements IMock {
-    create<T>(resource: string, resources: any, options?: IRequestOptions): IRestResponse<T> | null {
-        let mockObj: T | null = null;
-        let status: number = 500;
-        switch (resource) {
-            case "firm":
-                mockObj = <T> new Firm(1, "9999999");
-                status = 200;
-                return new MockResponse(mockObj, status);
-        }
-        return null;
+  create<T>(resource: string, resources: any, options?: IRequestOptions): IRestResponse<T> | null {
+    let mockObj: T | null = null;
+    let status: number = 500;
+    switch (resource) {
+      case "firm":
+        mockObj = <T> new Firm(1, "9999999");
+        status = 200;
+        return new MockResponse(mockObj, status);
     }
+    return null;
+  }
 
-    del<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null{
-        return null;
-    }
+  del<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
+    return null;
+  }
 
-    get<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
-        let mockObj: T | null = null;
-        let status: number = 500;
-        switch (resource) {
-            case "firm/1":
-                mockObj = <T> new Firm(1, "99999999", "Dupont", 4, 2);
-                status = 200;
-                return new MockResponse(mockObj, status);
-            case "firm/2":
-                mockObj = <T> new Firm(2, "1111111", "Henry", 2, 6);
-                status = 200;
-                return new MockResponse(mockObj, status);
-            case "firm":
-                mockObj = <T> new Page(<T[]> [new Firm(1, "99999999", "Dupont", 4, 2), new Firm(2, "11111111", "Henry", 2, 6)], new Meta (0,1,2 ,25))
-                status = 200;
-                return new MockResponse(mockObj, status);
-        }
-        return null;
+  get<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
+    let mockObj: T | null = null;
+    let status: number = 500;
+    switch (resource) {
+      case "firm/1":
+        mockObj = <T> new Firm(1, "99999999", "Dupont", 4, 2);
+        status = 200;
+        return new MockResponse(mockObj, status);
+      case "firm/2":
+        mockObj = <T> new Firm(2, "1111111", "Henry", 2, 6);
+        status = 200;
+        return new MockResponse(mockObj, status);
+      case "firm":
+        mockObj = <T> new Page(<T[]> [new Firm(1, "99999999", "Dupont", 4, 2), new Firm(2, "11111111", "Henry", 2, 6)], new Meta(0, 1, 2, 25));
+        status = 200;
+        return new MockResponse(mockObj, status);
     }
+    return null;
+  }
 
-    getAll<T>(resource: string, options?: IRequestOptions): IRestResponse<T[]> | null {
-        let mockObj: T[] | null = null;
-        let status: number = 500;
-        switch (resource) {
-            case "firm":
-                mockObj = <T[]> [ <T> new Firm(1, "99999999", "Dupont", 4, 2), new Firm(2, "11111111", "Henry", 2, 6)];
-                status = 200;
-                return new MockResponse(mockObj, status);
-        }
-        return null;
+  getAll<T>(resource: string, options?: IRequestOptions): IRestResponse<T[]> | null {
+    let mockObj: T[] | null = null;
+    let status: number = 500;
+    switch (resource) {
+      case "firm":
+        mockObj = <T[]> [<T> new Firm(1, "99999999", "Dupont", 4, 2), new Firm(2, "11111111", "Henry", 2, 6)];
+        status = 200;
+        return new MockResponse(mockObj, status);
     }
+    return null;
+  }
 
-    options<T>(requestUrl: string, options?: IRequestOptions): IRestResponse<T> | null {
-        return null;
-    }
+  options<T>(requestUrl: string, options?: IRequestOptions): IRestResponse<T> | null {
+    return null;
+  }
 
-    update<T>(resource: string, resources: any, options?: IRequestOptions): IRestResponse<T> | null {
-        return null;
-    }
+  update<T>(resource: string, resources: any, options?: IRequestOptions): IRestResponse<T> | null {
+    return null;
+  }
 }

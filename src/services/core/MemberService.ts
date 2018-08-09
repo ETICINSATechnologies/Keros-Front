@@ -2,76 +2,76 @@ import { IRestResponse } from "typed-rest-client/RestClient";
 import { Member } from "../../models/core/Member";
 import { BaseService } from "../common/BaseService";
 import * as winston from "winston";
-import {Page} from "../../models/core/Page";
+import { Page } from "../../models/core/Page";
 
 export class MemberService extends BaseService {
-    static getMember(id: number, callback: (err: any, result: Member | null) => void): void {
-        this.rest.get<Member>("member/" + id).then(
-            (res: IRestResponse<Member>) => {
-                if (res.statusCode !== 200) {
-                    return callback(this.defaultError(), null);
-                }
-                winston.debug("getMember response with status " + res.statusCode);
-                callback(null, res.result);
-            }
-        ).catch(
-            e => callback(e, null)
-        );
-    }
+  static getMember(id: number, callback: (err: any, result: Member | null) => void): void {
+    this.rest.get<Member>("member/" + id).then(
+      (res: IRestResponse<Member>) => {
+        if (res.statusCode !== 200) {
+          return callback(this.defaultError(), null);
+        }
+        winston.debug("getMember response with status " + res.statusCode);
+        callback(null, res.result);
+      }
+    ).catch(
+      e => callback(e, null)
+    );
+  }
 
-    static getAllMembers(callback: (err: any, result: Page<Member> | null) => void): void {
-        this.rest.get<Page<Member>>("member").then(
-            (res: IRestResponse<Page<Member>>) => {
-                if (res.statusCode !== 200) {
-                    return callback(this.defaultError(), null);
-                }
-                winston.debug("getAllMembers response with status " + res.statusCode);
-                callback(null, res.result);
-            }
-        ).catch(
-            e => callback(e, null)
-        );
-    }
+  static getAllMembers(callback: (err: any, result: Page<Member> | null) => void): void {
+    this.rest.get<Page<Member>>("member").then(
+      (res: IRestResponse<Page<Member>>) => {
+        if (res.statusCode !== 200) {
+          return callback(this.defaultError(), null);
+        }
+        winston.debug("getAllMembers response with status " + res.statusCode);
+        callback(null, res.result);
+      }
+    ).catch(
+      e => callback(e, null)
+    );
+  }
 
-    static createMember(member: Member, callback: (err: any) => void): void {
-        this.rest.create<Member>("member", member).then(
-            (res: IRestResponse<Member>) => {
-                if (res.statusCode !== 200) {
-                    return callback(this.defaultError());
-                }
-                winston.debug("createMember response with status " + res.statusCode);
-                callback(null);
-            }
-        ).catch(
-            e => callback(e)
-        );
-    }
+  static createMember(member: Member, callback: (err: any) => void): void {
+    this.rest.create<Member>("member", member).then(
+      (res: IRestResponse<Member>) => {
+        if (res.statusCode !== 200) {
+          return callback(this.defaultError());
+        }
+        winston.debug("createMember response with status " + res.statusCode);
+        callback(null);
+      }
+    ).catch(
+      e => callback(e)
+    );
+  }
 
-    static del(member: Member, callback: (err: any) => void): void {
-        this.rest.create<Member>("member", member).then(
-            (res: IRestResponse<Member>) => {
-                if (res.statusCode !== 200) {
-                    return callback(this.defaultError());
-                }
-                winston.debug("del response with status " + res.statusCode);
-                callback(null);
-            }
-        ).catch(
-            e => callback(e)
-        );
-    }
+  static del(member: Member, callback: (err: any) => void): void {
+    this.rest.create<Member>("member", member).then(
+      (res: IRestResponse<Member>) => {
+        if (res.statusCode !== 200) {
+          return callback(this.defaultError());
+        }
+        winston.debug("del response with status " + res.statusCode);
+        callback(null);
+      }
+    ).catch(
+      e => callback(e)
+    );
+  }
 
-    static update(member: Member, callback: (err: any) => void): void {
-        this.rest.create<Member>("member", member).then(
-            (res: IRestResponse<Member>) => {
-                if (res.statusCode !== 200) {
-                    return callback(this.defaultError());
-                }
-                winston.debug("update response with status " + res.statusCode);
-                callback(null);
-            }
-        ).catch(
-            e => callback(e)
-        );
-    }
+  static update(member: Member, callback: (err: any) => void): void {
+    this.rest.create<Member>("member", member).then(
+      (res: IRestResponse<Member>) => {
+        if (res.statusCode !== 200) {
+          return callback(this.defaultError());
+        }
+        winston.debug("update response with status " + res.statusCode);
+        callback(null);
+      }
+    ).catch(
+      e => callback(e)
+    );
+  }
 }

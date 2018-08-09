@@ -1,61 +1,63 @@
 <body class="hold-transition skin-green fixed sidebar-mini">
 <div class="wrapper">
-    {{> template/header}}
-    {{> template/sidebar}}
+  {{> template/header}}
+  {{> template/sidebar}}
 
-    <div class="content-wrapper">
-        <section class="content-header">
-            <h1>
-                Voir les études
-            </h1>
-            {{> breadcrumb tab="UA" path="Etudes,Voir les études"}}
-        </section>
-        <section class="content">
-            <div class="row">
-                <div class="col-md-3">
-                    <a href="/ua/study/inscription" style="color: white;"><button type="button" class="btn btn-block btn-success btn-lg box">Nouvelle étude</button></a>
-                </div>
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Voir les études
+      </h1>
+      {{> breadcrumb tab="UA" path="Etudes,Voir les études"}}
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-md-3">
+          <a href="/ua/study/inscription" style="color: white;">
+            <button type="button" class="btn btn-block btn-success btn-lg box">Nouvelle étude</button>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Les études</h3>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Les études</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <div class="dataTables_wrapper form-inline dt-bootstrap">
-                                {{> template/itemPerPage meta=studies.meta}}
-                                <table class="table table-bordered dataTable">
-                                    <tbody>
-                                    <tr>
-                                        <th>Id<a href="#" id="id" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                                        <th>Nom<a href="#" id="name" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                                        <th>Voir</th>
-                                        <th>Modifier</th>
-                                    </tr>
-                                    {{#each studies.content}}
-                                        <tr>
-                                            <td>{{id}}</td>
-                                            <td>{{name}}</td>
-                                            <td><a href="/ua/study/{{id}}" class="fa fa-hand-pointer-o"></a></td>
-                                            <td><a href="/ua/study/update/{{id}}">Modifier</a></td>
-                                        </tr>
-                                    {{/each}}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="box-footer">
-                            {{> template/pagination meta=studies.meta}}
-                        </div>
-                    </div>
-                </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="dataTables_wrapper form-inline dt-bootstrap">
+                {{> template/itemPerPage meta=studies.meta}}
+                <table class="table table-bordered dataTable">
+                  <tbody>
+                  <tr>
+                    <th>Id<a href="#" id="id" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Nom<a href="#" id="name" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Voir</th>
+                    <th>Modifier</th>
+                  </tr>
+                  {{#each studies.content}}
+                    <tr>
+                      <td>{{id}}</td>
+                      <td>{{name}}</td>
+                      <td><a href="/ua/study/{{id}}" class="fa fa-hand-pointer-o"></a></td>
+                      <td><a href="/ua/study/update/{{id}}">Modifier</a></td>
+                    </tr>
+                  {{/each}}
+                  </tbody>
+                </table>
+              </div>
             </div>
-        </section>
-    </div>
+            <div class="box-footer">
+              {{> template/pagination meta=studies.meta}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 
-    {{> template/footer}}
+  {{> template/footer}}
 </div>
 {{> template/scripts}}
 </body>

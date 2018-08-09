@@ -14,7 +14,7 @@ export default handlebars({
       return value ? value : defaultValue;
     },
     split(value: string, splitter: string) {
-      return value.split(splitter)
+      return value.split(splitter);
     },
     toUpper(value: string) {
       return value.toUpperCase();

@@ -13,7 +13,9 @@
     <section class="content">
       <div class="row">
         <div class="col-md-3">
-            <a href="/core/member/signin" style="color: white;"><button type="button" class="btn btn-block btn-success btn-lg box">Nouveau membre</button></a>
+          <a href="/core/member/create" style="color: white;">
+            <button type="button" class="btn btn-block btn-success btn-lg box">Nouveau membre</button>
+          </a>
         </div>
       </div>
       <div class="row">
@@ -24,36 +26,38 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            <div class="dataTables_wrapper form-inline dt-bootstrap">
-              {{> template/itemPerPage meta=members.meta}}
-              <table class="table table-bordered dataTable">
-                <tbody>
-                <tr>
-                  <th>Nom d'utilisateur <a href="#" id="username" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                  <th>Nom<a href="#" id="name" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                  <th>Prénom<a href="#" id="firstname" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                  <th>Id position<a href="#" id="positionId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                  <th>Email<a href="#" id="email" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                  <th>Voir</th>
-                  <th>Modifier</th>
-                </tr>
-                {{#each members.content}}
+              <div class="dataTables_wrapper form-inline dt-bootstrap">
+                {{> template/itemPerPage meta=members.meta}}
+                <table class="table table-bordered dataTable">
+                  <tbody>
                   <tr>
-                    <td>{{username}}</td>
-                    <td>{{lastName}}</td>
-                    <td>{{firstName}}</td>
-                    <td>{{positionId}}</td>
-                    <td>{{email}}</td>
-                    <td><a href="/core/member/{{id}}" class="fa fa-hand-pointer-o"></a></td>
-                    <td><a href="/core/member/update/{{id}}">Modifier</a></td>
+                    <th>Nom d'utilisateur <a href="#" id="username"
+                                             class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Nom<a href="#" id="name" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Prénom<a href="#" id="firstname" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Id position<a href="#" id="positionId" class="fa fa-unsorted fa-pull-right select_filter"></a>
+                    </th>
+                    <th>Email<a href="#" id="email" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Voir</th>
+                    <th>Modifier</th>
                   </tr>
-                {{/each}}
-                </tbody>
-              </table>
+                  {{#each members.content}}
+                    <tr>
+                      <td>{{username}}</td>
+                      <td>{{lastName}}</td>
+                      <td>{{firstName}}</td>
+                      <td>{{positionId}}</td>
+                      <td>{{email}}</td>
+                      <td><a href="/core/member/{{id}}" class="fa fa-hand-pointer-o"></a></td>
+                      <td><a href="/core/member/update/{{id}}">Modifier</a></td>
+                    </tr>
+                  {{/each}}
+                  </tbody>
+                </table>
               </div>
             </div>
             <div class="box-footer">
-            {{> template/pagination meta=members.meta}}
+              {{> template/pagination meta=members.meta}}
             </div>
           </div>
         </div>

@@ -6,12 +6,12 @@
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-          {{#if member}}Modification d'un membre{{else}}Page d'inscription{{/if}}
+        {{#if member}}Modification d'un membre{{else}}Page d'inscription{{/if}}
       </h1>
       {{#if member}}
-          {{> breadcrumb tab="SG" path="Membres,Modification d'un membre"}}
+        {{> breadcrumb tab="SG" path="Membres,Modification d'un membre"}}
       {{else}}
-          {{> breadcrumb tab="SG" path="Membres,Création d'un membre"}}
+        {{> breadcrumb tab="SG" path="Membres,Création d'un membre"}}
       {{/if}}
     </section>
     <section class="content">
@@ -20,28 +20,32 @@
           <section class="content">
             <div class="box box-primary">
               <div class="box-header with-border">
-                <h3 class="box-title">
-                  {{#if member}}Modifiez un membre{{else}}Inscrivez un membre</h3>{{/if}}
+              <h3 class="box-title">
+                {{#if member}}Modifiez un membre{{else}}Inscrivez un membre</h3>{{/if}}
                 </h3>
               </div>
-              <form role="form" {{#if member}}method="post" action="#"{{else}}method="post" action="/core/member/create"{{/if}}>
+              <form role="form" {{#if member}}method="post" action="#"{{else}}method="post"
+                    action="/core/member/create"{{/if}}>
                 <div class="box-body">
                   <div class="form-group">
                     <label for="lastName">Nom</label>
                     <input type="text" class="form-control" id="lastName" name="lastName"
-                           {{#if member}}value="{{member.lastName}}"{{else}}placeholder="Entrez le nom"{{/if}} required>
+                           {{#if member}}value="{{member.lastName}}" {{else}}placeholder="Entrez le nom"{{/if}}
+                           required>
                   </div>
 
                   <div class="form-group">
                     <label for="firstName">Prénom</label>
                     <input type="text" class="form-control" id="firstName" name="firstName"
-                           {{#if member}}value="{{member.firstName}}"{{else}}placeholder="Entrez le prénom"{{/if}} required>
+                           {{#if member}}value="{{member.firstName}}" {{else}}placeholder="Entrez le prénom"{{/if}}
+                           required>
                   </div>
 
                   <div class="form-group">
                     <label for="userName">Username</label>
                     <input type="text" class="form-control" id="userName" name="userName"
-                           {{#if member}}value="{{member.username}}"{{else}}placeholder="Entrez le username"{{/if}} required>
+                           {{#if member}}value="{{member.username}}" {{else}}placeholder="Entrez le username"{{/if}}
+                           required>
                   </div>
 
                   <div class="form-group">
@@ -57,7 +61,7 @@
                   <div class="form-group">
                     <label for="email">Email</label>
                     <input type="text" class="form-control" id="email" name="email"
-                           {{#if member}}value="{{member.email}}"{{else}}placeholder="Entrez l'email"{{/if}} required>
+                           {{#if member}}value="{{member.email}}" {{else}}placeholder="Entrez l'email"{{/if}} required>
                   </div>
 
                   <div class="form-group">
@@ -83,7 +87,8 @@
                   <div class="form-group">
                     <label for="schoolYear">Année scolaire</label>
                     <select class="form-control" id="schoolYear" name="schoolYear">
-                      {{#if member}}<option value="" disabled selected>{{member.schoolYear}}e année{{/if}}
+                      {{#if member}}
+                      <option value="" disabled selected>{{member.schoolYear}}e année{{/if}}
                       <option value="1">1ere année</option>
                       <option value="2">2e année</option>
                       <option value="3">3e année</option>
@@ -98,46 +103,48 @@
                   <div class="form-group">
                     <label for="telephone">Téléphone</label>
                     <input type="text" class="form-control" id="telephone" name="telephone"
-                           {{#if member}}value="{{member.telephone}}"{{else}}placeholder="Entrez le numéro de téléphone"{{/if}} required>
+                           {{#if member}}value="{{member.telephone}}"
+                           {{else}}placeholder="Entrez le numéro de téléphone"{{/if}} required>
                   </div>
 
                   <div class="form-group">
-                      <label for="line1">Adresse</label>
-                      <input type="string" class="form-control" id="line1" name="line1"
-                             placeholder="Entrez l'adresse 1" required>
+                    <label for="line1">Adresse</label>
+                    <input type="string" class="form-control" id="line1" name="line1"
+                           placeholder="Entrez l'adresse 1" required>
                   </div>
 
                   <div class="form-group">
-                      <input type="string" class="form-control" id="line2" name="line2"
-                             placeholder="Entrez l'adresse 2">
+                    <input type="string" class="form-control" id="line2" name="line2"
+                           placeholder="Entrez l'adresse 2">
                   </div>
 
                   <div class="form-group">
-                      <label for="city">Ville</label>
-                      <input type="string" class="form-control" id="city" name="city"
-                             placeholder="Entrez la ville" required>
+                    <label for="city">Ville</label>
+                    <input type="string" class="form-control" id="city" name="city"
+                           placeholder="Entrez la ville" required>
                   </div>
 
                   <div class="form-group">
-                      <label for="postalCode">Code postal</label>
-                      <input type="string" class="form-control" id="postalCode" name="postalCode"
-                             placeholder="Entrez le code postal" required>
+                    <label for="postalCode">Code postal</label>
+                    <input type="string" class="form-control" id="postalCode" name="postalCode"
+                           placeholder="Entrez le code postal" required>
                   </div>
 
                   <div class="form-group">
-                      <label for="countryId">Pays</label>
-                      <select class="form-control" id="countryId" name="countryId" required>
-                          <option value="1">France</option>
-                          <option value="2">Suisse</option>
-                          <option value="3">Allemagne</option>
-                          <option value="4">Espagne</option>
-                      </select>
+                    <label for="countryId">Pays</label>
+                    <select class="form-control" id="countryId" name="countryId" required>
+                      <option value="1">France</option>
+                      <option value="2">Suisse</option>
+                      <option value="3">Allemagne</option>
+                      <option value="4">Espagne</option>
+                    </select>
                   </div>
 
                   <div class="form-group">
                     <label for="positionId">Id de position</label>
                     <input type="text" class="form-control" id="positionId" name="positionId"
-                           {{#if member}}value="{{member.positionId}}"{{else}}placeholder="Entrez la position"{{/if}} required>
+                           {{#if member}}value="{{member.positionId}}" {{else}}placeholder="Entrez la position"{{/if}}
+                           required>
                   </div>
 
                 </div>
