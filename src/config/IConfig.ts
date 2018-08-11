@@ -1,4 +1,4 @@
-import { Environment } from "./environment";
+import { Environment } from "./Environment";
 
 export interface IConfig {
   readonly env: Environment;

@@ -6,7 +6,7 @@ import { Page } from "../../models/core/Page";
 
 export class FirmService extends BaseService {
   static getFirm(id: number, callback: (err: any, result: Firm | null) => void): void {
-    this.rest.get<Firm>("firm/" + id).then(
+    this.rest.get<Firm>("ua/firm/" + id).then(
       (res: IRestResponse<Firm>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);
@@ -20,7 +20,7 @@ export class FirmService extends BaseService {
   }
 
   static getAllFirms(callback: (err: any, result: Page<Firm> | null) => void): void {
-    this.rest.get<Page<Firm>>("firm").then(
+    this.rest.get<Page<Firm>>("ua/firm").then(
       (res: IRestResponse<Page<Firm>>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);
@@ -34,7 +34,7 @@ export class FirmService extends BaseService {
   }
 
   static createFirm(member: Firm, callback: (err: any) => void): void {
-    this.rest.create<Firm>("firm", Firm).then(
+    this.rest.create<Firm>("ua/firm", Firm).then(
       (res: IRestResponse<Firm>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError());
@@ -48,7 +48,7 @@ export class FirmService extends BaseService {
   }
 
   static del(member: Firm, callback: (err: any) => void): void {
-    this.rest.create<Firm>("firm", Firm).then(
+    this.rest.create<Firm>("ua/firm", Firm).then(
       (res: IRestResponse<Firm>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError());
@@ -62,7 +62,7 @@ export class FirmService extends BaseService {
   }
 
   static update(member: Firm, callback: (err: any) => void): void {
-    this.rest.create<Firm>("firm", Firm).then(
+    this.rest.create<Firm>("ua/firm", Firm).then(
       (res: IRestResponse<Firm>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError());

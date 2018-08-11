@@ -10,7 +10,7 @@ export class StudyMock implements IMock {
     let mockObj: T | null = null;
     let status: number = 500;
     switch (resource) {
-      case "study":
+      case "ua/study":
         mockObj = <T> new Study(1, "Etude 1");
         status = 200;
         return new MockResponse(mockObj, status);
@@ -26,15 +26,15 @@ export class StudyMock implements IMock {
     let mockObj: T | null = null;
     let status: number = 500;
     switch (resource) {
-      case "study/1":
+      case "ua/study/1":
         mockObj = <T> new Study(1, "Etude 1");
         status = 200;
         return new MockResponse(mockObj, status);
-      case "study/2":
+      case "ua/study/2":
         mockObj = <T> new Study(2, "Etude 2");
         status = 200;
         return new MockResponse(mockObj, status);
-      case "study":
+      case "ua/study":
         mockObj = <T> new Page(<T[]> [new Study(1, "Etude 1"), new Study(2, "Etude 2")], new Meta(0, 1, 2, 25));
         status = 200;
         return new MockResponse(mockObj, status);
@@ -46,7 +46,7 @@ export class StudyMock implements IMock {
     let mockObj: T[] | null = null;
     let status: number = 500;
     switch (resource) {
-      case "study":
+      case "ua/study":
         mockObj = <T[]> [<T> new Study(1, "Etude 1"), new Study(2, "Etude 2")];
         status = 200;
         return new MockResponse(mockObj, status);

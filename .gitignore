@@ -4,4 +4,8 @@ dist
 node_modules
 .idea
 .tmp.txt
-.iml
+*.iml
+
+# Ignore logs but keep directory
+logs/*
+!logs/.gitkeep

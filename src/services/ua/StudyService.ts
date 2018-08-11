@@ -6,7 +6,7 @@ import { Page } from "../../models/core/Page";
 
 export class StudyService extends BaseService {
   static getStudy(id: number, callback: (err: any, result: Study | null) => void): void {
-    this.rest.get<Study>("study/" + id).then(
+    this.rest.get<Study>("ua/study/" + id).then(
       (res: IRestResponse<Study>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);
@@ -20,7 +20,7 @@ export class StudyService extends BaseService {
   }
 
   static getAllStudies(callback: (err: any, result: Page<Study> | null) => void): void {
-    this.rest.get<Page<Study>>("study").then(
+    this.rest.get<Page<Study>>("ua/study").then(
       (res: IRestResponse<Page<Study>>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);
@@ -34,7 +34,7 @@ export class StudyService extends BaseService {
   }
 
   static createStudy(member: Study, callback: (err: any) => void): void {
-    this.rest.create<Study>("study", Study).then(
+    this.rest.create<Study>("ua/study", Study).then(
       (res: IRestResponse<Study>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError());
@@ -48,7 +48,7 @@ export class StudyService extends BaseService {
   }
 
   static del(member: Study, callback: (err: any) => void): void {
-    this.rest.create<Study>("study", Study).then(
+    this.rest.create<Study>("ua/study", Study).then(
       (res: IRestResponse<Study>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError());
@@ -62,7 +62,7 @@ export class StudyService extends BaseService {
   }
 
   static update(member: Study, callback: (err: any) => void): void {
-    this.rest.create<Study>("study", Study).then(
+    this.rest.create<Study>("ua/study", Study).then(
       (res: IRestResponse<Study>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError());

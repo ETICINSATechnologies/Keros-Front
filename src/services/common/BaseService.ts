@@ -1,6 +1,6 @@
 import { IRequestOptions, IRestResponse } from "typed-rest-client/RestClient";
 import HttpError from "../../util/httpError";
-import { Config } from "../../config/config";
+import { Config } from "../../config/Config";
 import { KerosRestClient } from "./KerosRestClient";
 import { MockClient } from "./mock/MockClient";
 
@@ -25,7 +25,7 @@ export class BaseService {
       if (Config.getUseMock()) {
         return new MockClient();
       }
-      return new KerosRestClient("http://localhost:8000/api/v1");
+      return new KerosRestClient(Config.getClientBaseUrl());
     }();
 
   protected static defaultError(): HttpError {
