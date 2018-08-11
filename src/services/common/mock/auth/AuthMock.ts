@@ -1,5 +1,4 @@
-
-import { IRestResponse, IRequestOptions } from "typed-rest-client/RestClient";
+import { IRequestOptions, IRestResponse } from "typed-rest-client/RestClient";
 import { MockResponse } from "../MockClient";
 import HttpError from "../../../../util/httpError";
 import { LoginResponse } from "../../../../models/auth/LoginResponse";
@@ -7,15 +6,15 @@ import { IMock } from "../IMock";
 
 export class AuthMock implements IMock {
 
-  create<T>(resource: string, resources: any, options?: IRequestOptions): IRestResponse<T> | null{
+  create<T>(resource: string, resources: any, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;
     let status: number = 500;
     switch (resource) {
       case "auth/login":
-        if(resources.username === "username" && resources.password === "password") {
+        if (resources.username === "username" && resources.password === "password") {
           mockObj = <T> new LoginResponse("tokenConnexionOk");
           status = 200;
-          return new MockResponse(mockObj, status)
+          return new MockResponse(mockObj, status);
         } else
           throw new HttpError("Authentification échouée", 401);
     }

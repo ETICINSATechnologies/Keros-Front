@@ -13,7 +13,9 @@
     <section class="content">
       <div class="row">
         <div class="col-md-3">
-            <a href="/ua/firm/create" style="color: white;"><button type="button" class="btn btn-block btn-success btn-lg box">Nouvelle société</button></a>
+          <a href="/ua/firm/create" style="color: white;">
+            <button type="button" class="btn btn-block btn-success btn-lg box">Nouvelle société</button>
+          </a>
         </div>
       </div>
       <div class="row">
@@ -24,34 +26,35 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            <div class="dataTables_wrapper form-inline dt-bootstrap">
-              {{> template/itemPerPage meta=firms.meta}}
-              <table class="table table-bordered dataTable">
-                <tbody>
-                <tr>
-                  <th>Nom<a href="#" id="name" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                  <th>Siret<a href="#" id="siret" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                  <th>Id adresse<a href="#" id="addressId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                  <th>Id type<a href="#" id="typeId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                  <th>Voir</th>
-                  <th>Modifier</th>
-                </tr>
-                {{#each firms.content}}
+              <div class="dataTables_wrapper form-inline dt-bootstrap">
+                {{> template/itemPerPage meta=firms.meta}}
+                <table class="table table-bordered dataTable">
+                  <tbody>
                   <tr>
-                    <td>{{name}}</td>
-                    <td>{{siret}}</td>
-                    <td>{{addressId}}</td>
-                    <td>{{typeId}}</td>
-                    <td><a href="/ua/firm/{{id}}" class="fa fa-hand-pointer-o"></a></td>
-                    <td><a href="/ua/firm/update/{{id}}">Modifier</a></td>
+                    <th>Nom<a href="#" id="name" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Siret<a href="#" id="siret" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Id adresse<a href="#" id="addressId" class="fa fa-unsorted fa-pull-right select_filter"></a>
+                    </th>
+                    <th>Id type<a href="#" id="typeId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Voir</th>
+                    <th>Modifier</th>
                   </tr>
-                {{/each}}
-                </tbody>
-              </table>
+                  {{#each firms.content}}
+                    <tr>
+                      <td>{{name}}</td>
+                      <td>{{siret}}</td>
+                      <td>{{addressId}}</td>
+                      <td>{{typeId}}</td>
+                      <td><a href="/ua/firm/{{id}}" class="fa fa-hand-pointer-o"></a></td>
+                      <td><a href="/ua/firm/update/{{id}}">Modifier</a></td>
+                    </tr>
+                  {{/each}}
+                  </tbody>
+                </table>
               </div>
             </div>
             <div class="box-footer">
-             {{> template/pagination meta=firms.meta}}
+              {{> template/pagination meta=firms.meta}}
             </div>
           </div>
         </div>

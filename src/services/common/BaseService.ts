@@ -6,10 +6,15 @@ import { MockClient } from "./mock/MockClient";
 
 export interface IClient {
   options<T>(requestUrl: string, options?: IRequestOptions): Promise<IRestResponse<T>>;
+
   get<T>(resource: string, options?: IRequestOptions): Promise<IRestResponse<T>>;
+
   getAll<T>(resource: string, options?: IRequestOptions): Promise<IRestResponse<T[]>>;
+
   del<T>(resource: string, options?: IRequestOptions): Promise<IRestResponse<T>>;
+
   create<T>(resource: string, resources: any, options?: IRequestOptions): Promise<IRestResponse<T>>;
+
   update<T>(resource: string, resources: any, options?: IRequestOptions): Promise<IRestResponse<T>>;
 }
 

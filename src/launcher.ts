@@ -9,11 +9,11 @@ import HttpError from "./util/httpError";
 import handlebars from "./util/handlebars";
 import * as http from "http";
 import { Config } from "./config/config";
-import { catRouter } from "./control/cat/catRouter";
 import { authRouter } from "./control/auth/authRouter";
-import  { coreRouter } from "./control/core/coreRouter";
+import { coreRouter } from "./control/core/coreRouter";
 import { firmRouter } from "./control/ua/firmRouter";
 import { studyRouter } from "./control/ua/studyRouter";
+import { dashboardRouter } from "./control/core/dashboardRouter";
 
 /**
  * The Launcher - contains the express Application as well as methods to launch a server on that
@@ -72,14 +72,10 @@ export class Launcher {
     this.app.use(cookieParser("156daf75-d51b-4918-a1b5-e158126b0cbd"));
 
     this.app.use("/auth", authRouter());
-    this.app.use("/cat", catRouter());
-    this.app.use("/core/member", coreRouter());
+    this.app.use("", dashboardRouter());
+    this.app.use("/core", coreRouter());
     this.app.use("/ua/firm", firmRouter());
     this.app.use("/ua/study", studyRouter());
-
-    this.app.get("", function (req, res) {
-      res.redirect("/cat");
-    });
 
     // Catch 404 and forward to error handler
     this.app.use(function (req: express.Request, res: express.Response, next: express.NextFunction) {

@@ -13,7 +13,7 @@ export class Config {
 
   public static bootstrap() {
     // Don't bootstrap if config is already loaded
-    if(this.activeConfig){
+    if (this.activeConfig) {
       return;
     }
 

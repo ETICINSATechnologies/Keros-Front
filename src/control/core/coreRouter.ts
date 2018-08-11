@@ -1,22 +1,24 @@
 import * as winston from "winston";
 import { Router } from "express";
-import { MemberController } from "./memberController";
+import { MemberController } from "./MemberController";
+import { secureRouter } from "../secureRouter";
 
 /**
- * Router for members for /member/**
+ * Router for core endpoints*
  * @returns {e.Router}
  */
 
 export function coreRouter(): Router {
-    winston.debug("Mapping Members routes");
-    const memberController: MemberController = new MemberController();
-    const router: Router = Router();
+  winston.debug("Mapping Core routes");
+  const memberController: MemberController = new MemberController();
+  const router: Router = Router();
+  secureRouter(router);
 
-    router.get("", memberController.viewMembers);
-    router.get("/:id(\\d+)/", memberController.viewMember);
-    router.get("/signin", memberController.viewMemberForm);
-    router.post("/create", memberController.postMemberForm);
-    router.get("/update/:id(\\d+)/", memberController.viewMemberForm);
+  router.get("/member", memberController.viewMembers);
+  router.get("/member/:id(\\d+)/", memberController.viewMember);
+  router.get("/member/create", memberController.viewMemberForm);
+  router.post("/member/create", memberController.postMemberForm);
+  router.get("/member/update/:id(\\d+)/", memberController.viewMemberForm);
 
-    return router;
+  return router;
 }
