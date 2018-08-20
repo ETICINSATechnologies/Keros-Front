@@ -1,11 +1,10 @@
 import { IConfig } from "./IConfig";
-import { DefaultDevelopmentConfig } from "./defaultDevelopmentConfig";
-import { DefaultTestingConfig } from "./defaultTestingConfig";
-import { DefaultStagingConfig } from "./defaultStagingConfig";
-import { DefaultProductionConfig } from "./defaultProductionConfig";
-import { Environment } from "./environment";
+import { LocalConfig } from "./LocalConfig";
+import { TestingConfig } from "./TestingConfig";
+import { StagingConfig } from "./StagingConfig";
+import { Environment } from "./Environment";
 import * as winston from "winston";
-import { DefaultMockConfig } from "./defaultMockConfig";
+import { MockConfig } from "./MockConfig";
 
 export class Config {
 
@@ -19,23 +18,20 @@ export class Config {
 
     const nodeEnv = process.env["NODE_ENV"];
     switch (nodeEnv) {
-      case "development":
-        this.activeConfig = new DefaultDevelopmentConfig();
+      case "local":
+        this.activeConfig = new LocalConfig();
         break;
       case "mock":
-        this.activeConfig = new DefaultMockConfig();
+        this.activeConfig = new MockConfig();
         break;
       case "testing":
-        this.activeConfig = new DefaultTestingConfig();
+        this.activeConfig = new TestingConfig();
         break;
       case "staging":
-        this.activeConfig = new DefaultStagingConfig();
-        break;
-      case "production":
-        this.activeConfig = new DefaultProductionConfig();
+        this.activeConfig = new StagingConfig();
         break;
       default:
-        this.activeConfig = new DefaultDevelopmentConfig();
+        this.activeConfig = new LocalConfig();
         break;
     }
 
@@ -44,6 +40,11 @@ export class Config {
       transports: [
         new winston.transports.Console({
           colorize: true
+        }),
+        new winston.transports.File({
+          filename: __dirname + '/../../../logs/app.log',
+          timestamp: true,
+          maxsize: 2048
         })
       ]
     });

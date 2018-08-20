@@ -1,5 +1,6 @@
 import { IClient } from "./BaseService";
 import { IRequestOptions, IRestResponse, RestClient } from "typed-rest-client/RestClient";
+import * as winston from "winston";
 
 export class KerosRestClient implements IClient {
   private restClient: RestClient;

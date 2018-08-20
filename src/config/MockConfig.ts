@@ -1,7 +1,7 @@
 import { IConfig } from "./IConfig";
-import { Environment } from "./environment";
+import { Environment } from "./Environment";
 
-export class DefaultMockConfig implements IConfig {
+export class MockConfig implements IConfig {
   env: Environment = Environment.mock;
   httpPort = 8080;
   clientBaseUrl = "";

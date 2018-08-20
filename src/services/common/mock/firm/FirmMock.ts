@@ -10,7 +10,7 @@ export class FirmMock implements IMock {
     let mockObj: T | null = null;
     let status: number = 500;
     switch (resource) {
-      case "firm":
+      case "ua/firm":
         mockObj = <T> new Firm(1, "9999999");
         status = 200;
         return new MockResponse(mockObj, status);
@@ -26,15 +26,15 @@ export class FirmMock implements IMock {
     let mockObj: T | null = null;
     let status: number = 500;
     switch (resource) {
-      case "firm/1":
+      case "ua/firm/1":
         mockObj = <T> new Firm(1, "99999999", "Dupont", 4, 2);
         status = 200;
         return new MockResponse(mockObj, status);
-      case "firm/2":
+      case "ua/firm/2":
         mockObj = <T> new Firm(2, "1111111", "Henry", 2, 6);
         status = 200;
         return new MockResponse(mockObj, status);
-      case "firm":
+      case "ua/firm":
         mockObj = <T> new Page(<T[]> [new Firm(1, "99999999", "Dupont", 4, 2), new Firm(2, "11111111", "Henry", 2, 6)], new Meta(0, 1, 2, 25));
         status = 200;
         return new MockResponse(mockObj, status);
@@ -46,7 +46,7 @@ export class FirmMock implements IMock {
     let mockObj: T[] | null = null;
     let status: number = 500;
     switch (resource) {
-      case "firm":
+      case "ua/firm":
         mockObj = <T[]> [<T> new Firm(1, "99999999", "Dupont", 4, 2), new Firm(2, "11111111", "Henry", 2, 6)];
         status = 200;
         return new MockResponse(mockObj, status);

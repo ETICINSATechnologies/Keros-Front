@@ -8,7 +8,7 @@ import * as winston from "winston";
 import HttpError from "./util/httpError";
 import handlebars from "./util/handlebars";
 import * as http from "http";
-import { Config } from "./config/config";
+import { Config } from "./config/Config";
 import { authRouter } from "./control/auth/authRouter";
 import { coreRouter } from "./control/core/coreRouter";
 import { firmRouter } from "./control/ua/firmRouter";

@@ -5,7 +5,7 @@ import * as winston from "winston";
 
 export class AddressService extends BaseService {
   static getAddress(id: number, callback: (err: any, result: Address | null) => void): void {
-    this.rest.get<Address>("address/" + id).then(
+    this.rest.get<Address>("core/address/" + id).then(
       (res: IRestResponse<Address>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);
@@ -19,7 +19,7 @@ export class AddressService extends BaseService {
   }
 
   static getAddressId(address: Address, callback: (err: any, result: Address | null) => void): void {
-    this.rest.get<Address>("address").then(
+    this.rest.get<Address>("core/address").then(
       (res: IRestResponse<Address>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);
@@ -33,7 +33,7 @@ export class AddressService extends BaseService {
   }
 
   static getAllAddress(callback: (err: any, result: Address[] | null) => void): void {
-    this.rest.getAll<Address>("address").then(
+    this.rest.getAll<Address>("core/address").then(
       (res: IRestResponse<Address[]>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);

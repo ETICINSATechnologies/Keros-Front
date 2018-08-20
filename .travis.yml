@@ -1,3 +1,28 @@
 language: node_js
 node_js:
-  - "8"
+- '8'
+addons:
+  apt:
+    packages:
+    - language-pack-fr
+env:
+  global:
+  - secure: jUX7Y7rto2fjvUSgE7eVw8pX5stKoRU15jvgirSyFLgOpO7IcAeVxxxLacNweb8AI+/ThA88flGtjAmzTGySNREDCKIeA4+uWut+jaKb/FdpZgJUXT7yatBOnR0jQxyF8kzrtKq23EMKco+O4q88M0Mhy2fDEi9kCFdLgjUSVn1L4xHh5WFYaaNJnfauOT0E34+DOJSNi0KzuMnG0Fq6dTEWTHdp4WSS77bzG+nu9SzZjVr4BQauhnCxrTOTImhmb8G4xzOqwgMn6lsBMpRp4my5aFCGpc902+UCdMZDWm2UIIqNqxjW/lLl9iah8OB/ZfO5YwBE3a6PCiNfLe4CuuZ12wG5ASaDjDXLlTTeXz2BAaTz08xoTM5urFp0VStuBz87tYXzPHxT/mk+I4diqrOAixlwuIFuP9Tx0LS00p1EkpuhREohoBBDvQ40wiiRNbBzjmWqGdPfuILM3LIvVlp0uEIXa8AlBRKHlIPL61JZcMkopq2LqajSXdnofHNTuCmERZQD0MnU9X2STaSthvEvuSAtwfAgMKwtB3EZgfT041ftG21iZG4LfWfPHA0Z8dOOi60jrY7evgNO5RXOLGfWp408TnIm/aYRjuWnZsVRavfgxSGsQN7zO6y2/snl3rgJJA3mpoL8hq/GyWQ9y/3kkIViPf/Rc8MMDl0v2f0=
+  - secure: J2525Y0RDjBZnuLkRXC+qY+w/6/WTxD+O9fwty3r85wTkQ5mXG/P2BuVuGqjBEwtYoODgcLIiGY7huU3D7z8x1c8ntpCjIasfawya9i7EhKu49GNTE9iTwuDiZL+Iq5fbkfLM4LKucrlhM8//VXwTqYpTOmSwIv/ViJ5SYNGPUo0w9ZFJIlaO0+y742GABoiXlByrbAj0hEErbAaM6LVvEox0yF4FQ2J3v7eT2sGzJcwKdAAGkeWsOEnsZQrB80S4oqBX+M7KStb6FRpYNf0FCZ+LVq4MNET/kilhWcDKZgg7o3LYCgsQ3I9ruYmVNSI06JgVFDyy0yo9DP2bV3SWEkbKRZzMAftmr8eCyN696I+ICwzwbB8ciMa3GAF/lIxprTuEBDyRB8UgnU6mxsUsWQwPrJIBaGpiiOQ2HAC4wZg9YUsEscTCCGTl66faVjuMijPB+ZeJPm09wplGHLVpiGIUYKqPcN+Bio8cr+DMyYZ4j/gNKR2s/7qY6D1Q/H1SsZJ4Ow5ubR5efqU3Kfc2M6Gx1KXeDvyj0fAzy+AyLOFSupYOaqVlt75QZqiBRUpNZLmNzgeBcQtHI/7F7vism6JFaC6xR0/zd6ppaZdxxEKhxL9+yMY/oE/5dkA9SPcwSlUxGQveAlD+xEoK5wZA8zLLeUBbrZTreMB0XI0xuE=
+  - secure: irGdJrxxMeJ2N2p23M1p7Cz9/z+1SxB8OpTBCfiOvUUz1AHksbGgYCIRfSpCrfmG8ps+TdHxX6ipt/zj3+mun16BCYq9NQvQszlH8k972CYLoskufsRMlJqmTRUewFiAfqbIl5lpi9MuoirRdqX/aoXfo5MSw4PzumZCAWKh7UK4Dgm5OItx/P1ZprYNUNRVvwiZGbg1pp1/1fr63TF3vc6YUusRvWZhUBeDPcxWqu6qpvAfNlmv+IImylSKe8cDMQxiHihwr3uo+46Xp0GbIHWwfjSnpGhMUV9cFnvifRoOgRqCfLHH1pORPqJcYQRbGm5Y1inCRDifkRi4JfPGdRkYawsQyaGW+/oUjod5gHWpUdqs5Yys6HIiigBko3jscUVGLyCA2tBg+zS0+B5VfiP/PJxoTLZXSxWAdjcY3yqYcVu/h7xqRdgOU2Anml1Jybdld9YgPWWP5KMo49Ugleoc0wyUZkJW3nRVPQ7UtsQ97zrCfzOA3Fb+ZAWJ4fVcJMmhWApgDEVPiHJ1+BslnPJU95dxXI9J+GXjAxUzT+uNYb1dogLxd6GNML/Qc6gZggR4CM0vPSS332kDEbSPZaJChd9RkBiwRmtDPFCcPaNtVBXjV2pj0vIn1Kus3wEop7COU6qU5Tb+BXa3gyQHrImG5bFlKu75g3KJdRz+8N0=
+  - LANG=fr_FR.UTF-8
+  - LC_ALL=fr_FR.UTF-8
+install:
+- npm install
+script:
+- npm test
+before_deploy:
+- sudo apt-get install -y sshpass
+- echo "vps35827.ovh.net,46.105.16.161 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMe3IgrZgB/aH0F9Rjh+Riy5TLa+Sn/vShQNwC879dobP/nS9AxvMFmad0kjnOiqFjFwP8MpYPmVMfBUHMDVMmI="
+  > ~/.ssh/known_hosts
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: bash .deploy/deploy-staging.sh
+  on:
+    branch: deploy-staging
