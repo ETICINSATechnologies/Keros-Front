@@ -36,7 +36,7 @@
                   <div class="col-md-4 form-group">
                     <label for="genderId">Sexe</label>
                     <select class="form-control" id="genderId" name="genderId" disabled>
-                      <option value="" disabled selected>{{member.gender}}</option>
+                      <option value="" disabled selected>{{member.genderId}}</option>
                       {{#each gender}}
                         <option value="{{id}}">{{label}}</option>
                       {{/each}}
@@ -57,8 +57,7 @@
                   <div class="col-md-4 form-group">
                     <label for="departmentId">Département</label>
                     <select class="form-control" id="departmentId" name="departmentId" disabled>
-                      {{> template/getItem id=member.deparmentId list=departments }}
-                      <!--<option value="{{member.deparmentId}}" disabled selected>{{department.label}}</option>-->
+                      {{> template/getItem id=member.departmentId list=departments }}
                       {{#each departments}}
                         <option value="{{id}}">{{label}}</option>
                       {{/each}}

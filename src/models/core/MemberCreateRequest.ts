@@ -9,7 +9,7 @@ export class MemberCreateRequest {
     private genderId ?: string,
     private email ?: string,
     private birthday ?: string,
-    private deparmentId ?: number,
+    private departmentId ?: number,
     private schoolYear ?: number,
     private telephone ?: string,
     private address ?: Address,
