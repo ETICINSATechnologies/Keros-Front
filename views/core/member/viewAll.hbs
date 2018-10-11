@@ -2,7 +2,6 @@
 <div class="wrapper">
   {{> template/header}}
   {{> template/sidebar}}
-
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
@@ -13,9 +12,7 @@
     <section class="content">
       <div class="row">
         <div class="col-md-3">
-          <a href="/core/member/create" style="color: white;">
-            <button type="button" class="btn btn-block btn-success btn-lg box">Nouveau membre</button>
-          </a>
+          <a href="/core/member/create" style="color: white;"><button type="button" class="btn btn-block btn-success btn-lg box">Nouveau membre</button></a>
         </div>
       </div>
       <div class="row">
@@ -31,12 +28,10 @@
                 <table class="table table-bordered dataTable">
                   <tbody>
                   <tr>
-                    <th>Nom d'utilisateur <a href="#" id="username"
-                                             class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Nom d'utilisateur <a href="#" id="username" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
                     <th>Nom<a href="#" id="name" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
                     <th>Prénom<a href="#" id="firstname" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                    <th>Id position<a href="#" id="positionId" class="fa fa-unsorted fa-pull-right select_filter"></a>
-                    </th>
+                    <th>Id position<a href="#" id="positionId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
                     <th>Email<a href="#" id="email" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
                     <th>Voir</th>
                     <th>Modifier</th>
@@ -64,7 +59,6 @@
       </div>
     </section>
   </div>
-
   {{> template/footer}}
 </div>
 {{> template/scripts}}

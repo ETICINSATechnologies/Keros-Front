@@ -1,0 +1,12 @@
+<option value="{{id}}" id="current{{id}}" disabled selected></option>
+
+<script>
+  var id = {{id}},
+  option = document.getElementById("current{{id}}");
+
+  {{#each list}}
+  if ({{id}} == id) {
+    option.innerHTML = "{{label}}";
+  }
+  {{/each}}
+</script>

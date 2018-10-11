@@ -1,4 +1,6 @@
-export class Member {
+import { Address } from "./Address";
+
+export class MemberCreateRequest {
   constructor(
     private id ?: number,
     private firstName ?: string,
@@ -10,7 +12,7 @@ export class Member {
     private departmentId ?: number,
     private schoolYear ?: number,
     private telephone ?: string,
-    private addressId ?: number,
+    private address ?: Address,
     private positionIds ?: number[],
   ) {
   }

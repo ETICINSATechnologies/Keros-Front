@@ -2,17 +2,12 @@
 <div class="wrapper">
   {{> template/header}}
   {{> template/sidebar}}
-
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        {{#if member}}Modification d'un membre{{else}}Page d'inscription{{/if}}
+        Fiche d'inscription
       </h1>
-      {{#if member}}
-        {{> breadcrumb tab="SG" path="Membres,Modification d'un membre"}}
-      {{else}}
-        {{> breadcrumb tab="SG" path="Membres,Création d'un membre"}}
-      {{/if}}
+      {{> breadcrumb tab="SG" path="Membres,Inscription"}}
     </section>
     <section class="content">
       <div class="row">
@@ -20,137 +15,129 @@
           <section class="content">
             <div class="box box-primary">
               <div class="box-header with-border">
-              <h3 class="box-title">
-                {{#if member}}Modifiez un membre{{else}}Inscrivez un membre</h3>{{/if}}
+                <h3 class="box-title">
+                  Informations
                 </h3>
               </div>
-              <form role="form" {{#if member}}method="post" action="#"{{else}}method="post"
-                    action="/core/member/create"{{/if}}>
-                <div class="box-body">
-                  <div class="form-group">
+              <form role="form" method="post" action="/core/member/createform">
+                <div class="box-body row">
+                  <div class="col-md-6 form-group">
                     <label for="lastName">Nom</label>
-                    <input type="text" class="form-control" id="lastName" name="lastName"
-                           {{#if member}}value="{{member.lastName}}" {{else}}placeholder="Entrez le nom"{{/if}}
-                           required>
+                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Entrez le nom" required>
                   </div>
-
-                  <div class="form-group">
+                  <div class="col-md-6 form-group">
                     <label for="firstName">Prénom</label>
-                    <input type="text" class="form-control" id="firstName" name="firstName"
-                           {{#if member}}value="{{member.firstName}}" {{else}}placeholder="Entrez le prénom"{{/if}}
-                           required>
+                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Entrez le prénom" required>
                   </div>
-
-                  <div class="form-group">
-                    <label for="userName">Username</label>
-                    <input type="text" class="form-control" id="userName" name="userName"
-                           {{#if member}}value="{{member.username}}" {{else}}placeholder="Entrez le username"{{/if}}
-                           required>
+                  <div class="col-md-4 form-group">
+                    <label for="userName">Nom d'utilisateur</label>
+                    <input type="text" class="form-control" id="userName" name="userName" placeholder="Entrez le nom d'utilisateur" required>
                   </div>
-
-                  <div class="form-group">
+                  <div class="col-md-4 form-group">
                     <label for="gender">Sexe</label>
-                    <select class="form-control" id="gender" name="gender">
-                      <option value="0">Homme</option>
-                      <option value="1">Femme</option>
-                      <option value="2">Autre</option>
-                      <option value="3" selected>Inconnu</option>
+                    <select class="form-control" id="gender" name="gender" >
+                      {{#each gender}}
+                        <option value="{{id}}">{{label}}</option>
+                      {{/each}}
                     </select>
                   </div>
-
-                  <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="text" class="form-control" id="email" name="email"
-                           {{#if member}}value="{{member.email}}" {{else}}placeholder="Entrez l'email"{{/if}} required>
-                  </div>
-
-                  <div class="form-group">
+                  <div class="col-md-4 form-group">
                     <label for="birthday">Date de naissance</label>
                     <input type="date" class="form-control" id="birthday" name="birthday" required>
                   </div>
-
-                  <div class="form-group">
+                  <div class="col-md-12 form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" name="email" placeholder="Entrez l'adresse mail" required>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="telephone">Téléphone</label>
+                    <input type="text" class="form-control" id="telephone" name="telephone" placeholder="Entrez le numéro de téléphone" required>
+                  </div>
+                  <div class="col-md-4 form-group">
                     <label for="departmentId">Département</label>
-                    <select class="form-control" id="departmentId" name="departmentId">
-                      <option value="1">BIM</option>
-                      <option value="2">IF</option>
-                      <option value="3">GCM</option>
-                      <option value="4">GCU</option>
-                      <option value="5">GE</option>
-                      <option value="6">GEN</option>
-                      <option value="7">GI</option>
-                      <option value="8">GM</option>
-                      <option value="9">TC</option>
+                    <select class="form-control" id="departmentId" name="departmentId" >
+                      {{#each departments}}
+                        <option value="{{id}}">{{label}}</option>
+                      {{/each}}
                     </select>
                   </div>
-
-                  <div class="form-group">
+                  <div class="col-md-4 form-group">
                     <label for="schoolYear">Année scolaire</label>
                     <select class="form-control" id="schoolYear" name="schoolYear">
-                      {{#if member}}
-                      <option value="" disabled selected>{{member.schoolYear}}e année{{/if}}
-                      <option value="1">1ere année</option>
-                      <option value="2">2e année</option>
-                      <option value="3">3e année</option>
-                      <option value="4">4e année</option>
-                      <option value="5">5e année</option>
-                      <option value="6">6e année</option>
-                      <option value="7">7e année</option>
-                      <option value="8">8e année</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
                     </select>
                   </div>
-
-                  <div class="form-group">
-                    <label for="telephone">Téléphone</label>
-                    <input type="text" class="form-control" id="telephone" name="telephone"
-                           {{#if member}}value="{{member.telephone}}"
-                           {{else}}placeholder="Entrez le numéro de téléphone"{{/if}} required>
+                  <h4 class="col-md-12 box-title">
+                    Adresse
+                  </h4>
+                  <div class="col-md-12 form-group">
+                    <label for="line1">Ligne 1</label>
+                    <input type="string" class="form-control" id="line1" name="line1" placeholder="Entrez l'adresse 1" required>
                   </div>
-
-                  <div class="form-group">
-                    <label for="line1">Adresse</label>
-                    <input type="string" class="form-control" id="line1" name="line1"
-                           placeholder="Entrez l'adresse 1" required>
+                  <div class="col-md-12 form-group">
+                    <label for="line2">Ligne 2</label>
+                    <input type="string" class="form-control" id="line2" name="line2" placeholder="Entrez l'adresse 2">
                   </div>
-
-                  <div class="form-group">
-                    <input type="string" class="form-control" id="line2" name="line2"
-                           placeholder="Entrez l'adresse 2">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="city">Ville</label>
-                    <input type="string" class="form-control" id="city" name="city"
-                           placeholder="Entrez la ville" required>
-                  </div>
-
-                  <div class="form-group">
+                  <div class="col-md-2 form-group">
                     <label for="postalCode">Code postal</label>
-                    <input type="string" class="form-control" id="postalCode" name="postalCode"
-                           placeholder="Entrez le code postal" required>
+                    <input type="string" class="form-control" id="postalCode" name="postalCode" placeholder="Entrez le code postal" required>
                   </div>
-
-                  <div class="form-group">
+                  <div class="col-md-6 form-group">
+                    <label for="city">Ville</label>
+                    <input type="string" class="form-control" id="city" name="city" placeholder="Entrez la ville" required>
+                  </div>
+                  <div class="col-md-4 form-group">
                     <label for="countryId">Pays</label>
                     <select class="form-control" id="countryId" name="countryId" required>
-                      <option value="1">France</option>
-                      <option value="2">Suisse</option>
-                      <option value="3">Allemagne</option>
-                      <option value="4">Espagne</option>
+                      {{#each countries}}
+                        <option value="{{id}}">{{label}}</option>
+                      {{/each}}
                     </select>
                   </div>
-
-                  <div class="form-group">
-                    <label for="positionId">Id de position</label>
-                    <input type="text" class="form-control" id="positionId" name="positionId"
-                           {{#if member}}value="{{member.positionId}}" {{else}}placeholder="Entrez la position"{{/if}}
-                           required>
+                  <h4 class="col-md-12 box-title">
+                    Fonction/Poste
+                  </h4>
+                  <div class="col-md-4 form-group">
+                    <label for="countryId">Fonction 1</label>
+                    <select class="form-control" id="countryId" name="countryId">
+                      {{#each positions}}
+                        <option value="{{id}}">{{label}}</option>
+                      {{/each}}
+                    </select>
                   </div>
-
+                  <div class="col-md-4 form-group">
+                    <label for="countryId">Fonction 2</label>
+                    <select class="form-control" id="countryId" name="countryId">
+                      {{#each positions}}
+                        <option value="{{id}}">{{label}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="countryId">Fonction 3</label>
+                    <select class="form-control" id="countryId" name="countryId">
+                      {{#each positions}}
+                        <option value="{{id}}">{{label}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
                 </div>
-
                 <div class="box-footer">
-                  <button type="submit" class="btn btn-primary">Envoyer</button>
+                  <div class="clearfix row">
+                    <div class="col-md-10">
+                      <a href="/core/member"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button></a>
+                    </div>
+                    <div class="col-md-2" id="box_buttons">
+                      <button type="button" class="btn btn-primary pull-right" id="update">Editer</button>
+                    </div>
+                  </div>
                 </div>
               </form>
             </div>
@@ -159,7 +146,6 @@
       </div>
     </section>
   </div>
-
   {{> template/footer}}
 </div>
 {{> template/scripts}}
