@@ -5,6 +5,7 @@ import { Member } from "../../../../models/core/Member";
 import { Page } from "../../../../models/core/Page";
 import { Meta } from "../../../../models/core/Meta";
 import * as winston from "winston";
+
 export class MemberMock implements IMock {
   create<T>(resource: string, resources: any, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;

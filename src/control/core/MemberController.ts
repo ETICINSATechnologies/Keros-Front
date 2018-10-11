@@ -12,6 +12,7 @@ import { Gender } from "../../models/core/Gender";
 import { CountryService } from "../../services/core/CountryService";
 import { Country } from "../../models/core/Country";
 import { PositionService } from "../../services/core/PositionService";
+
 export class MemberController {
   public viewMembers(req: Request, res: Response, next: NextFunction) {
     MemberService.getAllMembers(function (err, page: Page<Member> | null) {
@@ -19,7 +20,7 @@ export class MemberController {
       if (err) {
         return next(err);
       }
-      winston.debug("Page = " + page);
+      winston.debug("Page = " + JSON.stringify(page));
       const options = {
         members: page,
       };
@@ -28,7 +29,6 @@ export class MemberController {
   }
   public viewMemberForm(req: Request, res: Response, next: NextFunction) {
     winston.info("Getting create member form");
-    if (req.params.id == null) {
       DepartmentService.getAllDepartments(function (err1, departments: Department[] | null) {
         GenderService.getAllGenders(function (err2, genders: Gender[] | null) {
           CountryService.getAllCountries(function (err3, countries: Country[] | null) {
@@ -49,23 +49,8 @@ export class MemberController {
           });
         });
       });
-    }
-    else {
-      winston.info("Params = " + req.params.id);
-      const id = req.params.id;
-      winston.info("Getting member form for id " + id);
-      MemberService.getMember(id, function (err, member: Member | null) {
-        if (err) {
-          return next(err);
-        }
-        const options = {
-          member: member
-        };
-        // On peut passer un objet directement si c'est assez facile à lire / comprendre
-        res.render("core/member/createForm", options);
-      });
-    }
   }
+
   public viewMember(req: Request, res: Response, next: NextFunction) {
     let id = req.params.id;
     MemberService.getMember(id, function (err1, member: Member | null) {
@@ -98,60 +83,6 @@ export class MemberController {
                         };
                         winston.debug("Gender : " + JSON.stringify(genders));
                         res.render("core/member/viewMember", options);
-                      });
-                    });
-                  });
-                });
-              }
-            });
-          });
-        });
-      }
-    });
-  }
-  public test(req: Request, res: Response, next: NextFunction) {
-    const id = 1;
-    MemberService.getMember(id, function (err1, member: Member | null) {
-      if (member !== null) {
-        DepartmentService.getAllDepartments(function (err2, departments: Department[] | null) {
-          GenderService.getAllGenders(function (err3, genders: Gender[] | null) {
-            AddressService.getAddress(member["addressId"], function (err4, address: Address | null) {
-              if (address !== null) {
-                CountryService.getAllCountries(function (err5, countries: Country[] | null) {
-                  PositionService.getAllPositions(function (err6, positions: Position[] | null) {
-                    DepartmentService.getDepartment(member["deparmentId"], function (err7, department: Department | null) {
-                      CountryService.getCountry(address["countryId"], function (err8, country: Country | null) {
-                        /*if (member["positionId"] !== []) {
-                          let truc: string[] = [];
-                          for (let i = 0 ; i < member["positionId"].length; i++) {
-                            PositionService.getPosition(member["positionId"][i], function (err9, position: Position | null) {
-                              truc.push(position["label"]);
-                            });
-                          }
-                          winston.debug("Test: " + truc);
-                        }*/
-                        // PositionService.getPosition(member["positionId"], function (err9, position: Position | null) {
-                        if (err1) return next(err1);
-                        if (err2) return next(err2);
-                        if (err3) return next(err3);
-                        if (err4) return next(err4);
-                        if (err5) return next(err5);
-                        if (err6) return next(err6);
-                        if (err7) return next(err7);
-                        if (err8) return next(err8);
-                        const options = {
-                          member: member,
-                          departments: departments,
-                          department: department,
-                          gender: genders,
-                          address: address,
-                          countries: countries,
-                          country: country,
-                          positions: positions,
-                        };
-                        winston.debug("Gender : " + JSON.stringify(genders));
-                        res.render("core/member/test", options);
-                        // });
                       });
                     });
                   });
