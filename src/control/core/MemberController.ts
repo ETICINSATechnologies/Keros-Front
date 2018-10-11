@@ -5,7 +5,13 @@ import { Member } from "../../models/core/Member";
 import { Address } from "../../models/core/Address";
 import * as winston from "winston";
 import { Page } from "../../models/core/Page";
-
+import { DepartmentService } from "../../services/core/DepartmentService";
+import { Department } from "../../models/core/Department";
+import { GenderService } from "../../services/core/GenderService";
+import { Gender } from "../../models/core/Gender";
+import { CountryService } from "../../services/core/CountryService";
+import { Country } from "../../models/core/Country";
+import { PositionService } from "../../services/core/PositionService";
 export class MemberController {
   public viewMembers(req: Request, res: Response, next: NextFunction) {
     MemberService.getAllMembers(function (err, page: Page<Member> | null) {
@@ -13,87 +19,178 @@ export class MemberController {
       if (err) {
         return next(err);
       }
-      winston.debug("Page = " + JSON.stringify(page));
+      winston.debug("Page = " + page);
       const options = {
         members: page,
       };
-
       res.render("core/member/viewAll", options);
     });
   }
-
   public viewMemberForm(req: Request, res: Response, next: NextFunction) {
     winston.info("Getting create member form");
     if (req.params.id == null) {
-      res.render("core/member/createForm");
+      DepartmentService.getAllDepartments(function (err1, departments: Department[] | null) {
+        GenderService.getAllGenders(function (err2, genders: Gender[] | null) {
+          CountryService.getAllCountries(function (err3, countries: Country[] | null) {
+            PositionService.getAllPositions(function (err4, positions: Position[] | null) {
+              if (err1) return next(err1);
+              if (err2) return next(err2);
+              if (err3) return next(err3);
+              if (err4) return next(err4);
+              const options = {
+                departments: departments,
+                gender: genders,
+                countries: countries,
+                positions: positions,
+              };
+              winston.debug("Gender : " + JSON.stringify(genders));
+              res.render("core/member/createForm", options);
+            });
+          });
+        });
+      });
     }
     else {
       winston.info("Params = " + req.params.id);
-      let id = req.params.id;
+      const id = req.params.id;
       winston.info("Getting member form for id " + id);
       MemberService.getMember(id, function (err, member: Member | null) {
         if (err) {
           return next(err);
         }
-
         const options = {
           member: member
         };
-
         // On peut passer un objet directement si c'est assez facile à lire / comprendre
         res.render("core/member/createForm", options);
       });
     }
   }
-
   public viewMember(req: Request, res: Response, next: NextFunction) {
     let id = req.params.id;
-    winston.info("Getting member form for id " + id);
-    MemberService.getMember(id, function (err, member: Member | null) {
-      if (err) {
-        return next(err);
+    MemberService.getMember(id, function (err1, member: Member | null) {
+      if (member !== null) {
+        DepartmentService.getAllDepartments(function (err2, departments: Department[] | null) {
+          GenderService.getAllGenders(function (err3, genders: Gender[] | null) {
+            AddressService.getAddress(member["addressId"], function (err4, address: Address | null) {
+              if (address !== null) {
+                CountryService.getAllCountries(function (err5, countries: Country[] | null) {
+                  PositionService.getAllPositions(function (err6, positions: Position[] | null) {
+                    DepartmentService.getDepartment(member["deparmentId"], function (err7, department: Department | null) {
+                      CountryService.getCountry(address["countryId"], function (err8, country: Country | null) {
+                        if (err1) return next(err1);
+                        if (err2) return next(err2);
+                        if (err3) return next(err3);
+                        if (err4) return next(err4);
+                        if (err5) return next(err5);
+                        if (err6) return next(err6);
+                        if (err7) return next(err7);
+                        if (err8) return next(err8);
+                        const options = {
+                          member: member,
+                          departments: departments,
+                          department: department,
+                          gender: genders,
+                          address: address,
+                          countries: countries,
+                          country: country,
+                          positions: positions,
+                        };
+                        winston.debug("Gender : " + JSON.stringify(genders));
+                        res.render("core/member/viewMember", options);
+                      });
+                    });
+                  });
+                });
+              }
+            });
+          });
+        });
       }
-
-      const options = {
-        member: member
-      };
-
-      // On peut passer un objet directement si c'est assez facile à lire / comprendre
-      res.render("core/member/viewMember", options);
     });
   }
-
-  public postMemberForm(req: Request, res: Response, next: NextFunction) {
-    let lastName = req.body.lastName;
-    let firstName = req.body.firstName;
-    let userName = req.body.userName;
-    let gender = req.body.gender;
-    let email = req.body.email;
-    let birthday = req.body.birthday;
-    let departmentId = req.body.departmentId;
-    let schoolYear = req.body.schoolYear;
-    let telephone = req.body.telephone;
-    let line1 = req.body.line1;
-    let line2 = req.body.line2;
-    let city = req.body.city;
-    let postalCode = req.body.postalCode;
-    let countryId = req.body.countryId;
-    let positionId = req.body.positionId;
-
-
-    let address = new Address(undefined, line1, line2, city, postalCode, countryId);
-    AddressService.getAddressId(address, function (err) {
-      if (err) {
-        return next(err);
+  public test(req: Request, res: Response, next: NextFunction) {
+    const id = 1;
+    MemberService.getMember(id, function (err1, member: Member | null) {
+      if (member !== null) {
+        DepartmentService.getAllDepartments(function (err2, departments: Department[] | null) {
+          GenderService.getAllGenders(function (err3, genders: Gender[] | null) {
+            AddressService.getAddress(member["addressId"], function (err4, address: Address | null) {
+              if (address !== null) {
+                CountryService.getAllCountries(function (err5, countries: Country[] | null) {
+                  PositionService.getAllPositions(function (err6, positions: Position[] | null) {
+                    DepartmentService.getDepartment(member["deparmentId"], function (err7, department: Department | null) {
+                      CountryService.getCountry(address["countryId"], function (err8, country: Country | null) {
+                        /*if (member["positionId"] !== []) {
+                          let truc: string[] = [];
+                          for (let i = 0 ; i < member["positionId"].length; i++) {
+                            PositionService.getPosition(member["positionId"][i], function (err9, position: Position | null) {
+                              truc.push(position["label"]);
+                            });
+                          }
+                          winston.debug("Test: " + truc);
+                        }*/
+                        // PositionService.getPosition(member["positionId"], function (err9, position: Position | null) {
+                        if (err1) return next(err1);
+                        if (err2) return next(err2);
+                        if (err3) return next(err3);
+                        if (err4) return next(err4);
+                        if (err5) return next(err5);
+                        if (err6) return next(err6);
+                        if (err7) return next(err7);
+                        if (err8) return next(err8);
+                        const options = {
+                          member: member,
+                          departments: departments,
+                          department: department,
+                          gender: genders,
+                          address: address,
+                          countries: countries,
+                          country: country,
+                          positions: positions,
+                        };
+                        winston.debug("Gender : " + JSON.stringify(genders));
+                        res.render("core/member/test", options);
+                        // });
+                      });
+                    });
+                  });
+                });
+              }
+            });
+          });
+        });
       }
     });
-
-    let user = new Member(undefined, firstName, lastName, userName, gender, email, birthday, departmentId, schoolYear, telephone, 1, positionId);
-    MemberService.createMember(user, function (err) {
-      if (err) {
-        return next(err);
-      }
-      res.redirect("/core/member");
+  }
+  public postMemberForm(req: Request, res: Response, next: NextFunction) {
+    const lastName = req.body.lastName;
+    const firstName = req.body.firstName;
+    const userName = req.body.userName;
+    const gender = req.body.gender;
+    const email = req.body.email;
+    const birthday = req.body.birthday;
+    const departmentId = req.body.departmentId;
+    const schoolYear = req.body.schoolYear;
+    const telephone = req.body.telephone;
+    const line1 = req.body.line1;
+    const line2 = req.body.line2;
+    const city = req.body.city;
+    const postalCode = req.body.postalCode;
+    const countryId = req.body.countryId;
+    const positionId = req.body.positionId;
+    const address = new Address(undefined, line1, line2, city, postalCode, countryId);
+    const user = new Member(undefined, firstName, lastName, userName, gender, email, birthday, departmentId, schoolYear, telephone, 1, positionId);
+    MemberService.createMember(user, function(err1) {
+      AddressService.createAddress(address, function (err2) {
+        if (err2) {
+          return next(err2);
+        }
+        if (err1) {
+          return next(err1);
+        }
+        res.redirect("/core/member");
+      });
     });
   }
 }

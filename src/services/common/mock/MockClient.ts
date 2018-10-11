@@ -5,12 +5,22 @@ import { IMock } from "./IMock";
 import { MemberMock } from "./member/MemberMock";
 import { FirmMock } from "./firm/FirmMock";
 import { StudyMock } from "./study/StudyMock";
+import { DepartmentMock } from "./department/DepartmentMock";
+import { GenderMock } from "./gender/GenderMock";
+import { AddressMock } from "./address/AddressMock";
+import { CountryMock } from "./country/CountryMock";
+import { PositionMock } from "./position/PositionMock";
 
 const MOCKS: IMock[] = [
   new AuthMock(),
   new MemberMock(),
   new FirmMock(),
   new StudyMock(),
+  new DepartmentMock(),
+  new GenderMock(),
+  new AddressMock(),
+  new CountryMock(),
+  new PositionMock(),
 ];
 
 export class MockResponse<T> implements IRestResponse<T> {
