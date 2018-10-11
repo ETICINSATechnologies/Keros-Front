@@ -34,8 +34,8 @@
                     <input type="text" class="form-control" id="userName" name="userName" value="{{member.username}}" placeholder="Entrez le nom d'utilisateur" required>
                   </div>
                   <div class="col-md-4 form-group">
-                    <label for="gender">Sexe</label>
-                    <select class="form-control" id="gender" name="gender" disabled>
+                    <label for="genderId">Sexe</label>
+                    <select class="form-control" id="genderId" name="genderId" disabled>
                       <option value="" disabled selected>{{member.gender}}</option>
                       {{#each gender}}
                         <option value="{{id}}">{{label}}</option>

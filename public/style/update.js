@@ -4,7 +4,6 @@ const buttons = '<button type="button" class="btn btn-primary" onclick="refresh(
   gendersId = {"H":1, "F":2, "A":3, "I":4};
 
 var url = document.location.pathname;
-//$("select[name='departmentId'] > option:first").html("asnkdasd");
 
 if (url.match(/update\/\d*/) || url.match(/create/)) {
   $("#update").remove();
@@ -31,9 +30,9 @@ function refresh() {
   location.reload();
 }
 
-$("select[name='gender'] > option:first").attr("value", gendersId[$("select[name='gender'] > option:first").html()]);
+$("select[name='genderId'] > option:first").attr("value", gendersId[$("select[name='genderId'] > option:first").html()]);
 
-$("select[name='gender'] > option").each(function () {
+$("select[name='genderId'] > option").each(function () {
   var tmp = $(this).html();
   $(this).html(genders[tmp]);
 });

@@ -91,7 +91,7 @@ export class MemberController {
     const lastName = req.body.lastName;
     const firstName = req.body.firstName;
     const userName = req.body.userName;
-    const gender = req.body.gender;
+    const gender = req.body.genderId;
     const email = req.body.email;
     const birthday = req.body.birthday;
     const departmentId = req.body.departmentId;

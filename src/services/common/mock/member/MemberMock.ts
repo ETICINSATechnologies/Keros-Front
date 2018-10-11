@@ -12,7 +12,7 @@ export class MemberMock implements IMock {
     let status: number = 500;
     switch (resource) {
       case "/core/member":
-        mockObj = <T> new Member(0, resources["lastName"], resources["firstName"], resources["username"], resources["gender"], resources["email"], resources["birthday"], resources["deparmentId"], resources["schoolYear"], resources["telephone"], resources["address"]["id"], resources["positionId"]);
+        mockObj = <T> new Member(0, resources["lastName"], resources["firstName"], resources["username"], resources["genderId"], resources["email"], resources["birthday"], resources["departmentId"], resources["schoolYear"], resources["telephone"], resources["address"]["id"], resources["positionIds"]);
         status = 200;
         winston.debug("Member created : " + JSON.stringify(mockObj));
         return new MockResponse(mockObj, status);

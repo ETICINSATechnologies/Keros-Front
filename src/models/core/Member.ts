@@ -4,14 +4,14 @@ export class Member {
     private firstName ?: string,
     private lastName ?: string,
     private username ?: string,
-    private gender ?: string,
+    private genderId ?: string,
     private email ?: string,
     private birthday ?: string,
-    private deparmentId ?: number,
+    private departmentId ?: number,
     private schoolYear ?: number,
     private telephone ?: string,
     private addressId ?: number,
-    private positionId ?: number[],
+    private positionIds ?: number[],
   ) {
   }
 
