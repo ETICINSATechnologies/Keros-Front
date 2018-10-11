@@ -17,17 +17,4 @@ export class AddressService extends BaseService {
       e => callback(e, null)
     );
   }
-  static createAddress(address: Address, callback: (err: any) => void): void {
-    this.rest.create<Address>("address", address).then(
-      (res: IRestResponse<Address>) => {
-        if (res.statusCode !== 200) {
-          return callback(this.defaultError());
-        }
-        winston.debug("createAddress response with status " + res.statusCode);
-        callback(null);
-      }
-    ).catch(
-      e => callback(e)
-    );
-  }
 }

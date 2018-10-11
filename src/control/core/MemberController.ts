@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { MemberService } from "../../services/core/MemberService";
 import { AddressService } from "../../services/core/AddressService";
 import { Member } from "../../models/core/Member";
+import { MemberCreateRequest } from "../../models/core/MemberCreateRequest";
 import { Address } from "../../models/core/Address";
 import * as winston from "winston";
 import { Page } from "../../models/core/Page";
@@ -44,7 +45,7 @@ export class MemberController {
                 positions: positions,
               };
               winston.debug("Gender : " + JSON.stringify(genders));
-              res.render("core/member/createForm", options);
+              res.render("core/member/viewMember", options);
             });
           });
         });
@@ -61,30 +62,22 @@ export class MemberController {
               if (address !== null) {
                 CountryService.getAllCountries(function (err5, countries: Country[] | null) {
                   PositionService.getAllPositions(function (err6, positions: Position[] | null) {
-                    DepartmentService.getDepartment(member["deparmentId"], function (err7, department: Department | null) {
-                      CountryService.getCountry(address["countryId"], function (err8, country: Country | null) {
-                        if (err1) return next(err1);
-                        if (err2) return next(err2);
-                        if (err3) return next(err3);
-                        if (err4) return next(err4);
-                        if (err5) return next(err5);
-                        if (err6) return next(err6);
-                        if (err7) return next(err7);
-                        if (err8) return next(err8);
-                        const options = {
-                          member: member,
-                          departments: departments,
-                          department: department,
-                          gender: genders,
-                          address: address,
-                          countries: countries,
-                          country: country,
-                          positions: positions,
-                        };
-                        winston.debug("Gender : " + JSON.stringify(genders));
-                        res.render("core/member/viewMember", options);
-                      });
-                    });
+                    if (err1) return next(err1);
+                    if (err2) return next(err2);
+                    if (err3) return next(err3);
+                    if (err4) return next(err4);
+                    if (err5) return next(err5);
+                    if (err6) return next(err6);
+                    const options = {
+                      member: member,
+                      departments: departments,
+                      gender: genders,
+                      address: address,
+                      countries: countries,
+                      positions: positions,
+                    };
+                    winston.debug("Gender : " + JSON.stringify(genders));
+                    res.render("core/member/viewMember", options);
                   });
                 });
               }
@@ -109,19 +102,18 @@ export class MemberController {
     const city = req.body.city;
     const postalCode = req.body.postalCode;
     const countryId = req.body.countryId;
-    const positionId = req.body.positionId;
-    const address = new Address(undefined, line1, line2, city, postalCode, countryId);
-    const user = new Member(undefined, firstName, lastName, userName, gender, email, birthday, departmentId, schoolYear, telephone, 1, positionId);
+    const positionId1 = req.body.positionId1;
+    const positionId2 = req.body.positionId2;
+    const positionId3 = req.body.positionId3;
+    const positionsId = [positionId1, positionId2, positionId3];
+
+    const address = new Address(1, line1, line2, city, postalCode, countryId);
+    const user = new MemberCreateRequest(undefined, firstName, lastName, userName, gender, email, birthday, departmentId, schoolYear, telephone, address, positionsId);
     MemberService.createMember(user, function(err1) {
-      AddressService.createAddress(address, function (err2) {
-        if (err2) {
-          return next(err2);
-        }
         if (err1) {
           return next(err1);
         }
         res.redirect("/core/member");
-      });
     });
   }
 }

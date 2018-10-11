@@ -14,11 +14,11 @@ export function coreRouter(): Router {
   const router: Router = Router();
   secureRouter(router);
 
-  router.get("", memberController.viewMembers);
-  router.get("/:id(\\d+)/", memberController.viewMember);
-  router.get("/signin", memberController.viewMemberForm);
-  router.post("/create", memberController.postMemberForm);
-  router.get("/update/:id(\\d+)/", memberController.viewMember);
+  router.get("/member", memberController.viewMembers);
+  router.get("/member/:id(\\d+)/", memberController.viewMember);
+  router.get("/member/create", memberController.viewMemberForm);
+  router.post("/member/createform", memberController.postMemberForm);
+  router.get("/member/update/:id(\\d+)/", memberController.viewMember);
 
   return router;
 }

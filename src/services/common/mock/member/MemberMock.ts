@@ -11,8 +11,8 @@ export class MemberMock implements IMock {
     let mockObj: T | null = null;
     let status: number = 500;
     switch (resource) {
-      case "member":
-        mockObj = <T> new Member(0, resources["firstName"], resources["lastName"], resources["username"], resources["gender"], resources["email"], resources["birthday"], resources["deparmentId"], resources["schoolYear"], resources["telephone"], resources["addressId"], resources["positionId"]);
+      case "/core/member":
+        mockObj = <T> new Member(0, resources["lastName"], resources["firstName"], resources["username"], resources["gender"], resources["email"], resources["birthday"], resources["deparmentId"], resources["schoolYear"], resources["telephone"], resources["address"]["id"], resources["positionId"]);
         status = 200;
         winston.debug("Member created : " + JSON.stringify(mockObj));
         return new MockResponse(mockObj, status);
@@ -26,15 +26,15 @@ export class MemberMock implements IMock {
     let mockObj: T | null = null;
     let status: number = 500;
     switch (resource) {
-      case "member/1":
+      case "/core/member/1":
         mockObj = <T> new Member(1, "Tom", "Dupont", "tdupont", "A", "tom.dupont@test.com", "1996-08-27", 4, 3, "0607080910", 2, [3, 4]);
         status = 200;
         return new MockResponse(mockObj, status);
-      case "member/2":
+      case "/core/member/2":
         mockObj = <T> new Member(2, "Pierre", "Henry", "tdupont", "H", "tom.dupont@test.com", "1996-08-27", 4, 3, "0607080910", 2, [3, 2]);
         status = 200;
         return new MockResponse(mockObj, status);
-      case "member":
+      case "/core/member":
         mockObj = <T> new Page(<T[]> [new Member(1, "Tom", "Dupont", "tdupont", "H", "tom.dupont@test.com", "1996-08-27", 4, 3, "0607080910", 1, [3, 4]), new Member(2, "Pierre", "Henry", "phenry", "H", "pierre.henry   @test.com", "1996-08-27", 4, 3, "0607080910", 2, [3, 2])], new Meta (0, 1, 2 , 25));
         status = 200;
         return new MockResponse(mockObj, status);
@@ -45,7 +45,7 @@ export class MemberMock implements IMock {
     let mockObj: T[] | null = null;
     let status: number = 500;
     switch (resource) {
-      case "member":
+      case "/core/member":
         mockObj = <T[]> [ <T> new Member(1, "Tom", "Dupont", "tdupont", "H", "tom.dupont@test.com", "1996-08-27", 4, 3, "0607080910", 1, [3, 4]), new Member(2, "Pierre", "Henry", "phenry", "H", "tom.dupont@test.com", "1996-08-27", 4, 3, "0607080910", 2, [3, 2])];
         status = 200;
         return new MockResponse(mockObj, status);

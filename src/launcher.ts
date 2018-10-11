@@ -73,7 +73,7 @@ export class Launcher {
 
     this.app.use("/auth", authRouter());
     this.app.use("", dashboardRouter());
-    this.app.use("/core/member", coreRouter());
+    this.app.use("/core", coreRouter());
     this.app.use("/ua/firm", firmRouter());
     this.app.use("/ua/study", studyRouter());
 

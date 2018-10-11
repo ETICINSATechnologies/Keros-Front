@@ -19,24 +19,24 @@
                   Informations
                 </h3>
               </div>
-              <form role="form" method="post" action="/core/member/create">
+              <form role="form" method="post" action="/core/member/createform">
                 <div class="box-body row">
                   <div class="col-md-6 form-group">
                     <label for="lastName">Nom</label>
-                    <input type="text" class="form-control" id="lastName" name="lastName" value="{{member.lastName}}" required disabled>
+                    <input type="text" class="form-control" id="lastName" name="lastName" value="{{member.lastName}}" placeholder="Entrez le nom" required disabled>
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="firstName">Prénom</label>
-                    <input type="text" class="form-control" id="firstName" name="firstName" value="{{member.firstName}}" required disabled>
+                    <input type="text" class="form-control" id="firstName" name="firstName" value="{{member.firstName}}" placeholder="Entrez le prénom" required disabled>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="userName">Nom d'utilisateur</label>
-                    <input type="text" class="form-control" id="userName" name="userName" value="{{member.username}}" required>
+                    <input type="text" class="form-control" id="userName" name="userName" value="{{member.username}}" placeholder="Entrez le nom d'utilisateur" required>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="gender">Sexe</label>
                     <select class="form-control" id="gender" name="gender" disabled>
-                      <option value="12" disabled selected>{{member.gender}}</option>
+                      <option value="" disabled selected>{{member.gender}}</option>
                       {{#each gender}}
                         <option value="{{id}}">{{label}}</option>
                       {{/each}}
@@ -48,16 +48,17 @@
                   </div>
                   <div class="col-md-12 form-group">
                     <label for="email">Email</label>
-                    <input type="text" class="form-control" id="email" name="email" value="{{member.email}}" required disabled>
+                    <input type="text" class="form-control" id="email" name="email" value="{{member.email}}" placeholder="Entrez l'adresse mail" required disabled>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="telephone">Téléphone</label>
-                    <input type="text" class="form-control" id="telephone" name="telephone" value="{{member.telephone}}" required disabled>
+                    <input type="text" class="form-control" id="telephone" name="telephone" value="{{member.telephone}}" placeholder="Entrez le numéro de téléphone" required disabled>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="departmentId">Département</label>
                     <select class="form-control" id="departmentId" name="departmentId" disabled>
-                      <option value="{{member.deparmentId}}" disabled selected>{{department.label}}</option>
+                      {{> template/getItem id=member.deparmentId list=departments }}
+                      <!--<option value="{{member.deparmentId}}" disabled selected>{{department.label}}</option>-->
                       {{#each departments}}
                         <option value="{{id}}">{{label}}</option>
                       {{/each}}
@@ -103,7 +104,7 @@
                   <div class="col-md-4 form-group">
                     <label for="countryId">Pays</label>
                     <select class="form-control" id="countryId" name="countryId" required disabled>
-                      <option value="{{country.id}}" selected disabled>{{country.label}}</option>
+                      {{> template/getItem id=address.countryId list=countries }}
                       {{#each countries}}
                         <option value="{{id}}">{{label}}</option>
                       {{/each}}
@@ -114,7 +115,7 @@
                   </h4>
                   <div class="col-md-4 form-group">
                     <label for="countryId">Fonction 1</label>
-                    <select class="form-control" id="countryId" name="countryId">
+                    <select class="form-control" id="countryId" name="positionId1">
                       {{#each positions}}
                         <option value="{{id}}">{{label}}</option>
                       {{/each}}
@@ -122,7 +123,7 @@
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="countryId">Fonction 2</label>
-                    <select class="form-control" id="countryId" name="countryId">
+                    <select class="form-control" id="countryId" name="positionId2">
                       {{#each positions}}
                         <option value="{{id}}">{{label}}</option>
                       {{/each}}
@@ -130,7 +131,7 @@
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="countryId">Fonction 3</label>
-                    <select class="form-control" id="countryId" name="countryId">
+                    <select class="form-control" id="countryId" name="positionId3">
                       {{#each positions}}
                         <option value="{{id}}">{{label}}</option>
                       {{/each}}
