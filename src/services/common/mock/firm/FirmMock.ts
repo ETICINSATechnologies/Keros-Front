@@ -4,6 +4,7 @@ import { Firm } from "../../../../models/ua/Firm";
 import { Page } from "../../../../models/core/Page";
 import { MockResponse } from "../MockClient";
 import { Meta } from "../../../../models/core/Meta";
+import * as winston from "winston";
 
 export class FirmMock implements IMock {
   create<T>(resource: string, resources: any, options?: IRequestOptions): IRestResponse<T> | null {
@@ -11,8 +12,9 @@ export class FirmMock implements IMock {
     let status: number = 500;
     switch (resource) {
       case "ua/firm":
-        mockObj = <T> new Firm(1, "9999999");
+        mockObj = <T> new Firm(0, resources["siret"], resources["name"], resources["address"]["id"], resources["typeId"]);
         status = 200;
+        winston.debug("Firm created : " + JSON.stringify(mockObj));
         return new MockResponse(mockObj, status);
     }
     return null;
@@ -27,15 +29,15 @@ export class FirmMock implements IMock {
     let status: number = 500;
     switch (resource) {
       case "ua/firm/1":
-        mockObj = <T> new Firm(1, "99999999", "Dupont", 4, 2);
+        mockObj = <T> new Firm(1, "99999999", "La boucherie du Léman", 1, 2);
         status = 200;
         return new MockResponse(mockObj, status);
       case "ua/firm/2":
-        mockObj = <T> new Firm(2, "1111111", "Henry", 2, 6);
+        mockObj = <T> new Firm(2, "1111111", "La poissonerie des familles", 2, 4);
         status = 200;
         return new MockResponse(mockObj, status);
       case "ua/firm":
-        mockObj = <T> new Page(<T[]> [new Firm(1, "99999999", "Dupont", 4, 2), new Firm(2, "11111111", "Henry", 2, 6)], new Meta(0, 1, 2, 25));
+        mockObj = <T> new Page(<T[]> [new Firm(1, "99999999", "La boucherie du Léman", 4, 2), new Firm(2, "11111111", "La poissonerie des familles", 2, 6)], new Meta(0, 1, 2, 25));
         status = 200;
         return new MockResponse(mockObj, status);
     }
@@ -47,7 +49,7 @@ export class FirmMock implements IMock {
     let status: number = 500;
     switch (resource) {
       case "ua/firm":
-        mockObj = <T[]> [<T> new Firm(1, "99999999", "Dupont", 4, 2), new Firm(2, "11111111", "Henry", 2, 6)];
+        mockObj = <T[]> [<T> new Firm(1, "99999999", "La boucherie du Léman", 1, 2), new Firm(2, "11111111", "La poissonerie des familles", 2, 4)];
         status = 200;
         return new MockResponse(mockObj, status);
     }

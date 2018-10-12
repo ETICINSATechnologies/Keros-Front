@@ -3,6 +3,13 @@ import { FirmService } from "../../services/ua/FirmService";
 import { Firm } from "../../models/ua/Firm";
 import * as winston from "winston";
 import { Page } from "../../models/core/Page";
+import { Address } from "../../models/core/Address";
+import { FirmCreateRequest } from "../../models/ua/FirmCreateRequest";
+import { FirmTypeService } from "../../services/ua/FirmTypeService";
+import { FirmType } from "../../models/ua/FirmType";
+import { CountryService } from "../../services/core/CountryService";
+import { Country } from "../../models/core/Country";
+import { AddressService } from "../../services/core/AddressService";
 
 export class FirmController {
   public viewFirms(req: Request, res: Response, next: NextFunction) {
@@ -15,63 +22,63 @@ export class FirmController {
       const options = {
         firms: page,
       };
-
       res.render("ua/firm/viewAll", options);
     });
   }
 
   public viewFirmForm(req: Request, res: Response, next: NextFunction) {
     winston.info("Getting create firm form");
-    if (req.params.id == null) {
-      res.render("ua/firm/createForm");
-    }
-    else {
-      winston.info("Params = " + req.params.id);
-      let id = req.params.id;
-      winston.info("Getting firm form for id " + id);
-      FirmService.getFirm(id, function (err, firm: Firm | null) {
-        if (err) {
-          return next(err);
-        }
-
+    FirmTypeService.getAllFirmTypes(function (err1, firmTypes: FirmType[] | null) {
+      CountryService.getAllCountries(function (err2, countries: Country[] | null) {
+        if (err1) return next(err1);
+        if (err2) return next(err2);
         const options = {
-          firm: firm
+          firmTypes : firmTypes,
+          countries : countries,
         };
-
-        // On peut passer un objet directement si c'est assez facile à lire / comprendre
-        res.render("ua/firm/createForm", options);
+        winston.debug("FirmType : " + JSON.stringify(firmTypes));
+        res.render("ua/firm/viewFirm", options);
       });
-    }
+    });
   }
 
   public viewFirm(req: Request, res: Response, next: NextFunction) {
     let id = req.params.id;
-    winston.info("Getting member form for id " + id);
+    winston.info("Getting Firm form for id " + id);
     FirmService.getFirm(id, function (err, firm: Firm | null) {
-      if (err) {
-        return next(err);
+      if (firm !== null) {
+        AddressService.getAddress(firm["addressId"], function (err1, address: Address | null) {
+          FirmTypeService.getAllFirmTypes(function (err2, firmTypes: FirmType[] | null) {
+            CountryService.getAllCountries(function (err3, countries: Country[] | null) {
+              if (err1) return next(err1);
+              if (err2) return next(err2);
+              if (err3) return next(err3);
+              const options = {
+                firm : firm,
+                address : address,
+                firmTypes : firmTypes,
+                countries : countries,
+              };
+              winston.debug("FirmType : " + JSON.stringify(firmTypes));
+              res.render("ua/firm/viewFirm", options);
+            });
+          });
+        });
       }
-
-      const options = {
-        firm: firm
-      };
-
-      // On peut passer un objet directement si c'est assez facile à lire / comprendre
-      res.render("ua/firm/viewFirm", options);
     });
   }
 
   public postFirmForm(req: Request, res: Response, next: NextFunction) {
-    let name = req.body.name;
-    let siret = req.body.siret;
-    let line1 = req.body.line1;
-    let line2 = req.body.line2;
-    let city = req.body.city;
-    let postalCode = req.body.postalCode;
-    let countryId = req.body.countryId;
-    let typeId = req.body.typeId;
-
-    let firm = new Firm(undefined, name, siret, 1, typeId);
+    const name = req.body.name;
+    const siret = req.body.siret;
+    const line1 = req.body.line1;
+    const line2 = req.body.line2;
+    const city = req.body.city;
+    const postalCode = req.body.postalCode;
+    const countryId = req.body.countryId;
+    const typeId = req.body.typeId;
+    const address = new Address(1, line1, line2, city, postalCode, countryId);
+    const firm = new FirmCreateRequest(siret, name, address, typeId);
     FirmService.createFirm(firm, function (err) {
       if (err) {
         return next(err);

@@ -17,8 +17,8 @@ export function firmRouter(): Router {
   router.get("", firmController.viewFirms);
   router.get("/:id(\\d+)/", firmController.viewFirm);
   router.get("/create", firmController.viewFirmForm);
-  router.post("/create", firmController.postFirmForm);
-  router.get("/update/:id(\\d+)/", firmController.viewFirmForm);
+  router.post("/createform", firmController.postFirmForm);
+  router.get("/update/:id(\\d+)/", firmController.viewFirm);
   router.post("/update", firmController.postFirmForm);
 
   return router;

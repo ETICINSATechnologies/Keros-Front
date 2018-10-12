@@ -108,7 +108,7 @@ export class MemberController {
     const positionsId = [positionId1, positionId2, positionId3];
 
     const address = new Address(1, line1, line2, city, postalCode, countryId);
-    const user = new MemberCreateRequest(undefined, firstName, lastName, userName, gender, email, birthday, departmentId, schoolYear, telephone, address, positionsId);
+    const user = new MemberCreateRequest(firstName, lastName, userName, gender, email, birthday, departmentId, schoolYear, telephone, address, positionsId);
     MemberService.createMember(user, function(err1) {
         if (err1) {
           return next(err1);
