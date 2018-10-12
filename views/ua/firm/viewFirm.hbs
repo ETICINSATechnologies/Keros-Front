@@ -5,9 +5,13 @@
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        Fiche Société
+        {{#if firm}}Fiche Société{{else}}Nouvelle société{{/if}}
       </h1>
+      {{#if firm}}
       {{> breadcrumb tab="UA" path="Sociétés,Edition d'une société"}}
+      {{else}}
+      {{> breadcrumb tab="UA" path="Sociétés,Nouvelle société"}}
+      {{/if}}
     </section>
     <section class="content">
       <div class="row">
@@ -74,7 +78,7 @@
                 <div class="box-footer">
                   <div class="clearfix row">
                     <div class="col-md-10">
-                      <a href="/core/member"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button></a>
+                      <a href="/ua/firm"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button></a>
                     </div>
                     <div class="col-md-2" id="box_buttons">
                       <button type="button" class="btn btn-primary pull-right" id="update">Editer</button>

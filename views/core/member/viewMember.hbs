@@ -5,9 +5,13 @@
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        Fiche Membre
+        {{#if member}}Fiche Membre{{else}}Nouveau Membre{{/if}}
       </h1>
-      {{> breadcrumb tab="SG" path="Membres,Edition d'un membre"}}
+      {{#if member}}
+        {{> breadcrumb tab="SG" path="Membres,Edition d'un membre"}}
+      {{else}}
+        {{> breadcrumb tab="SG" path="Membres,Nouveau Membre"}}
+      {{/if}}
     </section>
     <section class="content">
       <div class="row">

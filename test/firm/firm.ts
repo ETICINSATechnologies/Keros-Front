@@ -33,7 +33,7 @@ describe("Firm tests", function () {
       .then((resp: Response) => {
         const window = new JSDOM(resp.text).window;
         const $ = jquery(window);
-        expect($(".content-header>h1:first").text().trim()).equals("Voir les sociétés");
+        expect($(".content-header>h1:first").text().trim()).equals("Fiche Société");
         done();
       })
       .catch((err: Error) => {
@@ -51,7 +51,7 @@ describe("Firm tests", function () {
       .then((resp: Response) => {
         const window = new JSDOM(resp.text).window;
         const $ = jquery(window);
-        expect($(".content-header>h1:first").text().trim()).equals("Création d'une société");
+        expect($(".content-header>h1:first").text().trim()).equals("Nouvelle société");
         done();
       })
       .catch((err: Error) => {
@@ -69,7 +69,7 @@ describe("Firm tests", function () {
       .then((resp: Response) => {
         const window = new JSDOM(resp.text).window;
         const $ = jquery(window);
-        expect($(".content-header>h1:first").text().trim()).equals("Modification d'une société");
+        expect($(".content-header>h1:first").text().trim()).equals("Fiche Société");
         done();
       })
       .catch((err: Error) => {

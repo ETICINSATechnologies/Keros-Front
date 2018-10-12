@@ -41,7 +41,7 @@ describe("Member tests", function () {
   });
   it("Should return the creation form with /core/member/signin", function (done) {
     request
-      .get("/core/member/signin")
+      .get("/core/member/create")
       .set("Accept", "text/html")
       .set('Cookie', 'token=randomToken;')
       .expect("Content-Type", "text/html; charset=utf-8")
@@ -49,7 +49,7 @@ describe("Member tests", function () {
       .then((resp: Response) => {
         const window = new JSDOM(resp.text).window;
         const $ = jquery(window);
-        expect($(".content-header>h1:first").text().trim()).equals("Fiche d'inscription");
+        expect($(".content-header>h1:first").text().trim()).equals("Nouveau Membre");
         done();
       })
       .catch((err: Error) => {
