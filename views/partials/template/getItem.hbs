@@ -1,4 +1,4 @@
-<option value="{{id}}" id="current{{id}}" disabled selected></option>
+<option value="{{id}}" id="current{{id}}" selected></option>
 
 <script>
   var id = {{id}},
@@ -6,7 +6,12 @@
 
   {{#each list}}
   if ({{id}} == id) {
-    option.innerHTML = "{{label}}";
+    if ("{{label}}" == "") {
+      option.innerHTML = "{{name}}";
+    }
+    else {
+      option.innerHTML = "{{label}}";
+    }
   }
   {{/each}}
 </script>

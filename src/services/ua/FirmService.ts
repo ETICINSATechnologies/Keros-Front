@@ -34,6 +34,20 @@ export class FirmService extends BaseService {
     );
   }
 
+  static getListOfAllFirms(callback: (err: any, result: Firm[] | null) => void): void {
+    this.rest.getAll<Firm>("ua/firm").then(
+      (res: IRestResponse<Firm[]>) => {
+        if (res.statusCode !== 200) {
+          return callback(this.defaultError(), null);
+        }
+        winston.debug("getListOfAllFirms response with status " + res.statusCode);
+        callback(null, res.result);
+      }
+    ).catch(
+      e => callback(e, null)
+    );
+  }
+
   static createFirm(firmRequest: FirmCreateRequest, callback: (err: any) => void): void {
     this.rest.create<FirmCreateRequest>("ua/firm", firmRequest).then(
       (res: IRestResponse<FirmCreateRequest>) => {

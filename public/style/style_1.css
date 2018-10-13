@@ -1,1 +1,1 @@
-option[value=""][disabled] {display: none;}
+option[selected] {color: darkgrey;}

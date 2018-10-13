@@ -1,0 +1,23 @@
+<script>
+  var ids = "{{id}}".split(",");
+  var positions = "";
+
+    {{#each list}}
+    positions = positions.concat('<option value="{{id}}">{{label}}</option>')
+  {{/each}}
+
+  for (var i = 0; i < 3; i++) {
+    if (ids[i] != null) {
+      {{#each list}}
+        if (parseInt(ids[i]) == {{id}}) {
+          var tmp = '<option value="{{id}}" selected>{{label}}</option>'
+        }
+      {{/each}}
+      document.getElementById("positionId" + (i + 1)).innerHTML = tmp.concat(positions);
+    }
+    else {
+      var tmp = '<option value="" selected></option>';
+      document.getElementById("positionId" + (i + 1)).innerHTML = tmp.concat(positions);
+    }
+  }
+</script>

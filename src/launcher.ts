@@ -14,6 +14,7 @@ import { coreRouter } from "./control/core/coreRouter";
 import { firmRouter } from "./control/ua/firmRouter";
 import { studyRouter } from "./control/ua/studyRouter";
 import { dashboardRouter } from "./control/core/dashboardRouter";
+import { contactRouter } from "./control/ua/contactRouter";
 
 /**
  * The Launcher - contains the express Application as well as methods to launch a server on that
@@ -76,6 +77,7 @@ export class Launcher {
     this.app.use("/core", coreRouter());
     this.app.use("/ua/firm", firmRouter());
     this.app.use("/ua/study", studyRouter());
+    this.app.use("/ua/contact", contactRouter());
 
     // Catch 404 and forward to error handler
     this.app.use(function (req: express.Request, res: express.Response, next: express.NextFunction) {
