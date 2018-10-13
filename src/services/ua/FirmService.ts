@@ -54,7 +54,7 @@ export class FirmService extends BaseService {
         if (res.statusCode !== 200) {
           return callback(this.defaultError());
         }
-        winston.debug("createFirm response with status " + res.statusCode);
+        winston.debug("update firm response with status " + res.statusCode);
         callback(null);
       }
     ).catch(
