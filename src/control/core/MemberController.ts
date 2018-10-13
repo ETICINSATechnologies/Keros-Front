@@ -55,36 +55,38 @@ export class MemberController {
   public viewMember(req: Request, res: Response, next: NextFunction) {
     let id = req.params.id;
     MemberService.getMember(id, function (err1, member: Member | null) {
-      if (member !== null) {
-        DepartmentService.getAllDepartments(function (err2, departments: Department[] | null) {
-          GenderService.getAllGenders(function (err3, genders: Gender[] | null) {
-            AddressService.getAddress(member["addressId"], function (err4, address: Address | null) {
-              if (address !== null) {
-                CountryService.getAllCountries(function (err5, countries: Country[] | null) {
-                  PositionService.getAllPositions(function (err6, positions: Position[] | null) {
-                    if (err1) return next(err1);
-                    if (err2) return next(err2);
-                    if (err3) return next(err3);
-                    if (err4) return next(err4);
-                    if (err5) return next(err5);
-                    if (err6) return next(err6);
-                    const options = {
-                      member: member,
-                      departments: departments,
-                      gender: genders,
-                      address: address,
-                      countries: countries,
-                      positions: positions,
-                    };
-                    winston.debug("Gender : " + JSON.stringify(genders));
-                    res.render("core/member/viewMember", options);
-                  });
-                });
-              }
+      if (member === null) {
+        return next(err1);
+      }
+      DepartmentService.getAllDepartments(function (err2, departments: Department[] | null) {
+        GenderService.getAllGenders(function (err3, genders: Gender[] | null) {
+          AddressService.getAddress(member["addressId"], function (err4, address: Address | null) {
+            if (address === null) {
+              return next(err4);
+            }
+            CountryService.getAllCountries(function (err5, countries: Country[] | null) {
+              PositionService.getAllPositions(function (err6, positions: Position[] | null) {
+                if (err1) return next(err1);
+                if (err2) return next(err2);
+                if (err3) return next(err3);
+                if (err4) return next(err4);
+                if (err5) return next(err5);
+                if (err6) return next(err6);
+                const options = {
+                  member: member,
+                  departments: departments,
+                  gender: genders,
+                  address: address,
+                  countries: countries,
+                  positions: positions,
+                };
+                winston.debug("Gender : " + JSON.stringify(genders));
+                res.render("core/member/viewMember", options);
+              });
             });
           });
         });
-      }
+      });
     });
   }
   public postMemberForm(req: Request, res: Response, next: NextFunction) {

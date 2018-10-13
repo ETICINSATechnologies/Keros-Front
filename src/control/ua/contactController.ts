@@ -34,7 +34,6 @@ export class ContactController {
           firms : firms,
           gender : genders,
         };
-        winston.debug("Firms : " + JSON.stringify(firms));
         res.render("ua/contact/viewContact", options);
       });
     });
@@ -44,21 +43,21 @@ export class ContactController {
     const id = req.params.id;
     winston.info("Getting Contact form for id " + id);
     ContactService.getContact(id, function (err, contact: Contact | null) {
-      if (contact !== null) {
-          FirmService.getListOfAllFirms(function (err1, firms: Firm[] | null) {
-            GenderService.getAllGenders(function (err2, genders: Gender[] | null) {
-              if (err1) return next(err1);
-              if (err2) return next(err2);
-              const options = {
-                contact : contact,
-                firms : firms,
-                gender : genders,
-              };
-              winston.debug("Firms : " + JSON.stringify(firms));
-              res.render("ua/contact/viewContact", options);
-            });
-          });
+      if (contact === null) {
+        return next(err);
       }
+      FirmService.getListOfAllFirms(function (err1, firms: Firm[] | null) {
+        GenderService.getAllGenders(function (err2, genders: Gender[] | null) {
+          if (err1) return next(err1);
+          if (err2) return next(err2);
+          const options = {
+            contact : contact,
+            firms : firms,
+            gender : genders,
+          };
+          res.render("ua/contact/viewContact", options);
+        });
+      });
     });
   }
 
