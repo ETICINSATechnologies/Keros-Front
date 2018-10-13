@@ -2,7 +2,6 @@ import { Address } from "./Address";
 
 export class MemberCreateRequest {
   constructor(
-    private id ?: number,
     private firstName ?: string,
     private lastName ?: string,
     private username ?: string,

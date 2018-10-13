@@ -3,6 +3,7 @@ import { Firm } from "../../models/ua/Firm";
 import { BaseService } from "../common/BaseService";
 import * as winston from "winston";
 import { Page } from "../../models/core/Page";
+import { FirmCreateRequest } from "../../models/ua/FirmCreateRequest";
 
 export class FirmService extends BaseService {
   static getFirm(id: number, callback: (err: any, result: Firm | null) => void): void {
@@ -33,9 +34,9 @@ export class FirmService extends BaseService {
     );
   }
 
-  static createFirm(member: Firm, callback: (err: any) => void): void {
-    this.rest.create<Firm>("ua/firm", Firm).then(
-      (res: IRestResponse<Firm>) => {
+  static createFirm(firmRequest: FirmCreateRequest, callback: (err: any) => void): void {
+    this.rest.create<FirmCreateRequest>("ua/firm", firmRequest).then(
+      (res: IRestResponse<FirmCreateRequest>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError());
         }
@@ -47,27 +48,13 @@ export class FirmService extends BaseService {
     );
   }
 
-  static del(member: Firm, callback: (err: any) => void): void {
-    this.rest.create<Firm>("ua/firm", Firm).then(
-      (res: IRestResponse<Firm>) => {
+  static update(firmRequest: FirmCreateRequest, callback: (err: any) => void): void {
+    this.rest.create<FirmCreateRequest>("ua/firm", firmRequest).then(
+      (res: IRestResponse<FirmCreateRequest>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError());
         }
-        winston.debug("del response with status " + res.statusCode);
-        callback(null);
-      }
-    ).catch(
-      e => callback(e)
-    );
-  }
-
-  static update(member: Firm, callback: (err: any) => void): void {
-    this.rest.create<Firm>("ua/firm", Firm).then(
-      (res: IRestResponse<Firm>) => {
-        if (res.statusCode !== 200) {
-          return callback(this.defaultError());
-        }
-        winston.debug("update response with status " + res.statusCode);
+        winston.debug("update firm response with status " + res.statusCode);
         callback(null);
       }
     ).catch(

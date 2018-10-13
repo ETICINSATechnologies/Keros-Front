@@ -10,6 +10,7 @@ import { GenderMock } from "./gender/GenderMock";
 import { AddressMock } from "./address/AddressMock";
 import { CountryMock } from "./country/CountryMock";
 import { PositionMock } from "./position/PositionMock";
+import { FirmTypeMock } from "./firmType/FirmTypeMock";
 
 const MOCKS: IMock[] = [
   new AuthMock(),
@@ -21,6 +22,7 @@ const MOCKS: IMock[] = [
   new AddressMock(),
   new CountryMock(),
   new PositionMock(),
+  new FirmTypeMock(),
 ];
 
 export class MockResponse<T> implements IRestResponse<T> {
