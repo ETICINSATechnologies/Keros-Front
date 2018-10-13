@@ -25,7 +25,7 @@ export class FirmTypeService extends BaseService {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);
         }
-        winston.debug("getCountry response with status " + res.statusCode);
+        winston.debug("getFirmType response with status " + res.statusCode);
         callback(null, res.result);
       }
     ).catch(
