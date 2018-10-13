@@ -34,8 +34,8 @@
                     <input type="text" class="form-control" id="name" name="name" value="{{firm.name}}" placeholder="Entrez le nom de l'entreprise" required disabled>
                   </div>
                   <div class="col-md-4 form-group">
-                    <label for="firmType">Type de société</label>
-                    <select class="form-control" id="firmType" name="firmType" disabled>
+                    <label for="typeId">Type de société</label>
+                    <select class="form-control" id="typeId" name="typeId" disabled>
                       {{> template/getItem id=firm.typeId list=firmTypes }}
                       {{#each firmTypes}}
                         <option value="{{id}}">{{label}}</option>

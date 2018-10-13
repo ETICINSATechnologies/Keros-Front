@@ -46,25 +46,26 @@ export class FirmController {
     let id = req.params.id;
     winston.info("Getting Firm form for id " + id);
     FirmService.getFirm(id, function (err, firm: Firm | null) {
-      if (firm !== null) {
-        AddressService.getAddress(firm["addressId"], function (err1, address: Address | null) {
-          FirmTypeService.getAllFirmTypes(function (err2, firmTypes: FirmType[] | null) {
-            CountryService.getAllCountries(function (err3, countries: Country[] | null) {
-              if (err1) return next(err1);
-              if (err2) return next(err2);
-              if (err3) return next(err3);
-              const options = {
-                firm : firm,
-                address : address,
-                firmTypes : firmTypes,
-                countries : countries,
-              };
-              winston.debug("FirmType : " + JSON.stringify(firmTypes));
-              res.render("ua/firm/viewFirm", options);
-            });
+      if (firm === null) {
+        return next(err);
+      }
+      AddressService.getAddress(firm["addressId"], function (err1, address: Address | null) {
+        FirmTypeService.getAllFirmTypes(function (err2, firmTypes: FirmType[] | null) {
+          CountryService.getAllCountries(function (err3, countries: Country[] | null) {
+            if (err1) return next(err1);
+            if (err2) return next(err2);
+            if (err3) return next(err3);
+            const options = {
+              firm : firm,
+              address : address,
+              firmTypes : firmTypes,
+              countries : countries,
+            };
+            winston.debug("FirmType : " + JSON.stringify(firmTypes));
+            res.render("ua/firm/viewFirm", options);
           });
         });
-      }
+      });
     });
   }
 

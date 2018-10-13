@@ -40,7 +40,7 @@
                   <div class="col-md-4 form-group">
                     <label for="genderId">Sexe</label>
                     <select class="form-control" id="genderId" name="genderId" disabled>
-                      <option value="" disabled selected>{{member.genderId}}</option>
+                      <option value="" selected>{{member.genderId}}</option>
                       {{#each gender}}
                         <option value="{{id}}">{{label}}</option>
                       {{/each}}
@@ -118,28 +118,20 @@
                   </h4>
                   <div class="col-md-4 form-group">
                     <label for="countryId">Fonction 1</label>
-                    <select class="form-control" id="countryId" name="positionId1">
-                      {{#each positions}}
-                        <option value="{{id}}">{{label}}</option>
-                      {{/each}}
+                    <select class="form-control" id="positionId1" name="positionId1">
                     </select>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="countryId">Fonction 2</label>
-                    <select class="form-control" id="countryId" name="positionId2">
-                      {{#each positions}}
-                        <option value="{{id}}">{{label}}</option>
-                      {{/each}}
+                    <select class="form-control" id="positionId2" name="positionId2">
                     </select>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="countryId">Fonction 3</label>
-                    <select class="form-control" id="countryId" name="positionId3">
-                      {{#each positions}}
-                        <option value="{{id}}">{{label}}</option>
-                      {{/each}}
+                    <select class="form-control" id="positionId3" name="positionId3">
                     </select>
                   </div>
+                  {{> template/position id=member.positionIds list=positions}}
                 </div>
                 <div class="box-footer">
                   <div class="clearfix row">

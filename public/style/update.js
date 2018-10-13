@@ -36,4 +36,3 @@ $("select[name='genderId'] > option").each(function () {
   var tmp = $(this).html();
   $(this).html(genders[tmp]);
 });
-
