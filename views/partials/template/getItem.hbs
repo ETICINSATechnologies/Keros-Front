@@ -1,8 +1,8 @@
-<option value="{{id}}" id="current{{id}}" selected></option>
+<option value="{{id}}" id="{{idTag}}" selected></option>
 
 <script>
   var id = {{id}},
-  option = document.getElementById("current{{id}}");
+  option = document.getElementById("{{idTag}}");
 
   {{#each list}}
   if ({{id}} == id) {

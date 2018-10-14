@@ -13,7 +13,7 @@
     <section class="content">
       <div class="row">
         <div class="col-md-3">
-          <a href="/ua/study/inscription" style="color: white;">
+          <a href="/ua/study/create" style="color: white;">
             <button type="button" class="btn btn-block btn-success btn-lg box">Nouvelle étude</button>
           </a>
         </div>
@@ -31,15 +31,23 @@
                 <table class="table table-bordered dataTable">
                   <tbody>
                   <tr>
-                    <th>Id<a href="#" id="id" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
                     <th>Nom<a href="#" id="name" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Numéro de projet<a href="#" id="projectNumber" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Status<a href="#" id="statusId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Société<a href="#" id="firmId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Contacts<a href="#" id="contactIds" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Responsable<a href="#" id="leaderId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
                     <th>Voir</th>
                     <th>Modifier</th>
                   </tr>
                   {{#each studies.content}}
                     <tr>
-                      <td>{{id}}</td>
                       <td>{{name}}</td>
+                      <td>{{projectNumber}}</td>
+                      <td>{{status.label}}</td>
+                      <td>{{firm.name}}</td>
+                      <td>{{#each contacts}}{{firstName}} {{lastName}}<br/>{{/each}}</td>
+                      <td>{{leader.firstName}} {{leader.lastName}}</td>
                       <td><a href="/ua/study/{{id}}" class="fa fa-hand-pointer-o"></a></td>
                       <td><a href="/ua/study/update/{{id}}">Modifier</a></td>
                     </tr>

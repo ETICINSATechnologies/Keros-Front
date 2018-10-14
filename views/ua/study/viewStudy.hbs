@@ -2,44 +2,253 @@
 <div class="wrapper">
   {{> template/header}}
   {{> template/sidebar}}
-
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        Voir les études
+        {{#if study}}Fiche Etude{{else}}Nouvelle étude{{/if}}
       </h1>
-      {{> breadcrumb tab="UA" path="Etudes,Voir les études"}}
+      {{#if study}}
+        {{> breadcrumb tab="UA" path="Etudes,Edition d'une étude"}}
+      {{else}}
+        {{> breadcrumb tab="UA" path="Etudes,Nouvelle étude"}}
+      {{/if}}
     </section>
     <section class="content">
       <div class="row">
         <div class="col-md-12">
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">{{study.name}}</h3>
+          <section class="content">
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title">
+                  Informations
+                </h3>
+              </div>
+              <form role="form" method="post" {{#if study}}action="/ua/study/update" {{else}}action="/ua/study/createform"{{/if}}>
+                <div class="box-body row">
+                  <div class="col-md-6 form-group">
+                    <label for="name">Nom</label>
+                    <input type="text" class="form-control" id="name" name="name" value="{{study.name}}" placeholder="Entrez le nom de l'étude" required disabled>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label for="projectNumber">Numéro de projet</label>
+                    <input type="number" class="form-control" id="projectNumber" name="projectNumber" value="{{study.projectNumber}}" placeholder="Entrez le numéro de projet" required disabled>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label for="firmId">Société</label>
+                    <select class="form-control" id="firmId" name="firmId" disabled>
+                      <option value="{{study.firm.id}}" selected>{{study.firm.name}}</option>
+                      {{#each firms}}
+                        <option value="{{id}}">{{name}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label for="departmentId">Départment</label>
+                    <select class="form-control" id="departmentId" name="departmentId" disabled>
+                      <option value="{{study.department.id}}" selected>{{study.department.label}}</option>
+                      {{#each departments}}
+                        <option value="{{id}}">{{label}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <div class="col-md-12 form-group">
+                    <label for="description">Description</label>
+                    <textarea rows="3" type="string" class="form-control" id="description" name="description" placeholder="Entrez la description de l'étude" disabled>{{study.description}}</textarea>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label for="statusId">Status</label>
+                    <select class="form-control" id="statusId" name="statusId" disabled>
+                      <option value="{{study.status.id}}" selected>{{study.status.label}}</option>
+                      {{#each status}}
+                        <option value="{{id}}">{{label}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <h4 class="col-md-12 box-title">
+                    Date
+                  </h4>
+                  <div class="col-md-4 form-group">
+                    <label for="signDate">Date de début</label>
+                    <input type="date" class="form-control" id="signDate" name="signDate"
+                           value="{{study.signDate}}" disabled>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="endDate">Date de fin</label>
+                    <input type="date" class="form-control" id="endDate" name="endDate"
+                           value="{{study.endDate}}" disabled>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="archivedDate">Date d'archivation</label>
+                    <input type="date" class="form-control" id="archivedDate" name="archivedDate"
+                           value="{{study.archivedDate}}" disabled>
+                  </div>
+                  <h4 class="col-md-12 box-title">
+                    Prix
+                  </h4>
+                  <div class="col-md-4 form-group">
+                    <label for="managementFee">Frai de gestion</label>
+                    <div class="input-group">
+                      <span class="input-group-addon" style="background-color: #DBE0E0; font-weight: bold;">€</span>
+                      <input type="number" class="form-control" id="managementFee" name="managementFee"
+                             value="{{study.managementFee}}" placeholder="Frai de gestion" disabled>
+                    </div>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="applicationFee">Frai d'inscription</label>
+                    <div class="input-group">
+                      <span class="input-group-addon" style="background-color: #DBE0E0; font-weight: bold;">€</span>
+                      <input type="number" class="form-control" id="applicationFee" name="applicationFee"
+                           value="{{study.applicationFee}}" placeholder="Frai d'inscription " disabled>
+                    </div>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="rebilledFee">Frai rebilled</label>
+                    <div class="input-group">
+                      <span class="input-group-addon" style="background-color: #DBE0E0; font-weight: bold;">€</span>
+                      <input type="number" class="form-control" id="rebilledFee" name="rebilledFee"
+                             value="{{study.rebilledFee}}" placeholder="Frai de rebilled" disabled>
+                    </div>
+                  </div>
+                  <h4 class="col-md-12 box-title">
+                    Personnels
+                  </h4>
+                  <div class="col-md-4 form-group">
+                    <label for="contactId1">Contact 1</label>
+                    <select class="form-control" id="contactId1" name="contactId1" required disabled>
+                      <option value="{{study.contacts.0.id}}" selected>{{study.contacts.0.firstName}} {{study.contacts.0.lastName}}</option>
+                      {{#each contactShorts}}
+                        <option value="{{id}}">{{firstName}} {{lastName}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="contactId2">Contact 2</label>
+                    <select class="form-control" id="contactId2" name="contactId2" disabled>
+                      {{#if study}}
+                      <option value="{{study.contacts.1.id}}" selected>{{study.contacts.1.firstName}} {{study.contacts.1.lastName}}</option>
+                      {{else}}
+                        <option selected></option>
+                      {{/if}}
+                      {{#each contactShorts}}
+                      <option value="{{id}}">{{firstName}} {{lastName}}</option>
+                      {{/each}}
+                      {{#if study.contacts.1.id}}
+                        <option value=""></option>
+                      {{/if}}
+                    </select>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="contactId3">Contact 3</label>
+                    <select class="form-control" id="contactId3" name="contactId3" disabled>
+                      {{#if study}}
+                      <option value="{{study.contacts.2.id}}" selected>{{study.contacts.2.firstName}} {{study.contacts.2.lastName}}</option>
+                      {{else}}
+                        <option selected></option>
+                      {{/if}}
+                      {{#each contactShorts}}
+                      <option value="{{id}}">{{firstName}} {{lastName}}</option>
+                      {{/each}}
+                      {{#if study.contacts.2.id}}
+                        <option value=""></option>
+                      {{/if}}
+                    </select>
+                  </div>
+                  <hr/>
+                  <div class="col-md-12 form-group">
+                    <label for="leaderId">Responsable</label>
+                    <select class="form-control" id="leaderId" name="leaderId" required disabled>
+                      <option value="{{study.leader.id}}" selected>{{study.leader.firstName}} {{study.leader.lastName}}</option>
+                      {{#each memberShorts}}
+                        <option value="{{id}}">{{firstName}} {{lastName}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <hr/>
+                  <div class="col-md-4 form-group">
+                    <label for="consultantId1">Consultant 1</label>
+                    <select class="form-control" id="consultantId1" name="consultantId1" required disabled>
+                      <option value="{{study.consultants.0.id}}" selected>{{study.consultants.0.firstName}} {{study.consultants.0.lastName}}</option>
+                      {{#each memberShorts}}
+                        <option value="{{id}}">{{firstName}} {{lastName}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="consultantId2">Consultant 2</label>
+                    <select class="form-control" id="consultantId2" name="consultantId2" disabled>
+                      {{#if study}}
+                        <option value="{{study.consultants.1.id}}" selected>{{study.consultants.1.firstName}} {{study.consultants.1.lastName}}</option>
+                      {{else}}
+                        <option selected></option>
+                      {{/if}}
+                      {{#each memberShorts}}
+                        <option value="{{id}}">{{firstName}} {{lastName}}</option>
+                      {{/each}}
+                      {{#if study.consultants.1.id}}
+                        <option value=""></option>
+                      {{/if}}
+                    </select>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="consultantId3">Consultant 3</label>
+                    <select class="form-control" id="consultantId3" name="consultantId3" disabled>
+                      {{#if study}}
+                        <option value="{{study.consultants.3.id}}" selected>{{study.consultants.3.firstName}} {{study.consultants.3.lastName}}</option>
+                      {{else}}
+                        <option selected></option>
+                      {{/if}}
+                      {{#each memberShorts}}
+                        <option value="{{id}}">{{firstName}} {{lastName}}</option>
+                      {{/each}}
+                      {{#if study.consultants.2.id}}
+                        <option value=""></option>
+                      {{/if}}
+                    </select>
+                  </div>
+                  <hr/>
+                  <div class="col-md-6 form-group">
+                    <label for="qualityManagerId1">Responsable qualité 1</label>
+                    <select class="form-control" id="qualityManagerId1" name="qualityManagerId1" required disabled>
+                      <option value="{{study.qualityManagers.0.id}}" selected>{{study.qualityManagers.0.firstName}} {{study.qualityManagers.0.lastName}}</option>
+                      {{#each memberShorts}}
+                        <option value="{{id}}">{{firstName}} {{lastName}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label for="qualityManagerId2">Responsable qualité 2</label>
+                    <select class="form-control" id="qualityManagerId2" name="qualityManagerId2" disabled>
+                      {{#if study}}
+                        <option value="{{study.qualityManagers.1.id}}" selected>{{study.qualityManagers.1.firstName}} {{study.qualityManagers.1.lastName}}</option>
+                      {{else}}
+                        <option selected></option>
+                      {{/if}}
+                      {{#each memberShorts}}
+                        <option value="{{id}}">{{firstName}} {{lastName}}</option>
+                      {{/each}}
+                      {{#if study.qualityManagers.1.id}}
+                        <option value=""></option>
+                      {{/if}}
+                    </select>
+                  </div>
+                </div>
+                <div class="box-footer">
+                  <div class="clearfix row">
+                    <div class="col-md-10">
+                      <a href="/ua/study"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button></a>
+                    </div>
+                    <div class="col-md-2" id="box_buttons">
+                      <button type="button" class="btn btn-primary pull-right" id="update">Editer</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
             </div>
-            <div class="box-body">
-              <ul>
-                <li>Nom : {{study.name}}</li>
-                <li>Id : {{study.id}}</li>
-              </ul>
-            </div>
-            <a href="/ua/study/update/{{study.id}}">Modifier</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-12">
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title"><a href="/ua/study">Revenir à la liste des études</a></h3>
-            </div>
-          </div>
+          </section>
         </div>
       </div>
     </section>
   </div>
-
   {{> template/footer}}
 </div>
 {{> template/scripts}}

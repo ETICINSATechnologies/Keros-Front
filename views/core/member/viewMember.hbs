@@ -56,21 +56,30 @@
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="telephone">Téléphone</label>
-                    <input type="text" class="form-control" id="telephone" name="telephone" value="{{member.telephone}}" placeholder="Entrez le numéro de téléphone" required disabled>
+                    <input type="text" class="form-control" id="telephone" name="telephone" value="{{member.telephone}}" placeholder="Entrez le numéro de téléphone" disabled>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="departmentId">Département</label>
                     <select class="form-control" id="departmentId" name="departmentId" disabled>
-                      {{> template/getItem id=member.departmentId list=departments }}
+                      {{#if member}}
+                        {{> template/getItem id=member.departmentId list=departments idTag="inputDepartmentId"}}
+                      {{else}}
+                        <option selected></option>
+                      {{/if}}
                       {{#each departments}}
                         <option value="{{id}}">{{label}}</option>
                       {{/each}}
+                      {{#if member.departmentId}}
+                        <option value=""></option>
+                      {{/if}}
                     </select>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="schoolYear">Année scolaire</label>
                     <select class="form-control" id="schoolYear" name="schoolYear">
-                      {{#if member}}<option value="{{member.schoolYear}}" disabled selected>{{member.schoolYear}}{{/if}}
+                      {{#if member}}<option value="{{member.schoolYear}}" disabled selected>{{member.schoolYear}}
+                      {{else}}<option selected></option>
+                      {{/if}}
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -79,6 +88,9 @@
                       <option value="6">6</option>
                       <option value="7">7</option>
                       <option value="8">8</option>
+                      {{#if member.schoolYear}}
+                        <option value=""></option>
+                      {{/if}}
                     </select>
                   </div>
                   <h4 class="col-md-12 box-title">
@@ -107,7 +119,7 @@
                   <div class="col-md-4 form-group">
                     <label for="countryId">Pays</label>
                     <select class="form-control" id="countryId" name="countryId" required disabled>
-                      {{> template/getItem id=address.countryId list=countries }}
+                      {{> template/getItem id=address.countryId list=countries idTag="inputCountryId"}}
                       {{#each countries}}
                         <option value="{{id}}">{{label}}</option>
                       {{/each}}
@@ -118,20 +130,45 @@
                   </h4>
                   <div class="col-md-4 form-group">
                     <label for="countryId">Fonction 1</label>
-                    <select class="form-control" id="positionId1" name="positionId1">
+                    <select class="form-control" id="positionId1" name="positionId1" required>
+                      {{> template/getItem id=member.positionIds.[0] list=positions idTag="inputPositionId1"}}
+                      {{#each positions}}
+                        <option value="{{id}}">{{label}}</option>
+                      {{/each}}
                     </select>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="countryId">Fonction 2</label>
                     <select class="form-control" id="positionId2" name="positionId2">
+                      {{#if member}}
+                        {{> template/getItem id=member.positionIds.[1] list=positions idTag="inputPositionId2"}}
+                      {{else}}
+                        <option selected></option>
+                      {{/if}}
+                      {{#each positions}}
+                        <option value="{{id}}">{{label}}</option>
+                      {{/each}}
+                      {{#if member.positionIds.[1]}}
+                        <option value=""></option>
+                      {{/if}}
                     </select>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="countryId">Fonction 3</label>
                     <select class="form-control" id="positionId3" name="positionId3">
+                      {{#if member}}
+                       {{> template/getItem id=member.positionIds.[2] list=positions idTag="inputPositionId3"}}
+                      {{else}}
+                        <option selected></option>
+                      {{/if}}
+                      {{#each positions}}
+                        <option value="{{id}}">{{label}}</option>
+                      {{/each}}
+                      {{#if member.positionIds.[2]}}
+                        <option value=""></option>
+                      {{/if}}
                     </select>
                   </div>
-                  {{> template/position id=member.positionIds list=positions}}
                 </div>
                 <div class="box-footer">
                   <div class="clearfix row">
