@@ -14,7 +14,7 @@ export class ContactMock implements IMock {
     let status: number = 500;
     switch (resource) {
       case "ua/contact":
-        mockObj = <T> new Contact(0, resources["firstName"], resources["lastName"], new Gender(resources["genderId"], "I"), new Firm(resources["firmId"], "111111111", "blablabla", 2, 1), resources["email"], resources["telephone"], resources["cellphone"], resources["position"], resources["notes"], true);
+        mockObj = <T> new Contact(0, resources["firstName"], resources["lastName"], new Gender(resources["genderId"], "I"), new Firm(resources["firmId"], "111111111", "blablabla", 2, 1), resources["email"], resources["telephone"], resources["cellphone"], resources["position"], resources["notes"], resources["old"]);
         status = 200;
         winston.debug("Contact created : " + JSON.stringify(mockObj));
         return new MockResponse(mockObj, status);

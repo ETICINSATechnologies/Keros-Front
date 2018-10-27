@@ -93,6 +93,7 @@ export class MemberController {
     const lastName = req.body.lastName;
     const firstName = req.body.firstName;
     const userName = req.body.userName;
+    const password = req.body.password;
     const gender = req.body.genderId;
     const email = req.body.email;
     const birthday = req.body.birthday;
@@ -110,7 +111,7 @@ export class MemberController {
     const positionsId = [positionId1, positionId2, positionId3];
 
     const address = new Address(1, line1, line2, city, postalCode, countryId);
-    const user = new MemberCreateRequest(firstName, lastName, userName, gender, email, birthday, departmentId, schoolYear, telephone, address, positionsId);
+    const user = new MemberCreateRequest(firstName, lastName, userName, password, gender, email, birthday, departmentId, schoolYear, telephone, address, positionsId);
     MemberService.createMember(user, function(err1) {
         if (err1) {
           return next(err1);

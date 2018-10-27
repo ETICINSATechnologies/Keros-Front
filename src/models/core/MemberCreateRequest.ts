@@ -5,6 +5,7 @@ export class MemberCreateRequest {
     private firstName ?: string,
     private lastName ?: string,
     private username ?: string,
+    private password ?: string,
     private genderId ?: string,
     private email ?: string,
     private birthday ?: string,

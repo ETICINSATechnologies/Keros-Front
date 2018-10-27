@@ -71,7 +71,9 @@ export class ContactController {
     const cellphone = req.body.cellphone;
     const position = req.body.position;
     const notes = req.body.notes;
-    const contact = new ContactCreateRequest(firstName, lastName, genderId, firmId, email, telephone, cellphone, position, notes);
+    let old = req.body.old;
+    old = !!old;
+    const contact = new ContactCreateRequest(firstName, lastName, genderId, firmId, email, telephone, cellphone, position, notes, old);
     ContactService.createContact(contact, function (err) {
       if (err) {
         return next(err);

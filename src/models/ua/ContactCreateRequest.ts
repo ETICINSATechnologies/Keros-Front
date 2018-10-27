@@ -9,5 +9,6 @@ export class ContactCreateRequest {
     private cellphone ?: string,
     private position ?: string,
     private notes ?: string,
+    private old ?: boolean,
   ) {}
 }
