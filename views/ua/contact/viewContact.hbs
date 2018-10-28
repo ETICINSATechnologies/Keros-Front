@@ -22,65 +22,71 @@
                 <h3 class="box-title">
                   Informations
                 </h3>
-                {{#if contact.old}}
-                  <button class="btn btn-success btn-xs pull-right" style="width:150px;">Actif</button>
-                {{else}}
-                  <button class="btn btn-danger btn-xs pull-right" style="width:150px;">Inactif</button>
+                {{#if contact}}
+                  {{#if contact.old}}
+                    <button class="btn btn-success btn-xs pull-right" style="width:150px;">Actif</button>
+                  {{else}}
+                    <button class="btn btn-danger btn-xs pull-right" style="width:150px;">Inactif</button>
+                  {{/if}}
                 {{/if}}
               </div>
               <form role="form" method="post" {{#if contact}}action="/ua/contact/update" {{else}}action="/ua/contact/createform"{{/if}}>
                 <div class="box-body row">
                   <div class="col-md-6 form-group">
                     <label for="lastName">Nom</label>
-                    <input type="text" class="form-control" id="lastName" name="lastName" value="{{contact.lastName}}" placeholder="Entrez le nom" required disabled>
+                    <input type="text" class="form-control" id="lastName" name="lastName" value="{{contact.lastName}}" placeholder="Entrez le nom" required readonly>
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="firstName">Prénom</label>
-                    <input type="text" class="form-control" id="firstName" name="firstName" value="{{contact.firstName}}" placeholder="Entrez le prénom" required disabled>
+                    <input type="text" class="form-control" id="firstName" name="firstName" value="{{contact.firstName}}" placeholder="Entrez le prénom" required readonly>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="genderId">Sexe</label>
-                    <select class="form-control" id="genderId" name="genderId" disabled>
-                      {{> template/getItem id=contact.genderId list=gender }}
+                    <select class="form-control" id="genderId" name="genderId">
                       {{#each gender}}
-                        <option value="{{id}}">{{label}}</option>
+                        <option value="{{id}}" {{selected id @root.contact.gender.id}}>{{gender label}}</option>
                       {{/each}}
                     </select>
                   </div>
                   <div class="col-md-12 form-group">
                     <label for="firmId">Société</label>
-                    <select class="form-control" id="firmId" name="firmId" disabled>
-                      <option value="{{contact.firm.id}}" disabled selected>{{contact.firm.name}}</option>
+                    <select class="form-control" id="firmId" name="firmId">
                       {{#each firms}}
-                        <option value="{{id}}">{{name}}</option>
+                        <option value="{{id}}" {{selected id @root.contact.firm.id}}>{{name}}</option>
                       {{/each}}
                     </select>
                   </div>
                   <div class="col-md-12 form-group">
                     <label for="email">Email</label>
                     <input type="string" class="form-control" id="email" name="email"
-                           value="{{contact.email}}" placeholder="Entrez l'adresse mail" disabled>
+                           value="{{contact.email}}" placeholder="Entrez l'adresse mail" readonly>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="telephone">Téléphone</label>
                     <input type="string" class="form-control" id="telephone" name="telephone"
-                           value="{{contact.telephone}}" placeholder="Entrez le numéro de téléphone" required disabled>
+                           value="{{contact.telephone}}" placeholder="Entrez le numéro de téléphone" readonly>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="cellphone">Téléphone Portable</label>
                     <input type="string" class="form-control" id="cellphone" name="cellphone"
-                           value="{{contact.cellphone}}" placeholder="Entrez le numéro de portable" required disabled>
+                           value="{{contact.cellphone}}" placeholder="Entrez le numéro de portable" readonly>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="position">Position</label>
                     <input type="string" class="form-control" id="position" name="position"
-                           value="{{contact.position}}" placeholder="Entrez la position au sein de la société" required disabled>
+                           value="{{contact.position}}" placeholder="Entrez la position au sein de la société" readonly>
                   </div>
                   <div class="col-md-12 form-group">
                     <label for="notes">Notes</label>
                     <textarea rows="5" type="string" class="form-control" id="notes" name="notes" placeholder="Entrez des informations">{{contact.notes}}</textarea>
                   </div>
-                </div>
+                  <div class="col-md-1">
+                    <label for="old">Activité :</label>
+                  </div>
+                  <div class="col-md-1">
+                    <input type="checkbox" id="old" name="old" checked>Actif</input>
+                  </div>
+                  </div>
                 <div class="box-footer">
                   <div class="clearfix row">
                     <div class="col-md-10">
@@ -88,6 +94,7 @@
                     </div>
                     <div class="col-md-2" id="box_buttons">
                       <button type="button" class="btn btn-primary pull-right" id="update">Editer</button>
+                      <button type="submit" class="btn btn-primary" id="validate">Valider</button>
                     </div>
                   </div>
                 </div>

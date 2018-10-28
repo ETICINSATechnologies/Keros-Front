@@ -11,16 +11,8 @@
     </section>
     <section class="content">
       <div class="row">
-        <div class="col-md-3">
-          <a href="/core/member/create" style="color: white;"><button type="button" class="btn btn-block btn-success btn-lg box">Nouveau membre</button></a>
-        </div>
-      </div>
-      <div class="row">
         <div class="col-md-12">
           <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Les membres</h3>
-            </div>
             <!-- /.box-header -->
             <div class="box-body">
               <div class="dataTables_wrapper form-inline dt-bootstrap">
@@ -55,6 +47,11 @@
               {{> template/pagination meta=members.meta}}
             </div>
           </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <a href="/core/member/create" style="color: white;"><button type="button" class="btn btn-block btn-success btn-lg box">Nouveau membre</button></a>
         </div>
       </div>
     </section>

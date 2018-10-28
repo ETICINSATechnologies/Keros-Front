@@ -4,7 +4,7 @@ export class Member {
     private firstName ?: string,
     private lastName ?: string,
     private username ?: string,
-    private genderId ?: string,
+    private genderId ?: number,
     private email ?: string,
     private birthday ?: string,
     private departmentId ?: number,

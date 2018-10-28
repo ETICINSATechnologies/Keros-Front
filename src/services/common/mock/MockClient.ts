@@ -12,6 +12,9 @@ import { CountryMock } from "./country/CountryMock";
 import { PositionMock } from "./position/PositionMock";
 import { FirmTypeMock } from "./firmType/FirmTypeMock";
 import { ContactMock } from "./contact/ContactMock";
+import { StatusMock } from "./status/StatusMock";
+import { FieldMock } from "./field/FieldMock";
+import { ProvenanceMock } from "./provenance/ProvenanceMock";
 
 const MOCKS: IMock[] = [
   new AuthMock(),
@@ -25,6 +28,9 @@ const MOCKS: IMock[] = [
   new PositionMock(),
   new FirmTypeMock(),
   new ContactMock(),
+  new StatusMock(),
+  new FieldMock(),
+  new ProvenanceMock(),
 ];
 
 export class MockResponse<T> implements IRestResponse<T> {

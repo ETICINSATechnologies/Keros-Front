@@ -1,11 +1,12 @@
 import { Firm } from "./Firm";
+import { Gender } from "../core/Gender";
 
 export class Contact {
   constructor(
     private id ?: number,
     private firstName ?: string,
     private lastName ?: string,
-    private genderId ?: number,
+    private gender ?: Gender,
     private firm ?: Firm,
     private email ?: string,
     private telephone ?: string,

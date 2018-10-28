@@ -1,5 +1,7 @@
 import * as path from "path";
 import * as handlebars from "express-handlebars";
+import { labelToName } from "./handlebars/genderHelper";
+import { convertRuleOptions } from "tslint/lib/configuration";
 
 /**
  * Handlebars configuration using the express-handlebars constructor
@@ -45,6 +47,21 @@ export default handlebars({
     },
     or: function () {
       return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
+    },
+    selected: function (current: number, selected: any) {
+      if (current === selected) {
+        return "selected";
+      }
+      return "";
+    },
+    gender: function (label: any) {
+      return labelToName(label);
+    },
+    required: function (item: any) {
+      if (item) {
+        return "";
+      }
+      return "required";
     }
   }
 });
