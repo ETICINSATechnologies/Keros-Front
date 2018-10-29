@@ -94,7 +94,7 @@ export class MemberController {
     const firstName = req.body.firstName;
     const userName = req.body.userName;
     const password = req.body.password;
-    const gender = +req.body.genderId;      // Convert string to int
+    const gender = +req.body.genderId;
     const email = req.body.email;
     const birthday = req.body.birthday;
     const departmentId = +req.body.departmentId;
