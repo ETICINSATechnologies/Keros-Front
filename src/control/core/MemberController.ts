@@ -28,28 +28,29 @@ export class MemberController {
       res.render("core/member/viewAll", options);
     });
   }
+
   public viewMemberForm(req: Request, res: Response, next: NextFunction) {
     winston.info("Getting create member form");
-      DepartmentService.getAllDepartments(function (err1, departments: Department[] | null) {
-        GenderService.getAllGenders(function (err2, genders: Gender[] | null) {
-          CountryService.getAllCountries(function (err3, countries: Country[] | null) {
-            PositionService.getAllPositions(function (err4, positions: Position[] | null) {
-              if (err1) return next(err1);
-              if (err2) return next(err2);
-              if (err3) return next(err3);
-              if (err4) return next(err4);
-              const options = {
-                departments: departments,
-                gender: genders,
-                countries: countries,
-                positions: positions,
-              };
-              winston.debug("Gender : " + JSON.stringify(genders));
-              res.render("core/member/viewMember", options);
-            });
+    DepartmentService.getAllDepartments(function (err1, departments: Department[] | null) {
+      GenderService.getAllGenders(function (err2, genders: Gender[] | null) {
+        CountryService.getAllCountries(function (err3, countries: Country[] | null) {
+          PositionService.getAllPositions(function (err4, positions: Position[] | null) {
+            if (err1) return next(err1);
+            if (err2) return next(err2);
+            if (err3) return next(err3);
+            if (err4) return next(err4);
+            const options = {
+              departments: departments,
+              gender: genders,
+              countries: countries,
+              positions: positions,
+            };
+            winston.debug("Gender : " + JSON.stringify(genders));
+            res.render("core/member/viewMember", options);
           });
         });
       });
+    });
   }
 
   public viewMember(req: Request, res: Response, next: NextFunction) {
@@ -89,7 +90,9 @@ export class MemberController {
       });
     });
   }
+
   public postMemberForm(req: Request, res: Response, next: NextFunction) {
+    const id = req.body.id;
     const lastName = req.body.lastName;
     const firstName = req.body.firstName;
     const userName = req.body.userName;
@@ -106,16 +109,27 @@ export class MemberController {
     const postalCode = req.body.postalCode;
     const countryId = +req.body.countryId;
     const positionId1 = +req.body.positionId1;
+    const positionIds = [positionId1];
     const positionId2 = +req.body.positionId2;
+    if(positionId2) positionIds.push(positionId2);
     const positionId3 = +req.body.positionId3;
-    const positionsId = [positionId1, positionId2, positionId3];
+    if(positionId3) positionIds.push(positionId3);
     const address = new Address(1, line1, line2, city, postalCode, countryId);
-    const user = new MemberCreateRequest(firstName, lastName, userName, password, gender, email, birthday, departmentId, schoolYear, telephone, address, positionsId);
-    MemberService.createMember(user, function(err1) {
+    const user = new MemberCreateRequest(firstName, lastName, userName, password, gender, email, birthday, departmentId, schoolYear, telephone, address, positionIds);
+    if (id) {
+      MemberService.update(id, user, function (err1) {
         if (err1) {
           return next(err1);
         }
         res.redirect("/core/member");
-    });
+      });
+    } else {
+      MemberService.createMember(user, function (err1) {
+        if (err1) {
+          return next(err1);
+        }
+        res.redirect("/core/member");
+      });
+    }
   }
 }

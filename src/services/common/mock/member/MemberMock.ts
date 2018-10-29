@@ -56,6 +56,18 @@ export class MemberMock implements IMock {
     return null;
   }
   update<T>(resource: string, resources: any, options?: IRequestOptions): IRestResponse<T> | null {
+    let mockObj: T | null = null;
+    let status: number = 500;
+    switch (resource) {
+      case "core/member/1":
+        mockObj = <T> new Member(1, "Tom", "Dupont", "tdupont", 3, "tom.dupont@test.com", "1996-08-27", 4, 3, "0607080910", 1, [3, 4]), new Member(2, "Pierre", "Henry", "phenry", 1, "tom.dupont@test.com", "1996-08-27", 4, 3, "0607080910", 2, [3, 2]);
+        status = 200;
+        return new MockResponse(mockObj, status);
+      case "core/member/2":
+        mockObj = <T> new Member(1, "Tom", "Dupont", "tdupont", 3, "tom.dupont@test.com", "1996-08-27", 4, 3, "0607080910", 1, [3, 4]), new Member(2, "Pierre", "Henry", "phenry", 1, "tom.dupont@test.com", "1996-08-27", 4, 3, "0607080910", 2, [3, 2]);
+        status = 200;
+        return new MockResponse(mockObj, status);
+    }
     return null;
   }
 }

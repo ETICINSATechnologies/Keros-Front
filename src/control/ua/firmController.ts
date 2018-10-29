@@ -33,8 +33,8 @@ export class FirmController {
         if (err1) return next(err1);
         if (err2) return next(err2);
         const options = {
-          firmTypes : firmTypes,
-          countries : countries,
+          firmTypes: firmTypes,
+          countries: countries,
         };
         winston.debug("FirmType : " + JSON.stringify(firmTypes));
         res.render("ua/firm/viewFirm", options);
@@ -56,10 +56,10 @@ export class FirmController {
             if (err2) return next(err2);
             if (err3) return next(err3);
             const options = {
-              firm : firm,
-              address : address,
-              firmTypes : firmTypes,
-              countries : countries,
+              firm: firm,
+              address: address,
+              firmTypes: firmTypes,
+              countries: countries,
             };
             winston.debug("FirmType : " + JSON.stringify(firmTypes));
             res.render("ua/firm/viewFirm", options);
@@ -70,6 +70,7 @@ export class FirmController {
   }
 
   public postFirmForm(req: Request, res: Response, next: NextFunction) {
+    const id = +req.body.id;
     const name = req.body.name;
     const siret = req.body.siret;
     const line1 = req.body.line1;
@@ -80,11 +81,20 @@ export class FirmController {
     const typeId = +req.body.typeId;
     const address = new Address(1, line1, line2, city, postalCode, countryId);
     const firm = new FirmCreateRequest(siret, name, address, typeId);
-    FirmService.createFirm(firm, function (err) {
-      if (err) {
-        return next(err);
-      }
-      res.redirect("/ua/firm");
-    });
+    if (id) {
+      FirmService.update(id, firm, function (err) {
+        if (err) {
+          return next(err);
+        }
+        res.redirect("/ua/firm");
+      });
+    } else {
+      FirmService.createFirm(firm, function (err) {
+        if (err) {
+          return next(err);
+        }
+        res.redirect("/ua/firm");
+      });
+    }
   }
 }
