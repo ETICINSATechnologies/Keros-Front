@@ -8,9 +8,9 @@
         {{#if member}}Fiche Membre{{else}}Nouveau Membre{{/if}}
       </h1>
       {{#if member}}
-        {{> breadcrumb tab="SG" path="Membres,Edition d'un membre"}}
+        {{> breadcrumb tab="RH" path="Membres,Edition d'un membre"}}
       {{else}}
-        {{> breadcrumb tab="SG" path="Membres,Nouveau Membre"}}
+        {{> breadcrumb tab="RH" path="Membres,Nouveau Membre"}}
       {{/if}}
     </section>
     <section class="content">
@@ -145,7 +145,7 @@
                     <select class="form-control" id="positionId3" name="positionId3">
                       <option></option>
                       {{#each positions}}
-                        <option value="{{id}}" {{selected id @root.member.position.Ids.[2]}}>{{label}}</option>
+                        <option value="{{id}}" {{selected id @root.member.positionIds.[2]}}>{{label}}</option>
                       {{/each}}
                     </select>
                   </div>
@@ -153,7 +153,7 @@
                 <div class="box-footer">
                   <div class="clearfix row">
                     <div class="col-md-10">
-                      <a href="member"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button></a>
+                      <a href="/core/member"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button></a>
                     </div>
                     <div class="col-md-2" id="box_buttons">
                       <button type="button" class="btn btn-primary pull-right" id="update">Editer</button>

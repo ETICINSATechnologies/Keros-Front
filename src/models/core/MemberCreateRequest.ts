@@ -6,7 +6,7 @@ export class MemberCreateRequest {
     private lastName ?: string,
     private username ?: string,
     private password ?: string,
-    private genderId ?: string,
+    private genderId ?: number,
     private email ?: string,
     private birthday ?: string,
     private departmentId ?: number,

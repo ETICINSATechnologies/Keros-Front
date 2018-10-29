@@ -64,8 +64,8 @@ export class ContactController {
   public postContactForm(req: Request, res: Response, next: NextFunction) {
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
-    const genderId = req.body.genderId;
-    const firmId = req.body.firmId;
+    const genderId = +req.body.genderId;
+    const firmId = +req.body.firmId;
     const email = req.body.email;
     const telephone = req.body.telephone;
     const cellphone = req.body.cellphone;
