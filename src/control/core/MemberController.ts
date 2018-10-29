@@ -94,22 +94,21 @@ export class MemberController {
     const firstName = req.body.firstName;
     const userName = req.body.userName;
     const password = req.body.password;
-    const gender = req.body.genderId;
+    const gender = +req.body.genderId;
     const email = req.body.email;
     const birthday = req.body.birthday;
-    const departmentId = req.body.departmentId;
-    const schoolYear = req.body.schoolYear;
+    const departmentId = +req.body.departmentId;
+    const schoolYear = +req.body.schoolYear;
     const telephone = req.body.telephone;
     const line1 = req.body.line1;
     const line2 = req.body.line2;
     const city = req.body.city;
     const postalCode = req.body.postalCode;
-    const countryId = req.body.countryId;
-    const positionId1 = req.body.positionId1;
-    const positionId2 = req.body.positionId2;
-    const positionId3 = req.body.positionId3;
+    const countryId = +req.body.countryId;
+    const positionId1 = +req.body.positionId1;
+    const positionId2 = +req.body.positionId2;
+    const positionId3 = +req.body.positionId3;
     const positionsId = [positionId1, positionId2, positionId3];
-
     const address = new Address(1, line1, line2, city, postalCode, countryId);
     const user = new MemberCreateRequest(firstName, lastName, userName, password, gender, email, birthday, departmentId, schoolYear, telephone, address, positionsId);
     MemberService.createMember(user, function(err1) {
