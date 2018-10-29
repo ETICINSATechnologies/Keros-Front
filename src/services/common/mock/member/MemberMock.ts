@@ -11,7 +11,7 @@ export class MemberMock implements IMock {
     let mockObj: T | null = null;
     let status: number = 500;
     switch (resource) {
-      case "/core/member":
+      case "core/member":
         mockObj = <T> new Member(0, resources["lastName"], resources["firstName"], resources["username"], resources["genderId"], resources["email"], resources["birthday"], resources["departmentId"], resources["schoolYear"], resources["telephone"], resources["address"]["id"], resources["positionIds"]);
         status = 200;
         winston.debug("Member created : " + JSON.stringify(mockObj));
@@ -26,15 +26,15 @@ export class MemberMock implements IMock {
     let mockObj: T | null = null;
     let status: number = 500;
     switch (resource) {
-      case "/core/member/1":
+      case "core/member/1":
         mockObj = <T> new Member(1, "Tom", "Dupont", "tdupont", 3, "tom.dupont@test.com", "1996-08-27", 4, 3, "0607080910", 2, [3, 4]);
         status = 200;
         return new MockResponse(mockObj, status);
-      case "/core/member/2":
+      case "core/member/2":
         mockObj = <T> new Member(2, "Pierre", "Henry", "tdupont", 1, "tom.dupont@test.com", "1996-08-27", 4, 3, "0607080910", 2, [3, 2]);
         status = 200;
         return new MockResponse(mockObj, status);
-      case "/core/member":
+      case "core/member":
         mockObj = <T> new Page(<T[]> [new Member(1, "Tom", "Dupont", "tdupont", 3, "tom.dupont@test.com", "1996-08-27", 4, 3, "0607080910", 1, [3, 4]), new Member(2, "Pierre", "Henry", "phenry", 1, "pierre.henry   @test.com", "1996-08-27", 4, 3, "0607080910", 2, [3, 2])], new Meta (0, 1, 2 , 25));
         status = 200;
         return new MockResponse(mockObj, status);
@@ -45,7 +45,7 @@ export class MemberMock implements IMock {
     let mockObj: T[] | null = null;
     let status: number = 500;
     switch (resource) {
-      case "/core/member":
+      case "core/member":
         mockObj = <T[]> [ <T> new Member(1, "Tom", "Dupont", "tdupont", 3, "tom.dupont@test.com", "1996-08-27", 4, 3, "0607080910", 1, [3, 4]), new Member(2, "Pierre", "Henry", "phenry", 1, "tom.dupont@test.com", "1996-08-27", 4, 3, "0607080910", 2, [3, 2])];
         status = 200;
         return new MockResponse(mockObj, status);

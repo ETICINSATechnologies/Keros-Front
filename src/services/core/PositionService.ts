@@ -4,7 +4,7 @@ import * as winston from "winston";
 
 export class PositionService extends BaseService {
   static getAllPositions(callback: (err: any, result: Position[] | null) => void): void {
-    this.rest.getAll<Position>("position").then(
+    this.rest.getAll<Position>("core/position").then(
       (res: IRestResponse<Position[]>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);
@@ -18,7 +18,7 @@ export class PositionService extends BaseService {
   }
 
   static getPosition(id: number | undefined, callback: (err: any, result: Position | null) => void): void {
-    this.rest.get<Position>("position/" + id).then(
+    this.rest.get<Position>("core/position/" + id).then(
       (res: IRestResponse<Position>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);

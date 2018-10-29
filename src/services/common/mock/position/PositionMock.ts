@@ -8,39 +8,39 @@ export class PositionMock implements IMock {
     let mockObj: T | null = null;
     let status: number = 500;
     switch (resource) {
-      case "position/1":
+      case "core/position/1":
         mockObj = <T>new Position(1, "Président(e)", 1);
         status = 200;
         return new MockResponse(mockObj, status);
-      case "position/2":
+      case "core/position/2":
         mockObj = <T> new Position(2, "Vice-Président(e)", 1);
         status = 200;
         return new MockResponse(mockObj, status);
-      case "position/3":
+      case "core/position/3":
         mockObj = <T> new Position(3, "Secretaire Générale", 1);
         status = 200;
         return new MockResponse(mockObj, status);
-      case "position/4":
+      case "core/position/4":
         mockObj = <T> new Position(4, "Responsable SI", 2);
         status = 200;
         return new MockResponse(mockObj, status);
-      case "position/5":
+      case "core/position/5":
         mockObj = <T> new Position(5, "Senior SI", 2);
         status = 200;
         return new MockResponse(mockObj, status);
-      case "position/6":
+      case "core/position/6":
         mockObj = <T> new Position(6, "Junior SI", 2);
         status = 200;
         return new MockResponse(mockObj, status);
-      case "position/7":
+      case "core/position/7":
         mockObj = <T> new Position(7, "Chargé d'affaire", 3);
         status = 200;
         return new MockResponse(mockObj, status);
-      case "position/8":
+      case "core/position/8":
         mockObj = <T> new Position(8, "Responsable Performance", 4);
         status = 200;
         return new MockResponse(mockObj, status);
-      case "position/9":
+      case "core/position/9":
         mockObj = <T> new Position(9, "Trésorier(e)", 5);
         status = 200;
         return new MockResponse(mockObj, status);
@@ -52,7 +52,7 @@ export class PositionMock implements IMock {
     let mockObj: T[] | null = null;
     let status: number = 500;
     switch (resource) {
-      case "position":
+      case "core/position":
         mockObj = <T[]> [ <T> new Position(1, "Président(e)", 1), new Position(2, "Vice-Président(e)", 1), new Position(3, "Secretaire Générale", 1), new Position(4, "Responsable SI", 2), new Position(5, "Senior SI", 2), new Position(6, "Junior SI", 2), new Position(7, "Chargé d'affaire", 3), new Position(8, "Responsable Performance", 4), new Position(9, "Trésorier(e)", 5)];
         status = 200;
         return new MockResponse(mockObj, status);

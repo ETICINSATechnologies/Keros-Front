@@ -5,7 +5,7 @@ import * as winston from "winston";
 
 export class DepartmentService extends BaseService {
   static getAllDepartments(callback: (err: any, result: Department[] | null) => void): void {
-    this.rest.getAll<Department>("department").then(
+    this.rest.getAll<Department>("core/department").then(
       (res: IRestResponse<Department[]>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);
@@ -19,7 +19,7 @@ export class DepartmentService extends BaseService {
   }
 
   static getDepartment(id: number | undefined, callback: (err: any, result: Department | null) => void): void {
-    this.rest.get<Department>("department/" + id).then(
+    this.rest.get<Department>("core/department/" + id).then(
       (res: IRestResponse<Department>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);

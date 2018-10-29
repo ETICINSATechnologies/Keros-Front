@@ -12,7 +12,7 @@ export class GenderMock implements IMock {
     let mockObj: T[] | null = null;
     let status: number = 500;
     switch (resource) {
-      case "gender":
+      case "core/gender":
         mockObj = <T[]> [ <T> new Gender(1, "H"), new Gender(2, "F"), new Gender(3, "A"), new Gender(4, "I")];
         status = 200;
         return new MockResponse(mockObj, status);

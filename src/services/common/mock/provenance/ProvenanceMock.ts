@@ -8,19 +8,19 @@ export class ProvenanceMock implements IMock {
     let mockObj: T | null = null;
     let status: number = 500;
     switch (resource) {
-      case "provenance/1":
+      case "ua/provenance/1":
         mockObj = <T> new Provenance(1, "Mail");
         status = 200;
         return new MockResponse(mockObj, status);
-      case "provenance/2":
+      case "ua/provenance/2":
         mockObj = <T> new Provenance(2, "Letter");
         status = 200;
         return new MockResponse(mockObj, status);
-      case "provenance/3":
+      case "ua/provenance/3":
         mockObj = <T> new Provenance(3, "Network");
         status = 200;
         return new MockResponse(mockObj, status);
-      case "provenance/4":
+      case "ua/provenance/4":
         mockObj = <T> new Provenance(4, "Phoning");
         status = 200;
         return new MockResponse(mockObj, status);
@@ -32,7 +32,7 @@ export class ProvenanceMock implements IMock {
     let mockObj: T[] | null = null;
     let status: number = 500;
     switch (resource) {
-      case "provenance":
+      case "ua/provenance":
         mockObj = <T[]> [ <T> new Provenance(1, "Mail"), new Provenance(2, "Letter"), new Provenance(3, "Network"), new Provenance(4, "Phoning")];
         status = 200;
         return new MockResponse(mockObj, status);

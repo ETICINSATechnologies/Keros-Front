@@ -5,7 +5,7 @@ import { Country } from "../../models/core/Country";
 
 export class CountryService extends BaseService {
   static getAllCountries(callback: (err: any, result: Country[] | null) => void): void {
-    this.rest.getAll<Country>("country").then(
+    this.rest.getAll<Country>("core/country").then(
       (res: IRestResponse<Country[]>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);
@@ -19,7 +19,7 @@ export class CountryService extends BaseService {
   }
 
   static getCountry(id: number | undefined, callback: (err: any, result: Country | null) => void): void {
-    this.rest.get<Country>("country/" + id).then(
+    this.rest.get<Country>("core/country/" + id).then(
       (res: IRestResponse<Country>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);

@@ -5,7 +5,7 @@ import { Field } from "../../models/ua/Field";
 
 export class FieldService extends BaseService {
   static getAllFields(callback: (err: any, result: Field[] | null) => void): void {
-    this.rest.getAll<Field>("field").then(
+    this.rest.getAll<Field>("ua/field").then(
       (res: IRestResponse<Field[]>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);
@@ -19,7 +19,7 @@ export class FieldService extends BaseService {
   }
 
   static getField(id: number | undefined, callback: (err: any, result: Field | null) => void): void {
-    this.rest.get<Field>("field/" + id).then(
+    this.rest.get<Field>("ua/field/" + id).then(
       (res: IRestResponse<Field>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);
