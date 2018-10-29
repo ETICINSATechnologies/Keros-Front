@@ -2,55 +2,172 @@
 <div class="wrapper">
   {{> template/header}}
   {{> template/sidebar}}
-
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        Voir les membres
+        {{#if member}}Fiche Membre{{else}}Nouveau Membre{{/if}}
       </h1>
-      {{> breadcrumb tab="SG" path="Membres,Voir les membres"}}
+      {{#if member}}
+        {{> breadcrumb tab="SG" path="Membres,Edition d'un membre"}}
+      {{else}}
+        {{> breadcrumb tab="SG" path="Membres,Nouveau Membre"}}
+      {{/if}}
     </section>
     <section class="content">
       <div class="row">
         <div class="col-md-12">
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">{{member.name}}</h3>
+          <section class="content">
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title">
+                  Informations
+                </h3>
+              </div>
+              <form role="form" method="post" action="/core/member/createform">
+                <div class="box-body row">
+                  <div class="col-md-6 form-group">
+                    <label for="lastName">Nom</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" value="{{member.lastName}}" placeholder="Entrez le nom" required readonly>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label for="firstName">Prénom</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" value="{{member.firstName}}" placeholder="Entrez le prénom" required readonly>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label for="userName">Nom d'utilisateur</label>
+                    <input type="text" class="form-control" id="userName" name="userName" value="{{member.username}}" placeholder="Entrez le nom d'utilisateur" required>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Entrez/Modifiez le mot de passe" {{required member}} readonly>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="genderId">Sexe</label>
+                    <select class="form-control" id="genderId" name="genderId" >
+                      {{#each gender}}
+                        <option value="{{id}}" {{selected id @root.member.genderId}}>{{gender label}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="birthday">Date de naissance</label>
+                    <input type="date" class="form-control" id="birthday" name="birthday" value="{{member.birthday}}" required readonly>
+                  </div>
+                  <div class="col-md-12 form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" name="email" value="{{member.email}}" placeholder="Entrez l'adresse mail" required readonly>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="telephone">Téléphone</label>
+                    <input type="text" class="form-control" id="telephone" name="telephone" value="{{member.telephone}}" placeholder="Entrez le numéro de téléphone" readonly>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="departmentId">Département</label>
+                    <select class="form-control" id="departmentId" name="departmentId" >
+                      <option></option>
+                      {{#each departments}}
+                        <option value="{{id}}" {{selected id @root.member.departmentId}}>{{label}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="schoolYear">Année scolaire</label>
+                    <select class="form-control" id="schoolYear" name="schoolYear">
+                      {{#if member}}<option value="{{member.schoolYear}}" selected>{{member.schoolYear}}</option>
+                      {{else}}<option selected></option>
+                      {{/if}}
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      {{#if member.schoolYear}}
+                        <option value=""></option>
+                      {{/if}}
+                    </select>
+                  </div>
+                  <h4 class="col-md-12 box-title">
+                    Adresse
+                  </h4>
+                  <div class="col-md-12 form-group">
+                    <label for="line1">Ligne 1</label>
+                    <input type="string" class="form-control" id="line1" name="line1"
+                           value="{{address.line1}}" placeholder="Entrez l'adresse 1" required readonly>
+                  </div>
+                  <div class="col-md-12 form-group">
+                    <label for="line2">Ligne 2</label>
+                    <input type="string" class="form-control" id="line2" name="line2"
+                           value="{{address.line2}}" placeholder="Entrez l'adresse 2" readonly>
+                  </div>
+                  <div class="col-md-2 form-group">
+                    <label for="postalCode">Code postal</label>
+                    <input type="string" class="form-control" id="postalCode" name="postalCode"
+                           value="{{address.postalCode}}" placeholder="Entrez le code postal" required readonly>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label for="city">Ville</label>
+                    <input type="string" class="form-control" id="city" name="city"
+                           value="{{address.city}}" placeholder="Entrez la ville" required readonly>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="countryId">Pays</label>
+                    <select class="form-control" id="countryId" name="countryId" required >
+                      {{#each countries}}
+                        <option value="{{id}}" {{selected id @root.address.countryId}}>{{label}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <h4 class="col-md-12 box-title">
+                    Fonction/Poste
+                  </h4>
+                  <div class="col-md-4 form-group">
+                    <label for="countryId">Fonction 1</label>
+                    <select class="form-control" id="positionId1" name="positionId1" required>
+                      {{#each positions}}
+                        <option value="{{id}}" {{selected id @root.member.positionIds.[0]}}>{{label}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="countryId">Fonction 2</label>
+                    <select class="form-control" id="positionId2" name="positionId2">
+                      <option></option>
+                      {{#each positions}}
+                        <option value="{{id}}" {{selected id @root.member.positionIds.[1]}}>{{label}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="countryId">Fonction 3</label>
+                    <select class="form-control" id="positionId3" name="positionId3">
+                      <option></option>
+                      {{#each positions}}
+                        <option value="{{id}}" {{selected id @root.member.position.Ids.[2]}}>{{label}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                </div>
+                <div class="box-footer">
+                  <div class="clearfix row">
+                    <div class="col-md-10">
+                      <a href="/core/member"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button></a>
+                    </div>
+                    <div class="col-md-2" id="box_buttons">
+                      <button type="button" class="btn btn-primary pull-right" id="update">Editer</button>
+                      <button type="submit" class="btn btn-primary" id="validate">Valider</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
             </div>
-            <div class="box-body">
-              <b>{{member.firstName}} {{member.lastName}}</b>
-              <ul>
-                <li>Nom d'utilisateur : {{member.username}}</li>
-                <li>Genre : {{member.gender}}</li>
-                <li>Email : {{member.email}}</li>
-                <li>Date d'anniversaire : {{member.birthday}}</li>
-                <li>Id de département : {{member.deparmentId}}</li>
-                <li>Année d'étude : {{member.schoolYear}}e année</li>
-                <li>Numéro de téléphone : {{member.telephone}}</li>
-                <li>Adresse : {{member.addressId}}</li>
-                <!--<li>Ville : {{member.city}}</li>
-                <li>Code postal : {{member.postalCode}}</li>
-                <li>Id de pays : {{member.CountryId}}</li>-->
-                <li>Id de position : {{member.positionId}}</li>
-              </ul>
-            </div>
-            <a href="/core/member/update/{{member.id}}">Modifier</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-12">
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title"><a href="/core/member">Revenir à la liste des membres</a></h3>
-            </div>
-          </div>
+          </section>
         </div>
       </div>
     </section>
   </div>
-
   {{> template/footer}}
 </div>
 {{> template/scripts}}

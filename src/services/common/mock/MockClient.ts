@@ -5,12 +5,32 @@ import { IMock } from "./IMock";
 import { MemberMock } from "./member/MemberMock";
 import { FirmMock } from "./firm/FirmMock";
 import { StudyMock } from "./study/StudyMock";
+import { DepartmentMock } from "./department/DepartmentMock";
+import { GenderMock } from "./gender/GenderMock";
+import { AddressMock } from "./address/AddressMock";
+import { CountryMock } from "./country/CountryMock";
+import { PositionMock } from "./position/PositionMock";
+import { FirmTypeMock } from "./firmType/FirmTypeMock";
+import { ContactMock } from "./contact/ContactMock";
+import { StatusMock } from "./status/StatusMock";
+import { FieldMock } from "./field/FieldMock";
+import { ProvenanceMock } from "./provenance/ProvenanceMock";
 
 const MOCKS: IMock[] = [
   new AuthMock(),
   new MemberMock(),
   new FirmMock(),
   new StudyMock(),
+  new DepartmentMock(),
+  new GenderMock(),
+  new AddressMock(),
+  new CountryMock(),
+  new PositionMock(),
+  new FirmTypeMock(),
+  new ContactMock(),
+  new StatusMock(),
+  new FieldMock(),
+  new ProvenanceMock(),
 ];
 
 export class MockResponse<T> implements IRestResponse<T> {

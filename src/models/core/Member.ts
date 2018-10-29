@@ -1,19 +1,17 @@
-import { Gender } from "./Core";
-
 export class Member {
   constructor(
     private id ?: number,
     private firstName ?: string,
     private lastName ?: string,
     private username ?: string,
-    private gender ?: Gender,
+    private genderId ?: number,
     private email ?: string,
-    private birthday ?: Date,
-    private deparmentId ?: number,
+    private birthday ?: string,
+    private departmentId ?: number,
     private schoolYear ?: number,
     private telephone ?: string,
     private addressId ?: number,
-    private positionId ?: number[],
+    private positionIds ?: number[],
   ) {
   }
 

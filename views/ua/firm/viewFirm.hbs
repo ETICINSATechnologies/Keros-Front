@@ -2,46 +2,95 @@
 <div class="wrapper">
   {{> template/header}}
   {{> template/sidebar}}
-
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        Voir les sociétés
+        {{#if firm}}Fiche Société{{else}}Nouvelle société{{/if}}
       </h1>
-      {{> breadcrumb tab="UA" path="Sociétés,Voir les sociétés"}}
+      {{#if firm}}
+      {{> breadcrumb tab="UA" path="Sociétés,Edition d'une société"}}
+      {{else}}
+      {{> breadcrumb tab="UA" path="Sociétés,Nouvelle société"}}
+      {{/if}}
     </section>
     <section class="content">
       <div class="row">
         <div class="col-md-12">
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">{{firm.name}}</h3>
+          <section class="content">
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title">
+                  Informations
+                </h3>
+              </div>
+              <form role="form" method="post" {{#if firm}}action="/ua/firm/update" {{else}}action="/ua/firm/createform"{{/if}}>
+                <div class="box-body row">
+                  <div class="col-md-6 form-group">
+                    <label for="siret">SIRET</label>
+                    <input type="text" class="form-control" id="siret" name="siret" value="{{firm.siret}}" placeholder="Entrez le SIRET" readonly>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label for="name">Nom</label>
+                    <input type="text" class="form-control" id="name" name="name" value="{{firm.name}}" placeholder="Entrez le nom de l'entreprise" required readonly>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="typeId">Type de société</label>
+                    <select class="form-control" id="typeId" name="typeId" >
+                      {{#each firmTypes}}
+                        <option value="{{id}}" {{selected id @root.firm.typeId}}>{{label}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <h4 class="col-md-12 box-title">
+                    Adresse
+                  </h4>
+                  <div class="col-md-12 form-group">
+                    <label for="line1">Ligne 1</label>
+                    <input type="string" class="form-control" id="line1" name="line1"
+                           value="{{address.line1}}" placeholder="Entrez l'adresse 1" required readonly>
+                  </div>
+                  <div class="col-md-12 form-group">
+                    <label for="line2">Ligne 2</label>
+                    <input type="string" class="form-control" id="line2" name="line2"
+                           value="{{address.line2}}" placeholder="Entrez l'adresse 2" readonly>
+                  </div>
+                  <div class="col-md-2 form-group">
+                    <label for="postalCode">Code postal</label>
+                    <input type="string" class="form-control" id="postalCode" name="postalCode"
+                           value="{{address.postalCode}}" placeholder="Entrez le code postal" required readonly>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label for="city">Ville</label>
+                    <input type="string" class="form-control" id="city" name="city"
+                           value="{{address.city}}" placeholder="Entrez la ville" required readonly>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="countryId">Pays</label>
+                    <select class="form-control" id="countryId" name="countryId" required >
+                      {{#each countries}}
+                        <option value="{{id}}" {{selected id @root.address.countryId}}>{{label}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                </div>
+                <div class="box-footer">
+                  <div class="clearfix row">
+                    <div class="col-md-10">
+                      <a href="/ua/firm"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button></a>
+                    </div>
+                    <div class="col-md-2" id="box_buttons">
+                      <button type="button" class="btn btn-primary pull-right" id="update">Editer</button>
+                      <button type="submit" class="btn btn-primary" id="validate">Valider</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
             </div>
-            <div class="box-body">
-              <ul>
-                <li>Nom : {{firm.name}}</li>
-                <li>Siret : {{firm.siret}}</li>
-                <li>Adresse : {{firm.addressId}}</li>
-                <li>Type : {{firm.typeId}}</li>
-              </ul>
-            </div>
-            <a href="/ua/firm/update/{{firm.id}}">Modifier</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-12">
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title"><a href="/ua/firm">Revenir à la liste des sociétés</a></h3>
-            </div>
-          </div>
+          </section>
         </div>
       </div>
     </section>
   </div>
-
   {{> template/footer}}
 </div>
 {{> template/scripts}}

@@ -1,0 +1,64 @@
+<body class="hold-transition skin-green fixed sidebar-mini">
+<div class="wrapper">
+  {{> template/header}}
+  {{> template/sidebar}}
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Voir les contacts
+      </h1>
+      {{> breadcrumb tab="UA" path="Contacts,Voir les contacts"}}
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="dataTables_wrapper form-inline dt-bootstrap">
+                {{> template/itemPerPage meta=contacts.meta}}
+                <table class="table table-bordered dataTable">
+                  <tbody>
+                  <tr>
+                    <th>Nom<a href="#" id="LastName" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Prénom<a href="#" id="firstName" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Société<a href="#" id="firmId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Email<a href="#" id="email" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Telephone<a href="#" id="telephone" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Position<a href="#" id="position" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Voir</th>
+                    <th>Modifier</th>
+                  </tr>
+                  {{#each contacts.content}}
+                    <tr>
+                      <td>{{lastName}}</td>
+                      <td>{{firstName}}</td>
+                      <td>{{firm.name}}</td>
+                      <td>{{email}}</td>
+                      <td>{{telephone}}</td>
+                      <td>{{position}}</td>
+                      <td><a href="/ua/contact/{{id}}" class="fa fa-hand-pointer-o"></a></td>
+                      <td><a href="/ua/contact/update/{{id}}">Modifier</a></td>
+                    </tr>
+                  {{/each}}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="box-footer">
+              {{> template/pagination meta=contacts.meta}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <a href="/ua/contact/create" style="color: white;"><button type="button" class="btn btn-block btn-success btn-lg box">Nouveau contact</button></a>
+        </div>
+      </div>
+    </section>
+  </div>
+  {{> template/footer}}
+</div>
+{{> template/scripts}}
+</body>

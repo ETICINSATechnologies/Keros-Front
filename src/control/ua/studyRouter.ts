@@ -16,9 +16,9 @@ export function studyRouter(): Router {
 
   router.get("", studyController.viewStudies);
   router.get("/:id(\\d+)/", studyController.viewStudy);
-  router.get("/inscription", studyController.viewStudyForm);
-  router.post("/create", studyController.postStudyForm);
-  router.get("/update/:id(\\d+)/", studyController.viewStudyForm);
+  router.get("/create", studyController.viewStudyForm);
+  router.post("/createform", studyController.postStudyForm);
+  router.get("/update/:id(\\d+)/", studyController.viewStudy);
   router.post("/update", studyController.postStudyForm);
 
   return router;

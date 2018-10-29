@@ -6,6 +6,5 @@ export class Address {
     private postalCode ?: string,
     private city ?: string,
     private countryId ?: number,
-  ) {
-  }
+  ) {}
 }

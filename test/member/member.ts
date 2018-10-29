@@ -1,8 +1,8 @@
 import { JSDOM } from "jsdom";
 import { expect } from "chai";
 import { request } from "../helpers";
-import { Response } from "supertest";
 import jquery = require("jquery");
+import { Response } from "supertest";
 
 describe("Member tests", function () {
   it("Should return the member list with /core/member", function (done) {
@@ -22,7 +22,6 @@ describe("Member tests", function () {
         done(err);
       });
   });
-
   it("Should return a specific member view with /core/member/id", function (done) {
     request
       .get("/core/member/1")
@@ -33,15 +32,14 @@ describe("Member tests", function () {
       .then((resp: Response) => {
         const window = new JSDOM(resp.text).window;
         const $ = jquery(window);
-        expect($(".content-header>h1:first").text().trim()).equals("Voir les membres");
+        expect($(".content-header>h1:first").text().trim()).equals("Fiche Membre");
         done();
       })
       .catch((err: Error) => {
         done(err);
       });
   });
-
-  it("Should return the creation form with /core/member/create", function (done) {
+  it("Should return the creation form with /core/member/signin", function (done) {
     request
       .get("/core/member/create")
       .set("Accept", "text/html")
@@ -51,14 +49,13 @@ describe("Member tests", function () {
       .then((resp: Response) => {
         const window = new JSDOM(resp.text).window;
         const $ = jquery(window);
-        expect($(".content-header>h1:first").text().trim()).equals("Page d'inscription");
+        expect($(".content-header>h1:first").text().trim()).equals("Nouveau Membre");
         done();
       })
       .catch((err: Error) => {
         done(err);
       });
   });
-
   it("Should return the update form with /core/member/update/id", function (done) {
     request
       .get("/core/member/update/1")
@@ -69,7 +66,7 @@ describe("Member tests", function () {
       .then((resp: Response) => {
         const window = new JSDOM(resp.text).window;
         const $ = jquery(window);
-        expect($(".content-header>h1:first").text().trim()).equals("Modification d'un membre");
+        expect($(".content-header>h1:first").text().trim()).equals("Fiche Membre");
         done();
       })
       .catch((err: Error) => {
