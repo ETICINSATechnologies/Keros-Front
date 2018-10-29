@@ -8,39 +8,39 @@ export class DepartmentMock implements IMock {
     let mockObj: T | null = null;
     let status: number = 500;
     switch (resource) {
-      case "department/1":
+      case "core/department/1":
         mockObj = <T> new Department(1, "BIM", "Biosciences");
         status = 200;
         return new MockResponse(mockObj, status);
-      case "department/2":
+      case "core/department/2":
         mockObj = <T> new Department(2, "IF", "Informatique");
         status = 200;
         return new MockResponse(mockObj, status);
-      case "department/3":
+      case "core/department/3":
         mockObj = <T> new Department(3, "GCM", "Science et Génie des Matériaux");
         status = 200;
         return new MockResponse(mockObj, status);
-      case "department/4":
+      case "core/department/4":
         mockObj = <T> new Department(4, "GCU", "Génie Civil et Urbanisme");
         status = 200;
         return new MockResponse(mockObj, status);
-      case "department/5":
+      case "core/department/5":
         mockObj = <T> new Department(5, "GE", "Génie Electrique");
           status = 200;
         return new MockResponse(mockObj, status);
-      case "department/6":
+      case "core/department/6":
         mockObj = <T> new Department(6, "GEN", "Génie Energétique et Environnement");
           status = 200;
         return new MockResponse(mockObj, status);
-      case "department/7":
+      case "core/department/7":
         mockObj = <T> new Department(7, "GI", "Génie Industriel");
         status = 200;
         return new MockResponse(mockObj, status);
-      case "department/8":
+      case "core/department/8":
         mockObj = <T> new Department(8, "GM", "Génie Mécanique");
           status = 200;
         return new MockResponse(mockObj, status);
-      case "department/9":
+      case "core/department/9":
         mockObj = <T> new Department(9, "TC", "Télécommunications, Services et Usages");
         status = 200;
         return new MockResponse(mockObj, status);
@@ -52,7 +52,7 @@ export class DepartmentMock implements IMock {
     let mockObj: T[] | null = null;
     let status: number = 500;
     switch (resource) {
-      case "department":
+      case "core/department":
         mockObj = <T[]> [ <T> new Department(1, "BIM", "Biosciences"), new Department(2, "IF", "Informatique"), new Department(3, "GCM", "Science et Génie des Matériaux"), new Department(4, "GCU", "Génie Civil et Urbanisme"), new Department(5, "GE", "Génie Electrique"), new Department(6, "GEN", "Génie Energétique et Environnement"), new Department(7, "GI", "Génie Industriel"), new Department(8, "GM", "Génie Mécanique"), new Department(9, "TC", "Télécommunications, Services et Usages")];
         status = 200;
         return new MockResponse(mockObj, status);

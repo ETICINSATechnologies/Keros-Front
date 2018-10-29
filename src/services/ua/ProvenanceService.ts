@@ -5,7 +5,7 @@ import { Provenance } from "../../models/ua/Provenance";
 
 export class ProvenanceService extends BaseService {
   static getAllProvenances(callback: (err: any, result: Provenance[] | null) => void): void {
-    this.rest.getAll<Provenance>("provenance").then(
+    this.rest.getAll<Provenance>("ua/provenance").then(
       (res: IRestResponse<Provenance[]>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);
@@ -19,7 +19,7 @@ export class ProvenanceService extends BaseService {
   }
 
   static getProvenance(id: number | undefined, callback: (err: any, result: Provenance | null) => void): void {
-    this.rest.get<Provenance>("provenance/" + id).then(
+    this.rest.get<Provenance>("ua/provenance/" + id).then(
       (res: IRestResponse<Provenance>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);

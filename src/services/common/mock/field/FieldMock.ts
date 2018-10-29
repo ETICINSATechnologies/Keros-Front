@@ -8,19 +8,19 @@ export class FieldMock implements IMock {
     let mockObj: T | null = null;
     let status: number = 500;
     switch (resource) {
-      case "field/1":
+      case "ua/field/1":
         mockObj = <T> new Field(1, "Mécanique");
         status = 200;
         return new MockResponse(mockObj, status);
-      case "field/2":
+      case "ua/field/2":
         mockObj = <T> new Field(2, "Web");
         status = 200;
         return new MockResponse(mockObj, status);
-      case "field/3":
+      case "ua/field/3":
         mockObj = <T> new Field(3, "Réseau");
         status = 200;
         return new MockResponse(mockObj, status);
-      case "field/4":
+      case "ua/field/4":
         mockObj = <T> new Field(4, "Télécommunication");
         status = 200;
         return new MockResponse(mockObj, status);
@@ -32,7 +32,7 @@ export class FieldMock implements IMock {
     let mockObj: T[] | null = null;
     let status: number = 500;
     switch (resource) {
-      case "field":
+      case "ua/field":
         mockObj = <T[]> [ <T> new Field(1, "Mécanique"), new Field(2, "Web"), new Field(3, "Réseau"), new Field(4, "Télécommunication")];
         status = 200;
         return new MockResponse(mockObj, status);

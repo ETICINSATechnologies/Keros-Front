@@ -5,7 +5,7 @@ import * as winston from "winston";
 
 export class AddressService extends BaseService {
   static getAddress(id: number | undefined, callback: (err: any, result: Address | null) => void): void {
-    this.rest.get<Address>("address/" + id).then(
+    this.rest.get<Address>("core/address/" + id).then(
       (res: IRestResponse<Address>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);

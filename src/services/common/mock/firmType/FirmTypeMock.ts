@@ -8,27 +8,27 @@ export class FirmTypeMock implements IMock {
     let mockObj: T | null = null;
     let status: number = 500;
     switch (resource) {
-      case "firmType/1":
+      case "ua/firm-type/1":
         mockObj = <T> new FirmType(1, "TPE");
         status = 200;
         return new MockResponse(mockObj, status);
-      case "firmType/2":
+      case "ua/firm-type/2":
         mockObj = <T> new FirmType(2, "PME/PMI");
         status = 200;
         return new MockResponse(mockObj, status);
-      case "firmType/3":
+      case "ua/firm-type/3":
         mockObj = <T> new FirmType(3, "GE");
         status = 200;
         return new MockResponse(mockObj, status);
-      case "firmType/4":
+      case "ua/firm-type/4":
         mockObj = <T> new FirmType(4, "SARL");
         status = 200;
         return new MockResponse(mockObj, status);
-      case "firmType/5":
+      case "ua/firm-type/5":
         mockObj = <T> new FirmType(5, "SA");
         status = 200;
         return new MockResponse(mockObj, status);
-      case "firmType/6":
+      case "ua/firm-type/6":
         mockObj = <T> new FirmType(6, "SAS");
         status = 200;
         return new MockResponse(mockObj, status);
@@ -40,7 +40,7 @@ export class FirmTypeMock implements IMock {
     let mockObj: T[] | null = null;
     let status: number = 500;
     switch (resource) {
-      case "firmType":
+      case "ua/firm-type":
         mockObj = <T[]> [ <T> new FirmType(1, "TPE"), new FirmType(2, "PME/PMI"), new FirmType(3, "GE"), new FirmType(4, "SARL"), new FirmType(5, "SA"), new FirmType(6, "SAS")];
         status = 200;
         return new MockResponse(mockObj, status);

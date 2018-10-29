@@ -8,27 +8,27 @@ export class CountryMock implements IMock {
     let mockObj: T | null = null;
     let status: number = 500;
     switch (resource) {
-      case "country/1":
+      case "core/country/1":
         mockObj = <T> new Country(1, "France");
         status = 200;
         return new MockResponse(mockObj, status);
-      case "country/2":
+      case "core/country/2":
         mockObj = <T> new Country(2, "Suisse");
         status = 200;
         return new MockResponse(mockObj, status);
-      case "country/3":
+      case "core/country/3":
         mockObj = <T> new Country(3, "Belgique");
         status = 200;
         return new MockResponse(mockObj, status);
-      case "country/4":
+      case "core/country/4":
         mockObj = <T> new Country(4, "Allemagne");
         status = 200;
         return new MockResponse(mockObj, status);
-      case "country/5":
+      case "core/country/5":
         mockObj = <T> new Country(5, "Espagne");
         status = 200;
         return new MockResponse(mockObj, status);
-      case "country/6":
+      case "core/country/6":
         mockObj = <T> new Country(6, "Royaume-Uni");
         status = 200;
         return new MockResponse(mockObj, status);
@@ -40,7 +40,7 @@ export class CountryMock implements IMock {
     let mockObj: T[] | null = null;
     let status: number = 500;
     switch (resource) {
-      case "country":
+      case "core/country":
         mockObj = <T[]> [ <T> new Country(1, "France"), new Country(2, "Suisse"), new Country(3, "Belgique"), new Country(4, "Allemagne"), new Country(5, "Espagne"), new Country(6, "Royaume-Uni")];
         status = 200;
         return new MockResponse(mockObj, status);
