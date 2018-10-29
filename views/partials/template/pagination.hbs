@@ -9,12 +9,12 @@
 
   //MESSAGE
 
-  var start = {{meta.page}} * {{meta.itemPerPage}} +1;
-  if ((({{meta.page}}+1) * {{meta.itemPerPage}}) > {{meta.totalItems}}) {
+  var start = {{meta.page}} * {{meta.itemsPerPage}} +1;
+  if ((({{meta.page}}+1) * {{meta.itemsPerPage}}) > {{meta.totalItems}}) {
     var end = {{meta.totalItems}};
   }
   else {
-    var end = ({{meta.page}}+1) * {{meta.itemPerPage}};
+    var end = ({{meta.page}}+1) * {{meta.itemsPerPage}};
   }
   var display = "Showing " + start + " to " + end + " of {{meta.totalItems}} entries";
   document.getElementById('entries').innerHTML = display;

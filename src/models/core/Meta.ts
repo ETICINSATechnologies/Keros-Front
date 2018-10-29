@@ -3,7 +3,7 @@ export class Meta {
     private page ?: number,
     private totalPages ?: number,
     private totalItems ?: number,
-    private itemPerPage ?: number,
+    private itemsPerPage ?: number,
   ) {
   }
 }

@@ -76,8 +76,8 @@ export class FirmController {
     const line2 = req.body.line2;
     const city = req.body.city;
     const postalCode = req.body.postalCode;
-    const countryId = req.body.countryId;
-    const typeId = req.body.typeId;
+    const countryId = +req.body.countryId;
+    const typeId = +req.body.typeId;
     const address = new Address(1, line1, line2, city, postalCode, countryId);
     const firm = new FirmCreateRequest(siret, name, address, typeId);
     FirmService.createFirm(firm, function (err) {
