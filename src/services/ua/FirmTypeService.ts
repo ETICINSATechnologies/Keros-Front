@@ -6,7 +6,7 @@ import { FirmType } from "../../models/ua/FirmType";
 
 export class FirmTypeService extends BaseService {
   static getAllFirmTypes(callback: (err: any, result: FirmType[] | null) => void): void {
-    this.rest.getAll<FirmType>("firmType").then(
+    this.rest.getAll<FirmType>("ua/firm-type").then(
       (res: IRestResponse<FirmType[]>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);
@@ -20,7 +20,7 @@ export class FirmTypeService extends BaseService {
   }
 
   static getFirmType(id: number | undefined, callback: (err: any, result: FirmType | null) => void): void {
-    this.rest.get<FirmType>("firmType/" + id).then(
+    this.rest.get<FirmType>("ua/firm-type/" + id).then(
       (res: IRestResponse<FirmType>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);

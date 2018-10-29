@@ -7,7 +7,7 @@ import { MemberCreateRequest } from "../../models/core/MemberCreateRequest";
 
 export class MemberService extends BaseService {
   static getMember(id: number, callback: (err: any, result: Member | null) => void): void {
-    this.rest.get<Member>("/core/member/" + id).then(
+    this.rest.get<Member>("core/member/" + id).then(
       (res: IRestResponse<Member>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);
@@ -21,7 +21,7 @@ export class MemberService extends BaseService {
   }
 
   static getAllMembers(callback: (err: any, result: Page<Member> | null) => void): void {
-    this.rest.get<Page<Member>>("/core/member").then(
+    this.rest.get<Page<Member>>("core/member").then(
       (res: IRestResponse<Page<Member>>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);
@@ -35,7 +35,7 @@ export class MemberService extends BaseService {
   }
 
   static createMember(memberRequest: MemberCreateRequest, callback: (err: any) => void): void {
-    this.rest.create<MemberCreateRequest>("/core/member", memberRequest).then(
+    this.rest.create<MemberCreateRequest>("core/member", memberRequest).then(
       (res: IRestResponse<MemberCreateRequest>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError());
@@ -49,7 +49,7 @@ export class MemberService extends BaseService {
   }
 
   static update(memberRequest: MemberCreateRequest, callback: (err: any) => void): void {
-    this.rest.create<MemberCreateRequest>("/core/member", memberRequest).then(
+    this.rest.create<MemberCreateRequest>("core/member", memberRequest).then(
       (res: IRestResponse<MemberCreateRequest>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError());

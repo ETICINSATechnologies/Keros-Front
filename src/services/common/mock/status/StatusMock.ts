@@ -8,19 +8,19 @@ export class StatusMock implements IMock {
     let mockObj: T | null = null;
     let status: number = 500;
     switch (resource) {
-      case "status/1":
+      case "ua/status/1":
         mockObj = <T> new Status(1, "En cours");
         status = 200;
         return new MockResponse(mockObj, status);
-      case "status/2":
+      case "ua/status/2":
         mockObj = <T> new Status(2, "A faire");
         status = 200;
         return new MockResponse(mockObj, status);
-      case "status/3":
+      case "ua/status/3":
         mockObj = <T> new Status(3, "A valider");
         status = 200;
         return new MockResponse(mockObj, status);
-      case "status/4":
+      case "ua/status/4":
         mockObj = <T> new Status(4, "Finie");
         status = 200;
         return new MockResponse(mockObj, status);
@@ -32,7 +32,7 @@ export class StatusMock implements IMock {
     let mockObj: T[] | null = null;
     let status: number = 500;
     switch (resource) {
-      case "status":
+      case "ua/status":
         mockObj = <T[]> [ <T> new Status(1, "En cours"), new Status(2, "A faire"), new Status(3, "A valider"), new Status(4, "Finie")];
         status = 200;
         return new MockResponse(mockObj, status);

@@ -5,7 +5,7 @@ import * as winston from "winston";
 
 export class GenderService extends BaseService {
   static getAllGenders(callback: (err: any, result: Gender[] | null) => void): void {
-    this.rest.getAll<Gender>("gender").then(
+    this.rest.getAll<Gender>("core/gender").then(
       (res: IRestResponse<Gender[]>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);

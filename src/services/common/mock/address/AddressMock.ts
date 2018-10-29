@@ -8,11 +8,11 @@ export class AddressMock implements IMock {
     let mockObj: T | null = null;
     let status: number = 500;
     switch (resource) {
-      case "address/1":
+      case "core/address/1":
         mockObj = <T> new Address(1, "37, rue des Lilas", "", "01220", "Grilly", 1);
         status = 200;
         return new MockResponse(mockObj, status);
-      case "address/2":
+      case "core/address/2":
         mockObj = <T> new Address(1, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", 2);
         status = 200;
         return new MockResponse(mockObj, status);
@@ -35,7 +35,7 @@ export class AddressMock implements IMock {
     let mockObj: T | null = null;
     let status: number = 500;
     switch (resource) {
-      case "address":
+      case "core/address":
         mockObj = <T> new Address(0, resources["line1"], resources["line2"], resources["city"], resources["postalCode"], resources["countryId"]);
         status = 200;
         winston.debug("Address created : " + JSON.stringify(mockObj));
