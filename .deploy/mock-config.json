@@ -1,0 +1,7 @@
+{
+  "env": "mock",
+  "httpPort": 8080,
+  "clientBaseUrl": "http://127.0.0.1:8000/api/v1",
+  "useMock": true,
+  "logLevel": "debug"
+}
