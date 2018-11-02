@@ -1,0 +1,7 @@
+{
+  "env": "testing",
+  "httpPort": 8081,
+  "clientBaseUrl": "",
+  "useMock": true,
+  "logLevel": "debug"
+}
