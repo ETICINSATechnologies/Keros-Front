@@ -38,7 +38,7 @@
                     <label for="typeId">Type de société</label>
                     <select class="form-control" id="typeId" name="typeId" disabled>
                       {{#each firmTypes}}
-                        <option value="{{id}}" {{selected id @root.firm.typeId}}>{{label}}</option>
+                        <option value="{{id}}" {{selected id @root.firm.type.id}}>{{label}}</option>
                       {{/each}}
                     </select>
                   </div>
@@ -48,28 +48,28 @@
                   <div class="col-md-12 form-group">
                     <label for="line1">Ligne 1</label>
                     <input type="string" class="form-control" id="line1" name="line1"
-                           value="{{address.line1}}" placeholder="Entrez l'adresse 1" required disabled>
+                           value="{{firm.address.line1}}" placeholder="Entrez l'adresse 1" required disabled>
                   </div>
                   <div class="col-md-12 form-group">
                     <label for="line2">Ligne 2</label>
                     <input type="string" class="form-control" id="line2" name="line2"
-                           value="{{address.line2}}" placeholder="Entrez l'adresse 2" disabled>
+                           value="{{firm.address.line2}}" placeholder="Entrez l'adresse 2" disabled>
                   </div>
                   <div class="col-md-2 form-group">
                     <label for="postalCode">Code postal</label>
                     <input type="string" class="form-control" id="postalCode" name="postalCode"
-                           value="{{address.postalCode}}" placeholder="Entrez le code postal" required disabled>
+                           value="{{firm.address.postalCode}}" placeholder="Entrez le code postal" required disabled>
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="city">Ville</label>
                     <input type="string" class="form-control" id="city" name="city"
-                           value="{{address.city}}" placeholder="Entrez la ville" required disabled>
+                           value="{{firm.address.city}}" placeholder="Entrez la ville" required disabled>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="countryId">Pays</label>
                     <select class="form-control" id="countryId" name="countryId" required disabled>
                       {{#each countries}}
-                        <option value="{{id}}" {{selected id @root.address.countryId}}>{{label}}</option>
+                        <option value="{{id}}" {{selected id @root.firm.address.country.id}}>{{label}}</option>
                       {{/each}}
                     </select>
                   </div>

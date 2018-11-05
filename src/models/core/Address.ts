@@ -1,4 +1,5 @@
 import { IStringable } from "../interface/IStringable";
+import { Country } from "./Country";
 
 export class Address implements IStringable {
   constructor(
@@ -7,7 +8,7 @@ export class Address implements IStringable {
     private line2 ?: string,
     private postalCode ?: string,
     private city ?: string,
-    private countryId ?: number,
+    private country ?: Country,
   ) {
   }
 

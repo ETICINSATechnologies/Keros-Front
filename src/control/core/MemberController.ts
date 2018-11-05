@@ -61,29 +61,22 @@ export class MemberController {
       }
       DepartmentService.getAllDepartments(function (err2, departments: Department[] | null) {
         GenderService.getAllGenders(function (err3, genders: Gender[] | null) {
-          AddressService.getAddress(member["addressId"], function (err4, address: Address | null) {
-            if (address === null) {
-              return next(err4);
-            }
-            CountryService.getAllCountries(function (err5, countries: Country[] | null) {
-              PositionService.getAllPositions(function (err6, positions: Position[] | null) {
-                if (err1) return next(err1);
-                if (err2) return next(err2);
-                if (err3) return next(err3);
-                if (err4) return next(err4);
-                if (err5) return next(err5);
-                if (err6) return next(err6);
-                const options = {
-                  member: member,
-                  departments: departments,
-                  gender: genders,
-                  address: address,
-                  countries: countries,
-                  positions: positions,
-                };
-                winston.debug("Gender : " + JSON.stringify(genders));
-                res.render("core/member/viewMember", options);
-              });
+          CountryService.getAllCountries(function (err4, countries: Country[] | null) {
+            PositionService.getAllPositions(function (err5, positions: Position[] | null) {
+              if (err1) return next(err1);
+              if (err2) return next(err2);
+              if (err3) return next(err3);
+              if (err4) return next(err4);
+              if (err5) return next(err5);
+              const options = {
+                member: member,
+                departments: departments,
+                gender: genders,
+                countries: countries,
+                positions: positions,
+              };
+              winston.debug("Member : " + JSON.stringify(member));
+              res.render("core/member/viewMember", options);
             });
           });
         });
@@ -111,10 +104,10 @@ export class MemberController {
     const positionId1 = +req.body.positionId1;
     const positionIds = [positionId1];
     const positionId2 = +req.body.positionId2;
-    if(positionId2) positionIds.push(positionId2);
+    if (positionId2) positionIds.push(positionId2);
     const positionId3 = +req.body.positionId3;
-    if(positionId3) positionIds.push(positionId3);
-    const address = new Address(1, line1, line2, city, postalCode, countryId);
+    if (positionId3) positionIds.push(positionId3);
+    const address = new Address(1, line1, line2, postalCode, city, new Country(countryId));
     const user = new MemberCreateRequest(firstName, lastName, userName, password, gender, email, birthday, departmentId, schoolYear, telephone, address, positionIds);
     if (id) {
       MemberService.update(id, user, function (err1) {

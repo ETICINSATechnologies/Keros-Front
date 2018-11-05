@@ -20,7 +20,7 @@ export function contactRouter(): Router {
   router.post("/createform", contactController.postContactForm);
   router.get("/update/:id(\\d+)/", contactController.viewContact);
   router.post("/update", contactController.postContactForm);
-  router.get("/json", contactController.viewContacts);
+  router.get("/json", contactController.viewJSONContacts);
 
   return router;
 }

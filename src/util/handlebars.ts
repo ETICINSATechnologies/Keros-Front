@@ -66,9 +66,9 @@ export default handlebars({
     },
     toString: function (item: IStringable, maxLength = 0) {
       let str = item.toString();
-      winston.info(str);
-      winston.info(JSON.stringify(maxLength));
-      winston.info(typeof (maxLength));
+      // winston.info(str);
+      // winston.info(JSON.stringify(maxLength));
+      // winston.info(typeof (maxLength));
       if (maxLength > 0) {
         str = str.slice(0, maxLength) + "...";
       }

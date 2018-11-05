@@ -46,7 +46,7 @@
                     <label for="genderId">Sexe</label>
                     <select class="form-control" id="genderId" name="genderId" disabled>
                       {{#each gender}}
-                        <option value="{{id}}" {{selected id @root.member.genderId}}>{{gender label}}</option>
+                        <option value="{{id}}" {{selected id @root.member.gender.id}}>{{gender label}}</option>
                       {{/each}}
                     </select>
                   </div>
@@ -67,7 +67,7 @@
                     <select class="form-control" id="departmentId" name="departmentId" disabled>
                       <option></option>
                       {{#each departments}}
-                        <option value="{{id}}" {{selected id @root.member.departmentId}}>{{label}}</option>
+                        <option value="{{id}}" {{selected id @root.member.department.id}}>{{label}}</option>
                       {{/each}}
                     </select>
                   </div>
@@ -96,28 +96,28 @@
                   <div class="col-md-12 form-group">
                     <label for="line1">Ligne 1</label>
                     <input type="string" class="form-control" id="line1" name="line1"
-                           value="{{address.line1}}" placeholder="Entrez l'adresse 1" required disabled>
+                           value="{{member.address.line1}}" placeholder="Entrez l'adresse 1" required disabled>
                   </div>
                   <div class="col-md-12 form-group">
                     <label for="line2">Ligne 2</label>
                     <input type="string" class="form-control" id="line2" name="line2"
-                           value="{{address.line2}}" placeholder="Entrez l'adresse 2" disabled>
+                           value="{{member.address.line2}}" placeholder="Entrez l'adresse 2" disabled>
                   </div>
                   <div class="col-md-2 form-group">
                     <label for="postalCode">Code postal</label>
                     <input type="string" class="form-control" id="postalCode" name="postalCode"
-                           value="{{address.postalCode}}" placeholder="Entrez le code postal" required disabled>
+                           value="{{member.address.postalCode}}" placeholder="Entrez le code postal" required disabled>
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="city">Ville</label>
                     <input type="string" class="form-control" id="city" name="city"
-                           value="{{address.city}}" placeholder="Entrez la ville" required disabled>
+                           value="{{member.address.city}}" placeholder="Entrez la ville" required disabled>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="countryId">Pays</label>
                     <select class="form-control" id="countryId" name="countryId" required disabled>
                       {{#each countries}}
-                        <option value="{{id}}" {{selected id @root.address.countryId}}>{{label}}</option>
+                        <option value="{{id}}" {{selected id @root.member.address.country.id}}>{{label}}</option>
                       {{/each}}
                     </select>
                   </div>
@@ -128,7 +128,7 @@
                     <label for="countryId">Fonction 1</label>
                     <select class="form-control" id="positionId1" name="positionId1" required disabled>
                       {{#each positions}}
-                        <option value="{{id}}" {{selected id @root.member.positionIds.[0]}}>{{label}}</option>
+                        <option value="{{id}}" {{selected id @root.member.positions.0.id}}>{{toString .}}</option>
                       {{/each}}
                     </select>
                   </div>
@@ -137,7 +137,7 @@
                     <select class="form-control" id="positionId2" name="positionId2" disabled>
                       <option></option>
                       {{#each positions}}
-                        <option value="{{id}}" {{selected id @root.member.positionIds.[1]}}>{{label}}</option>
+                        <option value="{{id}}" {{selected id @root.member.positions.1.id}}>{{toString .}}</option>
                       {{/each}}
                     </select>
                   </div>
@@ -146,7 +146,7 @@
                     <select class="form-control" id="positionId3" name="positionId3" disabled>
                       <option></option>
                       {{#each positions}}
-                        <option value="{{id}}" {{selected id @root.member.positionIds.[2]}}>{{label}}</option>
+                        <option value="{{id}}" {{selected id @root.member.positions.2.id}}>{{toString .}}</option>
                       {{/each}}
                     </select>
                   </div>
