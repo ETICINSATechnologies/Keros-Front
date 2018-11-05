@@ -1,6 +1,7 @@
 import { Pole } from "./Pole";
+import { IStringable } from "../interface/IStringable";
 
-export class Position {
+export class Position implements IStringable {
   constructor(
     private id ?: number,
     private label ?: string,

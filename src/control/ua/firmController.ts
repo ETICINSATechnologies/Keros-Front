@@ -58,7 +58,6 @@ export class FirmController {
             firmTypes: firmTypes,
             countries: countries,
           };
-          winston.debug("FirmType : " + JSON.stringify(firmTypes));
           res.render("ua/firm/viewFirm", options);
         });
       });

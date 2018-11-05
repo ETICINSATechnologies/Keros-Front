@@ -23,11 +23,10 @@ export class ContactController {
       res.render("ua/contact/viewAll", options);
     });
   }
-  public viewJSONContacts(req: Request, res: Response, next: NextFunction) {
+  public getJSONContacts(req: Request, res: Response, next: NextFunction) {
     ContactService.getAllContacts(function (err, page: Page<Contact> | null) {
-      winston.debug("Getting JSON contacts");
+      winston.info("Getting JSON contacts");
       if (err) return next(err);
-      winston.debug("Contact = " + page);
       res.send(page);
     });
   }

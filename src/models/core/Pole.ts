@@ -1,4 +1,6 @@
-export class Pole {
+import { IStringable } from "../interface/IStringable";
+
+export class Pole implements IStringable{
   constructor(
     private id ?: number,
     private label ?: string,
