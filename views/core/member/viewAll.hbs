@@ -23,7 +23,7 @@
                     <th>Nom d'utilisateur <a href="#" id="username" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
                     <th>Nom<a href="#" id="name" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
                     <th>Prénom<a href="#" id="firstname" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                    <th>Id position<a href="#" id="positionId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Position(s)<a href="#" id="positionId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
                     <th>Email<a href="#" id="email" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
                     <th>Voir</th>
                     <th>Modifier</th>
@@ -33,7 +33,7 @@
                       <td>{{username}}</td>
                       <td>{{lastName}}</td>
                       <td>{{firstName}}</td>
-                      <td>{{positionIds}}</td>
+                      <td>{{#each positions}}{{toString .}}<br/>{{/each}}</td>
                       <td>{{email}}</td>
                       <td><a href="member/{{id}}" class="fa fa-hand-pointer-o"></a></td>
                       <td><a href="member/update/{{id}}">Modifier</a></td>

@@ -33,8 +33,8 @@ export class FirmController {
         if (err1) return next(err1);
         if (err2) return next(err2);
         const options = {
-          firmTypes : firmTypes,
-          countries : countries,
+          firmTypes: firmTypes,
+          countries: countries,
         };
         winston.debug("FirmType : " + JSON.stringify(firmTypes));
         res.render("ua/firm/viewFirm", options);
@@ -45,31 +45,27 @@ export class FirmController {
   public viewFirm(req: Request, res: Response, next: NextFunction) {
     let id = req.params.id;
     winston.info("Getting Firm form for id " + id);
-    FirmService.getFirm(id, function (err, firm: Firm | null) {
+    FirmService.getFirm(id, function (err1, firm: Firm | null) {
       if (firm === null) {
-        return next(err);
+        return next(err1);
       }
-      AddressService.getAddress(firm["addressId"], function (err1, address: Address | null) {
-        FirmTypeService.getAllFirmTypes(function (err2, firmTypes: FirmType[] | null) {
-          CountryService.getAllCountries(function (err3, countries: Country[] | null) {
-            if (err1) return next(err1);
-            if (err2) return next(err2);
-            if (err3) return next(err3);
-            const options = {
-              firm : firm,
-              address : address,
-              firmTypes : firmTypes,
-              countries : countries,
-            };
-            winston.debug("FirmType : " + JSON.stringify(firmTypes));
-            res.render("ua/firm/viewFirm", options);
-          });
+      FirmTypeService.getAllFirmTypes(function (err2, firmTypes: FirmType[] | null) {
+        CountryService.getAllCountries(function (err3, countries: Country[] | null) {
+          if (err2) return next(err2);
+          if (err3) return next(err3);
+          const options = {
+            firm: firm,
+            firmTypes: firmTypes,
+            countries: countries,
+          };
+          res.render("ua/firm/viewFirm", options);
         });
       });
     });
   }
 
   public postFirmForm(req: Request, res: Response, next: NextFunction) {
+    const id = +req.body.id;
     const name = req.body.name;
     const siret = req.body.siret;
     const line1 = req.body.line1;
@@ -78,13 +74,22 @@ export class FirmController {
     const postalCode = req.body.postalCode;
     const countryId = +req.body.countryId;
     const typeId = +req.body.typeId;
-    const address = new Address(1, line1, line2, city, postalCode, countryId);
+    const address = new Address(1, line1, line2, postalCode, city, new Country(countryId));
     const firm = new FirmCreateRequest(siret, name, address, typeId);
-    FirmService.createFirm(firm, function (err) {
-      if (err) {
-        return next(err);
-      }
-      res.redirect("/ua/firm");
-    });
+    if (id) {
+      FirmService.update(id, firm, function (err) {
+        if (err) {
+          return next(err);
+        }
+        res.redirect("/ua/firm");
+      });
+    } else {
+      FirmService.createFirm(firm, function (err) {
+        if (err) {
+          return next(err);
+        }
+        res.redirect("/ua/firm");
+      });
+    }
   }
 }

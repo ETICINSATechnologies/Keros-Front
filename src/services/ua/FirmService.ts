@@ -62,8 +62,8 @@ export class FirmService extends BaseService {
     );
   }
 
-  static update(firmRequest: FirmCreateRequest, callback: (err: any) => void): void {
-    this.rest.create<FirmCreateRequest>("ua/firm", firmRequest).then(
+  static update(id: number, firmRequest: FirmCreateRequest, callback: (err: any) => void): void {
+    this.rest.update<FirmCreateRequest>("ua/firm/" + id, firmRequest).then(
       (res: IRestResponse<FirmCreateRequest>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError());

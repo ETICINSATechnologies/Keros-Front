@@ -23,6 +23,13 @@ export class ContactController {
       res.render("ua/contact/viewAll", options);
     });
   }
+  public getJSONContacts(req: Request, res: Response, next: NextFunction) {
+    ContactService.getAllContacts(function (err, page: Page<Contact> | null) {
+      winston.info("Getting JSON contacts");
+      if (err) return next(err);
+      res.send(page);
+    });
+  }
 
   public viewContactForm(req: Request, res: Response, next: NextFunction) {
     winston.info("Getting create contact form");

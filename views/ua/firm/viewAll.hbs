@@ -23,9 +23,9 @@
                   <tr>
                     <th>Nom<a href="#" id="name" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
                     <th>Siret<a href="#" id="siret" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                    <th>Id adresse<a href="#" id="addressId" class="fa fa-unsorted fa-pull-right select_filter"></a>
+                    <th>Adresse<a href="#" id="addressId" class="fa fa-unsorted fa-pull-right select_filter"></a>
                     </th>
-                    <th>Id type<a href="#" id="typeId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Type<a href="#" id="typeId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
                     <th>Voir</th>
                     <th>Modifier</th>
                   </tr>
@@ -33,8 +33,8 @@
                     <tr>
                       <td>{{name}}</td>
                       <td>{{siret}}</td>
-                      <td>{{addressId}}</td>
-                      <td>{{typeId}}</td>
+                      <td>{{toString address}}</td>
+                      <td>{{type.label}}</td>
                       <td><a href="/ua/firm/{{id}}" class="fa fa-hand-pointer-o"></a></td>
                       <td><a href="/ua/firm/update/{{id}}">Modifier</a></td>
                     </tr>
