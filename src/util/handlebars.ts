@@ -1,7 +1,8 @@
 import * as path from "path";
 import * as handlebars from "express-handlebars";
 import { labelToName } from "./handlebars/genderHelper";
-import { convertRuleOptions } from "tslint/lib/configuration";
+import { IStringable } from "../models/interface/IStringable";
+import * as winston from "winston";
 
 /**
  * Handlebars configuration using the express-handlebars constructor
@@ -57,11 +58,18 @@ export default handlebars({
     gender: function (label: any) {
       return labelToName(label);
     },
-    required: function (item: any) {
+    requiredIfMissing: function (item: any) {
       if (item) {
         return "";
       }
       return "required";
+    },
+    toString: function (item: IStringable, maxLength = 0) {
+      let str = item.toString();
+      if (maxLength > 0) {
+        str = str.slice(0, maxLength) + "...";
+      }
+      return str;
     }
   }
 });

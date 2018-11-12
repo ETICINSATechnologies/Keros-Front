@@ -48,8 +48,8 @@ export class MemberService extends BaseService {
     );
   }
 
-  static update(memberRequest: MemberCreateRequest, callback: (err: any) => void): void {
-    this.rest.create<MemberCreateRequest>("core/member", memberRequest).then(
+  static update(memberId: number, memberRequest: MemberCreateRequest, callback: (err: any) => void): void {
+    this.rest.update<MemberCreateRequest>("core/member/" + memberId, memberRequest).then(
       (res: IRestResponse<MemberCreateRequest>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError());

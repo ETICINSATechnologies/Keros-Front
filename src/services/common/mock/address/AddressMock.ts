@@ -3,17 +3,18 @@ import { MockResponse } from "../MockClient";
 import { IRestResponse, IRequestOptions } from "typed-rest-client/RestClient";
 import { Address } from "../../../../models/core/Address";
 import * as winston from "winston";
+import { Country } from "../../../../models/core/Country";
 export class AddressMock implements IMock {
   get<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;
     let status: number = 500;
     switch (resource) {
       case "core/address/1":
-        mockObj = <T> new Address(1, "37, rue des Lilas", "", "01220", "Grilly", 1);
+        mockObj = <T> new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France"));
         status = 200;
         return new MockResponse(mockObj, status);
       case "core/address/2":
-        mockObj = <T> new Address(1, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", 2);
+        mockObj = <T> new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse"));
         status = 200;
         return new MockResponse(mockObj, status);
     }
@@ -36,7 +37,7 @@ export class AddressMock implements IMock {
     let status: number = 500;
     switch (resource) {
       case "core/address":
-        mockObj = <T> new Address(0, resources["line1"], resources["line2"], resources["city"], resources["postalCode"], resources["countryId"]);
+        mockObj = <T> new Address(0, resources["line1"], resources["line2"], resources["city"], resources["postalCode"], resources["country"]);
         status = 200;
         winston.debug("Address created : " + JSON.stringify(mockObj));
         return new MockResponse(mockObj, status);

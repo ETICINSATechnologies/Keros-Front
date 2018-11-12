@@ -1,10 +1,6 @@
 import { IConfig } from "./IConfig";
-import { LocalConfig } from "./LocalConfig";
-import { TestingConfig } from "./TestingConfig";
-import { StagingConfig } from "./StagingConfig";
 import { Environment } from "./Environment";
 import * as winston from "winston";
-import { MockConfig } from "./MockConfig";
 
 export class Config {
 
@@ -18,20 +14,14 @@ export class Config {
 
     const nodeEnv = process.env["NODE_ENV"];
     switch (nodeEnv) {
-      case "local":
-        this.activeConfig = new LocalConfig();
-        break;
       case "mock":
-        this.activeConfig = new MockConfig();
+        this.activeConfig = require('../../../.deploy/mock-config.json');
         break;
       case "testing":
-        this.activeConfig = new TestingConfig();
-        break;
-      case "staging":
-        this.activeConfig = new StagingConfig();
+        this.activeConfig = require('../../../.deploy/testing-config.json');
         break;
       default:
-        this.activeConfig = new LocalConfig();
+        this.activeConfig = require('../../../config.json');
         break;
     }
 
@@ -49,7 +39,7 @@ export class Config {
       ]
     });
 
-    winston.info("Running configuration in " + Environment[this.activeConfig.env] + " environment");
+    winston.info("Running configuration in " + this.getEnv() + " environment");
   }
 
   public static getEnv(): Environment {
