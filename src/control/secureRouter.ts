@@ -9,7 +9,7 @@ import * as httpContext from "express-http-context";
  */
 export function secureRouter(router: Router): void {
   router.use(function (req: Request, res: Response, next: NextFunction) {
-    
+
     if (!req.cookies.token || !req.cookies.connectedUser) {
       return res.redirect("/auth/login");
     }

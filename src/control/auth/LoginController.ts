@@ -43,8 +43,7 @@ export class LoginController {
         if(Config.getEnv().toString() === "testing"){
           res.redirect("/");
         } else {
-          res
-            .cookie("connectedUser", response)
+          res.cookie("connectedUser", JSON.stringify(response))
             .cookie("token", token)
             .redirect("/");
         }
