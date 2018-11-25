@@ -1,18 +1,18 @@
 import { IRestResponse } from "typed-rest-client/RestClient";
 import { Study } from "../../models/ua/Study";
 import { BaseService } from "../common/BaseService";
-import * as winston from "winston";
 import { Page } from "../../models/core/Page";
 import { StudyCreateRequest } from "../../models/ua/StudyCreateRequest";
+import * as winston from "winston";
 
 export class StudyService extends BaseService {
   static getStudy(id: number, callback: (err: any, result: Study | null) => void): void {
-    this.rest.get<Study>("ua/study/" + id).then(
+    this.rest.get<Study>("ua/study/" + id, this.defaultHeaders()).then(
       (res: IRestResponse<Study>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);
         }
-        winston.debug("getStudy response with status " + res.statusCode);
+        winston.debug("Response : " + JSON.stringify(res));
         callback(null, res.result);
       }
     ).catch(
@@ -21,12 +21,12 @@ export class StudyService extends BaseService {
   }
 
   static getAllStudies(callback: (err: any, result: Page<Study> | null) => void): void {
-    this.rest.get<Page<Study>>("ua/study").then(
+    this.rest.get<Page<Study>>("ua/study", this.defaultHeaders()).then(
       (res: IRestResponse<Page<Study>>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);
         }
-        winston.debug("getAllStudies response with status " + res.statusCode);
+        winston.debug("Response : " + JSON.stringify(res));
         callback(null, res.result);
       }
     ).catch(
@@ -35,12 +35,12 @@ export class StudyService extends BaseService {
   }
 
   static createStudy(studyRequest: StudyCreateRequest, callback: (err: any) => void): void {
-    this.rest.create<StudyCreateRequest>("ua/study", studyRequest).then(
+    this.rest.create<StudyCreateRequest>("ua/study", studyRequest, this.defaultHeaders()).then(
       (res: IRestResponse<StudyCreateRequest>) => {
-        if (res.statusCode !== 200) {
+        if (res.statusCode !== 201) {
           return callback(this.defaultError());
         }
-        winston.debug("createStudy response with status " + res.statusCode);
+        winston.debug("Response : " + JSON.stringify(res));
         callback(null);
       }
     ).catch(
@@ -48,13 +48,13 @@ export class StudyService extends BaseService {
     );
   }
 
-  static update(study: Study, callback: (err: any) => void): void {
-    this.rest.create<Study>("ua/study", Study).then(
+  static update(id: number, studyRequest: StudyCreateRequest, callback: (err: any) => void): void {
+    this.rest.update<Study>("ua/study/" + id, studyRequest, this.defaultHeaders()).then(
       (res: IRestResponse<Study>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError());
         }
-        winston.debug("update response with status " + res.statusCode);
+        winston.debug("Response : " + JSON.stringify(res));
         callback(null);
       }
     ).catch(

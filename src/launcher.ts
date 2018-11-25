@@ -5,16 +5,16 @@ import * as path from "path";
 
 
 import * as winston from "winston";
-import HttpError from "./util/httpError";
 import handlebars from "./util/handlebars";
 import * as http from "http";
-import { Config } from "./config/Config";
-import { authRouter } from "./control/auth/authRouter";
-import { coreRouter } from "./control/core/coreRouter";
-import { firmRouter } from "./control/ua/firmRouter";
-import { studyRouter } from "./control/ua/studyRouter";
-import { dashboardRouter } from "./control/core/dashboardRouter";
-import { contactRouter } from "./control/ua/contactRouter";
+import * as httpContext from "express-http-context";
+import {Config} from "./config/Config";
+import {authRouter} from "./control/auth/authRouter";
+import {coreRouter} from "./control/core/coreRouter";
+import {firmRouter} from "./control/ua/firmRouter";
+import {studyRouter} from "./control/ua/studyRouter";
+import {dashboardRouter} from "./control/core/dashboardRouter";
+import {contactRouter} from "./control/ua/contactRouter";
 
 /**
  * The Launcher - contains the express Application as well as methods to launch a server on that
@@ -72,6 +72,8 @@ export class Launcher {
     // mount cookie parser middleware
     this.app.use(cookieParser("156daf75-d51b-4918-a1b5-e158126b0cbd"));
 
+    this.app.use(httpContext.middleware);
+
     this.app.use("/auth", authRouter());
     this.app.use("", dashboardRouter());
     this.app.use("/core", coreRouter());
@@ -79,14 +81,10 @@ export class Launcher {
     this.app.use("/ua/study", studyRouter());
     this.app.use("/ua/contact", contactRouter());
 
-    // Catch 404 and forward to error handler
-    this.app.use(function (req: express.Request, res: express.Response, next: express.NextFunction) {
-      const err: any = new HttpError("Cette page n'existe pas", 404);
-      next(err);
-    });
 
     // Handle any errors
     this.app.use(function (err: any, req: any, res: any, next: any) {
+      winston.error(err);
       res.status(err.status || 500);
       res.render("error", {
         error: err

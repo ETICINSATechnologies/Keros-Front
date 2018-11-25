@@ -1,8 +1,8 @@
 import { BaseService } from "../common/BaseService";
 import { IRestResponse } from "typed-rest-client/RestClient";
-import * as winston from "winston";
 import { LoginRequest } from "../../models/auth/LoginRequest";
 import { LoginResponse } from "../../models/auth/LoginResponse";
+import * as winston from "winston";
 
 
 export class AuthService extends BaseService {
@@ -16,7 +16,7 @@ export class AuthService extends BaseService {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);
         }
-        winston.debug("Login response with status " + res.statusCode);
+        winston.debug("Response : " + JSON.stringify(res));
         callback(null, res.result);
       }
     ).catch(

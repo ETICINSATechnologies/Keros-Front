@@ -1,14 +1,14 @@
 export class ContactCreateRequest {
   constructor(
-    private firstName ?: string,
-    private lastName ?: string,
-    private genderId ?: number,
-    private firmId ?: number,
-    private email ?: string,
-    private telephone ?: string,
-    private cellphone ?: string,
-    private position ?: string,
-    private notes ?: string,
-    private old ?: boolean,
+    public firstName ?: string,
+    public lastName ?: string,
+    public genderId ?: number,
+    public firmId ?: number,
+    public email ?: string,
+    public telephone ?: string,
+    public cellphone ?: string,
+    public position ?: string,
+    public notes ?: string,
+    public old ?: boolean,
   ) {}
 }

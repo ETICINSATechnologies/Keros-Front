@@ -1,10 +1,10 @@
 <header class="main-header">
   <!-- Logo -->
-  <a href="/index" class="logo">
+  <a href="/" class="logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->
-    <span class="logo-mini">KRS</span>
+    <img class="logo-mini" src="../../../public/images/logo-keros-carre.png" alt="Keros Logo">
     <!-- logo for regular state and mobile devices -->
-    <span class="logo-lg"><b>Keros</b></span>
+    <img class="logo-lg" src="../../../public/images/logo-keros-typo.png" alt="Keros Logo">
   </a>
   <!-- Header Navbar: style can be found in header.less -->
   <nav class="navbar navbar-static-top">
@@ -96,18 +96,17 @@
         -->
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="../../../public/images/default-50x50.gif" class="user-image" alt="User Image">
-            <span class="hidden-xs">Alexander Pierce</span>
+            <span class="hidden-xs">{{connectedUser.firstName}} {{connectedUser.lastName}}</span>
           </a>
           <ul class="dropdown-menu">
             <li class="user-header">
-              <img src="../../../public/images/default-50x50.gif" class="img-circle" alt="User Image">
-
+              <div class="fa fa-user fa-3x" style="color: #FEFEFE"></div>
               <p>
-                Alexander Pierce - Web Developer
-                <small>Member since Nov. 2012</small>
+                {{connectedUser.firstName}} {{connectedUser.lastName}}
+                <!--<small>Member since Nov. 2012</small>-->
               </p>
             </li>
+            <!--
             <li class="user-body">
               <div class="row">
                 <div class="col-xs-4 text-center">
@@ -121,10 +120,13 @@
                 </div>
               </div>
             </li>
+            -->
             <li class="user-footer">
+              <!--
               <div class="pull-left">
                 <a href="#" class="btn btn-default btn-flat">Profile</a>
               </div>
+              -->
               <div class="pull-right">
                 <a href="/auth/logout" class="btn btn-default btn-flat">Déconnecter</a>
               </div>

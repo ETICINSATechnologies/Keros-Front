@@ -1,7 +1,8 @@
 import { Firm } from "./Firm";
 import { Gender } from "../core/Gender";
+import {IStringable} from "../interface/IStringable";
 
-export class Contact {
+export class Contact implements IStringable {
   constructor(
     private id ?: number,
     private firstName ?: string,
@@ -15,4 +16,8 @@ export class Contact {
     private notes ?: string,
     private old ?: boolean,
   ) {}
+
+  toString(): string {
+    return this.firstName + " " + this.lastName;
+  }
 }

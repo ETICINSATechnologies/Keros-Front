@@ -1,15 +1,15 @@
-import { JSDOM } from "jsdom";
-import { expect } from "chai";
-import { request } from "../helpers";
+import {JSDOM} from "jsdom";
+import {expect} from "chai";
+import {defaultCookies, request} from "../helpers";
+import {Response} from "supertest";
 import jquery = require("jquery");
-import { Response } from "supertest";
 
 describe("Member tests", function () {
   it("Should return the member list with /core/member", function (done) {
     request
       .get("/core/member")
       .set("Accept", "text/html")
-      .set('Cookie', 'token=randomToken;')
+      .set('Cookie', defaultCookies())
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(200)
       .then((resp: Response) => {
@@ -26,7 +26,7 @@ describe("Member tests", function () {
     request
       .get("/core/member/1")
       .set("Accept", "text/html")
-      .set('Cookie', 'token=randomToken;')
+      .set('Cookie', defaultCookies())
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(200)
       .then((resp: Response) => {
@@ -43,7 +43,7 @@ describe("Member tests", function () {
     request
       .get("/core/member/create")
       .set("Accept", "text/html")
-      .set('Cookie', 'token=randomToken;')
+      .set('Cookie', defaultCookies())
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(200)
       .then((resp: Response) => {
@@ -60,7 +60,7 @@ describe("Member tests", function () {
     request
       .get("/core/member/update/1")
       .set("Accept", "text/html")
-      .set('Cookie', 'token=randomToken;')
+      .set('Cookie', defaultCookies())
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(200)
       .then((resp: Response) => {

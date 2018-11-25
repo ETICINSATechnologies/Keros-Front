@@ -1,6 +1,6 @@
 import * as winston from "winston";
 import { Router } from "express";
-import { FirmController } from "./firmController";
+import { FirmController } from "./FirmController";
 import { secureRouter } from "../secureRouter";
 
 /**
@@ -16,9 +16,9 @@ export function firmRouter(): Router {
 
   router.get("", firmController.viewFirms);
   router.get("/:id(\\d+)/", firmController.viewFirm);
-  router.get("/create", firmController.viewFirmForm);
+  router.get("/create", firmController.createFirm);
+  router.get("/update/:id(\\d+)/", firmController.updateFirm);
   router.post("/postform", firmController.postFirmForm);
-  router.get("/update/:id(\\d+)/", firmController.viewFirm);
 
   return router;
 }

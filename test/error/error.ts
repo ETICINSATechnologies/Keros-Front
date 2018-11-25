@@ -1,8 +1,5 @@
-import { JSDOM } from "jsdom";
-import { expect } from "chai";
-import { request } from "../helpers";
-import { Response } from "supertest";
-import jquery = require("jquery");
+import {defaultCookies, request} from "../helpers";
+import {Response} from "supertest";
 
 describe("Error page testing", function () {
   it("Logged out use should be redirected to login page", function (done) {
@@ -24,13 +21,10 @@ describe("Error page testing", function () {
     request
       .get("/doestnexist")
       .set("Accept", "text/html")
-      .set('Cookie', 'token=randomToken;')
+      .set('Cookie', defaultCookies())
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(404)
       .then((resp: Response) => {
-        const window = new JSDOM(resp.text).window;
-        const $ = jquery(window);
-        expect($(".headline").text()).equals("404");
         done();
       })
       .catch((err: Error) => {

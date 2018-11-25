@@ -1,11 +1,11 @@
-import { Address } from "../core/Address";
+import {AddressCreateRequest} from "../core/AddressCreateRequest";
 
 export class FirmCreateRequest {
   constructor(
-    private siret ?: string,
-    private name ?: string,
-    private address ?: Address,
-    private typeId ?: number,
+    public siret ?: string,
+    public name ?: string,
+    public address ?: AddressCreateRequest,
+    public typeId ?: number,
   ) {
   }
 }

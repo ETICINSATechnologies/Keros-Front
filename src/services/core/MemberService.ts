@@ -1,18 +1,32 @@
-import { IRestResponse } from "typed-rest-client/RestClient";
-import { Member } from "../../models/core/Member";
-import { BaseService } from "../common/BaseService";
+import {IRestResponse} from "typed-rest-client/RestClient";
+import {Member} from "../../models/core/Member";
+import {BaseService} from "../common/BaseService";
+import {Page} from "../../models/core/Page";
+import {MemberCreateRequest} from "../../models/core/MemberCreateRequest";
 import * as winston from "winston";
-import { Page } from "../../models/core/Page";
-import { MemberCreateRequest } from "../../models/core/MemberCreateRequest";
 
 export class MemberService extends BaseService {
   static getMember(id: number, callback: (err: any, result: Member | null) => void): void {
-    this.rest.get<Member>("core/member/" + id).then(
+    this.rest.get<Member>("core/member/" + id, this.defaultHeaders()).then(
       (res: IRestResponse<Member>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);
         }
-        winston.debug("getMember response with status " + res.statusCode);
+        winston.debug("Response : " + JSON.stringify(res));
+        callback(null, res.result);
+      }
+    ).catch(
+      e => callback(e, null)
+    );
+  }
+
+  static getConnectedMember(callback: (err: any, result: Member | null) => void): void {
+    this.rest.get<Member>("core/member/me", this.defaultHeaders()).then(
+      (res: IRestResponse<Member>) => {
+        if (res.statusCode !== 200) {
+          return callback(this.defaultError(), null);
+        }
+        winston.debug("Response : " + JSON.stringify(res));
         callback(null, res.result);
       }
     ).catch(
@@ -21,12 +35,12 @@ export class MemberService extends BaseService {
   }
 
   static getAllMembers(callback: (err: any, result: Page<Member> | null) => void): void {
-    this.rest.get<Page<Member>>("core/member").then(
+    this.rest.get<Page<Member>>("core/member", this.defaultHeaders()).then(
       (res: IRestResponse<Page<Member>>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);
         }
-        winston.debug("getAllMembers response with status " + res.statusCode);
+        winston.debug("Response : " + JSON.stringify(res));
         callback(null, res.result);
       }
     ).catch(
@@ -35,12 +49,12 @@ export class MemberService extends BaseService {
   }
 
   static createMember(memberRequest: MemberCreateRequest, callback: (err: any) => void): void {
-    this.rest.create<MemberCreateRequest>("core/member", memberRequest).then(
+    this.rest.create<MemberCreateRequest>("core/member", memberRequest, this.defaultHeaders()).then(
       (res: IRestResponse<MemberCreateRequest>) => {
-        if (res.statusCode !== 200) {
+        if (res.statusCode !== 201) {
           return callback(this.defaultError());
         }
-        winston.debug("createMember response with status " + res.statusCode);
+        winston.debug("Response : " + JSON.stringify(res));
         callback(null);
       }
     ).catch(
@@ -49,12 +63,12 @@ export class MemberService extends BaseService {
   }
 
   static update(memberId: number, memberRequest: MemberCreateRequest, callback: (err: any) => void): void {
-    this.rest.update<MemberCreateRequest>("core/member/" + memberId, memberRequest).then(
+    this.rest.update<MemberCreateRequest>("core/member/" + memberId, memberRequest, this.defaultHeaders()).then(
       (res: IRestResponse<MemberCreateRequest>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError());
         }
-        winston.debug("update member with status " + res.statusCode);
+        winston.debug("Response : " + JSON.stringify(res));
         callback(null);
       }
     ).catch(

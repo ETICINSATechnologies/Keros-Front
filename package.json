@@ -1,5 +1,5 @@
 {
-  "name": "Keros-Front",
+  "name": "keros-front",
   "description": "Frontend of the Keros ERP for internal use for ETIC INSA Technologies",
   "version": "1.0.0",
   "private": true,
@@ -21,6 +21,7 @@
     "errorhandler": "^1.5.0",
     "express": "^4.16.2",
     "express-handlebars": "^3.0.0",
+    "express-http-context": "^1.2.0",
     "hbs": "^4.0.1",
     "less-middleware": "~2.2.1",
     "typed-rest-client": "^1.0.7",
@@ -30,6 +31,7 @@
     "@types/body-parser": "1.16.8",
     "@types/chai": "^4.1.3",
     "@types/chai-http": "^3.0.4",
+    "@types/cls-hooked": "^4.2.1",
     "@types/cookie-parser": "^1.4.1",
     "@types/errorhandler": "0.0.32",
     "@types/express-handlebars": "0.0.30",

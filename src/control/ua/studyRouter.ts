@@ -1,6 +1,6 @@
 import * as winston from "winston";
 import { Router } from "express";
-import { StudyController } from "./studyController";
+import { StudyController } from "./StudyController";
 import { secureRouter } from "../secureRouter";
 
 /**
@@ -16,10 +16,9 @@ export function studyRouter(): Router {
 
   router.get("", studyController.viewStudies);
   router.get("/:id(\\d+)/", studyController.viewStudy);
-  router.get("/create", studyController.viewStudyForm);
-  router.post("/createform", studyController.postStudyForm);
-  router.get("/update/:id(\\d+)/", studyController.viewStudy);
-  router.post("/update", studyController.postStudyForm);
+  router.get("/create", studyController.createStudy);
+  router.get("/update/:id(\\d+)/", studyController.updateStudy);
+  router.post("/postform", studyController.postStudyForm);
 
   return router;
 }

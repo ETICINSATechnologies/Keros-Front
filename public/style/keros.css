@@ -1,0 +1,16 @@
+.main-header .logo .logo-lg {
+    display: inline;
+    height: 85%;
+}
+
+.main-header .logo .logo-mini {
+    height: 100%;
+}
+
+option[selected] {
+    color: darkgrey;
+}
+
+.form-buttons > button {
+    margin-left: 20px;
+}

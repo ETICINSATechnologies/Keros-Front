@@ -24,6 +24,7 @@
                     <th>Nom<a href="#" id="name" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
                     <th>Prénom<a href="#" id="firstname" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
                     <th>Position(s)<a href="#" id="positionId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Pole(s)<a href="#" class="fa fa-unsorted fa-pull-right"></a></th>
                     <th>Email<a href="#" id="email" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
                     <th>Voir</th>
                     <th>Modifier</th>
@@ -33,10 +34,11 @@
                       <td>{{username}}</td>
                       <td>{{lastName}}</td>
                       <td>{{firstName}}</td>
-                      <td>{{#each positions}}{{toString .}}<br/>{{/each}}</td>
+                      <td>{{#each positions}}{{this.label}}<br/>{{/each}}</td>
+                      <td>{{#each positions}}{{this.pole.label}}<br/>{{/each}}</td>
                       <td>{{email}}</td>
-                      <td><a href="member/{{id}}" class="fa fa-hand-pointer-o"></a></td>
-                      <td><a href="member/update/{{id}}">Modifier</a></td>
+                      <td><a href="member/{{id}}" class="fa fa-eye fa-2x"></a></td>
+                      <td><a href="member/update/{{id}}" class="fa fa-edit fa-2x"></a></td>
                     </tr>
                   {{/each}}
                   </tbody>

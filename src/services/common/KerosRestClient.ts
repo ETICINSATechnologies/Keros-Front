@@ -10,26 +10,34 @@ export class KerosRestClient implements IClient {
   }
 
   create<T>(resource: string, resources: any, options?: IRequestOptions): Promise<IRestResponse<T>> {
+    winston.debug("CREATE " + resource + " with body : " + JSON.stringify(resources));
     return this.restClient.create<T>(resource, resources, options);
   }
 
   del<T>(resource: string, options?: IRequestOptions): Promise<IRestResponse<T>> {
+    winston.debug("DELETE " + resource);
     return this.restClient.del<T>(resource, options);
   }
 
   get<T>(resource: string, options?: IRequestOptions): Promise<IRestResponse<T>> {
+    winston.debug("GET " + resource);
     return this.restClient.get<T>(resource, options);
   }
 
+  // Custom call type to have array as response
   getAll<T>(resource: string, options?: IRequestOptions): Promise<IRestResponse<T[]>> {
+    winston.debug("GET ALL " + resource);
     return this.restClient.get<T[]>(resource, options);
   }
 
   options<T>(requestUrl: string, options?: IRequestOptions): Promise<IRestResponse<T>> {
+    winston.debug("OPTIONS " + requestUrl);
     return this.restClient.options<T>(requestUrl, options);
   }
 
+  // Replace "update" (PATCH) with "replace" (PUT)
   update<T>(resource: string, resources: any, options?: IRequestOptions): Promise<IRestResponse<T>> {
-    return this.restClient.create<T>(resource, resources, options);
+    winston.debug("UPDATE " + resource + " with body : " + JSON.stringify(resources));
+    return this.restClient.replace<T>(resource, resources, options);
   }
 }
