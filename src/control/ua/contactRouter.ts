@@ -1,7 +1,7 @@
 import * as winston from "winston";
 import { Router } from "express";
 import { secureRouter } from "../secureRouter";
-import { ContactController } from "./contactController";
+import { ContactController } from "./ContactController";
 
 /**
  * Router for members for /firm/**
@@ -16,10 +16,10 @@ export function contactRouter(): Router {
 
   router.get("", contactController.viewContacts);
   router.get("/:id(\\d+)/", contactController.viewContact);
-  router.get("/create", contactController.viewContactForm);
-  router.post("/createform", contactController.postContactForm);
-  router.get("/update/:id(\\d+)/", contactController.viewContact);
-  router.post("/update", contactController.postContactForm);
+  router.get("/create", contactController.createContact);
+  router.get("/update/:id(\\d+)/", contactController.updateContact);
+  router.post("/postform", contactController.postContactForm);
+
   router.get("/json", contactController.getJSONContacts);
 
   return router;

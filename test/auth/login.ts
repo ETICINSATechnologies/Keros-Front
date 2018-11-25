@@ -35,7 +35,6 @@ describe("Login tests", function () {
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(302)
       .then((resp: Response) => {
-        expect(getCookie(resp, "token")).is.not.null.and.is.not.empty;
         done();
       })
       .catch((err: Error) => {

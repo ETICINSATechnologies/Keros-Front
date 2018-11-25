@@ -1,19 +1,19 @@
-import { Address } from "./Address";
+import {AddressCreateRequest} from "./AddressCreateRequest";
 
 export class MemberCreateRequest {
   constructor(
-    private firstName ?: string,
-    private lastName ?: string,
-    private username ?: string,
-    private password ?: string,
-    private genderId ?: number,
-    private email ?: string,
-    private birthday ?: string,
-    private departmentId ?: number,
-    private schoolYear ?: number,
-    private telephone ?: string,
-    private address ?: Address,
-    private positionIds ?: number[],
+    public firstName ?: string,
+    public lastName ?: string,
+    public username ?: string,
+    public password ?: string,
+    public genderId ?: number,
+    public email ?: string,
+    public birthday ?: string,
+    public departmentId ?: number,
+    public schoolYear ?: number,
+    public telephone ?: string,
+    public address ?: AddressCreateRequest,
+    public positionIds ?: number[],
   ) {
   }
 

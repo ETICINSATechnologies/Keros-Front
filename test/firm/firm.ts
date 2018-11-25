@@ -1,7 +1,7 @@
-import { JSDOM } from "jsdom";
-import { expect } from "chai";
-import { request } from "../helpers";
-import { Response } from "supertest";
+import {JSDOM} from "jsdom";
+import {expect} from "chai";
+import {defaultCookies, request} from "../helpers";
+import {Response} from "supertest";
 import jquery = require("jquery");
 
 describe("Firm tests", function () {
@@ -9,7 +9,7 @@ describe("Firm tests", function () {
     request
       .get("/ua/firm")
       .set("Accept", "text/html")
-      .set('Cookie', 'token=randomToken;')
+      .set('Cookie', defaultCookies())
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(200)
       .then((resp: Response) => {
@@ -27,7 +27,7 @@ describe("Firm tests", function () {
     request
       .get("/ua/firm/1")
       .set("Accept", "text/html")
-      .set('Cookie', 'token=randomToken;')
+      .set('Cookie', defaultCookies())
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(200)
       .then((resp: Response) => {
@@ -45,7 +45,7 @@ describe("Firm tests", function () {
     request
       .get("/ua/firm/create")
       .set("Accept", "text/html")
-      .set('Cookie', 'token=randomToken;')
+      .set('Cookie', defaultCookies())
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(200)
       .then((resp: Response) => {
@@ -63,7 +63,7 @@ describe("Firm tests", function () {
     request
       .get("/ua/firm/update/1")
       .set("Accept", "text/html")
-      .set('Cookie', 'token=randomToken;')
+      .set('Cookie', defaultCookies())
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(200)
       .then((resp: Response) => {

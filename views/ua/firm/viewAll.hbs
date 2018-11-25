@@ -23,7 +23,7 @@
                   <tr>
                     <th>Nom<a href="#" id="name" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
                     <th>Siret<a href="#" id="siret" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                    <th>Adresse<a href="#" id="addressId" class="fa fa-unsorted fa-pull-right select_filter"></a>
+                    <th>Ville<a href="#" class="fa fa-unsorted fa-pull-right select_filter"></a>
                     </th>
                     <th>Type<a href="#" id="typeId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
                     <th>Voir</th>
@@ -32,11 +32,11 @@
                   {{#each firms.content}}
                     <tr>
                       <td>{{name}}</td>
-                      <td>{{siret}}</td>
-                      <td>{{toString address}}</td>
+                      <td>{{{ifExists siret '<i>Aucun</i>'}}}</td>
+                      <td>{{address.city}}</td>
                       <td>{{type.label}}</td>
-                      <td><a href="/ua/firm/{{id}}" class="fa fa-hand-pointer-o"></a></td>
-                      <td><a href="/ua/firm/update/{{id}}">Modifier</a></td>
+                      <td><a href="/ua/firm/{{id}}" class="fa fa-eye fa-2x"></a></td>
+                      <td><a href="/ua/firm/update/{{id}}" class="fa fa-edit fa-2x"></a></td>
                     </tr>
                   {{/each}}
                   </tbody>

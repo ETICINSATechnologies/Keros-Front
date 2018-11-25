@@ -32,14 +32,14 @@
                   </tr>
                   {{#each studies.content}}
                     <tr>
-                      <td>{{name}}</td>
+                      <td>{{ifExists name '<i>Aucun</i>'}}</td>
                       <td>{{projectNumber}}</td>
                       <td>{{status.label}}</td>
                       <td>{{firm.name}}</td>
-                      <td>{{#each contacts}}{{firstName}} {{lastName}}<br/>{{/each}}</td>
-                      <td>{{#each leaders}} {{firstName}} {{lastName}}<br/>{{/each}}</td>
-                      <td><a href="/ua/study/{{id}}" class="fa fa-hand-pointer-o"></a></td>
-                      <td><a href="/ua/study/update/{{id}}">Modifier</a></td>
+                      <td>{{#if contacts}}{{#each contacts}}{{firstName}} {{lastName}}<br/>{{/each}}{{else}}<i>Aucun</i>{{/if}}</td>
+                      <td>{{#if leaders}}{{#each leaders}} {{firstName}} {{lastName}}<br/>{{/each}}{{else}}<i>Aucun</i>{{/if}}</td>
+                      <td><a href="/ua/study/{{id}}" class="fa fa-eye fa-2x"></a></td>
+                      <td><a href="/ua/study/update/{{id}}" class="fa fa-edit fa-2x"></a></td>
                     </tr>
                   {{/each}}
                   </tbody>

@@ -35,10 +35,10 @@
                       <td>{{firstName}}</td>
                       <td>{{firm.name}}</td>
                       <td>{{email}}</td>
-                      <td>{{telephone}}</td>
-                      <td>{{position}}</td>
-                      <td><a href="/ua/contact/{{id}}" class="fa fa-hand-pointer-o"></a></td>
-                      <td><a href="/ua/contact/update/{{id}}">Modifier</a></td>
+                      <td>{{{ifExists telephone '<i>Aucun</i>'}}}</td>
+                      <td>{{{ifExists position '<i>Aucun</i>'}}}</td>
+                      <td><a href="/ua/contact/{{id}}" class="fa fa-eye fa-2x"></a></td>
+                      <td><a href="/ua/contact/update/{{id}}" class="fa fa-edit fa-2x"></a></td>
                     </tr>
                   {{/each}}
                   </tbody>

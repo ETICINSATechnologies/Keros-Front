@@ -32,6 +32,10 @@ export class MemberMock implements IMock {
     let mockObj: T | null = null;
     let status: number = 500;
     switch (resource) {
+      case "core/member/me":
+        mockObj = <T> new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(3, "Secretaire Générale", new Pole(1, "RH", "Ressources Humaines")), new Position(4, "Responsable SI", new Pole(2, "SI", "Système d'informations"))]);
+        status = 200;
+        return new MockResponse(mockObj, status);
       case "core/member/1":
         mockObj = <T> new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(3, "Secretaire Générale", new Pole(1, "RH", "Ressources Humaines")), new Position(4, "Responsable SI", new Pole(2, "SI", "Système d'informations"))]);
         status = 200;

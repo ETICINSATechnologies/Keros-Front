@@ -5,12 +5,12 @@ import * as winston from "winston";
 
 export class AddressService extends BaseService {
   static getAddress(id: number | undefined, callback: (err: any, result: Address | null) => void): void {
-    this.rest.get<Address>("core/address/" + id).then(
+    this.rest.get<Address>("core/address/" + id, this.defaultHeaders()).then(
       (res: IRestResponse<Address>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(), null);
         }
-        winston.debug("getAddress response with status " + res.statusCode);
+        winston.debug("Response : " + JSON.stringify(res));
         callback(null, res.result);
       }
     ).catch(

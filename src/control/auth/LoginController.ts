@@ -1,8 +1,13 @@
-import { NextFunction, Request, Response } from "express";
+import {NextFunction, Request, Response} from "express";
 import * as winston from "winston";
-import { AuthService } from "../../services/auth/AuthService";
-import { LoginRequest } from "../../models/auth/LoginRequest";
-import { LoginResponse } from "../../models/auth/LoginResponse";
+import {AuthService} from "../../services/auth/AuthService";
+import {LoginRequest} from "../../models/auth/LoginRequest";
+import {LoginResponse} from "../../models/auth/LoginResponse";
+import {MemberService} from "../../services/core/MemberService";
+import {Member} from "../../models/core/Member";
+import * as httpContext from "express-http-context";
+import {Config} from "../../config/Config";
+import {Environment} from "../../config/Environment";
 
 export class LoginController {
 
@@ -28,8 +33,22 @@ export class LoginController {
       if (response === null) {
         return next(new Error("Connection échouée"));
       }
-      res.cookie("token", response.token);
-      res.redirect("/");
+      let token = response.token;
+      httpContext.set("token", token);
+      MemberService.getConnectedMember(function (err: any, response: Member | null) {
+        if (err) {
+          return next(err);
+        }
+
+        if(Config.getEnv().toString() === "testing"){
+          res.redirect("/");
+        } else {
+          res
+            .cookie("connectedUser", response)
+            .cookie("token", token)
+            .redirect("/");
+        }
+      });
     });
   }
 }
