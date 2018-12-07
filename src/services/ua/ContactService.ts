@@ -61,4 +61,19 @@ export class ContactService extends BaseService {
       e => callback(e)
     );
   }
+
+  static delete(id: number, callback: (err: any) => void): void {
+    this.rest.del<ContactCreateRequest>("ua/contact/" + id, this.defaultHeaders()).then(
+      (res: IRestResponse<ContactCreateRequest>) => {
+        if (res.statusCode !== 200) {
+          return callback(this.defaultError());
+        }
+        winston.debug("Response : " + JSON.stringify(res));
+        callback(null);
+      }
+    ).catch(
+      e => callback(e)
+    );
+  }
+
 }
