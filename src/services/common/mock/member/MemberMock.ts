@@ -19,13 +19,24 @@ export class MemberMock implements IMock {
     switch (resource) {
       case "core/member":
         mockObj = <T> new Member(0, resources["lastName"], resources["firstName"], resources["username"], new Gender(resources["genderId"], "A"), resources["email"], resources["birthday"], new Department(resources["departmentId"], "TC"), resources["schoolYear"], resources["telephone"], resources["address"], [new Position(resources["positionIds"][0], "Secretaire Général", new Pole(1, "RH", "Ressources Humaines")), new Position(resources["positionIds"][1], "Président(e)", new Pole(1, "RH", "Ressources Humaines")), new Position(resources["positionIds"][2], "Vice-Président(e)", new Pole(1, "RH", "Ressources Humaines"))]);
-        status = 200;
+        status = 201;
         winston.debug("Member created : " + JSON.stringify(mockObj));
         return new MockResponse(mockObj, status);
     }
     return null;
   }
   del<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
+    let status: number = 500;
+    switch (resource) {
+      case "core/member/1":
+        status = 204;
+        winston.debug("Member 1 removed");
+        return new MockResponse(null, status);
+      case "core/member/2":
+        status = 204;
+        winston.debug("Member 2 removed");
+        return new MockResponse(null, status);
+    }
     return null;
   }
   get<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
