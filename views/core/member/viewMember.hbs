@@ -4,14 +4,14 @@
   {{> template/sidebar}}
   <div class="content-wrapper">
     <section class="content-header">
-      <h1>
-        {{#if member}}Fiche Membre{{else}}Nouveau Membre{{/if}}
-      </h1>
-      {{#if member}}
-        {{> breadcrumb tab="RH" path="Membres,Edition d'un membre"}}
-      {{else}}
-        {{> breadcrumb tab="RH" path="Membres,Nouveau Membre"}}
-      {{/if}}
+        <h1>
+          {{#if member}}Fiche Membre{{else}}Nouveau Membre{{/if}}
+        </h1>
+        {{#if member}}
+          {{> breadcrumb tab="RH" path="Membres,Edition d'un membre"}}
+        {{else}}
+          {{> breadcrumb tab="RH" path="Membres,Nouveau Membre"}}
+        {{/if}}
     </section>
     <section class="content">
       <div class="row">

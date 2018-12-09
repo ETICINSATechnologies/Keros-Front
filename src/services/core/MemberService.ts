@@ -75,4 +75,18 @@ export class MemberService extends BaseService {
       e => callback(e)
     );
   }
+
+ /* static updateConnectedMember(memberId: number, memberRequest: MemberCreateRequest, callback: (err: any) => void): void {
+    this.rest.update<MemberCreateRequest>("core/member/me", memberRequest, this.defaultHeaders()).then(
+      (res: IRestResponse<MemberCreateRequest>) => {
+        if (res.statusCode !== 200) {
+          return callback(this.defaultError());
+        }
+        winston.debug("Response : " + JSON.stringify(res));
+        callback(null);
+      }
+    ).catch(
+      e => callback(e)
+    );
+  }*/
 }
