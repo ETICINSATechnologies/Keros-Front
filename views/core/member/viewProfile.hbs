@@ -1,0 +1,159 @@
+<body class="hold-transition skin-green fixed sidebar-mini">
+<div class="wrapper">
+  {{> template/header}}
+  {{> template/sidebar}}
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Mon Profil
+      </h1>
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <section class="content">
+            <div class="box box-primary">
+
+              <form role="form" method="post" action="/core/member/postform">
+                {{#if connectedUser}}<input type="text" id="id" name="id" value="{{connectedUser.id}}" hidden>{{/if}}
+                <div class="box-body row">
+                  <div class="col-md-6 form-group">
+                    <label for="lastName">Nom</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" value="{{connectedUser.lastName}}" placeholder="Entrez le nom" required {{readonlyIf (eq action "view")}}>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label for="firstName">Prénom</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" value="{{connectedUser.firstName}}" placeholder="Entrez le prénom" required {{readonlyIf (eq action "view")}}>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label for="username">Nom d'utilisateur</label>
+                    <input type="text" class="form-control" id="username" name="username" value="{{connectedUser.username}}" placeholder="Entrez le nom d'utilisateur" required {{readonlyIf (eq action "view")}}>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Entrez/Modifiez le mot de passe" {{requiredIfMissing connectedUser}} {{readonlyIf (eq action "view")}}>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="genderId">Sexe</label>
+                    <select class="form-control" id="genderId" name="genderId" {{readonlyIf (eq action "view")}}>
+                      {{#each gender}}
+                        <option value="{{id}}" {{selected id @root.connectedUser.gender.id}}>{{gender label}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="birthday">Date de naissance</label>
+                    <input type="date" class="form-control" id="birthday" name="birthday" value="{{connectedUser.birthday}}" required {{readonlyIf (eq action "view")}}>
+                  </div>
+                  <div class="col-md-12 form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{{connectedUser.email}}" placeholder="Entrez l'adresse mail" required {{readonlyIf (eq action "view")}}>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="telephone">Téléphone</label>
+                    <input type="text" class="form-control" id="telephone" name="telephone" value="{{connectedUser.telephone}}" placeholder="Entrez le numéro de téléphone" {{readonlyIf (eq action "view")}}>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="departmentId">Département</label>
+                    <select class="form-control" id="departmentId" name="departmentId" {{readonlyIf (eq action "view")}}>
+                      <option></option>
+                      {{#each departments}}
+                        <option value="{{id}}" {{selected id @root.connectedUser.department.id}}>{{label}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="schoolYear">Année scolaire</label>
+                    <select class="form-control" id="schoolYear" name="schoolYear" {{readonlyIf (eq action "view")}}>
+                      {{#if connectedUser}}<option value="{{connectedUser.schoolYear}}" selected>{{connectedUser.schoolYear}}</option>
+                      {{else}}<option selected></option>
+                      {{/if}}
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      {{#if connectedUser.schoolYear}}
+                        <option value=""></option>
+                      {{/if}}
+                    </select>
+                  </div>
+                  <h4 class="col-md-12 box-title">
+                    Adresse
+                  </h4>
+                  <div class="col-md-12 form-group">
+                    <label for="line1">Ligne 1</label>
+                    <input type="string" class="form-control" id="line1" name="line1"
+                           value="{{connectedUser.address.line1}}" placeholder="Entrez l'adresse 1" required {{readonlyIf (eq action "view")}}>
+                  </div>
+                  <div class="col-md-12 form-group">
+                    <label for="line2">Ligne 2</label>
+                    <input type="string" class="form-control" id="line2" name="line2"
+                           value="{{connectedUser.address.line2}}" placeholder="Entrez l'adresse 2" {{readonlyIf (eq action "view")}}>
+                  </div>
+                  <div class="col-md-2 form-group">
+                    <label for="postalCode">Code postal</label>
+                    <input type="string" class="form-control" id="postalCode" name="postalCode"
+                           value="{{connectedUser.address.postalCode}}" placeholder="Entrez le code postal" required {{readonlyIf (eq action "view")}}>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label for="city">Ville</label>
+                    <input type="string" class="form-control" id="city" name="city"
+                           value="{{connectedUser.address.city}}" placeholder="Entrez la ville" required {{readonlyIf (eq action "view")}}>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="countryId">Pays</label>
+                    <select class="form-control" id="countryId" name="countryId" required {{readonlyIf (eq action "view")}}>
+                      {{#each countries}}
+                        <option value="{{id}}" {{selected id @root.connectedUser.address.country.id}}>{{label}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <h4 class="col-md-12 box-title">
+                    Fonction/Poste
+                  </h4>
+                  <div class="col-md-4 form-group">
+                    <label for="countryId">Fonction 1</label>
+                    <select class="form-control" id="positionId1" name="positionId1" required {{readonlyIf (eq action "view")}}>
+                      {{#each positions}}
+                        <option value="{{id}}" {{selected id @root.connectedUser.positions.0.id}}>{{label}} {{#if pole}}({{pole.label}}){{/if}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="countryId">Fonction 2</label>
+                    <select class="form-control" id="positionId2" name="positionId2" {{readonlyIf (eq action "view")}}>
+                      <option></option>
+                      {{#each positions}}
+                        <option value="{{id}}" {{selected id @root.connectedUser.positions.1.id}}>{{label}} {{#if pole}}({{pole.label}}){{/if}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="countryId">Fonction 3</label>
+                    <select class="form-control" id="positionId3" name="positionId3" {{readonlyIf (eq action "view")}}>
+                      <option></option>
+                      {{#each positions}}
+                        <option value="{{id}}" {{selected id @root.connectedUser.positions.2.id}}>{{label}} {{#if pole}}({{pole.label}}){{/if}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                </div>
+                <div class="box-footer">
+                  <a href="/"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button></a>
+                  {{> formButtons action=action page="profilePage"}}
+                </div>
+              </form>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </div>
+  {{> template/footer}}
+</div>
+{{> template/scripts}}
+</body>
