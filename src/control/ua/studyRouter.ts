@@ -18,6 +18,7 @@ export function studyRouter(): Router {
   router.get("/:id(\\d+)/", studyController.viewStudy);
   router.get("/create", studyController.createStudy);
   router.get("/update/:id(\\d+)/", studyController.updateStudy);
+  router.get("/delete/:id(\\d+)/", studyController.deleteStudy);
   router.post("/postform", studyController.postStudyForm);
 
   return router;
