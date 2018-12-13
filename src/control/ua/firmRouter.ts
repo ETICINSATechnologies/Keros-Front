@@ -19,6 +19,7 @@ export function firmRouter(): Router {
   router.get("/create", firmController.createFirm);
   router.get("/update/:id(\\d+)/", firmController.updateFirm);
   router.post("/postform", firmController.postFirmForm);
+  router.get("/delete/:id(\\d+)", firmController.deleteFirm);
 
   return router;
 }
