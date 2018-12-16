@@ -19,7 +19,6 @@ export function coreRouter(): Router {
   router.get("/member/create", memberController.createMember);
   router.get("/member/update/:id(\\d+)/", memberController.updateMember);
   router.post("/member/postform", memberController.postMemberForm);
-  //router.post("/connectedUser/postform", memberController.postMemberForm);
   router.get("/member/me", memberController.viewProfile);
   return router;
 }
