@@ -65,7 +65,7 @@ export class FirmService extends BaseService {
   static delete(id: number, callback: (err: any) => void): void {
     this.rest.del<Firm>("ua/firm/" + id, this.defaultHeaders()).then(
       (res: IRestResponse<Firm>) => {
-        if (res.statusCode !== 200) {
+        if (res.statusCode !== 204) {
           return callback(this.defaultError());
         }
         winston.debug("Response : " + JSON.stringify(res));
