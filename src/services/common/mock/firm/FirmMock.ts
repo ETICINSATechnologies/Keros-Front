@@ -24,6 +24,17 @@ export class FirmMock implements IMock {
   }
 
   del<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
+    let status: number = 500;
+    switch (resource) {
+      case "ua/firm/1":
+        status = 204;
+        winston.debug("Firm 1 removed");
+        return new MockResponse(null, status);
+      case "ua/firm/2":
+        status = 204;
+        winston.debug("Firm 2 removed");
+        return new MockResponse(null, status);
+    }
     return null;
   }
 
