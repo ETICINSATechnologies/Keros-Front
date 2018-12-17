@@ -27,11 +27,11 @@ export class FirmMock implements IMock {
     let status: number = 500;
     switch (resource) {
       case "ua/firm/1":
-        status = 200;
+        status = 204;
         winston.debug("Firm 1 removed");
         return new MockResponse(null, status);
       case "ua/firm/2":
-        status = 200;
+        status = 204;
         winston.debug("Firm 2 removed");
         return new MockResponse(null, status);
     }
