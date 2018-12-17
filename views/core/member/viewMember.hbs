@@ -38,11 +38,11 @@
                     <label for="username">Nom d'utilisateur</label>
                     <input type="text" class="form-control" id="username" name="username" value="{{member.username}}" placeholder="Entrez le nom d'utilisateur" required {{readonlyIf (eq action "view")}}>
                   </div>
-                  <div class="col-md-6 form-group">
+                  <div class="col-md-6 form-group" {{#if (and (ne action "create") (ne member.id connectedUser.id))}}style = "display : none"{{/if}}>
                     <label for="password">Mot de passe</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Entrez/Modifiez le mot de passe" {{requiredIfMissing member}} {{readonlyIf (eq action "view")}}>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Entrez/Modifiez le mot de passe" {{requiredIfMissing member}} {{readonlyIf (eq action "view")}}  >
                   </div>
-                  <div class="col-md-4 form-group">
+                  <div {{#if (and (ne action "create") (ne member.id connectedUser.id))}}class="col-md-6 form-group"{{else}}class="col-md-4 form-group"{{/if}}>
                     <label for="genderId">Sexe</label>
                     <select class="form-control" id="genderId" name="genderId" {{readonlyIf (eq action "view")}}>
                       {{#each gender}}
