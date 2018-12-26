@@ -73,4 +73,21 @@ describe("Member tests", function () {
         done(err);
       });
   });
+  it("Should return the update form for the connected user with /core/member/me", function (done) {
+    request
+      .get("/core/member/me")
+      .set("Accept", "text/html")
+      .set('Cookie', defaultCookies())
+      .expect("Content-Type", "text/html; charset=utf-8")
+      .expect(200)
+      .then((resp: Response) => {
+        const window = new JSDOM(resp.text).window;
+        const $ = jquery(window);
+        expect($(".content-header>h1:first").text().trim()).equals("Mon Profil");
+        done();
+      })
+      .catch((err: Error) => {
+        done(err);
+      });
+  });
 });

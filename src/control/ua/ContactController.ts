@@ -89,6 +89,19 @@ export class ContactController {
     });
   }
 
+  public deleteContact(req: Request, res: Response, next: NextFunction) {
+    const id = req.params.id;
+    winston.info("Deleting Contact for id " + id);
+    if (id) {
+      ContactService.delete(id, function (err1) {
+        if (err1) {
+          return next(err1);
+        }
+        res.redirect("/ua/contact");
+      });
+    }
+  }
+
   public postContactForm(req: Request, res: Response, next: NextFunction) {
     const id = parseInt(req.body.id);
 

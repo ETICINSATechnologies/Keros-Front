@@ -12,6 +12,7 @@ import {CountryService} from "../../services/core/CountryService";
 import {Country} from "../../models/core/Country";
 import {PositionService} from "../../services/core/PositionService";
 import {AddressCreateRequest} from "../../models/core/AddressCreateRequest";
+import * as httpContext from "express-http-context";
 
 export class MemberController {
   public viewMembers(req: Request, res: Response, next: NextFunction) {
@@ -110,6 +111,8 @@ export class MemberController {
   public postMemberForm(req: Request, res: Response, next: NextFunction) {
     const userId = parseInt(req.body.id);
 
+    let currentUserId = httpContext.get("connectedUser").id;
+
     const userRequest = new MemberCreateRequest();
     userRequest.lastName = req.body.lastName;
     userRequest.firstName = req.body.firstName;
@@ -139,7 +142,8 @@ export class MemberController {
         if (err1) {
           return next(err1);
         }
-        res.redirect("/core/member");
+        if (userId === currentUserId) res.redirect("/core/member/me");
+        else res.redirect("/core/member");
       });
     } else {
       MemberService.createMember(userRequest, function (err1) {
@@ -150,4 +154,33 @@ export class MemberController {
       });
     }
   }
+
+  public viewProfile(req: Request, res: Response, next: NextFunction) {
+    MemberService.getConnectedMember(function (err1, member: Member | null) {
+      DepartmentService.getAllDepartments(function (err2, departments: Department[] | null) {
+        GenderService.getAllGenders(function (err3, genders: Gender[] | null) {
+          CountryService.getAllCountries(function (err4, countries: Country[] | null) {
+            PositionService.getAllPositions(function (err5, positions: Position[] | null) {
+              if (err1) return next(err1);
+              if (err2) return next(err2);
+              if (err3) return next(err3);
+              if (err4) return next(err4);
+              if (err5) return next(err5);
+              const options = {
+                member: member,
+                page: "profile",
+                departments: departments,
+                gender: genders,
+                countries: countries,
+                positions: positions,
+                action: "view"
+              };
+              res.render("core/member/viewProfile", options);
+            });
+          });
+        });
+      });
+    });
+  }
+
 }
