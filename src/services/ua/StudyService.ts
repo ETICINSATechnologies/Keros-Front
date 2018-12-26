@@ -61,4 +61,18 @@ export class StudyService extends BaseService {
       e => callback(e)
     );
   }
+
+  static getAllStudiesForConnectedUser(callback: (err: any, result: Page<Study> | null) => void): void {
+    this.rest.get<Page<Study>>("ua/study/me", this.defaultHeaders()).then(
+      (res: IRestResponse<Page<Study>>) => {
+        if (res.statusCode !== 200) {
+          return callback(this.defaultError(), null);
+        }
+        winston.debug("Response : " + JSON.stringify(res));
+        callback(null, res.result);
+      }
+    ).catch(
+      e => callback(e, null)
+    );
+  }
 }
