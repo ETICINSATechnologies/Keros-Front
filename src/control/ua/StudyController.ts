@@ -73,7 +73,7 @@ export class StudyController {
           FirmService.getAllFirms(function (err4, firms: Page<Firm> | null) {
             ContactService.getAllContacts(function (err5, contactShorts: Page<Contact> | null) {
               MemberService.getAllMembers(function (err6, memberShorts: Page<Member> | null) {
-                ProvenanceService.getAllProvenances(function (err7, provenances: Provenance[] | null) {
+                ProvenanceService.getAllProvenances(function (err7 , provenances: Provenance[] | null) {
                   if (err1) return next(err1);
                   if (err2) return next(err2);
                   if (err3) return next(err3);
@@ -110,7 +110,7 @@ export class StudyController {
           FirmService.getAllFirms(function (err4, firms: Page<Firm> | null) {
             ContactService.getAllContacts(function (err5, contactShorts: Page<Contact> | null) {
               MemberService.getAllMembers(function (err6, memberShorts: Page<Member> | null) {
-                ProvenanceService.getAllProvenances(function (err7, provenances: Provenance[] | null) {
+                ProvenanceService.getAllProvenances(function (err7 , provenances: Provenance[] | null) {
                   if (err1) return next(err1);
                   if (err2) return next(err2);
                   if (err3) return next(err3);
