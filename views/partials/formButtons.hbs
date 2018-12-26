@@ -1,13 +1,13 @@
 <div id="view-buttons" class="form-buttons pull-right" {{#if (ne action "view")}}style="display: none"{{/if}}>
   {{#if (ne page "profilePage")}}
-    <button type="button" class="btn btn-danger" onclick="location.href='/ua/{{origin}}/delete/{{id}}'">Supprimer</button>
+    <button type="button" class="btn btn-danger" onclick="location.href='{{origin}}/delete/{{id}}'">Supprimer</button>
   {{/if}}
   <button type="button" class="btn btn-primary" onclick="editButtonPress()">Éditer</button>
   <button type="submit" class="btn btn-primary">Valider</button>
 </div>
 <div id="update-buttons" class="form-buttons pull-right" {{#if (ne action "update")}}style="display: none"{{/if}}>
   {{#if (ne page "profilePage")}}
-    <button type="button" class="btn btn-danger" onclick="location.href='/ua/{{origin}}/delete/{{id}}'">Supprimer</button>
+    <button type="button" class="btn btn-danger" onclick="location.href='{{origin}}/delete/{{id}}'">Supprimer</button>
   {{/if}}
   <button type="button" class="btn btn-primary" onclick="location.reload();">Annuler</button>
   <button type="submit" class="btn btn-primary">Valider</button>
