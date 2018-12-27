@@ -19,7 +19,7 @@ export function studyRouter(): Router {
   router.get("/create", studyController.createStudy);
   router.get("/update/:id(\\d+)/", studyController.updateStudy);
   router.post("/postform", studyController.postStudyForm);
-  router.get("/me", studyController.viewStudiesForConnectedUser);
+
 
   return router;
 }
