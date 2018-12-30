@@ -183,4 +183,15 @@ export class MemberController {
     });
   }
 
+  public deleteMember(req: Request, res: Response, next: NextFunction) {
+    const userId = req.params.id;
+    winston.info("Deleting Member for id " + userId);
+    MemberService.delete(userId, function (err) {
+      if (err) {
+        return next(err);
+      }
+      res.redirect("/core/member");
+    });
+  }
+
 }
