@@ -75,4 +75,18 @@ export class MemberService extends BaseService {
       e => callback(e)
     );
   }
+
+  static delete(memberId: number, callback: (err: any) => void): void {
+    this.rest.del<Member>("core/member/" + memberId, this.defaultHeaders()).then(
+      (res: IRestResponse<Member>) => {
+        if (res.statusCode !== 204) {
+          return callback(this.defaultError());
+        }
+        winston.debug("Response : " + JSON.stringify(res));
+        callback(null);
+      }
+    ).catch(
+      e => callback(e)
+    );
+  }
 }

@@ -16,7 +16,7 @@ export class FirmMock implements IMock {
     switch (resource) {
       case "ua/firm":
         mockObj = <T> new Firm(0, resources["siret"], resources["name"], resources["address"], new FirmType(resources["typeId"], "SARL"));
-        status = 200;
+        status = 201;
         winston.debug("Firm created : " + JSON.stringify(mockObj));
         return new MockResponse(mockObj, status);
     }
@@ -24,6 +24,17 @@ export class FirmMock implements IMock {
   }
 
   del<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
+    let status: number = 500;
+    switch (resource) {
+      case "ua/firm/1":
+        status = 204;
+        winston.debug("Firm 1 removed");
+        return new MockResponse(null, status);
+      case "ua/firm/2":
+        status = 204;
+        winston.debug("Firm 2 removed");
+        return new MockResponse(null, status);
+    }
     return null;
   }
 

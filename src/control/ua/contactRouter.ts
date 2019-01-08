@@ -21,6 +21,6 @@ export function contactRouter(): Router {
   router.post("/postform", contactController.postContactForm);
 
   router.get("/json", contactController.getJSONContacts);
-
+  router.get("/delete/:id(\\d+)/",contactController.deleteContact);
   return router;
 }

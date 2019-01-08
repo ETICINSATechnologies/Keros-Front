@@ -105,6 +105,11 @@
                 {{connectedUser.firstName}} {{connectedUser.lastName}}
                 <!--<small>Member since Nov. 2012</small>-->
               </p>
+              {{#each connectedUser.positions}}
+                <p>
+                  <small>{{label}} - {{pole.name}}</small>
+                </p>
+              {{/each}}
             </li>
             <!--
             <li class="user-body">
@@ -128,6 +133,7 @@
               </div>
               -->
               <div class="pull-right">
+                <a href="/core/member/me" class="btn btn-default btn-flat">Mon Profil</a>
                 <a href="/auth/logout" class="btn btn-default btn-flat">Déconnecter</a>
               </div>
             </li>

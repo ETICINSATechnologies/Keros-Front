@@ -34,6 +34,6 @@ export class BaseService {
   }
 
   protected static defaultHeaders(): IRequestOptions {
-    return {additionalHeaders: {Authorization: httpContext.get("token")}}
+    return {additionalHeaders: {Authorization: httpContext.get("token")}};
   }
 }
