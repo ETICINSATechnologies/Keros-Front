@@ -14,3 +14,12 @@ option[selected] {
 .form-buttons > button {
     margin-left: 20px;
 }
+
+.row-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.content-col {
+    height: 100%;
+}

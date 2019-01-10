@@ -31,7 +31,7 @@ export class LoginController {
         return next(err);
       }
       if (response === null) {
-        return next(new Error("Connection échouée"));
+        return next(new Error("Connection échouée"))
       }
       let token = response.token;
       httpContext.set("token", token);
