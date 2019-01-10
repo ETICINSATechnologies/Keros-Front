@@ -16,6 +16,7 @@ import { FieldService } from "../../services/ua/FieldService";
 import { Field } from "../../models/ua/Field";
 import { ProvenanceService } from "../../services/ua/ProvenanceService";
 import { Provenance } from "../../models/ua/Provenance";
+import * as httpContext from "express-http-context";
 
 export class StudyController {
     public viewStudies(req: Request, res: Response, next: NextFunction) {
