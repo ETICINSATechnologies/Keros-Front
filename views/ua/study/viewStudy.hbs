@@ -31,12 +31,8 @@
                     <input type="text" class="form-control" id="name" name="name" value="{{study.name}}" placeholder="Entrez le nom de l'étude" required {{readonlyIf (eq action "view")}}>
                   </div>
                   <div class="col-md-6 form-group">
-                    <label for="projectNumber">Numéro de projet</label>
-                    <input type="number" class="form-control" id="projectNumber" name="projectNumber" value="{{study.projectNumber}}" placeholder="Entrez le numéro de projet" required {{readonlyIf (eq action "view")}}>
-                  </div>
-                  <div class="col-md-6 form-group">
                     <label for="firmId">Société</label>
-                    <select class="form-control" id="firmId" name="firmId" >
+                    <select class="form-control" id="firmId" name="firmId" {{readonlyIf (eq action "view")}}>
                       {{!TODO : Use pagination}}
                       {{#each firms.content}}
                         <option value="{{id}}" {{selected id @root.study.firm.id}}>{{name}}</option>
@@ -45,7 +41,7 @@
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="fieldId">Secteur</label>
-                    <select class="form-control" id="fieldId" name="fieldId" >
+                    <select class="form-control" id="fieldId" name="fieldId" {{readonlyIf (eq action "view")}}>
                       {{#each fields}}
                         <option value="{{id}}" {{selected id @root.study.field.id}}>{{label}}</option>
                       {{/each}}
@@ -65,7 +61,7 @@
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="provenanceId">Provenance</label>
-                    <select class="form-control" id="provenanceId" name="provenanceId" >
+                    <select class="form-control" id="provenanceId" name="provenanceId" {{readonlyIf (eq action "view")}}>
                       <option></option>
                       {{#each provenances}}
                         <option value="{{id}}" {{selected id @root.study.provenance.id}}>{{label}}</option>
@@ -134,11 +130,11 @@
                     </div>
                   </div>
                   <h4 class="col-md-12 box-title">
-                    Personnels
+                    Personnel(s) Entreprise
                   </h4>
                   <div class="col-md-4 form-group">
                     <label for="contactId1">Contact 1</label>
-                    <select class="form-control" id="contactId1" name="contactId1" required >
+                    <select class="form-control" id="contactId1" name="contactId1" required {{readonlyIf (eq action "view")}}>
                       {{#each contactShorts.content}}
                         <option value="{{id}}" {{selected id @root.study.contacts.0.id}}>{{firstName}} {{lastName}}</option>
                       {{/each}}
@@ -146,7 +142,7 @@
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="contactId2">Contact 2</label>
-                    <select class="form-control" id="contactId2" name="contactId2" >
+                    <select class="form-control" id="contactId2" name="contactId2" {{readonlyIf (eq action "view")}}>
                       <option></option>
                       {{#each contactShorts.content}}
                         <option value="{{id}}" {{selected id @root.study.contacts.1.id}}>{{firstName}} {{lastName}}</option>
@@ -155,7 +151,7 @@
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="contactId3">Contact 3</label>
-                    <select class="form-control" id="contactId3" name="contactId3" >
+                    <select class="form-control" id="contactId3" name="contactId3" {{readonlyIf (eq action "view")}}>
                       <option></option>
                       {{#each contactShorts.content}}
                         <option value="{{id}}" {{selected id @root.study.contacts.2.id}}>{{firstName}} {{lastName}}</option>
@@ -163,9 +159,12 @@
                     </select>
                   </div>
                   <hr/>
+                  <h4 class="col-md-12 box-title">
+                    Personnel(s) ETIC
+                  </h4>
                   <div class="col-md-4 form-group">
                     <label for="leaderId1">Responsable 1</label>
-                    <select class="form-control" id="leaderId1" name="leaderId1" required >
+                    <select class="form-control" id="leaderId1" name="leaderId1" required {{readonlyIf (eq action "view")}}>
                       {{#each memberShorts.content}}
                         <option value="{{id}}" {{selected id @root.study.leaders.0.id}}>{{firstName}} {{lastName}}</option>
                       {{/each}}
@@ -173,7 +172,7 @@
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="leaderId2">Responsable 2</label>
-                    <select class="form-control" id="leaderId2" name="leaderId2" >
+                    <select class="form-control" id="leaderId2" name="leaderId2" {{readonlyIf (eq action "view")}}>
                       <option></option>
                       {{#each memberShorts.content}}
                         <option value="{{id}}" {{selected id @root.study.leaders.1.id}}>{{firstName}} {{lastName}}</option>
@@ -182,7 +181,7 @@
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="leaderId3">Responsable 3</label>
-                    <select class="form-control" id="leaderId3" name="leaderId3" >
+                    <select class="form-control" id="leaderId3" name="leaderId3" {{readonlyIf (eq action "view")}}>
                       <option></option>
                       {{#each memberShorts.content}}
                         <option value="{{id}}" {{selected id @root.study.leaders.3.id}}>{{firstName}} {{lastName}}</option>
@@ -192,7 +191,7 @@
                   <hr/>
                   <div class="col-md-4 form-group">
                     <label for="consultantId1">Consultant 1</label>
-                    <select class="form-control" id="consultantId1" name="consultantId1" required >
+                    <select class="form-control" id="consultantId1" name="consultantId1" required {{readonlyIf (eq action "view")}}>
                       {{#each memberShorts.content}}
                         <option value="{{id}}" {{selected id @root.study.consultants.0.id}}>{{firstName}} {{lastName}}</option>
                       {{/each}}
@@ -200,7 +199,7 @@
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="consultantId2">Consultant 2</label>
-                    <select class="form-control" id="consultantId2" name="consultantId2" >
+                    <select class="form-control" id="consultantId2" name="consultantId2" {{readonlyIf (eq action "view")}}>
                       <option></option>
                       {{#each memberShorts.content}}
                         <option value="{{id}}" {{selected id @root.study.consultants.1.id}}>{{firstName}} {{lastName}}</option>
@@ -209,7 +208,7 @@
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="consultantId3">Consultant 3</label>
-                    <select class="form-control" id="consultantId3" name="consultantId3" >
+                    <select class="form-control" id="consultantId3" name="consultantId3" {{readonlyIf (eq action "view")}}>
                       <option></option>
                       {{#each memberShorts.content}}
                         <option value="{{id}}" {{selected id @root.study.consultants.2.id}}>{{firstName}} {{lastName}}</option>
@@ -219,7 +218,7 @@
                   <hr/>
                   <div class="col-md-6 form-group">
                     <label for="qualityManagerId1">Responsable qualité 1</label>
-                    <select class="form-control" id="qualityManagerId1" name="qualityManagerId1" required >
+                    <select class="form-control" id="qualityManagerId1" name="qualityManagerId1" required {{readonlyIf (eq action "view")}}>
                       {{#each memberShorts.content}}
                         <option value="{{id}}" {{selected id @root.study.qualityManagers.0.id}}>{{firstName}} {{lastName}}</option>
                       {{/each}}
@@ -227,7 +226,7 @@
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="qualityManagerId2">Responsable qualité 2</label>
-                    <select class="form-control" id="qualityManagerId2" name="qualityManagerId2">
+                    <select class="form-control" id="qualityManagerId2" name="qualityManagerId2"{{readonlyIf (eq action "view")}}>
                       <option></option>
                       {{#each memberShorts.content}}
                         <option value="{{id}}" {{selected id @root.study.qualityManagers.1.id}}>{{firstName}} {{lastName}}</option>
