@@ -61,7 +61,7 @@
                       {{#each status}}
                         <option value="{{id}}" {{selected id @root.study.status.id}}>{{label}}</option>
                       {{/each}}
-                    </select>     
+                    </select>
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="provenanceId">Provenance</label>
@@ -106,7 +106,7 @@
                     <div class="input-group">
                       <span class="input-group-addon" style="background-color: #DBE0E0; font-weight: bold;">€</span>
                       <input type="number" class="form-control" id="realizationFee" name="realizationFee" step="0.01" min="0"
-                           value="{{study.realizationFee}}" placeholder="Frais de réalisation " {{readonlyIf (eq action "view")}}>
+                             value="{{study.realizationFee}}" placeholder="Frais de réalisation " {{readonlyIf (eq action "view")}}>
                     </div>
                   </div>
                   <div class="col-md-4 form-group">
@@ -136,114 +136,59 @@
                   <h4 class="col-md-12 box-title">
                     Personnels
                   </h4>
-                  <div class="col-md-4 form-group">
-                    <label for="contactId1">Contact 1</label>
-                    <select class="form-control" id="contactId1" name="contactId1" required >
-                      {{#each contactShorts.content}}
-                        <option value="{{id}}" {{selected id @root.study.contacts.0.id}}>{{firstName}} {{lastName}}</option>
-                      {{/each}}
-                    </select>
+                  <div class="col-md-4">
+                    <label for="inputcollapsecontactId1">Contact 1</label>
+                    {{> paginateDropdown name="contactId1" type="/ua/contact" studyItem=study.contacts.[0] items=contactShorts required=true action=action}}
                   </div>
-                  <div class="col-md-4 form-group">
-                    <label for="contactId2">Contact 2</label>
-                    <select class="form-control" id="contactId2" name="contactId2" >
-                      <option></option>
-                      {{#each contactShorts.content}}
-                        <option value="{{id}}" {{selected id @root.study.contacts.1.id}}>{{firstName}} {{lastName}}</option>
-                      {{/each}}
-                    </select>
+                  <div class="col-md-4">
+                    <label for="inputcollapsecontactId1">Contact 2</label>
+                    {{> paginateDropdown name="contactId2" type="/ua/contact" studyItem=study.contacts.[1] items=contactShorts required=false action=action}}
                   </div>
-                  <div class="col-md-4 form-group">
-                    <label for="contactId3">Contact 3</label>
-                    <select class="form-control" id="contactId3" name="contactId3" >
-                      <option></option>
-                      {{#each contactShorts.content}}
-                        <option value="{{id}}" {{selected id @root.study.contacts.2.id}}>{{firstName}} {{lastName}}</option>
-                      {{/each}}
-                    </select>
+                  <div class="col-md-4">
+                    <label for="inputcollapsecontactId1">Contact 3</label>
+                    {{> paginateDropdown name="contactId3" type="/ua/contact" studyItem=study.contacts.[2] items=contactShorts required=false action=action}}
                   </div>
                   <hr/>
-                  <div class="col-md-4 form-group">
-                    <label for="leaderId1">Responsable 1</label>
-                    <select class="form-control" id="leaderId1" name="leaderId1" required >
-                      {{#each memberShorts.content}}
-                        <option value="{{id}}" {{selected id @root.study.leaders.0.id}}>{{firstName}} {{lastName}}</option>
-                      {{/each}}
-                    </select>
-                  </div>
-                  <div class="col-md-4 form-group">
-                    <label for="leaderId2">Responsable 2</label>
-                    <select class="form-control" id="leaderId2" name="leaderId2" >
-                      <option></option>
-                      {{#each memberShorts.content}}
-                        <option value="{{id}}" {{selected id @root.study.leaders.1.id}}>{{firstName}} {{lastName}}</option>
-                      {{/each}}
-                    </select>
-                  </div>
-                  <div class="col-md-4 form-group">
-                    <label for="leaderId3">Responsable 3</label>
-                    <select class="form-control" id="leaderId3" name="leaderId3" >
-                      <option></option>
-                      {{#each memberShorts.content}}
-                        <option value="{{id}}" {{selected id @root.study.leaders.3.id}}>{{firstName}} {{lastName}}</option>
-                      {{/each}}
-                    </select>
+                  <div >
+                    <div class="col-md-4">
+                      <label for="inputcollapseleaderId1">Responsable 1</label>
+                      {{> paginateDropdown name="leaderId1" type="/core/member" studyItem=study.leaders.[0] items=memberShorts required=true action=action}}
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputcollapseleaderId2">Responsable 2</label>
+                      {{> paginateDropdown name="leaderId2" type="/core/member" studyItem=study.leaders.[1] items=memberShorts required=false action=action}}
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputcollapseleaderId1">Responsable 3</label>
+                      {{> paginateDropdown name="leaderId3" type="/core/member" studyItem=study.leaders.[2] items=memberShorts required=false action=action}}
+                    </div>
                   </div>
                   <hr/>
-                  <div class="col-md-4 form-group">
-                    <label for="consultantId1">Consultant 1</label>
-                    <select class="form-control" id="consultantId1" name="consultantId1" required >
-                      {{#each memberShorts.content}}
-                        <option value="{{id}}" {{selected id @root.study.consultants.0.id}}>{{firstName}} {{lastName}}</option>
-                      {{/each}}
-                      </select>
+                  <div class="col-md-4">
+                    <label for="inputcollapseconsultantId1">Consultant 1</label>
+                    {{> paginateDropdown name="consultantId1" type="/core/member" studyItem=study.consultants.[0] items=memberShorts required=true action=action}}
                   </div>
-                  <div class="col-md-4 form-group">
-                    <label for="consultantId2">Consultant 2</label>
-                    <select class="form-control" id="consultantId2" name="consultantId2" >
-                      <option></option>
-                      {{#each memberShorts.content}}
-                        <option value="{{id}}" {{selected id @root.study.consultants.1.id}}>{{firstName}} {{lastName}}</option>
-                      {{/each}}
-                    </select>
+                  <div class="col-md-4">
+                    <label for="inputcollapseleaderId2">Consultant 2</label>
+                    {{> paginateDropdown name="consultantId2" type="/core/member" studyItem=study.consultants.[1] items=memberShorts required=false action=action}}
                   </div>
-                  <div class="col-md-4 form-group">
-                    <label for="consultantId3">Consultant 3</label>
-                    <select class="form-control" id="consultantId3" name="consultantId3" >
-                      <option></option>
-                      {{#each memberShorts.content}}
-                        <option value="{{id}}" {{selected id @root.study.consultants.2.id}}>{{firstName}} {{lastName}}</option>
-                      {{/each}}
-                    </select>
+                  <div class="col-md-4">
+                    <label for="inputcollapseconsultantId1">Consultant 3</label>
+                    {{> paginateDropdown name="consultantId3" type="/core/member" studyItem=study.consultants.[2] items=memberShorts required=false action=action}}
                   </div>
                   <hr/>
-                  <div class="col-md-6 form-group">
-                    <label for="qualityManagerId1">Responsable qualité 1</label>
-                    <select class="form-control" id="qualityManagerId1" name="qualityManagerId1" required >
-                      {{#each memberShorts.content}}
-                        <option value="{{id}}" {{selected id @root.study.qualityManagers.0.id}}>{{firstName}} {{lastName}}</option>
-                      {{/each}}
-                    </select>
+                  <div class="col-md-6">
+                    <label for="inputcollapsequalityManagerId1">Responsable qualité 1</label>
+                    {{> paginateDropdown name="qualityManagerId1" type="/core/member" studyItem=study.qualityManagers.[0] items=memberShorts required=true action=action}}
                   </div>
-                  <div class="col-md-6 form-group">
-                    <label for="qualityManagerId2">Responsable qualité 2</label>
-                    <select class="form-control" id="qualityManagerId2" name="qualityManagerId2">
-                      <option></option>
-                      {{#each memberShorts.content}}
-                        <option value="{{id}}" {{selected id @root.study.qualityManagers.1.id}}>{{firstName}} {{lastName}}</option>
-                      {{/each}}
-                    </select>
-                  </div>
-                  <h4 class="col-md-12 box-title">
-                    Publipostage
-                  </h4>
-                  <div class="col-md-12">
-                    <a href="/ua/study">Template Test 1
+                  <div class="col-md-6">
+                    <label for="inputcollapsequalityManagerId2">Responsable qualité 2</label>
+                    {{> paginateDropdown name="qualityManagerId2" type="/core/member" studyItem=study.qualityManagers.[1] items=memberShorts required=false action=action}}
                   </div>
                 </div>
                 <div class="box-footer">
                   <a href="/ua/study"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button></a>
-                  {{> formButtons action=action origin="/ua/study" id=study.id}}
+                  {{> formButtons action=action}}
                 </div>
               </form>
             </div>

@@ -1,0 +1,39 @@
+<div class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#collapse{{name}}">
+          {{#if (ne action "create")}}
+            {{#if (ifExists studyItem.id "")}}
+              {{studyItem.firstName}} {{studyItem.lastName}}
+            {{else}}
+              ---
+            {{/if}}
+          {{else}}
+            {{#if (ne required true)}}
+              ---
+            {{else}}
+              {{items.content.0.firstName}} {{items.content.0.lastName}}
+            {{/if}}
+          {{/if}}
+        </a>
+        <input type="text" id="inputcollapse{{name}}" name="{{name}}" value="{{studyItem.id}}" hidden>
+      </h4>
+    </div>
+    <div id="collapse{{name}}" class="panel-collapse collapse" style="background-color: #DDDDDD;">
+      <ul class="list-group" id="collapseSelect{{name}}">
+        {{#if (ne required true)}}
+          <button class="btn btn-block btn-flat" id="{{name}}_" type="button" onclick="selectValue('{{name}}_')">---</button>
+        {{/if}}
+        {{#each items.content}}
+          <button class="btn btn-block btn-flat" type="button" id="{{../name}}_{{id}}" onclick="selectValue('{{../name}}_{{id}}')">{{firstName}} {{lastName}}</button>
+        {{/each}}
+      </ul>
+      <div class="panel-footer" id="linkcollapseSelect{{name}}" style="height: 30px;">
+        {{#if (ne items.meta.totalPages 1)}}
+          <a href="javascript:void(0)" onclick="callAjax('{{type}}/json', {{items.meta.page}} + 1, 'collapseSelect{{name}}')" class="fa fa-arrow-right fa-pull-right"></a>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>
