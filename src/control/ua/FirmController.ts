@@ -114,4 +114,15 @@ export class FirmController {
       });
     }
   }
+
+  public deleteFirm(req: Request, res: Response, next: NextFunction) {
+    let id = req.params.id;
+    FirmService.delete(id, function (err) {
+      if (err) {
+        return next(err);
+      }
+      res.redirect("/ua/firm");
+    });
+
+  }
 }

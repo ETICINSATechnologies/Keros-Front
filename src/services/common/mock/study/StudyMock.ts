@@ -30,6 +30,17 @@ export class StudyMock implements IMock {
     return null;
   }
   del<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
+    let status: number = 500;
+    switch (resource) {
+      case "ua/study/1":
+        status = 204;
+        winston.debug("Study 1 removed");
+        return new MockResponse(null, status);
+      case "ua/study/2":
+        status = 204;
+        winston.debug("Study 2 removed");
+        return new MockResponse(null, status);
+    }
     return null;
   }
   get<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {

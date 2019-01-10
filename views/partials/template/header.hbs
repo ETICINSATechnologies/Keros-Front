@@ -105,6 +105,11 @@
                 {{connectedUser.firstName}} {{connectedUser.lastName}}
                 <!--<small>Member since Nov. 2012</small>-->
               </p>
+              {{#each connectedUser.positions}}
+                <p>
+                  <small>{{label}} - {{pole.name}}</small>
+                </p>
+              {{/each}}
             </li>
             <!--
             <li class="user-body">

@@ -20,5 +20,6 @@ export function coreRouter(): Router {
   router.get("/member/update/:id(\\d+)/", memberController.updateMember);
   router.post("/member/postform", memberController.postMemberForm);
   router.get("/member/me", memberController.viewProfile);
+  router.get("/member/delete/:id(\\d+)/", memberController.deleteMember);
   return router;
 }
