@@ -27,5 +27,6 @@ export class Study {
     private leaders ?: Member[],
     private consultants ?: Member[],
     private qualityManagers ?: Member[],
+    private templates ?: Template[],
   ) {}
 }
