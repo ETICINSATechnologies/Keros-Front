@@ -4,6 +4,7 @@ import { Field } from "./Field";
 import { Provenance } from "./Provenance";
 import { Contact } from "./Contact";
 import { Member } from "../core/Member";
+import { Template } from "./Template";
 
 export class Study {
   constructor(
