@@ -133,57 +133,167 @@
                              value="{{study.outsourcingFee}}" placeholder="Frais de sous traitance" {{readonlyIf (eq action "view")}}>
                     </div>
                   </div>
+
                   <h4 class="col-md-12 box-title">
                     Personnels
                   </h4>
-                  <div class="col-md-4">
-                    <label for="inputcollapsecontactId1">Contact 1</label>
-                    {{> paginateDropdown name="contactId1" type="/ua/contact" studyItem=study.contacts.[0] items=contactShorts required=true action=action}}
+
+                  <div class="col-md-4 paginateselect">
+                    <label for="contactId1">Contact 1</label>
+                    <div id="contactId1">
+                      <select class="selectpicker required" data-width="100%" id="/ua/contact" name="contactId1" required>
+                        {{#each contactShorts.content}}
+                          <option value="{{id}}" {{selected id @root.study.contacts.0.id}}>{{firstName}} {{lastName}}</option>
+                        {{/each}}
+                        {{#if (ne contactShorts.meta.totalPages 1)}}
+                          <option value="next_{{contactShorts.meta.page}}" data-icon="fa fa-arrow-right fa-pull-right" class="selectlinks"></option>
+                        {{/if}}
+                        </select>
+                    </div>
                   </div>
-                  <div class="col-md-4">
-                    <label for="inputcollapsecontactId1">Contact 2</label>
-                    {{> paginateDropdown name="contactId2" type="/ua/contact" studyItem=study.contacts.[1] items=contactShorts required=false action=action}}
+                  <div class="col-md-4 paginateselect">
+                    <label for="contactId2">Contact 2</label>
+                    <div id="contactId2">
+                      <select class="selectpicker" data-width="100%" id="/ua/contact" name="contactId2">
+                        <option></option>
+                        {{#each contactShorts.content}}
+                          <option value="{{id}}" {{selected id @root.study.contacts.1.id}}>{{firstName}} {{lastName}}</option>
+                        {{/each}}
+                        {{#if (ne contactShorts.meta.totalPages 1)}}
+                          <option value="next_{{contactShorts.meta.page}}" data-icon="fa fa-arrow-right fa-pull-right" class="selectlinks"></option>
+                        {{/if}}
+                      </select>
+                    </div>
                   </div>
-                  <div class="col-md-4">
-                    <label for="inputcollapsecontactId1">Contact 3</label>
-                    {{> paginateDropdown name="contactId3" type="/ua/contact" studyItem=study.contacts.[2] items=contactShorts required=false action=action}}
+                  <div class="col-md-4 paginateselect">
+                    <label for="contactId3">Contact 3</label>
+                    <div id="contactId3">
+                      <select class="selectpicker" data-width="100%" id="/ua/contact" name="contactId3">
+                        <option></option>
+                        {{#each contactShorts.content}}
+                          <option value="{{id}}" {{selected id @root.study.contacts.2.id}}>{{firstName}} {{lastName}}</option>
+                        {{/each}}
+                        {{#if (ne contactShorts.meta.totalPages 1)}}
+                          <option value="next_{{contactShorts.meta.page}}" data-icon="fa fa-arrow-right fa-pull-right" class="selectlinks"></option>
+                        {{/if}}
+                      </select>
+                    </div>
                   </div>
                   <hr/>
                   <div >
-                    <div class="col-md-4">
-                      <label for="inputcollapseleaderId1">Responsable 1</label>
-                      {{> paginateDropdown name="leaderId1" type="/core/member" studyItem=study.leaders.[0] items=memberShorts required=true action=action}}
+                    <div class="col-md-4 paginateselect">
+                      <label for="leaderId1">Responsable 1</label>
+                      <div id="leaderId1">
+                        <select class="selectpicker" data-width="100%" id="/core/member" name="leaderId1">
+                          <option></option>
+                          {{#each memberShorts.content}}
+                            <option value="{{id}}" {{selected id @root.study.leaders.0.id}}>{{firstName}} {{lastName}}</option>
+                          {{/each}}
+                          {{#if (ne memberShorts.meta.totalPages 1)}}
+                            <option value="next_{{memberShorts.meta.page}}" data-icon="fa fa-arrow-right fa-pull-right" class="selectlinks"></option>
+                          {{/if}}
+                        </select>
+                      </div>
                     </div>
-                    <div class="col-md-4">
-                      <label for="inputcollapseleaderId2">Responsable 2</label>
-                      {{> paginateDropdown name="leaderId2" type="/core/member" studyItem=study.leaders.[1] items=memberShorts required=false action=action}}
+                    <div class="col-md-4 paginateselect">
+                      <label for="leaderId2">Responsable 2</label>
+                      <div id="leaderId2">
+                        <select class="selectpicker" data-width="100%" id="/core/member" name="leaderId2">
+                          <option></option>
+                          {{#each memberShorts.content}}
+                            <option value="{{id}}" {{selected id @root.study.leaders.1.id}}>{{firstName}} {{lastName}}</option>
+                          {{/each}}
+                          {{#if (ne memberShorts.meta.totalPages 1)}}
+                            <option value="next_{{memberShorts.meta.page}}" data-icon="fa fa-arrow-right fa-pull-right" class="selectlinks"></option>
+                          {{/if}}
+                        </select>
+                      </div>
                     </div>
-                    <div class="col-md-4">
-                      <label for="inputcollapseleaderId1">Responsable 3</label>
-                      {{> paginateDropdown name="leaderId3" type="/core/member" studyItem=study.leaders.[2] items=memberShorts required=false action=action}}
+                    <div class="col-md-4 paginateselect">
+                      <label for="leaderId3">Responsable 3</label>
+                      <div id="leaderId3">
+                        <select class="selectpicker" data-width="100%" id="/core/member" name="leaderId3">
+                          <option></option>
+                          {{#each memberShorts.content}}
+                            <option value="{{id}}" {{selected id @root.study.leaders.2.id}}>{{firstName}} {{lastName}}</option>
+                          {{/each}}
+                          {{#if (ne memberShorts.meta.totalPages 1)}}
+                            <option value="next_{{memberShorts.meta.page}}" data-icon="fa fa-arrow-right fa-pull-right" class="selectlinks"></option>
+                          {{/if}}
+                        </select>
+                      </div>
                     </div>
                   </div>
                   <hr/>
-                  <div class="col-md-4">
-                    <label for="inputcollapseconsultantId1">Consultant 1</label>
-                    {{> paginateDropdown name="consultantId1" type="/core/member" studyItem=study.consultants.[0] items=memberShorts required=true action=action}}
+                  <div class="col-md-4 paginateselect">
+                    <label for="consultantId1">Consultant 1</label>
+                    <div id="consultantId1">
+                      <select class="selectpicker" data-width="100%" id="/core/member" name="consultantId1">
+                        <option></option>
+                        {{#each memberShorts.content}}
+                          <option value="{{id}}" {{selected id @root.study.consultants.0.id}}>{{firstName}} {{lastName}}</option>
+                        {{/each}}
+                        {{#if (ne memberShorts.meta.totalPages 1)}}
+                          <option value="next_{{memberShorts.meta.page}}" data-icon="fa fa-arrow-right fa-pull-right" class="selectlinks"></option>
+                        {{/if}}
+                      </select>
+                    </div>
                   </div>
-                  <div class="col-md-4">
-                    <label for="inputcollapseleaderId2">Consultant 2</label>
-                    {{> paginateDropdown name="consultantId2" type="/core/member" studyItem=study.consultants.[1] items=memberShorts required=false action=action}}
+                  <div class="col-md-4 paginateselect">
+                    <label for="consultantId2">Consultant 2</label>
+                    <div id="consultantId2">
+                      <select class="selectpicker" data-width="100%" id="/core/member" name="consultantId2">
+                        <option></option>
+                        {{#each memberShorts.content}}
+                          <option value="{{id}}" {{selected id @root.study.consultants.1.id}}>{{firstName}} {{lastName}}</option>
+                        {{/each}}
+                        {{#if (ne memberShorts.meta.totalPages 1)}}
+                          <option value="next_{{memberShorts.meta.page}}" data-icon="fa fa-arrow-right fa-pull-right" class="selectlinks"></option>
+                        {{/if}}
+                      </select>
+                    </div>
                   </div>
-                  <div class="col-md-4">
-                    <label for="inputcollapseconsultantId1">Consultant 3</label>
-                    {{> paginateDropdown name="consultantId3" type="/core/member" studyItem=study.consultants.[2] items=memberShorts required=false action=action}}
+                  <div class="col-md-4 paginateselect">
+                    <label for="consultantId3">Consultant 3</label>
+                    <div id="consultantId3">
+                      <select class="selectpicker" data-width="100%" id="/core/member" name="consultantId3">
+                        <option></option>
+                        {{#each memberShorts.content}}
+                          <option value="{{id}}" {{selected id @root.study.consultants.2.id}}>{{firstName}} {{lastName}}</option>
+                        {{/each}}
+                        {{#if (ne memberShorts.meta.totalPages 1)}}
+                          <option value="next_{{memberShorts.meta.page}}" data-icon="fa fa-arrow-right fa-pull-right" class="selectlinks"></option>
+                        {{/if}}
+                      </select>
+                    </div>
                   </div>
                   <hr/>
-                  <div class="col-md-6">
-                    <label for="inputcollapsequalityManagerId1">Responsable qualité 1</label>
-                    {{> paginateDropdown name="qualityManagerId1" type="/core/member" studyItem=study.qualityManagers.[0] items=memberShorts required=true action=action}}
+                  <div class="col-md-6 paginateselect">
+                    <label for="qualityManagerId1">Responsable qualité 1</label>
+                    <div id="qualityManagerId1">
+                      <select class="selectpicker" data-width="100%" id="/core/member" name="qualityManagerId1">
+                        {{#each memberShorts.content}}
+                          <option value="{{id}}" {{selected id @root.study.qualityManagers.0.id}}>{{firstName}} {{lastName}}</option>
+                        {{/each}}
+                        {{#if (ne memberShorts.meta.totalPages 1)}}
+                          <option value="next_{{memberShorts.meta.page}}" data-icon="fa fa-arrow-right fa-pull-right" class="selectlinks"></option>
+                        {{/if}}
+                      </select>
+                    </div>
                   </div>
-                  <div class="col-md-6">
-                    <label for="inputcollapsequalityManagerId2">Responsable qualité 2</label>
-                    {{> paginateDropdown name="qualityManagerId2" type="/core/member" studyItem=study.qualityManagers.[1] items=memberShorts required=false action=action}}
+                  <div class="col-md-6 paginateselect">
+                    <label for="qualityManagerId2">Responsable qualité 2</label>
+                    <div id="qualityManagerId2">
+                      <select class="selectpicker" data-width="100%" id="/core/member" name="qualityManagerId2">
+                        <option></option>
+                        {{#each memberShorts.content}}
+                          <option value="{{id}}" {{selected id @root.study.qualityManagers.1.id}}>{{firstName}} {{lastName}}</option>
+                        {{/each}}
+                        {{#if (ne memberShorts.meta.totalPages 1)}}
+                          <option value="next_{{memberShorts.meta.page}}" data-icon="fa fa-arrow-right fa-pull-right" class="selectlinks"></option>
+                        {{/if}}
+                      </select>
+                    </div>
                   </div>
                 </div>
                 <div class="box-footer">

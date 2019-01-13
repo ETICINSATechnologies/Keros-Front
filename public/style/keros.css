@@ -14,3 +14,13 @@ option[selected] {
 .form-buttons > button {
     margin-left: 20px;
 }
+
+.paginateselect {
+    margin-bottom: 10px;
+}
+
+.selectlinks {
+    /*border: 2px solid #00a65a;*/
+    /*padding: 20px;*/
+    background-color: #eeeeee;
+}
