@@ -3,6 +3,7 @@ import { MockResponse } from "../MockClient";
 import HttpError from "../../../../util/httpError";
 import { LoginResponse } from "../../../../models/auth/LoginResponse";
 import { IMock } from "../IMock";
+import * as winston from "winston";
 
 export class AuthMock implements IMock {
 
@@ -15,8 +16,13 @@ export class AuthMock implements IMock {
           mockObj = <T> new LoginResponse("tokenConnexionOk");
           status = 200;
           return new MockResponse(mockObj, status);
-        } else
-          throw new HttpError("Authentification échouée", 401);
+        } else {
+          //should return error 2
+          mockObj = <T> new LoginResponse("connectionFailed",2);
+          status = 200;
+          return new MockResponse(mockObj, status);
+          //throw new HttpError("Authentification échouée", 401);
+        }
     }
     return null;
   }

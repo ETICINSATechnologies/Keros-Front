@@ -117,6 +117,12 @@ export class ContactController {
     contactRequest.notes = req.body.notes;
     contactRequest.old = !!req.body.old;
 
+/*
+    if (req.body.telephone.toString().substring(0,2) !== "00") {
+      const options
+    }
+*/
+
     if (id) {
       ContactService.update(id, contactRequest, function (err1) {
         if (err1) {

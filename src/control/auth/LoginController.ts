@@ -25,29 +25,45 @@ export class LoginController {
   public login(req: Request, res: Response, next: NextFunction) {
     let username = req.body.username;
     let password = req.body.password;
-    let request = new LoginRequest(username, password);
-    AuthService.login(request, function (err: any, response: LoginResponse | null) {
-      if (err) {
-        return next(err);
-      }
-      if (response === null) {
-        return next(new Error("Connection échouée"));
-      }
-      let token = response.token;
-      httpContext.set("token", token);
-      MemberService.getConnectedMember(function (err: any, response: Member | null) {
+    winston.debug("username:" ,username);
+    if (password.toString().length <= 8) {
+      const options = {
+        error: 1,
+      };
+      res.render("auth/login",options);
+    }
+
+      let request = new LoginRequest(username, password);
+      AuthService.login(request, function (err: any, response: LoginResponse | null) {
         if (err) {
           return next(err);
         }
-
-        if(Config.getEnv().toString() === "testing"){
-          res.redirect("/");
-        } else {
-          res.cookie("connectedUser", JSON.stringify(response))
-            .cookie("token", token)
-            .redirect("/");
+        if (response === null) {
+          return next(new Error("Connection échouée"));
         }
+
+        if (response.errorCode != undefined) {
+          const options = {
+            error: response.errorCode,
+          };
+          res.render("auth/login",options);
+        }
+
+        let token = response.token;
+        httpContext.set("token", token);
+        MemberService.getConnectedMember(function (err: any, response: Member | null) {
+          if (err) {
+            return next(err);
+          }
+
+          if (Config.getEnv().toString() === "testing") {
+            res.redirect("/");
+          } else {
+            res.cookie("connectedUser", JSON.stringify(response))
+              .cookie("token", token)
+              .redirect("/");
+          }
+        });
       });
-    });
-  }
+    }
 }
