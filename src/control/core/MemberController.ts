@@ -13,8 +13,6 @@ import {Country} from "../../models/core/Country";
 import {PositionService} from "../../services/core/PositionService";
 import {AddressCreateRequest} from "../../models/core/AddressCreateRequest";
 import * as httpContext from "express-http-context";
-import { ContactService } from "../../services/ua/ContactService";
-import { Contact } from "../../models/ua/Contact";
 
 export class MemberController {
   public viewMembers(req: Request, res: Response, next: NextFunction) {
