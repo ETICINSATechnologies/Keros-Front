@@ -1,31 +1,36 @@
-var div_select, select_menu;
+$('document').ready( function() {
+  $.get("/ua/contact/json", function (data) {
+    generateOptions($(".selectpicker.selectcontacts"), data, true);
+  });
+  $.get("/core/member/json", function (data) {
+    generateOptions($(".selectpicker.selectmembers"), data, true);
+  });
+});
 
 $('body').on('change','.selectpicker', function () {
-  if (!($(this).val().match(/previous|next/))) {return;}
+  if (!($(this).val().match(/link/))) {return;}
 
-  select_menu = $(this);
-  div_select = "#" + select_menu.parent().parent().attr("id");
-  var pageNumber = parseInt(select_menu.val().split("_")[1]);
+  var select_menu = $(this);
+  var pageNumber = parseInt($(this).val().split("_")[1]);
 
-  $(this).val().match(/previous/) ? pageNumber-- : pageNumber++;
-
-  $.get(select_menu.attr("id") + "/json?pageNumber=" + pageNumber, function (data) {
-    generateOptions(data);
+  $.get($(this).attr("data-endpoint") + "/json?pageNumber=" + pageNumber, function (data) {
+    generateOptions(select_menu, data);
   })
 });
 
-function generateOptions(data) {
-  var required = select_menu.attr('class').split(" ")[1] === "required" ? select_menu.attr('class').split(" ")[1] : "";
-  var options = "<select class='selectpicker " + required + "' data-width='100%' id='" + select_menu.attr("id") + "' name='"+ select_menu.attr("name") +"' " + required + "></select>";
-  $(div_select).empty().append(options);
+function generateOptions(select_menu, data, init) {
+  select_menu.empty().filter(function () {return !($(this).attr('class').match(/required/));}).append("<option></option>");
 
-  if(required !== "required") {$(div_select).children().append("<option></option>");}
   data.content.forEach(function (elem) {
-    $(div_select).children().append("<option value='" + elem.id + "'>" + elem.firstName + " " + elem.lastName + "</option>");
+    select_menu.each( function () {
+      if (elem.id == $(this).attr('data-selected')) {var selected = "selected";}
+      $(this).append("<option value='" + elem.id + "' "+ selected +">" + elem.firstName + " " + elem.lastName + "</option>");
+    });
   });
-  paginate($(div_select).children(), data.meta);
+  paginate(select_menu, data.meta);
 
-  $(div_select).children().selectpicker('refresh').addClass('open').selectpicker('setStyle');
+  select_menu.selectpicker('refresh');
+  if (!init) {select_menu.addClass('open').selectpicker('setStyle');}
 }
 
 function paginate($, meta) {
@@ -33,13 +38,13 @@ function paginate($, meta) {
     return $;
   }
   else if (meta.page === 0) {
-    return $.append("<option value='next_"+ meta.page +"' data-icon=\"fa fa-arrow-right fa-pull-right\"></option>");
+    return $.append("<option value='link_"+ (meta.page + 1) +"' data-icon=\"fa fa-arrow-right fa-pull-right\"></option>");
   }
   else if (meta.page === meta.totalPages - 1) {
-    return $.append("<option value='previous_"+ meta.page +"' data-icon=\"fa fa-arrow-left fa-pull-left\"></option>");
+    return $.append("<option value='link_"+ (meta.page - 1) +"' data-icon=\"fa fa-arrow-left fa-pull-left\"></option>");
   }
   else {
-    return $.append("<option value='previous_"+ meta.page +"' class='selectlinks' data-icon=\"fa fa-arrow-left fa-pull-left\" style='position: absolute; width: 50%; z-index: 9999;'></option>" +
-      "<option value='next_"+ meta.page +"' class='selectlinks' data-icon=\"fa fa-arrow-right fa-pull-right\" style='width: 50%; margin-left: 50%;'></option>");
+    return $.append("<option value='link_"+ (meta.page - 1) +"' class='selectlinks' data-icon=\"fa fa-arrow-left fa-pull-left\" style='position: absolute; width: 50%; z-index: 9999;'></option>" +
+      "<option value='link_"+ (meta.page + 1) +"' class='selectlinks' data-icon=\"fa fa-arrow-right fa-pull-right\" style='width: 50%; margin-left: 50%;'></option>");
   }
 }
