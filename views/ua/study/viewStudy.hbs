@@ -31,12 +31,8 @@
                     <input type="text" class="form-control" id="name" name="name" value="{{study.name}}" placeholder="Entrez le nom de l'étude" required {{readonlyIf (eq action "view")}}>
                   </div>
                   <div class="col-md-6 form-group">
-                    <label for="projectNumber">Numéro de projet</label>
-                    <input type="number" class="form-control" id="projectNumber" name="projectNumber" value="{{study.projectNumber}}" placeholder="Entrez le numéro de projet" required {{readonlyIf (eq action "view")}}>
-                  </div>
-                  <div class="col-md-6 form-group">
                     <label for="firmId">Société</label>
-                    <select class="form-control" id="firmId" name="firmId" >
+                    <select class="form-control" id="firmId" name="firmId" {{readonlyIf (eq action "view")}}>
                       {{!TODO : Use pagination}}
                       {{#each firms.content}}
                         <option value="{{id}}" {{selected id @root.study.firm.id}}>{{name}}</option>
@@ -45,7 +41,7 @@
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="fieldId">Secteur</label>
-                    <select class="form-control" id="fieldId" name="fieldId" >
+                    <select class="form-control" id="fieldId" name="fieldId" {{readonlyIf (eq action "view")}}>
                       {{#each fields}}
                         <option value="{{id}}" {{selected id @root.study.field.id}}>{{label}}</option>
                       {{/each}}
@@ -57,7 +53,7 @@
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="statusId">Status</label>
-                    <select class="form-control" id="statusId" name="statusId" >
+                    <select class="form-control" id="statusId" name="statusId" {{readonlyIf (eq action "view")}}>
                       {{#each status}}
                         <option value="{{id}}" {{selected id @root.study.status.id}}>{{label}}</option>
                       {{/each}}
