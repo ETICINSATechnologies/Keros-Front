@@ -25,7 +25,18 @@ export class ContactMock implements IMock {
     return null;
   }
   del<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
-    return null;
+      let status: number = 500;
+      switch (resource) {
+        case "ua/contact/1":
+          status = 204;
+          winston.debug("Contact 1 removed");
+          return new MockResponse(null, status);
+        case "ua/contact/2":
+	        status = 204;
+          winston.debug("Contact 2 removed");
+          return new MockResponse(null, status);
+      }
+      return null;
   }
   get<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;
