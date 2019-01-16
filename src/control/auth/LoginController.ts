@@ -25,13 +25,6 @@ export class LoginController {
   public login(req: Request, res: Response, next: NextFunction) {
     let username = req.body.username;
     let password = req.body.password;
-    winston.debug("username:" ,username);
-    if (password.toString().length <= 8) {
-      const options = {
-        error: 1,
-      };
-      res.render("auth/login",options);
-    }
 
       let request = new LoginRequest(username, password);
       AuthService.login(request, function (err: any, response: LoginResponse | null) {
@@ -46,24 +39,25 @@ export class LoginController {
           const options = {
             error: response.errorCode,
           };
-          res.render("auth/login",options);
+          res.render("auth/login", options);
+        } else {
+
+          let token = response.token;
+          httpContext.set("token", token);
+          MemberService.getConnectedMember(function (err: any, response: Member | null) {
+            if (err) {
+              return next(err);
+            }
+
+            if (Config.getEnv().toString() === "testing") {
+              res.redirect("/");
+            } else {
+              res.cookie("connectedUser", JSON.stringify(response))
+                .cookie("token", token)
+                .redirect("/");
+            }
+          });
         }
-
-        let token = response.token;
-        httpContext.set("token", token);
-        MemberService.getConnectedMember(function (err: any, response: Member | null) {
-          if (err) {
-            return next(err);
-          }
-
-          if (Config.getEnv().toString() === "testing") {
-            res.redirect("/");
-          } else {
-            res.cookie("connectedUser", JSON.stringify(response))
-              .cookie("token", token)
-              .redirect("/");
-          }
-        });
       });
     }
 }

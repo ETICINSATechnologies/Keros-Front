@@ -81,7 +81,7 @@ export class ContactController {
             contact : contact,
             firms : firms,
             gender : genders,
-            action: "update"
+            action: "update",
           };
           res.render("ua/contact/viewContact", options);
         });
@@ -117,26 +117,20 @@ export class ContactController {
     contactRequest.notes = req.body.notes;
     contactRequest.old = !!req.body.old;
 
-/*
-    if (req.body.telephone.toString().substring(0,2) !== "00") {
-      const options
+      if (id) {
+        ContactService.update(id, contactRequest, function (err1) {
+          if (err1) {
+            return next(err1);
+          }
+          res.redirect("/ua/contact");
+        });
+      } else {
+        ContactService.createContact(contactRequest, function (err1) {
+          if (err1) {
+            return next(err1);
+          }
+          res.redirect("/ua/contact");
+        });
+      }
     }
-*/
-
-    if (id) {
-      ContactService.update(id, contactRequest, function (err1) {
-        if (err1) {
-          return next(err1);
-        }
-        res.redirect("/ua/contact");
-      });
-    } else {
-      ContactService.createContact(contactRequest, function (err1) {
-        if (err1) {
-          return next(err1);
-        }
-        res.redirect("/ua/contact");
-      });
-    }
-  }
 }
