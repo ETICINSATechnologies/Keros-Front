@@ -32,7 +32,7 @@ export class ContactMock implements IMock {
           winston.debug("Contact 1 removed");
           return new MockResponse(null, status);
         case "ua/contact/2":
-	        status = 204;
+	  status = 204;
           winston.debug("Contact 2 removed");
           return new MockResponse(null, status);
       }
