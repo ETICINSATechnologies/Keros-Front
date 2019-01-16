@@ -53,7 +53,7 @@
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="statusId">Status</label>
-                    <select class="form-control" id="statusId" name="statusId" {{readonlyIf (eq action "view")}}>
+                    <select class="form-control" id="statusId" name="statusId">
                       {{#each status}}
                         <option value="{{id}}" {{selected id @root.study.status.id}}>{{label}}</option>
                       {{/each}}
@@ -61,7 +61,7 @@
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="provenanceId">Provenance</label>
-                    <select class="form-control" id="provenanceId" name="provenanceId" >
+                    <select class="form-control" id="provenanceId" name="provenanceId" {{readonlyIf (eq action "view")}}>
                       <option></option>
                       {{#each provenances}}
                         <option value="{{id}}" {{selected id @root.study.provenance.id}}>{{label}}</option>
