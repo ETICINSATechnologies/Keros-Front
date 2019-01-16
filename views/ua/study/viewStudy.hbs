@@ -135,7 +135,7 @@
                   </div>
 
                   <h4 class="col-md-12 box-title">
-                    Personnels
+                    Personnel(s) Entreprise
                   </h4>
 
                   <div class="col-md-4 paginateselect">
@@ -156,6 +156,11 @@
                     </div>
                   </div>
                   <hr/>
+
+                  <h4 class="col-md-12 box-title">
+                    Personnel(s) ETIC
+                  </h4>
+
                   <div >
                     <div class="col-md-4 paginateselect">
                       <label for="leaderId1">Responsable 1</label>
@@ -200,6 +205,38 @@
                       <select class="selectpicker selectmembers" data-width="100%" data-endpoint="/core/member" data-selected="{{study.qualityManagers.1.id}}" name="qualityManagerId2">
                       </select>
                   </div>
+                  {{#if (eq action "view")}}
+                    <div id="view-mailshots">
+                      <h4 class="col-md-12 box-title">
+                        Publipostage
+                      </h4>
+                      <div class="col-md-12">
+                        <div class="panel panel-default">
+                          <a data-toggle="collapse" data-parent="#faq" href="#col-mailshots" aria-expanded="false" aria-controls="elemmailshots">
+                            <div class="panel-heading" role="tab" id="mailshots" style="background-color:#F5F5F5;">
+                              <h5 class="panel-title">
+                                Afficher
+                              </h5>
+                            </div>
+                          </a>
+                          <div id="col-mailshots" class="panel-collapse collapse" role="tabpanel" aria-labelledby="mailshots">
+                            {{#each study.templates}}
+                              <div class="panel-body" value="{{id}}">
+                                <div class="col-md-6">
+                                  {{name}}
+                                </div>
+                                <div class="col-md-6">
+                                  <a href="{{link}}" target="_blank">
+                                    Générer
+                                  </a>
+                                </div>
+                              </div>
+                            {{/each}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  {{/if}}
                 </div>
                 <div class="box-footer">
                   <a href="/ua/study"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button></a>
