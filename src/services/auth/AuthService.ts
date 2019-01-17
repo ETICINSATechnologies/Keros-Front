@@ -14,6 +14,9 @@ export class AuthService extends BaseService {
     this.rest.create<LoginResponse>("auth/login", request).then(
       (res: IRestResponse<LoginResponse>) => {
         if (res.statusCode !== 200) {
+          if (res.statusCode === 401) {
+            return callback(null, null);
+          }
           return callback(this.defaultError(), null);
         }
         winston.debug("Response : " + JSON.stringify(res));
