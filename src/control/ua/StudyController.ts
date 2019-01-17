@@ -168,6 +168,7 @@ export class StudyController {
         studyRequest.ecoparticipationFee = parseFloat(req.body.ecoparticipationFee);
         studyRequest.outsourcingFee = parseFloat(req.body.outsourcingFee);
         studyRequest.archivedDate = req.body.archivedDate;
+        studyRequest.confidential = !!req.body.confidential;
         studyRequest.firmId = parseInt(req.body.firmId);
         studyRequest.contactIds = [parseInt(req.body.contactId1)];
         if (req.body.contactId2) studyRequest.contactIds.push(parseInt(req.body.contactId2));

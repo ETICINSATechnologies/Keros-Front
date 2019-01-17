@@ -82,8 +82,9 @@
                     <textarea rows="5" type="string" class="form-control" id="notes" name="notes" placeholder="Entrez des informations">{{contact.notes}}</textarea>
                   </div>
                   <div class="col-md-12 form-group">
-                    <label for="old">Désactivé </label>
-                    <input type="checkbox" id="old" name="old" {{#if contact.old}}checked{{/if}}>
+                    <label for="old">
+                      <input type="checkbox" id="old" name="old" {{#if contact.old}}checked{{/if}}> Désactivé
+                    </label>
                   </div>
                 </div>
                 <div class="box-footer">
