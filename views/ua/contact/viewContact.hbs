@@ -7,11 +7,7 @@
       <h1>
         {{#if contact}}Fiche Contact{{else}}Nouveau contact{{/if}}
       </h1>
-      {{#if contact}}
-        {{> breadcrumb tab="UA" path="Contacts,Edition d'un contact"}}
-      {{else}}
-        {{> breadcrumb tab="UA" path="Contacts,Nouveau contact"}}
-      {{/if}}
+      {{> breadcrumb action=action tab="UA" pathnew="Contacts,Nouveau contact" pathview=(concat "Contacts," (concat contact.lastName (concat " " contact.firstName))) pathedit=(concat "Contacts,Edition " (concat contact.lastName (concat " " contact.firstName))) }}
     </section>
     <section class="content">
       <div class="row">
