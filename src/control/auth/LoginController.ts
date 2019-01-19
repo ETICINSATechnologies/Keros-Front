@@ -33,6 +33,7 @@ export class LoginController {
           const options = {
             error: 401,
           };
+         res.status(401);
          res.render("auth/login", options);
         } else return next(err);
       }
