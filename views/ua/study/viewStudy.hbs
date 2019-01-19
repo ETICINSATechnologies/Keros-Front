@@ -47,11 +47,6 @@
                       {{/each}}
                     </select>
                   </div>
-                  <div class="col-md-4 form-group">
-                    <label for="confidential">
-                      <input type="checkbox" id="confidential" name="confidential" {{#if contact.confidential}}checked{{/if}}> Confidentiel
-                    </label>
-                  </div>
                   <div class="col-md-12 form-group">
                     <label for="description">Description</label>
                     <textarea rows="3" class="form-control" id="description" name="description" placeholder="Entrez la description de l'étude" >{{study.description}}</textarea>
@@ -72,6 +67,11 @@
                         <option value="{{id}}" {{selected id @root.study.provenance.id}}>{{label}}</option>
                       {{/each}}
                     </select>
+                  </div>
+                  <div class="col-md-12 form-group">
+                    <label for="confidential">
+                      <input type="checkbox" id="confidential" name="confidential" {{#if study.confidential}}checked{{/if}}> Confidentiel
+                    </label>
                   </div>
                   <h4 class="col-md-12 box-title">
                     Date
