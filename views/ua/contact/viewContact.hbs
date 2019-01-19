@@ -59,12 +59,18 @@
                   <div class="col-md-4 form-group">
                     <label for="telephone">Téléphone</label> <small>(Format international: 0033612345678)</small>
                     <input type="string" class="form-control" id="telephone" name="telephone"
-                           value="{{contact.telephone}}" placeholder="Entrez le numéro de téléphone" {{readonlyIf (eq action "view")}}>
+                           value="{{contact.telephone}}" placeholder="Entrez le numéro de téléphone" {{readonlyIf (eq action "view")}}
+                           pattern="^00\w+"
+                           oninvalid="this.setCustomValidity('Le format du numéro de téléphone est invalide')"
+                           oninput="this.setCustomValidity(' ')" onchange="this.setCustomValidity('')">
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="cellphone">Téléphone Portable</label> <small>(Format international: 0033612345678)</small>
-                    <input type="string" class="form-control" id="cellphone" name="cellphone"
-                           value="{{contact.cellphone}}" placeholder="Entrez le numéro de portable" {{readonlyIf (eq action "view")}}>
+                    <input type="text" class="form-control" id="cellphone" name="cellphone"
+                           value="{{contact.cellphone}}" placeholder="Entrez le numéro de portable" {{readonlyIf (eq action "view")}}
+                           pattern="^00\w+"
+                           oninvalid="this.setCustomValidity('Le format du numéro de téléphone est invalide')"
+                           oninput="this.setCustomValidity(' ')" onchange="this.setCustomValidity('')">
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="position">Position</label>
@@ -76,8 +82,9 @@
                     <textarea rows="5" type="string" class="form-control" id="notes" name="notes" placeholder="Entrez des informations">{{contact.notes}}</textarea>
                   </div>
                   <div class="col-md-12 form-group">
-                    <label for="old">Désactivé </label>
-                    <input type="checkbox" id="old" name="old" {{#if contact.old}}checked{{/if}}>
+                    <label for="old">
+                      <input type="checkbox" id="old" name="old" {{#if contact.old}}checked{{/if}}> Désactivé
+                    </label>
                   </div>
                 </div>
                 <div class="box-footer">
