@@ -29,15 +29,18 @@ export class LoginController {
     let request = new LoginRequest(username, password);
     AuthService.login(request, function (err: any, response: LoginResponse | null) {
       if (err) {
-        return next(err);
+        if (err === 401) {
+          const options = {
+            error: 401,
+          };
+         res.render("auth/login", options);
+        } else return next(err);
       }
-      if (response === null) {
-        const options = {
-          error: 401,
-        };
-        res.render("auth/login", options);
-        // return next(new Error("Connection échouée"));
-      } else {
+      else {
+        if (response === null) {
+          return next(new Error("Connection échouée"));
+        }
+
         let token = response.token;
         httpContext.set("token", token);
         MemberService.getConnectedMember(function (err: any, response: Member | null) {

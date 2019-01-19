@@ -17,11 +17,7 @@ export class AuthMock implements IMock {
           status = 200;
           return new MockResponse(mockObj, status);
         } else {
-          //should return error 2
-          mockObj = <T> new LoginResponse("connectionFailed");
-          status = 401;
-          return new MockResponse(mockObj, status);
-          //throw new HttpError("Authentification échouée", 401);
+          return new MockResponse(null, 401);
         }
     }
     return null;

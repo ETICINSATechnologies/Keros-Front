@@ -15,7 +15,7 @@ export class AuthService extends BaseService {
       (res: IRestResponse<LoginResponse>) => {
         if (res.statusCode !== 200) {
           if (res.statusCode === 401) {
-            return callback(null, null);
+            return callback(res.statusCode, null);
           }
           return callback(this.defaultError(), null);
         }
