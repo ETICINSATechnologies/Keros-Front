@@ -165,17 +165,17 @@
                   <div >
                     <div class="col-md-4 paginateselect">
                       <label for="leaderId1">Responsable 1</label>
-                      <select class="selectpicker selectmembers" data-width="100%" data-endpoint="/core/member" data-selected="{{study.leaders.0.id}}" name="leaderId1">
+                      <select class="selectpicker selectmembers selectleaders" data-width="100%" data-endpoint="/core/member" data-selected="{{study.leaders.0.id}}" name="leaderId1">
                       </select>
                     </div>
                     <div class="col-md-4 paginateselect">
                       <label for="leaderId2">Responsable 2</label>
-                      <select class="selectpicker selectmembers" data-width="100%" data-endpoint="/core/member" data-selected="{{study.leaders.1.id}}" name="leaderId2">
+                      <select class="selectpicker selectmembers selectleaders" data-width="100%" data-endpoint="/core/member" data-selected="{{study.leaders.1.id}}" name="leaderId2">
                       </select>
                     </div>
                     <div class="col-md-4 paginateselect">
                       <label for="leaderId3">Responsable 3</label>
-                      <select class="selectpicker selectmembers" data-width="100%" data-endpoint="/core/member" data-selected="{{study.leaders.2.id}}" name="leaderId3">
+                      <select class="selectpicker selectmembers selectleaders" data-width="100%" data-endpoint="/core/member" data-selected="{{study.leaders.2.id}}" name="leaderId3">
                       </select>
                     </div>
                   </div>
@@ -198,12 +198,12 @@
                   <hr/>
                   <div class="col-md-6 paginateselect">
                     <label for="qualityManagerId1">Responsable qualité 1</label>
-                    <select class="selectpicker selectmembers" data-width="100%" data-endpoint="/core/member" data-selected="{{study.qualityManagers.0.id}}" name="qualityManagerId1">
+                    <select class="selectpicker selectmembers selectPerfleaders" data-width="100%" data-endpoint="/core/member" data-selected="{{study.qualityManagers.0.id}}" name="qualityManagerId1">
                     </select>
                   </div>
                   <div class="col-md-6 paginateselect">
                     <label for="qualityManagerId2">Responsable qualité 2</label>
-                      <select class="selectpicker selectmembers" data-width="100%" data-endpoint="/core/member" data-selected="{{study.qualityManagers.1.id}}" name="qualityManagerId2">
+                      <select class="selectpicker selectmembers selectPerfleaders" data-width="100%" data-endpoint="/core/member" data-selected="{{study.qualityManagers.1.id}}" name="qualityManagerId2">
                       </select>
                   </div>
                   {{#if (eq action "view")}}
