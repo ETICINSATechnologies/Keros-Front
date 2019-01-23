@@ -4,34 +4,19 @@ $('document').ready( function() {
       generateOptions($(".selectpicker.selectcontacts"), data, true);
     });
   }
-  if ($(".selectpicker.selectmembers").length > 1) {
+  if ($(".selectpicker.selectconsultants").length > 1) {
     $.get("/core/member/json", function (data) {
-      data.content = data.content.filter(function(el){
-        return el.positions.some(function(el) {
-          return el == "Consultant";
-        });
-      });
-      generateOptions($(".selectpicker.selectmembers"), data, true);
+      generateOptions($(".selectpicker.selectconsultants"), data, true);
     });
   }
-  if ($(".selectpicker.selectmembers.selectleaders").length > 1) {
+  if ($(".selectpicker.selectleaders").length > 1) {
     $.get("/core/member/json", function (data) {
-      data.content = data.content.filter(function(el){
-        return el.positions.some(function(el) {
-          return el.pole.name == "Chargé d'affaire";
-        });
-      });
-      generateOptions($(".selectpicker.selectmembers.selectleaders"), data, true);
+      generateOptions($(".selectpicker.selectleaders"), data, true);
     });
   }
-  if ($(".selectpicker.selectmembers.selectPerfleaders").length > 1) {
+  if ($(".selectpicker.selectPerfleaders").length > 1) {
     $.get("/core/member/json", function (data) {
-      data.content = data.content.filter(function(el){
-        return el.positions.some(function(el) {
-          return el.pole.name == "Performance";
-        });
-      });
-      generateOptions($(".selectpicker.selectmembers.selectPerfleaders"), data, true);
+      generateOptions($(".selectpicker.selectPerfleaders"), data, true);
     });
   }
 });
@@ -49,7 +34,7 @@ $('body').on('change','.selectpicker , .form-control', function () {
   }
 
   if ($(this).val().match(/link/)) {
-    let select_menu = $(this);
+    let select_menu = $(this.parentElement.attr("class"));
     let params = {};
     params.pageNumber = $(this).val().split("_")[1];
 
@@ -63,6 +48,26 @@ $('body').on('change','.selectpicker , .form-control', function () {
 
 function generateOptions(select_menu, data, init) {
   select_menu.empty().not($(".required")).append("<option></option>");
+
+  if(select_menu.attr("class") == "selectpicker selectleaders") {
+    data.content = data.content.filter(function(el){
+      return el.positions.some(function(el) {
+        return el == "Chargé d'affaire";
+      });
+    });
+  } else if (select_menu.attr("class") == "selectpicker selectPerfleaders"){
+    data.content = data.content.filter(function(el){
+      return el.positions.some(function(el) {
+        return el.pole.name == "Performance";
+      });
+    });
+  } else if (select_menu.attr("class") == "selectpicker selectconsultants"){
+    data.content = data.content.filter(function(el){
+      return el.positions.some(function(el) {
+        return el == "Consultant";
+      });
+    });
+  }
 
   data.content.forEach(function (elem) {
       select_menu.each(function () {
