@@ -23,6 +23,7 @@
     "express": "^4.16.2",
     "express-handlebars": "^3.0.0",
     "express-http-context": "^1.2.0",
+    "handlebars-helpers": "^0.10.0",
     "hbs": "^4.0.1",
     "less-middleware": "~2.2.1",
     "typed-rest-client": "^1.0.7",

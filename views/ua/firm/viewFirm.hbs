@@ -7,11 +7,7 @@
       <h1>
         {{#if firm}}Fiche Société{{else}}Nouvelle société{{/if}}
       </h1>
-      {{#if firm}}
-      {{> breadcrumb tab="UA" path="Sociétés,Edition d'une société"}}
-      {{else}}
-      {{> breadcrumb tab="UA" path="Sociétés,Nouvelle société"}}
-      {{/if}}
+      {{> breadcrumb action=action tab="UA" pathnew="Société,Nouvelle société" pathview=(concat "Société," firm.name) pathedit=(concat "Société,Edition " firm.name) }}
     </section>
     <section class="content">
       <div class="row">

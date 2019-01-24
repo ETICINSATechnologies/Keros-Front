@@ -3,4 +3,6 @@ function editButtonPress() {
   $('#view-buttons').hide();
   $('#view-mailshots').hide();
   $('#update-buttons').show();
+  $('.view-breadcrumb').hide();
+  $('.edit-breadcrumb').show();
 }

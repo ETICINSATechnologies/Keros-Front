@@ -13,9 +13,28 @@
     <li><a href="/sg"><i class="fa fa-male"></i>SG</a></li>
   {{else if (eq (toUpper tab) "COMM") }}
     <li><a href="/comm"><i class="fa fa-bullhorn"></i>COMM</a></li>
+  {{else if (eq (toUpper tab) "PROFIL") }}
+    <li><a href="/rh"><i class="fa fa-user-circle-o"></i>Mon profil</a></li>
   {{/if}}
 
-  {{#each (split path ",")}}
-    <li {{#if @last}}class="active"{{/if}}>{{.}}</li>
-  {{/each}}
+  {{#if (eq action "all") }}
+    {{#each (split pathall ",") }}
+      <li {{#if @last}}class="active"{{/if}}>{{.}}</li>
+    {{/each}}
+  {{else if (eq action "create") }}
+    {{#each (split pathnew ",") }}
+      <li {{#if @last}}class="active"{{/if}}>{{.}}</li>
+    {{/each}}
+  {{else if (eq action "view") }}
+    {{#each (split pathview ",") }}
+        <li class="view-breadcrumb {{#if @last}}active{{/if}}">{{.}}</li>
+    {{/each}}
+    {{#each (split pathedit ",") }}
+        <li class="edit-breadcrumb {{#if @last}}active{{/if}}" style="display: none">{{.}}</li>
+    {{/each}}
+  {{else if (eq action "update") }}
+    {{#each (split pathedit ",") }}
+      <li {{#if @last}}class="active"{{/if}}>{{.}}</li>
+    {{/each}}
+  {{/if}}
 </ol>

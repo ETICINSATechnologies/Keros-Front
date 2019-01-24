@@ -7,11 +7,7 @@
       <h1>
         {{#if study}}Fiche Etude{{else}}Nouvelle étude{{/if}}
       </h1>
-      {{#if study}}
-        {{> breadcrumb tab="UA" path="Etudes,Edition d'une étude"}}
-      {{else}}
-        {{> breadcrumb tab="UA" path="Etudes,Nouvelle étude"}}
-      {{/if}}
+      {{> breadcrumb action=action tab="UA" pathnew="Etudes,Nouvelle étude" pathview=(concat "Etudes,Fiche n°" study.id) pathedit=(concat "Etudes,Edition fiche n°" study.id) }}
     </section>
     <section class="content">
       <div class="row">
@@ -254,3 +250,4 @@
 </div>
 {{> template/scripts}}
 </body>
+

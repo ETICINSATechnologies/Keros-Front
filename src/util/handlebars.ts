@@ -78,6 +78,9 @@ export default handlebars({
             str = str.slice(0, maxLength) + "...";
         }
         return str;
-    }
+    },
+    concat: function (str1: string, str2: string): string {
+      return str1 + str2;
+    },
   }
 });
