@@ -33,6 +33,19 @@ export class StudyController {
         });
     }
 
+  public viewStudiesConnectedUser(req: Request, res: Response, next: NextFunction) {
+    StudyService.getAllStudiesForConnectedUser(function (err, page: Page<Study> | null) {
+      winston.info("Getting all studies");
+      if (err) {
+        return next(err);
+      }
+      const options = {
+        studies: page,
+      };
+      res.render("ua/study/viewAll", options);
+    });
+  }
+
     public createStudy(req: Request, res: Response, next: NextFunction) {
         winston.info("Getting create study form");
         FieldService.getAllFields(function (err1, fields: Field[] | null) {

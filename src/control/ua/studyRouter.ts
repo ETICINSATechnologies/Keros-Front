@@ -15,6 +15,7 @@ export function studyRouter(): Router {
   secureRouter(router);
 
   router.get("", studyController.viewStudies);
+  router.get("/me", studyController.viewStudiesConnectedUser);
   router.get("/:id(\\d+)/", studyController.viewStudy);
   router.get("/create", studyController.createStudy);
   router.get("/update/:id(\\d+)/", studyController.updateStudy);
