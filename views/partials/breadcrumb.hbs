@@ -1,21 +1,40 @@
 <ol class="breadcrumb">
   {{#if (eq (toUpper tab) "GRC") }}
-    <li><a href="/grc"><i class="fa fa-comments"></i>GRC</a></li>
+    <li><i class="fa fa-comments"></i>GRC</li>
   {{else if (eq (toUpper tab) "RH") }}
-    <li><a href="/rh"><i class="fa fa-user-circle-o"></i>RH</a></li>
+    <li><i class="fa fa-user-circle-o"></i>RH</li>
   {{else if (eq (toUpper tab) "ACCUEIL") }}
-    <li><a href="/"><i class="fa fa-home"></i>Accueil</a></li>
+    <li><i class="fa fa-home"></i>Accueil</li>
   {{else if (eq (toUpper tab) "SUPPORT") }}
-    <li><a href="/support"><i class="fa fa-support"></i>Support</a></li>
+    <li><i class="fa fa-support"></i>Support</li>
   {{else if (eq (toUpper tab) "UA") }}
-    <li><a href="/ua"><i class="fa fa-line-chart"></i>UA</a></li>
+    <li><i class="fa fa-line-chart"></i>UA</li>
   {{else if (eq (toUpper tab) "SG") }}
-    <li><a href="/sg"><i class="fa fa-male"></i>SG</a></li>
+    <li><i class="fa fa-male"></i>SG</li>
   {{else if (eq (toUpper tab) "COMM") }}
-    <li><a href="/comm"><i class="fa fa-bullhorn"></i>COMM</a></li>
+    <li><i class="fa fa-bullhorn"></i>COMM</li>
+  {{else if (eq (toUpper tab) "PROFIL") }}
+    <li><i class="fa fa-user-circle-o"></i>Mon profil</li>
   {{/if}}
 
-  {{#each (split path ",")}}
-    <li {{#if @last}}class="active"{{/if}}>{{.}}</li>
-  {{/each}}
+  {{#if (eq action "all") }}
+    {{#each (split pathall ",") }}
+      <li {{#if @last}}class="active"{{/if}}>{{.}}</li>
+    {{/each}}
+  {{else if (eq action "create") }}
+    {{#each (split pathnew ",") }}
+      <li {{#if @last}}class="active"{{/if}}>{{.}}</li>
+    {{/each}}
+  {{else if (eq action "view") }}
+    {{#each (split pathview ",") }}
+        <li class="view-breadcrumb {{#if @last}}active{{/if}}">{{.}}</li>
+    {{/each}}
+    {{#each (split pathedit ",") }}
+        <li class="edit-breadcrumb {{#if @last}}active{{/if}}" style="display: none">{{.}}</li>
+    {{/each}}
+  {{else if (eq action "update") }}
+    {{#each (split pathedit ",") }}
+      <li {{#if @last}}class="active"{{/if}}>{{.}}</li>
+    {{/each}}
+  {{/if}}
 </ol>
