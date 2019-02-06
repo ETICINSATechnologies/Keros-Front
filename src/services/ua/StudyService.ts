@@ -4,6 +4,7 @@ import { BaseService } from "../common/BaseService";
 import { Page } from "../../models/core/Page";
 import { StudyCreateRequest } from "../../models/ua/StudyCreateRequest";
 import * as winston from "winston";
+import { StudyDocumentResponse } from '../../models/ua/StudyDocumentResponse';
 
 export class StudyService extends BaseService {
     static getStudy(id: number, callback: (err: any, result: Study | null) => void): void {
@@ -19,6 +20,20 @@ export class StudyService extends BaseService {
             e => callback(e, null)
         );
     }
+
+  static getStudyDocuments(id: number, callback: (err: any, result: StudyDocumentResponse | null) => void): void {
+    this.rest.get<StudyDocumentResponse>("ua/study/" + id + "/documents", this.defaultHeaders()).then(
+      (res: IRestResponse<StudyDocumentResponse>) => {
+        if (res.statusCode !== 200) {
+          return callback(this.defaultError(), null);
+        }
+        winston.debug("Response : " + JSON.stringify(res));
+        callback(null, res.result);
+      }
+    ).catch(
+      e => callback(e, null)
+    );
+  }
 
     static getAllStudies(callback: (err: any, result: Page<Study> | null) => void): void {
         this.rest.get<Page<Study>>("ua/study", this.defaultHeaders()).then(

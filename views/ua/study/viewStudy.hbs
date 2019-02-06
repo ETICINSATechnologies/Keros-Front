@@ -219,14 +219,22 @@
                             </div>
                           </a>
                           <div id="col-mailshots" class="panel-collapse collapse" role="tabpanel" aria-labelledby="mailshots">
-                            {{#each study.templates}}
-                              <div class="panel-body" value="{{id}}">
+                              <div class="panel-body">
+                                  <div class="col-md-6">
+                                      <b>Titre du document</b>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <b>Publiposter</b>
+                                  </div>
+                              </div>
+                            {{#each studyDocuments.documents}}
+                              <div class="panel-body">
                                 <div class="col-md-6">
                                   {{name}}
                                 </div>
                                 <div class="col-md-6">
-                                  <a href="{{link}}" target="_blank">
-                                    Générer
+                                  <a href="{{@root.clientBaseUrl}}/core/authenticate-backend?backendUrl={{link}}" target="_blank">
+                                      <i style="font-size: 2em;" class="fa fa-download"></i>
                                   </a>
                                 </div>
                               </div>

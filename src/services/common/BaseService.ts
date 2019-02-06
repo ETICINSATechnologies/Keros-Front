@@ -26,7 +26,7 @@ export class BaseService {
       if (Config.getUseMock()) {
         return new MockClient();
       }
-      return new KerosRestClient(Config.getClientBaseUrl());
+      return new KerosRestClient(Config.getBackendBaseUrl());
     }();
 
   protected static defaultError(): HttpError {
