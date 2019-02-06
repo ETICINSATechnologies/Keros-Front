@@ -66,7 +66,9 @@
                   </div>
                   <div class="col-md-12 form-group">
                     <label for="confidential">
-                      <input type="checkbox" id="confidential" name="confidential" {{#if study.confidential}}checked{{/if}}> Confidentiel
+                      <input type="checkbox" id="confidential" name="confidential"
+                        {{#if (eq action "view")}} disabled="disabled" {{/if}}
+                        {{#if study.confidential}}checked{{/if}}> Confidentiel
                     </label>
                   </div>
                   <h4 class="col-md-12 box-title">

@@ -17,8 +17,22 @@ export class DashboardController {
       if (err) {
         return next(err);
       }
+
+      let nb : number = 0;
+      if (page !== null && page.content !== undefined) {
+        page.content.forEach(getNumberOngoingStudies);
+      }
+
+      function getNumberOngoingStudies(study : any) {
+        if (study.status.id === 1) {
+          nb += 1;
+        }
+      }
+      winston.debug("Nombre d'etudes en cours: ", nb);
+
       const options = {
         studies: page,
+        nbOngoingStudies : nb,
       };
       res.render("core/dashboardStudies",options);
     });
