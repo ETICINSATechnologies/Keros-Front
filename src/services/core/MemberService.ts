@@ -34,18 +34,32 @@ export class MemberService extends BaseService {
     );
   }
 
-  static getAllMembers(callback: (err: any, result: Page<Member> | null) => void): void {
-    this.rest.get<Page<Member>>("core/member", this.defaultHeaders()).then(
-      (res: IRestResponse<Page<Member>>) => {
-        if (res.statusCode !== 200) {
-          return callback(this.defaultError(), null);
+  static getAllMembers(callback: (err: any, result: Page<Member> | null) => void, para?: string): void {
+    if (para === undefined) {
+      this.rest.get<Page<Member>>("core/member", this.defaultHeaders()).then(
+        (res: IRestResponse<Page<Member>>) => {
+          if (res.statusCode !== 200) {
+            return callback(this.defaultError(), null);
+          }
+          winston.debug("Response : " + JSON.stringify(res));
+          callback(null, res.result);
         }
-        winston.debug("Response : " + JSON.stringify(res));
-        callback(null, res.result);
-      }
-    ).catch(
-      e => callback(e, null)
-    );
+      ).catch(
+        e => callback(e, null)
+      );
+    } else {
+      this.rest.get<Page<Member>>("core/member?" + para, this.defaultHeaders()).then(
+        (res: IRestResponse<Page<Member>>) => {
+          if (res.statusCode !== 200) {
+            return callback(this.defaultError(), null);
+          }
+          winston.debug("Response : " + JSON.stringify(res));
+          callback(null, res.result);
+        }
+      ).catch(
+        e => callback(e, null)
+      );
+    }
   }
 
   static createMember(memberRequest: MemberCreateRequest, callback: (err: any) => void): void {

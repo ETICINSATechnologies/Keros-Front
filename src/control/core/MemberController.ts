@@ -195,11 +195,26 @@ export class MemberController {
   }
 
   public getJSONMembers(req: Request, res: Response, next: NextFunction) {
-    MemberService.getAllMembers(function (err, page: Page<Member> | null) {
-      winston.info("Getting JSON members");
-      if (err) return next(err);
-      res.send(page);
-    });
+    const params = req.query;
+    if (Object.keys(params).length === 0) {
+      MemberService.getAllMembers(function (err, page: Page<Member> | null) {
+        winston.info("Getting JSON members");
+        if (err) return next(err);
+        res.send(page);
+      });
+    } else {
+      let param = "";
+      for (const key in params) {
+        const value = params[key];
+        param += key + "=" + value + "&";
+      }
+      param = param.slice(0, -1);
+      MemberService.getAllMembers(function(err, page: Page<Member> | null) {
+        winston.info("Getting JSON members with specified parameters : " + param);
+        if (err) return next(err);
+        res.send(page);
+      }, param);
+    }
   }
 
 }
