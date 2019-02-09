@@ -24,11 +24,25 @@ export class ContactController {
   }
 
   public getJSONContacts(req: Request, res: Response, next: NextFunction) {
-    ContactService.getAllContacts(function (err, page: Page<Contact> | null) {
-      winston.info("Getting JSON contacts");
-      if (err) return next(err);
-      res.send(page);
-    });
+    const params = req.query;
+    if (Object.keys(params).length === 0) {
+      ContactService.getAllContacts(function (err, page: Page<Contact> | null) {
+        winston.info("Getting JSON contacts");
+        if (err) return next(err);
+        res.send(page);
+      });
+    } else {
+      let param = "";
+      for (const key in params) {
+        const value = params[key];
+        param += key + "=" + value;
+      }
+      ContactService.getAllContacts(function (err, page: Page<Contact> | null) {
+        winston.info("Getting JSON contacts for specified firmId : " + param);
+        if (err) return next(err);
+        res.send(page);
+      }, param);
+    }
   }
 
   public createContact(req: Request, res: Response, next: NextFunction) {

@@ -5,17 +5,23 @@ $('document').ready( function() {
     });
   }
   if ($(".selectpicker.selectconsultants").length > 1) {
-    $.get("/core/member/json", function (data) {
+    let params = {};
+    params.positionId = 10; // PositionId de consultant
+    $.get("/core/member/json?" + $.param(params), function (data) {
       generateOptions($(".selectpicker.selectconsultants"), data, true);
     });
   }
   if ($(".selectpicker.selectleaders").length > 1) {
-    $.get("/core/member/json", function (data) {
+    let params = {};
+    params.positionId = 7; // Position ID de chargé d'affaires
+    $.get("/core/member/json?"+ $.param(params), function (data) {
       generateOptions($(".selectpicker.selectleaders"), data, true);
     });
   }
   if ($(".selectpicker.selectPerfleaders").length > 1) {
-    $.get("/core/member/json", function (data) {
+    let params = {};
+    params.poleId = 4; // Pole ID de Performance
+    $.get("/core/member/json?"+ $.param(params), function (data) {
       generateOptions($(".selectpicker.selectPerfleaders"), data, true);
     });
   }
@@ -24,11 +30,10 @@ $('document').ready( function() {
 $('body').on('change','.selectpicker , .form-control', function () {
 
   if($(this).attr("id") == "firmId"){
-    let selectedFirm = $(this).find('option:selected').text();
-    $.get("/ua/contact/json", function (data) {
-      data.content = data.content.filter(function(el) {
-        return el.firm.name == selectedFirm;
-      });
+    let selectedFirm = $(this).find('option:selected').attr("value");
+    let params = {};
+    params.firmId = selectedFirm;
+    $.get("/ua/contact/json?" + $.param(params), function (data) {
       generateOptions($(".selectpicker.selectcontacts"), data, true);
     });
   }
@@ -48,26 +53,6 @@ $('body').on('change','.selectpicker , .form-control', function () {
 
 function generateOptions(select_menu, data, init) {
   select_menu.empty().not($(".required")).append("<option></option>");
-
-  if(select_menu.attr("class") == "selectpicker selectleaders") {
-    data.content = data.content.filter(function(el){
-      return el.positions.some(function(el) {
-        return el == "Chargé d'affaire";
-      });
-    });
-  } else if (select_menu.attr("class") == "selectpicker selectPerfleaders"){
-    data.content = data.content.filter(function(el){
-      return el.positions.some(function(el) {
-        return el.pole.name == "Performance";
-      });
-    });
-  } else if (select_menu.attr("class") == "selectpicker selectconsultants"){
-    data.content = data.content.filter(function(el){
-      return el.positions.some(function(el) {
-        return el == "Consultant";
-      });
-    });
-  }
 
   data.content.forEach(function (elem) {
       select_menu.each(function () {

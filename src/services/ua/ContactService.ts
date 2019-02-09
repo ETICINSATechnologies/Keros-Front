@@ -20,18 +20,32 @@ export class ContactService extends BaseService {
     );
   }
 
-  static getAllContacts(callback: (err: any, result: Page<Contact> | null) => void): void {
-    this.rest.get<Page<Contact>>("ua/contact", this.defaultHeaders()).then(
-      (res: IRestResponse<Page<Contact>>) => {
-        if (res.statusCode !== 200) {
-          return callback(this.defaultError(), null);
+  static getAllContacts(callback: (err: any, result: Page<Contact> | null) => void, para?: string): void {
+    if (para === undefined) {
+      this.rest.get<Page<Contact>>("ua/contact", this.defaultHeaders()).then(
+        (res: IRestResponse<Page<Contact>>) => {
+          if (res.statusCode !== 200) {
+            return callback(this.defaultError(), null);
+          }
+          winston.debug("Response : " + JSON.stringify(res));
+          callback(null, res.result);
         }
-        winston.debug("Response : " + JSON.stringify(res));
-        callback(null, res.result);
-      }
-    ).catch(
-      e => callback(e, null)
-    );
+      ).catch(
+        e => callback(e, null)
+      );
+    } else {
+      this.rest.get<Page<Contact>>("ua/contact?" + para, this.defaultHeaders()).then(
+        (res: IRestResponse<Page<Contact>>) => {
+          if (res.statusCode !== 200) {
+            return callback(this.defaultError(), null);
+          }
+          winston.debug("Response : " + JSON.stringify(res));
+          callback(null, res.result);
+        }
+      ).catch(
+        e => callback(e, null)
+      );
+    }
   }
 
   static createContact(contactRequest: ContactCreateRequest, callback: (err: any) => void): void {
