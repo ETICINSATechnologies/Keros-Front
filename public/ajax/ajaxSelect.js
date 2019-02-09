@@ -6,21 +6,21 @@ $('document').ready( function() {
   }
   if ($(".selectpicker.selectconsultants").length > 1) {
     let params = {};
-    params.positionId = 10;  //positionId supposé car aucune info trouvée dessus
+    params.positionId = 10; // PositionId de consultant
     $.get("/core/member/json?" + $.param(params), function (data) {
       generateOptions($(".selectpicker.selectconsultants"), data, true);
     });
   }
   if ($(".selectpicker.selectleaders").length > 1) {
     let params = {};
-    params.positionId = 7;
+    params.positionId = 7; // Position ID de chargé d'affaires
     $.get("/core/member/json?"+ $.param(params), function (data) {
       generateOptions($(".selectpicker.selectleaders"), data, true);
     });
   }
   if ($(".selectpicker.selectPerfleaders").length > 1) {
     let params = {};
-    params.poleId = 4;
+    params.poleId = 4; // Pole ID de Performance
     $.get("/core/member/json?"+ $.param(params), function (data) {
       generateOptions($(".selectpicker.selectPerfleaders"), data, true);
     });
