@@ -7,7 +7,6 @@ $('document').ready( function() {
   if ($(".selectpicker.selectconsultants").length > 1) {
     let params = {};
     params.positionId = 10;  //positionId supposé car aucune info trouvée dessus
-    params.poleId = 1;    // pas nécessaire du coup mais c'est possible
     $.get("/core/member/json?" + $.param(params), function (data) {
       generateOptions($(".selectpicker.selectconsultants"), data, true);
     });
@@ -15,7 +14,6 @@ $('document').ready( function() {
   if ($(".selectpicker.selectleaders").length > 1) {
     let params = {};
     params.positionId = 7;
-    params.poleId = 3;
     $.get("/core/member/json?"+ $.param(params), function (data) {
       generateOptions($(".selectpicker.selectleaders"), data, true);
     });
