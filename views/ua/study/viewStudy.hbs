@@ -7,11 +7,7 @@
       <h1>
         {{#if study}}Fiche Etude{{else}}Nouvelle étude{{/if}}
       </h1>
-      {{#if study}}
-        {{> breadcrumb tab="UA" path="Etudes,Edition d'une étude"}}
-      {{else}}
-        {{> breadcrumb tab="UA" path="Etudes,Nouvelle étude"}}
-      {{/if}}
+      {{> breadcrumb action=action tab="UA" pathnew="Etudes,Nouvelle étude" pathview=(concat "Etudes,Fiche n°" study.id) pathedit=(concat "Etudes,Edition fiche n°" study.id) }}
     </section>
     <section class="content">
       <div class="row">
@@ -31,12 +27,8 @@
                     <input type="text" class="form-control" id="name" name="name" value="{{study.name}}" placeholder="Entrez le nom de l'étude" required {{readonlyIf (eq action "view")}}>
                   </div>
                   <div class="col-md-6 form-group">
-                    <label for="projectNumber">Numéro de projet</label>
-                    <input type="number" class="form-control" id="projectNumber" name="projectNumber" value="{{study.projectNumber}}" placeholder="Entrez le numéro de projet" required {{readonlyIf (eq action "view")}}>
-                  </div>
-                  <div class="col-md-6 form-group">
                     <label for="firmId">Société</label>
-                    <select class="form-control" id="firmId" name="firmId" >
+                    <select class="form-control" id="firmId" name="firmId" {{readonlyIf (eq action "view")}}>
                       {{!TODO : Use pagination}}
                       {{#each firms.content}}
                         <option value="{{id}}" {{selected id @root.study.firm.id}}>{{name}}</option>
@@ -45,7 +37,7 @@
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="fieldId">Secteur</label>
-                    <select class="form-control" id="fieldId" name="fieldId" >
+                    <select class="form-control" id="fieldId" name="fieldId" {{readonlyIf (eq action "view")}}>
                       {{#each fields}}
                         <option value="{{id}}" {{selected id @root.study.field.id}}>{{label}}</option>
                       {{/each}}
@@ -57,20 +49,27 @@
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="statusId">Status</label>
-                    <select class="form-control" id="statusId" name="statusId" >
+                    <select class="form-control" id="statusId" name="statusId">
                       {{#each status}}
                         <option value="{{id}}" {{selected id @root.study.status.id}}>{{label}}</option>
                       {{/each}}
-                    </select>     
+                    </select>
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="provenanceId">Provenance</label>
-                    <select class="form-control" id="provenanceId" name="provenanceId" >
+                    <select class="form-control" id="provenanceId" name="provenanceId" {{readonlyIf (eq action "view")}}>
                       <option></option>
                       {{#each provenances}}
                         <option value="{{id}}" {{selected id @root.study.provenance.id}}>{{label}}</option>
                       {{/each}}
                     </select>
+                  </div>
+                  <div class="col-md-12 form-group">
+                    <label for="confidential">
+                      <input type="checkbox" id="confidential" name="confidential"
+                        {{#if (eq action "view")}} disabled="disabled" {{/if}}
+                        {{#if study.confidential}}checked{{/if}}> Confidentiel
+                    </label>
                   </div>
                   <h4 class="col-md-12 box-title">
                     Date
@@ -106,7 +105,7 @@
                     <div class="input-group">
                       <span class="input-group-addon" style="background-color: #DBE0E0; font-weight: bold;">€</span>
                       <input type="number" class="form-control" id="realizationFee" name="realizationFee" step="0.01" min="0"
-                           value="{{study.realizationFee}}" placeholder="Frais de réalisation " {{readonlyIf (eq action "view")}}>
+                             value="{{study.realizationFee}}" placeholder="Frais de réalisation " {{readonlyIf (eq action "view")}}>
                     </div>
                   </div>
                   <div class="col-md-4 form-group">
@@ -133,113 +132,118 @@
                              value="{{study.outsourcingFee}}" placeholder="Frais de sous traitance" {{readonlyIf (eq action "view")}}>
                     </div>
                   </div>
+
                   <h4 class="col-md-12 box-title">
-                    Personnels
+                    Personnel(s) Entreprise
                   </h4>
-                  <div class="col-md-4 form-group">
+
+                  <div class="col-md-4 paginateselect">
                     <label for="contactId1">Contact 1</label>
-                    <select class="form-control" id="contactId1" name="contactId1" required >
-                      {{#each contactShorts.content}}
-                        <option value="{{id}}" {{selected id @root.study.contacts.0.id}}>{{firstName}} {{lastName}}</option>
-                      {{/each}}
+                    <select class="selectpicker selectcontacts required" data-width="100%" data-endpoint="/ua/contact" data-selected="{{study.contacts.0.id}}" name="contactId1" required>
                     </select>
                   </div>
-                  <div class="col-md-4 form-group">
+                  <div class="col-md-4 paginateselect">
                     <label for="contactId2">Contact 2</label>
-                    <select class="form-control" id="contactId2" name="contactId2" >
-                      <option></option>
-                      {{#each contactShorts.content}}
-                        <option value="{{id}}" {{selected id @root.study.contacts.1.id}}>{{firstName}} {{lastName}}</option>
-                      {{/each}}
+                    <select class="selectpicker selectcontacts" data-width="100%" data-endpoint="/ua/contact" data-selected="{{study.contacts.1.id}}" name="contactId2">
                     </select>
                   </div>
-                  <div class="col-md-4 form-group">
+                  <div class="col-md-4 paginateselect">
                     <label for="contactId3">Contact 3</label>
-                    <select class="form-control" id="contactId3" name="contactId3" >
-                      <option></option>
-                      {{#each contactShorts.content}}
-                        <option value="{{id}}" {{selected id @root.study.contacts.2.id}}>{{firstName}} {{lastName}}</option>
-                      {{/each}}
-                    </select>
+                    <div id="contactId3">
+                      <select class="selectpicker selectcontacts" data-width="100%" data-endpoint="/ua/contact" data-selected="{{study.contacts.2.id}}" name="contactId3">
+                      </select>
+                    </div>
                   </div>
                   <hr/>
-                  <div class="col-md-4 form-group">
-                    <label for="leaderId1">Responsable 1</label>
-                    <select class="form-control" id="leaderId1" name="leaderId1" required >
-                      {{#each memberShorts.content}}
-                        <option value="{{id}}" {{selected id @root.study.leaders.0.id}}>{{firstName}} {{lastName}}</option>
-                      {{/each}}
-                    </select>
-                  </div>
-                  <div class="col-md-4 form-group">
-                    <label for="leaderId2">Responsable 2</label>
-                    <select class="form-control" id="leaderId2" name="leaderId2" >
-                      <option></option>
-                      {{#each memberShorts.content}}
-                        <option value="{{id}}" {{selected id @root.study.leaders.1.id}}>{{firstName}} {{lastName}}</option>
-                      {{/each}}
-                    </select>
-                  </div>
-                  <div class="col-md-4 form-group">
-                    <label for="leaderId3">Responsable 3</label>
-                    <select class="form-control" id="leaderId3" name="leaderId3" >
-                      <option></option>
-                      {{#each memberShorts.content}}
-                        <option value="{{id}}" {{selected id @root.study.leaders.3.id}}>{{firstName}} {{lastName}}</option>
-                      {{/each}}
-                    </select>
+
+                  <h4 class="col-md-12 box-title">
+                    Personnel(s) ETIC
+                  </h4>
+
+                  <div >
+                    <div class="col-md-4 paginateselect">
+                      <label for="leaderId1">Responsable 1</label>
+                      <select class="selectpicker selectleaders" data-width="100%" data-endpoint="/core/member" data-selected="{{study.leaders.0.id}}" name="leaderId1">
+                      </select>
+                    </div>
+                    <div class="col-md-4 paginateselect">
+                      <label for="leaderId2">Responsable 2</label>
+                      <select class="selectpicker selectleaders" data-width="100%" data-endpoint="/core/member" data-selected="{{study.leaders.1.id}}" name="leaderId2">
+                      </select>
+                    </div>
+                    <div class="col-md-4 paginateselect">
+                      <label for="leaderId3">Responsable 3</label>
+                      <select class="selectpicker selectleaders" data-width="100%" data-endpoint="/core/member" data-selected="{{study.leaders.2.id}}" name="leaderId3">
+                      </select>
+                    </div>
                   </div>
                   <hr/>
-                  <div class="col-md-4 form-group">
+                  <div class="col-md-4 paginateselect">
                     <label for="consultantId1">Consultant 1</label>
-                    <select class="form-control" id="consultantId1" name="consultantId1" required >
-                      {{#each memberShorts.content}}
-                        <option value="{{id}}" {{selected id @root.study.consultants.0.id}}>{{firstName}} {{lastName}}</option>
-                      {{/each}}
+                    <select class="selectpicker selectconsultants" data-width="100%" data-endpoint="/core/member" data-selected="{{study.consultants.0.id}}" name="consultantId1">
+                    </select>
+                  </div>
+                  <div class="col-md-4 paginateselect">
+                    <label for="consultantId2">Consultant 2</label>
+                    <select class="selectpicker selectconsultants" data-width="100%" data-endpoint="/core/member" data-selected="{{study.consultants.1.id}}" name="consultantId2">
+                    </select>
+                  </div>
+                  <div class="col-md-4 paginateselect">
+                    <label for="consultantId3">Consultant 3</label>
+                    <select class="selectpicker selectconsultants" data-width="100%" data-endpoint="/core/member" data-selected="{{study.consultants.2.id}}" name="consultantId3">
+                    </select>
+                  </div>
+                  <hr/>
+                  <div class="col-md-6 paginateselect">
+                    <label for="qualityManagerId1">Responsable qualité 1</label>
+                    <select class="selectpicker selectPerfleaders" data-width="100%" data-endpoint="/core/member" data-selected="{{study.qualityManagers.0.id}}" name="qualityManagerId1">
+                    </select>
+                  </div>
+                  <div class="col-md-6 paginateselect">
+                    <label for="qualityManagerId2">Responsable qualité 2</label>
+                      <select class="selectpicker selectPerfleaders" data-width="100%" data-endpoint="/core/member" data-selected="{{study.qualityManagers.1.id}}" name="qualityManagerId2">
                       </select>
                   </div>
-                  <div class="col-md-4 form-group">
-                    <label for="consultantId2">Consultant 2</label>
-                    <select class="form-control" id="consultantId2" name="consultantId2" >
-                      <option></option>
-                      {{#each memberShorts.content}}
-                        <option value="{{id}}" {{selected id @root.study.consultants.1.id}}>{{firstName}} {{lastName}}</option>
-                      {{/each}}
-                    </select>
-                  </div>
-                  <div class="col-md-4 form-group">
-                    <label for="consultantId3">Consultant 3</label>
-                    <select class="form-control" id="consultantId3" name="consultantId3" >
-                      <option></option>
-                      {{#each memberShorts.content}}
-                        <option value="{{id}}" {{selected id @root.study.consultants.2.id}}>{{firstName}} {{lastName}}</option>
-                      {{/each}}
-                    </select>
-                  </div>
-                  <hr/>
-                  <div class="col-md-6 form-group">
-                    <label for="qualityManagerId1">Responsable qualité 1</label>
-                    <select class="form-control" id="qualityManagerId1" name="qualityManagerId1" required >
-                      {{#each memberShorts.content}}
-                        <option value="{{id}}" {{selected id @root.study.qualityManagers.0.id}}>{{firstName}} {{lastName}}</option>
-                      {{/each}}
-                    </select>
-                  </div>
-                  <div class="col-md-6 form-group">
-                    <label for="qualityManagerId2">Responsable qualité 2</label>
-                    <select class="form-control" id="qualityManagerId2" name="qualityManagerId2">
-                      <option></option>
-                      {{#each memberShorts.content}}
-                        <option value="{{id}}" {{selected id @root.study.qualityManagers.1.id}}>{{firstName}} {{lastName}}</option>
-                      {{/each}}
-                    </select>
-                  </div>
-                  <h4 class="col-md-12 box-title">
-                    Publipostage
-                  </h4>
-                  <div class="col-md-12">
-                    <a href="/ua/study">Template Test 1
-                  </div>
+                  {{#if (eq action "view")}}
+                    <div id="view-mailshots">
+                      <h4 class="col-md-12 box-title">
+                        Publipostage
+                      </h4>
+                      <div class="col-md-12">
+                        <div class="panel panel-default">
+                          <a data-toggle="collapse" data-parent="#faq" href="#col-mailshots" aria-expanded="false" aria-controls="elemmailshots">
+                            <div class="panel-heading" role="tab" id="mailshots" style="background-color:#F5F5F5;">
+                              <h5 class="panel-title">
+                                Afficher
+                              </h5>
+                            </div>
+                          </a>
+                          <div id="col-mailshots" class="panel-collapse collapse" role="tabpanel" aria-labelledby="mailshots">
+                              <div class="panel-body">
+                                  <div class="col-md-6">
+                                      <b>Titre du document</b>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <b>Publiposter</b>
+                                  </div>
+                              </div>
+                            {{#each studyDocuments.documents}}
+                              <div class="panel-body">
+                                <div class="col-md-6">
+                                  {{name}}
+                                </div>
+                                <div class="col-md-6">
+                                  <a href="{{@root.clientBaseUrl}}/core/authenticate-backend?backendUrl={{link}}" target="_blank">
+                                      <i style="font-size: 2em;" class="fa fa-download"></i>
+                                  </a>
+                                </div>
+                              </div>
+                            {{/each}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  {{/if}}
                 </div>
                 <div class="box-footer">
                   <a href="/ua/study"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button></a>
@@ -256,3 +260,4 @@
 </div>
 {{> template/scripts}}
 </body>
+

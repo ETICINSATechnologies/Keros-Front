@@ -16,14 +16,18 @@
     "mocha": "cross-env NODE_ENV=testing mocha dist/test --recursive --exit"
   },
   "dependencies": {
+    "@types/request": "^2.48.1",
     "body-parser": "^1.18.2",
+    "bootstrap-select": "^1.13.5",
     "cookie-parser": "^1.4.3",
     "errorhandler": "^1.5.0",
     "express": "^4.16.2",
     "express-handlebars": "^3.0.0",
     "express-http-context": "^1.2.0",
+    "handlebars-helpers": "^0.10.0",
     "hbs": "^4.0.1",
     "less-middleware": "~2.2.1",
+    "request": "^2.88.0",
     "typed-rest-client": "^1.0.7",
     "winston": "^2.4.2"
   },

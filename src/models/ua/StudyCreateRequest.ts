@@ -19,5 +19,6 @@ export class StudyCreateRequest {
     public leaderIds ?: number[],
     public consultantIds ?: number[],
     public qualityManagerIds ?: number [],
+    public confidential ?: boolean,
   ) {}
 }
