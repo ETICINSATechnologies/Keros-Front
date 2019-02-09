@@ -1,22 +1,23 @@
-import { NextFunction, Request, Response } from "express";
-import { StudyService } from "../../services/ua/StudyService";
-import { Study } from "../../models/ua/Study";
-import * as winston from "winston";
-import { Page } from "../../models/core/Page";
-import { StatusService } from "../../services/ua/StatusService";
-import { Status } from "../../models/ua/Status";
-import { FirmService } from "../../services/ua/FirmService";
-import { Firm } from "../../models/ua/Firm";
-import { StudyCreateRequest } from "../../models/ua/StudyCreateRequest";
-import { ContactService } from "../../services/ua/ContactService";
-import { Contact } from "../../models/ua/Contact";
-import { MemberService } from "../../services/core/MemberService";
-import { Member } from "../../models/core/Member";
-import { FieldService } from "../../services/ua/FieldService";
-import { Field } from "../../models/ua/Field";
-import { ProvenanceService } from "../../services/ua/ProvenanceService";
-import { Provenance } from "../../models/ua/Provenance";
-import * as httpContext from "express-http-context";
+import { NextFunction, Request, Response } from 'express';
+import { StudyService } from '../../services/ua/StudyService';
+import { Study } from '../../models/ua/Study';
+import * as winston from 'winston';
+import { Page } from '../../models/core/Page';
+import { StatusService } from '../../services/ua/StatusService';
+import { Status } from '../../models/ua/Status';
+import { FirmService } from '../../services/ua/FirmService';
+import { Firm } from '../../models/ua/Firm';
+import { StudyCreateRequest } from '../../models/ua/StudyCreateRequest';
+import { ContactService } from '../../services/ua/ContactService';
+import { Contact } from '../../models/ua/Contact';
+import { MemberService } from '../../services/core/MemberService';
+import { Member } from '../../models/core/Member';
+import { FieldService } from '../../services/ua/FieldService';
+import { Field } from '../../models/ua/Field';
+import { ProvenanceService } from '../../services/ua/ProvenanceService';
+import { Provenance } from '../../models/ua/Provenance';
+import { Config } from '../../config/Config';
+import { StudyDocumentResponse } from '../../models/ua/StudyDocumentResponse';
 
 export class StudyController {
     public viewStudies(req: Request, res: Response, next: NextFunction) {
@@ -93,30 +94,35 @@ export class StudyController {
         let id = req.params.id;
         winston.info("Getting study for id " + id);
         StudyService.getStudy(id, function (err1, study: Study | null) {
-            FieldService.getAllFields(function (err2, fields: Field[] | null) {
-                StatusService.getAllStatus(function (err3, status: Status[] | null) {
-                    FirmService.getAllFirms(function (err4, firms: Page<Firm> | null) {
-                        ContactService.getAllContacts(function (err5, contactShorts: Page<Contact> | null) {
-                            MemberService.getAllMembers(function (err6, memberShorts: Page<Member> | null) {
-                                ProvenanceService.getAllProvenances(function (err7, provenances: Provenance[] | null) {
-                                    if (err1) return next(err1);
-                                    if (err2) return next(err2);
-                                    if (err3) return next(err3);
-                                    if (err4) return next(err4);
-                                    if (err5) return next(err5);
-                                    if (err6) return next(err6);
-                                    if (err7) return next(err7);
-                                    const options = {
-                                        study: study,
-                                        fields: fields,
-                                        status: status,
-                                        firms: firms,
-                                        contactShorts: contactShorts,
-                                        memberShorts: memberShorts,
-                                        provenances: provenances,
-                                        action: "view"
-                                    };
-                                    res.render("ua/study/viewStudy", options);
+            StudyService.getStudyDocuments(id, function (err2, studyDocuments: StudyDocumentResponse | null) {
+                FieldService.getAllFields(function (err3, fields: Field[] | null) {
+                    StatusService.getAllStatus(function (err4, status: Status[] | null) {
+                        FirmService.getAllFirms(function (err5, firms: Page<Firm> | null) {
+                            ContactService.getAllContacts(function (err6, contactShorts: Page<Contact> | null) {
+                                MemberService.getAllMembers(function (err7, memberShorts: Page<Member> | null) {
+                                    ProvenanceService.getAllProvenances(function (err8, provenances: Provenance[] | null) {
+                                        if (err1) return next(err1);
+                                        if (err2) return next(err2);
+                                        if (err3) return next(err3);
+                                        if (err4) return next(err4);
+                                        if (err5) return next(err5);
+                                        if (err6) return next(err6);
+                                        if (err7) return next(err7);
+                                        if (err8) return next(err8);
+                                        const options = {
+                                            study: study,
+                                            studyDocuments: studyDocuments,
+                                            fields: fields,
+                                            status: status,
+                                            firms: firms,
+                                            contactShorts: contactShorts,
+                                            memberShorts: memberShorts,
+                                            provenances: provenances,
+                                            clientBaseUrl: Config.getClientBaseUrl(),
+                                            action: "view"
+                                        };
+                                        res.render("ua/study/viewStudy", options);
+                                    });
                                 });
                             });
                         });

@@ -1,7 +1,8 @@
 {
   "env": "testing",
   "httpPort": 8081,
-  "clientBaseUrl": "",
+  "clientBaseUrl": "https://keros-dev.etic-insa.com",
+  "backendBaseUrl": "",
   "useMock": true,
   "logLevel": "debug"
 }
