@@ -90,6 +90,33 @@ export class StudyService extends BaseService {
         e => callback(e, null)
       );
     }
+
+  static getOnGoingStudiesForConnectedUser(callback: (err: any, result: Page<Study> | null, numberStudies: number) => void): void {
+    let pageOnGoingStudies : Page<Study>;
+    let nb = 0;
+      this.getAllStudiesForConnectedUser(function (err, page: Page<Study> | null) {
+        if (err) {
+          return err;
+        }
+
+        if (page && page.content) {
+          pageOnGoingStudies = new Page<Study>();
+          pageOnGoingStudies.meta = page.meta;
+          pageOnGoingStudies.content = [];
+
+          page.content.forEach(function (study:any, index:number)  {
+           if (study.status.id === 1) {
+             if (pageOnGoingStudies.content)
+             pageOnGoingStudies.content.push(study);
+           }
+          });
+        }
+        winston.debug("Ongoing studies : ",pageOnGoingStudies);
+        nb = (pageOnGoingStudies.content) ? pageOnGoingStudies.content.length : 0;
+        winston.debug("Number of ongoing studies : ",nb);
+        callback(null,pageOnGoingStudies, nb);
+      });
+  }
     
     static delete(id: number, callback: (err: any) => void): void {
         this.rest.del<Study>("ua/study/" + id, this.defaultHeaders()).then(
