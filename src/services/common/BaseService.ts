@@ -29,11 +29,11 @@ export class BaseService {
       return new KerosRestClient(Config.getBackendBaseUrl());
     }();
 
-  protected static defaultError(): HttpError {
-    return new HttpError("Erreur de connection avec le back", 500);
+  protected static defaultError(status: number): HttpError {
+    return new HttpError("Erreur de connection avec le back (Status: " + status + ")", 500);
   }
 
-  protected static defaultHeaders(): IRequestOptions {
+  public static defaultHeaders(): IRequestOptions {
     return {additionalHeaders: {Authorization: httpContext.get("token")}};
   }
 }

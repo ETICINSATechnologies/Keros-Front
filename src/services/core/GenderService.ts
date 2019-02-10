@@ -14,7 +14,7 @@ export class GenderService extends BaseService {
       this.rest.getAll<Gender>("core/gender", this.defaultHeaders()).then(
         (res: IRestResponse<Gender[]>) => {
           if (res.statusCode !== 200) {
-            return callback(this.defaultError(), null);
+            return callback(this.defaultError(res.statusCode), null);
           }
           winston.debug("Response : " + JSON.stringify(res));
           this.cacheGendersValues = res.result;

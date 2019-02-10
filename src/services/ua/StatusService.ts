@@ -15,7 +15,7 @@ export class StatusService extends BaseService {
       this.rest.getAll<Status>("ua/status", this.defaultHeaders()).then(
         (res: IRestResponse<Status[]>) => {
           if (res.statusCode !== 200) {
-            return callback(this.defaultError(), null);
+            return callback(this.defaultError(res.statusCode), null);
           }
           winston.debug("Response : " + JSON.stringify(res));
           this.cacheStatusValues = res.result;
@@ -32,7 +32,7 @@ export class StatusService extends BaseService {
     this.rest.get<Status>("ua/status/" + id, this.defaultHeaders()).then(
       (res: IRestResponse<Status>) => {
         if (res.statusCode !== 200) {
-          return callback(this.defaultError(), null);
+          return callback(this.defaultError(res.statusCode), null);
         }
         winston.debug("Response : " + JSON.stringify(res));
         callback(null, res.result);

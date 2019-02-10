@@ -8,7 +8,7 @@ export class AddressService extends BaseService {
     this.rest.get<Address>("core/address/" + id, this.defaultHeaders()).then(
       (res: IRestResponse<Address>) => {
         if (res.statusCode !== 200) {
-          return callback(this.defaultError(), null);
+          return callback(this.defaultError(res.statusCode), null);
         }
         winston.debug("Response : " + JSON.stringify(res));
         callback(null, res.result);

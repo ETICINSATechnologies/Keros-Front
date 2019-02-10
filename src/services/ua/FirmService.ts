@@ -10,7 +10,7 @@ export class FirmService extends BaseService {
     this.rest.get<Firm>("ua/firm/" + id, this.defaultHeaders()).then(
       (res: IRestResponse<Firm>) => {
         if (res.statusCode !== 200) {
-          return callback(this.defaultError(), null);
+          return callback(this.defaultError(res.statusCode), null);
         }
         winston.debug("Response : " + JSON.stringify(res));
         callback(null, res.result);
@@ -24,7 +24,7 @@ export class FirmService extends BaseService {
     this.rest.get<Page<Firm>>("ua/firm", this.defaultHeaders()).then(
       (res: IRestResponse<Page<Firm>>) => {
         if (res.statusCode !== 200) {
-          return callback(this.defaultError(), null);
+          return callback(this.defaultError(res.statusCode), null);
         }
         winston.debug("Response : " + JSON.stringify(res));
         callback(null, res.result);
@@ -38,7 +38,7 @@ export class FirmService extends BaseService {
     this.rest.create<FirmCreateRequest>("ua/firm", firmRequest, this.defaultHeaders()).then(
       (res: IRestResponse<FirmCreateRequest>) => {
         if (res.statusCode !== 201) {
-          return callback(this.defaultError());
+          return callback(this.defaultError(res.statusCode));
         }
         winston.debug("Response : " + JSON.stringify(res));
         callback(null);
@@ -52,7 +52,7 @@ export class FirmService extends BaseService {
     this.rest.update<FirmCreateRequest>("ua/firm/" + id, firmRequest, this.defaultHeaders()).then(
       (res: IRestResponse<FirmCreateRequest>) => {
         if (res.statusCode !== 200) {
-          return callback(this.defaultError());
+          return callback(this.defaultError(res.statusCode));
         }
         winston.debug("Response : " + JSON.stringify(res));
         callback(null);
@@ -66,7 +66,7 @@ export class FirmService extends BaseService {
     this.rest.del<Firm>("ua/firm/" + id, this.defaultHeaders()).then(
       (res: IRestResponse<Firm>) => {
         if (res.statusCode !== 204) {
-          return callback(this.defaultError());
+          return callback(this.defaultError(res.statusCode));
         }
         winston.debug("Response : " + JSON.stringify(res));
         callback(null);
