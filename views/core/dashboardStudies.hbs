@@ -36,18 +36,21 @@
             <div class="box-body no-padding">
               <table class="table table-bordered">
                 {{#each studies.content}}
-                {{#if (lt @index 2)}}
-                <tr>
-                  <td>
-                    <div>
-                      <a href="/ua/study/{{id}}"><b>{{ifExists name '<i>Aucun</i>'}}</b></a>
-                      <p class="text-muted">
-                        {{#if (gt description.length 100)}}{{maxLength description 100}}
-                        {{else}}{{description}}{{/if}}
-                      </p>
-                    </div>
-                  </td>
-                </tr>
+                  {{#if (eq status.id 1)}}
+                  {{#if (lt @index 2)}}
+
+                  <tr>
+                    <td>
+                      <div>
+                        <a href="/ua/study/{{id}}"><b>{{ifExists name '<i>Aucun</i>'}}</b></a>
+                        <p class="text-muted">
+                          {{#if (gt description.length 100)}}{{maxLength description 100}}
+                          {{else}}{{description}}{{/if}}
+                        </p>
+                      </div>
+                    </td>
+                  </tr>
+                  {{/if}}
                 {{/if}}
                 {{/each}}
                 <tr>
