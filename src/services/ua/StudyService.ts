@@ -6,6 +6,7 @@ import { StudyCreateRequest } from "../../models/ua/StudyCreateRequest";
 import * as winston from "winston";
 import { StudyDocumentResponse } from '../../models/ua/StudyDocumentResponse';
 
+
 export class StudyService extends BaseService {
     static getStudy(id: number, callback: (err: any, result: Study | null) => void): void {
         this.rest.get<Study>("ua/study/" + id, this.defaultHeaders()).then(
