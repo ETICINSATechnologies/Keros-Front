@@ -68,7 +68,7 @@ export class StudyMock implements IMock {
         return new MockResponse(mockObj, status);
       case "ua/study/1/documents":
       case "ua/study/2/documents":
-        mockObj = <T> new StudyDocumentResponse([new StudyDocument(1, "Evian", "https://keros.back-api/study/1/template/1"), new StudyDocument(2, "Hepar", "https://keros.back-api/study/1/template/2")]);
+        mockObj = <T> new StudyDocumentResponse([new StudyDocument(1, "Evian", "https://keros.back-api/study/1/template/1", "https://keros.back-api/study/1/document/1", "https://keros.back-api/study/1/document/1"), new StudyDocument(2, "Hepar", "https://keros.back-api/study/1/template/2", "https://keros.back-api/study/1/document/2", "https://keros.back-api/study/1/document/2")]);
         status = 200;
         return new MockResponse(mockObj, status);
     }
