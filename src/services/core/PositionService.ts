@@ -14,7 +14,7 @@ export class PositionService extends BaseService {
       this.rest.getAll<Position>("core/position", this.defaultHeaders()).then(
         (res: IRestResponse<Position[]>) => {
           if (res.statusCode !== 200) {
-            return callback(this.defaultError(), null);
+            return callback(this.defaultError(res.statusCode), null);
           }
           winston.debug("Response : " + JSON.stringify(res));
           this.cachePositionsValues = res.result;
@@ -31,7 +31,7 @@ export class PositionService extends BaseService {
     this.rest.get<Position>("core/position/" + id, this.defaultHeaders()).then(
       (res: IRestResponse<Position>) => {
         if (res.statusCode !== 200) {
-          return callback(this.defaultError(), null);
+          return callback(this.defaultError(res.statusCode), null);
         }
         winston.debug("Response : " + JSON.stringify(res));
         callback(null, res.result);

@@ -15,7 +15,7 @@ export class FieldService extends BaseService {
       this.rest.getAll<Field>("ua/field", this.defaultHeaders()).then(
         (res: IRestResponse<Field[]>) => {
           if (res.statusCode !== 200) {
-            return callback(this.defaultError(), null);
+            return callback(this.defaultError(res.statusCode), null);
           }
           winston.debug("Response : " + JSON.stringify(res));
           this.cacheFieldsValues = res.result;
@@ -32,7 +32,7 @@ export class FieldService extends BaseService {
     this.rest.get<Field>("ua/field/" + id, this.defaultHeaders()).then(
       (res: IRestResponse<Field>) => {
         if (res.statusCode !== 200) {
-          return callback(this.defaultError(), null);
+          return callback(this.defaultError(res.statusCode), null);
         }
         winston.debug("Response : " + JSON.stringify(res));
         callback(null, res.result);

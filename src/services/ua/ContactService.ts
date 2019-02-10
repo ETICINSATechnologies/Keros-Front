@@ -10,7 +10,7 @@ export class ContactService extends BaseService {
     this.rest.get<Contact>("ua/contact/" + id, this.defaultHeaders()).then(
       (res: IRestResponse<Contact>) => {
         if (res.statusCode !== 200) {
-          return callback(this.defaultError(), null);
+          return callback(this.defaultError(res.statusCode), null);
         }
         winston.debug("Response : " + JSON.stringify(res));
         callback(null, res.result);
@@ -25,7 +25,7 @@ export class ContactService extends BaseService {
       this.rest.get<Page<Contact>>("ua/contact", this.defaultHeaders()).then(
         (res: IRestResponse<Page<Contact>>) => {
           if (res.statusCode !== 200) {
-            return callback(this.defaultError(), null);
+            return callback(this.defaultError(res.statusCode), null);
           }
           winston.debug("Response : " + JSON.stringify(res));
           callback(null, res.result);
@@ -37,7 +37,7 @@ export class ContactService extends BaseService {
       this.rest.get<Page<Contact>>("ua/contact?" + para, this.defaultHeaders()).then(
         (res: IRestResponse<Page<Contact>>) => {
           if (res.statusCode !== 200) {
-            return callback(this.defaultError(), null);
+            return callback(this.defaultError(res.statusCode), null);
           }
           winston.debug("Response : " + JSON.stringify(res));
           callback(null, res.result);
@@ -52,7 +52,7 @@ export class ContactService extends BaseService {
     this.rest.create<ContactCreateRequest>("ua/contact", contactRequest, this.defaultHeaders()).then(
       (res: IRestResponse<ContactCreateRequest>) => {
         if (res.statusCode !== 201) {
-          return callback(this.defaultError());
+          return callback(this.defaultError(res.statusCode));
         }
         winston.debug("Response : " + JSON.stringify(res));
         callback(null);
@@ -66,7 +66,7 @@ export class ContactService extends BaseService {
     this.rest.update<ContactCreateRequest>("ua/contact/" + id, contactRequest, this.defaultHeaders()).then(
       (res: IRestResponse<ContactCreateRequest>) => {
         if (res.statusCode !== 200) {
-          return callback(this.defaultError());
+          return callback(this.defaultError(res.statusCode));
         }
         winston.debug("Response : " + JSON.stringify(res));
         callback(null);
@@ -80,7 +80,7 @@ export class ContactService extends BaseService {
     this.rest.del<Contact>("ua/contact/" + id, this.defaultHeaders()).then(
       (res: IRestResponse<Contact>) => {
         if (res.statusCode !== 204) {
-          return callback(this.defaultError());
+          return callback(this.defaultError(res.statusCode));
         }
         winston.debug("Response : " + JSON.stringify(res));
         callback(null);

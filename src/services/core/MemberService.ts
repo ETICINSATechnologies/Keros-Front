@@ -10,7 +10,7 @@ export class MemberService extends BaseService {
     this.rest.get<Member>('core/member/' + id, this.defaultHeaders()).then(
       (res: IRestResponse<Member>) => {
         if (res.statusCode !== 200) {
-          return callback(this.defaultError(), null);
+          return callback(this.defaultError(res.statusCode), null);
         }
         winston.debug('Response : ' + JSON.stringify(res));
         callback(null, res.result);
@@ -24,7 +24,7 @@ export class MemberService extends BaseService {
     this.rest.get<Member>('core/member/me', this.defaultHeaders()).then(
       (res: IRestResponse<Member>) => {
         if (res.statusCode !== 200) {
-          return callback(this.defaultError(), null);
+          return callback(this.defaultError(res.statusCode), null);
         }
         winston.debug('Response : ' + JSON.stringify(res));
         callback(null, res.result);
@@ -48,7 +48,7 @@ export class MemberService extends BaseService {
     this.rest.get<Page<Member>>('core/member' + queryString, this.defaultHeaders()).then(
       (res: IRestResponse<Page<Member>>) => {
         if (res.statusCode !== 200) {
-          return callback(this.defaultError(), null);
+          return callback(this.defaultError(res.statusCode), null);
         }
         winston.debug('Response : ' + JSON.stringify(res));
         callback(null, res.result);
@@ -62,7 +62,7 @@ export class MemberService extends BaseService {
     this.rest.create<MemberCreateRequest>('core/member', memberRequest, this.defaultHeaders()).then(
       (res: IRestResponse<MemberCreateRequest>) => {
         if (res.statusCode !== 201) {
-          return callback(this.defaultError());
+          return callback(this.defaultError(res.statusCode));
         }
         winston.debug('Response : ' + JSON.stringify(res));
         callback(null);
@@ -76,7 +76,7 @@ export class MemberService extends BaseService {
     this.rest.update<MemberCreateRequest>('core/member/' + memberId, memberRequest, this.defaultHeaders()).then(
       (res: IRestResponse<MemberCreateRequest>) => {
         if (res.statusCode !== 200) {
-          return callback(this.defaultError());
+          return callback(this.defaultError(res.statusCode));
         }
         winston.debug('Response : ' + JSON.stringify(res));
         callback(null);
@@ -90,7 +90,7 @@ export class MemberService extends BaseService {
     this.rest.del<Member>('core/member/' + memberId, this.defaultHeaders()).then(
       (res: IRestResponse<Member>) => {
         if (res.statusCode !== 204) {
-          return callback(this.defaultError());
+          return callback(this.defaultError(res.statusCode));
         }
         winston.debug('Response : ' + JSON.stringify(res));
         callback(null);

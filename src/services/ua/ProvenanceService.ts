@@ -15,7 +15,7 @@ export class ProvenanceService extends BaseService {
       this.rest.getAll<Provenance>("ua/provenance", this.defaultHeaders()).then(
         (res: IRestResponse<Provenance[]>) => {
           if (res.statusCode !== 200) {
-            return callback(this.defaultError(), null);
+            return callback(this.defaultError(res.statusCode), null);
           }
           winston.debug("Response : " + JSON.stringify(res));
           this.cacheProvenancesValues = res.result;
@@ -32,7 +32,7 @@ export class ProvenanceService extends BaseService {
     this.rest.get<Provenance>("ua/provenance/" + id, this.defaultHeaders()).then(
       (res: IRestResponse<Provenance>) => {
         if (res.statusCode !== 200) {
-          return callback(this.defaultError(), null);
+          return callback(this.defaultError(res.statusCode), null);
         }
         winston.debug("Response : " + JSON.stringify(res));
         callback(null, res.result);

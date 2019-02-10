@@ -15,7 +15,7 @@ export class DepartmentService extends BaseService {
       this.rest.getAll<Department>("core/department", this.defaultHeaders()).then(
         (res: IRestResponse<Department[]>) => {
           if (res.statusCode !== 200) {
-            return callback(this.defaultError(), null);
+            return callback(this.defaultError(res.statusCode), null);
           }
           winston.debug("Response : " + JSON.stringify(res));
           this.cacheDepartmentsValues = res.result;
@@ -32,7 +32,7 @@ export class DepartmentService extends BaseService {
     this.rest.get<Department>("core/department/" + id, this.defaultHeaders()).then(
       (res: IRestResponse<Department>) => {
         if (res.statusCode !== 200) {
-          return callback(this.defaultError(), null);
+          return callback(this.defaultError(res.statusCode), null);
         }
         winston.debug("Response : " + JSON.stringify(res));
         callback(null, res.result);

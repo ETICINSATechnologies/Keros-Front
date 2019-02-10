@@ -15,7 +15,7 @@ export class FirmTypeService extends BaseService {
       this.rest.getAll<FirmType>("ua/firm-type", this.defaultHeaders()).then(
         (res: IRestResponse<FirmType[]>) => {
           if (res.statusCode !== 200) {
-            return callback(this.defaultError(), null);
+            return callback(this.defaultError(res.statusCode), null);
           }
           winston.debug("Response : " + JSON.stringify(res));
           this.cacheFirmTypesValues = res.result;
@@ -32,7 +32,7 @@ export class FirmTypeService extends BaseService {
     this.rest.get<FirmType>("ua/firm-type/" + id, this.defaultHeaders()).then(
       (res: IRestResponse<FirmType>) => {
         if (res.statusCode !== 200) {
-          return callback(this.defaultError(), null);
+          return callback(this.defaultError(res.statusCode), null);
         }
         winston.debug("Response : " + JSON.stringify(res));
         callback(null, res.result);
