@@ -12,27 +12,13 @@ export class DashboardController {
   }
 
   public viewStudiesOnDashboard(req: Request, res: Response, next: NextFunction) {
-    StudyService.getAllStudiesForConnectedUser(function (err, page: Page<Study> | null) {
-      winston.info("Getting all studies for connected user");
-      if (err) {
-        return next(err);
-      }
-
-      let nb : number = 0;
-      if (page !== null && page.content !== undefined) {
-        page.content.forEach(getNumberOngoingStudies);
-      }
-
-      function getNumberOngoingStudies(study : any) {
-        if (study.status.id === 1) {
-          nb += 1;
+    StudyService.getOnGoingStudiesForConnectedUser(function (err, page: Page<Study> | null, nbStudies: number) {
+        if (err) {
+          return next(err);
         }
-      }
-      winston.debug("Nombre d'etudes en cours: ", nb);
-
       const options = {
         studies: page,
-        nbOngoingStudies : nb,
+        nbOngoingStudies : nbStudies,
       };
       res.render("core/dashboardStudies",options);
     });

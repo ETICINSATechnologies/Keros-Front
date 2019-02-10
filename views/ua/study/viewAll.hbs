@@ -33,7 +33,7 @@
                   {{#each studies.content}}
                     <tr>
                       <td>{{ifExists name '<i>Aucun</i>'}}</td>
-                      <td>{{projectNumber}}</td>
+                      <td>{{id}}</td>
                       <td>{{status.label}}</td>
                       <td>{{firm.name}}</td>
                       <td>{{#if contacts}}{{#each contacts}}{{firstName}} {{lastName}}<br/>{{/each}}{{else}}<i>Aucun</i>{{/if}}</td>

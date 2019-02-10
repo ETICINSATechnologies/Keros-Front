@@ -15,7 +15,7 @@ export class CountryService extends BaseService {
       this.rest.getAll<Country>("core/country", this.defaultHeaders()).then(
         (res: IRestResponse<Country[]>) => {
           if (res.statusCode !== 200) {
-            return callback(this.defaultError(), null);
+            return callback(this.defaultError(res.statusCode), null);
           }
           winston.debug("Response : " + JSON.stringify(res));
           this.cacheCountriesValues = res.result;
@@ -32,7 +32,7 @@ export class CountryService extends BaseService {
     this.rest.get<Country>("core/country/" + id, this.defaultHeaders()).then(
       (res: IRestResponse<Country>) => {
         if (res.statusCode !== 200) {
-          return callback(this.defaultError(), null);
+          return callback(this.defaultError(res.statusCode), null);
         }
         winston.debug("Response : " + JSON.stringify(res));
         callback(null, res.result);
