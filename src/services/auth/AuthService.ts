@@ -17,7 +17,7 @@ export class AuthService extends BaseService {
           if (res.statusCode === 401) {
             return callback(res.statusCode, null);
           }
-          return callback(this.defaultError(), null);
+          return callback(this.defaultError(res.statusCode), null);
         }
         winston.debug("Response : " + JSON.stringify(res));
         callback(null, res.result);

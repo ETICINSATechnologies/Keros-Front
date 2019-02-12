@@ -1,7 +1,8 @@
 {
   "env": "staging",
   "httpPort": 9000,
-  "clientBaseUrl": "http://keros-api-dev.etic-insa.com/api/v1",
+  "clientBaseUrl": "https://keros-dev.etic-insa.com",
+  "backendBaseUrl": "http://keros-api-dev.etic-insa.com/api/v1",
   "useMock": false,
   "logLevel": "debug"
 }

@@ -50,6 +50,10 @@ export class Config {
     return this.activeConfig.clientBaseUrl;
   }
 
+  public static getBackendBaseUrl(): string {
+    return this.activeConfig.backendBaseUrl;
+  }
+
   public static getHttpPort(): number {
     return this.activeConfig.httpPort;
   }

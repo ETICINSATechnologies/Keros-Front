@@ -1,7 +1,8 @@
 {
   "env": "local",
-  "httpPort": 8000,
-  "clientBaseUrl": "http://keros-api-dev.etic-insa.com/api/v1",
+  "httpPort": 8080,
+  "clientBaseUrl": "http://localhost:8080",
+  "backendBaseUrl": "http://localhost:8000/api/v1",
   "useMock": false,
   "logLevel": "debug"
 }

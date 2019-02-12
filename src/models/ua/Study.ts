@@ -4,7 +4,7 @@ import { Field } from "./Field";
 import { Provenance } from "./Provenance";
 import { Contact } from "./Contact";
 import { Member } from "../core/Member";
-import { Template } from "./Template";
+import { StudyDocument } from "./StudyDocument";
 
 export class Study {
   constructor(
@@ -28,7 +28,6 @@ export class Study {
     private leaders ?: Member[],
     private consultants ?: Member[],
     private qualityManagers ?: Member[],
-    private templates ?: Template[],
     private confidential ?: boolean,
   ) {}
 }
