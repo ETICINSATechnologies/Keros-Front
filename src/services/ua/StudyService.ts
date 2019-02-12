@@ -41,7 +41,7 @@ export class StudyService extends BaseService {
         this.rest.get<Page<Study>>("ua/study", this.defaultHeaders()).then(
             (res: IRestResponse<Page<Study>>) => {
                 if (res.statusCode !== 200) {
-                    return callback(this.defaultError(), null);
+                    return callback(this.defaultError(res.statusCode), null);
                 }
                 winston.debug("Response : " + JSON.stringify(res));
                 callback(null, res.result);
@@ -55,7 +55,7 @@ export class StudyService extends BaseService {
         this.rest.create<StudyCreateRequest>("ua/study", studyRequest, this.defaultHeaders()).then(
             (res: IRestResponse<StudyCreateRequest>) => {
                 if (res.statusCode !== 201) {
-                    return callback(this.defaultError());
+                    return callback(this.defaultError(res.statusCode));
                 }
                 winston.debug("Response : " + JSON.stringify(res));
                 callback(null);
@@ -69,7 +69,7 @@ export class StudyService extends BaseService {
       this.rest.update<Study>("ua/study/" + id, studyRequest, this.defaultHeaders()).then(
         (res: IRestResponse<Study>) => {
           if (res.statusCode !== 200) {
-            return callback(this.defaultError());
+            return callback(this.defaultError(res.statusCode));
           }
           winston.debug("Response : " + JSON.stringify(res));
           callback(null);
@@ -83,7 +83,7 @@ export class StudyService extends BaseService {
       this.rest.get<Page<Study>>("ua/study/me", this.defaultHeaders()).then(
         (res: IRestResponse<Page<Study>>) => {
           if (res.statusCode !== 200) {
-            return callback(this.defaultError(), null);
+            return callback(this.defaultError(res.statusCode), null);
           }
           winston.debug("Response : " + JSON.stringify(res));
           callback(null, res.result);
@@ -93,31 +93,32 @@ export class StudyService extends BaseService {
       );
     }
 
-  static getOnGoingStudiesForConnectedUser(callback: (err: any, result: Page<Study> | null, numberStudies: number) => void): void {
+  static getOnGoingStudiesForConnectedUser(callback:(err:any,result:Page<Study> | null, numberStudies: number)=>void): void{
     let pageOnGoingStudies : Page<Study>;
-    let nb = 0;
-      this.getAllStudiesForConnectedUser(function (err, page: Page<Study> | null) {
-        if (err) {
-          return err;
-        }
-
-        if (page && page.content) {
-          pageOnGoingStudies = new Page<Study>();
-          pageOnGoingStudies.meta = page.meta;
-          pageOnGoingStudies.content = [];
-
-          page.content.forEach(function (study:any, index:number)  {
-           if (study.status.id === 1) {
-             if (pageOnGoingStudies.content)
-             pageOnGoingStudies.content.push(study);
-           }
+    let nbStudies = 0;
+    this.getAllStudiesForConnectedUser(function(err, page:Page<Study> | null){
+      if(err){
+        return err;
+      }
+      if(page){
+        pageOnGoingStudies = new Page<Study>();
+        pageOnGoingStudies.meta = page.meta;
+        pageOnGoingStudies.content = [];
+        if(page.content){
+          page.content.forEach(function(study: any, index: number){
+            if(study.status.id === 1){
+              if(pageOnGoingStudies.content)
+                pageOnGoingStudies.content.push(study);
+            }
           });
         }
-        winston.debug("Ongoing studies : ",pageOnGoingStudies);
-        nb = (pageOnGoingStudies.content) ? pageOnGoingStudies.content.length : 0;
-        winston.debug("Number of ongoing studies : ",nb);
-        callback(null,pageOnGoingStudies, nb);
-      });
+        winston.debug("Ongoing studies:", pageOnGoingStudies);
+        nbStudies = (pageOnGoingStudies.content) ? pageOnGoingStudies.content.length : 0;
+        winston.debug("Number of on going studies:", nbStudies);
+        callback(null, pageOnGoingStudies, nbStudies);
+      }
+      else callback(404,null,0);
+    });
   }
 
     static delete(id: number, callback: (err: any) => void): void {
