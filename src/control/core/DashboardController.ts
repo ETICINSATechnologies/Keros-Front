@@ -13,14 +13,9 @@ export class DashboardController {
 
   public viewStudiesOnDashboard(req: Request, res: Response, next: NextFunction) {
     StudyService.getOnGoingStudiesForConnectedUser(function (err, page: Page<Study> | null, nbStudies: number) {
-      if (page === null) {
-        winston.debug("Page null");
-        /*page = new Page<Study>();
-        nbStudies = 0;*/
+      if (err) {
+        return next(err);
       }
-        if (err) {
-          return next(err);
-        }
       const options = {
         studies: page,
         nbOngoingStudies : nbStudies,

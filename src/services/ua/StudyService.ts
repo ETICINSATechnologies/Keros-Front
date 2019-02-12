@@ -5,8 +5,7 @@ import { Page } from "../../models/core/Page";
 import { StudyCreateRequest } from "../../models/ua/StudyCreateRequest";
 import * as winston from "winston";
 import { StudyDocumentResponse } from '../../models/ua/StudyDocumentResponse';
-
-import e = require("express");
+import HttpError from "../../util/httpError";
 
 export class StudyService extends BaseService {
     static getStudy(id: number, callback: (err: any, result: Study | null) => void): void {
@@ -116,8 +115,7 @@ export class StudyService extends BaseService {
         nbStudies = (pageOnGoingStudies.content) ? pageOnGoingStudies.content.length : 0;
         winston.debug("Number of on going studies:", nbStudies);
         callback(null, pageOnGoingStudies, nbStudies);
-      }
-      else callback(404,null,0);
+      } else callback(new HttpError("Page d'études non trouvée", 404), null, 0);
     });
   }
 
