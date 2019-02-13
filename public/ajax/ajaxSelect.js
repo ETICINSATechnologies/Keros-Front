@@ -52,17 +52,32 @@ $('body').on('change','.selectpicker , .form-control', function () {
 });
 
 function generateOptions(select_menu, data, init) {
-  select_menu.empty().not($(".required")).append("<option></option>");
+
+
+  let emptyFields = select_menu.empty().not($(".required"));
+  emptyFields.append("<option></option>");
+  let emptyMemberFields = emptyFields.filter(function () {
+    return $(this).attr('name').match(/.*Id1$/) && $(this).attr('data-endpoint') === "/core/member";
+  });
+  emptyMemberFields.empty();
+  emptyMemberFields.append("<option>Aucun membre/responsable</option>");
+
+  if (select_menu.attr('name').match(/contactId./) && data.content.length === 0) { // cas où il n'y a pas de contact pour l'entreprise
+    select_menu.filter(function () {
+      return $(this).attr('name') === "contactId1";
+    }).append("<option>Pas de contact</option>");
+  }
 
   data.content.forEach(function (elem) {
-      select_menu.each(function () {
-        let selected = "";
-        if (elem.id == $(this).attr('data-selected')) {
-          selected = "selected";
-        }
-        $(this).append("<option value='" + elem.id + "' " + selected + ">" + elem.firstName + " " + elem.lastName + "</option>");
-      });
+    select_menu.each(function () {
+      let selected = "";
+      if (elem.id == $(this).attr('data-selected')) {
+        selected = "selected";
+      }
+      $(this).append("<option value='" + elem.id + "' " + selected + ">" + elem.firstName + " " + elem.lastName + "</option>");
+    });
   });
+
   paginate(select_menu, data.meta);
 
   select_menu.selectpicker('refresh');
@@ -70,7 +85,7 @@ function generateOptions(select_menu, data, init) {
 }
 
 function paginate(select, meta) {
-  if (meta.totalPages === 1) {
+  if (meta.totalPages === 1 || meta.totalPages === 0) {
     return select;
   }
   else if (meta.page === 0) {

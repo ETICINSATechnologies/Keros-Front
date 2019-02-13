@@ -13,9 +13,9 @@ export class DashboardController {
 
   public viewStudiesOnDashboard(req: Request, res: Response, next: NextFunction) {
     StudyService.getOnGoingStudiesForConnectedUser(function (err, page: Page<Study> | null, nbStudies: number) {
-        if (err) {
-          return next(err);
-        }
+      if (err) {
+        return next(err);
+      }
       const options = {
         studies: page,
         nbOngoingStudies : nbStudies,
