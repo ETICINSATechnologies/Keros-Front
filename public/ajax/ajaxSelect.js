@@ -52,6 +52,8 @@ $('body').on('change','.selectpicker , .form-control', function () {
 });
 
 function generateOptions(select_menu, data, init) {
+
+
   let emptyFields = select_menu.empty().not($(".required"));
   emptyFields.append("<option></option>");
   let emptyMemberFields = emptyFields.filter(function () {
@@ -59,6 +61,12 @@ function generateOptions(select_menu, data, init) {
   });
   emptyMemberFields.empty();
   emptyMemberFields.append("<option>Aucun membre/responsable</option>");
+
+  if (select_menu.attr('name').match(/contactId./) && data.content.length === 0) { // cas où il n'y a pas de contact pour l'entreprise
+    select_menu.filter(function () {
+      return $(this).attr('name') === "contactId1";
+    }).append("<option>Pas de contact</option>");
+  }
 
   data.content.forEach(function (elem) {
     select_menu.each(function () {
