@@ -5,7 +5,7 @@ import { Page } from "../../models/core/Page";
 import { StudyCreateRequest } from "../../models/ua/StudyCreateRequest";
 import * as winston from "winston";
 import { StudyDocumentResponse } from '../../models/ua/StudyDocumentResponse';
-
+import HttpError from "../../util/httpError";
 
 export class StudyService extends BaseService {
     static getStudy(id: number, callback: (err: any, result: Study | null) => void): void {
@@ -92,33 +92,33 @@ export class StudyService extends BaseService {
       );
     }
 
-  static getOnGoingStudiesForConnectedUser(callback: (err: any, result: Page<Study> | null, numberStudies: number) => void): void {
+  static getOnGoingStudiesForConnectedUser(callback:(err:any,result:Page<Study> | null, numberStudies: number)=>void): void{
     let pageOnGoingStudies : Page<Study>;
-    let nb = 0;
-      this.getAllStudiesForConnectedUser(function (err, page: Page<Study> | null) {
-        if (err) {
-          return err;
-        }
-
-        if (page && page.content) {
-          pageOnGoingStudies = new Page<Study>();
-          pageOnGoingStudies.meta = page.meta;
-          pageOnGoingStudies.content = [];
-
-          page.content.forEach(function (study:any, index:number)  {
-           if (study.status.id === 1) {
-             if (pageOnGoingStudies.content)
-             pageOnGoingStudies.content.push(study);
-           }
+    let nbStudies = 0;
+    this.getAllStudiesForConnectedUser(function(err, page:Page<Study> | null){
+      if(err){
+        return err;
+      }
+      if(page){
+        pageOnGoingStudies = new Page<Study>();
+        pageOnGoingStudies.meta = page.meta;
+        pageOnGoingStudies.content = [];
+        if(page.content){
+          page.content.forEach(function(study: any, index: number){
+            if(study.status.id === 1){
+              if(pageOnGoingStudies.content)
+                pageOnGoingStudies.content.push(study);
+            }
           });
         }
-        winston.debug("Ongoing studies : ",pageOnGoingStudies);
-        nb = (pageOnGoingStudies.content) ? pageOnGoingStudies.content.length : 0;
-        winston.debug("Number of ongoing studies : ",nb);
-        callback(null,pageOnGoingStudies, nb);
-      });
+        winston.debug("Ongoing studies:", pageOnGoingStudies);
+        nbStudies = (pageOnGoingStudies.content) ? pageOnGoingStudies.content.length : 0;
+        winston.debug("Number of on going studies:", nbStudies);
+        callback(null, pageOnGoingStudies, nbStudies);
+      } else callback(new HttpError("Page d'études non trouvée", 404), null, 0);
+    });
   }
-    
+
     static delete(id: number, callback: (err: any) => void): void {
         this.rest.del<Study>("ua/study/" + id, this.defaultHeaders()).then(
             (res: IRestResponse<Study>) => {
