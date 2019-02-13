@@ -58,31 +58,32 @@ export class MemberService extends BaseService {
     );
   }
 
-  static createMember(memberRequest: MemberCreateRequest, callback: (err: any) => void): void {
-    this.rest.create<MemberCreateRequest>('core/member', memberRequest, this.defaultHeaders()).then(
-      (res: IRestResponse<MemberCreateRequest>) => {
+  static createMember(memberRequest: MemberCreateRequest, callback: (err: any, result: Member | null) => void): void {
+    this.rest.create<Member>('core/member', memberRequest, this.defaultHeaders()).then(
+      (res: IRestResponse<Member>) => {
         if (res.statusCode !== 201) {
-          return callback(this.defaultError(res.statusCode));
+          return callback(this.defaultError(res.statusCode), null);
         }
         winston.debug('Response : ' + JSON.stringify(res));
-        callback(null);
+        callback(null, res.result);
       }
     ).catch(
-      e => callback(e)
+      e => callback(e, null)
     );
   }
 
-  static update(memberId: number, memberRequest: MemberCreateRequest, callback: (err: any) => void): void {
-    this.rest.update<MemberCreateRequest>('core/member/' + memberId, memberRequest, this.defaultHeaders()).then(
-      (res: IRestResponse<MemberCreateRequest>) => {
+  // TODO why doesn't this return member ?
+  static update(memberId: number, memberRequest: MemberCreateRequest, callback: (err: any, result: Member | null) => void): void {
+    this.rest.update<Member>('core/member/' + memberId, memberRequest, this.defaultHeaders()).then(
+      (res: IRestResponse<Member>) => {
         if (res.statusCode !== 200) {
-          return callback(this.defaultError(res.statusCode));
+          return callback(this.defaultError(res.statusCode), null);
         }
         winston.debug('Response : ' + JSON.stringify(res));
-        callback(null);
+        callback(null, res.result);
       }
     ).catch(
-      e => callback(e)
+      e => callback(e, null)
     );
   }
 
