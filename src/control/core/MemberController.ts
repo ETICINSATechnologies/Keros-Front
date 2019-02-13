@@ -125,9 +125,9 @@ export class MemberController {
     userRequest.schoolYear = parseInt(req.body.schoolYear);
     userRequest.telephone = req.body.telephone;
 
-    userRequest.positionIds = [parseInt(req.body.positionId1)];
-    if (req.body.positionId2) userRequest.positionIds.push(parseInt(req.body.positionId2));
-    if (req.body.positionId3) userRequest.positionIds.push(parseInt(req.body.positionId3));
+    userRequest.positions = [{id: parseInt(req.body.positionId1)}];
+    if (req.body.positionId2) userRequest.positions.push({id: parseInt(req.body.positionId2)});
+    if (req.body.positionId3) userRequest.positions.push({id : parseInt(req.body.positionId3)});
 
     const addressRequest = new AddressCreateRequest();
     addressRequest.line1 = req.body.line1;
@@ -142,8 +142,15 @@ export class MemberController {
         if (err1) {
           return next(err1);
         }
-        if (userId === currentUserId) res.redirect("/core/member/me");
-        else res.redirect("/core/member");
+        if (userId === currentUserId){
+          MemberService.getConnectedMember(function (err2, member) {
+            res.cookie("connectedUser", JSON.stringify(member))
+              .redirect("/core/member/me");
+          });
+        }
+        else {
+          res.redirect("/core/member");
+        }
       });
     } else {
       MemberService.createMember(userRequest, function (err1) {
