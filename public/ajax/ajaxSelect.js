@@ -6,14 +6,14 @@ $('document').ready( function() {
   }
   if ($(".selectpicker.selectconsultants").length > 1) {
     let params = {};
-    params.positionId = 10; // PositionId de consultant
+    params.positionId = 6; // PositionId de consultant
     $.get("/core/member/json?" + $.param(params), function (data) {
       generateOptions($(".selectpicker.selectconsultants"), data, true);
     });
   }
   if ($(".selectpicker.selectleaders").length > 1) {
     let params = {};
-    params.positionId = 7; // Position ID de chargé d'affaires
+    params.positionId = 3; // Position ID de chargé d'affaires
     $.get("/core/member/json?"+ $.param(params), function (data) {
       generateOptions($(".selectpicker.selectleaders"), data, true);
     });
@@ -60,12 +60,12 @@ function generateOptions(select_menu, data, init) {
     return $(this).attr('name').match(/.*Id1$/) && $(this).attr('data-endpoint') === "/core/member";
   });
   emptyMemberFields.empty();
-  emptyMemberFields.append("<option>Aucun membre/responsable</option>");
+  emptyMemberFields.append("<option value=''>Aucun membre/responsable</option>");
 
   if (select_menu.attr('name').match(/contactId./) && data.content.length === 0) { // cas où il n'y a pas de contact pour l'entreprise
     select_menu.filter(function () {
       return $(this).attr('name') === "contactId1";
-    }).append("<option>Pas de contact</option>");
+    }).append("<option value=''>Pas de contact</option>");
   }
 
   data.content.forEach(function (elem) {

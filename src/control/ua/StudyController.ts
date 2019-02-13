@@ -34,7 +34,7 @@ export class StudyController {
         });
     }
 
-  public viewStudiesConnectedUser(req: Request, res: Response, next: NextFunction) {
+    public viewStudiesConnectedUser(req: Request, res: Response, next: NextFunction) {
     StudyService.getAllStudiesForConnectedUser(function (err, page: Page<Study> | null) {
       winston.info("Getting all studies");
       if (err) {
@@ -45,34 +45,26 @@ export class StudyController {
       };
       res.render("ua/study/viewAll", options);
     });
-  }
+    }
 
     public createStudy(req: Request, res: Response, next: NextFunction) {
         winston.info("Getting create study form");
         FieldService.getAllFields(function (err1, fields: Field[] | null) {
             StatusService.getAllStatus(function (err2, status: Status[] | null) {
                 FirmService.getAllFirms(function (err3, firms: Page<Firm> | null) {
-                    ContactService.getAllContacts(function (err4, contacts: Page<Contact> | null) {
-                        MemberService.getAllMembers(function (err5, members: Page<Member> | null) {
-                            ProvenanceService.getAllProvenances(function (err6, provenances: Provenance[] | null) {
-                                if (err1) return next(err1);
-                                if (err2) return next(err2);
-                                if (err3) return next(err3);
-                                if (err4) return next(err4);
-                                if (err5) return next(err5);
-                                if (err6) return next(err6);
-                                const options = {
-                                    fields: fields,
-                                    status: status,
-                                    firms: firms,
-                                    contactShorts: contacts,
-                                    memberShorts: members,
-                                    provenances: provenances,
-                                    action: "create"
-                                };
-                                res.render("ua/study/viewStudy", options);
-                            });
-                        });
+                    ProvenanceService.getAllProvenances(function (err4, provenances: Provenance[] | null) {
+                        if (err1) return next(err1);
+                        if (err2) return next(err2);
+                        if (err3) return next(err3);
+                        if (err4) return next(err4);
+                        const options = {
+                            fields: fields,
+                            status: status,
+                            firms: firms,
+                            provenances: provenances,
+                            action: "create"
+                        };
+                        res.render("ua/study/viewStudy", options);
                     });
                 });
             });
@@ -98,32 +90,26 @@ export class StudyController {
                 FieldService.getAllFields(function (err3, fields: Field[] | null) {
                     StatusService.getAllStatus(function (err4, status: Status[] | null) {
                         FirmService.getAllFirms(function (err5, firms: Page<Firm> | null) {
-                            ContactService.getAllContacts(function (err6, contactShorts: Page<Contact> | null) {
-                                MemberService.getAllMembers(function (err7, memberShorts: Page<Member> | null) {
-                                    ProvenanceService.getAllProvenances(function (err8, provenances: Provenance[] | null) {
-                                        if (err1) return next(err1);
-                                        if (err2) return next(err2);
-                                        if (err3) return next(err3);
-                                        if (err4) return next(err4);
-                                        if (err5) return next(err5);
-                                        if (err6) return next(err6);
-                                        if (err7) return next(err7);
-                                        if (err8) return next(err8);
-                                        const options = {
-                                            study: study,
-                                            studyDocuments: studyDocuments,
-                                            fields: fields,
-                                            status: status,
-                                            firms: firms,
-                                            contactShorts: contactShorts,
-                                            memberShorts: memberShorts,
-                                            provenances: provenances,
-                                            clientBaseUrl: Config.getClientBaseUrl(),
-                                            action: "view"
-                                        };
-                                        res.render("ua/study/viewStudy", options);
-                                    });
-                                });
+                            ProvenanceService.getAllProvenances(function (err6, provenances: Provenance[] | null) {
+                                if (err1) return next(err1);
+                                // TODO : cleaner. This request can fail if study is not valid.
+                                // TODO The page should stil display
+                                if (err2) studyDocuments = new StudyDocumentResponse([]);
+                                if (err3) return next(err3);
+                                if (err4) return next(err4);
+                                if (err5) return next(err5);
+                                if (err6) return next(err6);
+                                const options = {
+                                    study: study,
+                                    studyDocuments: studyDocuments,
+                                    fields: fields,
+                                    status: status,
+                                    firms: firms,
+                                    provenances: provenances,
+                                    clientBaseUrl: Config.getClientBaseUrl(),
+                                    action: "view"
+                                };
+                                res.render("ua/study/viewStudy", options);
                             });
                         });
                     });
@@ -139,28 +125,24 @@ export class StudyController {
             FieldService.getAllFields(function (err2, fields: Field[] | null) {
                 StatusService.getAllStatus(function (err3, status: Status[] | null) {
                     FirmService.getAllFirms(function (err4, firms: Page<Firm> | null) {
-                        ContactService.getAllContacts(function (err5, contactShorts: Page<Contact> | null) {
-                            MemberService.getAllMembers(function (err6, memberShorts: Page<Member> | null) {
-                                ProvenanceService.getAllProvenances(function (err7, provenances: Provenance[] | null) {
-                                    if (err1) return next(err1);
-                                    if (err2) return next(err2);
-                                    if (err3) return next(err3);
-                                    if (err4) return next(err4);
-                                    if (err5) return next(err5);
-                                    if (err6) return next(err6);
-                                    if (err7) return next(err7);
-                                    const options = {
-                                        study: study,
-                                        fields: fields,
-                                        status: status,
-                                        firms: firms,
-                                        contactShorts: contactShorts,
-                                        memberShorts: memberShorts,
-                                        provenances: provenances,
-                                        action: "update"
-                                    };
-                                    res.render("ua/study/viewStudy", options);
-                                });
+                        MemberService.getAllMembers(function (err5, memberShorts: Page<Member> | null) {
+                            ProvenanceService.getAllProvenances(function (err6, provenances: Provenance[] | null) {
+                                if (err1) return next(err1);
+                                if (err2) return next(err2);
+                                if (err3) return next(err3);
+                                if (err4) return next(err4);
+                                if (err5) return next(err5);
+                                if (err6) return next(err6);
+                                const options = {
+                                    study: study,
+                                    fields: fields,
+                                    status: status,
+                                    firms: firms,
+                                    memberShorts: memberShorts,
+                                    provenances: provenances,
+                                    action: "update"
+                                };
+                                res.render("ua/study/viewStudy", options);
                             });
                         });
                     });
@@ -189,16 +171,20 @@ export class StudyController {
         studyRequest.archivedDate = req.body.archivedDate;
         studyRequest.confidential = !!req.body.confidential;
         studyRequest.firmId = parseInt(req.body.firmId);
-        studyRequest.contactIds = [parseInt(req.body.contactId1)];
+        studyRequest.contactIds = [];
+        if (req.body.contactId1) studyRequest.contactIds.push(parseInt(req.body.contactId1));
         if (req.body.contactId2) studyRequest.contactIds.push(parseInt(req.body.contactId2));
         if (req.body.contactId3) studyRequest.contactIds.push(parseInt(req.body.contactId3));
-        studyRequest.leaderIds = [parseInt(req.body.leaderId1)];
+        studyRequest.leaderIds = [];
+        if (req.body.leaderId1) studyRequest.leaderIds.push(parseInt(req.body.leaderId1));
         if (req.body.leaderId2) studyRequest.leaderIds.push(parseInt(req.body.leaderId2));
         if (req.body.leaderId3) studyRequest.leaderIds.push(parseInt(req.body.leaderId3));
-        studyRequest.consultantIds = [parseInt(req.body.consultantId1)];
+        studyRequest.consultantIds = [];
+        if (req.body.consultantId1) studyRequest.consultantIds.push(parseInt(req.body.consultantId1));
         if (req.body.consultantId2) studyRequest.consultantIds.push(parseInt(req.body.consultantId2));
         if (req.body.consultantId3) studyRequest.consultantIds.push(parseInt(req.body.consultantId3));
-        studyRequest.qualityManagerIds = [parseInt(req.body.qualityManagerId1)];
+        studyRequest.qualityManagerIds = [];
+        if (req.body.qualityManagerId1) studyRequest.qualityManagerIds.push(parseInt(req.body.qualityManagerId1));
         if (req.body.qualityManagerId2) studyRequest.qualityManagerIds.push(parseInt(req.body.qualityManagerId2));
         if (req.body.qualityManagerId3) studyRequest.qualityManagerIds.push(parseInt(req.body.qualityManagerId3));
 

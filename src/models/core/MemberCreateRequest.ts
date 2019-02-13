@@ -13,7 +13,7 @@ export class MemberCreateRequest {
     public schoolYear ?: number,
     public telephone ?: string,
     public address ?: AddressCreateRequest,
-    public positionIds ?: number[],
+    public positions ?: object[],
   ) {
   }
 
