@@ -1,1 +1,0 @@
-src\services\ua\StudyService.ts src\services\ua\.baseDir.ts --sourcemap --removeComments --noImplicitAny --moduleResolution node --strict --target ES6 --module commonjs --outDir dist
