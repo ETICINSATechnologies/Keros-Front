@@ -1,7 +1,7 @@
 export class Meta {
   constructor(
     private page ?: number,
-    private totalPages ?: number,
+    public totalPages ?: number,
     private totalItems ?: number,
     private itemsPerPage ?: number,
   ) {

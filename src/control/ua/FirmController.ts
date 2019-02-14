@@ -9,6 +9,8 @@ import {FirmType} from "../../models/ua/FirmType";
 import {CountryService} from "../../services/core/CountryService";
 import {Country} from "../../models/core/Country";
 import {AddressCreateRequest} from "../../models/core/AddressCreateRequest";
+import { MemberService } from "../../services/core/MemberService";
+import { Member } from "../../models/core/Member";
 
 export class FirmController {
   public viewFirms(req: Request, res: Response, next: NextFunction) {
@@ -124,5 +126,14 @@ export class FirmController {
       res.redirect("/ua/firm");
     });
 
+  }
+
+  public getJSONFirms(req: Request, res: Response, next: NextFunction) {
+    const queryParams = req.query;
+    FirmService.getAllFirms(function(err, page: Page<Firm> | null) {
+      winston.debug("Getting JSON firms with specified parameters : " + JSON.stringify(queryParams));
+      if (err) return next(err);
+      res.send(page);
+    }, queryParams);
   }
 }
