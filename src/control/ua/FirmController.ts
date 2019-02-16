@@ -125,4 +125,13 @@ export class FirmController {
     });
 
   }
+
+  public getJSONFirms(req: Request, res: Response, next: NextFunction) {
+    const queryParams = req.query;
+    FirmService.getAllFirms(function(err, page: Page<Firm> | null) {
+      winston.debug("Getting JSON firms with specified parameters : " + JSON.stringify(queryParams));
+      if (err) return next(err);
+      res.send(page);
+    }, queryParams);
+  }
 }
