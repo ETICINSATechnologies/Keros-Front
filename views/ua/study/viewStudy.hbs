@@ -24,15 +24,14 @@
                 <div class="box-body row">
                   <div class="col-md-6 form-group">
                     <label for="name">Nom</label>
-                    <input type="text" class="form-control" id="name" name="name" value="{{study.name}}" placeholder="Entrez le nom de l'étude" required {{readonlyIf (eq action "view")}}>
+                    <input type="text" class="form-control" id="name" name="name" value="{{study.name}}"
+                           placeholder="Entrez le nom de l'étude" required {{readonlyIf (eq action "view")}}>
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="firmId">Société</label>
-                    <select class="form-control" id="firmId" name="firmId" {{readonlyIf (eq action "view")}}>
-                      {{!TODO : Use pagination}}
-                      {{#each firms.content}}
-                        <option value="{{id}}" {{selected id @root.study.firm.id}}>{{name}}</option>
-                      {{/each}}
+                    <select class="form-control" id="selectFirm"
+                            name="firmId" {{readonlyIf (eq action "view")}}
+                            data-selected="{{study.firm.id}}">
                     </select>
                   </div>
                   <div class="col-md-6 form-group">
@@ -45,7 +44,8 @@
                   </div>
                   <div class="col-md-12 form-group">
                     <label for="description">Description</label>
-                    <textarea rows="3" class="form-control" id="description" name="description" placeholder="Entrez la description de l'étude" >{{study.description}}</textarea>
+                    <textarea rows="3" class="form-control" id="description" name="description"
+                              placeholder="Entrez la description de l'étude">{{study.description}}</textarea>
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="statusId">Status</label>
@@ -57,7 +57,8 @@
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="provenanceId">Provenance</label>
-                    <select class="form-control" id="provenanceId" name="provenanceId" {{readonlyIf (eq action "view")}}>
+                    <select class="form-control" id="provenanceId" name="provenanceId" {{readonlyIf
+                            (eq action "view")}}>
                       <option></option>
                       {{#each provenances}}
                         <option value="{{id}}" {{selected id @root.study.provenance.id}}>{{label}}</option>
@@ -96,16 +97,20 @@
                     <label for="managementFee">Frais de gestion</label>
                     <div class="input-group">
                       <span class="input-group-addon" style="background-color: #DBE0E0; font-weight: bold;">€</span>
-                      <input type="number" class="form-control" id="managementFee" name="managementFee" step="0.01" min="0"
-                             value="{{study.managementFee}}" placeholder="Frais de gestion" {{readonlyIf (eq action "view")}}>
+                      <input type="number" class="form-control" id="managementFee" name="managementFee" step="0.01"
+                             min="0"
+                             value="{{study.managementFee}}" placeholder="Frais de gestion" {{readonlyIf
+                              (eq action "view")}}>
                     </div>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="realizationFee">Frais de réalisation</label>
                     <div class="input-group">
                       <span class="input-group-addon" style="background-color: #DBE0E0; font-weight: bold;">€</span>
-                      <input type="number" class="form-control" id="realizationFee" name="realizationFee" step="0.01" min="0"
-                             value="{{study.realizationFee}}" placeholder="Frais de réalisation " {{readonlyIf (eq action "view")}}>
+                      <input type="number" class="form-control" id="realizationFee" name="realizationFee" step="0.01"
+                             min="0"
+                             value="{{study.realizationFee}}" placeholder="Frais de réalisation " {{readonlyIf
+                              (eq action "view")}}>
                     </div>
                   </div>
                   <div class="col-md-4 form-group">
@@ -113,23 +118,28 @@
                     <div class="input-group">
                       <span class="input-group-addon" style="background-color: #DBE0E0; font-weight: bold;">€</span>
                       <input type="number" class="form-control" id="rebilledFee" name="rebilledFee" step="0.01" min="0"
-                             value="{{study.rebilledFee}}" placeholder="Frais de refacturation" {{readonlyIf (eq action "view")}}>
+                             value="{{study.rebilledFee}}" placeholder="Frais de refacturation" {{readonlyIf
+                              (eq action "view")}}>
                     </div>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="ecoparticipationFee">Frais d'écoparticipation</label>
                     <div class="input-group">
                       <span class="input-group-addon" style="background-color: #DBE0E0; font-weight: bold;">€</span>
-                      <input type="number" class="form-control" id="ecoparticipationFee" name="ecoparticipationFee" step="0.01" min="0"
-                             value="{{study.ecoparticipationFee}}" placeholder="Frais d'écoparticipation" {{readonlyIf (eq action "view")}}>
+                      <input type="number" class="form-control" id="ecoparticipationFee" name="ecoparticipationFee"
+                             step="0.01" min="0"
+                             value="{{study.ecoparticipationFee}}" placeholder="Frais d'écoparticipation" {{readonlyIf
+                              (eq action "view")}}>
                     </div>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="outsourcingFee">Frais de sous traitance</label>
                     <div class="input-group">
                       <span class="input-group-addon" style="background-color: #DBE0E0; font-weight: bold;">€</span>
-                      <input type="number" class="form-control" id="outsourcingFee" name="outsourcingFee" step="0.01" min="0"
-                             value="{{study.outsourcingFee}}" placeholder="Frais de sous traitance" {{readonlyIf (eq action "view")}}>
+                      <input type="number" class="form-control" id="outsourcingFee" name="outsourcingFee" step="0.01"
+                             min="0"
+                             value="{{study.outsourcingFee}}" placeholder="Frais de sous traitance" {{readonlyIf
+                              (eq action "view")}}>
                     </div>
                   </div>
 
@@ -137,22 +147,26 @@
                     Personnel(s) Entreprise
                   </h4>
 
-                  <div class="col-md-4 paginateselect">
+                  <div class="col-md-4">
                     <label for="contactId1">Contact 1</label>
-                    <select class="selectpicker selectcontacts required" data-width="100%" data-endpoint="/ua/contact" data-selected="{{study.contacts.0.id}}" name="contactId1" required>
+                    <select class="form-control selectcontacts"
+                            name="contactId1" {{readonlyIf (eq action "view")}}
+                            data-selected="{{study.contacts.0.id}}" data-n="1">
                     </select>
                   </div>
-                  <div class="col-md-4 paginateselect">
+                  <div class="col-md-4">
                     <label for="contactId2">Contact 2</label>
-                    <select class="selectpicker selectcontacts" data-width="100%" data-endpoint="/ua/contact" data-selected="{{study.contacts.1.id}}" name="contactId2">
+                    <select class="form-control selectcontacts"
+                            name="contactId2" {{readonlyIf (eq action "view")}}
+                            data-selected="{{study.contacts.1.id}}" data-n="2">
                     </select>
                   </div>
-                  <div class="col-md-4 paginateselect">
+                  <div class="col-md-4">
                     <label for="contactId3">Contact 3</label>
-                    <div id="contactId3">
-                      <select class="selectpicker selectcontacts" data-width="100%" data-endpoint="/ua/contact" data-selected="{{study.contacts.2.id}}" name="contactId3">
-                      </select>
-                    </div>
+                    <select class="form-control selectcontacts"
+                            name="contactId3" {{readonlyIf (eq action "view")}}
+                            data-selected="{{study.contacts.2.id}}" data-n="3">
+                    </select>
                   </div>
                   <hr/>
 
@@ -160,49 +174,65 @@
                     Personnel(s) ETIC
                   </h4>
 
-                  <div >
-                    <div class="col-md-4 paginateselect">
+                  <div>
+                    <div class="col-md-4">
                       <label for="leaderId1">Responsable 1</label>
-                      <select class="selectpicker selectmembers selectleaders" data-width="100%" data-endpoint="/core/member" data-selected="{{study.leaders.0.id}}" name="leaderId1">
+                      <select class="form-control selectleaders"
+                              name="leaderId1" {{readonlyIf (eq action "view")}}
+                              data-selected="{{study.leaders.0.id}}" data-n="1">
                       </select>
                     </div>
-                    <div class="col-md-4 paginateselect">
+                    <div class="col-md-4">
                       <label for="leaderId2">Responsable 2</label>
-                      <select class="selectpicker selectmembers selectleaders" data-width="100%" data-endpoint="/core/member" data-selected="{{study.leaders.1.id}}" name="leaderId2">
+                      <select class="form-control selectleaders"
+                              name="leaderId2" {{readonlyIf (eq action "view")}}
+                              data-selected="{{study.leaders.1.id}}" data-n="2">
                       </select>
                     </div>
-                    <div class="col-md-4 paginateselect">
+                    <div class="col-md-4">
                       <label for="leaderId3">Responsable 3</label>
-                      <select class="selectpicker selectmembers selectleaders" data-width="100%" data-endpoint="/core/member" data-selected="{{study.leaders.2.id}}" name="leaderId3">
+                      <select class="form-control selectleaders"
+                              name="leaderId3" {{readonlyIf (eq action "view")}}
+                              data-selected="{{study.leaders.2.id}}" data-n="3">
                       </select>
                     </div>
                   </div>
                   <hr/>
-                  <div class="col-md-4 paginateselect">
+                  <div class="col-md-4">
                     <label for="consultantId1">Consultant 1</label>
-                    <select class="selectpicker selectmembers selectconsultants" data-width="100%" data-endpoint="/core/member" data-selected="{{study.consultants.0.id}}" name="consultantId1">
+                    <select class="form-control selectconsultants"
+                            name="consultantId1" {{readonlyIf (eq action "view")}}
+                            data-selected="{{study.consultants.0.id}}" data-n="1">
                     </select>
                   </div>
-                  <div class="col-md-4 paginateselect">
+                  <div class="col-md-4">
                     <label for="consultantId2">Consultant 2</label>
-                    <select class="selectpicker selectmembers selectconsultants" data-width="100%" data-endpoint="/core/member" data-selected="{{study.consultants.1.id}}" name="consultantId2">
+                    <select class="form-control selectconsultants"
+                            name="consultantId2" {{readonlyIf (eq action "view")}}
+                            data-selected="{{study.consultants.1.id}}" data-n="2">
                     </select>
                   </div>
-                  <div class="col-md-4 paginateselect">
+                  <div class="col-md-4">
                     <label for="consultantId3">Consultant 3</label>
-                    <select class="selectpicker selectmembers selectconsultants" data-width="100%" data-endpoint="/core/member" data-selected="{{study.consultants.2.id}}" name="consultantId3">
+                    <select class="form-control selectconsultants"
+                            name="consultantId3" {{readonlyIf (eq action "view")}}
+                            data-selected="{{study.consultants.2.id}}" data-n="3">
                     </select>
                   </div>
                   <hr/>
-                  <div class="col-md-6 paginateselect">
+                  <div class="col-md-6">
                     <label for="qualityManagerId1">Responsable qualité 1</label>
-                    <select class="selectpicker selectmembers selectPerfleaders" data-width="100%" data-endpoint="/core/member" data-selected="{{study.qualityManagers.0.id}}" name="qualityManagerId1">
+                    <select class="form-control selectqualityleaders"
+                            name="qualityManagerId1" {{readonlyIf (eq action "view")}}
+                            data-selected="{{study.qualityManagers.0.id}}" data-n="1">
                     </select>
                   </div>
-                  <div class="col-md-6 paginateselect">
+                  <div class="col-md-6">
                     <label for="qualityManagerId2">Responsable qualité 2</label>
-                      <select class="selectpicker selectmembers selectPerfleaders" data-width="100%" data-endpoint="/core/member" data-selected="{{study.qualityManagers.1.id}}" name="qualityManagerId2">
-                      </select>
+                    <select class="form-control selectqualityleaders"
+                            name="qualityManagerId2" {{readonlyIf (eq action "view")}}
+                            data-selected="{{study.qualityManagers.1.id}}" data-n="2">
+                    </select>
                   </div>
                   {{#if (eq action "view")}}
                     <div id="view-mailshots">
@@ -211,30 +241,33 @@
                       </h4>
                       <div class="col-md-12">
                         <div class="panel panel-default">
-                          <a data-toggle="collapse" data-parent="#faq" href="#col-mailshots" aria-expanded="false" aria-controls="elemmailshots">
+                          <a data-toggle="collapse" data-parent="#faq" href="#col-mailshots" aria-expanded="false"
+                             aria-controls="elemmailshots">
                             <div class="panel-heading" role="tab" id="mailshots" style="background-color:#F5F5F5;">
                               <h5 class="panel-title">
                                 Afficher
                               </h5>
                             </div>
                           </a>
-                          <div id="col-mailshots" class="panel-collapse collapse" role="tabpanel" aria-labelledby="mailshots">
-                              <div class="panel-body">
-                                  <div class="col-md-6">
-                                      <b>Titre du document</b>
-                                  </div>
-                                  <div class="col-md-6">
-                                      <b>Publiposter</b>
-                                  </div>
+                          <div id="col-mailshots" class="panel-collapse collapse" role="tabpanel"
+                               aria-labelledby="mailshots">
+                            <div class="panel-body">
+                              <div class="col-md-6">
+                                <b>Titre du document</b>
                               </div>
+                              <div class="col-md-6">
+                                <b>Publiposter</b>
+                              </div>
+                            </div>
                             {{#each studyDocuments.documents}}
                               <div class="panel-body">
                                 <div class="col-md-6">
                                   {{name}}
                                 </div>
                                 <div class="col-md-6">
-                                  <a href="{{@root.clientBaseUrl}}/core/authenticate-backend?backendUrl={{generateLocation}}" target="_blank">
-                                      <i style="font-size: 2em;" class="fa fa-download"></i>
+                                  <a href="{{@root.clientBaseUrl}}/core/authenticate-backend?backendUrl={{generateLocation}}
+                                  " target="_blank">
+                                  <i style="font-size: 2em;" class="fa fa-download"></i>
                                   </a>
                                 </div>
                               </div>
@@ -246,7 +279,9 @@
                   {{/if}}
                 </div>
                 <div class="box-footer">
-                  <a href="/ua/study"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button></a>
+                  <a href="/ua/study">
+                    <button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button>
+                  </a>
                   {{> formButtons action=action origin="/ua/study" id=study.id}}
                 </div>
               </form>

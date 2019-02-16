@@ -4,7 +4,7 @@ import { FirmController } from "./FirmController";
 import { secureRouter } from "../secureRouter";
 
 /**
- * Router for firms for /firm/**
+ * Router for firms for /ua/firm/**
  * @returns {e.Router}
  */
 

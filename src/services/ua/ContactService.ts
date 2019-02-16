@@ -4,7 +4,7 @@ import { Page } from "../../models/core/Page";
 import { Contact } from "../../models/ua/Contact";
 import { ContactCreateRequest } from "../../models/ua/ContactCreateRequest";
 import * as winston from "winston";
-import { Member } from "../../models/core/Member";
+import { queryStringify } from '../../util/Helper';
 
 export class ContactService extends BaseService {
   static getContact(id: number, callback: (err: any, result: Contact | null) => void): void {
@@ -22,15 +22,7 @@ export class ContactService extends BaseService {
   }
 
   static getAllContacts(callback: (err: any, result: Page<Contact> | null) => void, queryParams?: any): void {
-    let queryString = "";
-    if (queryParams && Object.keys(queryParams).length !== 0) {
-      let paramTuples: any[] = [];
-      for (const key in queryParams) {
-        const value = queryParams[key];
-        paramTuples.push([key, value].join("="));
-      }
-      queryString = "?" + paramTuples.join("&");
-    }
+    const queryString = queryStringify(queryParams);
     this.rest.get<Page<Contact>>("ua/contact?" + queryString, this.defaultHeaders()).then(
       (res: IRestResponse<Page<Contact>>) => {
         if (res.statusCode !== 200) {

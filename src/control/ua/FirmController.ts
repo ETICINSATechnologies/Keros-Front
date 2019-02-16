@@ -9,8 +9,6 @@ import {FirmType} from "../../models/ua/FirmType";
 import {CountryService} from "../../services/core/CountryService";
 import {Country} from "../../models/core/Country";
 import {AddressCreateRequest} from "../../models/core/AddressCreateRequest";
-import { MemberService } from "../../services/core/MemberService";
-import { Member } from "../../models/core/Member";
 
 export class FirmController {
   public viewFirms(req: Request, res: Response, next: NextFunction) {

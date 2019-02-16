@@ -205,6 +205,7 @@ export class MemberController {
     const queryParams = req.query;
     MemberService.getAllMembers(function(err, page: Page<Member> | null) {
       winston.debug("Getting JSON members with specified parameters : " + JSON.stringify(queryParams));
+      if (err) return next(err);
       res.send(page);
     }, queryParams);
   }
