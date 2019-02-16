@@ -16,7 +16,6 @@
     "mocha": "cross-env NODE_ENV=testing mocha dist/test --recursive --exit"
   },
   "dependencies": {
-    "@types/request": "^2.48.1",
     "body-parser": "^1.18.2",
     "bootstrap-select": "^1.13.5",
     "cookie-parser": "^1.4.3",
@@ -26,6 +25,7 @@
     "express-http-context": "^1.2.0",
     "handlebars-helpers": "^0.10.0",
     "hbs": "^4.0.1",
+    "jquery": "3.2.1",
     "less-middleware": "~2.2.1",
     "request": "^2.88.0",
     "typed-rest-client": "^1.0.7",
@@ -44,6 +44,7 @@
     "@types/jsdom": "^11.0.4",
     "@types/method-override": "0.0.31",
     "@types/mocha": "^5.2.0",
+    "@types/request": "^2.48.1",
     "@types/supertest": "^2.0.4",
     "@types/winston": "^2.3.9",
     "chai": "^4.1.2",
@@ -55,7 +56,6 @@
     "grunt-contrib-watch": "^1.0.0",
     "grunt-sync": "^0.7.0",
     "grunt-ts": "^6.0.0-beta.17",
-    "jquery": "3.2.1",
     "jsdom": "^11.10.0",
     "mocha": "^5.1.1",
     "nodemon": "^1.12.1",

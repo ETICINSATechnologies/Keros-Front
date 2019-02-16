@@ -51,7 +51,30 @@ export class MemberService extends BaseService {
           return callback(this.defaultError(res.statusCode), null);
         }
         winston.debug('Response : ' + JSON.stringify(res));
-        callback(null, res.result);
+        let totalPages = 1;
+        if (res.result && res.result.meta && res.result.meta.totalPages) {
+          totalPages = res.result.meta.totalPages;
+        }
+        if (totalPages !== 1) {
+          let pageCount = 1;
+          while (totalPages - pageCount !== 0) {
+            this.rest.get<Page<Member>>("core/member?pageNumber=" + pageCount + queryString, this.defaultHeaders()).then(
+              (resu: IRestResponse<Page<Member>>) => {
+                if (resu.statusCode !== 200) {
+                  return callback(this.defaultError(resu.statusCode), null);
+                }
+                winston.debug('Response for page ' + pageCount + ' : ' + JSON.stringify(resu));
+                if (res.result && res.result.content &&  resu.result && resu.result.content) {
+                  res.result.content = res.result.content.concat(resu.result.content);
+                  callback(null, res.result);
+                }
+              }).catch(e => callback(e, null)
+            );
+            pageCount += 1;
+          }
+        } else {
+          callback(null, res.result);
+        }
       }
     ).catch(
       e => callback(e, null)

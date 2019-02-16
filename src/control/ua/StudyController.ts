@@ -186,7 +186,6 @@ export class StudyController {
         studyRequest.qualityManagerIds = [];
         if (req.body.qualityManagerId1) studyRequest.qualityManagerIds.push(parseInt(req.body.qualityManagerId1));
         if (req.body.qualityManagerId2) studyRequest.qualityManagerIds.push(parseInt(req.body.qualityManagerId2));
-        if (req.body.qualityManagerId3) studyRequest.qualityManagerIds.push(parseInt(req.body.qualityManagerId3));
 
         if (id) {
             StudyService.update(id, studyRequest, function (err) {
