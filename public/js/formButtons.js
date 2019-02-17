@@ -6,4 +6,6 @@ function editButtonPress() {
   $('#update-buttons').show();
   $('.view-breadcrumb').hide();
   $('.edit-breadcrumb').show();
+  $('select').prop('disabled', false);
+  $('selectpicker').prop('disabled', false);
 }
