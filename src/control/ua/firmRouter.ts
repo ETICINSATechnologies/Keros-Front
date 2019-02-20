@@ -4,7 +4,7 @@ import { FirmController } from "./FirmController";
 import { secureRouter } from "../secureRouter";
 
 /**
- * Router for firms for /firm/**
+ * Router for firms for /ua/firm/**
  * @returns {e.Router}
  */
 
@@ -20,6 +20,7 @@ export function firmRouter(): Router {
   router.get("/update/:id(\\d+)/", firmController.updateFirm);
   router.post("/postform", firmController.postFirmForm);
   router.get("/delete/:id(\\d+)", firmController.deleteFirm);
+  router.get("/json", firmController.getJSONFirms);
 
   return router;
 }

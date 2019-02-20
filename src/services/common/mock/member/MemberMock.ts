@@ -18,8 +18,6 @@ export class MemberMock implements IMock {
     let status: number = 500;
     switch (resource) {
       case "core/member":
-        //mockObj = <T> new Member(0, resources["lastName"], resources["firstName"], resources["username"], new Gender(resources["genderId"], "A"), resources["email"], resources["birthday"], new Department(resources["departmentId"], "TC"), resources["schoolYear"], resources["telephone"], resources["address"], [new Position(resources["positionIds"][0], "Secretaire Général", new Pole(1, "RH", "Ressources Humaines")), new Position(resources["positionIds"][1], "Président(e)", new Pole(1, "RH", "Ressources Humaines")), new Position(resources["positionIds"][2], "Vice-Président(e)", new Pole(1, "RH", "Ressources Humaines"))]);
-        winston.debug("Ressources: ", resources);
         mockObj = <T>new Member(0, resources["lastName"], resources["firstName"], resources["username"],
           new Gender(resources["genderId"], "A"), resources["email"], resources["birthday"],
           new Department(resources["departmentId"], "TC"), resources["schoolYear"], resources["telephone"], resources["address"],
@@ -67,7 +65,17 @@ export class MemberMock implements IMock {
         status = 200;
         return new MockResponse(mockObj, status);
     }
-    if(resource.startsWith("core/member?")){
+    if (resource.startsWith("core/member?")) {
+      switch (resource) {
+        case "core/member?pageNumber=0":
+          mockObj = <T>new Page(<T[]>[new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(3, "Secretaire Générale", 2018, false, new Pole(1, "RH", "Ressources Humaines")), new Position(4, "Responsable SI", 2018, true, new Pole(2, "SI", "Système d'informations"))]), new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"), "pierre.henry   @test.com", "1996-08-27", new Department(9, "TC"), 3, "0607080910", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), [new Position(3, "Secretaire Générale", 2018, true, new Pole(1, "RH", "Ressources Humaines")), new Position(2, "Vice-Président(e)", 2018, true, new Pole(1, "RH", "Ressources Humaines"))])], new Meta(2, 5, 2, 25));
+          status = 200;
+          return new MockResponse(mockObj, status);
+        case "core/member?pageNumber=1":
+          mockObj = <T>new Member(2, "Pierre", "Henry", "tdupont", new Gender(1, "H"), "tom.dupont@test.com", "1996-08-27", new Department(9, "TC"), 3, "0607080910", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), [new Position(3, "Secretaire Générale", 2018, true, new Pole(1, "RH", "Ressources Humaines")), new Position(2, "Vice-Président(e)", 2017, true, new Pole(1, "RH", "Ressources Humaines"))]);
+          status = 200;
+          return new MockResponse(mockObj, status);
+      }
       mockObj = <T>new Page(<T[]>[new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(3, "Secretaire Générale", 2018, false, new Pole(1, "RH", "Ressources Humaines")), new Position(4, "Responsable SI", 2018, true, new Pole(2, "SI", "Système d'informations"))]), new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"), "pierre.henry   @test.com", "1996-08-27", new Department(9, "TC"), 3, "0607080910", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), [new Position(3, "Secretaire Générale", 2018, true, new Pole(1, "RH", "Ressources Humaines")), new Position(2, "Vice-Président(e)", 2018, true, new Pole(1, "RH", "Ressources Humaines"))])], new Meta(2, 5, 2, 25));
       status = 200;
       return new MockResponse(mockObj, status);

@@ -158,8 +158,14 @@ export class MemberController {
         if (err1) {
           return next(err1);
         }
-        if (userId === currentUserId) res.redirect("/core/member/me");
-        else res.redirect("/core/member");
+        if (userId === currentUserId) {
+          MemberService.getConnectedMember(function (err2, member) {
+            res.cookie("connectedUser", JSON.stringify(member))
+              .redirect("/core/member/me");
+          });
+        } else {
+          res.redirect("/core/member");
+        }
       });
     } else {
       MemberService.createMember(userRequest, function (err1) {

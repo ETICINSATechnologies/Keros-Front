@@ -1,86 +1,103 @@
-$('document').ready( function() {
-  if ($(".selectpicker.selectcontacts").length > 1) {
-    $.get("/ua/contact/json", function (data) {
-      generateOptions($(".selectpicker.selectcontacts"), data, true);
+function generateFirmOptions() {
+  $("#selectFirm").empty();
+  $.get("/ua/firm/json", function (data) {
+    $.each(data.content, (_, firm) => {
+      let selected = (firm.id == $("#selectFirm").attr("data-selected")) ? "selected" : "";
+      let html = `<option value="${firm.id}" ${selected}>${firm.name}</option>`;
+      $("#selectFirm").append(html);
     });
-  }
-  if ($(".selectpicker.selectconsultants").length > 1) {
-    let params = {};
-    params.positionId = 10; // PositionId de consultant
-    $.get("/core/member/json?" + $.param(params), function (data) {
-      generateOptions($(".selectpicker.selectconsultants"), data, true);
-    });
-  }
-  if ($(".selectpicker.selectleaders").length > 1) {
-    let params = {};
-    params.positionId = 7; // Position ID de chargé d'affaires
-    $.get("/core/member/json?"+ $.param(params), function (data) {
-      generateOptions($(".selectpicker.selectleaders"), data, true);
-    });
-  }
-  if ($(".selectpicker.selectPerfleaders").length > 1) {
-    let params = {};
-    params.poleId = 4; // Pole ID de Performance
-    $.get("/core/member/json?"+ $.param(params), function (data) {
-      generateOptions($(".selectpicker.selectPerfleaders"), data, true);
-    });
-  }
-});
-
-$('body').on('change','.selectpicker , .form-control', function () {
-
-  if($(this).attr("id") == "firmId"){
-    let selectedFirm = $(this).find('option:selected').attr("value");
-    let params = {};
-    params.firmId = selectedFirm;
-    $.get("/ua/contact/json?" + $.param(params), function (data) {
-      generateOptions($(".selectpicker.selectcontacts"), data, true);
-    });
-  }
-
-  if ($(this).val().match(/link/)) {
-    let select_menu = $(this.parentElement.attr("class"));
-    let params = {};
-    params.pageNumber = $(this).val().split("_")[1];
-
-    $.get($(this).attr("data-endpoint") + "/json?" + $.param(params), function (data) {
-    generateOptions(select_menu, data);
-  })
-  }
-
-
-});
-
-function generateOptions(select_menu, data, init) {
-  select_menu.empty().not($(".required")).append("<option></option>");
-
-  data.content.forEach(function (elem) {
-      select_menu.each(function () {
-        let selected = "";
-        if (elem.id == $(this).attr('data-selected')) {
-          selected = "selected";
-        }
-        $(this).append("<option value='" + elem.id + "' " + selected + ">" + elem.firstName + " " + elem.lastName + "</option>");
-      });
   });
-  paginate(select_menu, data.meta);
-
-  select_menu.selectpicker('refresh');
-  if (!init) {select_menu.addClass('open').selectpicker('setStyle');}
 }
 
-function paginate(select, meta) {
-  if (meta.totalPages === 1) {
-    return select;
+function generateContactOptions() {
+  $(".selectcontacts").empty();
+  // Si une entreprise est selectionné, on utilisé son ID
+  let selectedFirm = $('#selectFirm option:selected').attr('value');
+  // Sinon le firm ID initial du study
+  if (!selectedFirm) {
+    selectedFirm = $('#selectFirm').attr('data-selected');
   }
-  else if (meta.page === 0) {
-    return select.append("<option value='link_"+ (meta.page + 1) +"' data-icon=\"fa fa-arrow-right fa-pull-right\"></option>");
-  }
-  else if (meta.page === meta.totalPages - 1) {
-    return select.append("<option value='link_"+ (meta.page - 1) +"' data-icon=\"fa fa-arrow-left fa-pull-left\"></option>");
-  }
-  else {
-    return select.append("<option value='link_"+ (meta.page - 1) +"' class='selectlinks' data-icon=\"fa fa-arrow-left fa-pull-left\" style='position: absolute; width: 50%; z-index: 9999;'></option>" +
-      "<option value='link_"+ (meta.page + 1) +"' class='selectlinks' data-icon=\"fa fa-arrow-right fa-pull-right\" style='width: 50%; margin-left: 50%;'></option>");
-  }
+  let params = {
+    firmId: selectedFirm
+  };
+  $.get("/ua/contact/json?" + $.param(params), function (data) {
+    // Pour chaque select
+    $.each([1, 2, 3], (_, number) => {
+      const selectObj = $(`.selectcontacts[data-n=${number}]`);
+      let html = "<option></option>";
+      selectObj.append(html);
+      $.each(data.content, (_, contact) => {
+        let selected = (contact.id == selectObj.attr("data-selected")) ? "selected" : "";
+        let html = `<option value="${contact.id}" ${selected}>${contact.firstName} ${contact.lastName}</option>`;
+        selectObj.append(html);
+      });
+    });
+  });
 }
+
+function generateLeaderOptions() {
+  let params = {
+    positionId: 3 // Chargé d'affaires
+  };
+  $.get("/core/member/json?" + $.param(params), function (data) {
+    $.each([1, 2, 3], (_, number) => {
+      const selectObj = $(`.selectleaders[data-n=${number}]`);
+      let html = "<option></option>";
+      selectObj.append(html);
+      $.each(data.content, (_, leader) => {
+        let selected = (leader.id == selectObj.attr("data-selected")) ? "selected" : "";
+        let html = `<option value="${leader.id}" ${selected}>${leader.firstName} ${leader.lastName}</option>`;
+        selectObj.append(html);
+      });
+    });
+  });
+}
+
+function generateConsultantOptions() {
+  let params = {
+    positionId: 6 // Consultant
+  };
+  $.get("/core/member/json?" + $.param(params), function (data) {
+    $.each([1, 2, 3], (_, number) => {
+      const selectObj = $(`.selectconsultants[data-n=${number}]`);
+      let html = "<option></option>";
+      selectObj.append(html);
+      $.each(data.content, (_, consultant) => {
+        let selected = (consultant.id == selectObj.attr("data-selected")) ? "selected" : "";
+        let html = `<option value="${consultant.id}" ${selected}>${consultant.firstName} ${consultant.lastName}</option>`;
+        selectObj.append(html);
+      });
+    });
+  });
+}
+
+function generateQualityLeaderOptions() {
+  let params = {
+    poleId: 4 // Performance
+  };
+  $.get("/core/member/json?" + $.param(params), function (data) {
+    $.each([1, 2], (_, number) => {
+      const selectObj = $(`.selectqualityleaders[data-n=${number}]`);
+      let html = '<option></option>';
+      selectObj.append(html);
+      $.each(data.content, (_, leader) => {
+        let selected = (leader.id == selectObj.attr("data-selected")) ? "selected" : "";
+        let html = `<option value="${leader.id}" ${selected}>${leader.firstName} ${leader.lastName}</option>`;
+        selectObj.append(html);
+      });
+    });
+  });
+}
+
+$('document').ready(function () {
+  generateFirmOptions();
+  generateContactOptions();
+  generateLeaderOptions();
+  generateConsultantOptions();
+  generateQualityLeaderOptions();
+
+  // Quand on change de Firm, on recharge les contacts
+  $("#selectFirm").change(() => {
+    generateContactOptions();
+  });
+});
