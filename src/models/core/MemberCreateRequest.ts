@@ -1,4 +1,5 @@
 import {AddressCreateRequest} from "./AddressCreateRequest";
+import { PositionRequest } from "./PositionRequest";
 
 export class MemberCreateRequest {
   constructor(
@@ -13,7 +14,7 @@ export class MemberCreateRequest {
     public schoolYear ?: number,
     public telephone ?: string,
     public address ?: AddressCreateRequest,
-    public positionIds ?: number[],
+    public positions ?: PositionRequest[],
   ) {
   }
 

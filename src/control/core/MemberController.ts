@@ -13,6 +13,7 @@ import {Country} from "../../models/core/Country";
 import {PositionService} from "../../services/core/PositionService";
 import {AddressCreateRequest} from "../../models/core/AddressCreateRequest";
 import * as httpContext from "express-http-context";
+import { PositionRequest } from "../../models/core/PositionRequest";
 
 export class MemberController {
   public viewMembers(req: Request, res: Response, next: NextFunction) {
@@ -125,9 +126,24 @@ export class MemberController {
     userRequest.schoolYear = parseInt(req.body.schoolYear);
     userRequest.telephone = req.body.telephone;
 
-    userRequest.positionIds = [parseInt(req.body.positionId1)];
-    if (req.body.positionId2) userRequest.positionIds.push(parseInt(req.body.positionId2));
-    if (req.body.positionId3) userRequest.positionIds.push(parseInt(req.body.positionId3));
+    const positionRequest1 = new PositionRequest();
+    userRequest.positions = [];
+    positionRequest1.id = parseInt(req.body.positionId1);
+    positionRequest1.year = parseInt(req.body.yearPosition1);
+    positionRequest1.isBoard = req.body.isBoard1;
+    if (positionRequest1 && userRequest.positions) userRequest.positions.push(positionRequest1);
+
+    const positionRequest2 = new PositionRequest();
+    positionRequest2.id = parseInt(req.body.positionId2);
+    positionRequest2.year = parseInt(req.body.yearPosition2);
+    positionRequest2.isBoard = req.body.isBoard2;
+    if (positionRequest2 && userRequest.positions) userRequest.positions.push(positionRequest2);
+
+    const positionRequest3 = new PositionRequest();
+    positionRequest3.id = parseInt(req.body.positionId3);
+    positionRequest3.year = parseInt(req.body.yearPosition3);
+    positionRequest3.isBoard = req.body.isBoard3;
+    if (positionRequest3 && userRequest.positions) userRequest.positions.push(positionRequest3);
 
     const addressRequest = new AddressCreateRequest();
     addressRequest.line1 = req.body.line1;
