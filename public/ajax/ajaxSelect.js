@@ -7,35 +7,64 @@ $('document').ready( function() {
 });
 
 
-$('body').on('change','.selectpicker , .form-control', function () {
-
-  if ($(this).val().match(/link/)) { //Pagination
-    let page = $(this).val().split("_")[1];
-    let numSelect = $(this).attr('data-n');
-    let type = $(this).attr("class");
-    if (type.match(/selectcontacts/)) {
-      generateContactOptions(page, numSelect);
-    }
-    if (type.match(/selectleaders/)) {
-      generateLeaderOptions(page, numSelect);
-    }
-    if (type.match(/selectqualityleaders/)) {
-      generateQualityLeaderOptions(page, numSelect);
-    }
-    if (type.match(/selectconsultants/)) {
-      generateConsultantOptions(page, numSelect);
-    }
-    if (type.match(/selectfirm/)) {
-      generateFirmOptions(page);
-    }
-  }
-  if($(this).attr("id") === "selectFirm") { //Quand on change de firm on recharge les contacts correspondants
-    generateContactOptions();
-  }
-
+$('body').on('change','.selectfirm' , function () {
+  $('.selectcontacts option').remove();
+  generateContactOptions();
 });
 
 function generateContactOptions(page, numSelect) {
+
+  let selectContacts = $('.selectcontacts');
+  let selectedFirmId = $('.selectfirm option:selected').attr('value');
+  /**if(selectedFirmId) {
+    $.ajax({
+      url: "/ua/contact/json",
+      data: {firmId: selectedFirmId}
+    }).then(function(data) {
+      $.each(selectContacts, (_, selectObj) => {
+        let selectedContact = selectObj.attr('data-selected');
+        $.each(data.content, (_, contact) => {
+          if (contact.id === selectedContact) {
+            selectObj.append(`<option value='${contact.id}' selected>${contact.name}</option>`)
+          }
+        });
+        selectObj.trigger('change');
+        selectObj.trigger({
+          type: 'select2:select',
+          params: {
+            data: data.content
+          }
+        });
+      });
+    });
+  }**/
+
+  selectContacts.select2({
+    ajax: {
+      url: "/ua/contact/json",
+      dataType: 'json',
+      delay: 250,
+      data: function (params) {
+        return {
+          search: params.term,
+          firmId: selectedFirmId
+        }
+      },
+      processResults: function (data) {
+        let result = $.map(data.content, function(obj) {
+          obj.selected = selectedFirmId === obj.id;
+          obj.text = obj.text || obj.name;
+          return obj;
+        });
+        return {
+          results: result
+        };
+      }
+    },
+    minimumInputLength: 1,
+    placeholder : "Search a contact"
+  });
+  /**
   // Si une entreprise est selectionnée, on utilise son ID
   let selectedFirm = $('#selectFirm option:selected').attr('value');
   // Sinon le firm ID initial du study
@@ -83,10 +112,11 @@ function generateContactOptions(page, numSelect) {
       paginate(selectObj, data.meta);
       selectObj.selectpicker('refresh');
     }
-  });
+  });**/
 }
 
 function generateFirmOptions(page) {
+  /**
   let params = {};
   if (page) {
     params.pageNumber = page;
@@ -102,6 +132,48 @@ function generateFirmOptions(page) {
     });
     paginate(selectObj, data.meta);
     selectObj.selectpicker('refresh');
+  });**/
+
+  let selectFirm = $('.selectfirm');
+  let selectedFirmId = selectFirm.attr('data-selected');
+  if(selectedFirmId) {
+    $.ajax({
+      url: "/ua/firm/json",
+      data: {firmId: selectedFirmId}
+    }).then(function(data) {
+      selectFirm.append(`<option value='${data.content[0].id}' selected>${data.content[0].name}</option>`).trigger('change');
+      selectFirm.trigger({
+        type: 'select2:select',
+        params: {
+          data: data.content[0]
+        }
+      });
+    });
+  }
+
+  selectFirm.select2({
+    ajax: {
+      url: "/ua/firm/json",
+      dataType: 'json',
+      delay: 250,
+      data: function (params) {
+        return {
+          search: params.term,
+        }
+      },
+      processResults: function (data) {
+        let result = $.map(data.content, function(obj) {
+          obj.selected = selectedFirmId === obj.id;
+          obj.text = obj.text || obj.name;
+          return obj;
+        });
+        return {
+          results: result
+        };
+      }
+    },
+    minimumInputLength: 1,
+    placeholder : "Search a firm"
   });
 }
 
