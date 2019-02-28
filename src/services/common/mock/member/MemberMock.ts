@@ -63,31 +63,16 @@ export class MemberMock implements IMock {
     if (resource.startsWith("core/member?")) {
       const params = resource.split("?")[1];
       if (params.match(/poleId=1/)) {
-        if (params.match(/pageNumber=1/)) {
-          mockObj = <T> new Page(<T[]> [new Member(1, "Tomas", "Dupontel", "tdupont", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(3, "Secretaire Générale", new Pole(1, "RH", "Ressources Humaines")), new Position(4, "Responsable SI", new Pole(2, "SI", "Système d'informations"))]), new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"), "pierre.henry   @test.com", "1996-08-27",  new Department(9, "TC"), 3, "0607080910", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), [new Position(3, "Secretaire Générale", new Pole(1, "RH", "Ressources Humaines")), new Position(2, "Vice-Président(e)", new Pole(1, "RH", "Ressources Humaines"))])], new Meta (1, 2, 4 , 25));
-          status = 200;
-          return new MockResponse(mockObj, status);
-        }
         mockObj = <T> new Page(<T[]> [new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(3, "Secretaire Générale", new Pole(1, "RH", "Ressources Humaines")), new Position(4, "Responsable SI", new Pole(2, "SI", "Système d'informations"))]), new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"), "pierre.henry   @test.com", "1996-08-27",  new Department(9, "TC"), 3, "0607080910", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), [new Position(3, "Secretaire Générale", new Pole(1, "RH", "Ressources Humaines")), new Position(2, "Vice-Président(e)", new Pole(1, "RH", "Ressources Humaines"))])], new Meta (0, 2, 4 , 25));
         status = 200;
         return new MockResponse(mockObj, status);
       }
       if (params.match(/positionId=3/)) {
-        if (params.match(/pageNumber=1/)) {
-          mockObj = <T> new Page(<T[]> [new Member(1, "Tomate", "Duponterre", "tdupont", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(3, "Secretaire Générale", new Pole(1, "RH", "Ressources Humaines")), new Position(4, "Responsable SI", new Pole(2, "SI", "Système d'informations"))]), new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"), "pierre.henry   @test.com", "1996-08-27",  new Department(9, "TC"), 3, "0607080910", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), [new Position(3, "Secretaire Générale", new Pole(1, "RH", "Ressources Humaines")), new Position(2, "Vice-Président(e)", new Pole(1, "RH", "Ressources Humaines"))])], new Meta (1, 2, 4 , 25));
-          status = 200;
-          return new MockResponse(mockObj, status);
-        }
         mockObj = <T> new Page(<T[]> [new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(3, "Secretaire Générale", new Pole(1, "RH", "Ressources Humaines")), new Position(4, "Responsable SI", new Pole(2, "SI", "Système d'informations"))]), new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"), "pierre.henry   @test.com", "1996-08-27",  new Department(9, "TC"), 3, "0607080910", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), [new Position(3, "Secretaire Générale", new Pole(1, "RH", "Ressources Humaines")), new Position(2, "Vice-Président(e)", new Pole(1, "RH", "Ressources Humaines"))])], new Meta (0, 2, 4 , 25));
         status = 200;
         return new MockResponse(mockObj, status);
       }
       if (params.match(/positionId=2/)) {
-        if (params.match(/pageNumber=1/)) {
-          mockObj = <T> new Page(<T[]> [new Member(2, "Pierrot", "Legros", "plegros", new Gender(1, "H"), "pierre.henry   @test.com", "1996-08-27",  new Department(9, "TC"), 3, "0607080910", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), [new Position(3, "Secretaire Générale", new Pole(1, "RH", "Ressources Humaines")), new Position(2, "Vice-Président(e)", new Pole(1, "RH", "Ressources Humaines"))])], new Meta (1, 2, 2 , 25));
-          status = 200;
-          return new MockResponse(mockObj, status);
-        }
         mockObj = <T> new Page(<T[]> [new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"), "pierre.henry   @test.com", "1996-08-27",  new Department(9, "TC"), 3, "0607080910", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), [new Position(3, "Secretaire Générale", new Pole(1, "RH", "Ressources Humaines")), new Position(2, "Vice-Président(e)", new Pole(1, "RH", "Ressources Humaines"))])], new Meta (0, 2, 2 , 25));
         status = 200;
         return new MockResponse(mockObj, status);
