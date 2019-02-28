@@ -2,7 +2,6 @@ import { Gender } from "../core/Gender";
 import { Department } from "./Department";
 import { Address } from "./Address";
 import { Position } from "./Position";
-import { PositionRequest } from "./PositionRequest";
 import {IStringable} from "../interface/IStringable";
 
 export class Member implements IStringable {
