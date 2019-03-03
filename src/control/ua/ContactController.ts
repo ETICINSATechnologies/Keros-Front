@@ -26,10 +26,10 @@ export class ContactController {
   public getJSONContacts(req: Request, res: Response, next: NextFunction) {
     const queryParams = req.query;
     ContactService.getAllContacts(function (err, page: Page<Contact> | null) {
-        winston.debug("Getting JSON contacts for specified firmId : " + JSON.stringify(queryParams));
+      winston.debug("Getting JSON contacts for specified firmId : " + JSON.stringify(queryParams));
         if (err) return next(err);
         res.send(page);
-      }, queryParams);
+    }, queryParams);
   }
 
   public createContact(req: Request, res: Response, next: NextFunction) {

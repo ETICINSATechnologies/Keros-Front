@@ -1,4 +1,4 @@
-function generateFirmOptions(){
+function generateFirmOptions() {
   $("#selectFirm").empty();
   $.get("/ua/firm/json", function (data) {
     $.each(data.content, (_, firm) => {
@@ -9,12 +9,12 @@ function generateFirmOptions(){
   });
 }
 
-function generateContactOptions(){
+function generateContactOptions() {
   $(".selectcontacts").empty();
   // Si une entreprise est selectionné, on utilisé son ID
   let selectedFirm = $('#selectFirm option:selected').attr('value');
   // Sinon le firm ID initial du study
-  if(!selectedFirm){
+  if (!selectedFirm) {
     selectedFirm = $('#selectFirm').attr('data-selected');
   }
   let params = {
@@ -22,7 +22,7 @@ function generateContactOptions(){
   };
   $.get("/ua/contact/json?" + $.param(params), function (data) {
     // Pour chaque select
-    $.each([1,2, 3], (_, number) => {
+    $.each([1, 2, 3], (_, number) => {
       const selectObj = $(`.selectcontacts[data-n=${number}]`);
       let html = "<option></option>";
       selectObj.append(html);
@@ -35,12 +35,12 @@ function generateContactOptions(){
   });
 }
 
-function generateLeaderOptions(){
+function generateLeaderOptions() {
   let params = {
     positionId: 3 // Chargé d'affaires
   };
-  $.get("/core/member/json?"  + $.param(params), function (data) {
-    $.each([1,2, 3], (_, number) => {
+  $.get("/core/member/json?" + $.param(params), function (data) {
+    $.each([1, 2, 3], (_, number) => {
       const selectObj = $(`.selectleaders[data-n=${number}]`);
       let html = "<option></option>";
       selectObj.append(html);
@@ -53,12 +53,12 @@ function generateLeaderOptions(){
   });
 }
 
-function generateConsultantOptions(){
+function generateConsultantOptions() {
   let params = {
     positionId: 6 // Consultant
   };
-  $.get("/core/member/json?"  + $.param(params), function (data) {
-    $.each([1,2, 3], (_, number) => {
+  $.get("/core/member/json?" + $.param(params), function (data) {
+    $.each([1, 2, 3], (_, number) => {
       const selectObj = $(`.selectconsultants[data-n=${number}]`);
       let html = "<option></option>";
       selectObj.append(html);
@@ -71,12 +71,12 @@ function generateConsultantOptions(){
   });
 }
 
-function generateQualityLeaderOptions(){
+function generateQualityLeaderOptions() {
   let params = {
     poleId: 4 // Performance
   };
-  $.get("/core/member/json?"  + $.param(params), function (data) {
-    $.each([1,2], (_, number) => {
+  $.get("/core/member/json?" + $.param(params), function (data) {
+    $.each([1, 2], (_, number) => {
       const selectObj = $(`.selectqualityleaders[data-n=${number}]`);
       let html = '<option></option>';
       selectObj.append(html);
@@ -89,7 +89,7 @@ function generateQualityLeaderOptions(){
   });
 }
 
-$('document').ready( function() {
+$('document').ready(function () {
   generateFirmOptions();
   generateContactOptions();
   generateLeaderOptions();

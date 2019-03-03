@@ -50,7 +50,7 @@ export class FirmService extends BaseService {
                   return callback(this.defaultError(resu.statusCode), null);
                 }
                 winston.debug('Response for page ' + pageCount + ' : ' + JSON.stringify(resu));
-                if (res.result && res.result.content &&  resu.result && resu.result.content) {
+                if (res.result && res.result.content && resu.result && resu.result.content) {
                   res.result.content = res.result.content.concat(resu.result.content);
                   callback(null, res.result);
                 }
