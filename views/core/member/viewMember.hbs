@@ -40,7 +40,8 @@
                   </div>
                   <div {{#if (and (ne action "create") (ne member.id connectedUser.id))}}class="col-md-6 form-group"{{else}}class="col-md-4 form-group"{{/if}}>
                     <label for="genderId">Sexe</label>
-                    <select class="form-control" id="genderId" name="genderId" {{readonlyIf (eq action "view")}}>
+                    <select class="form-control" id="genderId" name="genderId" {{readonlyIf
+                            (eq action "view")}} {{disabledIf (eq action "view")}}>
                       {{#each gender}}
                         <option value="{{id}}" {{selected id @root.member.gender.id}}>{{gender label}}</option>
                       {{/each}}
@@ -56,11 +57,16 @@
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="telephone">Téléphone</label>
-                    <input type="text" class="form-control" id="telephone" name="telephone" value="{{member.telephone}}" placeholder="Entrez le numéro de téléphone" {{readonlyIf (eq action "view")}}>
+                    <input type="text" class="form-control" id="telephone" name="telephone" value="{{member.telephone}}"
+                           placeholder="Entrez le numéro de téléphone" {{readonlyIf (eq action "view")}}
+                           pattern=".{8,16}"
+                           oninvalid="this.setCustomValidity('Le numéro de téléphone doit contenir entre 8 et 16 chiffres')"
+                           oninput="this.setCustomValidity(' ')" onchange="this.setCustomValidity('')">
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="departmentId">Département</label>
-                    <select class="form-control" id="departmentId" name="departmentId" {{readonlyIf (eq action "view")}}>
+                    <select class="form-control" id="departmentId" name="departmentId" {{readonlyIf
+                            (eq action "view")}} {{disabledIf (eq action "view")}}>
                       <option></option>
                       {{#each departments}}
                         <option value="{{id}}" {{selected id @root.member.department.id}}>{{label}}</option>
@@ -69,7 +75,8 @@
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="schoolYear">Année scolaire</label>
-                    <select class="form-control" id="schoolYear" name="schoolYear" {{readonlyIf (eq action "view")}}>
+                    <select class="form-control" id="schoolYear" name="schoolYear" {{readonlyIf
+                            (eq action "view")}} {{disabledIf (eq action "view")}}>
                       {{#if member}}<option value="{{member.schoolYear}}" selected>{{member.schoolYear}}</option>
                       {{else}}<option selected></option>
                       {{/if}}
@@ -111,7 +118,8 @@
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="countryId">Pays</label>
-                    <select class="form-control" id="countryId" name="countryId" required {{readonlyIf (eq action "view")}}>
+                    <select class="form-control" id="countryId" name="countryId" required {{readonlyIf
+                            (eq action "view")}} {{disabledIf (eq action "view")}}>
                       {{#each countries}}
                         <option value="{{id}}" {{selected id @root.member.address.country.id}}>{{label}}</option>
                       {{/each}}
@@ -122,7 +130,8 @@
                   </h4>
                   <div class="col-md-4 form-group">
                     <label for="countryId">Fonction 1</label>
-                    <select class="form-control" id="positionId1" name="positionId1" required {{readonlyIf (eq action "view")}}>
+                    <select class="form-control" id="positionId1" name="positionId1" required {{readonlyIf
+                            (eq action "view")}} {{disabledIf (eq action "view")}}>
                       {{#each positions}}
                         <option value="{{id}}" {{selected id @root.member.positions.0.id}}>{{label}} {{#if pole}}({{pole.label}}){{/if}}</option>
                       {{/each}}
@@ -139,7 +148,8 @@
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="countryId">Fonction 2</label>
-                    <select class="form-control" id="positionId2" name="positionId2"{{readonlyIf (eq action "view")}}>
+                    <select class="form-control" id="positionId2" name="positionId2"{{readonlyIf
+                            (eq action "view")}} {{disabledIf (eq action "view")}}>
                       <option></option>
                       {{#each positions}}
                         <option value="{{id}}" {{selected id @root.member.positions.1.id}}>{{label}} {{#if pole}}({{pole.label}}){{/if}}</option>
@@ -156,7 +166,8 @@
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="countryId">Fonction 3</label>
-                    <select class="form-control" id="positionId3" name="positionId3" {{readonlyIf (eq action "view")}}>
+                    <select class="form-control" id="positionId3" name="positionId3" {{readonlyIf
+                            (eq action "view")}} {{disabledIf (eq action "view")}}>
                       <option></option>
                       {{#each positions}}
                         <option value="{{id}}" {{selected id @root.member.positions.2.id}}>{{label}} {{#if pole}}({{pole.label}}){{/if}}</option>
