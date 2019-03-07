@@ -84,6 +84,7 @@ export class StudyController {
 
     public viewStudy(req: Request, res: Response, next: NextFunction) {
         let id = req.params.id;
+        let mailshots;
         winston.info("Getting study for id " + id);
         StudyService.getStudy(id, function (err1, study: Study | null) {
             StudyService.getStudyDocuments(id, function (err2, studyDocuments: StudyDocumentResponse | null) {
@@ -99,6 +100,11 @@ export class StudyController {
                             if (err4) return next(err4);
                             if (err5) return next(err5);
                             if (err6) return next(err6);
+                            if (!study || !study.consultants || !study.qualityManagers ) {
+                              mailshots = 0;
+                            } else {
+                              mailshots = 1;
+                            }
                             const options = {
                               study: study,
                               studyDocuments: studyDocuments,
@@ -107,6 +113,7 @@ export class StudyController {
                               firms: firms,
                               provenances: provenances,
                               clientBaseUrl: Config.getClientBaseUrl(),
+                              mailshots: mailshots,
                               action: "view"
                             };
                             res.render("ua/study/viewStudy", options);
