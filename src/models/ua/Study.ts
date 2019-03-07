@@ -26,8 +26,8 @@ export class Study {
     private firm ?: Firm,
     private contacts ?: Contact[],
     private leaders ?: Member[],
-    private consultants ?: Member[],
-    private qualityManagers ?: Member[],
+    public consultants ?: Member[],
+    public qualityManagers ?: Member[],
     private confidential ?: boolean,
   ) {}
 }
