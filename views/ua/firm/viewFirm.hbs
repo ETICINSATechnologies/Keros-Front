@@ -63,7 +63,8 @@
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="countryId">Pays</label>
-                    <select class="form-control" id="countryId" name="countryId" required {{readonlyIf (eq action "view")}}>
+                    <select class="form-control" id="countryId" name="countryId" required {{readonlyIf
+                            (eq action "view")}} {{disabledIf (eq action "view")}}>
                       {{#each countries}}
                         <option value="{{id}}" {{selected id @root.firm.address.country.id}}>{{label}}</option>
                       {{/each}}

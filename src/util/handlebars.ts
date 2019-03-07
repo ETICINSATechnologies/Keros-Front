@@ -57,6 +57,9 @@ export default handlebars({
     readonlyIf: function (condition: boolean) {
       return condition ? 'readonly' : "";
     },
+    disabledIf: function (condition: boolean) {
+      return condition ? 'disabled' : "";
+    },
     gender: function (label: any) {
       return labelToName(label);
     },

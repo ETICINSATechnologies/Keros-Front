@@ -30,13 +30,14 @@
                   <div class="col-md-6 form-group">
                     <label for="firmId">Société</label>
                     <select class="form-control" id="selectFirm"
-                            name="firmId" {{readonlyIf (eq action "view")}}
+                            name="firmId" {{readonlyIf (eq action "view")}} {{disabledIf (eq action "view")}}
                             data-selected="{{study.firm.id}}">
                     </select>
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="fieldId">Secteur</label>
-                    <select class="form-control" id="fieldId" name="fieldId" {{readonlyIf (eq action "view")}}>
+                    <select class="form-control" id="fieldId" name="fieldId" {{readonlyIf
+                            (eq action "view")}} {{disabledIf (eq action "view")}}>
                       {{#each fields}}
                         <option value="{{id}}" {{selected id @root.study.field.id}}>{{label}}</option>
                       {{/each}}
@@ -44,12 +45,14 @@
                   </div>
                   <div class="col-md-12 form-group">
                     <label for="description">Description</label>
-                    <textarea rows="3" class="form-control" id="description" name="description"
+                    <textarea rows="3" class="form-control" id="description" name="description" {{readonlyIf
+                            (eq action "view")}}
                               placeholder="Entrez la description de l'étude">{{study.description}}</textarea>
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="statusId">Status</label>
-                    <select class="form-control" id="statusId" name="statusId">
+                    <select class="form-control" id="statusId" name="statusId" {{readonlyIf
+                            (eq action "view")}} {{disabledIf (eq action "view")}}>
                       {{#each status}}
                         <option value="{{id}}" {{selected id @root.study.status.id}}>{{label}}</option>
                       {{/each}}
@@ -58,7 +61,7 @@
                   <div class="col-md-6 form-group">
                     <label for="provenanceId">Provenance</label>
                     <select class="form-control" id="provenanceId" name="provenanceId" {{readonlyIf
-                            (eq action "view")}}>
+                            (eq action "view")}} {{disabledIf (eq action "view")}}>
                       <option></option>
                       {{#each provenances}}
                         <option value="{{id}}" {{selected id @root.study.provenance.id}}>{{label}}</option>
@@ -69,7 +72,7 @@
                     <label for="confidential">
                       <input type="checkbox" id="confidential" name="confidential"
                         {{#if (eq action "view")}} disabled="disabled" {{/if}}
-                        {{#if study.confidential}}checked{{/if}}> Confidentiel
+                        {{#if study.confidential}} checked {{/if}}> Confidentiel
                     </label>
                   </div>
                   <h4 class="col-md-12 box-title">
@@ -88,7 +91,7 @@
                   <div class="col-md-4 form-group">
                     <label for="archivedDate">Date d'archivation</label>
                     <input type="date" class="form-control" id="archivedDate" name="archivedDate"
-                           value="{{study.archivedDate}}" {{readonlyIf (eq action "view")}}>
+                           value="{{study.archivedDate}}" {{readonlyIf (eq action "view")}} >
                   </div>
                   <h4 class="col-md-12 box-title">
                     Prix
@@ -150,21 +153,21 @@
                   <div class="col-md-4">
                     <label for="contactId1">Contact 1</label>
                     <select class="form-control selectcontacts"
-                            name="contactId1" {{readonlyIf (eq action "view")}}
+                            name="contactId1" {{readonlyIf (eq action "view")}} {{disabledIf (eq action "view")}}
                             data-selected="{{study.contacts.0.id}}" data-n="1">
                     </select>
                   </div>
                   <div class="col-md-4">
                     <label for="contactId2">Contact 2</label>
                     <select class="form-control selectcontacts"
-                            name="contactId2" {{readonlyIf (eq action "view")}}
+                            name="contactId2" {{readonlyIf (eq action "view")}} {{disabledIf (eq action "view")}}
                             data-selected="{{study.contacts.1.id}}" data-n="2">
                     </select>
                   </div>
                   <div class="col-md-4">
                     <label for="contactId3">Contact 3</label>
                     <select class="form-control selectcontacts"
-                            name="contactId3" {{readonlyIf (eq action "view")}}
+                            name="contactId3" {{readonlyIf (eq action "view")}} {{disabledIf (eq action "view")}}
                             data-selected="{{study.contacts.2.id}}" data-n="3">
                     </select>
                   </div>
@@ -178,21 +181,21 @@
                     <div class="col-md-4">
                       <label for="leaderId1">Responsable 1</label>
                       <select class="form-control selectleaders"
-                              name="leaderId1" {{readonlyIf (eq action "view")}}
+                              name="leaderId1" {{readonlyIf (eq action "view")}} {{disabledIf (eq action "view")}}
                               data-selected="{{study.leaders.0.id}}" data-n="1">
                       </select>
                     </div>
                     <div class="col-md-4">
                       <label for="leaderId2">Responsable 2</label>
                       <select class="form-control selectleaders"
-                              name="leaderId2" {{readonlyIf (eq action "view")}}
+                              name="leaderId2" {{readonlyIf (eq action "view")}} {{disabledIf (eq action "view")}}
                               data-selected="{{study.leaders.1.id}}" data-n="2">
                       </select>
                     </div>
                     <div class="col-md-4">
                       <label for="leaderId3">Responsable 3</label>
                       <select class="form-control selectleaders"
-                              name="leaderId3" {{readonlyIf (eq action "view")}}
+                              name="leaderId3" {{readonlyIf (eq action "view")}} {{disabledIf (eq action "view")}}
                               data-selected="{{study.leaders.2.id}}" data-n="3">
                       </select>
                     </div>
@@ -201,21 +204,21 @@
                   <div class="col-md-4">
                     <label for="consultantId1">Consultant 1</label>
                     <select class="form-control selectconsultants"
-                            name="consultantId1" {{readonlyIf (eq action "view")}}
+                            name="consultantId1" {{readonlyIf (eq action "view")}} {{disabledIf (eq action "view")}}
                             data-selected="{{study.consultants.0.id}}" data-n="1">
                     </select>
                   </div>
                   <div class="col-md-4">
                     <label for="consultantId2">Consultant 2</label>
                     <select class="form-control selectconsultants"
-                            name="consultantId2" {{readonlyIf (eq action "view")}}
+                            name="consultantId2" {{readonlyIf (eq action "view")}} {{disabledIf (eq action "view")}}
                             data-selected="{{study.consultants.1.id}}" data-n="2">
                     </select>
                   </div>
                   <div class="col-md-4">
                     <label for="consultantId3">Consultant 3</label>
                     <select class="form-control selectconsultants"
-                            name="consultantId3" {{readonlyIf (eq action "view")}}
+                            name="consultantId3" {{readonlyIf (eq action "view")}} {{disabledIf (eq action "view")}}
                             data-selected="{{study.consultants.2.id}}" data-n="3">
                     </select>
                   </div>
@@ -223,14 +226,14 @@
                   <div class="col-md-6">
                     <label for="qualityManagerId1">Responsable qualité 1</label>
                     <select class="form-control selectqualityleaders"
-                            name="qualityManagerId1" {{readonlyIf (eq action "view")}}
+                            name="qualityManagerId1" {{readonlyIf (eq action "view")}} {{disabledIf (eq action "view")}}
                             data-selected="{{study.qualityManagers.0.id}}" data-n="1">
                     </select>
                   </div>
                   <div class="col-md-6">
                     <label for="qualityManagerId2">Responsable qualité 2</label>
                     <select class="form-control selectqualityleaders"
-                            name="qualityManagerId2" {{readonlyIf (eq action "view")}}
+                            name="qualityManagerId2" {{readonlyIf (eq action "view")}} {{disabledIf (eq action "view")}}
                             data-selected="{{study.qualityManagers.1.id}}" data-n="2">
                     </select>
                   </div>
