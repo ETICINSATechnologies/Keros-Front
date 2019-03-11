@@ -54,7 +54,7 @@
     "grunt-cli": "^1.2.0",
     "grunt-contrib-less": "^1.4.1",
     "grunt-contrib-watch": "^1.0.0",
-    "grunt-sync": "^0.7.0",
+    "grunt-sync": "^0.8.0",
     "grunt-ts": "^6.0.0-beta.17",
     "jsdom": "^11.10.0",
     "mocha": "^5.1.1",

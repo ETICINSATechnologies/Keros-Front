@@ -55,6 +55,38 @@ export class FirmMock implements IMock {
         status = 200;
         return new MockResponse(mockObj, status);
     }
+
+    if (resource.startsWith("ua/firm?")) {
+      const params = resource.split("?")[1];
+      if (params.match(/firmId=1/)) {
+        mockObj = <T> new Page(<T[]> [new Firm(1, "99999999", "La boucherie du Léman", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), new FirmType(2, "PME/PMI"))], new Meta(0, 1, 2, 25));
+        status = 200;
+        return new MockResponse(mockObj, status);
+      }
+      if (params.match(/firmId=2/)) {
+        mockObj = <T> new Page(<T[]> [new Firm(2, "11111111", "La poissonerie des familles", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), new FirmType(4, "SARL"))], new Meta(0, 1, 2, 25));
+        status = 200;
+        return new MockResponse(mockObj, status);
+      }
+      if (params.match(/pageNumber=1/)) {
+        mockObj = <T> new Page(<T[]> [new Firm(2, "11111111", "La poissonerie des familles", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), new FirmType(4, "SARL")), new Firm(1, "99999999", "La boucherie du Léman", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), new FirmType(2, "PME/PMI"))], new Meta(1, 2, 4, 25));
+        status = 200;
+        return new MockResponse(mockObj, status);
+      }
+      if (params.match(/search=b/) || params.match(/search=L/)) {
+        mockObj = <T> new Page(<T[]> [new Firm(1, "99999999", "La boucherie du Léman", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), new FirmType(2, "PME/PMI"))], new Meta(0, 1, 2, 25));
+        status = 200;
+        return new MockResponse(mockObj, status);
+      }
+      if (params.match(/search=p/) || params.match(/search=f/)) {
+        mockObj = <T> new Page(<T[]> [new Firm(2, "11111111", "La poissonerie des familles", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), new FirmType(4, "SARL"))], new Meta(0, 1, 2, 25));
+        status = 200;
+        return new MockResponse(mockObj, status);
+      }
+      mockObj = <T> new Page(<T[]> [new Firm(1, "99999999", "La boucherie du Léman", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), new FirmType(2, "PME/PMI")), new Firm(2, "11111111", "La poissonerie des familles", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), new FirmType(4, "SARL"))], new Meta(0, 2, 4, 25));
+      status = 200;
+      return new MockResponse(mockObj, status);
+    }
     return null;
   }
 

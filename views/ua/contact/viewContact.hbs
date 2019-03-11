@@ -41,13 +41,9 @@
                   </div>
                   <div class="col-md-12 form-group">
                     <label for="firmId">Société</label>
-                    <select class="form-control" id="firmId" name="firmId" {{readonlyIf
-                            (eq action "view")}} {{disabledIf (eq action "view")}}>
-                      {{!TODO : Use pagination}}
-                      {{#each firms.content}}
-                        <option value="{{id}}" {{selected id @root.contact.firm.id}}>{{name}}</option>
-                      {{/each}}
-                    </select>
+                      <select class="selectfirm" id="selectFirm" name="firmId" style="width:100%" data-selected="{{contact.firm.id}}" {{#if (eq action "view")}}disabled{{/if}}>
+                        {{#if (ne action create)}}<option value="{{contact.firm.id}}" >{{contact.firm.name}}</option>{{/if}}
+                      </select>
                   </div>
                   <div class="col-md-12 form-group">
                     <label for="email">Email</label>

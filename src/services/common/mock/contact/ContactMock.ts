@@ -10,10 +10,6 @@ import { Gender } from "../../../../models/core/Gender";
 import { FirmType } from "../../../../models/ua/FirmType";
 import { Address } from "../../../../models/core/Address";
 import { Country } from "../../../../models/core/Country";
-import { Member } from '../../../../models/core/Member';
-import { Department } from '../../../../models/core/Department';
-import { Position } from '../../../../models/core/Position';
-import { Pole } from '../../../../models/core/Pole';
 
 export class ContactMock implements IMock {
   create<T>(resource: string, resources: any, options?: IRequestOptions): IRestResponse<T> | null {
@@ -36,7 +32,7 @@ export class ContactMock implements IMock {
           winston.debug("Contact 1 removed");
           return new MockResponse(null, status);
         case "ua/contact/2":
-	  status = 204;
+	      status = 204;
           winston.debug("Contact 2 removed");
           return new MockResponse(null, status);
       }
@@ -59,31 +55,51 @@ export class ContactMock implements IMock {
         status = 200;
         return new MockResponse(mockObj, status);
     }
-    if(resource.startsWith("ua/contact?")){
+    if (resource.startsWith("ua/contact?")) {
       const params = resource.split("?")[1];
-      switch (params) {
-        case "firmId=1" :
-          mockObj = <T>new Page(<T[]>[new Contact(1, "Jimmy", "Neutron", new Gender(3, "A"), new Firm(2, "1111111", "La poissonerie des familles", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), new FirmType(4, "SARL")), "jimmy@test.com", "0450202122", "+33620547064", "Stagiaire", "Super sympa", true)], new Meta(0, 1, 2, 25));
-          status = 200;
-          return new MockResponse(mockObj, status);
-        case "firmId=2" :
-          mockObj = <T>new Page(<T[]>[new Contact(2, "José", "Bové", new Gender(4, "I"), new Firm(1, "99999999", "La boucherie du Léman", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), new FirmType(2, "TPE/PME")), "votezjosé@test.com", "0405060708", "+33711121314", "PDG", "", false)], new Meta(0, 1, 2, 25));
-          status = 200;
-          return new MockResponse(mockObj, status);
-      }
       if (params.match(/firmId=1/)) {
-        mockObj = <T>new Page(<T[]>[new Contact(1, "Jimmy", "Neutron", new Gender(3, "A"), new Firm(2, "1111111", "La poissonerie des familles", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), new FirmType(4, "SARL")), "jimmy@test.com", "0450202122", "+33620547064", "Stagiaire", "Super sympa", true)], new Meta(0, 1, 2, 25));
-        status = 200;
-        return new MockResponse(mockObj, status);
-      } else if (params.match(/firmId=2/)) {
-        mockObj = <T>new Page(<T[]>[new Contact(2, "José", "Bové", new Gender(4, "I"), new Firm(1, "99999999", "La boucherie du Léman", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), new FirmType(2, "TPE/PME")), "votezjosé@test.com", "0405060708", "+33711121314", "PDG", "", false)], new Meta(0, 1, 2, 25));
-        status = 200;
-        return new MockResponse(mockObj, status);
-      } else {
-        mockObj = <T>new Page(<T[]>[new Contact(1, "Jimmy", "Neutron", new Gender(3, "A"), new Firm(2, "1111111", "La poissonerie des familles", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), new FirmType(4, "SARL")), "jimmy@test.com", "0450202122", "+33620547064", "Stagiaire", "Super sympa", true)], new Meta(0, 2, 2, 25));
+        if (params.match(/search/)) {
+          if (params.match(/search=s/) || params.match(/search=p/)) {
+            mockObj = <T> new Page(<T[]> [new Contact(2, "Patrick", "Sebastien", new Gender(4, "I"), new Firm(1, "99999999", "La boucherie du Léman", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), new FirmType(2, "TPE/PME")), "votezjosé@test.com", "0405060708", "+33711121314", "PDG", "", false)], new Meta (1, 2, 2 , 25));
+            status = 200;
+            return new MockResponse(mockObj, status);
+          }
+          if (params.match(/search=b/) || params.match(/search=j/)) {
+            mockObj = <T> new Page(<T[]> [new Contact(2, "José", "Bové", new Gender(4, "I"), new Firm(1, "99999999", "La boucherie du Léman", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), new FirmType(2, "TPE/PME")), "votezjosé@test.com", "0405060708", "+33711121314", "PDG", "", false)], new Meta (0, 2, 2 , 25));
+            status = 200;
+            return new MockResponse(mockObj, status);
+          }
+          mockObj = <T> new Page(<T[]> [], new Meta (1, 5, 2 , 25));
+          status = 200;
+          return new MockResponse(mockObj, status);
+        }
+        mockObj = <T> new Page(<T[]> [new Contact(2, "José", "Bové", new Gender(4, "I"), new Firm(1, "99999999", "La boucherie du Léman", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), new FirmType(2, "TPE/PME")), "votezjosé@test.com", "0405060708", "+33711121314", "PDG", "", false), new Contact(2, "Patrick", "Sebastien", new Gender(4, "I"), new Firm(1, "99999999", "La boucherie du Léman", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), new FirmType(2, "TPE/PME")), "votezjosé@test.com", "0405060708", "+33711121314", "PDG", "", false)], new Meta (0, 2, 2 , 25));
         status = 200;
         return new MockResponse(mockObj, status);
       }
+      if (params.match(/firmId=2/)) {
+        if (params.match(/search/)) {
+          if (params.match(/search=m/) || params.match(/search=p/)) {
+            mockObj = <T> new Page(<T[]> [new Contact(2, "Patrick", "Montel", new Gender(4, "I"), new Firm(2, "1111111", "La poissonerie des familles", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), new FirmType(4, "SARL")), "votezjosé@test.com", "0405060708", "+33711121314", "PDG", "", false)], new Meta (1, 2, 2 , 25));
+            status = 200;
+            return new MockResponse(mockObj, status);
+          }
+          if (params.match(/search=n/) || params.match(/search=j/)) {
+            mockObj = <T> new Page(<T[]> [new Contact(1, "Jimmy", "Neutron", new Gender(3, "A"), new Firm(2, "1111111", "La poissonerie des familles", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), new FirmType(4, "SARL")), "jimmy@test.com", "0450202122", "+33620547064", "Stagiaire", "Super sympa", true)], new Meta (0, 2, 2 , 25));
+            status = 200;
+            return new MockResponse(mockObj, status);
+          }
+          mockObj = <T> new Page(<T[]> [], new Meta (1, 5, 2 , 25));
+          status = 200;
+          return new MockResponse(mockObj, status);
+        }
+        mockObj = <T> new Page(<T[]> [new Contact(1, "Jimmy", "Neutron", new Gender(3, "A"), new Firm(2, "1111111", "La poissonerie des familles", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), new FirmType(4, "SARL")), "jimmy@test.com", "0450202122", "+33620547064", "Stagiaire", "Super sympa", true), new Contact(2, "Patrick", "Montel", new Gender(4, "I"), new Firm(2, "1111111", "La poissonerie des familles", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), new FirmType(4, "SARL")), "votezjosé@test.com", "0405060708", "+33711121314", "PDG", "", false)], new Meta (0, 2, 2 , 25));
+        status = 200;
+        return new MockResponse(mockObj, status);
+      }
+      mockObj = <T> new Page(<T[]> [], new Meta (1, 5, 2 , 25));
+      status = 200;
+      return new MockResponse(mockObj, status);
     }
     return null;
   }
