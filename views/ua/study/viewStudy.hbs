@@ -30,6 +30,7 @@
                   <div class="col-md-6 form-group">
                     <label for="firmId">Société</label>
                     <select class="selectfirm" id="selectFirm" name="firmId" data-selected="{{study.firm.id}}" style="width:100%" {{#if (eq action "view")}}disabled{{/if}}>
+                      {{#if (ne action create)}}<option value="{{study.firm.id}}" >{{study.firm.name}}</option>{{/if}}
                     </select>
                   </div>
                   <div class="col-md-6 form-group">
@@ -149,17 +150,20 @@
                   <div class="col-md-4">
                     <label for="contactId1">Contact 1</label>
                     <select class="selectcontacts required" style="width:100%" data-selected="{{study.contacts.0.id}}" name="contactId1" data-n="1" required {{#if (eq action "view")}}disabled{{/if}}>
+                      {{#if (ne action "create")}}<option value="{{study.contacts.0.id}}" >{{study.contacts.0.firstName}} {{study.contacts.0.lastName}}</option>{{/if}}
                     </select>
                   </div>
                   <div class="col-md-4">
                     <label for="contactId2">Contact 2</label>
                     <select class="selectcontacts" style="width:100%" data-selected="{{study.contacts.1.id}}" name="contactId2" data-n="2" {{#if (eq action "view")}}disabled{{/if}}>
+                      {{#if (ne action "create")}}<option value="{{study.contacts.1.id}}" >{{study.contacts.1.firstName}} {{study.contacts.1.lastName}}</option>{{/if}}
                     </select>
                   </div>
                   <div class="col-md-4">
                     <label for="contactId3">Contact 3</label>
                     <div id="contactId3">
                       <select class="selectcontacts" style="width:100%" data-selected="{{study.contacts.2.id}}" name="contactId3" data-n="3" {{#if (eq action "view")}}disabled{{/if}}>
+                        {{#if (ne action "create")}}<option value="{{study.contacts.2.id}}" >{{study.contacts.2.firstName}} {{study.contacts.2.lastName}}</option>{{/if}}
                       </select>
                     </div>
                   </div>
@@ -173,16 +177,19 @@
                     <div class="col-md-4">
                       <label for="leaderId1">Responsable 1</label>
                       <select class="selectleaders" style="width:100%" data-selected="{{study.leaders.0.id}}" name="leaderId1" data-n="1" {{#if (eq action "view")}}disabled{{/if}}>
+                        {{#if (ne action "create")}}<option value="{{study.leaders.0.id}}" >{{study.leaders.0.firstName}} {{study.leaders.0.lastName}}</option>{{/if}}
                       </select>
                     </div>
                     <div class="col-md-4">
                       <label for="leaderId2">Responsable 2</label>
                       <select class="selectleaders" style="width:100%" data-selected="{{study.leaders.1.id}}" name="leaderId2"data-n="2" {{#if (eq action "view")}}disabled{{/if}}>
+                        {{#if (ne action "create")}}<option value="{{study.leaders.1.id}}" >{{study.leaders.1.firstName}} {{study.leaders.1.lastName}}</option>{{/if}}
                       </select>
                     </div>
                     <div class="col-md-4">
                       <label for="leaderId3">Responsable 3</label>
                       <select class="selectleaders" style="width:100%" data-selected="{{study.leaders.2.id}}" name="leaderId3"data-n="3" {{#if (eq action "view")}}disabled{{/if}}>
+                        {{#if (ne action "create")}}<option value="{{study.leaders.2.id}}" >{{study.leaders.2.firstName}} {{study.leaders.2.lastName}}</option>{{/if}}
                       </select>
                     </div>
                   </div>
@@ -190,27 +197,32 @@
                   <div class="col-md-4">
                     <label for="consultantId1">Consultant 1</label>
                     <select class="selectconsultants" style="width:100%" data-selected="{{study.consultants.0.id}}" name="consultantId1" data-n="1" {{#if (eq action "view")}}disabled{{/if}}>
+                      {{#if (ne action "create")}}<option value="{{study.consultants.0.id}}" >{{study.consultants.0.firstName}} {{study.consultants.0.lastName}}</option>{{/if}}
                     </select>
                   </div>
                   <div class="col-md-4">
                     <label for="consultantId2">Consultant 2</label>
                     <select class="selectconsultants" style="width:100%" data-selected="{{study.consultants.1.id}}" name="consultantId2" data-n="2" {{#if (eq action "view")}}disabled{{/if}}>
+                      {{#if (ne action "create")}}<option value="{{study.consultants.1.id}}" >{{study.consultants.1.firstName}} {{study.consultants.1.lastName}}</option>{{/if}}
                     </select>
                   </div>
                   <div class="col-md-4">
                     <label for="consultantId3">Consultant 3</label>
                     <select class="selectconsultants" style="width:100%" data-selected="{{study.consultants.2.id}}" name="consultantId3" data-n="3" {{#if (eq action "view")}}disabled{{/if}}>
+                      {{#if (ne action "create")}}<option value="{{study.consultants.2.id}}" >{{study.consultants.2.firstName}} {{study.consultants.2.lastName}}</option>{{/if}}
                     </select>
                   </div>
                   <hr/>
                   <div class="col-md-6">
                     <label for="qualityManagerId1">Responsable qualité 1</label>
                     <select class="selectqualityleaders" style="width:100%" data-selected="{{study.qualityManagers.0.id}}" name="qualityManagerId1" data-n="1" {{#if (eq action "view")}}disabled{{/if}}>
+                      {{#if (ne action "create")}}<option value="{{study.qualityManagers.0.id}}" >{{study.qualityManagers.0.firstName}} {{study.qualityManagers.0.lastName}}</option>{{/if}}
                     </select>
                   </div>
                   <div class="col-md-6">
                     <label for="qualityManagerId2">Responsable qualité 2</label>
                       <select class="selectqualityleaders" style="width:100%" data-selected="{{study.qualityManagers.1.id}}" name="qualityManagerId2" data-n="2" {{#if (eq action "view")}}disabled{{/if}}>
+                        {{#if (ne action "create")}}<option value="{{study.qualityManagers.1.id}}" >{{study.qualityManagers.1.firstName}} {{study.qualityManagers.1.lastName}}</option>{{/if}}
                       </select>
                   </div>
                   {{#if (eq action "view")}}

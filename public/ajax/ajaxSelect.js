@@ -3,37 +3,28 @@ $('document').ready( function() {
   generateConsultantOptions();
   generateLeaderOptions();
   generateQualityLeaderOptions();
-  generateContactOptions();
+  generateContactOptions(false);
 });
 
 
 $('body').on('change','.selectfirm' , function () { // Si on change de firm on enlève les contacts précédemment sélectionnés
   $('.selectcontacts option').remove();
-  generateContactOptions(); // nécessaire en raison du délai de chargement de la page lors d'un viewStudy d'une étude existante
+  generateContactOptions(true);
 });
 
-function generateContactOptions() {
-  let selectedFirmId = $('.selectfirm option:selected').attr('value'); // Si une firm est séléctionnée on charge ses contacts (1) sinon on attend que ce soit le cas (2)
+function generateContactOptions(reload) {
+  let selectedFirmId = $('.selectfirm option:selected').attr('value'); // Si une firm est séléctionnée on laisse la possibilité de sélectionner les contacts correspondants (1) sinon on attend que ce soit le cas (2)
   if(selectedFirmId) { // (1)
-    $.ajax({
-      url: "/ua/contact/json",
-      data: {firmId: selectedFirmId}
-    }).then(function(data) {
-      if (data.content.length !== 0) { // si résultats alors on affiche le résultat correspondant à l'étude
-        $.each([1,2,3], (_, number) => {
-          const selectObj = $(`.selectcontacts[data-n=${number}]`);
-          const selectedContact = selectObj.attr('data-selected');
-          $.each(data.content, (_, contact) => {
-            if (contact.id == selectedContact) {
-              selectObj.append(`<option value='${contact.id}' selected>${contact.firstName} ${contact.lastName}</option>`).trigger('change');
-            }
-          });
-        });
-      } else {
-        $('.selectcontacts').append(`<option selected disabled>Pas de contact pour cette société</option>`).trigger('change');
-
-      }
-    });
+    if(reload) { // si on sélectionne une nouvelle société on test si elle a des contacts associés dans la BDD
+      $.ajax({
+        url: "/ua/contact/json",
+        data: {firmId: selectedFirmId}
+      }).then(function(data) {
+        if (data.content.length == 0) { // Si pas de contact pour cette société on le précise
+          $('.selectcontacts').append(`<option selected disabled>Pas de contact pour cette société</option>`).trigger('change'); // si pas de contacts pour cette entreprise on le précise
+        }
+      });
+    }
     $.each([1,2,3], (_, number) => {
       const selectObj = $(`.selectcontacts[data-n=${number}]`);
       selectObj.select2({
@@ -76,18 +67,7 @@ function generateContactOptions() {
 }
 
 function generateFirmOptions() {
-  let selectFirm = $('.selectfirm');
-  let selectedFirmId = selectFirm.attr('data-selected');
-  if(selectedFirmId) {
-    $.ajax({
-      url: "/ua/firm/json",
-      data: {firmId: selectedFirmId}
-    }).then(function(data) {
-      selectFirm.append(`<option value='${data.content[0].id}' selected>${data.content[0].name}</option>`).trigger('change');
-    });
-  }
-
-  selectFirm.select2({
+  $('.selectfirm').select2({
     ajax: {
       url: "/ua/firm/json",
       dataType: 'json',
@@ -120,21 +100,6 @@ function generateFirmOptions() {
 }
 
 function generateLeaderOptions() {
-  // Si étude existante on charge ses éléments
-  $.ajax({
-    url: "/core/member/json",
-    data: {positionId: 3} // id chargé d'affaires
-  }).then(function(data) {
-    $.each([1,2,3], (_, number) => {
-      const selectObj = $(`.selectleaders[data-n=${number}]`);
-      const selectedLeader = selectObj.attr('data-selected');
-      $.each(data.content, (_, leader) => {
-        if (leader.id == selectedLeader) {
-          selectObj.append(`<option value='${leader.id}' selected>${leader.firstName} ${leader.lastName}</option>`).trigger('change');
-        }
-      });
-    });
-  });
   $.each([1,2,3], (_, number) => {
     const selectObj = $(`.selectleaders[data-n=${number}]`);
     selectObj.select2({
@@ -172,21 +137,6 @@ function generateLeaderOptions() {
 }
 
 function generateQualityLeaderOptions() {
-  // Si étude existante on charge ses éléments
-  $.ajax({
-    url: "/core/member/json",
-    data: {poleId: 4} // id pole performance
-  }).then(function(data) {
-    $.each([1,2,3], (_, number) => {
-      const selectObj = $(`.selectqualityleaders[data-n=${number}]`);
-      const selectedLeader = selectObj.attr('data-selected');
-      $.each(data.content, (_, leader) => {
-        if (leader.id == selectedLeader) {
-          selectObj.append(`<option value='${leader.id}' selected>${leader.firstName} ${leader.lastName}</option>`).trigger('change');
-        }
-      });
-    });
-  });
   $.each([1,2,3], (_, number) => {
     const selectObj = $(`.selectqualityleaders[data-n=${number}]`);
     selectObj.select2({
@@ -224,21 +174,6 @@ function generateQualityLeaderOptions() {
 }
 
 function generateConsultantOptions(){
-  // Si étude existante on charge ses éléments
-  $.ajax({
-    url: "/core/member/json",
-    data: {positionId: 6} // id consultant
-  }).then(function(data) {
-    $.each([1,2,3], (_, number) => {
-      const selectObj = $(`.selectconsultants[data-n=${number}]`);
-      const selectedConsultant = selectObj.attr('data-selected');
-      $.each(data.content, (_, consultant) => {
-        if (consultant.id == selectedConsultant) {
-          selectObj.append(`<option value='${consultant.id}' selected>${consultant.firstName} ${consultant.lastName}</option>`).trigger('change');
-        }
-      });
-    });
-  });
   $.each([1,2,3], (_, number) => {
     const selectObj = $(`.selectconsultants[data-n=${number}]`);
     selectObj.select2({

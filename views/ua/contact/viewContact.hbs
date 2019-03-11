@@ -42,6 +42,7 @@
                   <div class="col-md-12 form-group">
                     <label for="firmId">Société</label>
                       <select class="selectfirm" id="selectFirm" name="firmId" style="width:100%" data-selected="{{contact.firm.id}}" {{#if (eq action "view")}}disabled{{/if}}>
+                        {{#if (ne action create)}}<option value="{{study.firm.id}}" >{{study.firm.name}}</option>{{/if}}
                       </select>
                   </div>
                   <div class="col-md-12 form-group">
