@@ -31,7 +31,7 @@
                     <label for="type">Type de facture</label>
                     <select class="form-control" id="typeId" name="typeId" {{readonlyIf (eq action "view")}}>
                       {{#each types}}
-                        <option value="{{this}}" {{selected label @root.facture.type.label}}>{{typeToString this}}</option>
+                        <option value="{{this}}" {{#if (eq label @root.facture.type.label)}}selected{{/if}}>{{typeToString this}}</option>
                       {{/each}}
                     </select>
                   </div>
@@ -79,21 +79,24 @@
                     <select class="form-control" id="studyId" name="studyId" {{readonlyIf
                             (eq action "view")}} {{disabledIf (eq action "view")}}>
                       {{#each studies.content}}
-                        <option value="{{id}}" {{selected id @root.facture.study.name}}>{{name}}</option>
+                        <option value="{{id}}" {{selected id @root.facture.study.id}}>{{name}}</option>
                       {{/each}}
                     </select>
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="contact">Contact</label>
-                    <select class="form-control selectcontacts"
-                            name="contactId" {{readonlyIf (eq action "view")}} {{disabledIf (eq action "view")}}
-                            data-selected="{{facture.study.contacts.0.id}}" data-n="1" width="100%">
-                    </select>
+                    <input type="text" class="form-control" id="contactId" name="contactId" value="{{facture.contactName}}" placeholder="Entrez le nom du contact" required {{readonlyIf (eq action "view")}}>
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="contactEmailId">Email contact</label>
                     <input type="text" class="form-control" id="contactEmailId" name="contactEmailId" value="{{facture.contactEmail}}" placeholder="Entrez l'adresse e-mail du contact" required {{readonlyIf (eq action "view")}}>
                   </div>
+                  {{#if (ne action "create")}}
+                  <div class="col-md-6 form-group">
+                    <label for="consultantId">Consultant</label>
+                    <input type="text" class="form-control" id="consultantId" name="consultantId" value="{{facture.consultant.firstName}} {{facture.consultant.lastName}}" placeholder="Entrez le nom du consultant" required {{readonlyIf (eq action "view")}}>
+                  </div>
+                  {{/if}}
                   <div class="col-md-12 form-group">
                     <label for="subject">Sujet</label>
                     <textarea rows="3" class="form-control" id="subject" name="subject" {{readonlyIf
@@ -116,7 +119,7 @@
                               (eq action "view")}}>
                     </div>
                   </div>
-                  <div class="col-md-2 form-group">
+                  <div class="col-md-4 form-group">
                     <label for="taxPercentage">Pourcentage de taxation</label>
                     <div class="input-group">
                       <span class="input-group-addon" style="background-color: #DBE0E0; font-weight: bold;">%</span>
@@ -127,6 +130,18 @@
                               (eq action "view")}}>
                     </div>
                   </div>
+                  {{#if (ne action "create")}}
+                    <div class="col-md-4 form-group">
+                      <label for="amountTTC">Montant Toutes Taxes Comprises (TTC)</label>
+                      <div class="input-group">
+                        <span class="input-group-addon" style="background-color: #DBE0E0; font-weight: bold;">€</span>
+                        <input type="number" class="form-control" id="amountTTC" name="amountTTC" step="0.01"
+                               min="0"
+                               value="{{facture.amountTTC}}" placeholder="Montant TTC" {{readonlyIf
+                                (eq action "view")}}>
+                      </div>
+                    </div>
+                  {{/if}}
                   <h4 class="col-md-12 box-title">
                     Date
                   </h4>
@@ -146,6 +161,36 @@
                     <input type="date" class="form-control" id="createdDate" name="createdDate"
                            value="{{facture.createdDate}}" {{readonlyIf (eq action "view")}} >
                   </div>
+                  {{/if}}
+                  <h4 class="col-md-12 box-title">
+                    Informations complémentaires
+                  </h4>
+                  <div class="col-md-12 form-group">
+                    <textarea rows="3" class="form-control" id="additionalInformation" name="additionalInformation" {{readonlyIf
+                            (eq action "view")}}
+                              placeholder="Entrez toute information supplémentaire">{{facture.additionalInformation}}</textarea>
+                  </div>
+                  {{#if (ne action "create")}}
+                    <div class="col-md-12 form-group">
+                      <div class="col-md-10 form-group">
+                        <ol class="progtrckr" data-progtrckr-steps="3">
+                          <li class="progtrckr-done">Créé le {{facture.createdDate}} par {{facture.createdBy.firstName}} {{facture.createdBy.lastName}}</li>
+                          {{#if facture.validatedByUa}}
+                            <li class="progtrckr-done">Validation UA le {{facture.validatedByUaDate}} par {{facture.validatedByUaMember.firstName}} {{facture.validatedByUaMember.lastName}}</li>
+                          {{else}}
+                            <li class="progtrckr-todo">En attente (UA)</li>
+                          {{/if}}
+                          {{#if facture.validatedByPerf}}
+                            <li class="progtrckr-done">Validation Perf le {{facture.validatedByPerfDate}} par {{facture.validatedByPerfMember.firstName}} {{facture.validatedByPerfMember.lastName}}</li>
+                          {{else}}
+                            <li class="progtrckr-todo">En attente (Perfo)</li>
+                          {{/if}}
+                        </ol>
+                      </div>
+                      <a href="/treso/facture">
+                        <button type="button" class="btn btn-primary" style="margin-top: 2%" {{#if (ne action "update")}}disabled{{/if}}>Publiposter</button>
+                      </a>
+                    </div>
                   {{/if}}
                   {{#if (eq action "view")}}
                     {{#if (eq mailshots 1)}}
