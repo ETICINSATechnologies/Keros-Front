@@ -7,6 +7,10 @@ import { Facture } from "../../models/treso/Facture";
 import { StudyService } from "../../services/ua/StudyService";
 import { Study } from "../../models/ua/Study";
 import { AddressCreateRequest } from "../../models/core/AddressCreateRequest";
+import { FactureDocument } from "../../models/treso/FactureDocument";
+import { CountryService } from "../../services/core/CountryService";
+import { Country } from "../../models/core/Country";
+import { FactureTypeService } from "../../services/treso/FactureTypeService";
 
 export class FactureController {
   public viewFactures(req: Request, res: Response, next: NextFunction) {
@@ -25,14 +29,22 @@ export class FactureController {
 
   public createFacture(req: Request, res: Response, next: NextFunction) {
     winston.info("Getting create facture form");
-    StudyService.getAllStudies(function (err, studies: Page<Study> | null) {
-      if (err) return next(err);
-      const options = {
-        studies: studies,
-        action: "create"
-      };
-      res.render("treso/facture/viewFacture", options);
+    StudyService.getAllStudies(function (err1, studies: Page<Study> | null) {
+      CountryService.getAllCountries(function (err2, countries: Country[] | null) {
+        FactureTypeService.getAllFactureTypes(function (err3, types: string[] | null) {
+          if (err1) return next(err1);
+          if (err2) return next(err2);
+          if (err3) return next(err3);
+          const options = {
+            studies: studies,
+            countries: countries,
+            types: types,
+            action: "create"
+          };
+          res.render("treso/facture/viewFacture", options);
+        });
     });
+  });
   }
 
   public deleteFacture(req: Request, res: Response, next: NextFunction) {
@@ -51,16 +63,24 @@ export class FactureController {
     winston.info("Getting facture for id " + id);
     FactureService.getFacture(id, function (err1, facture: Facture | null) {
       StudyService.getAllStudies(function (err2, studies: Page<Study> | null) {
-        if (err1) return next(err1);
-        // TODO : cleaner. This request can fail if facture is not valid.
-        // TODO The page should still display
-        if (err2) return next(err2);
-        const options = {
-          facture : facture,
-          studies: studies,
-          action: "view"
-        };
-        res.render("treso/facture/viewFacture", options);
+        CountryService.getAllCountries(function (err3, countries: Country[] | null) {
+          FactureTypeService.getAllFactureTypes(function (err4, types: string[] | null) {
+            if (err1) return next(err1);
+            // TODO : cleaner. This request can fail if facture is not valid.
+            // TODO The page should still display
+            if (err2) return next(err2);
+            if (err3) return next(err3);
+            if (err4) return next(err4);
+            const options = {
+              facture : facture,
+              studies: studies,
+              countries: countries,
+              types: types,
+              action: "view"
+            };
+            res.render("treso/facture/viewFacture", options);
+          });
+        });
       });
     });
   }
@@ -70,14 +90,22 @@ export class FactureController {
     winston.info("Updating facture for id " + id);
     FactureService.getFacture(id, function (err1, facture: Facture | null) {
       StudyService.getAllStudies(function (err2, studies: Page<Study> | null) {
-        if (err1) return next(err1);
-        if (err2) return next(err2);
-        const options = {
-          facture: facture,
-          studies: studies,
-          action: "update"
-        };
-        res.render("treso/facture/viewFacture", options);
+        CountryService.getAllCountries(function (err3, countries: Country[] | null) {
+          FactureTypeService.getAllFactureTypes(function (err4, types: string[] | null) {
+            if (err1) return next(err1);
+            if (err2) return next(err2);
+            if (err3) return next(err3);
+            if (err4) return next(err4);
+            const options = {
+              facture: facture,
+              studies: studies,
+              countries: countries,
+              types: types,
+              action: "update"
+            };
+            res.render("treso/facture/viewFacture", options);
+          });
+        });
       });
     });
   }
@@ -144,6 +172,17 @@ export class FactureController {
         return next(err);
       }
       res.redirect("/treso/facture");
+    });
+  }
+
+  public getDocument(req: Request, res: Response, next: NextFunction) {
+    let id = req.params.id;
+    winston.info("Getting facture doc for id " + id);
+    FactureService.getFactureDocument(id, function (err, result: FactureDocument | null) {
+      if (err) {
+        return next(err);
+      }
+      res.send(result);
     });
   }
 

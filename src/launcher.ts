@@ -15,6 +15,7 @@ import {firmRouter} from "./control/ua/firmRouter";
 import {studyRouter} from "./control/ua/studyRouter";
 import {dashboardRouter} from "./control/core/dashboardRouter";
 import {contactRouter} from "./control/ua/contactRouter";
+import {factureRouter} from "./control/treso/factureRouter";
 
 /**
  * The Launcher - contains the express Application as well as methods to launch a server on that
@@ -80,6 +81,7 @@ export class Launcher {
     this.app.use("/ua/firm", firmRouter());
     this.app.use("/ua/study", studyRouter());
     this.app.use("/ua/contact", contactRouter());
+    this.app.use("/treso/facture", factureRouter());
 
 
     // Handle any errors

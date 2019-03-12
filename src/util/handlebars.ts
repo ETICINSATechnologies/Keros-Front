@@ -1,6 +1,7 @@
 import * as path from "path";
 import * as handlebars from "express-handlebars";
 import { labelToName } from "./handlebars/genderHelper";
+import { typeToName } from "./handlebars/factureTypeHelper";
 import { IStringable } from "../models/interface/IStringable";
 
 /**
@@ -85,5 +86,8 @@ export default handlebars({
     concat: function (str1: string, str2: string): string {
       return str1 + str2;
     },
+    typeToString: function (label: any) {
+      return typeToName(label);
+    }
   }
 });

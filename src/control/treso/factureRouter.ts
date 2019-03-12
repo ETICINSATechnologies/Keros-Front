@@ -22,7 +22,7 @@ export function factureRouter(): Router {
   router.post("/postform", factureController.postFactureForm);
   router.post("/:id(\\d+)/validate-ua", factureController.validateUa);
   router.post("/:id(\\d+)/validate-perf", factureController.validatePerf);
-  // router.get("/:id(\\d+)/generateDocument", factureController.generateDocument);
+  router.get("/:id(\\d+)/generateDocument", factureController.getDocument);
 
   return router;
 }

@@ -1,0 +1,68 @@
+<body class="hold-transition skin-green fixed sidebar-mini">
+<div class="wrapper">
+  {{> template/header}}
+  {{> template/sidebar}}
+
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Voir les factures
+      </h1>
+      {{> breadcrumb tab="TRESO" action="all" pathall="Factures,Voir les factures"}}
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="dataTables_wrapper form-inline dt-bootstrap">
+                {{> template/itemPerPage meta=factures.meta}}
+                <table class="table table-bordered dataTable">
+                  <tbody>
+                  <tr>
+                    <th>Numéro<a href="#" id="numeroId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Type<a href="#" id="typeId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Etude<a href="#" id="studyId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Client<a href="#" id="clientId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Contact<a href="#" id="contactIds" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Consultant<a href="#" id="consultantId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Voir</th>
+                    <th>Modifier</th>
+                  </tr>
+                  {{#each factures.content}}
+                    <tr>
+                      <td>{{id}}</td>
+                      <td>{{typeToString type.label}}</td>
+                      <td>{{study.name}}</td>
+                      <td>{{clientName}}</td>
+                      <td>{{contactName}}</td>
+                      <td>{{consultant.firstName}} {{consultant.lastName}}</td>
+                      <td><a href="/treso/facture/{{id}}" class="fa fa-eye fa-2x"></a></td>
+                      <td><a href="/treso/facture/update/{{id}}" class="fa fa-edit fa-2x"></a></td>
+                    </tr>
+                  {{/each}}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="box-footer">
+              {{> template/pagination meta=factures.meta}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <a href="/treso/facture/create" style="color: white;">
+            <button type="button" class="btn btn-block btn-success btn-lg box">Nouvelle facture</button>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  {{> template/footer}}
+</div>
+{{> template/scripts}}
+</body>

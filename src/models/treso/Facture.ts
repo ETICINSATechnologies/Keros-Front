@@ -1,6 +1,7 @@
 import { Address } from "../core/Address";
 import { Study } from "../ua/Study";
 import { Member } from "../core/Member";
+import { FactureType } from "./FactureType";
 
 export class Facture {
   constructor(
@@ -12,7 +13,7 @@ export class Facture {
     private contactEmail ?: string,
     private study ?: Study,
     private consultant ?: Member,
-    private type ?: string,
+    private type ?: FactureType,
     private amountDescription ?: string,
     private subject ?: string,
     private agreementSignDate ?: string,

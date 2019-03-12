@@ -1,0 +1,229 @@
+<body class="hold-transition skin-green fixed sidebar-mini">
+<div class="wrapper">
+  {{> template/header}}
+  {{> template/sidebar}}
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        {{#if facture}}Fiche facture{{else}}Nouvelle facture{{/if}}
+      </h1>
+      {{> breadcrumb action=action tab="TRESO" pathnew="Factures,Nouvelle facture" pathview=(concat "Factures,Fiche n°" facture.id) pathedit=(concat "Factures,Edition fiche n°" facture.id) }}
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <section class="content">
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title">
+                  Informations {{#if study}}facture n°{{facture.id}}{{/if}}
+                </h3>
+              </div>
+              <form role="form" method="post" action="/treso/facture/postform">
+                {{#if facture}}<input type="text" id="id" name="id" value="{{facture.id}}" hidden>{{/if}}
+                <div class="box-body row">
+                  <div class="col-md-6 form-group">
+                    <label for="numero">Numéro</label>
+                    <input type="text" class="form-control" id="numero" name="numero" value="{{facture.numero}}"
+                           placeholder="Entrez un numéro pour la facture" required {{readonlyIf (eq action "view")}}>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label for="type">Type de facture</label>
+                    <select class="form-control" id="typeId" name="typeId" {{readonlyIf (eq action "view")}}>
+                      {{#each types}}
+                        <option value="{{this}}" {{selected label @root.facture.type.label}}>{{typeToString this}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                    <h4 class="col-md-12 box-title">
+                      Adresse de facturation
+                    </h4>
+                    <div class="col-md-12 form-group">
+                      <label for="line1">Ligne 1</label>
+                      <input type="string" class="form-control" id="line1" name="line1"
+                             value="{{facture.fullAddress.line1}}" placeholder="Entrez l'adresse 1" required {{readonlyIf (eq action "view")}}>
+                    </div>
+                    <div class="col-md-12 form-group">
+                      <label for="line2">Ligne 2</label>
+                      <input type="string" class="form-control" id="line2" name="line2"
+                             value="{{facture.fullAddress.line2}}" placeholder="Entrez l'adresse 2" {{readonlyIf (eq action "view")}}>
+                    </div>
+                    <div class="col-md-2 form-group">
+                      <label for="postalCode">Code postal</label>
+                      <input type="string" class="form-control" id="postalCode" name="postalCode"
+                             value="{{facture.fullAddress.postalCode}}" placeholder="Entrez le code postal" required {{readonlyIf (eq action "view")}}>
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <label for="city">Ville</label>
+                      <input type="string" class="form-control" id="city" name="city"
+                             value="{{facture.fullAddress.city}}" placeholder="Entrez la ville" required {{readonlyIf (eq action "view")}}>
+                    </div>
+                    <div class="col-md-4 form-group">
+                      <label for="countryId">Pays</label>
+                      <select class="form-control" id="countryId" name="countryId" required {{readonlyIf
+                              (eq action "view")}} {{disabledIf (eq action "view")}}>
+                        {{#each countries}}
+                          <option value="{{id}}" {{selected id @root.facture.fullAddress.countryId}}>{{label}}</option>
+                        {{/each}}
+                      </select>
+                    </div>
+                  <h4 class="col-md-12 box-title">
+                    Détails
+                  </h4>
+                  <div class="col-md-6 form-group">
+                    <label for="clientNameId">Client</label>
+                    <input type="text" class="form-control" id="clientNameId" name="clientNameId" value="{{facture.clientName}}" placeholder="Entrez le nom du client" required {{readonlyIf (eq action "view")}}>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label for="studyId">Etude</label>
+                    <select class="form-control" id="studyId" name="studyId" {{readonlyIf
+                            (eq action "view")}} {{disabledIf (eq action "view")}}>
+                      {{#each studies.content}}
+                        <option value="{{id}}" {{selected id @root.facture.study.name}}>{{name}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label for="contact">Contact</label>
+                    <select class="form-control selectcontacts"
+                            name="contactId" {{readonlyIf (eq action "view")}} {{disabledIf (eq action "view")}}
+                            data-selected="{{facture.study.contacts.0.id}}" data-n="1" width="100%">
+                    </select>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label for="contactEmailId">Email contact</label>
+                    <input type="text" class="form-control" id="contactEmailId" name="contactEmailId" value="{{facture.contactEmail}}" placeholder="Entrez l'adresse e-mail du contact" required {{readonlyIf (eq action "view")}}>
+                  </div>
+                  <div class="col-md-12 form-group">
+                    <label for="subject">Sujet</label>
+                    <textarea rows="3" class="form-control" id="subject" name="subject" {{readonlyIf
+                            (eq action "view")}}
+                              placeholder="Entrez le sujet de la facture">{{facture.subject}}</textarea>
+                  </div>
+                  <div class="col-md-12 form-group">
+                  <label for="description">Description montant</label>
+                  <textarea rows="3" class="form-control" id="description" name="description" {{readonlyIf
+                          (eq action "view")}}
+                            placeholder="Entrez la description du montant de la facture">{{facture.amountDescription}}</textarea>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="amountHT">Montant Hors-Taxes (HT)</label>
+                    <div class="input-group">
+                      <span class="input-group-addon" style="background-color: #DBE0E0; font-weight: bold;">€</span>
+                      <input type="number" class="form-control" id="amountHT" name="amountHT" step="0.01"
+                             min="0"
+                             value="{{facture.amountHT}}" placeholder="Montant HT" {{readonlyIf
+                              (eq action "view")}}>
+                    </div>
+                  </div>
+                  <div class="col-md-2 form-group">
+                    <label for="taxPercentage">Pourcentage de taxation</label>
+                    <div class="input-group">
+                      <span class="input-group-addon" style="background-color: #DBE0E0; font-weight: bold;">%</span>
+                      <input type="number" class="form-control" id="taxPercentage" name="taxPercentage" step="0.01"
+                             min="0"
+                             max="100"
+                             value="{{facture.taxPercentage}}" placeholder="20" {{readonlyIf
+                              (eq action "view")}}>
+                    </div>
+                  </div>
+                  <h4 class="col-md-12 box-title">
+                    Date
+                  </h4>
+                  <div class="col-md-4 form-group">
+                    <label for="agreementSignDate">Date de signature convention</label>
+                    <input type="date" class="form-control" id="agreementSignDate" name="agreementSignDate"
+                           value="{{facture.agreementSignDate}}" {{readonlyIf (eq action "view")}}>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="dueDate">Date de fin</label>
+                    <input type="date" class="form-control" id="dueDate" name="dueDate"
+                           value="{{facture.dueDate}}" {{readonlyIf (eq action "view")}}>
+                  </div>
+                  {{#if (ne action "create")}}
+                  <div class="col-md-4 form-group">
+                    <label for="createdDate">Date de création</label>
+                    <input type="date" class="form-control" id="createdDate" name="createdDate"
+                           value="{{facture.createdDate}}" {{readonlyIf (eq action "view")}} >
+                  </div>
+                  {{/if}}
+                  {{#if (eq action "view")}}
+                    {{#if (eq mailshots 1)}}
+                      <div id="view-mailshots">
+                        <h4 class="col-md-12 box-title">
+                          Publipostage
+                        </h4>
+                        <div class="col-md-12">
+                          <div class="panel panel-default">
+                            <a data-toggle="collapse" data-parent="#faq" href="#col-mailshots" aria-expanded="false"
+                               aria-controls="elemmailshots">
+                              <div class="panel-heading" role="tab" id="mailshots" style="background-color:#F5F5F5;">
+                                <h5 class="panel-title">
+                                  Afficher
+                                </h5>
+                              </div>
+                            </a>
+                            <div id="col-mailshots" class="panel-collapse collapse" role="tabpanel"
+                                 aria-labelledby="mailshots">
+                              <div class="panel-body">
+                                <div class="col-md-3">
+                                  <b>Titre du document</b>
+                                </div>
+                                <div class="col-md-3">
+                                  <b>Publiposter</b>
+                                </div>
+                                <div class="col-md-3">
+                                  <b>Upload VF</b>
+                                </div>
+                                <div class="col-md-3">
+                                  <b>Download VF</b>
+                                </div>
+                              </div>
+                              {{#each studyDocuments.documents}}
+                                <div class="panel-body">
+                                  <div class="col-md-3">
+                                    {{name}}
+                                  </div>
+                                  <div class="col-md-3">
+                                    <a href="{{@root.clientBaseUrl}}/core/authenticate-backend?backendUrl={{generateLocation}}" target="_blank">
+                                    <i style="font-size: 2em;" class="fa fa-download"></i>
+                                    </a>
+                                  </div>
+                                  <div class="col-md-3">
+                                    <form method="post" enctype="multipart/form-data">
+                                      <input type="file" name="file">
+                                    </form>
+                                  </div>
+                                  <div class="col-md-3">
+                                    {{#if downloadLocation}}
+                                      <a href="{{@root.clientBaseUrl}}/core/authenticate-backend?backendUrl={{downloadLocation}}" target="_blank">
+                                      <i style="font-size: 2em;" class="fa fa-download"></i>
+                                      </a>
+                                    {{/if}}
+                                  </div>
+                                </div>
+                              {{/each}}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    {{/if}}
+                  {{/if}}
+                </div>
+                <div class="box-footer">
+                  <a href="/treso/facture">
+                    <button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button>
+                  </a>
+                  {{> formButtons action=action origin="/treso/facture" id=facture.id}}
+                </div>
+              </form>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </div>
+  {{> template/footer}}
+</div>
+{{> template/scripts}}
+</body>
