@@ -2,7 +2,7 @@ import { IStringable } from "../interface/IStringable";
 
 export class Pole implements IStringable{
   constructor(
-    private id ?: number,
+    public id ?: number,
     private label ?: string,
     private name ?: string,
   ) {}

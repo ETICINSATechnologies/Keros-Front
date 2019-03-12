@@ -16,7 +16,7 @@
             <div class="box box-primary">
               <div class="box-header with-border">
                 <h3 class="box-title">
-                  Informations {{#if study}}facture n°{{facture.id}}{{/if}}
+                  Informations {{#if facture}}facture n°{{facture.id}}{{/if}}
                 </h3>
               </div>
               <form role="form" method="post" action="/treso/facture/postform">
@@ -171,6 +171,34 @@
                               placeholder="Entrez toute information supplémentaire">{{facture.additionalInformation}}</textarea>
                   </div>
                   {{#if (ne action "create")}}
+                    <div class="col-md-12 box-title">
+                      <hr />
+                      <h4>
+                        Statuts
+                      </h4>
+                      <hr />
+                    </div>
+                    {{#if (eq action "update")}}
+                      <div class="col-md-2 form-group"></div>
+                      <div class="col-md-4 form-group">
+                        {{#if (ne facture.validatedByPerf true)}}
+                          {{#if facture.validatedByUa}}
+                            <button type="submit" class="btn btn-primary" style="margin-top: 2%;margin-left: 60%;">Appliquer les changements</button>
+                          {{else if (isFromUa connectedUser.positions)}}
+                            <button type="submit" formaction="/treso/facture/{{facture.id}}/validate-ua" class="btn btn-primary" style="margin-top: 2%;margin-left: 67%;">Valider (UA)</button>
+                          {{/if}}
+                        {{/if}}
+                      </div>
+                      {{#if facture.validatedByUa}}
+                        <div class="col-md-4 form-group">
+                          {{#if facture.validatedByPerf}}
+                            <button type="submit" class="btn btn-primary" style="margin-top: 2%;margin-left: 35%;">Appliquer les changements</button>
+                          {{else if (isFromPerf connectedUser.positions)}}
+                            <button type="submit" formaction="/treso/facture{{facture.id}}/validate-perf" class="btn btn-primary" style="margin-top: 2%;margin-left: 45%;">Valider (Perf)</button>
+                          {{/if}}
+                        </div>
+                      {{/if}}
+                    {{/if}}
                     <div class="col-md-12 form-group">
                       <div class="col-md-10 form-group">
                         <ol class="progtrckr" data-progtrckr-steps="3">
@@ -187,9 +215,7 @@
                           {{/if}}
                         </ol>
                       </div>
-                      <a href="/treso/facture">
-                        <button type="button" class="btn btn-primary" style="margin-top: 2%" {{#if (ne action "update")}}disabled{{/if}}>Publiposter</button>
-                      </a>
+                      <button type="submit" formaction="/treso/facture/{{facture.id}}/generateDocument" formmethod="get" class="btn btn-primary" style="margin-top: 2%" {{#if (ne (and facture.validatedByPerf facture.validatedByUa) true)}}disabled{{/if}}>Publiposter</button>
                     </div>
                   {{/if}}
                   {{#if (eq action "view")}}

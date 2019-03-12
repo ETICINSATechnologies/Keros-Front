@@ -141,6 +141,7 @@ export class FactureController {
         if (err) {
           return next(err);
         }
+        winston.info("Updated facture for id : " + id);
         res.redirect("/treso/facture");
       });
     } else {
@@ -148,6 +149,7 @@ export class FactureController {
         if (err) {
           return next(err);
         }
+        winston.info("Created a new facture");
         res.redirect("/treso/facture");
       });
     }

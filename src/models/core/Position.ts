@@ -7,7 +7,7 @@ export class Position implements IStringable {
     private label ?: string,
     public year ?: number,
     public isBoard ?: boolean,
-    private pole ?: Pole,
+    public pole ?: Pole,
   ) {}
   toString(): string {
     if (this.pole !== undefined) {

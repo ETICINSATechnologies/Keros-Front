@@ -85,7 +85,7 @@ export class FactureService extends BaseService {
           winston.debug("Problème lors de la validation");
           return callback(this.defaultError(res.statusCode));
         }
-        winston.debug("La facture " + id + "a été validée par l'UA");
+        winston.debug("La facture " + id + " a été validée par l'UA");
         callback(null);
       }
     ).catch(
@@ -102,7 +102,7 @@ export class FactureService extends BaseService {
           winston.debug("Problème lors de la validation");
           return callback(this.defaultError(res.statusCode));
         }
-        winston.debug("La facture " + id + "a été validée par la Perfo");
+        winston.debug("La facture " + id + " a été validée par la Perfo");
         callback(null);
       }
     ).catch(

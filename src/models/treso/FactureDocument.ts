@@ -1,5 +1,5 @@
 export class FactureDocument {
   constructor(
-    location ?: string
+    private location ?: string
   ) {}
 }

@@ -36,7 +36,7 @@
     {{/each}}
   {{else if (eq action "update") }}
     {{#each (split pathedit ",") }}
-      <li {{#if @last}}class="active"{{/if}}>{{.}}</li>
+      <li class="update-breadcrumb {{#if @last}}active"{{/if}}>{{.}}</li>
     {{/each}}
   {{/if}}
 </ol>
