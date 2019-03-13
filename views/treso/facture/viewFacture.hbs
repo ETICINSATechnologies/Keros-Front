@@ -204,12 +204,12 @@
                         <ol class="progtrckr" data-progtrckr-steps="3">
                           <li class="progtrckr-done">Créé le {{facture.createdDate}} par {{facture.createdBy.firstName}} {{facture.createdBy.lastName}}</li>
                           {{#if facture.validatedByUa}}
-                            <li class="progtrckr-done">Validation UA le {{facture.validatedByUaDate}} par {{facture.validatedByUaMember.firstName}} {{facture.validatedByUaMember.lastName}}</li>
+                            <li class="progtrckr-done">Validation UA</li>
                           {{else}}
                             <li class="progtrckr-todo">En attente (UA)</li>
                           {{/if}}
                           {{#if facture.validatedByPerf}}
-                            <li class="progtrckr-done">Validation Perf le {{facture.validatedByPerfDate}} par {{facture.validatedByPerfMember.firstName}} {{facture.validatedByPerfMember.lastName}}</li>
+                            <li class="progtrckr-done">Validation Perf</li>
                           {{else}}
                             <li class="progtrckr-todo">En attente (Perfo)</li>
                           {{/if}}
@@ -217,6 +217,19 @@
                       </div>
                       <button type="submit" formaction="/treso/facture/{{facture.id}}/generateDocument" formmethod="get" class="btn btn-primary" style="margin-top: 2%" {{#if (ne (and facture.validatedByPerf facture.validatedByUa) true)}}disabled{{/if}}>Publiposter</button>
                     </div>
+                      <div class="col-md-3 form-group"></div>
+                      <div class="col-md-4 form-group">
+                          {{#if facture.validatedByUa}}
+                            <label style="margin-left: 35%;">Validé le {{facture.validatedByUaDate}}<br/>par {{facture.validatedByUaMember.firstName}} {{facture.validatedByUaMember.lastName}}</label>
+                          {{/if}}
+                      </div>
+                      {{#if facture.validatedByUa}}
+                        <div class="col-md-4 form-group">
+                          {{#if facture.validatedByPerf}}
+                            <label style="margin-left: 10%;">Validé le {{facture.validatedByPerfDate}}<br/>par {{facture.validatedByPerfMember.firstName}} {{facture.validatedByPerfMember.lastName}}</label>
+                          {{/if}}
+                        </div>
+                      {{/if}}
                   {{/if}}
                   {{#if (eq action "view")}}
                     {{#if (eq mailshots 1)}}
