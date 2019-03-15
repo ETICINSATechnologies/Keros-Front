@@ -12,7 +12,6 @@ export class Facture {
     private contactName ?: string,
     private contactEmail ?: string,
     private study ?: Study,
-    private consultant ?: Member,
     private type ?: FactureType,
     private amountDescription ?: string,
     private subject ?: string,

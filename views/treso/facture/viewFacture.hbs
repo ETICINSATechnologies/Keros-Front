@@ -91,12 +91,6 @@
                     <label for="contactEmailId">Email contact</label>
                     <input type="text" class="form-control" id="contactEmailId" name="contactEmailId" value="{{facture.contactEmail}}" placeholder="Entrez l'adresse e-mail du contact" required {{readonlyIf (eq action "view")}}>
                   </div>
-                  {{#if (ne action "create")}}
-                  <div class="col-md-6 form-group">
-                    <label for="consultantId">Consultant</label>
-                    <input type="text" class="form-control" id="consultantId" name="consultantId" value="{{facture.consultant.firstName}} {{facture.consultant.lastName}}" placeholder="Entrez le nom du consultant" required {{readonlyIf (eq action "view")}}>
-                  </div>
-                  {{/if}}
                   <div class="col-md-12 form-group">
                     <label for="subject">Sujet</label>
                     <textarea rows="3" class="form-control" id="subject" name="subject" {{readonlyIf
