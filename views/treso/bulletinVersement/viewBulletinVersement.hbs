@@ -25,15 +25,17 @@
                   <div class="col-md-6 form-group">
                     <label for="missionRecapNumber">Numéro Récapitulatif Mission</label>
                     <input type="text" class="form-control" id="missionRecapNumber" name="missionRecapNumber" value="{{bulletin.missionRecapNumber}}"
-                           placeholder="Entrez le numéro Récapitulatif Mission correspondant" required {{readonlyIf (eq action "view")}}>
+                           placeholder="Entrez le numéro Récapitulatif Mission correspondant" {{readonlyIf (eq action "view")}}>
                   </div>
                   <div class="col-md-6 form-group">
-                    <label for="consultantName">Consultant</label>
-                    <input type="text" class="form-control" id="consultantName" name="consultantName" value="{{bulletin.consultantName}}" placeholder="Entrez le nom du consultant" required {{readonlyIf (eq action "view")}}>
+                    <label for="consultant">Consultant</label>
+                    <select class="selectconsultants" style="width:100%" name="consultant" data-n="1" {{#if (eq action "view")}}disabled{{/if}}>
+                      {{#if (ne action "create")}}<option value="{{bulletin.consultant.id}}{{bulletin.consultant.name}}" >{{bulletin.consultant.name}}</option>{{/if}}
+                    </select>
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="consultantSocialSecurityNumber">Numéro de Sécurité Social du consultant</label>
-                    <input type="text" class="form-control" id="consultantSocialSecurityNumber" name="consultantSocialSecurityNumber" value="{{bulletin.consultantSocialSecurityNumber}}" placeholder="Entrez le numéro de sécurité social du consultant" required {{readonlyIf (eq action "view")}}>
+                    <input type="text" class="form-control" id="consultantSocialSecurityNumber" name="consultantSocialSecurityNumber" value="{{bulletin.consultantSocialSecurityNumber}}" placeholder="Entrez le numéro de sécurité social du consultant" {{readonlyIf (eq action "view")}}>
                   </div>
                   <h4 class="col-md-12 box-title">
                     Adresse du consultant
@@ -41,7 +43,7 @@
                   <div class="col-md-12 form-group">
                     <label for="line1">Ligne 1</label>
                     <input type="string" class="form-control" id="line1" name="line1"
-                           value="{{bulletin.address.line1}}" placeholder="Entrez l'adresse 1" required {{readonlyIf (eq action "view")}}>
+                           value="{{bulletin.address.line1}}" placeholder="Entrez l'adresse 1" {{readonlyIf (eq action "view")}}>
                   </div>
                   <div class="col-md-12 form-group">
                     <label for="line2">Ligne 2</label>
@@ -51,12 +53,12 @@
                   <div class="col-md-2 form-group">
                     <label for="postalCode">Code postal</label>
                     <input type="string" class="form-control" id="postalCode" name="postalCode"
-                           value="{{bulletin.address.postalCode}}" placeholder="Entrez le code postal" required {{readonlyIf (eq action "view")}}>
+                           value="{{bulletin.address.postalCode}}" placeholder="Entrez le code postal" {{readonlyIf (eq action "view")}}>
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="city">Ville</label>
                     <input type="string" class="form-control" id="city" name="city"
-                           value="{{bulletin.address.city}}" placeholder="Entrez la ville" required {{readonlyIf (eq action "view")}}>
+                           value="{{bulletin.address.city}}" placeholder="Entrez la ville" {{readonlyIf (eq action "view")}}>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="countryId">Pays</label>
@@ -69,18 +71,18 @@
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="email">Email consultant</label>
-                    <input type="text" class="form-control" id="emailId" name="email" value="{{bulletin.email}}" placeholder="Entrez l'adresse e-mail du consultant" required {{readonlyIf (eq action "view")}}>
+                    <input type="text" class="form-control" id="emailId" name="email" value="{{bulletin.email}}" placeholder="Entrez l'adresse e-mail du consultant" {{readonlyIf (eq action "view")}}>
                   </div>
                   <h4 class="col-md-12 box-title">
                     Détails
                   </h4>
                   <div class="col-md-6 form-group">
                     <label for="clientName">Client</label>
-                    <input type="text" class="form-control" id="clientName" name="clientName" value="{{bulletin.clientName}}" placeholder="Entrez le nom du client" required {{readonlyIf (eq action "view")}}>
+                    <input type="text" class="form-control" id="clientName" name="clientName" value="{{bulletin.clientName}}" placeholder="Entrez le nom du client" {{readonlyIf (eq action "view")}}>
                   </div>
                   <div class="col-md-6 form-group">
-                    <label for="studyId">Etude</label>
-                    <select class="form-control" id="studyId" name="studyId" {{readonlyIf
+                    {{#if bulletin.isStudyPaid}}<label for="studyId">Etude (payée)</label>{{else}}<label for="studyId">Etude</label>{{/if}}
+                    <select class="form-control" id="studyId" name="studyId" required {{readonlyIf
                             (eq action "view")}} {{disabledIf (eq action "view")}}>
                       {{#each studies.content}}
                         <option value="{{id}}" {{selected id @root.bulletin.study.id}}>{{name}}</option>

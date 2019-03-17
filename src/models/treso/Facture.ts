@@ -17,7 +17,7 @@ export class Facture {
     private subject ?: string,
     private agreementSignDate ?: string,
     private amountHT ?: number,
-    private taxPercentage ?: number | 20,
+    private taxPercentage ?: number,
     private amountTTC ?: number,
     private dueDate ?: string,
     private additionalInformation ?: string,

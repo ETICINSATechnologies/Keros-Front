@@ -124,15 +124,15 @@ export class FactureController {
     factureRequest.subject = req.body.subject;
     factureRequest.agreementSignDate = req.body.agreementSignDate;
     factureRequest.amountHT = parseFloat(req.body.amountHT);
-    factureRequest.taxPercentage = parseFloat(req.body.taxPercentage);
+    if (req.body.taxPercentage) {factureRequest.taxPercentage = parseFloat(req.body.taxPercentage); } else {factureRequest.taxPercentage = 20; }
     factureRequest.dueDate = req.body.dueDate;
     factureRequest.additionalInformation = req.body.additionalInformation;
 
     const addressRequest = new AddressCreateRequest();
-    addressRequest.line1 = req.body.line1;
+    if (req.body.line1) {addressRequest.line1 = req.body.line1; } else {addressRequest.line1 = "A compléter"; }
     addressRequest.line2 = req.body.line2;
-    addressRequest.city = req.body.city;
-    addressRequest.postalCode = req.body.postalCode;
+    if (req.body.city) {addressRequest.city = req.body.city; } else {addressRequest.city = "A compléter"; }
+    if (req.body.postalCode) {addressRequest.postalCode = req.body.postalCode; } else {addressRequest.postalCode = "A compléter"; }
     addressRequest.countryId = parseInt(req.body.countryId);
     factureRequest.fullAddress = addressRequest;
 

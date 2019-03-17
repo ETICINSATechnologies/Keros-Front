@@ -25,7 +25,7 @@
                   <div class="col-md-6 form-group">
                     <label for="numero">Numéro</label>
                     <input type="text" class="form-control" id="numero" name="numero" value="{{facture.numero}}"
-                           placeholder="Entrez un numéro pour la facture" required {{readonlyIf (eq action "view")}}>
+                           placeholder="Entrez un numéro pour la facture" {{readonlyIf (eq action "view")}}>
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="type">Type de facture</label>
@@ -41,7 +41,7 @@
                     <div class="col-md-12 form-group">
                       <label for="line1">Ligne 1</label>
                       <input type="string" class="form-control" id="line1" name="line1"
-                             value="{{facture.fullAddress.line1}}" placeholder="Entrez l'adresse 1" required {{readonlyIf (eq action "view")}}>
+                             value="{{facture.fullAddress.line1}}" placeholder="Entrez l'adresse 1" {{readonlyIf (eq action "view")}}>
                     </div>
                     <div class="col-md-12 form-group">
                       <label for="line2">Ligne 2</label>
@@ -51,12 +51,12 @@
                     <div class="col-md-2 form-group">
                       <label for="postalCode">Code postal</label>
                       <input type="string" class="form-control" id="postalCode" name="postalCode"
-                             value="{{facture.fullAddress.postalCode}}" placeholder="Entrez le code postal" required {{readonlyIf (eq action "view")}}>
+                             value="{{facture.fullAddress.postalCode}}" placeholder="Entrez le code postal" {{readonlyIf (eq action "view")}}>
                     </div>
                     <div class="col-md-6 form-group">
                       <label for="city">Ville</label>
                       <input type="string" class="form-control" id="city" name="city"
-                             value="{{facture.fullAddress.city}}" placeholder="Entrez la ville" required {{readonlyIf (eq action "view")}}>
+                             value="{{facture.fullAddress.city}}" placeholder="Entrez la ville" {{readonlyIf (eq action "view")}}>
                     </div>
                     <div class="col-md-4 form-group">
                       <label for="countryId">Pays</label>
@@ -72,11 +72,11 @@
                   </h4>
                   <div class="col-md-6 form-group">
                     <label for="clientNameId">Client</label>
-                    <input type="text" class="form-control" id="clientNameId" name="clientNameId" value="{{facture.clientName}}" placeholder="Entrez le nom du client" required {{readonlyIf (eq action "view")}}>
+                    <input type="text" class="form-control" id="clientNameId" name="clientNameId" value="{{facture.clientName}}" placeholder="Entrez le nom du client" {{readonlyIf (eq action "view")}}>
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="studyId">Etude</label>
-                    <select class="form-control" id="studyId" name="studyId" {{readonlyIf
+                    <select class="form-control" id="studyId" name="studyId" required {{readonlyIf
                             (eq action "view")}} {{disabledIf (eq action "view")}}>
                       {{#each studies.content}}
                         <option value="{{id}}" {{selected id @root.facture.study.id}}>{{name}}</option>
@@ -85,11 +85,11 @@
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="contact">Contact</label>
-                    <input type="text" class="form-control" id="contactId" name="contactId" value="{{facture.contactName}}" placeholder="Entrez le nom du contact" required {{readonlyIf (eq action "view")}}>
+                    <input type="text" class="form-control" id="contactId" name="contactId" value="{{facture.contactName}}" placeholder="Entrez le nom du contact" {{readonlyIf (eq action "view")}}>
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="contactEmailId">Email contact</label>
-                    <input type="text" class="form-control" id="contactEmailId" name="contactEmailId" value="{{facture.contactEmail}}" placeholder="Entrez l'adresse e-mail du contact" required {{readonlyIf (eq action "view")}}>
+                    <input type="text" class="form-control" id="contactEmailId" name="contactEmailId" value="{{facture.contactEmail}}" placeholder="Entrez l'adresse e-mail du contact" {{readonlyIf (eq action "view")}}>
                   </div>
                   <div class="col-md-12 form-group">
                     <label for="subject">Sujet</label>

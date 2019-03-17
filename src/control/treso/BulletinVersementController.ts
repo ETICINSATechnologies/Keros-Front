@@ -101,11 +101,11 @@ export class BulletinVersementController {
 
     const bulletinRequest = new BulletinVersementCreateRequest();
     bulletinRequest.missionRecapNumber = req.body.missionRecapNumber;
-    bulletinRequest.consultantName = req.body.consultantName;
+    bulletinRequest.consultantName = req.body.consultant.split("/")[1];
     bulletinRequest.consultantSocialSecurityNumber = req.body.consultantSocialSecurityNumber;
     bulletinRequest.email = req.body.email;
     bulletinRequest.studyId = parseInt(req.body.studyId);
-    bulletinRequest.consultantId = parseInt(req.body.consultantId);
+    bulletinRequest.consultantId = parseInt(req.body.consultant.split("/")[0]);
     bulletinRequest.clientName = req.body.clientName;
     bulletinRequest.projectLead = req.body.clientName;
     bulletinRequest.isTotalJeh = !!req.body.isTotalJeh;
@@ -113,10 +113,10 @@ export class BulletinVersementController {
     bulletinRequest.amountDescription = req.body.amountDescription;
 
     const addressRequest = new AddressCreateRequest();
-    addressRequest.line1 = req.body.line1;
+    if (req.body.line1) {addressRequest.line1 = req.body.line1; } else {addressRequest.line1 = "A compléter"; }
     addressRequest.line2 = req.body.line2;
-    addressRequest.city = req.body.city;
-    addressRequest.postalCode = req.body.postalCode;
+    if (req.body.city) {addressRequest.city = req.body.city; } else {addressRequest.city = "A compléter"; }
+    if (req.body.postalCode) {addressRequest.postalCode = req.body.postalCode; } else {addressRequest.postalCode = "A compléter"; }
     addressRequest.countryId = parseInt(req.body.countryId);
     bulletinRequest.address = addressRequest;
 
