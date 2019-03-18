@@ -30,7 +30,7 @@
                   <div class="col-md-6 form-group">
                     <label for="consultant">Consultant</label>
                     <select class="selectconsultants" style="width:100%" name="consultant" data-n="1" {{#if (eq action "view")}}disabled{{/if}}>
-                      {{#if (ne action "create")}}<option value="{{bulletin.consultant.id}}{{bulletin.consultant.name}}" >{{bulletin.consultant.name}}</option>{{/if}}
+                      {{#if (ne action "create")}}<option value="{{bulletin.consultantId}}{{bulletin.consultantName}}" >{{bulletin.consultantName}}</option>{{/if}}
                     </select>
                   </div>
                   <div class="col-md-6 form-group">

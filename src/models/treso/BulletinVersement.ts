@@ -6,6 +6,7 @@ export class BulletinVersement {
   constructor(
     private id ?: number,
     private missionRecapNumber ?: string,
+    private consultantId ?: number,
     private consultantName ?: string,
     private consultantSocialSecurityNumber ?: string,
     private address ?: Address,

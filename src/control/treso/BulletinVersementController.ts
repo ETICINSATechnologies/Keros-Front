@@ -101,7 +101,7 @@ export class BulletinVersementController {
 
     const bulletinRequest = new BulletinVersementCreateRequest();
     bulletinRequest.missionRecapNumber = req.body.missionRecapNumber;
-    bulletinRequest.consultantName = req.body.consultant.split("/")[1];
+    // bulletinRequest.consultantName = req.body.consultant.split("/")[1];  Waiting to see changes in API in order to fix to it
     bulletinRequest.consultantSocialSecurityNumber = req.body.consultantSocialSecurityNumber;
     bulletinRequest.email = req.body.email;
     bulletinRequest.studyId = parseInt(req.body.studyId);
