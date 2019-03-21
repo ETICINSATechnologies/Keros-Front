@@ -5,9 +5,9 @@
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        {{#if bulletin}}Fiche BV{{else}}Nouveau BV{{/if}}
+        {{#if bulletin}}Fiche BV{{else}}Emission BV{{/if}}
       </h1>
-      {{> breadcrumb action=action tab="TRESO" pathnew="BV,Nouveau BV" pathview=(concat "BV,Fiche n°" bulletin.id) pathedit=(concat "BV,Edition fiche n°" bulletin.id) }}
+      {{> breadcrumb action=action tab="TRESO" pathnew="BV,Emission BV" pathview=(concat "BV,Fiche n°" bulletin.id) pathedit=(concat "BV,Edition fiche n°" bulletin.id) }}
     </section>
     <section class="content">
       <div class="row">
@@ -23,7 +23,7 @@
                 {{#if bulletin}}<input type="text" id="id" name="id" value="{{bulletin.id}}" hidden>{{/if}}
                 <div class="box-body row">
                   <div class="col-md-6 form-group">
-                    <label for="missionRecapNumber">Numéro Récapitulatif Mission</label>
+                    <label for="missionRecapNumber">Numéro Récapitulatif Mission (RM)</label>
                     <input type="text" class="form-control" id="missionRecapNumber" name="missionRecapNumber" value="{{bulletin.missionRecapNumber}}"
                            placeholder="Entrez le numéro Récapitulatif Mission correspondant" {{readonlyIf (eq action "view")}}>
                   </div>
