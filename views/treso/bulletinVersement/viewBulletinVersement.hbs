@@ -30,7 +30,8 @@
                   <div class="col-md-6 form-group">
                     <label for="consultant">Consultant</label>
                     <select class="selectconsultants" style="width:100%" name="consultant" data-n="1" {{#if (eq action "view")}}disabled{{/if}}>
-                      {{#if (ne action "create")}}<option value="{{bulletin.consultantId}}{{bulletin.consultantName}}" >{{bulletin.consultantName}}</option>{{/if}}
+                      {{#if selectedStudy}}<option value="{{selectedConsultant.id}}/{{selectedConsultant.firstName}} {{selectedConsultant.lastName}}">{{selectedConsultant.firstName}} {{selectedConsultant.lastName}}</option>{{/if}}
+                      {{#if (ne action "create")}}<option value="_/{{bulletin.consultantName}}" >{{bulletin.consultantName}}</option>{{/if}}
                     </select>
                   </div>
                   <div class="col-md-6 form-group">
@@ -43,49 +44,81 @@
                   <div class="col-md-12 form-group">
                     <label for="line1">Ligne 1</label>
                     <input type="string" class="form-control" id="line1" name="line1"
-                           value="{{bulletin.address.line1}}" placeholder="Entrez l'adresse 1" {{readonlyIf (eq action "view")}}>
+                      {{#if selectedStudy}}
+                           value="{{selectedConsultant.address.line1}}"
+                      {{else}}
+                           value="{{bulletin.address.line1}}"
+                      {{/if}}
+                           placeholder="Entrez l'adresse 1" {{readonlyIf (eq action "view")}}>
                   </div>
                   <div class="col-md-12 form-group">
                     <label for="line2">Ligne 2</label>
                     <input type="string" class="form-control" id="line2" name="line2"
-                           value="{{bulletin.address.line2}}" placeholder="Entrez l'adresse 2" {{readonlyIf (eq action "view")}}>
+                      {{#if selectedStudy}}
+                           value="{{selectedConsultant.address.line2}}"
+                      {{else}}
+                           value="{{bulletin.address.line2}}"
+                      {{/if}}
+                           placeholder="Entrez l'adresse 2" {{readonlyIf (eq action "view")}}>
                   </div>
                   <div class="col-md-2 form-group">
                     <label for="postalCode">Code postal</label>
                     <input type="string" class="form-control" id="postalCode" name="postalCode"
-                           value="{{bulletin.address.postalCode}}" placeholder="Entrez le code postal" {{readonlyIf (eq action "view")}}>
+                      {{#if selectedStudy}}
+                           value="{{selectedConsultant.address.postalCode}}"
+                      {{else}}
+                           value="{{bulletin.address.postalCode}}"
+                      {{/if}}
+                           placeholder="Entrez le code postal" {{readonlyIf (eq action "view")}}>
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="city">Ville</label>
                     <input type="string" class="form-control" id="city" name="city"
-                           value="{{bulletin.address.city}}" placeholder="Entrez la ville" {{readonlyIf (eq action "view")}}>
+                      {{#if selectedStudy}}
+                           value="{{selectedConsultant.address.city}}"
+                      {{else}}
+                           value="{{bulletin.address.city}}"
+                      {{/if}}
+                           placeholder="Entrez la ville" {{readonlyIf (eq action "view")}}>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="countryId">Pays</label>
                     <select class="form-control" id="countryId" name="countryId" required {{readonlyIf
                             (eq action "view")}} {{disabledIf (eq action "view")}}>
                       {{#each countries}}
-                        <option value="{{id}}" {{selected id @root.bulletin.address.countryId}}>{{label}}</option>
+                        <option value="{{id}}" {{#if @root.selectedStudy}}{{selected id @root.selectedStudy.firm.address.countryId}}{{else}}{{selected id @root.bulletin.address.countryId}}{{/if}}>{{label}}</option>
                       {{/each}}
                     </select>
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="email">Email consultant</label>
-                    <input type="text" class="form-control" id="emailId" name="email" value="{{bulletin.email}}" placeholder="Entrez l'adresse e-mail du consultant" {{readonlyIf (eq action "view")}}>
+                    <input type="text" class="form-control" id="emailId" name="email"
+                      {{#if selectedStudy}}
+                           value="{{selectedConsultant.email}}"
+                      {{else}}
+                           value="{{bulletin.email}}"
+                      {{/if}}
+                           placeholder="Entrez l'adresse e-mail du consultant" {{readonlyIf (eq action "view")}}>
                   </div>
                   <h4 class="col-md-12 box-title">
                     Détails
                   </h4>
                   <div class="col-md-6 form-group">
                     <label for="clientName">Client</label>
-                    <input type="text" class="form-control" id="clientName" name="clientName" value="{{bulletin.clientName}}" placeholder="Entrez le nom du client" {{readonlyIf (eq action "view")}}>
+                    <input type="text" class="form-control" id="clientName" name="clientName"
+                      {{#if selectedStudy}}
+                           value="{{selectedStudy.firm.name}}"
+                      {{else}}
+                           value="{{bulletin.clientName}}"
+                      {{/if}}
+                           placeholder="Entrez le nom du client" {{readonlyIf (eq action "view")}}>
                   </div>
                   <div class="col-md-6 form-group">
                     {{#if bulletin.isStudyPaid}}<label for="studyId">Etude (payée)</label>{{else}}<label for="studyId">Etude</label>{{/if}}
                     <select class="form-control" id="studyId" name="studyId" required {{readonlyIf
                             (eq action "view")}} {{disabledIf (eq action "view")}}>
                       {{#each studies.content}}
-                        <option value="{{id}}" {{selected id @root.bulletin.study.id}}>{{name}}</option>
+                        <option value="{{id}}" {{#if @root.selectedStudy}}{{selected id @root.selectedStudy.id}}{{else}}{{selected id @root.bulletin.study.id}}{{/if}}>{{name}}</option>
                       {{/each}}
                     </select>
                   </div>

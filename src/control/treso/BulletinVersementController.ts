@@ -9,6 +9,8 @@ import { Country } from "../../models/core/Country";
 import { BulletinVersementService } from "../../services/treso/BulletinVersementService";
 import { BulletinVersement } from "../../models/treso/BulletinVersement";
 import { BulletinVersementCreateRequest } from "../../models/treso/BulletinVersementCreateRequest";
+import { MemberService } from "../../services/core/MemberService";
+import { Member } from "../../models/core/Member";
 
 export class BulletinVersementController {
   public viewBulletinsVersement(req: Request, res: Response, next: NextFunction) {
@@ -26,17 +28,40 @@ export class BulletinVersementController {
   }
 
   public createBulletinVersement(req: Request, res: Response, next: NextFunction) {
+    const studyId = req.query.studyId;
+    const consultantId = req.query.consultantId;
     winston.info("Getting create BV form");
+    if (studyId) {
+      winston.info("From study " + studyId);
+    }
     StudyService.getAllStudies(function (err1, studies: Page<Study> | null) {
       CountryService.getAllCountries(function (err2, countries: Country[] | null) {
         if (err1) return next(err1);
         if (err2) return next(err2);
-        const options = {
-          studies: studies,
-          countries: countries,
-          action: "create"
-        };
-        res.render("treso/bulletinVersement/viewBulletinVersement", options);
+        let options = {};
+        if (studyId) {
+          StudyService.getStudy(studyId, function (err3, selectedStudy: Study | null) {
+            MemberService.getMember(consultantId, function(err4, selectedConsultant: Member | null) {
+              if (err3) return next(err3);
+              if (err4) return next(err4);
+              options = {
+                selectedConsultant : selectedConsultant,
+                selectedStudy: selectedStudy,
+                studies: studies,
+                countries: countries,
+                action: "create"
+              };
+              res.render("treso/bulletinVersement/viewBulletinVersement", options);
+            });
+          });
+        } else {
+          options = {
+            studies: studies,
+            countries: countries,
+            action: "create"
+          };
+          res.render("treso/bulletinVersement/viewBulletinVersement", options);
+        }
       });
     });
   }
@@ -101,11 +126,10 @@ export class BulletinVersementController {
 
     const bulletinRequest = new BulletinVersementCreateRequest();
     bulletinRequest.missionRecapNumber = req.body.missionRecapNumber;
-    // bulletinRequest.consultantName = req.body.consultant.split("/")[1];  Waiting to see changes in API in order to fix to it
+    bulletinRequest.consultantName = req.body.consultant.split("/")[1];
     bulletinRequest.consultantSocialSecurityNumber = req.body.consultantSocialSecurityNumber;
     bulletinRequest.email = req.body.email;
     bulletinRequest.studyId = parseInt(req.body.studyId);
-    bulletinRequest.consultantId = parseInt(req.body.consultant.split("/")[0]);
     bulletinRequest.clientName = req.body.clientName;
     bulletinRequest.projectLead = req.body.clientName;
     bulletinRequest.isTotalJeh = !!req.body.isTotalJeh;

@@ -7,7 +7,7 @@ export class BulletinVersementCreateRequest {
     public address ?: AddressCreateRequest,
     public email ?: string,
     public studyId ?: number,
-    public consultantId ?: number,
+    public consultantName ?: number,
     public clientName ?: string,
     public projectLead ?: string,
     public isTotalJeh ?: boolean,

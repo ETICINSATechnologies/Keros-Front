@@ -28,21 +28,40 @@ export class FactureController {
   }
 
   public createFacture(req: Request, res: Response, next: NextFunction) {
+    const studyId = req.query.studyId;
     winston.info("Getting create facture form");
+    if (studyId) {
+      winston.info("From study " + studyId);
+    }
     StudyService.getAllStudies(function (err1, studies: Page<Study> | null) {
       CountryService.getAllCountries(function (err2, countries: Country[] | null) {
         FactureTypeService.getAllFactureTypes(function (err3, types: string[] | null) {
           if (err1) return next(err1);
           if (err2) return next(err2);
           if (err3) return next(err3);
-          const options = {
-            studies: studies,
-            countries: countries,
-            types: types,
-            action: "create"
-          };
-          res.render("treso/facture/viewFacture", options);
-        });
+          let options = {};
+          if (studyId) {
+            StudyService.getStudy(studyId, function (err4, studySelected: Study | null) {
+              if (err4) return next(err4);
+              options = {
+                studySelected: studySelected,
+                studies: studies,
+                countries: countries,
+                types: types,
+                action: "create"
+              };
+              res.render("treso/facture/viewFacture", options);
+            });
+          } else {
+            options = {
+              studies: studies,
+              countries: countries,
+              types: types,
+              action: "create"
+            };
+            res.render("treso/facture/viewFacture", options);
+          }
+      });
     });
   });
   }

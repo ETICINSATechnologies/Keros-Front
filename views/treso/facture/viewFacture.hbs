@@ -41,29 +41,29 @@
                     <div class="col-md-12 form-group">
                       <label for="line1">Ligne 1</label>
                       <input type="string" class="form-control" id="line1" name="line1"
-                             value="{{facture.fullAddress.line1}}" placeholder="Entrez l'adresse 1" {{readonlyIf (eq action "view")}}>
+                             {{#if studySelected}}value="{{studySelected.firm.address.line1}}"{{else}}value="{{facture.fullAddress.line1}}"{{/if}} placeholder="Entrez l'adresse 1" {{readonlyIf (eq action "view")}}>
                     </div>
                     <div class="col-md-12 form-group">
                       <label for="line2">Ligne 2</label>
                       <input type="string" class="form-control" id="line2" name="line2"
-                             value="{{facture.fullAddress.line2}}" placeholder="Entrez l'adresse 2" {{readonlyIf (eq action "view")}}>
+                             {{#if studySelected}}value="{{studySelected.firm.address.line2}}"{{else}}value="{{facture.fullAddress.line2}}"{{/if}} placeholder="Entrez l'adresse 2" {{readonlyIf (eq action "view")}}>
                     </div>
                     <div class="col-md-2 form-group">
                       <label for="postalCode">Code postal</label>
                       <input type="string" class="form-control" id="postalCode" name="postalCode"
-                             value="{{facture.fullAddress.postalCode}}" placeholder="Entrez le code postal" {{readonlyIf (eq action "view")}}>
+                             {{#if studySelected}}value="{{studySelected.firm.address.postalCode}}"{{else}}value="{{facture.fullAddress.postalCode}}"{{/if}} placeholder="Entrez le code postal" {{readonlyIf (eq action "view")}}>
                     </div>
                     <div class="col-md-6 form-group">
                       <label for="city">Ville</label>
                       <input type="string" class="form-control" id="city" name="city"
-                             value="{{facture.fullAddress.city}}" placeholder="Entrez la ville" {{readonlyIf (eq action "view")}}>
+                             {{#if studySelected}}value="{{studySelected.firm.address.city}}"{{else}}value="{{facture.fullAddress.city}}"{{/if}} placeholder="Entrez la ville" {{readonlyIf (eq action "view")}}>
                     </div>
                     <div class="col-md-4 form-group">
                       <label for="countryId">Pays</label>
                       <select class="form-control" id="countryId" name="countryId" required {{readonlyIf
                               (eq action "view")}} {{disabledIf (eq action "view")}}>
                         {{#each countries}}
-                          <option value="{{id}}" {{selected id @root.facture.fullAddress.countryId}}>{{label}}</option>
+                          <option value="{{id}}" {{#if @root.studySelected}}{{selected id @root.studySelected.firm.address.countryId}}{{else}}{{selected id @root.facture.fullAddress.countryId}}{{/if}}>{{label}}</option>
                         {{/each}}
                       </select>
                     </div>
@@ -72,24 +72,26 @@
                   </h4>
                   <div class="col-md-6 form-group">
                     <label for="clientNameId">Client</label>
-                    <input type="text" class="form-control" id="clientNameId" name="clientNameId" value="{{facture.clientName}}" placeholder="Entrez le nom du client" {{readonlyIf (eq action "view")}}>
+                    <input type="text" class="form-control" id="clientNameId" name="clientNameId" {{#if studySelected}}value="{{studySelected.firm.name}}"{{else}}value="{{facture.clientName}}"{{/if}} placeholder="Entrez le nom du client" {{readonlyIf (eq action "view")}}>
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="studyId">Etude</label>
                     <select class="form-control" id="studyId" name="studyId" required {{readonlyIf
                             (eq action "view")}} {{disabledIf (eq action "view")}}>
                       {{#each studies.content}}
-                        <option value="{{id}}" {{selected id @root.facture.study.id}}>{{name}}</option>
+                        <option value="{{id}}" {{#if @root.studySelected}}{{selected id @root.studySelected.id}}{{else}}{{selected id @root.facture.study.id}}{{/if}}>{{name}}</option>
                       {{/each}}
                     </select>
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="contact">Contact</label>
-                    <input type="text" class="form-control" id="contactId" name="contactId" value="{{facture.contactName}}" placeholder="Entrez le nom du contact" {{readonlyIf (eq action "view")}}>
+                    <input type="text" class="form-control" id="contactId" name="contactId"
+                           {{#if studySelected}}value="{{studySelected.contacts.0.firstName}} {{studySelected.contacts.0.lastName}}"{{else}}value="{{facture.contactName}}"{{/if}} placeholder="Entrez le nom du contact" {{readonlyIf (eq action "view")}}>
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="contactEmailId">Email contact</label>
-                    <input type="text" class="form-control" id="contactEmailId" name="contactEmailId" value="{{facture.contactEmail}}" placeholder="Entrez l'adresse e-mail du contact" {{readonlyIf (eq action "view")}}>
+                    <input type="text" class="form-control" id="contactEmailId" name="contactEmailId"
+                           {{#if studySelected}}value="{{studySelected.contacts.0.email}}"{{else}}value="{{facture.contactEmail}}"{{/if}} placeholder="Entrez l'adresse e-mail du contact" {{readonlyIf (eq action "view")}}>
                   </div>
                   <div class="col-md-12 form-group">
                     <label for="subject">Sujet</label>
@@ -142,7 +144,7 @@
                   <div class="col-md-4 form-group">
                     <label for="agreementSignDate">Date de signature convention</label>
                     <input type="date" class="form-control" id="agreementSignDate" name="agreementSignDate"
-                           value="{{facture.agreementSignDate}}" {{readonlyIf (eq action "view")}}>
+                           {{#if studySelected}}value="{{studySelected.signDate}}"{{else}}value="{{facture.agreementSignDate}}"{{/if}} {{readonlyIf (eq action "view")}}>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="dueDate">Date de fin</label>
