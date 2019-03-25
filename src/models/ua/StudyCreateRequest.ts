@@ -1,6 +1,5 @@
 export class StudyCreateRequest {
   constructor(
-    public projectNumber ?: number,
     public name ?: string,
     public description ?: string,
     public fieldId ?: number,

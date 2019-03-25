@@ -8,8 +8,6 @@ import { Status } from '../../models/ua/Status';
 import { FirmService } from '../../services/ua/FirmService';
 import { Firm } from '../../models/ua/Firm';
 import { StudyCreateRequest } from '../../models/ua/StudyCreateRequest';
-import { ContactService } from '../../services/ua/ContactService';
-import { Contact } from '../../models/ua/Contact';
 import { MemberService } from '../../services/core/MemberService';
 import { Member } from '../../models/core/Member';
 import { FieldService } from '../../services/ua/FieldService';
@@ -162,7 +160,6 @@ export class StudyController {
         const id = parseInt(req.body.id);
 
         const studyRequest = new StudyCreateRequest();
-        studyRequest.projectNumber = parseInt(req.body.projectNumber);
         studyRequest.name = req.body.name;
         studyRequest.description = req.body.description;
         studyRequest.fieldId = parseInt(req.body.fieldId);

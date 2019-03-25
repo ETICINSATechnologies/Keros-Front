@@ -9,7 +9,6 @@ import { StudyDocument } from "./StudyDocument";
 export class Study {
   constructor(
     private id ?: number,
-    private projectNumber ?: number,
     private name ?: string,
     private description ?: string,
     private field ?: Field,
