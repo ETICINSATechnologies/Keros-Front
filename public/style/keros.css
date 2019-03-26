@@ -11,7 +11,7 @@
 }
 
 .skin-green .main-header .navbar .sidebar-toggle:hover {
-    background-color: #9bca8b;
+    background-color: #167173;
 }
 
 body {
@@ -48,7 +48,11 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 .skin-green .main-header li.user-header {
-    background-color: #9bca8b;
+    background-color: #005360;
+}
+
+.navbar-nav > .user-menu > .dropdown-menu > .user-footer {
+    background-color: #005360;
 }
 
 option[selected] {
@@ -59,7 +63,7 @@ option[selected] {
     margin-left: 20px;
 }
 
-.btn-success:active, .btn-success:hover, .btn-primary:active, .btn-primary:focus, .btn-primary:hover {
+.btn-success:active, .btn-success:hover, .btn-success:focus, .btn-primary:active, .btn-primary:focus, .btn-primary:hover, .btn-primary:focus-within, .btn-primary {
     background-color: #9BCA8B;
     border-color: #9BCA8B;
 }
@@ -75,6 +79,11 @@ option[selected] {
     border-color: #67ad86;
 }
 
+.btn-success, .btn-primary, .btn-danger, .btn {
+    /* min-height: 3em;
+     min-width: 8em;*/
+    font-size: medium;
+}
 
 .paginateselect {
     margin-bottom: 10px;
