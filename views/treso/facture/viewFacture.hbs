@@ -227,68 +227,6 @@
                         </div>
                       {{/if}}
                   {{/if}}
-                  {{#if (eq action "view")}}
-                    {{#if (eq mailshots 1)}}
-                      <div id="view-mailshots">
-                        <h4 class="col-md-12 box-title">
-                          Publipostage
-                        </h4>
-                        <div class="col-md-12">
-                          <div class="panel panel-default">
-                            <a data-toggle="collapse" data-parent="#faq" href="#col-mailshots" aria-expanded="false"
-                               aria-controls="elemmailshots">
-                              <div class="panel-heading" role="tab" id="mailshots" style="background-color:#F5F5F5;">
-                                <h5 class="panel-title">
-                                  Afficher
-                                </h5>
-                              </div>
-                            </a>
-                            <div id="col-mailshots" class="panel-collapse collapse" role="tabpanel"
-                                 aria-labelledby="mailshots">
-                              <div class="panel-body">
-                                <div class="col-md-3">
-                                  <b>Titre du document</b>
-                                </div>
-                                <div class="col-md-3">
-                                  <b>Publiposter</b>
-                                </div>
-                                <div class="col-md-3">
-                                  <b>Upload VF</b>
-                                </div>
-                                <div class="col-md-3">
-                                  <b>Download VF</b>
-                                </div>
-                              </div>
-                              {{#each studyDocuments.documents}}
-                                <div class="panel-body">
-                                  <div class="col-md-3">
-                                    {{name}}
-                                  </div>
-                                  <div class="col-md-3">
-                                    <a href="{{@root.clientBaseUrl}}/core/authenticate-backend?backendUrl={{generateLocation}}" target="_blank">
-                                    <i style="font-size: 2em;" class="fa fa-download"></i>
-                                    </a>
-                                  </div>
-                                  <div class="col-md-3">
-                                    <form method="post" enctype="multipart/form-data">
-                                      <input type="file" name="file">
-                                    </form>
-                                  </div>
-                                  <div class="col-md-3">
-                                    {{#if downloadLocation}}
-                                      <a href="{{@root.clientBaseUrl}}/core/authenticate-backend?backendUrl={{downloadLocation}}" target="_blank">
-                                      <i style="font-size: 2em;" class="fa fa-download"></i>
-                                      </a>
-                                    {{/if}}
-                                  </div>
-                                </div>
-                              {{/each}}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    {{/if}}
-                  {{/if}}
                 </div>
                 <div class="box-footer">
                   <a href="/treso/facture">

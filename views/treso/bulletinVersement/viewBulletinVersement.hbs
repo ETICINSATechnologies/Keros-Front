@@ -38,6 +38,16 @@
                     <label for="consultantSocialSecurityNumber">Numéro de Sécurité Social du consultant</label>
                     <input type="text" class="form-control" id="consultantSocialSecurityNumber" name="consultantSocialSecurityNumber" value="{{bulletin.consultantSocialSecurityNumber}}" placeholder="Entrez le numéro de sécurité social du consultant" {{readonlyIf (eq action "view")}}>
                   </div>
+                  <div class="col-md-6 form-group">
+                    <label for="email">Email consultant</label>
+                    <input type="text" class="form-control" id="emailId" name="email"
+                      {{#if selectedStudy}}
+                           value="{{selectedConsultant.email}}"
+                      {{else}}
+                           value="{{bulletin.email}}"
+                      {{/if}}
+                           placeholder="Entrez l'adresse e-mail du consultant" {{readonlyIf (eq action "view")}}>
+                  </div>
                   <h4 class="col-md-12 box-title">
                     Adresse du consultant
                   </h4>
@@ -89,16 +99,6 @@
                         <option value="{{id}}" {{#if @root.selectedStudy}}{{selected id @root.selectedStudy.firm.address.countryId}}{{else}}{{selected id @root.bulletin.address.countryId}}{{/if}}>{{label}}</option>
                       {{/each}}
                     </select>
-                  </div>
-                  <div class="col-md-6 form-group">
-                    <label for="email">Email consultant</label>
-                    <input type="text" class="form-control" id="emailId" name="email"
-                      {{#if selectedStudy}}
-                           value="{{selectedConsultant.email}}"
-                      {{else}}
-                           value="{{bulletin.email}}"
-                      {{/if}}
-                           placeholder="Entrez l'adresse e-mail du consultant" {{readonlyIf (eq action "view")}}>
                   </div>
                   <h4 class="col-md-12 box-title">
                     Détails

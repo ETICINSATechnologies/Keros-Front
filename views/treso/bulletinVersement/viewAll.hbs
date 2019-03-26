@@ -21,6 +21,7 @@
                 <table class="table table-bordered dataTable">
                   <tbody>
                   <tr>
+                    <th>Numéro CE<a href="#" id="numeroCeId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
                     <th>Numéro RM<a href="#" id="missionRecapNumberId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
                     <th>Consultant<a href="#" id="consulantId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
                     <th>Etude<a href="#" id="studyId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
@@ -31,6 +32,7 @@
                   </tr>
                   {{#each bulletins.content}}
                     <tr>
+                      <td>{{study.id}}</td>
                       <td>{{missionRecapNumber}}</td>
                       <td>{{consultantName}}</td>
                       <td>{{study.name}}</td>

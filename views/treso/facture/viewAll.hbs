@@ -22,6 +22,7 @@
                   <tbody>
                   <tr>
                     <th>Numéro<a href="#" id="numeroId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>Numéro CE<a href="#" id="numeroCeId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
                     <th>Type<a href="#" id="typeId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
                     <th>Etude<a href="#" id="studyId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
                     <th>Client<a href="#" id="clientId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
@@ -32,6 +33,7 @@
                   {{#each factures.content}}
                     <tr>
                       <td>{{id}}</td>
+                      <td>{{study.id}}</td>
                       <td>{{typeToString type.label}}</td>
                       <td>{{study.name}}</td>
                       <td>{{clientName}}</td>
