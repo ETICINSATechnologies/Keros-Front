@@ -290,8 +290,16 @@
                 </div>
                 <div class="box-footer">
                   <a href="/ua/study">
-                    <button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button>
+                    <button type="button" class="btn btn-primary pull-left"><i class="fa fa-arrow-left"></i> Retour</button>
                   </a>
+                  <div class="col-md-6" align="right" {{#if (ne action "view")}}style="display: none"{{/if}}>
+                    <a href="/treso/facture/create?studyId={{study.id}}">
+                      <button type="button" class="btn btn-primary">Créer une facture</button>
+                    </a>
+                    <a href="/treso/payment-slip/create?studyId={{study.id}}&consultantId={{study.consultants.0.id}}">
+                      <button type="button" class="btn btn-primary" style="margin-left: 5%">Créer un BV</button>
+                    </a>
+                  </div>
                   {{> formButtons action=action origin="/ua/study" id=study.id}}
                 </div>
               </form>

@@ -3,11 +3,11 @@ import { IStringable } from "../interface/IStringable";
 
 export class Position implements IStringable {
   constructor(
-    private id ?: number,
+    public id ?: number,
     private label ?: string,
     public year ?: number,
     public isBoard ?: boolean,
-    private pole ?: Pole,
+    public pole ?: Pole,
   ) {}
   toString(): string {
     if (this.pole !== undefined) {

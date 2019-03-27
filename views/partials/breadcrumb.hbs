@@ -15,6 +15,8 @@
     <li><i class="fa fa-bullhorn"></i>COMM</li>
   {{else if (eq (toUpper tab) "PROFIL") }}
     <li><i class="fa fa-user-circle-o"></i>Mon profil</li>
+  {{else if (eq (toUpper tab) "TRESO") }}
+    <li><i class="fa fa-balance-scale"></i>Tréso</li>
   {{/if}}
 
   {{#if (eq action "all") }}
@@ -34,7 +36,7 @@
     {{/each}}
   {{else if (eq action "update") }}
     {{#each (split pathedit ",") }}
-      <li {{#if @last}}class="active"{{/if}}>{{.}}</li>
+      <li class="update-breadcrumb {{#if @last}}active"{{/if}}>{{.}}</li>
     {{/each}}
   {{/if}}
 </ol>

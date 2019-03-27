@@ -1,7 +1,10 @@
 import * as path from "path";
 import * as handlebars from "express-handlebars";
 import { labelToName } from "./handlebars/genderHelper";
+import { typeToName } from "./handlebars/factureTypeHelper";
 import { IStringable } from "../models/interface/IStringable";
+import { Position } from "../models/core/Position";
+import { Study } from "../models/ua/Study";
 
 /**
  * Handlebars configuration using the express-handlebars constructor
@@ -70,20 +73,41 @@ export default handlebars({
       return "required";
     },
     toString: function (item: IStringable, maxLength = 0) {
-        let str = item.toString();
-        if (maxLength > 0) {
-            str = str.slice(0, maxLength) + "...";
-        }
-        return str;
+      let str = item.toString();
+      if (maxLength > 0) {
+        str = str.slice(0, maxLength) + "...";
+      }
+      return str;
     },
     maxLength: function (str: string, maxLength: number): string {
-        if (maxLength > 0) {
-            str = str.slice(0, maxLength) + "...";
-        }
-        return str;
+      if (maxLength > 0) {
+        str = str.slice(0, maxLength) + "...";
+      }
+      return str;
     },
     concat: function (str1: string, str2: string): string {
       return str1 + str2;
     },
+    typeToString: function (label: any) {
+      return typeToName(label);
+    },
+    isFromPerf: function (positions: Position[]) {
+      return positions.some(function(pos) {
+        let b = false;
+        if (pos.pole) {
+          b = 4 === pos.pole.id;
+        }
+        return b;
+      });
+    },
+    isFromUa: function (positions: Position[]) {
+      return positions.some(function(pos) {
+        let b = false;
+        if (pos.pole) {
+          b = 3 === pos.pole.id;
+        }
+        return b;
+      });
+    }
   }
 });

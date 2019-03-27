@@ -184,9 +184,9 @@ export class StudyController {
         if (req.body.leaderId2) studyRequest.leaderIds.push(parseInt(req.body.leaderId2));
         if (req.body.leaderId3) studyRequest.leaderIds.push(parseInt(req.body.leaderId3));
       studyRequest.consultantIds = [];
-      if (req.body.consultantId1) studyRequest.consultantIds.push(parseInt(req.body.consultantId1));
-        if (req.body.consultantId2) studyRequest.consultantIds.push(parseInt(req.body.consultantId2));
-        if (req.body.consultantId3) studyRequest.consultantIds.push(parseInt(req.body.consultantId3));
+      if (req.body.consultantId1) studyRequest.consultantIds.push(parseInt(req.body.consultantId1.split("/")[0]));
+        if (req.body.consultantId2) studyRequest.consultantIds.push(parseInt(req.body.consultantId2.split("/")[0]));
+        if (req.body.consultantId3) studyRequest.consultantIds.push(parseInt(req.body.consultantId3.split("/")[0]));
       studyRequest.qualityManagerIds = [];
       if (req.body.qualityManagerId1) studyRequest.qualityManagerIds.push(parseInt(req.body.qualityManagerId1));
         if (req.body.qualityManagerId2) studyRequest.qualityManagerIds.push(parseInt(req.body.qualityManagerId2));

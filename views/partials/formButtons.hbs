@@ -2,15 +2,12 @@
   {{#if (ne page "profilePage")}}
     <button type="button" class="btn btn-danger" onclick="location.href='{{origin}}/delete/{{id}}'">Supprimer</button>
   {{/if}}
-  <button type="button" class="btn btn-primary" onclick="editButtonPress()">Éditer</button>
+  <button type="button" class="btn btn-primary" onclick="location.href='{{origin}}/update/{{id}}'">Éditer</button>
   <button type="submit" class="btn btn-primary">Valider</button>
 </div>
 <div id="update-buttons" class="form-buttons pull-right" {{#if (ne action "update")}}style="display: none"{{/if}}>
   {{#if (ne page "profilePage")}}
     <button type="button" class="btn btn-danger" onclick="location.href='{{origin}}/delete/{{id}}'">Supprimer</button>
-  {{/if}}
-  {{#if (ne action "update")}}
-      <button type="button" class="btn btn-primary" onclick="location.reload();">Annuler</button>
   {{/if}}
   <button type="submit" class="btn btn-primary">Valider</button>
 </div>

@@ -74,8 +74,8 @@ export class StudyMock implements IMock {
         status = 200;
         return new MockResponse(mockObj, status);
     }
-return null;
-}
+    return null;
+  }
 
 getAll<T>(resource: string, options?: IRequestOptions): IRestResponse<T[]> | null {
   let mockObj: T[] | null = null;
