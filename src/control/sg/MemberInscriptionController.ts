@@ -24,7 +24,7 @@ export class MemberInscriptionController {
         inscriptions: page,
       };
 
-      res.render("treso/facture/viewAll", options);
+      res.render("sg/inscription/members/viewAll", options);
     });
   }
 
@@ -42,14 +42,14 @@ export class MemberInscriptionController {
             poles: poles,
             action: "create"
           };
-          res.render("sg/membre-inscription/viewInscription", options);
+          res.render("sg/inscription/members/viewInscription", options);
         });
       });
     });
   }
 
   public deleteMemberInscription(req: Request, res: Response, next: NextFunction) {
-    let id = req.params.id;
+    const id = req.params.id;
     winston.info("Delete inscription for id " + id);
     MemberInscriptionService.delete(id, function(err) {
       if (err) return next(err);
@@ -58,7 +58,7 @@ export class MemberInscriptionController {
   }
 
   public viewMemberInscription(req: Request, res: Response, next: NextFunction) {
-    let id = req.params.id;
+    const id = req.params.id;
     MemberInscriptionService.getMemberInscription(id, function(err4, inscription: MemberInscription | null) {
       DepartmentService.getAllDepartments(function(err1, departments: Department[] | null) {
         CountryService.getAllCountries(function(err2, countries: Country[] |  null) {
@@ -74,7 +74,7 @@ export class MemberInscriptionController {
               poles: poles,
               action: "view"
             };
-            res.render("sg/membre-inscription/viewInscription", options);
+            res.render("sg/inscription/members/viewInscription", options);
           });
         });
       });
@@ -82,7 +82,7 @@ export class MemberInscriptionController {
   }
 
   public updateMemberInscription(req: Request, res: Response, next: NextFunction) {
-    let id = req.params.id;
+    const id = req.params.id;
     MemberInscriptionService.getMemberInscription(id, function(err4, inscription: MemberInscription | null) {
       DepartmentService.getAllDepartments(function(err1, departments: Department[] | null) {
         CountryService.getAllCountries(function(err2, countries: Country[] |  null) {
@@ -98,7 +98,7 @@ export class MemberInscriptionController {
               poles: poles,
               action: "update"
             };
-            res.render("sg/membre-inscription/viewInscription", options);
+            res.render("sg/inscription/members/viewInscription", options);
           });
         });
       });
@@ -154,7 +154,9 @@ export class MemberInscriptionController {
       if (err) {
         return next(err);
       }
-      res.send(result);
+      if (result && result.location) {
+        res.redirect(result.location);
+      }
     });
   }
 
@@ -167,18 +169,21 @@ export class MemberInscriptionController {
         return next(err);
       }
       winston.info("Uploaded doc (of type" + documentTypeId + ") for id " + id);
+      res.redirect("/sg/membre-inscription/" + id);
     });
   }
 
   public downloadDocument(req: Request, res: Response, next: NextFunction) {
     const id = req.params.id;
     const documentTypeId = req.params.documentTypeId;
-    winston.info("Getting doc (of type " + documentTypeId + ") for id " + id);
-    MemberInscriptionService.generateDocument(id, documentTypeId, function (err, result: DocumentResponse | null) {
+    winston.info("Downloading doc (of type " + documentTypeId + ") for id " + id);
+    MemberInscriptionService.downloadDocument(id, documentTypeId, function (err, result: DocumentResponse | null) {
       if (err) {
         return next(err);
       }
-      res.send(result);
+      if (result && result.location) {
+        res.redirect(result.location);
+      }
     });
   }
 }
