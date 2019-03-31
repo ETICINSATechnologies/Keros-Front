@@ -2,7 +2,6 @@ import * as winston from "winston";
 import { Router } from "express";
 import { MemberController } from "./MemberController";
 import { secureRouter } from "../secureRouter";
-import { AuthenticateBackendController } from './AuthenticateBackendController';
 
 /**
  * Router for core endpoints*
@@ -12,7 +11,6 @@ import { AuthenticateBackendController } from './AuthenticateBackendController';
 export function coreRouter(): Router {
   winston.debug("Mapping Core routes");
   const memberController: MemberController = new MemberController();
-  const authenticateBackendController: AuthenticateBackendController = new AuthenticateBackendController();
   const router: Router = Router();
   secureRouter(router);
 
@@ -24,6 +22,5 @@ export function coreRouter(): Router {
   router.get("/member/me", memberController.viewProfile);
   router.get("/member/delete/:id(\\d+)/", memberController.deleteMember);
   router.get("/member/json", memberController.getJSONMembers);
-  router.get("/authenticate-backend", authenticateBackendController.authenticateBackend);
   return router;
 }
