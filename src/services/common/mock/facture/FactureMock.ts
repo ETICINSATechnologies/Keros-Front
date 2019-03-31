@@ -17,7 +17,7 @@ import { Member } from "../../../../models/core/Member";
 import { Page } from "../../../../models/core/Page";
 import { Meta } from "../../../../models/core/Meta";
 import { FactureType } from "../../../../models/treso/FactureType";
-import { FactureDocument } from "../../../../models/treso/FactureDocument";
+import { DocumentResponse } from "../../../../models/DocumentResponse";
 
 
 export class FactureMock implements IMock {
@@ -70,7 +70,7 @@ export class FactureMock implements IMock {
     let status: number = 500;
     if (resource.match(/generateDocument/)) {
       if (resource.match(/1/)) {
-        mockObj = <T> new FactureDocument("http://keros-api-dev.etic-insa.com/api/v1/core/document/a946092b-7387-4f42-bcd0-d4e43ccab89e");
+        mockObj = <T> new DocumentResponse("http://keros-api-dev.etic-insa.com/api/v1/core/document/a946092b-7387-4f42-bcd0-d4e43ccab89e");
         status = 200;
         return new MockResponse(mockObj, status);
       }

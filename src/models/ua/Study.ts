@@ -4,6 +4,7 @@ import { Field } from "./Field";
 import { Provenance } from "./Provenance";
 import { Contact } from "./Contact";
 import { Member } from "../core/Member";
+import { Document } from "../Document";
 
 export class Study {
   constructor(
@@ -27,5 +28,6 @@ export class Study {
     public consultants ?: Member[],
     public qualityManagers ?: Member[],
     private confidential ?: boolean,
+    private documents ?: Document[]
   ) {}
 }

@@ -211,7 +211,7 @@
                           {{/if}}
                         </ol>
                       </div>
-                      <button type="submit" formaction="/treso/facture/{{facture.id}}/generateDocument" formmethod="get" class="btn btn-primary" style="margin-top: 2%" {{#if (ne (and facture.validatedByPerf facture.validatedByUa) true)}}disabled{{/if}}>Publiposter</button>
+                      <button type="button" onclick="window.open('/treso/facture/{{facture.id}}/generateDocument', '_blank');" class="btn btn-primary" style="margin-top: 2%" {{#if (ne (and facture.validatedByPerf facture.validatedByUa) true)}}disabled{{/if}}>Publiposter</button>
                     </div>
                       <div class="col-md-3 form-group"></div>
                       <div class="col-md-4 form-group">
