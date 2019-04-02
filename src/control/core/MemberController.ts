@@ -131,19 +131,19 @@ export class MemberController {
     positionRequest1.id = parseInt(req.body.positionId1);
     positionRequest1.year = parseInt(req.body.yearPosition1);
     positionRequest1.isBoard = req.body.isBoard1;
-    if (positionRequest1 && userRequest.positions) userRequest.positions.push(positionRequest1);
+    if (positionRequest1 && positionRequest1.id && userRequest.positions) userRequest.positions.push(positionRequest1);
 
     const positionRequest2 = new PositionRequest();
     positionRequest2.id = parseInt(req.body.positionId2);
     positionRequest2.year = parseInt(req.body.yearPosition2);
     positionRequest2.isBoard = req.body.isBoard2;
-    if (positionRequest2 && userRequest.positions) userRequest.positions.push(positionRequest2);
+    if (positionRequest2 && positionRequest2.id && userRequest.positions) userRequest.positions.push(positionRequest2);
 
     const positionRequest3 = new PositionRequest();
     positionRequest3.id = parseInt(req.body.positionId3);
     positionRequest3.year = parseInt(req.body.yearPosition3);
     positionRequest3.isBoard = req.body.isBoard3;
-    if (positionRequest3 && userRequest.positions) userRequest.positions.push(positionRequest3);
+    if (positionRequest3 && positionRequest3.id && userRequest.positions) userRequest.positions.push(positionRequest3);
 
     const addressRequest = new AddressCreateRequest();
     addressRequest.line1 = req.body.line1;
