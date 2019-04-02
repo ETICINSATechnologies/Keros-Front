@@ -4,7 +4,7 @@ import { BaseService } from "../common/BaseService";
 import { Page } from "../../models/core/Page";
 import { FactureCreateRequest } from "../../models/treso/FactureCreateRequest";
 import * as winston from "winston";
-import { FactureDocument } from "../../models/treso/FactureDocument";
+import { DocumentResponse } from "../../models/DocumentResponse";
 
 export class FactureService extends BaseService {
 
@@ -112,9 +112,9 @@ export class FactureService extends BaseService {
     );
   }
 
-  static getFactureDocument(id: number, callback: (err: any, result: FactureDocument | null) => void): void {
-    this.rest.get<FactureDocument>("treso/facture/" + id + "/generateDocument", this.defaultHeaders()).then(
-      (res: IRestResponse<FactureDocument>) => {
+  static getFactureDocument(id: number, callback: (err: any, result: DocumentResponse | null) => void): void {
+    this.rest.get<DocumentResponse>("treso/facture/" + id + "/generateDocument", this.defaultHeaders()).then(
+      (res: IRestResponse<DocumentResponse>) => {
         if (res.statusCode !== 200) {
           winston.debug("Problème lors du chargement du document");
           return callback(this.defaultError(res.statusCode), null);

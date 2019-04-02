@@ -4,8 +4,8 @@ import { BaseService } from "../common/BaseService";
 import { Page } from "../../models/core/Page";
 import { StudyCreateRequest } from "../../models/ua/StudyCreateRequest";
 import * as winston from "winston";
-import { StudyDocumentResponse } from '../../models/ua/StudyDocumentResponse';
 import HttpError from "../../util/httpError";
+import { DocumentResponse } from "../../models/DocumentResponse";
 
 export class StudyService extends BaseService {
     static getStudy(id: number, callback: (err: any, result: Study | null) => void): void {
@@ -21,20 +21,6 @@ export class StudyService extends BaseService {
             e => callback(e, null)
         );
     }
-
-  static getStudyDocuments(id: number, callback: (err: any, result: StudyDocumentResponse | null) => void): void {
-    this.rest.get<StudyDocumentResponse>("ua/study/" + id + "/documents", this.defaultHeaders()).then(
-      (res: IRestResponse<StudyDocumentResponse>) => {
-        if (res.statusCode !== 200) {
-          return callback(this.defaultError(res.statusCode), null);
-        }
-        winston.debug("Response : " + JSON.stringify(res));
-        callback(null, res.result);
-      }
-    ).catch(
-      e => callback(e, null)
-    );
-  }
 
     static getAllStudies(callback: (err: any, result: Page<Study> | null) => void): void {
         this.rest.get<Page<Study>>("ua/study", this.defaultHeaders()).then(
@@ -119,17 +105,68 @@ export class StudyService extends BaseService {
     });
   }
 
-    static delete(id: number, callback: (err: any) => void): void {
-        this.rest.del<Study>("ua/study/" + id, this.defaultHeaders()).then(
-            (res: IRestResponse<Study>) => {
-                if (res.statusCode !== 204) {
-                    return callback(this.defaultError(res.statusCode));
-                }
-                winston.debug("Response : " + JSON.stringify(res));
-                callback(null);
-            }
-        ).catch(
-            e => callback(e)
-        );
-    }
+  static delete(id: number, callback: (err: any) => void): void {
+      this.rest.del<Study>("ua/study/" + id, this.defaultHeaders()).then(
+          (res: IRestResponse<Study>) => {
+              if (res.statusCode !== 204) {
+                  return callback(this.defaultError(res.statusCode));
+              }
+              winston.debug("Response : " + JSON.stringify(res));
+              callback(null);
+          }
+      ).catch(
+          e => callback(e)
+      );
+  }
+
+  static generateDocument(studyId: number, documentTypeId: number, callback: (err: any, result: DocumentResponse | null) => void): void {
+    this.rest.get<DocumentResponse>("ua/study/" + studyId + "/document/" + documentTypeId + "/generate", this.defaultHeaders()).then(
+      (res: IRestResponse<DocumentResponse>) => {
+        if (res.statusCode !== 200) {
+          winston.debug("Problème lors du chargement du document");
+          return callback(this.defaultError(res.statusCode), null);
+        }
+        winston.debug("Response : " + JSON.stringify(res));
+        callback(null, res.result);
+      }
+    ).catch(
+      e => {
+        callback(e, null);
+      }
+    );
+  }
+
+  static uploadDocument(studyId: number, documentTypeId: number, callback: (err: any) => void): void {
+    this.rest.create<DocumentResponse>("ua/study/" + studyId + "/document/" + documentTypeId, this.defaultHeaders()).then(
+      (res: IRestResponse<DocumentResponse>) => {
+        if (res.statusCode !== 200) {
+          winston.debug("Problème lors du chargement du document");
+          return callback(this.defaultError(res.statusCode));
+        }
+        winston.debug("Response : " + JSON.stringify(res));
+        callback(null);
+      }
+    ).catch(
+      e => {
+        callback(e);
+      }
+    );
+  }
+
+  static downloadDocument(studyId: number, documentTypeId: number, callback: (err: any, result: DocumentResponse | null) => void): void {
+    this.rest.get<DocumentResponse>("ua/study/" + studyId + "/document/" + documentTypeId, this.defaultHeaders()).then(
+      (res: IRestResponse<DocumentResponse>) => {
+        if (res.statusCode !== 200) {
+          winston.debug("Problème lors du chargement du document");
+          return callback(this.defaultError(res.statusCode), null);
+        }
+        winston.debug("Response : " + JSON.stringify(res));
+        callback(null, res.result);
+      }
+    ).catch(
+      e => {
+        callback(e, null);
+      }
+    );
+  }
 }

@@ -7,10 +7,10 @@ import { Facture } from "../../models/treso/Facture";
 import { StudyService } from "../../services/ua/StudyService";
 import { Study } from "../../models/ua/Study";
 import { AddressCreateRequest } from "../../models/core/AddressCreateRequest";
-import { FactureDocument } from "../../models/treso/FactureDocument";
 import { CountryService } from "../../services/core/CountryService";
 import { Country } from "../../models/core/Country";
 import { FactureTypeService } from "../../services/treso/FactureTypeService";
+import { DocumentResponse } from "../../models/DocumentResponse";
 
 export class FactureController {
   public viewFactures(req: Request, res: Response, next: NextFunction) {
@@ -199,11 +199,13 @@ export class FactureController {
   public getDocument(req: Request, res: Response, next: NextFunction) {
     let id = req.params.id;
     winston.info("Getting facture doc for id " + id);
-    FactureService.getFactureDocument(id, function (err, result: FactureDocument | null) {
+    FactureService.getFactureDocument(id, function (err, result: DocumentResponse | null) {
       if (err) {
         return next(err);
       }
-      res.send(result);
+      if (result && result.location) {
+        res.redirect(result.location);
+      }
     });
   }
 
