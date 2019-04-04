@@ -4,7 +4,6 @@ import { labelToName } from "./handlebars/genderHelper";
 import { typeToName } from "./handlebars/factureTypeHelper";
 import { IStringable } from "../models/interface/IStringable";
 import { Position } from "../models/core/Position";
-import { Study } from "../models/ua/Study";
 
 /**
  * Handlebars configuration using the express-handlebars constructor

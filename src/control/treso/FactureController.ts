@@ -11,6 +11,7 @@ import { CountryService } from "../../services/core/CountryService";
 import { Country } from "../../models/core/Country";
 import { FactureTypeService } from "../../services/treso/FactureTypeService";
 import { DocumentResponse } from "../../models/DocumentResponse";
+import HttpError from "../../util/httpError";
 
 export class FactureController {
   public viewFactures(req: Request, res: Response, next: NextFunction) {
@@ -205,6 +206,8 @@ export class FactureController {
       }
       if (result && result.location) {
         res.redirect(result.location);
+      } else {
+        return next(new HttpError("Error when loading document", 500));
       }
     });
   }

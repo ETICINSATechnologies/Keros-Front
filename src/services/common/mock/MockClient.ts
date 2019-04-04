@@ -17,7 +17,9 @@ import { FieldMock } from "./field/FieldMock";
 import { ProvenanceMock } from "./provenance/ProvenanceMock";
 import { FactureMock } from "./facture/FactureMock";
 import { FactureTypeMock } from "./facture/FactureTypeMock";
-import { BulletinVersementMock} from "./bulletinVersement/BulletinVersementMock";
+import { BulletinVersementMock } from "./bulletinVersement/BulletinVersementMock";
+import { MemberInscriptionMock } from "./inscriptions/MemberInscriptionMock";
+import { PoleMock} from "./pole/PoleMock";
 
 const MOCKS: IMock[] = [
   new AuthMock(),
@@ -36,7 +38,9 @@ const MOCKS: IMock[] = [
   new ProvenanceMock(),
   new FactureMock(),
   new FactureTypeMock(),
-  new BulletinVersementMock()
+  new BulletinVersementMock(),
+  new MemberInscriptionMock(),
+  new PoleMock()
 ];
 
 export class MockResponse<T> implements IRestResponse<T> {

@@ -7,7 +7,7 @@
         <h1>
           {{#if member}}Fiche Membre{{else}}Nouveau Membre{{/if}}
         </h1>
-      {{> breadcrumb action=action tab="UA" pathnew="Membres,Nouveau membre" pathview=(concat "Membres," (concat member.lastName (concat " " member.firstName))) pathedit=(concat "Membres,Edition " (concat member.lastName (concat " " member.firstName))) }}
+      {{> breadcrumb action=action tab="RH" pathnew="Membres,Nouveau membre" pathview=(concat "Membres," (concat member.lastName (concat " " member.firstName))) pathedit=(concat "Membres,Edition " (concat member.lastName (concat " " member.firstName))) }}
     </section>
     <section class="content">
       <div class="row">
