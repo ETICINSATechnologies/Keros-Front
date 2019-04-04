@@ -16,6 +16,7 @@ import { ProvenanceService } from '../../services/ua/ProvenanceService';
 import { Provenance } from '../../models/ua/Provenance';
 import { Config } from '../../config/Config';
 import { DocumentResponse } from "../../models/DocumentResponse";
+import HttpError from "../../util/httpError";
 
 export class StudyController {
     public viewStudies(req: Request, res: Response, next: NextFunction) {
@@ -214,6 +215,8 @@ export class StudyController {
       }
       if (result && result.location) {
         res.redirect(result.location);
+      } else {
+        return next(new HttpError("Error when loading document", 500));
       }
     });
   }
@@ -241,6 +244,8 @@ export class StudyController {
       }
       if (result && result.location) {
         res.redirect(result.location);
+      } else {
+        return next(new HttpError("Error when loading document", 500));
       }
     });
   }

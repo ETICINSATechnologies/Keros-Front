@@ -12,6 +12,7 @@ import { Pole } from "../../models/core/Pole";
 import { MemberInscriptionCreateRequest } from "../../models/sg/MemberInscriptionCreateRequest";
 import { AddressCreateRequest } from "../../models/core/AddressCreateRequest";
 import { DocumentResponse } from "../../models/DocumentResponse";
+import HttpError from "../../util/httpError";
 
 export class MemberInscriptionController {
   public viewMemberInscriptions(req: Request, res: Response, next: NextFunction) {
@@ -156,6 +157,8 @@ export class MemberInscriptionController {
       }
       if (result && result.location) {
         res.redirect(result.location);
+      } else {
+        return next(new HttpError("Error when loading document", 500));
       }
     });
   }
@@ -183,6 +186,8 @@ export class MemberInscriptionController {
       }
       if (result && result.location) {
         res.redirect(result.location);
+      } else {
+        return next(new HttpError("Error when loading document", 500));
       }
     });
   }
