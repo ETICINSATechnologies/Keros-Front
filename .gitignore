@@ -7,5 +7,4 @@ node_modules
 *.iml
 
 # Ignore logs but keep directory
-logs/*
-!logs/.gitkeep
+logs
