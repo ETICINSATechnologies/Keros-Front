@@ -1,0 +1,11 @@
+version: "3.7"
+services:
+  keros-front:
+    build: .
+    image: "keros-front"
+    container_name: keros-front
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - "./logs:/var/www/logs"
