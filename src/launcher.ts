@@ -18,6 +18,7 @@ import { contactRouter } from "./control/ua/contactRouter";
 import { factureRouter } from "./control/treso/factureRouter";
 import { bulletinVersementRouter } from "./control/treso/bulletinVersementRouter";
 import { memberInscriptionRouter } from "./control/sg/memberInscriptionRouter";
+import { consultantInscriptionRouter } from "./control/sg/consultantInscriptionRouter";
 
 /**
  * The Launcher - contains the express Application as well as methods to launch a server on that
@@ -86,6 +87,7 @@ export class Launcher {
     this.app.use("/treso/facture", factureRouter());
     this.app.use("/treso/payment-slip", bulletinVersementRouter());
     this.app.use("/sg/membre-inscription", memberInscriptionRouter());
+    this.app.use("/sg/consultant-inscription", consultantInscriptionRouter());
 
 
     // Handle any errors
