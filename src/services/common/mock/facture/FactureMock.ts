@@ -42,7 +42,7 @@ export class FactureMock implements IMock {
     }
     switch (resource) {
       case "treso/facture":
-        mockObj = <T> new Facture (0, resources["numero"], resources["fullAddress"], resources["clientName"], resources["contactName"], resources["contactEmail"], new Study(resources["studyId"]), new FactureType("acompte"), resources["amountDescription"], resources["subject"], resources["agreementSignDate"], resources["amountHT"], resources["taxPercentage"], 9000, resources["dueDate"], resources["additionalInformation"]);
+        mockObj = <T> new Facture (0, resources.numero, resources.fullAddress, resources.clientName, resources.contactName, resources.contactEmail, new Study(resources.studyId), new FactureType("acompte"), resources.amountDescription, resources.subject, resources.agreementSignDate, resources.amountHT, resources.taxPercentage, 9000, resources.dueDate, resources.additionalInformation);
         status = 201;
         winston.debug("Facture created : " + JSON.stringify(mockObj));
         return new MockResponse(mockObj, status);

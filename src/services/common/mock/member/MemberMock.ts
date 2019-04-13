@@ -18,7 +18,7 @@ export class MemberMock implements IMock {
     let status = 500;
     switch (resource) {
       case "core/member":
-        mockObj = <T>new Member(0, resources["lastName"], resources["firstName"], resources["username"], new Gender(resources["genderId"], "A"), resources["email"], resources["birthday"], new Department(resources["departmentId"], "TC"), resources["schoolYear"], resources["telephone"], resources["address"], [new Position(resources["positionIds"][0], "Secretaire Général", 2015, true, new Pole(1, "RH", "Ressources Humaines")), new Position(resources["positionIds"][1], "Président(e)", 2015, true, new Pole(1, "RH", "Ressources Humaines")), new Position(resources["positionIds"][2], "Vice-Président(e)", 2015, true, new Pole(1, "RH", "Ressources Humaines"))]);
+        mockObj = <T>new Member(0, resources.lastName, resources.firstName, resources.username, new Gender(resources.genderId, "A"), resources.email, resources.birthday, new Department(resources.departmentId, "TC"), resources.schoolYear, resources.telephone, resources.address, [new Position(resources.positionIds[0], "Secretaire Général", 2015, true, new Pole(1, "RH", "Ressources Humaines")), new Position(resources.positionIds[1], "Président(e)", 2015, true, new Pole(1, "RH", "Ressources Humaines")), new Position(resources.positionIds[2], "Vice-Président(e)", 2015, true, new Pole(1, "RH", "Ressources Humaines"))]);
         status = 201;
         winston.debug("Member created : " + JSON.stringify(mockObj));
         return new MockResponse(mockObj, status);

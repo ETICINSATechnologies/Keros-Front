@@ -15,6 +15,7 @@ env:
 install:
 - npm install
 script:
+- npm run lint-check
 - npm test
 before_deploy:
 - sudo apt-get install -y sshpass

@@ -26,71 +26,71 @@ export default handlebars({
     toLower(value: string) {
       return value.toLowerCase();
     },
-    eq: function (v1: any, v2: any) {
+    eq (v1: any, v2: any) {
       return v1 === v2;
     },
-    ne: function (v1: any, v2: any) {
+    ne (v1: any, v2: any) {
       return v1 !== v2;
     },
-    lt: function (v1: any, v2: any) {
+    lt (v1: any, v2: any) {
       return v1 < v2;
     },
-    gt: function (v1: any, v2: any) {
+    gt (v1: any, v2: any) {
       return v1 > v2;
     },
-    lte: function (v1: any, v2: any) {
+    lte (v1: any, v2: any) {
       return v1 <= v2;
     },
-    gte: function (v1: any, v2: any) {
+    gte (v1: any, v2: any) {
       return v1 >= v2;
     },
-    and: function () {
+    and () {
       return Array.prototype.slice.call(arguments).every(Boolean);
     },
-    or: function () {
+    or () {
       return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
     },
-    selected: function (current: number, selected: any) {
+    selected (current: number, selected: any) {
       if (current === selected) {
         return "selected";
       }
       return "";
     },
-    readonlyIf: function (condition: boolean) {
+    readonlyIf (condition: boolean) {
       return condition ? "readonly" : "";
     },
-    disabledIf: function (condition: boolean) {
+    disabledIf (condition: boolean) {
       return condition ? "disabled" : "";
     },
-    gender: function (label: any) {
+    gender (label: any) {
       return labelToName(label);
     },
-    requiredIfMissing: function (item: any) {
+    requiredIfMissing (item: any) {
       if (item) {
         return "";
       }
       return "required";
     },
-    toString: function (item: IStringable, maxLength = 0) {
+    toString (item: IStringable, maxLength = 0) {
       let str = item.toString();
       if (maxLength > 0) {
         str = str.slice(0, maxLength) + "...";
       }
       return str;
     },
-    maxLength: function (str: string, maxLength: number): string {
+    maxLength (str: string, maxLength: number): string {
       if (maxLength > 0) {
         str = str.slice(0, maxLength) + "...";
       }
       return str;
     },
-    concat: function (str1: string, str2: string): string {
+    concat (str1: string, str2: string): string {
       return str1 + str2;
     },
-    typeToString: function (label: any) {
+    typeToString (label: any) {
       return typeToName(label);
     },
-    isFromPerf: function (positions: Position[]) {
+    isFromPerf (positions: Position[]) {
       return positions.some(function(pos) {
         let b = false;
         if (pos.pole) {
@@ -99,7 +99,7 @@ export default handlebars({
         return b;
       });
     },
-    isFromUa: function (positions: Position[]) {
+    isFromUa (positions: Position[]) {
       return positions.some(function(pos) {
         let b = false;
         if (pos.pole) {

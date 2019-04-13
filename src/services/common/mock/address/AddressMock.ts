@@ -37,7 +37,7 @@ export class AddressMock implements IMock {
     let status = 500;
     switch (resource) {
       case "core/address":
-        mockObj = <T> new Address(0, resources["line1"], resources["line2"], resources["city"], resources["postalCode"], resources["country"]);
+        mockObj = <T> new Address(0, resources.line1, resources.line2, resources.city, resources.postalCode, resources.country);
         status = 200;
         winston.debug("Address created : " + JSON.stringify(mockObj));
         return new MockResponse(mockObj, status);

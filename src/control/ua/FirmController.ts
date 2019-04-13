@@ -31,8 +31,8 @@ export class FirmController {
         if (err1) return next(err1);
         if (err2) return next(err2);
         const options = {
-          firmTypes: firmTypes,
-          countries: countries,
+          firmTypes,
+          countries,
           action: "create"
         };
         res.render("ua/firm/viewFirm", options);
@@ -50,9 +50,9 @@ export class FirmController {
           if (err2) return next(err2);
           if (err3) return next(err3);
           const options = {
-            firm: firm,
-            firmTypes: firmTypes,
-            countries: countries,
+            firm,
+            firmTypes,
+            countries,
             action: "view"
           };
           res.render("ua/firm/viewFirm", options);
@@ -71,9 +71,9 @@ export class FirmController {
           if (err2) return next(err2);
           if (err3) return next(err3);
           const options = {
-            firm: firm,
-            firmTypes: firmTypes,
-            countries: countries,
+            firm,
+            firmTypes,
+            countries,
             action: "update"
           };
           res.render("ua/firm/viewFirm", options);

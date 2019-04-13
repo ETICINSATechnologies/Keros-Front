@@ -39,7 +39,7 @@ export class ContactController {
         if (err1) return next(err1);
         if (err2) return next(err2);
         const options = {
-          firms : firms,
+          firms,
           gender : genders,
           action: "create"
         };
@@ -58,8 +58,8 @@ export class ContactController {
           if (err2) return next(err2);
           if (err3) return next(err3);
           const options = {
-            contact : contact,
-            firms : firms,
+            contact,
+            firms,
             gender : genders,
             action: "view"
           };
@@ -79,8 +79,8 @@ export class ContactController {
           if (err2) return next(err2);
           if (err3) return next(err3);
           const options = {
-            contact : contact,
-            firms : firms,
+            contact,
+            firms,
             gender : genders,
             action: "update",
           };

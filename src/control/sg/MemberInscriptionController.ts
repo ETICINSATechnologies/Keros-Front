@@ -38,9 +38,9 @@ export class MemberInscriptionController {
           if (err2) return next(err2);
           if (err3) return next(err3);
           const options = {
-            departments: departments,
-            countries: countries,
-            poles: poles,
+            departments,
+            countries,
+            poles,
             action: "create"
           };
           res.render("sg/inscription/members/viewInscription", options);
@@ -69,10 +69,10 @@ export class MemberInscriptionController {
             if (err3) return next(err3);
             if (err4) return next(err4);
             const options = {
-              inscription: inscription,
-              departments: departments,
-              countries: countries,
-              poles: poles,
+              inscription,
+              departments,
+              countries,
+              poles,
               action: "view"
             };
             res.render("sg/inscription/members/viewInscription", options);
@@ -93,10 +93,10 @@ export class MemberInscriptionController {
             if (err3) return next(err3);
             if (err4) return next(err4);
             const options = {
-              inscription: inscription,
-              departments: departments,
-              countries: countries,
-              poles: poles,
+              inscription,
+              departments,
+              countries,
+              poles,
               action: "update"
             };
             res.render("sg/inscription/members/viewInscription", options);

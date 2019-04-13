@@ -15,7 +15,7 @@ export class FirmMock implements IMock {
     let status = 500;
     switch (resource) {
       case "ua/firm":
-        mockObj = <T> new Firm(0, resources["siret"], resources["name"], resources["address"], new FirmType(resources["typeId"], "SARL"));
+        mockObj = <T> new Firm(0, resources.siret, resources.name, resources.address, new FirmType(resources.typeId, "SARL"));
         status = 201;
         winston.debug("Firm created : " + JSON.stringify(mockObj));
         return new MockResponse(mockObj, status);

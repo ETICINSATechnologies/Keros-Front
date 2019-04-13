@@ -12,7 +12,7 @@ export class Config {
       return;
     }
 
-    const nodeEnv = process.env["NODE_ENV"];
+    const nodeEnv = process.env.NODE_ENV;
     switch (nodeEnv) {
       case "mock":
         this.activeConfig = require("../../../.deploy/mock-config.json");
