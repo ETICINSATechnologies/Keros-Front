@@ -1,12 +1,12 @@
-import {IRestResponse} from "typed-rest-client/RestClient";
-import {BaseService} from "../common/BaseService";
-import {Status} from "../../models/ua/Status";
+import { IRestResponse } from "typed-rest-client/RestClient";
+import { BaseService } from "../common/BaseService";
+import { Status } from "../../models/ua/Status";
 import * as winston from "winston";
 
 export class StatusService extends BaseService {
 
   private static cacheStatusValues: Status[] | null = null;
-  private static cacheStatusExpires: number = 0;
+  private static cacheStatusExpires = 0;
 
   static getAllStatus(callback: (err: any, result: Status[] | null) => void): void {
     if (Date.now() < this.cacheStatusExpires) {

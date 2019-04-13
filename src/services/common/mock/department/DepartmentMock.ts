@@ -6,7 +6,7 @@ import { Department } from "../../../../models/core/Department";
 export class DepartmentMock implements IMock {
   get<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "core/department/1":
         mockObj = <T> new Department(1, "BIM", "Biosciences");
@@ -50,7 +50,7 @@ export class DepartmentMock implements IMock {
 
   getAll<T>(resource: string, options?: IRequestOptions): IRestResponse<T[]> | null {
     let mockObj: T[] | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "core/department":
         mockObj = <T[]> [ <T> new Department(1, "BIM", "Biosciences"), new Department(2, "IF", "Informatique"), new Department(3, "GCM", "Science et Génie des Matériaux"), new Department(4, "GCU", "Génie Civil et Urbanisme"), new Department(5, "GE", "Génie Electrique"), new Department(6, "GEN", "Génie Energétique et Environnement"), new Department(7, "GI", "Génie Industriel"), new Department(8, "GM", "Génie Mécanique"), new Department(9, "TC", "Télécommunications, Services et Usages")];

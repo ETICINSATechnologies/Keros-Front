@@ -1,6 +1,6 @@
-import { IRestResponse } from 'typed-rest-client/RestClient';
-import { BaseService } from '../common/BaseService';
-import * as winston from 'winston';
+import { IRestResponse } from "typed-rest-client/RestClient";
+import { BaseService } from "../common/BaseService";
+import * as winston from "winston";
 import { MemberInscription } from "../../models/sg/MemberInscription";
 import { Page } from "../../models/core/Page";
 import { MemberInscriptionCreateRequest } from "../../models/sg/MemberInscriptionCreateRequest";
@@ -8,12 +8,12 @@ import { DocumentResponse } from "../../models/DocumentResponse";
 
 export class MemberInscriptionService extends BaseService {
   static getMemberInscription(id: number, callback: (err: any, result: MemberInscription | null) => void): void {
-    this.rest.get<MemberInscription>('sg/membre-inscription/' + id, this.defaultHeaders()).then(
+    this.rest.get<MemberInscription>("sg/membre-inscription/" + id, this.defaultHeaders()).then(
       (res: IRestResponse<MemberInscription>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(res.statusCode), null);
         }
-        winston.debug('Response : ' + JSON.stringify(res));
+        winston.debug("Response : " + JSON.stringify(res));
         callback(null, res.result);
       }
     ).catch(
@@ -36,12 +36,12 @@ export class MemberInscriptionService extends BaseService {
   }
 
   static createMemberInscription(memberInscriptionRequest: MemberInscriptionCreateRequest, callback: (err: any, result: MemberInscription | null) => void): void {
-    this.rest.create<MemberInscription>('sg/membre-inscription', memberInscriptionRequest, this.defaultHeaders()).then(
+    this.rest.create<MemberInscription>("sg/membre-inscription", memberInscriptionRequest, this.defaultHeaders()).then(
       (res: IRestResponse<MemberInscription>) => {
         if (res.statusCode !== 201) {
           return callback(this.defaultError(res.statusCode), null);
         }
-        winston.debug('Response : ' + JSON.stringify(res));
+        winston.debug("Response : " + JSON.stringify(res));
         callback(null, res.result);
       }
     ).catch(
@@ -50,12 +50,12 @@ export class MemberInscriptionService extends BaseService {
   }
 
   static update(id: number, memberInscriptionRequest: MemberInscriptionCreateRequest, callback: (err: any, result: MemberInscription | null) => void): void {
-    this.rest.update<MemberInscription>('sg/membre-inscription/' + id, memberInscriptionRequest, this.defaultHeaders()).then(
+    this.rest.update<MemberInscription>("sg/membre-inscription/" + id, memberInscriptionRequest, this.defaultHeaders()).then(
       (res: IRestResponse<MemberInscription>) => {
         if (res.statusCode !== 200) {
           return callback(this.defaultError(res.statusCode), null);
         }
-        winston.debug('Response : ' + JSON.stringify(res));
+        winston.debug("Response : " + JSON.stringify(res));
         callback(null, res.result);
       }
     ).catch(
@@ -64,12 +64,12 @@ export class MemberInscriptionService extends BaseService {
   }
 
   static delete(id: number, callback: (err: any) => void): void {
-    this.rest.del<MemberInscription>('sg/membre-inscription/' + id, this.defaultHeaders()).then(
+    this.rest.del<MemberInscription>("sg/membre-inscription/" + id, this.defaultHeaders()).then(
       (res: IRestResponse<MemberInscription>) => {
         if (res.statusCode !== 204) {
           return callback(this.defaultError(res.statusCode));
         }
-        winston.debug('Response : ' + JSON.stringify(res));
+        winston.debug("Response : " + JSON.stringify(res));
         callback(null);
       }
     ).catch(

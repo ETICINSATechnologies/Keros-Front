@@ -1,5 +1,5 @@
-import {defaultCookies, request} from "../helpers";
-import {Response} from "supertest";
+import { defaultCookies, request } from "../helpers";
+import { Response } from "supertest";
 
 describe("Error page testing", function () {
   it("Logged out use should be redirected to login page", function (done) {
@@ -21,7 +21,7 @@ describe("Error page testing", function () {
     request
       .get("/doestnexist")
       .set("Accept", "text/html")
-      .set('Cookie', defaultCookies())
+      .set("Cookie", defaultCookies())
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(404)
       .then((resp: Response) => {

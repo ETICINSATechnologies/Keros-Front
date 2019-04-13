@@ -1,12 +1,12 @@
-import {IRestResponse} from "typed-rest-client/RestClient";
-import {Department} from "../../models/core/Department";
-import {BaseService} from "../common/BaseService";
+import { IRestResponse } from "typed-rest-client/RestClient";
+import { Department } from "../../models/core/Department";
+import { BaseService } from "../common/BaseService";
 import * as winston from "winston";
 
 export class DepartmentService extends BaseService {
 
   private static cacheDepartmentsValues: Department[] | null = null;
-  private static cacheDepartmentsExpires: number = 0;
+  private static cacheDepartmentsExpires = 0;
 
   static getAllDepartments(callback: (err: any, result: Department[] | null) => void): void {
     if (Date.now() < this.cacheDepartmentsExpires) {

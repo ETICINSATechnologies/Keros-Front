@@ -12,7 +12,7 @@ import { FirmType } from "../../../../models/ua/FirmType";
 export class FirmMock implements IMock {
   create<T>(resource: string, resources: any, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "ua/firm":
         mockObj = <T> new Firm(0, resources["siret"], resources["name"], resources["address"], new FirmType(resources["typeId"], "SARL"));
@@ -24,7 +24,7 @@ export class FirmMock implements IMock {
   }
 
   del<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "ua/firm/1":
         status = 204;
@@ -40,7 +40,7 @@ export class FirmMock implements IMock {
 
   get<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "ua/firm/1":
         mockObj = <T> new Firm(1, "99999999", "La boucherie du Léman", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), new FirmType(2, "PME/PMI"));
@@ -92,7 +92,7 @@ export class FirmMock implements IMock {
 
   getAll<T>(resource: string, options?: IRequestOptions): IRestResponse<T[]> | null {
     let mockObj: T[] | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "ua/firm":
         mockObj = <T[]> [<T> new Firm(1, "99999999", "La boucherie du Léman", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), new FirmType(2, "PME/PMI")), new Firm(2, "11111111", "La poissonerie des familles", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), new FirmType(4, "SARL"))];
@@ -108,7 +108,7 @@ export class FirmMock implements IMock {
 
   update<T>(resource: string, resources: any, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "ua/firm/1":
         mockObj = <T> new Firm(1, "99999999", "La boucherie du Léman", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), new FirmType(2, "PME/PMI"));

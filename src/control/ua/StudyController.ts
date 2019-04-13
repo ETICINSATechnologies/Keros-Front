@@ -1,20 +1,20 @@
-import { NextFunction, Request, Response } from 'express';
-import { StudyService } from '../../services/ua/StudyService';
-import { Study } from '../../models/ua/Study';
-import * as winston from 'winston';
-import { Page } from '../../models/core/Page';
-import { StatusService } from '../../services/ua/StatusService';
-import { Status } from '../../models/ua/Status';
-import { FirmService } from '../../services/ua/FirmService';
-import { Firm } from '../../models/ua/Firm';
-import { StudyCreateRequest } from '../../models/ua/StudyCreateRequest';
-import { MemberService } from '../../services/core/MemberService';
-import { Member } from '../../models/core/Member';
-import { FieldService } from '../../services/ua/FieldService';
-import { Field } from '../../models/ua/Field';
-import { ProvenanceService } from '../../services/ua/ProvenanceService';
-import { Provenance } from '../../models/ua/Provenance';
-import { Config } from '../../config/Config';
+import { NextFunction, Request, Response } from "express";
+import { StudyService } from "../../services/ua/StudyService";
+import { Study } from "../../models/ua/Study";
+import * as winston from "winston";
+import { Page } from "../../models/core/Page";
+import { StatusService } from "../../services/ua/StatusService";
+import { Status } from "../../models/ua/Status";
+import { FirmService } from "../../services/ua/FirmService";
+import { Firm } from "../../models/ua/Firm";
+import { StudyCreateRequest } from "../../models/ua/StudyCreateRequest";
+import { MemberService } from "../../services/core/MemberService";
+import { Member } from "../../models/core/Member";
+import { FieldService } from "../../services/ua/FieldService";
+import { Field } from "../../models/ua/Field";
+import { ProvenanceService } from "../../services/ua/ProvenanceService";
+import { Provenance } from "../../models/ua/Provenance";
+import { Config } from "../../config/Config";
 import { DocumentResponse } from "../../models/DocumentResponse";
 import HttpError from "../../util/httpError";
 
@@ -71,7 +71,7 @@ export class StudyController {
   }
 
   public deleteStudy(req: Request, res: Response, next: NextFunction) {
-      let id = req.params.id;
+      const id = req.params.id;
       winston.info("Delete study for id " + id);
       StudyService.delete(id, function (err) {
           if (err) {
@@ -79,10 +79,10 @@ export class StudyController {
           }
           res.redirect("/ua/study");
       });
-  };
+  }
 
   public viewStudy(req: Request, res: Response, next: NextFunction) {
-      let id = req.params.id;
+      const id = req.params.id;
       let mailshots;
       winston.info("Getting study for id " + id);
       StudyService.getStudy(id, function (err1, study: Study | null) {
@@ -97,7 +97,7 @@ export class StudyController {
                       if (err4) return next(err4);
                       if (err5) return next(err5);
                       if (err6) return next(err6);
-                      if (!study || !study.consultants || !study.qualityManagers ) {
+                      if (!study || !study.consultants || !study.qualityManagers) {
                         mailshots = 0;
                       } else {
                         mailshots = 1;
@@ -121,7 +121,7 @@ export class StudyController {
   }
 
   public updateStudy(req: Request, res: Response, next: NextFunction) {
-      let id = req.params.id;
+      const id = req.params.id;
       winston.info("Updating study for id " + id);
       StudyService.getStudy(id, function (err1, study: Study | null) {
           FieldService.getAllFields(function (err2, fields: Field[] | null) {

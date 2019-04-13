@@ -6,7 +6,7 @@ import { Provenance } from "../../../../models/ua/Provenance";
 export class ProvenanceMock implements IMock {
   get<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "ua/provenance/1":
         mockObj = <T> new Provenance(1, "Mail");
@@ -30,7 +30,7 @@ export class ProvenanceMock implements IMock {
 
   getAll<T>(resource: string, options?: IRequestOptions): IRestResponse<T[]> | null {
     let mockObj: T[] | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "ua/provenance":
         mockObj = <T[]> [ <T> new Provenance(1, "Mail"), new Provenance(2, "Letter"), new Provenance(3, "Network"), new Provenance(4, "Phoning")];

@@ -10,7 +10,7 @@ export class GenderMock implements IMock {
 
   getAll<T>(resource: string, options?: IRequestOptions): IRestResponse<T[]> | null {
     let mockObj: T[] | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "core/gender":
         mockObj = <T[]> [ <T> new Gender(1, "H"), new Gender(2, "F"), new Gender(3, "A"), new Gender(4, "I")];

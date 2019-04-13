@@ -14,7 +14,7 @@ import { Country } from "../../../../models/core/Country";
 export class ContactMock implements IMock {
   create<T>(resource: string, resources: any, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "ua/contact":
         mockObj = <T> new Contact(0, resources["firstName"], resources["lastName"], new Gender(resources["genderId"], "I"), new Firm(resources["firmId"], "111111111", "blablabla", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), new FirmType(4, "SARL")), resources["email"], resources["telephone"], resources["cellphone"], resources["position"], resources["notes"], resources["old"]);
@@ -25,14 +25,14 @@ export class ContactMock implements IMock {
     return null;
   }
   del<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
-      let status: number = 500;
+      let status = 500;
       switch (resource) {
         case "ua/contact/1":
           status = 204;
           winston.debug("Contact 1 removed");
           return new MockResponse(null, status);
         case "ua/contact/2":
-	      status = 204;
+        status = 204;
           winston.debug("Contact 2 removed");
           return new MockResponse(null, status);
       }
@@ -40,7 +40,7 @@ export class ContactMock implements IMock {
   }
   get<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "ua/contact/1":
         mockObj = <T> new Contact(1, "Jimmy", "Neutron", new Gender(3, "A"), new Firm(2, "1111111", "La poissonerie des familles", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), new FirmType(4, "SARL")), "jimmy@test.com", "0450202122", "+33620547064", "Stagiaire", "Super sympa", true);
@@ -105,7 +105,7 @@ export class ContactMock implements IMock {
   }
   getAll<T>(resource: string, options?: IRequestOptions): IRestResponse<T[]> | null {
     let mockObj: T[] | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "ua/contact":
         mockObj = <T[]> [ <T> new Contact(1, "Jimmy", "Neutron", new Gender(3, "A"), new Firm(2, "1111111", "La poissonerie des familles", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), new FirmType(4, "SARL")), "jimmy@test.com", "0450202122", "+33620547064", "Stagiaire", "Super sympa", true), new Contact(2, "José", "Bové", new Gender(4, "I"), new Firm(1, "99999999", "La boucherie du Léman", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), new FirmType(2, "TPE/PME")), "votezjosé@test.com", "0405060708", "+33711121314", "PDG", "", false)];
@@ -119,7 +119,7 @@ export class ContactMock implements IMock {
   }
   update<T>(resource: string, resources: any, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "ua/contact/1":
         mockObj = <T> new Contact(1, "Jimmy", "Neutron", new Gender(3, "A"), new Firm(2, "1111111", "La poissonerie des familles", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), new FirmType(4, "SARL")), "jimmy@test.com", "0450202122", "+33620547064", "Stagiaire", "Super sympa", true);

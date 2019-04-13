@@ -1,7 +1,7 @@
-import {JSDOM} from "jsdom";
-import {expect} from "chai";
-import {defaultCookies, request} from "../helpers";
-import {Response} from "supertest";
+import { JSDOM } from "jsdom";
+import { expect } from "chai";
+import { defaultCookies, request } from "../helpers";
+import { Response } from "supertest";
 import jquery = require("jquery");
 
 describe("Member tests", function () {
@@ -9,7 +9,7 @@ describe("Member tests", function () {
     request
       .get("/core/member")
       .set("Accept", "text/html")
-      .set('Cookie', defaultCookies())
+      .set("Cookie", defaultCookies())
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(200)
       .then((resp: Response) => {
@@ -26,7 +26,7 @@ describe("Member tests", function () {
     request
       .get("/core/member/1")
       .set("Accept", "text/html")
-      .set('Cookie', defaultCookies())
+      .set("Cookie", defaultCookies())
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(200)
       .then((resp: Response) => {
@@ -43,7 +43,7 @@ describe("Member tests", function () {
     request
       .get("/core/member/create")
       .set("Accept", "text/html")
-      .set('Cookie', defaultCookies())
+      .set("Cookie", defaultCookies())
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(200)
       .then((resp: Response) => {
@@ -60,7 +60,7 @@ describe("Member tests", function () {
     request
       .get("/core/member/update/1")
       .set("Accept", "text/html")
-      .set('Cookie', defaultCookies())
+      .set("Cookie", defaultCookies())
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(200)
       .then((resp: Response) => {
@@ -77,7 +77,7 @@ describe("Member tests", function () {
     request
       .get("/core/member/me")
       .set("Accept", "text/html")
-      .set('Cookie', defaultCookies())
+      .set("Cookie", defaultCookies())
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(200)
       .then((resp: Response) => {

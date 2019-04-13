@@ -1,13 +1,13 @@
-import {expect} from "chai";
-import {defaultCookies, getCookie, request} from "../helpers";
-import {Response} from "supertest";
+import { expect } from "chai";
+import { defaultCookies, getCookie, request } from "../helpers";
+import { Response } from "supertest";
 
 describe("Logout tests", function () {
   it("Should logout the user and destroy token", function (done) {
     request
       .get("/auth/logout")
       .set("Accept", "text/html")
-      .set('Cookie', defaultCookies())
+      .set("Cookie", defaultCookies())
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(302)
       .then((resp: Response) => {

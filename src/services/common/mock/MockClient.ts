@@ -19,7 +19,7 @@ import { FactureMock } from "./facture/FactureMock";
 import { FactureTypeMock } from "./facture/FactureTypeMock";
 import { BulletinVersementMock } from "./bulletinVersement/BulletinVersementMock";
 import { MemberInscriptionMock } from "./inscriptions/MemberInscriptionMock";
-import { PoleMock} from "./pole/PoleMock";
+import { PoleMock } from "./pole/PoleMock";
 
 const MOCKS: IMock[] = [
   new AuthMock(),
@@ -54,7 +54,7 @@ export class MockResponse<T> implements IRestResponse<T> {
 export class MockClient implements IClient {
   create<T>(resource: string, resources: any, options?: IRequestOptions): Promise<IRestResponse<T>> {
     for (let i = 0; i < MOCKS.length; i++) {
-      let response: IRestResponse<T> | null = MOCKS[i].create<T>(resource, resources, options);
+      const response: IRestResponse<T> | null = MOCKS[i].create<T>(resource, resources, options);
       if (response) {
         return Promise.resolve(response);
       }
@@ -64,7 +64,7 @@ export class MockClient implements IClient {
 
   del<T>(resource: string, options?: IRequestOptions): Promise<IRestResponse<T>> {
     for (let i = 0; i < MOCKS.length; i++) {
-      let response: IRestResponse<T> | null = MOCKS[i].del<T>(resource, options);
+      const response: IRestResponse<T> | null = MOCKS[i].del<T>(resource, options);
       if (response) {
         return Promise.resolve(response);
       }
@@ -74,7 +74,7 @@ export class MockClient implements IClient {
 
   get<T>(resource: string, options?: IRequestOptions): Promise<IRestResponse<T>> {
     for (let i = 0; i < MOCKS.length; i++) {
-      let response: IRestResponse<T> | null = MOCKS[i].get<T>(resource, options);
+      const response: IRestResponse<T> | null = MOCKS[i].get<T>(resource, options);
       if (response) {
         return Promise.resolve(response);
       }
@@ -84,7 +84,7 @@ export class MockClient implements IClient {
 
   getAll<T>(resource: string, options?: IRequestOptions): Promise<IRestResponse<T[]>> {
     for (let i = 0; i < MOCKS.length; i++) {
-      let response: IRestResponse<T[]> | null = MOCKS[i].getAll<T>(resource, options);
+      const response: IRestResponse<T[]> | null = MOCKS[i].getAll<T>(resource, options);
       if (response) {
         return Promise.resolve(response);
       }
@@ -94,7 +94,7 @@ export class MockClient implements IClient {
 
   options<T>(requestUrl: string, options?: IRequestOptions): Promise<IRestResponse<T>> {
     for (let i = 0; i < MOCKS.length; i++) {
-      let response: IRestResponse<T> | null = MOCKS[i].options<T>(requestUrl, options);
+      const response: IRestResponse<T> | null = MOCKS[i].options<T>(requestUrl, options);
       if (response) {
         return Promise.resolve(response);
       }
@@ -104,7 +104,7 @@ export class MockClient implements IClient {
 
   update<T>(resource: string, resources: any, options?: IRequestOptions): Promise<IRestResponse<T>> {
     for (let i = 0; i < MOCKS.length; i++) {
-      let response: IRestResponse<T> | null = MOCKS[i].update<T>(resource, resources, options);
+      const response: IRestResponse<T> | null = MOCKS[i].update<T>(resource, resources, options);
       if (response) {
         return Promise.resolve(response);
       }

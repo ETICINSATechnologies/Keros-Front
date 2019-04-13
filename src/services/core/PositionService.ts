@@ -1,11 +1,11 @@
-import {IRestResponse} from "typed-rest-client/RestClient";
-import {BaseService} from "../common/BaseService";
+import { IRestResponse } from "typed-rest-client/RestClient";
+import { BaseService } from "../common/BaseService";
 import * as winston from "winston";
 
 export class PositionService extends BaseService {
 
   private static cachePositionsValues: Position[] | null = null;
-  private static cachePositionsExpires: number = 0;
+  private static cachePositionsExpires = 0;
 
   static getAllPositions(callback: (err: any, result: Position[] | null) => void): void {
     if (Date.now() < this.cachePositionsExpires) {

@@ -1,6 +1,6 @@
-import { NextFunction, Request, Response } from 'express';
-import * as winston from 'winston';
-import { Page } from '../../models/core/Page';
+import { NextFunction, Request, Response } from "express";
+import * as winston from "winston";
+import { Page } from "../../models/core/Page";
 import { StudyService } from "../../services/ua/StudyService";
 import { Study } from "../../models/ua/Study";
 import { AddressCreateRequest } from "../../models/core/AddressCreateRequest";
@@ -67,7 +67,7 @@ export class BulletinVersementController {
   }
 
   public deleteBulletinVersement(req: Request, res: Response, next: NextFunction) {
-    let id = req.params.id;
+    const id = req.params.id;
     winston.info("Delete BV for id " + id);
     BulletinVersementService.delete(id, function (err) {
       if (err) {
@@ -78,7 +78,7 @@ export class BulletinVersementController {
   }
 
   public viewBulletinVersement(req: Request, res: Response, next: NextFunction) {
-    let id = req.params.id;
+    const id = req.params.id;
     winston.info("Getting bulletin for id " + id);
     BulletinVersementService.getBulletinVersement(id, function (err1, bulletin: BulletinVersement | null) {
       StudyService.getAllStudies(function (err2, studies: Page<Study> | null) {
@@ -101,7 +101,7 @@ export class BulletinVersementController {
   }
 
   public updateBulletinVersement(req: Request, res: Response, next: NextFunction) {
-    let id = req.params.id;
+    const id = req.params.id;
     winston.info("Updating BV for id " + id);
     BulletinVersementService.getBulletinVersement(id, function (err1, bulletin: BulletinVersement | null) {
       StudyService.getAllStudies(function (err2, studies: Page<Study> | null) {
@@ -164,7 +164,7 @@ export class BulletinVersementController {
   }
 
   public validateUa(req: Request, res: Response, next: NextFunction) {
-    let id = req.params.id;
+    const id = req.params.id;
     winston.info("BV validationUA for id " + id);
     BulletinVersementService.validateUa(id, function (err) {
       if (err) {
@@ -175,7 +175,7 @@ export class BulletinVersementController {
   }
 
   public validatePerf(req: Request, res: Response, next: NextFunction) {
-    let id = req.params.id;
+    const id = req.params.id;
     winston.info("BV validationPerf for id " + id);
     BulletinVersementService.validatePerf(id, function (err) {
       if (err) {

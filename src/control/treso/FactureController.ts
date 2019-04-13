@@ -1,8 +1,8 @@
-import { NextFunction, Request, Response } from 'express';
-import * as winston from 'winston';
-import { Page } from '../../models/core/Page';
-import { FactureService } from '../../services/treso/FactureService';
-import { FactureCreateRequest } from '../../models/treso/FactureCreateRequest';
+import { NextFunction, Request, Response } from "express";
+import * as winston from "winston";
+import { Page } from "../../models/core/Page";
+import { FactureService } from "../../services/treso/FactureService";
+import { FactureCreateRequest } from "../../models/treso/FactureCreateRequest";
 import { Facture } from "../../models/treso/Facture";
 import { StudyService } from "../../services/ua/StudyService";
 import { Study } from "../../models/ua/Study";
@@ -68,7 +68,7 @@ export class FactureController {
   }
 
   public deleteFacture(req: Request, res: Response, next: NextFunction) {
-    let id = req.params.id;
+    const id = req.params.id;
     winston.info("Delete facture for id " + id);
     FactureService.delete(id, function (err) {
       if (err) {
@@ -79,7 +79,7 @@ export class FactureController {
   }
 
   public viewFacture(req: Request, res: Response, next: NextFunction) {
-    let id = req.params.id;
+    const id = req.params.id;
     winston.info("Getting facture for id " + id);
     FactureService.getFacture(id, function (err1, facture: Facture | null) {
       StudyService.getAllStudies(function (err2, studies: Page<Study> | null) {
@@ -106,7 +106,7 @@ export class FactureController {
   }
 
   public updateFacture(req: Request, res: Response, next: NextFunction) {
-    let id = req.params.id;
+    const id = req.params.id;
     winston.info("Updating facture for id " + id);
     FactureService.getFacture(id, function (err1, facture: Facture | null) {
       StudyService.getAllStudies(function (err2, studies: Page<Study> | null) {
@@ -176,7 +176,7 @@ export class FactureController {
   }
 
   public validateUa(req: Request, res: Response, next: NextFunction) {
-    let id = req.params.id;
+    const id = req.params.id;
     winston.info("Facture validationUA for id " + id);
     FactureService.validateUa(id, function (err) {
       if (err) {
@@ -187,7 +187,7 @@ export class FactureController {
   }
 
   public validatePerf(req: Request, res: Response, next: NextFunction) {
-    let id = req.params.id;
+    const id = req.params.id;
     winston.info("Facture validationPerf for id " + id);
     FactureService.validatePerf(id, function (err) {
       if (err) {
@@ -198,7 +198,7 @@ export class FactureController {
   }
 
   public getDocument(req: Request, res: Response, next: NextFunction) {
-    let id = req.params.id;
+    const id = req.params.id;
     winston.info("Getting facture doc for id " + id);
     FactureService.getFactureDocument(id, function (err, result: DocumentResponse | null) {
       if (err) {

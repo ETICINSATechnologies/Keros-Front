@@ -1,4 +1,4 @@
-import {NextFunction, Request, Response, Router} from "express";
+import { NextFunction, Request, Response, Router } from "express";
 import * as httpContext from "express-http-context";
 
 /**
@@ -15,10 +15,10 @@ export function secureRouter(router: Router): void {
     }
 
     // Add user information to locals for templating
-    let connectedUser = req.cookies.connectedUser;
+    const connectedUser = req.cookies.connectedUser;
     res.locals.connectedUser = JSON.parse(connectedUser);
-    httpContext.set('token', req.cookies.token);
-    httpContext.set('connectedUser', res.locals.connectedUser);
+    httpContext.set("token", req.cookies.token);
+    httpContext.set("connectedUser", res.locals.connectedUser);
 
     next();
   });

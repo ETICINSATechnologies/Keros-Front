@@ -8,16 +8,16 @@ import * as winston from "winston";
 import handlebars from "./util/handlebars";
 import * as http from "http";
 import * as httpContext from "express-http-context";
-import {Config} from "./config/Config";
-import {authRouter} from "./control/auth/authRouter";
-import {coreRouter} from "./control/core/coreRouter";
-import {firmRouter} from "./control/ua/firmRouter";
-import {studyRouter} from "./control/ua/studyRouter";
-import {dashboardRouter} from "./control/core/dashboardRouter";
-import {contactRouter} from "./control/ua/contactRouter";
-import {factureRouter} from "./control/treso/factureRouter";
-import {bulletinVersementRouter} from "./control/treso/bulletinVersementRouter";
-import {memberInscriptionRouter} from "./control/sg/memberInscriptionRouter";
+import { Config } from "./config/Config";
+import { authRouter } from "./control/auth/authRouter";
+import { coreRouter } from "./control/core/coreRouter";
+import { firmRouter } from "./control/ua/firmRouter";
+import { studyRouter } from "./control/ua/studyRouter";
+import { dashboardRouter } from "./control/core/dashboardRouter";
+import { contactRouter } from "./control/ua/contactRouter";
+import { factureRouter } from "./control/treso/factureRouter";
+import { bulletinVersementRouter } from "./control/treso/bulletinVersementRouter";
+import { memberInscriptionRouter } from "./control/sg/memberInscriptionRouter";
 
 /**
  * The Launcher - contains the express Application as well as methods to launch a server on that

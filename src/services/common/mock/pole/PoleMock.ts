@@ -6,7 +6,7 @@ import { MockResponse } from "../MockClient";
 export class PoleMock implements IMock {
   get<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "core/pole/1":
         mockObj = <T>new Pole(1, "RH", "Ressources Humaines");
@@ -42,7 +42,7 @@ export class PoleMock implements IMock {
 
   getAll<T>(resource: string, options?: IRequestOptions): IRestResponse<T[]> | null {
     let mockObj: T[] | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "core/pole":
         mockObj = <T[]>[<T>new Pole(1, "RH", "Ressources Humaines"),

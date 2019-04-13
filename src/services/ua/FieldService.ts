@@ -6,7 +6,7 @@ import * as winston from "winston";
 export class FieldService extends BaseService {
 
   private static cacheFieldsValues: Field[] | null = null;
-  private static cacheFieldsExpires: number = 0;
+  private static cacheFieldsExpires = 0;
 
   static getAllFields(callback: (err: any, result: Field[] | null) => void): void {
     if (Date.now() < this.cacheFieldsExpires) {

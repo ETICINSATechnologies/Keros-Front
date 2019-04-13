@@ -6,7 +6,7 @@ import { Country } from "../../../../models/core/Country";
 export class CountryMock implements IMock {
   get<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "core/country/1":
         mockObj = <T> new Country(1, "France");
@@ -38,7 +38,7 @@ export class CountryMock implements IMock {
 
   getAll<T>(resource: string, options?: IRequestOptions): IRestResponse<T[]> | null {
     let mockObj: T[] | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "core/country":
         mockObj = <T[]> [ <T> new Country(1, "France"), new Country(2, "Suisse"), new Country(3, "Belgique"), new Country(4, "Allemagne"), new Country(5, "Espagne"), new Country(6, "Royaume-Uni")];

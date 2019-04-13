@@ -1,6 +1,6 @@
 import { Firm } from "./Firm";
 import { Gender } from "../core/Gender";
-import {IStringable} from "../interface/IStringable";
+import { IStringable } from "../interface/IStringable";
 
 export class Contact implements IStringable {
   constructor(

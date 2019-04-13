@@ -6,7 +6,7 @@ import { Field } from "../../../../models/ua/Field";
 export class FieldMock implements IMock {
   get<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "ua/field/1":
         mockObj = <T> new Field(1, "Mécanique");
@@ -30,7 +30,7 @@ export class FieldMock implements IMock {
 
   getAll<T>(resource: string, options?: IRequestOptions): IRestResponse<T[]> | null {
     let mockObj: T[] | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "ua/field":
         mockObj = <T[]> [ <T> new Field(1, "Mécanique"), new Field(2, "Web"), new Field(3, "Réseau"), new Field(4, "Télécommunication")];

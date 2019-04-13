@@ -4,14 +4,14 @@ import { MockResponse } from "../MockClient";
 
 export class FactureTypeMock implements IMock {
   get<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
-    let mockObj: T | null = null;
-    let status: number = 500;
+    const mockObj: T | null = null;
+    const status = 500;
     return null;
   }
 
   getAll<T>(resource: string, options?: IRequestOptions): IRestResponse<T[]> | null {
     let mockObj: T[] | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "treso/facture-types" :
         mockObj = <T[]> [< T | string> "proforma", "acompte", "intermediaire", "solde"];

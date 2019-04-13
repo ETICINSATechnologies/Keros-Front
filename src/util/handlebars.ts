@@ -57,10 +57,10 @@ export default handlebars({
       return "";
     },
     readonlyIf: function (condition: boolean) {
-      return condition ? 'readonly' : "";
+      return condition ? "readonly" : "";
     },
     disabledIf: function (condition: boolean) {
-      return condition ? 'disabled' : "";
+      return condition ? "disabled" : "";
     },
     gender: function (label: any) {
       return labelToName(label);

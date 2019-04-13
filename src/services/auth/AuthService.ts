@@ -24,7 +24,7 @@ export class AuthService extends BaseService {
       }
     ).catch(
       e => {
-        callback(e, null)
+        callback(e, null);
       }
     );
   }
