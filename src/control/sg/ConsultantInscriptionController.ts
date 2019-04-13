@@ -11,6 +11,8 @@ import { DocumentResponse } from "../../models/DocumentResponse";
 import HttpError from "../../util/httpError";
 import { AddressCreateRequest } from "../../models/core/AddressCreateRequest";
 import { ConsultantInscriptionCreateRequest } from "../../models/sg/ConsultantInscriptionCreateRequest";
+import { FileUploader } from "../../util/FileUploader";
+
 
 export class ConsultantInscriptionController {
 
@@ -147,7 +149,13 @@ export class ConsultantInscriptionController {
         addressRequest.countryId = parseInt(req.body.countryId);
         inscriptionRequest.address = addressRequest;
 
-        // TODO get documents from request
+        if (req.files !== undefined) {
+            inscriptionRequest.documentIdentity = FileUploader.obtainFileBase64(req.files, "documentIdentity");
+            inscriptionRequest.documentResidencePermit = FileUploader.obtainFileBase64(req.files, "documentResidencePermit");
+            inscriptionRequest.documentRib = FileUploader.obtainFileBase64(req.files, "documentRib");
+            inscriptionRequest.documentScolarityCertificate = FileUploader.obtainFileBase64(req.files, "documentScolarityCertificate");
+            inscriptionRequest.documentVitaleCard = FileUploader.obtainFileBase64(req.files, "documentVitaleCard");
+        }
 
         if (id) {
             ConsultantInscriptionService.update(id, inscriptionRequest, function (err) {
