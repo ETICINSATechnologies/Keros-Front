@@ -1,0 +1,187 @@
+<body class="hold-transition skin-green fixed sidebar-mini">
+<div class="wrapper">
+    {{> template/header}}
+    {{> template/sidebar}}
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                {{#if consultant}}Fiche Inscription consultant{{else}}Nouvelle Inscription consultant{{/if}}
+            </h1>
+            {{> breadcrumb action=action tab="RH" pathnew="Inscriptions consultants,Nouvelle inscription consultant" pathview=(concat "Inscriptions consultants," (concat inscription.lastName (concat " " inscription.firstName))) pathedit=(concat "Inscriptions consultants,Edition " (concat inscription.lastName (concat " " inscription.firstName))) }}
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <section class="content">
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">
+                                    Informations  {{#if inscription}}inscription consultant n°{{inscription.id}}{{/if}}
+                                </h3>
+                            </div>
+                            <form role="form" method="post" action="/sg/consultant-inscription/postform">
+                                {{#if inscription}}<input type="text" id="id" name="id" value="{{inscription.id}}" hidden>{{/if}}
+                                <div class="box-body row">
+                                    <div class="col-md-6 form-group">
+                                        <label for="lastName">Nom</label>
+                                        <input type="text" class="form-control" id="lastName" name="lastName" value="{{inscription.lastName}}" placeholder="Entrez le nom" required {{readonlyIf (eq action "view")}}>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label for="firstName">Prénom</label>
+                                        <input type="text" class="form-control" id="firstName" name="firstName" value="{{inscription.firstName}}" placeholder="Entrez le prénom" required {{readonlyIf (eq action "view")}}>
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                        <label for="nationalityId">Pays de nationalité</label>
+                                        <select class="form-control" id="nationalityId" name="nationalityId" required {{readonlyIf
+                                                (eq action "view")}} {{disabledIf (eq action "view")}}>
+                                            {{#each countries}}
+                                                <option value="{{id}}" {{selected id @root.inscription.nationality.id}}>{{label}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-6 form-group">
+                                        <label for="socialSecurityNumber">Numéro de sécurité sociale</label>
+                                        <input type="text" class="form-control" id="socialSecurityNumber" name="socialSecurityNumber" value="{{inscription.socialSecurityNumber}}" placeholder="Entrez le numéro de sécurité sociale" required {{readonlyIf (eq action "view")}}>
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" class="form-control" id="email" name="email" value="{{inscription.email}}" placeholder="Entrez l'adresse mail" required {{readonlyIf (eq action "view")}}>
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                        <label for="phoneNumber">Téléphone</label>
+                                        <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" value="{{inscription.phoneNumber}}"
+                                               placeholder="Entrez le numéro de téléphone" {{readonlyIf (eq action "view")}}
+                                               pattern=".{8,16}"
+                                               oninvalid="this.setCustomValidity('Le numéro de téléphone doit contenir entre 8 et 16 chiffres')"
+                                               oninput="this.setCustomValidity(' ')" onchange="this.setCustomValidity('')">
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                        <label for="departmentId">Département</label>
+                                        <select class="form-control" id="departmentId" name="departmentId" {{readonlyIf
+                                                (eq action "view")}} {{disabledIf (eq action "view")}}>
+                                            <option></option>
+                                            {{#each departments}}
+                                                <option value="{{id}}" {{selected id @root.inscription.department.id}}>{{label}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                        <label for="outYear">Année de fin d'études</label>
+                                        <input type="number" min="2019" max="2030" step="1" class="form-control" id="outYear"
+                                               name="outYear" value="{{inscription.outYear}}"
+                                            {{readonlyIf (eq action "view")}}>
+                                    </div>
+                                    <h4 class="col-md-12 box-title">
+                                        Adresse
+                                    </h4>
+                                    <div class="col-md-12 form-group">
+                                        <label for="line1">Ligne 1</label>
+                                        <input type="string" class="form-control" id="line1" name="line1"
+                                               value="{{inscription.address.line1}}" placeholder="Entrez l'adresse 1" required {{readonlyIf (eq action "view")}}>
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <label for="line2">Ligne 2</label>
+                                        <input type="string" class="form-control" id="line2" name="line2"
+                                               value="{{inscription.address.line2}}" placeholder="Entrez l'adresse 2" {{readonlyIf (eq action "view")}}>
+                                    </div>
+                                    <div class="col-md-2 form-group">
+                                        <label for="postalCode">Code postal</label>
+                                        <input type="string" class="form-control" id="postalCode" name="postalCode"
+                                               value="{{inscription.address.postalCode}}" placeholder="Entrez le code postal" required {{readonlyIf (eq action "view")}}>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label for="city">Ville</label>
+                                        <input type="string" class="form-control" id="city" name="city"
+                                               value="{{inscription.address.city}}" placeholder="Entrez la ville" required {{readonlyIf (eq action "view")}}>
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                        <label for="countryId">Pays</label>
+                                        <select class="form-control" id="countryId" name="countryId" required {{readonlyIf
+                                                (eq action "view")}} {{disabledIf (eq action "view")}}>
+                                            {{#each countries}}
+                                                <option value="{{id}}" {{selected id @root.inscription.address.country.id}}>{{label}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                </div>
+                                {{#if (ne action "create")}}
+                                    {{#if inscription}}
+                                        <div id="view-documents">
+                                            <h4 class="col-md-12 box-title">
+                                                Documents
+                                            </h4>
+                                            <div class="col-md-12">
+                                                <div class="panel panel-default">
+                                                    <a data-toggle="collapse" data-parent="#faq" href="#col-documents" aria-expanded="false"
+                                                       aria-controls="elemmailshots">
+                                                        <div class="panel-heading" role="tab" id="documents" style="background-color:#F5F5F5;">
+                                                            <h5 class="panel-title">
+                                                                Afficher
+                                                            </h5>
+                                                        </div>
+                                                    </a>
+                                                    <div id="col-documents" class="panel-collapse collapse" role="tabpanel"
+                                                         aria-labelledby="documents">
+                                                        <div class="panel-body">
+                                                            <div class="col-md-3">
+                                                                <b>Titre du document</b>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <b>Publiposter</b>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <b>Upload VF</b>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <b>Download VF</b>
+                                                            </div>
+                                                        </div>
+                                                        {{#each inscription.documents}}
+                                                            <div class="panel-body">
+                                                                <div class="col-md-3">
+                                                                    {{name}}
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    {{#if isTemplatable}}
+                                                                        <a href="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{id}}/generate" target="_blank">
+                                                                            <i style="font-size: 2em;" class="fa fa-download"></i>
+                                                                        </a>
+                                                                    {{/if}}
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <form action="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{id}}" method="post" enctype="multipart/form-data">
+                                                                        <input type="file" name="file">
+                                                                        <button type="submit" formmethod="post" formaction="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{id}}" class="btn btn-primary btn-sm" style="margin-top: 5%">Submit</button>
+                                                                    </form>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    {{#if isUploaded}}
+                                                                        <a href="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{id}}" target="_blank">
+                                                                            <i style="font-size: 2em;" class="fa fa-download"></i>
+                                                                        </a>
+                                                                    {{/if}}
+                                                                </div>
+                                                            </div>
+                                                        {{/each}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {{/if}}
+                                {{/if}}
+                                <div class="box-footer">
+                                    <a href="/sg/consultant-inscription"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button></a>
+                                    {{> formButtons action=action origin="/sg/consultant-inscription" id=inscription.id}}
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </div>
+    {{> template/footer}}
+</div>
+{{> template/scripts}}
+</body>

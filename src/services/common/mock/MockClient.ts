@@ -20,6 +20,7 @@ import { FactureTypeMock } from "./facture/FactureTypeMock";
 import { BulletinVersementMock } from "./bulletinVersement/BulletinVersementMock";
 import { MemberInscriptionMock } from "./inscriptions/MemberInscriptionMock";
 import { PoleMock } from "./pole/PoleMock";
+import { ConsultantInscriptionMock } from "./inscriptions/ConsultantInscriptionMock";
 
 const MOCKS: IMock[] = [
   new AuthMock(),
@@ -40,6 +41,7 @@ const MOCKS: IMock[] = [
   new FactureTypeMock(),
   new BulletinVersementMock(),
   new MemberInscriptionMock(),
+  new ConsultantInscriptionMock(),
   new PoleMock()
 ];
 

@@ -78,7 +78,7 @@ export class Launcher {
         this.app.use(cookieParser("156daf75-d51b-4918-a1b5-e158126b0cbd"));
 
         // mount file uploader middleware
-        this.app.use(fileUpload);
+        this.app.use(fileUpload());
 
         this.app.use(httpContext.middleware);
 
