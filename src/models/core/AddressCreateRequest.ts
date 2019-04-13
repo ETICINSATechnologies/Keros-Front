@@ -1,4 +1,4 @@
-import {IStringable} from "../interface/IStringable";
+import { IStringable } from "../interface/IStringable";
 
 export class AddressCreateRequest implements IStringable {
   constructor(

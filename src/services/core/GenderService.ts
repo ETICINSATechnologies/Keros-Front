@@ -1,11 +1,11 @@
-import {IRestResponse} from "typed-rest-client/RestClient";
-import {Gender} from "../../models/core/Gender";
-import {BaseService} from "../common/BaseService";
+import { IRestResponse } from "typed-rest-client/RestClient";
+import { Gender } from "../../models/core/Gender";
+import { BaseService } from "../common/BaseService";
 import * as winston from "winston";
 
 export class GenderService extends BaseService {
   private static cacheGendersValues: Gender[] | null = null;
-  private static cacheGendersExpires: number = 0;
+  private static cacheGendersExpires = 0;
 
   static getAllGenders(callback: (err: any, result: Gender[] | null) => void): void {
     if (Date.now() < this.cacheGendersExpires) {

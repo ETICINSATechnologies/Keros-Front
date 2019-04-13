@@ -78,22 +78,23 @@ export class StudyService extends BaseService {
       );
     }
 
-  static getOnGoingStudiesForConnectedUser(callback:(err:any,result:Page<Study> | null, numberStudies: number)=>void): void{
-    let pageOnGoingStudies : Page<Study>;
+  static getOnGoingStudiesForConnectedUser(callback: (err: any, result: Page<Study> | null, numberStudies: number) => void): void {
+    let pageOnGoingStudies: Page<Study>;
     let nbStudies = 0;
-    this.getAllStudiesForConnectedUser(function(err, page:Page<Study> | null){
-      if(err){
+    this.getAllStudiesForConnectedUser(function(err, page: Page<Study> | null) {
+      if (err) {
         return err;
       }
-      if(page){
+      if (page) {
         pageOnGoingStudies = new Page<Study>();
         pageOnGoingStudies.meta = page.meta;
         pageOnGoingStudies.content = [];
-        if(page.content){
-          page.content.forEach(function(study: any, index: number){
-            if(study.status.id === 1){
-              if(pageOnGoingStudies.content)
+        if (page.content) {
+          page.content.forEach(function(study: any, index: number) {
+            if (study.status.id === 1) {
+              if (pageOnGoingStudies.content) {
                 pageOnGoingStudies.content.push(study);
+              }
             }
           });
         }

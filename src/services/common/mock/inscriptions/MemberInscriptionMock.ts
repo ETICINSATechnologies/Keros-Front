@@ -15,7 +15,7 @@ import { DocumentResponse } from "../../../../models/DocumentResponse";
 export class MemberInscriptionMock implements IMock {
   create<T>(resource: string, resources: any, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;
-    let status: number = 500;
+    let status = 500;
     if (resource.match(/document/)) {
       status = 200;
       return new MockResponse(null, status);
@@ -30,7 +30,7 @@ export class MemberInscriptionMock implements IMock {
   }
   update<T>(resource: string, resources: any, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "sg/membre-inscription/1" :
         mockObj = <T> new MemberInscription(1, resources["firstName"], resources["lastName"], new Department(resources["departmentId"], "TC"), resources["email"], resources["phoneNumber"], resources["outYear"], new Country(resources["nationalityId"], "France"), new Pole(resources["wantedPoleId"], "SI", "Systèmes d'Informations"), resources["address"]);
@@ -45,7 +45,7 @@ export class MemberInscriptionMock implements IMock {
     return null;
   }
   del<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "sg/membre-inscription/1" :
         status = 204;
@@ -60,7 +60,7 @@ export class MemberInscriptionMock implements IMock {
   }
   get<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;
-    let status: number = 500;
+    let status = 500;
     if (resource.match(/document\/3/)) {
       if (resource.match(/inscription\/2/)) {
         mockObj = <T> new DocumentResponse("http://keros-api-dev.etic-insa.com/generated/87c8d206-e4d8-4c0c-973f-f067026b498b");
@@ -93,7 +93,7 @@ export class MemberInscriptionMock implements IMock {
   }
   getAll<T>(resource: string, options?: IRequestOptions): IRestResponse<T[]> | null {
     let mockObj: T[] | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "sg/membre-inscription" :
         mockObj = <T[]> [new MemberInscription(1, "Michel", "Bienheureux", new Department(3, "GCU", "Génie Civil et Urbanisme"), "michel.bientavu@gmail.com", "0676287201", 2021, new Country(1, "France"), new Pole(2, "UA", "Unité d'affaires"), new Address(34, "40 Bd d'Elrond", undefined, "83800", "Foncombe", new Country(45, "Terre du Milieu"))),

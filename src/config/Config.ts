@@ -15,13 +15,13 @@ export class Config {
     const nodeEnv = process.env["NODE_ENV"];
     switch (nodeEnv) {
       case "mock":
-        this.activeConfig = require('../../../.deploy/mock-config.json');
+        this.activeConfig = require("../../../.deploy/mock-config.json");
         break;
       case "testing":
-        this.activeConfig = require('../../../.deploy/testing-config.json');
+        this.activeConfig = require("../../../.deploy/testing-config.json");
         break;
       default:
-        this.activeConfig = require('../../../config.json');
+        this.activeConfig = require("../../../config.json");
         break;
     }
 
@@ -32,7 +32,7 @@ export class Config {
           colorize: true
         }),
         new winston.transports.File({
-          filename: __dirname + '/../../../logs/app.log',
+          filename: __dirname + "/../../../logs/app.log",
           timestamp: true,
           maxsize: 2048
         })

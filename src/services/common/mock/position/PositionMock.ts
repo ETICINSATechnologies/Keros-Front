@@ -7,7 +7,7 @@ import { Pole } from "../../../../models/core/Pole";
 export class PositionMock implements IMock {
   get<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "core/position/1":
         mockObj = <T>new Position(1, "Président(e)", 2018, true, new Pole(1, "RH", "Ressources Humaines"));
@@ -51,7 +51,7 @@ export class PositionMock implements IMock {
 
   getAll<T>(resource: string, options?: IRequestOptions): IRestResponse<T[]> | null {
     let mockObj: T[] | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "core/position":
         mockObj = <T[]>[<T>new Position(1, "Président(e)", 2018, true, new Pole(1, "RH", "Ressources Humaines")), new Position(2, "Vice-Président(e)", 2018, true, new Pole(1, "RH", "Ressources Humaines")), new Position(3, "Secretaire Générale", 2018, true, new Pole(1, "RH", "Ressources Humaines")), new Position(4, "Responsable SI", 2018, true, new Pole(2, "SI", "Système d'informations")), new Position(5, "Senior SI", 2018, true, new Pole(2, "SI", "Système d'informations")), new Position(6, "Junior SI", 2018, true, new Pole(2, "SI", "Système d'informations")), new Position(7, "Chargé d'affaire", 2018, true, new Pole(3, "UA", "Unité d'affaires")), new Position(8, "Responsable Performance", 2018, true, new Pole(4, "PF", "Performance")), new Position(9, "Trésorier(e)", 2018, true, new Pole(5, "TR", "Trésorerie"))];

@@ -20,7 +20,7 @@ export class DashboardController {
         studies: page,
         nbOngoingStudies : nbStudies,
       };
-      res.render("core/dashboardStudies",options);
+      res.render("core/dashboardStudies", options);
     });
   }
 

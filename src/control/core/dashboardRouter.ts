@@ -14,8 +14,8 @@ export function dashboardRouter(): Router {
   const router: Router = Router();
   secureRouter(router);
 
-  //router.get("/dashboard", indexController.getDashboard);
-  //router.get("", indexController.getDashboard);
+  // router.get("/dashboard", indexController.getDashboard);
+  // router.get("", indexController.getDashboard);
   router.get("", indexController.viewStudiesOnDashboard);
   router.get("/dashboard", indexController.viewStudiesOnDashboard);
   return router;

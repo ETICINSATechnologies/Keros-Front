@@ -23,10 +23,10 @@ export class LoginController {
    * Try to authenticate the user with the given credentials
    */
   public login(req: Request, res: Response, next: NextFunction) {
-    let username = req.body.username;
-    let password = req.body.password;
+    const username = req.body.username;
+    const password = req.body.password;
 
-    let request = new LoginRequest(username, password);
+    const request = new LoginRequest(username, password);
     AuthService.login(request, function (err: any, response: LoginResponse | null) {
       if (err) {
         if (err === 401) {
@@ -42,7 +42,7 @@ export class LoginController {
           return next(new Error("Connection échouée"));
         }
 
-        let token = response.token;
+        const token = response.token;
         httpContext.set("token", token);
         MemberService.getConnectedMember(function (err: any, response: Member | null) {
           if (err) {

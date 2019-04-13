@@ -6,7 +6,7 @@ import { FirmType } from "../../../../models/ua/FirmType";
 export class FirmTypeMock implements IMock {
   get<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "ua/firm-type/1":
         mockObj = <T> new FirmType(1, "TPE");
@@ -38,7 +38,7 @@ export class FirmTypeMock implements IMock {
 
   getAll<T>(resource: string, options?: IRequestOptions): IRestResponse<T[]> | null {
     let mockObj: T[] | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "ua/firm-type":
         mockObj = <T[]> [ <T> new FirmType(1, "TPE"), new FirmType(2, "PME/PMI"), new FirmType(3, "GE"), new FirmType(4, "SARL"), new FirmType(5, "SA"), new FirmType(6, "SAS")];

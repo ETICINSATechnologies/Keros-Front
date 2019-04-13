@@ -6,7 +6,7 @@ import * as winston from "winston";
 export class PoleService extends BaseService {
 
   private static cachePolesValues: Pole[] | null = null;
-  private static cachePolesExpires: number = 0;
+  private static cachePolesExpires = 0;
 
   static getAllPoles(callback: (err: any, result: Pole[] | null) => void): void {
     if (Date.now() < this.cachePolesExpires) {

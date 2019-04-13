@@ -1,12 +1,12 @@
-import {IRestResponse} from "typed-rest-client/RestClient";
-import {BaseService} from "../common/BaseService";
-import {Provenance} from "../../models/ua/Provenance";
+import { IRestResponse } from "typed-rest-client/RestClient";
+import { BaseService } from "../common/BaseService";
+import { Provenance } from "../../models/ua/Provenance";
 import * as winston from "winston";
 
 export class ProvenanceService extends BaseService {
 
   private static cacheProvenancesValues: Provenance[] | null = null;
-  private static cacheProvenancesExpires: number = 0;
+  private static cacheProvenancesExpires = 0;
 
   static getAllProvenances(callback: (err: any, result: Provenance[] | null) => void): void {
     if (Date.now() < this.cacheProvenancesExpires) {

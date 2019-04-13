@@ -1,14 +1,14 @@
-import {NextFunction, Request, Response} from "express";
-import {FirmService} from "../../services/ua/FirmService";
-import {Firm} from "../../models/ua/Firm";
+import { NextFunction, Request, Response } from "express";
+import { FirmService } from "../../services/ua/FirmService";
+import { Firm } from "../../models/ua/Firm";
 import * as winston from "winston";
-import {Page} from "../../models/core/Page";
-import {FirmCreateRequest} from "../../models/ua/FirmCreateRequest";
-import {FirmTypeService} from "../../services/ua/FirmTypeService";
-import {FirmType} from "../../models/ua/FirmType";
-import {CountryService} from "../../services/core/CountryService";
-import {Country} from "../../models/core/Country";
-import {AddressCreateRequest} from "../../models/core/AddressCreateRequest";
+import { Page } from "../../models/core/Page";
+import { FirmCreateRequest } from "../../models/ua/FirmCreateRequest";
+import { FirmTypeService } from "../../services/ua/FirmTypeService";
+import { FirmType } from "../../models/ua/FirmType";
+import { CountryService } from "../../services/core/CountryService";
+import { Country } from "../../models/core/Country";
+import { AddressCreateRequest } from "../../models/core/AddressCreateRequest";
 
 export class FirmController {
   public viewFirms(req: Request, res: Response, next: NextFunction) {
@@ -41,7 +41,7 @@ export class FirmController {
   }
 
   public viewFirm(req: Request, res: Response, next: NextFunction) {
-    let id = req.params.id;
+    const id = req.params.id;
     winston.info("Getting Firm for id " + id);
     FirmService.getFirm(id, function (err1, firm: Firm | null) {
       FirmTypeService.getAllFirmTypes(function (err2, firmTypes: FirmType[] | null) {
@@ -62,7 +62,7 @@ export class FirmController {
   }
 
   public updateFirm(req: Request, res: Response, next: NextFunction) {
-    let id = req.params.id;
+    const id = req.params.id;
     winston.info("Updating Firm for id " + id);
     FirmService.getFirm(id, function (err1, firm: Firm | null) {
       FirmTypeService.getAllFirmTypes(function (err2, firmTypes: FirmType[] | null) {
@@ -116,7 +116,7 @@ export class FirmController {
   }
 
   public deleteFirm(req: Request, res: Response, next: NextFunction) {
-    let id = req.params.id;
+    const id = req.params.id;
     FirmService.delete(id, function (err) {
       if (err) {
         return next(err);

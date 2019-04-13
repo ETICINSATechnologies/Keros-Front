@@ -6,7 +6,7 @@ import { Status } from "../../../../models/ua/Status";
 export class StatusMock implements IMock {
   get<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "ua/status/1":
         mockObj = <T> new Status(1, "En cours");
@@ -30,7 +30,7 @@ export class StatusMock implements IMock {
 
   getAll<T>(resource: string, options?: IRequestOptions): IRestResponse<T[]> | null {
     let mockObj: T[] | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "ua/status":
         mockObj = <T[]> [ <T> new Status(1, "En cours"), new Status(2, "A faire"), new Status(3, "A valider"), new Status(4, "Finie")];

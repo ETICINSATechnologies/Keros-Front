@@ -1,4 +1,4 @@
-import {AddressCreateRequest} from "../core/AddressCreateRequest";
+import { AddressCreateRequest } from "../core/AddressCreateRequest";
 
 export class FirmCreateRequest {
   constructor(

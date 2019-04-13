@@ -1,4 +1,4 @@
-import {AddressCreateRequest} from "./AddressCreateRequest";
+import { AddressCreateRequest } from "./AddressCreateRequest";
 import { PositionRequest } from "./PositionRequest";
 
 export class MemberCreateRequest {

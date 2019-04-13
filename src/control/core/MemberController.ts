@@ -1,17 +1,17 @@
-import {NextFunction, Request, Response} from "express";
-import {MemberService} from "../../services/core/MemberService";
-import {Member} from "../../models/core/Member";
-import {MemberCreateRequest} from "../../models/core/MemberCreateRequest";
+import { NextFunction, Request, Response } from "express";
+import { MemberService } from "../../services/core/MemberService";
+import { Member } from "../../models/core/Member";
+import { MemberCreateRequest } from "../../models/core/MemberCreateRequest";
 import * as winston from "winston";
-import {Page} from "../../models/core/Page";
-import {DepartmentService} from "../../services/core/DepartmentService";
-import {Department} from "../../models/core/Department";
-import {GenderService} from "../../services/core/GenderService";
-import {Gender} from "../../models/core/Gender";
-import {CountryService} from "../../services/core/CountryService";
-import {Country} from "../../models/core/Country";
-import {PositionService} from "../../services/core/PositionService";
-import {AddressCreateRequest} from "../../models/core/AddressCreateRequest";
+import { Page } from "../../models/core/Page";
+import { DepartmentService } from "../../services/core/DepartmentService";
+import { Department } from "../../models/core/Department";
+import { GenderService } from "../../services/core/GenderService";
+import { Gender } from "../../models/core/Gender";
+import { CountryService } from "../../services/core/CountryService";
+import { Country } from "../../models/core/Country";
+import { PositionService } from "../../services/core/PositionService";
+import { AddressCreateRequest } from "../../models/core/AddressCreateRequest";
 import * as httpContext from "express-http-context";
 import { PositionRequest } from "../../models/core/PositionRequest";
 
@@ -54,7 +54,7 @@ export class MemberController {
   }
 
   public viewMember(req: Request, res: Response, next: NextFunction) {
-    let id = req.params.id;
+    const id = req.params.id;
     MemberService.getMember(id, function (err1, member: Member | null) {
       DepartmentService.getAllDepartments(function (err2, departments: Department[] | null) {
         GenderService.getAllGenders(function (err3, genders: Gender[] | null) {
@@ -82,7 +82,7 @@ export class MemberController {
   }
 
   public updateMember(req: Request, res: Response, next: NextFunction) {
-    let id = req.params.id;
+    const id = req.params.id;
     MemberService.getMember(id, function (err1, member: Member | null) {
       DepartmentService.getAllDepartments(function (err2, departments: Department[] | null) {
         GenderService.getAllGenders(function (err3, genders: Gender[] | null) {
@@ -112,7 +112,7 @@ export class MemberController {
   public postMemberForm(req: Request, res: Response, next: NextFunction) {
     const userId = parseInt(req.body.id);
 
-    let currentUserId = httpContext.get("connectedUser").id;
+    const currentUserId = httpContext.get("connectedUser").id;
 
     const userRequest = new MemberCreateRequest();
     userRequest.lastName = req.body.lastName;

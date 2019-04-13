@@ -1,12 +1,12 @@
-import {IRestResponse} from "typed-rest-client/RestClient";
-import {BaseService} from "../common/BaseService";
-import {FirmType} from "../../models/ua/FirmType";
+import { IRestResponse } from "typed-rest-client/RestClient";
+import { BaseService } from "../common/BaseService";
+import { FirmType } from "../../models/ua/FirmType";
 import * as winston from "winston";
 
 export class FirmTypeService extends BaseService {
 
   private static cacheFirmTypesValues: FirmType[] | null = null;
-  private static cacheFirmTypesExpires: number = 0;
+  private static cacheFirmTypesExpires = 0;
 
   static getAllFirmTypes(callback: (err: any, result: FirmType[] | null) => void): void {
     if (Date.now() < this.cacheFirmTypesExpires) {

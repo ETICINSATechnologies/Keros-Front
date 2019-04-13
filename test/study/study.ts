@@ -1,7 +1,7 @@
-import {JSDOM} from "jsdom";
-import {expect} from "chai";
-import {defaultCookies, request} from "../helpers";
-import {Response} from "supertest";
+import { JSDOM } from "jsdom";
+import { expect } from "chai";
+import { defaultCookies, request } from "../helpers";
+import { Response } from "supertest";
 import jquery = require("jquery");
 
 describe("Studies tests", function () {
@@ -9,7 +9,7 @@ describe("Studies tests", function () {
     request
       .get("/ua/study")
       .set("Accept", "text/html")
-      .set('Cookie', defaultCookies())
+      .set("Cookie", defaultCookies())
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(200)
       .then((resp: Response) => {
@@ -27,7 +27,7 @@ describe("Studies tests", function () {
     request
       .get("/ua/study/1")
       .set("Accept", "text/html")
-      .set('Cookie', defaultCookies())
+      .set("Cookie", defaultCookies())
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(200)
       .then((resp: Response) => {
@@ -45,7 +45,7 @@ describe("Studies tests", function () {
     request
       .get("/ua/study/create")
       .set("Accept", "text/html")
-      .set('Cookie', defaultCookies())
+      .set("Cookie", defaultCookies())
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(200)
       .then((resp: Response) => {
@@ -63,7 +63,7 @@ describe("Studies tests", function () {
     request
       .get("/ua/study/update/1")
       .set("Accept", "text/html")
-      .set('Cookie', defaultCookies())
+      .set("Cookie", defaultCookies())
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(200)
       .then((resp: Response) => {

@@ -1,12 +1,12 @@
-import {IRestResponse} from "typed-rest-client/RestClient";
-import {BaseService} from "../common/BaseService";
-import {Country} from "../../models/core/Country";
+import { IRestResponse } from "typed-rest-client/RestClient";
+import { BaseService } from "../common/BaseService";
+import { Country } from "../../models/core/Country";
 import * as winston from "winston";
 
 export class CountryService extends BaseService {
 
   private static cacheCountriesValues: Country[] | null = null;
-  private static cacheCountriesExpires: number = 0;
+  private static cacheCountriesExpires = 0;
 
   static getAllCountries(callback: (err: any, result: Country[] | null) => void): void {
     if (Date.now() < this.cacheCountriesExpires) {

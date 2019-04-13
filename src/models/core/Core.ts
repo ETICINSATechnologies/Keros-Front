@@ -1,1 +1,1 @@
-export enum Gender {H, F, A, I};
+export enum Gender {H, F, A, I}

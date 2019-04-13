@@ -9,7 +9,7 @@ export class AuthMock implements IMock {
 
   create<T>(resource: string, resources: any, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "auth/login":
         if (resources.username === "username" && resources.password === "password") {

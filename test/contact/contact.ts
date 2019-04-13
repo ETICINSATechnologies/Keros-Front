@@ -1,6 +1,6 @@
 import { JSDOM } from "jsdom";
 import { expect } from "chai";
-import {defaultCookies, request} from "../helpers";
+import { defaultCookies, request } from "../helpers";
 import jquery = require("jquery");
 import { Response } from "supertest";
 
@@ -9,7 +9,7 @@ describe("Contact tests", function () {
     request
       .get("/ua/contact")
       .set("Accept", "text/html")
-      .set('Cookie', defaultCookies())
+      .set("Cookie", defaultCookies())
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(200)
       .then((resp: Response) => {
@@ -26,7 +26,7 @@ describe("Contact tests", function () {
     request
       .get("/ua/contact/1")
       .set("Accept", "text/html")
-      .set('Cookie', defaultCookies())
+      .set("Cookie", defaultCookies())
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(200)
       .then((resp: Response) => {
@@ -43,7 +43,7 @@ describe("Contact tests", function () {
     request
       .get("/ua/contact/create")
       .set("Accept", "text/html")
-      .set('Cookie', defaultCookies())
+      .set("Cookie", defaultCookies())
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(200)
       .then((resp: Response) => {
@@ -60,7 +60,7 @@ describe("Contact tests", function () {
     request
       .get("/ua/contact/update/1")
       .set("Accept", "text/html")
-      .set('Cookie', defaultCookies())
+      .set("Cookie", defaultCookies())
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(200)
       .then((resp: Response) => {

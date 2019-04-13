@@ -1,8 +1,8 @@
-import {IRestResponse} from "typed-rest-client/RestClient";
-import {Firm} from "../../models/ua/Firm";
-import {BaseService} from "../common/BaseService";
-import {Page} from "../../models/core/Page";
-import {FirmCreateRequest} from "../../models/ua/FirmCreateRequest";
+import { IRestResponse } from "typed-rest-client/RestClient";
+import { Firm } from "../../models/ua/Firm";
+import { BaseService } from "../common/BaseService";
+import { Page } from "../../models/core/Page";
+import { FirmCreateRequest } from "../../models/ua/FirmCreateRequest";
 import * as winston from "winston";
 import { queryStringify } from "../../util/Helper";
 

@@ -23,7 +23,7 @@ import { DocumentResponse } from "../../../../models/DocumentResponse";
 export class FactureMock implements IMock {
   create<T>(resource: string, resources: any, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;
-    let status: number = 500;
+    let status = 500;
     if (resource.match(/treso\/facture\//)) {
       if (resource.match(/validate-ua/)) {
         if (resource.match(/2/)) {
@@ -51,7 +51,7 @@ export class FactureMock implements IMock {
   }
 
   del<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "treso/facture/1":
         status = 204;
@@ -67,7 +67,7 @@ export class FactureMock implements IMock {
 
   get<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;
-    let status: number = 500;
+    let status = 500;
     if (resource.match(/generateDocument/)) {
       if (resource.match(/1/)) {
         mockObj = <T> new DocumentResponse("http://keros-api-dev.etic-insa.com/api/v1/core/document/a946092b-7387-4f42-bcd0-d4e43ccab89e");
@@ -94,7 +94,7 @@ export class FactureMock implements IMock {
 
   getAll<T>(resource: string, options?: IRequestOptions): IRestResponse<T[]> | null {
     let mockObj: T[] | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "treso/facture":
         mockObj = null;
@@ -111,7 +111,7 @@ export class FactureMock implements IMock {
 
   update<T>(resource: string, resources: any, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;
-    let status: number = 500;
+    let status = 500;
     switch (resource) {
       case "treso/facture/1":
         mockObj = <T> new Facture(1, "numero1", new Address(1, "13 rue des Canards", "appt 312", "Tourcoing", "59600", new Country(5, "France")), "La Ferme à Dédé", "Jean Aimmare", "jeanaimarre@lafeermeadede.fr", new Study(1, "Création de Keros", "Le site web est un ERP", new Field(2, "Web"), new Status(1, "En cours"), new Provenance(4, "Phoning"), "2018-08-27", "2019-01-01", 5000, 2000, 1000, 200, 0, "", new Firm(1, "99999999", "La boucherie du Léman", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), new FirmType(2, "PME/TPE")), [new Contact(1, "Jimmy", "Neutron", new Gender(3, "A"), undefined, "jimmy@test.com", "0450202122", "+33620547064", "Stagiaire"), new Contact(2, "José", "Bové", new Gender(4, "I"), undefined,  "votezjosé@test.com", "0405060708", "+33711121314", "PDG")], [new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A")), new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"))], [new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A")), new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"))], [new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A")), new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"))],  true), new FactureType("proforma"), "D’un montant de quatre mille quatre-vingt euros toutes taxes comprises (4080€ TTC), correspondant à la réalisation de 13 JEH", "réalisation du plus bel ERP jamais conçu", "2018-08-27", 15000, 20, 65101, "2019-09-25", "Parce que c'est notre projet ! (Keros bien sûr)", "2019-03-08", new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H")), true, "2019-03-08", new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H")), true, "2019-03-08", new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A")));
