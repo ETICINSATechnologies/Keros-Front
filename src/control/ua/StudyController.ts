@@ -57,10 +57,10 @@ export class StudyController {
                   if (err3) return next(err3);
                   if (err4) return next(err4);
                   const options = {
-                    fields: fields,
-                    status: status,
-                    firms: firms,
-                    provenances: provenances,
+                    fields,
+                    status,
+                    firms,
+                    provenances,
                     action: "create"
                   };
                   res.render("ua/study/viewStudy", options);
@@ -103,13 +103,13 @@ export class StudyController {
                         mailshots = 1;
                       }
                       const options = {
-                        study: study,
-                        fields: fields,
-                        status: status,
-                        firms: firms,
-                        provenances: provenances,
+                        study,
+                        fields,
+                        status,
+                        firms,
+                        provenances,
                         clientBaseUrl: Config.getClientBaseUrl(),
-                        mailshots: mailshots,
+                        mailshots,
                         action: "view"
                       };
                       res.render("ua/study/viewStudy", options);
@@ -136,12 +136,12 @@ export class StudyController {
                         if (err5) return next(err5);
                         if (err6) return next(err6);
                         const options = {
-                          study: study,
-                          fields: fields,
-                          status: status,
-                          firms: firms,
-                          memberShorts: memberShorts,
-                          provenances: provenances,
+                          study,
+                          fields,
+                          status,
+                          firms,
+                          memberShorts,
+                          provenances,
                           action: "update"
                         };
                         res.render("ua/study/viewStudy", options);

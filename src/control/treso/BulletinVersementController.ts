@@ -45,10 +45,10 @@ export class BulletinVersementController {
               if (err3) return next(err3);
               if (err4) return next(err4);
               options = {
-                selectedConsultant : selectedConsultant,
-                selectedStudy: selectedStudy,
-                studies: studies,
-                countries: countries,
+                selectedConsultant,
+                selectedStudy,
+                studies,
+                countries,
                 action: "create"
               };
               res.render("treso/bulletinVersement/viewBulletinVersement", options);
@@ -56,8 +56,8 @@ export class BulletinVersementController {
           });
         } else {
           options = {
-            studies: studies,
-            countries: countries,
+            studies,
+            countries,
             action: "create"
           };
           res.render("treso/bulletinVersement/viewBulletinVersement", options);
@@ -89,9 +89,9 @@ export class BulletinVersementController {
           if (err2) return next(err2);
           if (err3) return next(err3);
           const options = {
-            bulletin : bulletin,
-            studies: studies,
-            countries: countries,
+            bulletin,
+            studies,
+            countries,
             action: "view"
           };
           res.render("treso/bulletinVersement/viewBulletinVersement", options);
@@ -110,9 +110,9 @@ export class BulletinVersementController {
           if (err2) return next(err2);
           if (err3) return next(err3);
           const options = {
-            bulletin: bulletin,
-            studies: studies,
-            countries: countries,
+            bulletin,
+            studies,
+            countries,
             action: "update"
           };
           res.render("treso/bulletinVersement/viewBulletinVersement", options);

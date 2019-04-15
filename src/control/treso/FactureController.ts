@@ -45,19 +45,19 @@ export class FactureController {
             StudyService.getStudy(studyId, function (err4, studySelected: Study | null) {
               if (err4) return next(err4);
               options = {
-                studySelected: studySelected,
-                studies: studies,
-                countries: countries,
-                types: types,
+                studySelected,
+                studies,
+                countries,
+                types,
                 action: "create"
               };
               res.render("treso/facture/viewFacture", options);
             });
           } else {
             options = {
-              studies: studies,
-              countries: countries,
-              types: types,
+              studies,
+              countries,
+              types,
               action: "create"
             };
             res.render("treso/facture/viewFacture", options);
@@ -92,10 +92,10 @@ export class FactureController {
             if (err3) return next(err3);
             if (err4) return next(err4);
             const options = {
-              facture : facture,
-              studies: studies,
-              countries: countries,
-              types: types,
+              facture,
+              studies,
+              countries,
+              types,
               action: "view"
             };
             res.render("treso/facture/viewFacture", options);
@@ -117,10 +117,10 @@ export class FactureController {
             if (err3) return next(err3);
             if (err4) return next(err4);
             const options = {
-              facture: facture,
-              studies: studies,
-              countries: countries,
-              types: types,
+              facture,
+              studies,
+              countries,
+              types,
               action: "update"
             };
             res.render("treso/facture/viewFacture", options);

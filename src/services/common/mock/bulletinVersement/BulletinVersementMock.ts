@@ -40,7 +40,7 @@ export class BulletinVersementMock implements IMock {
     }
     switch (resource) {
       case "treso/payment-slip":
-        mockObj = <T> new BulletinVersement (0, resources["missionRecapNumber"], resources["consultantId"], resources["consultantName"],  resources["consultantSocialSecurityNumber"], resources["address"], resources["email"], new Study(), resources["clientName"], resources["projectLead"], resources["isTotalJEH"], resources["isStudyPaid"], resources["amountDescription"], "2019-03-15", new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A")), false, undefined, undefined, false, undefined, undefined);
+        mockObj = <T> new BulletinVersement (0, resources.missionRecapNumber, resources.consultantId, resources.consultantName,  resources.consultantSocialSecurityNumber, resources.address, resources.email, new Study(), resources.clientName, resources.projectLead, resources.isTotalJEH, resources.isStudyPaid, resources.amountDescription, "2019-03-15", new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A")), false, undefined, undefined, false, undefined, undefined);
         status = 201;
         winston.debug("BulletinVersement created with : " + JSON.stringify(resources));
         return new MockResponse(mockObj, status);

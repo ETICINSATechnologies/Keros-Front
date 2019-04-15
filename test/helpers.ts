@@ -1,6 +1,5 @@
 import { Launcher } from "../src/launcher";
 import * as supertest from "supertest";
-import { Response } from "supertest";
 
 export let request = supertest.agent(Launcher.bootstrap().app);
 
@@ -16,7 +15,7 @@ export class Cookie {
  * Returns the value of a cookie given it's name and the response
  * @returns {string | null} the value of the cookie if found, null if not
  */
-export function getCookie(resp: Response, cookieName: string): string | null {
+export function getCookie(resp: supertest.Response, cookieName: string): string | null {
   if (!resp.header["set-cookie"] || !resp.header["set-cookie"][0]) {
     return null;
   }

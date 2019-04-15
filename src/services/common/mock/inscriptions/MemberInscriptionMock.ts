@@ -22,7 +22,7 @@ export class MemberInscriptionMock implements IMock {
     }
     switch (resource) {
       case "sg/membre-inscription" :
-        mockObj = <T> new MemberInscription(0, resources["firstName"], resources["lastName"], new Department(resources["departmentId"], "TC"), resources["email"], resources["phoneNumber"], resources["outYear"], new Country(resources["nationalityId"], "France"), new Pole(resources["wantedPoleId"], "SI", "Systèmes d'Informations"), resources["address"]);
+        mockObj = <T> new MemberInscription(0, resources.firstName, resources.lastName, new Department(resources.departmentId, "TC"), resources.email, resources.phoneNumber, resources.outYear, new Country(resources.nationalityId, "France"), new Pole(resources.wantedPoleId, "SI", "Systèmes d'Informations"), resources.address);
         status = 201;
         return new MockResponse(mockObj, status);
     }
@@ -33,11 +33,11 @@ export class MemberInscriptionMock implements IMock {
     let status = 500;
     switch (resource) {
       case "sg/membre-inscription/1" :
-        mockObj = <T> new MemberInscription(1, resources["firstName"], resources["lastName"], new Department(resources["departmentId"], "TC"), resources["email"], resources["phoneNumber"], resources["outYear"], new Country(resources["nationalityId"], "France"), new Pole(resources["wantedPoleId"], "SI", "Systèmes d'Informations"), resources["address"]);
+        mockObj = <T> new MemberInscription(1, resources.firstName, resources.lastName, new Department(resources.departmentId, "TC"), resources.email, resources.phoneNumber, resources.outYear, new Country(resources.nationalityId, "France"), new Pole(resources.wantedPoleId, "SI", "Systèmes d'Informations"), resources.address);
         status = 200;
         return new MockResponse(mockObj, status);
       case "sg/membre-inscription/2" :
-        mockObj = <T> new MemberInscription(2, resources["firstName"], resources["lastName"], new Department(resources["departmentId"], "IF"), resources["email"], resources["phoneNumber"], resources["outYear"], new Country(resources["nationalityId"], "France"), new Pole(resources["wantedPoleId"], "SI", "Systèmes d'Informations"), resources["address"], [new Document(1, "Fiche d'inscription", true, false), new Document(2, "Pièce identité", false, false), new Document(4, "PDF quelconque", false, true)]);
+        mockObj = <T> new MemberInscription(2, resources.firstName, resources.lastName, new Department(resources.departmentId, "IF"), resources.email, resources.phoneNumber, resources.outYear, new Country(resources.nationalityId, "France"), new Pole(resources.wantedPoleId, "SI", "Systèmes d'Informations"), resources.address, [new Document(1, "Fiche d'inscription", true, false), new Document(2, "Pièce identité", false, false), new Document(4, "PDF quelconque", false, true)]);
         status = 200;
         return new MockResponse(mockObj, status);
 
