@@ -45,6 +45,10 @@ export class PositionMock implements IMock {
         mockObj = <T>new Position(9, "Trésorier(e)", 2018, true, new Pole(5, "TR", "Trésorerie"));
         status = 200;
         return new MockResponse(mockObj, status);
+      case "core/position/10" :
+        mockObj = <T>new Position(10, "Responsable UA", 2018, true, new Pole(3, "UA", "Unité d'affaires"));
+        status = 200;
+        return new MockResponse(mockObj, status);
     }
     return null;
   }

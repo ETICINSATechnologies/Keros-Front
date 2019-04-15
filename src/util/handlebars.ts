@@ -107,6 +107,69 @@ export default handlebars({
         }
         return b;
       });
+    },
+    isFromBoard (positions: Position[]) {
+      return positions.some(function(pos) {
+        let b = false;
+        if (pos.isBoard) {
+          b = pos.isBoard;
+        }
+        return b;
+      });
+    },
+    isFromRH (positions: Position[]) {
+      return positions.some(function(pos) {
+        let b = false;
+        if (pos.pole) {
+          b = 1 === pos.pole.id;
+        }
+        return b;
+      });
+    },
+    isFromDevCo (positions: Position[]) {
+      return positions.some(function(pos) {
+        let b = false;
+        if (pos.pole) {
+          b = 6 === pos.pole.id;
+        }
+        return b;
+      });
+    },
+    isFromTreso (positions: Position[]) {
+      return positions.some(function (pos) {
+        let b = false;
+        if (pos.pole) {
+          b = 5 === pos.pole.id;
+        }
+        return b;
+      });
+    },
+    isAdmin (positions: Position[]) {
+      return positions.some(function (pos) {
+        let b = false;
+        if (pos.id) {
+          b = 4 === pos.id;
+        }
+        return b;
+      });
+    },
+    isChadaff (positions: Position[]) {
+      return positions.some(function (pos) {
+        let b = false;
+        if (pos.id) {
+          b = 7 === pos.id;
+        }
+        return b;
+      });
+    },
+    isRespUa (positions: Position[]) {
+      return positions.some(function (pos) {
+        let b = false;
+        if (pos.id) {
+          b = 10 === pos.id;
+        }
+        return b;
+      });
     }
   }
 });
