@@ -146,29 +146,17 @@ export default handlebars({
     },
     isAdmin (positions: Position[]) {
       return positions.some(function (pos) {
-        let b = false;
-        if (pos.id) {
-          b = 4 === pos.id;
-        }
-        return b;
+        return 4 === pos.id;
       });
     },
     isChadaff (positions: Position[]) {
       return positions.some(function (pos) {
-        let b = false;
-        if (pos.id) {
-          b = 7 === pos.id;
-        }
-        return b;
+        return 7 === pos.id;
       });
     },
     isRespUa (positions: Position[]) {
       return positions.some(function (pos) {
-        let b = false;
-        if (pos.id) {
-          b = 10 === pos.id;
-        }
-        return b;
+        return 10 === pos.id;
       });
     }
   }
