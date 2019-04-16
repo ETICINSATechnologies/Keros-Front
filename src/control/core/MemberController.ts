@@ -217,12 +217,12 @@ export class MemberController {
               if (err4) return next(err4);
               if (err5) return next(err5);
               const options = {
-                member: member,
+                member,
                 page: "profile",
-                departments: departments,
+                departments,
                 gender: genders,
-                countries: countries,
-                positions: positions,
+                countries,
+                positions,
                 action: "update"
               };
               res.render("core/member/viewProfile", options);
