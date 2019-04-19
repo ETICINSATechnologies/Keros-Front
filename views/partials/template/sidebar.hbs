@@ -18,7 +18,7 @@
         </a>
       </li>
       <!-- UA -->
-      {{#if (or (isFromUa connectedUser.positions) (isFromBoard connectedUser.positions) (isFromPerf connectedUser.positions) (isFromDevCo connectedUser.positions) (isAdmin connectedUser.positions))}}
+      {{#if (or (isFromUa connectedUser.positions) (isFromPrez connectedUser.positions) (isFromPerf connectedUser.positions) (isFromDevCo connectedUser.positions) (isAdmin connectedUser.positions))}}
       <li class="treeview">
         <a href="#">
           <i class="fa fa-line-chart"></i> <span>Unité d'affaires</span>
@@ -35,7 +35,7 @@
       {{/if}}
 
       <!-- RH -->
-      {{#if (or (isFromRH connectedUser.positions) (isFromBoard connectedUser.positions) (isAdmin connectedUser.positions))}}
+      {{#if (or (isFromRH connectedUser.positions) (isFromPrez connectedUser.positions) (isAdmin connectedUser.positions))}}
         <li class="treeview">
         <a href="#">
           <i class="fa fa-male"></i> <span>Ressources Humaines</span>
@@ -59,7 +59,7 @@
       {{/if}}
 
       <!-- Treso -->
-      {{#if (or (isFromTreso connectedUser.positions) (isFromPerf connectedUser.positions) (isFromBoard connectedUser.positions) (isAdmin connectedUser.positions) (isRespUa connectedUser.positions) (isChadaff connectedUser.positions))}}
+      {{#if (or (isFromTreso connectedUser.positions) (isFromPerf connectedUser.positions) (isFromPrez connectedUser.positions) (isAdmin connectedUser.positions) (isRespUa connectedUser.positions) (isChadaff connectedUser.positions))}}
         <li class="treeview">
           <a href="#">
             <i class="fa fa-balance-scale"></i> <span>Trésorerie</span>

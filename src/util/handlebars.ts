@@ -103,7 +103,7 @@ export default handlebars({
       return positions.some(function(pos) {
         let b = false;
         if (pos.pole) {
-          b = 3 === pos.pole.id;
+          b = 9 === pos.pole.id;
         }
         return b;
       });
@@ -121,7 +121,7 @@ export default handlebars({
       return positions.some(function(pos) {
         let b = false;
         if (pos.pole) {
-          b = 1 === pos.pole.id;
+          b = 6 === pos.pole.id;
         }
         return b;
       });
@@ -130,7 +130,7 @@ export default handlebars({
       return positions.some(function(pos) {
         let b = false;
         if (pos.pole) {
-          b = 6 === pos.pole.id;
+          b = 3 === pos.pole.id;
         }
         return b;
       });
@@ -139,24 +139,33 @@ export default handlebars({
       return positions.some(function (pos) {
         let b = false;
         if (pos.pole) {
-          b = 5 === pos.pole.id;
+          b = 8 === pos.pole.id;
         }
         return b;
       });
     },
     isAdmin (positions: Position[]) {
       return positions.some(function (pos) {
-        return 4 === pos.id;
+        return 20 === pos.id;
       });
     },
     isChadaff (positions: Position[]) {
       return positions.some(function (pos) {
-        return 7 === pos.id;
+        return 3 === pos.id;
       });
     },
     isRespUa (positions: Position[]) {
       return positions.some(function (pos) {
-        return 10 === pos.id;
+        return 21 === pos.id;
+      });
+    },
+    isFromPrez (positions: Position[]) {
+      return positions.some(function(pos) {
+        let b = false;
+        if (pos.pole) {
+          b = 5 === pos.pole.id;
+        }
+        return b;
       });
     }
   }
