@@ -103,7 +103,67 @@ export default handlebars({
       return positions.some(function(pos) {
         let b = false;
         if (pos.pole) {
+          b = 9 === pos.pole.id;
+        }
+        return b;
+      });
+    },
+    isFromBoard (positions: Position[]) {
+      return positions.some(function(pos) {
+        let b = false;
+        if (pos.isBoard) {
+          b = pos.isBoard;
+        }
+        return b;
+      });
+    },
+    isFromRH (positions: Position[]) {
+      return positions.some(function(pos) {
+        let b = false;
+        if (pos.pole) {
+          b = 6 === pos.pole.id;
+        }
+        return b;
+      });
+    },
+    isFromDevCo (positions: Position[]) {
+      return positions.some(function(pos) {
+        let b = false;
+        if (pos.pole) {
           b = 3 === pos.pole.id;
+        }
+        return b;
+      });
+    },
+    isFromTreso (positions: Position[]) {
+      return positions.some(function (pos) {
+        let b = false;
+        if (pos.pole) {
+          b = 8 === pos.pole.id;
+        }
+        return b;
+      });
+    },
+    isAdmin (positions: Position[]) {
+      return positions.some(function (pos) {
+        return 20 === pos.id;
+      });
+    },
+    isChadaff (positions: Position[]) {
+      return positions.some(function (pos) {
+        return 3 === pos.id;
+      });
+    },
+    isRespUa (positions: Position[]) {
+      return positions.some(function (pos) {
+        return 21 === pos.id;
+      });
+    },
+    isFromPrez (positions: Position[]) {
+      return positions.some(function(pos) {
+        let b = false;
+        if (pos.pole) {
+          b = 5 === pos.pole.id;
         }
         return b;
       });

@@ -18,6 +18,7 @@
         </a>
       </li>
       <!-- UA -->
+      {{#if (or (isFromUa connectedUser.positions) (isFromPrez connectedUser.positions) (isFromPerf connectedUser.positions) (isFromDevCo connectedUser.positions) (isAdmin connectedUser.positions))}}
       <li class="treeview">
         <a href="#">
           <i class="fa fa-line-chart"></i> <span>Unité d'affaires</span>
@@ -31,9 +32,11 @@
           <li><a href="/ua/firm"><i class="fa fa-circle-o"></i> Sociétés</a></li>
           </ul>
       </li>
+      {{/if}}
 
       <!-- RH -->
-      <li class="treeview">
+      {{#if (or (isFromRH connectedUser.positions) (isFromPrez connectedUser.positions) (isAdmin connectedUser.positions))}}
+        <li class="treeview">
         <a href="#">
           <i class="fa fa-male"></i> <span>Ressources Humaines</span>
           <span class="pull-right-container">
@@ -52,21 +55,24 @@
           </li>
 
         </ul>
-      </li>
+        </li>
+      {{/if}}
 
       <!-- Treso -->
-      <li class="treeview">
-        <a href="#">
-          <i class="fa fa-balance-scale"></i> <span>Trésorerie</span>
-          <span class="pull-right-container">
+      {{#if (or (isFromTreso connectedUser.positions) (isFromPerf connectedUser.positions) (isFromPrez connectedUser.positions) (isAdmin connectedUser.positions) (isRespUa connectedUser.positions) (isChadaff connectedUser.positions))}}
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-balance-scale"></i> <span>Trésorerie</span>
+            <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
           </span>
-        </a>
-        <ul class="treeview-menu">
-          <li><a href="/treso/facture"><i class="fa fa-circle-o"></i> Factures</a></li>
-          <li><a href="/treso/payment-slip"><i class="fa fa-circle-o"></i> Bulletins de versements</a></li>
-        </ul>
-      </li>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="/treso/facture"><i class="fa fa-circle-o"></i> Factures</a></li>
+            <li><a href="/treso/payment-slip"><i class="fa fa-circle-o"></i> Bulletins de versements</a></li>
+          </ul>
+        </li>
+      {{/if}}
 
       <!-- Support -->
       <!--
