@@ -9,21 +9,19 @@
 
   //MESSAGE
 
-  var start = {{meta.page}} * {{meta.itemsPerPage}} +1;
+  let start ={{meta.page}} * {{meta.itemsPerPage}} +1;
+  let end = ({{meta.page}}+1) * {{meta.itemsPerPage}};
   if ((({{meta.page}}+1) * {{meta.itemsPerPage}}) > {{meta.totalItems}}) {
-    var end = {{meta.totalItems}};
+    end = {{meta.totalItems}};
   }
-  else {
-    var end = ({{meta.page}}+1) * {{meta.itemsPerPage}};
-  }
-  var display = "Showing " + start + " to " + end + " of {{meta.totalItems}} entries";
+  let display = "Showing " + start + " to " + end + " of {{meta.totalItems}} entries";
   document.getElementById('entries').innerHTML = display;
 
   //LINKS MENU
 
-  var menu;
-  var parameters = document.location.search.replace(/&pageNumber=\d*/, "").replace(/\?pageNumber=\d*/, "");
-  var pathname = document.location.pathname;
+  let menu = "";
+  let parameters = document.location.search.replace(/&pageNumber=\d*/, "").replace(/\?pageNumber=\d*/, "");
+  let pathname = document.location.pathname;
 
   if (parameters === "") {
     parameters = "?";
@@ -32,58 +30,22 @@
     parameters = parameters + "&";
   }
 
-  if ({{meta.page}} ===
-  0
-  )
-  {
-    menu = "<li><a href='" + pathname + parameters + "pageNumber=0'>1</a></li>";
+  if (({{meta.page}} - 1) >= 0) {
+    menu += "<li><a href='" + pathname + parameters + "pageNumber=0'>1</a></li>";
+    if (({{meta.page}} - 10) >= 0) {
+      menu += "<li><a href='" + pathname + parameters + "pageNumber=" + ({{meta.page}}-10) + "'>««</a></li>";
+    }
+    menu += "<li><a href='" + pathname + parameters + "pageNumber=" + ({{meta.page}}-1) + "'>«</a></li>";
   }
-  else
-  if ({{meta.page}} <
-  10
-  )
-  {
-    menu = "<li><a href='" + pathname + parameters + "pageNumber=" + ({{meta.page}}-1) + "'>«</a></li> \
-        <li><a href='" + pathname + parameters + "pageNumber=0'>1</a></li>";
-  }
-  else
-  {
-    menu = "<li><a href='" + pathname + parameters + "pageNumber=" + ({{meta.page}}-10) + "'>««</a></li> \
-        <li><a href='" + pathname + parameters + "pageNumber=" + ({{meta.page}}-1) + "'>«</a></li> \
-        <li><a href='" + pathname + parameters + "pageNumber=0'>1</a></li>"
-  }
+  menu += "<li><a href='" + pathname + parameters + "pageNumber=" + ({{meta.page}}) + "' style=\"background-color:#D3D3D3;\">" + ({{meta.page}} + 1) + "</a></li>";
 
-  if ({{meta.totalPages}} <
-  6
-  )
-  {
-    for (var i = 1; i < {{meta.totalPages}}; i++) {
-      menu += "<li><a href='" + pathname + parameters + "pageNumber=" + i + "'>" + (i + 1) + "</a></li>";
-    }
-  }
-  else
-  if ({{meta.page}} <
-  3
-  )
-  {
-    for (var i = 2; i < 5; i++) {
-      menu += "<li><a href='" + pathname + parameters + "pageNumber=" + (i - 1) + "'>" + i + "</a></li>";
-    }
-    menu += "<li><a href='" + pathname + parameters + "pageNumber=" + ({{meta.totalPages}}-1) + "'>{{meta.totalPages}}</a></li>"
-  }
-  else
-  {
-    for (var i = 0; i < 3; i++) {
-      menu += "<li><a href='" + pathname + parameters + "pageNumber=" + ({{meta.page}}-1 + i) + "'>" + ({{meta.page}}+i) + "</a></li>";
-    }
-    menu += "<li><a href='" + pathname + parameters + "pageNumber=" + ({{meta.totalPages}}-1) + "'>{{meta.totalPages}}</a></li>"
-  }
-
-  if (({{meta.page}}+1) !== {{meta.totalPages}}) {
+  if (({{meta.page}}+1) < {{meta.totalPages}}) {
     menu += "<li><a href='" + pathname + parameters + "pageNumber=" + ({{meta.page}}+1) + "'>»</a></li>";
-    if (({{meta.page}}+10) <= {{meta.totalPages}}) {
+    if (({{meta.page}}+10) < {{meta.totalPages}}) {
       menu += "<li><a href='" + pathname + parameters + "pageNumber=" + ({{meta.page}}+10) + "'>»»</a></li>"
     }
+    menu += "<li><a href='" + pathname + parameters + "pageNumber=" + ({{meta.totalPages}}-1) + "'>{{meta.totalPages}}</a></li>"
   }
+
   document.getElementById('links').innerHTML = menu;
 </script>

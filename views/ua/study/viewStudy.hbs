@@ -25,7 +25,7 @@
                   <div class="col-md-6 form-group">
                     <label for="name">Nom</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{study.name}}"
-                           placeholder="Entrez le nom de l'étude" required {{readonlyIf (eq action "view")}}>
+                           placeholder="Entrez le nom de l'étude" {{readonlyIf (eq action "view")}}>
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="firmId">Société</label>
@@ -149,7 +149,7 @@
 
                   <div class="col-md-4">
                     <label for="contactId1">Contact 1</label>
-                    <select class="selectcontacts required" style="width:100%" data-selected="{{study.contacts.0.id}}" name="contactId1" data-n="1" required {{#if (eq action "view")}}disabled{{/if}}>
+                    <select class="selectcontacts required" style="width:100%" data-selected="{{study.contacts.0.id}}" name="contactId1" data-n="1" {{#if (eq action "view")}}disabled{{/if}}>
                       {{#if (ne action "create")}}<option value="{{study.contacts.0.id}}" >{{study.contacts.0.firstName}} {{study.contacts.0.lastName}}</option>{{/if}}
                     </select>
                   </div>
@@ -297,10 +297,10 @@
                   </a>
                   <div class="col-md-6" align="right" {{#if (ne action "view")}}style="display: none"{{/if}}>
                     <a href="/treso/facture/create?studyId={{study.id}}">
-                      <button type="button" class="btn btn-primary">Créer une facture</button>
+                      <button type="button" class="btn btn-primary">Demande de facture</button>
                     </a>
                     <a href="/treso/payment-slip/create?studyId={{study.id}}&consultantId={{study.consultants.0.id}}">
-                      <button type="button" class="btn btn-primary" style="margin-left: 5%">Créer un BV</button>
+                      <button type="button" class="btn btn-primary" style="margin-left: 5%">Demande de BV</button>
                     </a>
                   </div>
                   {{> formButtons action=action origin="/ua/study" id=study.id}}
