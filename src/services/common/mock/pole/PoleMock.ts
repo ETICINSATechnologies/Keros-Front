@@ -9,31 +9,39 @@ export class PoleMock implements IMock {
     let status = 500;
     switch (resource) {
       case "core/pole/1":
-        mockObj = <T>new Pole(1, "RH", "Ressources Humaines");
+        mockObj = <T>new Pole(1, "Com", "Communication");
         status = 200;
         return new MockResponse(mockObj, status);
       case "core/pole/2":
-        mockObj = <T>new Pole(2, "SI", "Système d'informations");
+        mockObj = <T>new Pole(2, "Cons", "Consultant");
         status = 200;
         return new MockResponse(mockObj, status);
       case "core/pole/3":
-        mockObj = <T>new Pole(3, "UA", "Unité d'affaires");
+        mockObj = <T>new Pole(3, "DevCo", "Développement Commercial");
         status = 200;
         return new MockResponse(mockObj, status);
       case "core/pole/4":
-        mockObj = <T>new Pole(4, "PF", "Performance");
+        mockObj = <T>new Pole(4, "Perf", "Performance");
         status = 200;
         return new MockResponse(mockObj, status);
       case "core/pole/5":
-        mockObj = <T>new Pole(5, "TR", "Trésorerie");
+        mockObj = <T>new Pole(5, "Prez", "Présidence");
         status = 200;
         return new MockResponse(mockObj, status);
       case "core/pole/6":
-        mockObj = <T>new Pole(6, "DEVCO", "Développement Commercial");
+        mockObj = <T>new Pole(6, "RH", "Ressources Humaines");
         status = 200;
         return new MockResponse(mockObj, status);
       case "core/pole/7":
-        mockObj = <T>new Pole(7, "COM", "Communication");
+        mockObj = <T>new Pole(7, "SI", "Systèmes d'Information");
+        status = 200;
+        return new MockResponse(mockObj, status);
+      case "core/pole/8":
+        mockObj = <T>new Pole(8, "Treso", "Trésorerie");
+        status = 200;
+        return new MockResponse(mockObj, status);
+      case "core/pole/9":
+        mockObj = <T>new Pole(9, "UA", "Unité d'affaires");
         status = 200;
         return new MockResponse(mockObj, status);
     }
@@ -45,13 +53,15 @@ export class PoleMock implements IMock {
     let status = 500;
     switch (resource) {
       case "core/pole":
-        mockObj = <T[]>[<T>new Pole(1, "RH", "Ressources Humaines"),
-          new Pole(2, "SI", "Système d'informations"),
-          new Pole(3, "UA", "Unité d'affaires"),
-          new Pole(4, "PF", "Performance"),
-          new Pole(5, "TR", "Trésorerie"),
-          new Pole(6, "DEVCO", "Développement Commercial"),
-          new Pole(7, "COM", "Communication")
+        mockObj = <T[]>[<T>new Pole(1, "Com", "Communication"),
+          new Pole(2, "Cons", "Consultant"),
+          new Pole(3, "DevCo", "Développement Commercial"),
+          new Pole(4, "Perf", "Performance"),
+          new Pole(5, "Prez", "Présidence"),
+          new Pole(6, "RH", "Ressources Humaines"),
+          new Pole(7, "SI", "Systèmes d'Information"),
+          new Pole(8, "Treso", "Trésorerie"),
+          new Pole(9, "UA", "Unité d'affaires")
         ];
         status = 200;
         return new MockResponse(mockObj, status);
