@@ -207,9 +207,13 @@
                     </select>
                   </div>
                   <div class="col-md-4">
-                    <label for="consultantId3">Consultant 3</label>
-                    <select class="selectconsultants" style="width:100%" data-selected="{{study.consultants.2.id}}" name="consultantId3" data-n="3" {{#if (eq action "view")}}disabled{{/if}}>
-                      {{#if (ne action "create")}}<option value="{{study.consultants.2.id}}" >{{study.consultants.2.firstName}} {{study.consultants.2.lastName}}</option>{{/if}}
+                    <label for="consultantId3">Consultant(s) supp.</label>
+                    <select class="selectconsultants" multiple style="width:100%" data-selected="" name="consultantId3" data-n="3" {{#if (eq action "view")}}disabled{{/if}}>
+                      {{#if (ne action "create")}}
+                        {{#each (removeFromArray study.consultants 2)}}
+                          <option value="{{id}}" selected>{{firstName}} {{lastName}}</option>
+                        {{/each}}
+                      {{/if}}
                     </select>
                   </div>
                   <hr/>
@@ -299,9 +303,16 @@
                     <a href="/treso/facture/create?studyId={{study.id}}">
                       <button type="button" class="btn btn-primary">Demande de facture</button>
                     </a>
-                    <a href="/treso/payment-slip/create?studyId={{study.id}}&consultantId={{study.consultants.0.id}}">
-                      <button type="button" class="btn btn-primary" style="margin-left: 5%">Demande de BV</button>
-                    </a>
+                    <button type="button" class="btn btn-primary" onclick="showPopUp()" style="margin-left: 5%">Demande de BV</button>
+                  </div>
+                  <div class="popup col-sm-1" id="popup" style="display: none">
+                    {{#each study.consultants}}
+                      <div>
+                        <a href="/treso/payment-slip/create?studyId={{@root.study.id}}&consultantId={{id}}">
+                          <i class="fa fa-arrow-right" ></i> {{firstName}} {{lastName}}
+                        </a>
+                      </div>
+                    {{/each}}
                   </div>
                   {{> formButtons action=action origin="/ua/study" id=study.id}}
                 </div>

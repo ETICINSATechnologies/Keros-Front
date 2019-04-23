@@ -195,7 +195,7 @@ function generateConsultantOptions(){
           }];
           if (data.content.length !== 0) {
             result = $.map(data.content, function(obj) {
-              obj.id = `${obj.id}/${obj.firstName} ${obj.lastName}/${obj.address.line1}`;
+              obj.id = `${obj.id}`;
               obj.text = obj.text || `${obj.firstName} ${obj.lastName}`;
               return obj;
             });

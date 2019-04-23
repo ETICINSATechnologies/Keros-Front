@@ -167,6 +167,15 @@ export default handlebars({
         }
         return b;
       });
+    },
+    removeFromArray (tab: any[], index: number) {
+      const newTab = [];
+      if (tab.length > index) {
+        for (let i = index; i < tab.length; i++) {
+          newTab.push(tab[i]);
+        }
+      }
+      return newTab;
     }
   }
 });
