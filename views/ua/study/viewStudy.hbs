@@ -305,18 +305,18 @@
                     </a>
                     <button type="button" class="btn btn-primary" onclick="showPopUp()" style="margin-left: 5%">Demande de BV</button>
                   </div>
-                  <div class="popup col-sm-1" id="popup" style="display: none">
-                    {{#each study.consultants}}
-                      <div>
-                        <a href="/treso/payment-slip/create?studyId={{@root.study.id}}&consultantId={{id}}">
-                          <i class="fa fa-arrow-right" ></i> {{firstName}} {{lastName}}
-                        </a>
-                      </div>
-                    {{/each}}
-                  </div>
                   {{> formButtons action=action origin="/ua/study" id=study.id}}
                 </div>
               </form>
+            </div>
+            <div class="popup col-sm-1" id="popup" style="display: none">
+              {{#each study.consultants}}
+                <div>
+                  <a href="/treso/payment-slip/create?studyId={{@root.study.id}}&consultantId={{id}}">
+                  <i class="fa fa-arrow-right" ></i> {{firstName}} {{lastName}}
+                  </a>
+                </div>
+              {{/each}}
             </div>
           </section>
         </div>
