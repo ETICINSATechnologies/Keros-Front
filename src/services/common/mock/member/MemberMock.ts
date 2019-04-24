@@ -44,45 +44,130 @@ export class MemberMock implements IMock {
     let status = 500;
     switch (resource) {
       case "core/member/me":
-        mockObj = <T>new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(3, "Secretaire Générale", 2019, true, new Pole(1, "RH", "Ressources Humaines")), new Position(4, "Responsable SI", 2019, true, new Pole(2, "SI", "Système d'informations"))]);
+        mockObj = <T>new Member(1,
+          "Tom",
+          "Dupont",
+          "tdupont",
+          new Gender(3, "A"),
+          "tom.dupont@test.com",
+          "1996-08-27",
+          new Department(1, "BIM"),
+          3,
+          "0607080910",
+          new Address(1,
+            "37, rue des Lilas",
+            "",
+            "01220",
+            "Grilly",
+            new Country(1, "France")),
+          [new Position(22, "Secrétaire Général(e)", 2018, true, new Pole(6, "RH", "Ressources Humaines")),
+            new Position(20, "Responsable SI", 2018, true, new Pole(7, "SI", "Systèmes d'Information"))]
+        );
         status = 200;
         return new MockResponse(mockObj, status);
       case "core/member/1":
-        mockObj = <T>new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(3, "Secretaire Générale", 2019, true, new Pole(1, "RH", "Ressources Humaines")), new Position(4, "Responsable SI", 2019, true, new Pole(2, "SI", "Système d'informations"))]);
+        mockObj = <T>new Member(1,
+          "Tom",
+          "Dupont",
+          "tdupont",
+          new Gender(3, "A"),
+          "tom.dupont@test.com",
+          "1996-08-27",
+          new Department(1, "BIM"),
+          3,
+          "0607080910",
+          new Address(1,
+            "37, rue des Lilas",
+            "",
+            "01220",
+            "Grilly",
+            new Country(1, "France")),
+          [new Position(22, "Secrétaire Général(e)", 2018, true, new Pole(6, "RH", "Ressources Humaines")),
+            new Position(20, "Responsable SI", 2018, true, new Pole(7, "SI", "Systèmes d'Information"))]);
         status = 200;
         return new MockResponse(mockObj, status);
       case "core/member/2":
-        mockObj = <T>new Member(2, "Pierre", "Henry", "tdupont", new Gender(1, "H"), "tom.dupont@test.com", "1996-08-27", new Department(9, "TC"), 3, "0607080910", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), [new Position(3, "Secretaire Générale", 2019, true, new Pole(1, "RH", "Ressources Humaines")), new Position(2, "Vice-Président(e)", 2019, true, new Pole(1, "RH", "Ressources Humaines"))]);
+        mockObj = <T>new Member(2,
+          "Pierre",
+          "Henry",
+          "tdupont",
+          new Gender(1, "H"),
+          "tom.dupont@test.com",
+          "1996-08-27",
+          new Department(9, "TC"),
+          3,
+          "0607080910",
+          new Address(2,
+            "1204, rue des Acacias",
+            "34, rue de Créqui",
+            "69006",
+            "Lyon",
+            new Country(2, "Suisse")),
+          [new Position(22, "Secrétaire Général(e)", 2018, true, new Pole(6, "RH", "Ressources Humaines")),
+            new Position(24, "Vice-Président(e)", 2018, true, new Pole(5, "Prez", "Présidence"))]);
+        status = 200;
+        return new MockResponse(mockObj, status);
+      case "core/member/3":
+        mockObj = <T>new Member(3,
+          "Tom",
+          "Lidiot",
+          "tlidiot",
+          new Gender(3, "A"),
+          "tom.dupont@test.com",
+          "1996-08-27",
+          new Department(1, "BIM"),
+          3,
+          "0607080910",
+          new Address(1,
+            "37, rue des Lilas",
+            "",
+            "01220",
+            "Grilly",
+            new Country(1, "France")),
+          [new Position(18, "Responsable qualité", 2018, true, new Pole(4, "Perf", "Performance"))]);
         status = 200;
         return new MockResponse(mockObj, status);
       case "core/member":
-        mockObj = <T>new Page(<T[]>[new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(3, "Secretaire Générale", 2019, true, new Pole(1, "RH", "Ressources Humaines")), new Position(4, "Responsable SI", 2019, true, new Pole(2, "SI", "Système d'informations"))]), new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"), "pierre.henry   @test.com", "1996-08-27", new Department(9, "TC"), 3, "0607080910", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), [new Position(3, "Secretaire Générale", 2019, true, new Pole(1, "RH", "Ressources Humaines")), new Position(2, "Vice-Président(e)", 2019, true, new Pole(1, "RH", "Ressources Humaines"))])], new Meta(0, 2, 6, 25));
+        mockObj = <T>new Page(<T[]>[new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(22, "Secrétaire Général(e)", 2018, true, new Pole(6, "RH", "Ressources Humaines")), new Position(20, "Responsable SI", 2018, true, new Pole(7, "SI", "Systèmes d'Information"))]),
+            new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"), "pierre.henry   @test.com", "1996-08-27", new Department(9, "TC"), 3, "0607080910", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), [new Position(22, "Secrétaire Général(e)", 2018, true, new Pole(6, "RH", "Ressources Humaines")), new Position(24, "Vice-Président(e)", 2018, true, new Pole(5, "Prez", "Présidence"))]),
+            new Member(3, "Tom", "Lidiot", "tlidiot", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(18, "Responsable qualité", 2018, true, new Pole(4, "Perf", "Performance"))])
+          ],
+          new Meta(0, 2, 6, 25));
         status = 200;
         return new MockResponse(mockObj, status);
     }
     if (resource.startsWith("core/member?")) {
       const params = resource.split("?")[1];
-      if (params.match(/poleId=1/)) {
-        mockObj = <T> new Page(<T[]> [new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(3, "Secretaire Générale", 2019, true, new Pole(1, "RH", "Ressources Humaines")), new Position(4, "Responsable SI", 2019, true, new Pole(2, "SI", "Système d'informations"))]), new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"), "pierre.henry   @test.com", "1996-08-27",  new Department(9, "TC"), 3, "0607080910", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), [new Position(3, "Secretaire Générale", 2019, true, new Pole(1, "RH", "Ressources Humaines")), new Position(2, "Vice-Président(e)", 2019, true, new Pole(1, "RH", "Ressources Humaines"))])], new Meta (0, 2, 4 , 25));
+      if (params.match(/poleId=6/)) {
+        mockObj = <T> new Page(<T[]> [new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(22, "Secrétaire Général(e)", 2018, true, new Pole(6, "RH", "Ressources Humaines")), new Position(20, "Responsable SI", 2018, true, new Pole(7, "SI", "Systèmes d'Information"))]),
+          new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"), "pierre.henry   @test.com", "1996-08-27", new Department(9, "TC"), 3, "0607080910", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), [new Position(22, "Secrétaire Général(e)", 2018, true, new Pole(6, "RH", "Ressources Humaines")), new Position(24, "Vice-Président(e)", 2018, true, new Pole(5, "Prez", "Présidence"))])
+        ], new Meta (0, 2, 4 , 25));
         status = 200;
         return new MockResponse(mockObj, status);
       }
-      if (params.match(/positionId=3/)) {
-        mockObj = <T> new Page(<T[]> [new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(3, "Secretaire Générale", 2019, true, new Pole(1, "RH", "Ressources Humaines")), new Position(4, "Responsable SI", 2019, true, new Pole(2, "SI", "Système d'informations"))]), new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"), "pierre.henry   @test.com", "1996-08-27",  new Department(9, "TC"), 3, "0607080910", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), [new Position(3, "Secretaire Générale", 2019, true, new Pole(1, "RH", "Ressources Humaines")), new Position(2, "Vice-Président(e)", 2019, true, new Pole(1, "RH", "Ressources Humaines"))])], new Meta (0, 2, 4 , 25));
+      if (params.match(/positionId=22/)) {
+        mockObj = <T> new Page(<T[]> [new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(22, "Secrétaire Général(e)", 2018, true, new Pole(6, "RH", "Ressources Humaines")), new Position(20, "Responsable SI", 2018, true, new Pole(7, "SI", "Systèmes d'Information"))]),
+          new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"), "pierre.henry   @test.com", "1996-08-27", new Department(9, "TC"), 3, "0607080910", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), [new Position(22, "Secrétaire Général(e)", 2018, true, new Pole(6, "RH", "Ressources Humaines")), new Position(24, "Vice-Président(e)", 2018, true, new Pole(5, "Prez", "Présidence"))])
+        ], new Meta (0, 2, 4 , 25));
         status = 200;
         return new MockResponse(mockObj, status);
       }
       if (params.match(/positionId=2/)) {
-        mockObj = <T> new Page(<T[]> [new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"), "pierre.henry   @test.com", "1996-08-27",  new Department(9, "TC"), 3, "0607080910", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), [new Position(3, "Secretaire Générale", 2019, true, new Pole(1, "RH", "Ressources Humaines")), new Position(2, "Vice-Président(e)", 2019, true, new Pole(1, "RH", "Ressources Humaines"))])], new Meta (0, 2, 2 , 25));
+        mockObj = <T> new Page(<T[]> [new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"), "pierre.henry   @test.com", "1996-08-27",  new Department(9, "TC"), 3, "0607080910", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), [new Position(2, "Auditeur treso", 2018, false)])],
+          new Meta (0, 2, 2 , 25));
         status = 200;
         return new MockResponse(mockObj, status);
       }
       if (params.match(/poleId=4/)) {
-        mockObj = <T> new Page(<T[]> [new Member(1, "Tom", "Lidiot", "tlidiot", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(3, "Secretaire Générale", 2019, true, new Pole(1, "RH", "Ressources Humaines")), new Position(4, "Responsable SI", 2019, true, new Pole(2, "SI", "Système d'informations"))])], new Meta (0, 1, 1 , 25));
+        mockObj = <T> new Page(<T[]> [new Member(3, "Tom", "Lidiot", "tlidiot", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(18, "Responsable qualité", 2018, true, new Pole(4, "Perf", "Performance"))])], new Meta (0, 1, 1 , 25));
         status = 200;
         return new MockResponse(mockObj, status);
       }
-      mockObj = <T> new Page(<T[]> [new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(3, "Secretaire Générale", 2019, true, new Pole(1, "RH", "Ressources Humaines")), new Position(4, "Responsable SI", 2019, true, new Pole(2, "SI", "Système d'informations"))]), new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"), "pierre.henry   @test.com", "1996-08-27",  new Department(9, "TC"), 3, "0607080910", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), [new Position(3, "Secretaire Générale", 2019, true, new Pole(1, "RH", "Ressources Humaines")), new Position(2, "Vice-Président(e)", 2019, true, new Pole(1, "RH", "Ressources Humaines"))])], new Meta (0 , 45, 1230, 25));
+      mockObj = <T> new Page(<T[]> [new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(22, "Secrétaire Général(e)", 2018, true, new Pole(6, "RH", "Ressources Humaines")), new Position(20, "Responsable SI", 2018, true, new Pole(7, "SI", "Systèmes d'Information"))]),
+          new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"), "pierre.henry   @test.com", "1996-08-27",  new Department(9, "TC"), 3, "0607080910", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), [new Position(22, "Secrétaire Général(e)", 2018, true, new Pole(6, "RH", "Ressources Humaines")), new Position(24, "Vice-Président(e)", 2018, true, new Pole(5, "Prez", "Présidence"))]),
+          new Member(3, "Tom", "Lidiot", "tlidiot", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(18, "Responsable qualité", 2018, true, new Pole(4, "Perf", "Performance"))])
+        ],
+        new Meta (0 , 45, 1230, 25));
       status = 200;
       return new MockResponse(mockObj, status);
     }
@@ -93,7 +178,10 @@ export class MemberMock implements IMock {
     let status = 500;
     switch (resource) {
       case "core/member":
-        mockObj = <T[]>[<T>new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(3, "Secretaire Générale", 2019, true, new Pole(1, "RH", "Ressources Humaines")), new Position(4, "Responsable SI", 2019, true, new Pole(2, "SI", "Système d'informations"))]), new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"), "tom.dupont@test.com", "1996-08-27", new Department(9, "TC"), 3, "0607080910", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), [new Position(3, "Secretaire Générale", 2019, true, new Pole(1, "RH", "Ressources Humaines")), new Position(2, "Vice-Président(e)", 2019, true, new Pole(1, "RH", "Ressources Humaines"))])];
+        mockObj = <T[]>[<T>new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(3, "Secretaire Générale", 2019, true, new Pole(1, "RH", "Ressources Humaines")), new Position(4, "Responsable SI", 2019, true, new Pole(2, "SI", "Système d'informations"))]),
+          new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"), "tom.dupont@test.com", "1996-08-27", new Department(9, "TC"), 3, "0607080910", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), [new Position(3, "Secretaire Générale", 2019, true, new Pole(1, "RH", "Ressources Humaines")), new Position(2, "Vice-Président(e)", 2019, true, new Pole(1, "RH", "Ressources Humaines"))]),
+          new Member(3, "Tom", "Lidiot", "tlidiot", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(18, "Responsable qualité", 2018, true, new Pole(4, "Perf", "Performance"))])
+        ];
         status = 200;
         return new MockResponse(mockObj, status);
     }
@@ -107,11 +195,13 @@ export class MemberMock implements IMock {
     let status = 500;
     switch (resource) {
       case "core/member/1":
-        mockObj = <T>new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(3, "Secretaire Générale", 2015, true, new Pole(1, "RH", "Ressources Humaines")), new Position(4, "Responsable SI", 2015, true, new Pole(2, "SI", "Système d'informations"))]), new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"), "tom.dupont@test.com", "1996-08-27", new Department(9, "TC"), 3, "0607080910", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), [new Position(3, "Secretaire Générale", 2019, true, new Pole(1, "RH", "Ressources Humaines")), new Position(2, "Vice-Président(e)", 2019, true, new Pole(1, "RH", "Ressources Humaines"))]);
+        mockObj = <T>new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(3, "Secretaire Générale", 2015, true, new Pole(1, "RH", "Ressources Humaines")), new Position(4, "Responsable SI", 2015, true, new Pole(2, "SI", "Système d'informations"))]),
+          new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"), "tom.dupont@test.com", "1996-08-27", new Department(9, "TC"), 3, "0607080910", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), [new Position(3, "Secretaire Générale", 2019, true, new Pole(1, "RH", "Ressources Humaines")), new Position(2, "Vice-Président(e)", 2019, true, new Pole(1, "RH", "Ressources Humaines"))]);
         status = 200;
         return new MockResponse(mockObj, status);
       case "core/member/2":
-        mockObj = <T>new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(3, "Secretaire Générale", 2019, true, new Pole(1, "RH", "Ressources Humaines")), new Position(4, "Responsable SI", 2019, true, new Pole(2, "SI", "Système d'informations"))]), new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"), "tom.dupont@test.com", "1996-08-27", new Department(9, "TC"), 3, "0607080910", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), [new Position(3, "Secretaire Générale", 2019, true, new Pole(1, "RH", "Ressources Humaines")), new Position(2, "Vice-Président(e)", 2019, true, new Pole(1, "RH", "Ressources Humaines"))]);
+        mockObj = <T>new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A"), "tom.dupont@test.com", "1996-08-27", new Department(1, "BIM"), 3, "0607080910", new Address(1, "37, rue des Lilas", "", "01220", "Grilly", new Country(1, "France")), [new Position(3, "Secretaire Générale", 2019, true, new Pole(1, "RH", "Ressources Humaines")), new Position(4, "Responsable SI", 2019, true, new Pole(2, "SI", "Système d'informations"))]),
+          new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"), "tom.dupont@test.com", "1996-08-27", new Department(9, "TC"), 3, "0607080910", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), [new Position(3, "Secretaire Générale", 2019, true, new Pole(1, "RH", "Ressources Humaines")), new Position(2, "Vice-Président(e)", 2019, true, new Pole(1, "RH", "Ressources Humaines"))]);
         status = 200;
         return new MockResponse(mockObj, status);
     }
