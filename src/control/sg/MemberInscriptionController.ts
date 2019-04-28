@@ -13,6 +13,8 @@ import { MemberInscriptionCreateRequest } from "../../models/sg/MemberInscriptio
 import { AddressCreateRequest } from "../../models/core/AddressCreateRequest";
 import { DocumentResponse } from "../../models/DocumentResponse";
 import HttpError from "../../util/httpError";
+import { GenderService } from "../../services/core/GenderService";
+import { Gender } from "../../models/core/Gender";
 
 export class MemberInscriptionController {
   public viewMemberInscriptions(req: Request, res: Response, next: NextFunction) {
@@ -34,16 +36,20 @@ export class MemberInscriptionController {
     DepartmentService.getAllDepartments(function(err1, departments: Department[] | null) {
       CountryService.getAllCountries(function(err2, countries: Country[] |  null) {
         PoleService.getAllPoles(function(err3, poles: Pole[] | null) {
-          if (err1) return next(err1);
-          if (err2) return next(err2);
-          if (err3) return next(err3);
-          const options = {
-            departments,
-            countries,
-            poles,
-            action: "create"
-          };
-          res.render("sg/inscription/members/viewInscription", options);
+          GenderService.getAllGenders(function(err4, genders: Gender[] | null) {
+            if (err1) return next(err1);
+            if (err2) return next(err2);
+            if (err3) return next(err3);
+            if (err4) return next(err4);
+            const options = {
+              departments,
+              countries,
+              gender: genders,
+              poles,
+              action: "create"
+            };
+            res.render("sg/inscription/members/viewInscription", options);
+          });
         });
       });
     });
@@ -64,18 +70,22 @@ export class MemberInscriptionController {
       DepartmentService.getAllDepartments(function(err1, departments: Department[] | null) {
         CountryService.getAllCountries(function(err2, countries: Country[] |  null) {
           PoleService.getAllPoles(function(err3, poles: Pole[] | null) {
-            if (err1) return next(err1);
-            if (err2) return next(err2);
-            if (err3) return next(err3);
-            if (err4) return next(err4);
-            const options = {
-              inscription,
-              departments,
-              countries,
-              poles,
-              action: "view"
-            };
-            res.render("sg/inscription/members/viewInscription", options);
+            GenderService.getAllGenders(function(err5, genders: Gender[] | null) {
+              if (err1) return next(err1);
+              if (err2) return next(err2);
+              if (err3) return next(err3);
+              if (err4) return next(err4);
+              if (err5) return next(err5);
+              const options = {
+                inscription,
+                departments,
+                countries,
+                gender: genders,
+                poles,
+                action: "view"
+              };
+              res.render("sg/inscription/members/viewInscription", options);
+            });
           });
         });
       });
@@ -88,18 +98,22 @@ export class MemberInscriptionController {
       DepartmentService.getAllDepartments(function(err1, departments: Department[] | null) {
         CountryService.getAllCountries(function(err2, countries: Country[] |  null) {
           PoleService.getAllPoles(function(err3, poles: Pole[] | null) {
-            if (err1) return next(err1);
-            if (err2) return next(err2);
-            if (err3) return next(err3);
-            if (err4) return next(err4);
-            const options = {
-              inscription,
-              departments,
-              countries,
-              poles,
-              action: "update"
-            };
-            res.render("sg/inscription/members/viewInscription", options);
+            GenderService.getAllGenders(function(err5, genders: Gender[] | null) {
+              if (err1) return next(err1);
+              if (err2) return next(err2);
+              if (err3) return next(err3);
+              if (err4) return next(err4);
+              if (err5) return next(err5);
+              const options = {
+                inscription,
+                departments,
+                countries,
+                gender: genders,
+                poles,
+                action: "update"
+              };
+              res.render("sg/inscription/members/viewInscription", options);
+            });
           });
         });
       });
@@ -114,6 +128,8 @@ export class MemberInscriptionController {
     inscriptionRequest.lastName = req.body.lastName;
     inscriptionRequest.departmentId = parseInt(req.body.departmentId);
     inscriptionRequest.email = req.body.email;
+    inscriptionRequest.genderId = parseInt(req.body.genderId);
+    inscriptionRequest.birthday = req.body.birthday;
     inscriptionRequest.phoneNumber = req.body.phoneNumber;
     inscriptionRequest.outYear = parseInt(req.body.outYear);
     inscriptionRequest.nationalityId = parseInt(req.body.nationalityId);

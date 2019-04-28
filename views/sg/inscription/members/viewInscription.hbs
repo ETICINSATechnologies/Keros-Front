@@ -39,6 +39,19 @@
                       {{/each}}
                     </select>
                   </div>
+                  <div class="col-md-4 form-group">
+                    <label for="genderId">Sexe</label>
+                    <select class="form-control" id="genderId" name="genderId" {{readonlyIf
+                            (eq action "view")}} {{disabledIf (eq action "view")}}>
+                      {{#each gender}}
+                        <option value="{{id}}" {{selected id @root.inscription.gender.id}}>{{gender label}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="birthday">Date de naissance</label>
+                    <input type="date" class="form-control" id="birthday" name="birthday" value="{{inscription.birthday}}" required {{readonlyIf (eq action "view")}}>
+                  </div>
                   <div class="col-md-12 form-group">
                     <label for="email">Email</label>
                     <input type="email" class="form-control" id="email" name="email" value="{{inscription.email}}" placeholder="Entrez l'adresse mail" required {{readonlyIf (eq action "view")}}>

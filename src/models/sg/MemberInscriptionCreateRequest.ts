@@ -7,6 +7,8 @@ export class MemberInscriptionCreateRequest implements IStringable {
     public lastName ?: string,
     public departmentId ?: number,
     public email ?: string,
+    public genderId ?: number,
+    public birthday ?: string,
     public phoneNumber ?: string,
     public outYear ?: number,
     public nationalityId ?: number,
