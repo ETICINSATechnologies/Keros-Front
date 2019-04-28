@@ -5,7 +5,7 @@
     <div class="content-wrapper">
         <section class="content-header">
             <h1>
-                {{#if consultant}}Fiche Inscription consultant{{else}}Nouvelle Inscription consultant{{/if}}
+                {{#if inscription}}Fiche Inscription consultant{{else}}Nouvelle Inscription consultant{{/if}}
             </h1>
             {{> breadcrumb action=action tab="RH" pathnew="Inscriptions consultants,Nouvelle inscription consultant" pathview=(concat "Inscriptions consultants," (concat inscription.lastName (concat " " inscription.firstName))) pathedit=(concat "Inscriptions consultants,Edition " (concat inscription.lastName (concat " " inscription.firstName))) }}
         </section>
@@ -169,6 +169,67 @@
                                             </div>
                                         </div>
                                     {{/if}}
+                                {{else}}
+                                    <div id="view-documents">
+                                        <h4 class="col-md-12 box-title">
+                                            Documents
+                                        </h4>
+                                        <div class="col-md-12">
+                                            <div class="panel panel-default">
+                                                <a data-toggle="collapse" data-parent="#faq" href="#col-documents" aria-expanded="false"
+                                                   aria-controls="elemmailshots">
+                                                    <div class="panel-heading" role="tab" id="documents" style="background-color:#F5F5F5;">
+                                                        <h5 class="panel-title">
+                                                            Afficher
+                                                        </h5>
+                                                    </div>
+                                                </a>
+                                                <div id="col-documents" class="panel-collapse collapse" role="tabpanel"
+                                                     aria-labelledby="documents">
+                                                    <div class="panel-body">
+                                                        <div class="col-md-6">
+                                                            <b>Titre du document</b>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <b>Upload VF</b>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div class="col-md-6">
+                                                            Pièce d'identité
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="file" name="documentIdentity" required>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            Certificat de scolarité de l'année en cours
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="file" name="documentScolarityCertificate" required>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            Relevé d'Identité Bancaire
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="file" name="documentRib" required>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            Carte vitale
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="file" name="documentVitaleCard" required>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            Titre de séjour
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="file" name="documentResidencePermit">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 {{/if}}
                                 <div class="box-footer">
                                     <a href="/sg/consultant-inscription"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button></a>
