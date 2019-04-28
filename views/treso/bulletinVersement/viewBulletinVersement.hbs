@@ -142,7 +142,7 @@
                       <hr />
                     </div>
                     {{#if (eq action "update")}}
-                      <div class="col-md-4 form-group"></div>
+                      <div class="col-md-2 form-group"></div>
                       <div class="col-md-4 form-group">
                         {{#if (ne bulletin.validatedByPerf true)}}
                           {{#if bulletin.validatedByUa}}
@@ -163,7 +163,7 @@
                       {{/if}}
                     {{/if}}
                     <div class="col-md-12 form-group">
-                      <div class="col-md-9 form-group">
+                      <div class="col-md-10 form-group">
                         <ol class="progtrckr" data-progtrckr-steps="3">
                           <li class="progtrckr-done">Créé le {{bulletin.createdDate}} par {{bulletin.createdBy.firstName}} {{bulletin.createdBy.lastName}}</li>
                           {{#if bulletin.validatedByUa}}
@@ -178,26 +178,18 @@
                           {{/if}}
                         </ol>
                       </div>
-                      <div class="row form-group">
-                        <div class="col-sm-1" style="margin-top: 1%">
-                          <button type="button" onclick="window.open('/treso/payment-slip/{{bulletin.id}}/generateDocument', '_blank');" class="btn btn-primary" {{#if (ne (and bulletin.validatedByPerf bulletin.validatedByUa) true)}}disabled{{/if}}>Publiposter</button>
-                        </div>
-                        <div class="col-sm-2" {{#if (ne (and bulletin.validatedByPerf bulletin.validatedByUa) true)}}style="display: none;"{{/if}}>
-                            <i class="fa fa-exclamation-triangle"></i>
-                            Le fichier renvoyé est un ZIP contenant les BV publipostés de TOUS les consultants de l'étude concernée.
-                        </div>
-                      </div>
+                      <button type="button" onclick="window.open('/treso/payment-slip/{{bulletin.id}}/generateDocument', '_blank');" class="btn btn-primary" style="margin-top: 2%" {{#if (ne (and bulletin.validatedByPerf bulletin.validatedByUa) true)}}disabled{{/if}}>Publiposter</button>
                     </div>
                     <div class="col-md-3 form-group"></div>
                     <div class="col-md-4 form-group">
                       {{#if bulletin.validatedByUa}}
-                        <label style="margin-left: 30%;">Validé le {{bulletin.validatedByUaDate}}<br/>par {{bulletin.validatedByUaMember.firstName}} {{bulletin.validatedByUaMember.lastName}}</label>
+                        <label style="margin-left: 35%;">Validé le {{bulletin.validatedByUaDate}}<br/>par {{bulletin.validatedByUaMember.firstName}} {{bulletin.validatedByUaMember.lastName}}</label>
                       {{/if}}
                     </div>
                     {{#if bulletin.validatedByUa}}
                       <div class="col-md-4 form-group">
                         {{#if bulletin.validatedByPerf}}
-                          <label style="">Validé le {{bulletin.validatedByPerfDate}}<br/>par {{bulletin.validatedByPerfMember.firstName}} {{bulletin.validatedByPerfMember.lastName}}</label>
+                          <label style="margin-left: 10%;">Validé le {{bulletin.validatedByPerfDate}}<br/>par {{bulletin.validatedByPerfMember.firstName}} {{bulletin.validatedByPerfMember.lastName}}</label>
                         {{/if}}
                       </div>
                     {{/if}}
