@@ -4,7 +4,7 @@ import * as winston from "winston";
 export class FileUploader {
 
     static obtainFileBase64(files: FileArray, filename: string): string | undefined {
-        const file = files["filename"];
+        const file = files.filename;
         if (file === null) {
             winston.warn("File named " + filename + " doesn't exist.");
             return;
@@ -13,6 +13,6 @@ export class FileUploader {
             winston.error("Many files named " + filename + " have been found.");
             return;
         }
-        return (file as UploadedFile).data.toString("base64");
+        return (file).data.toString("base64");
     }
 }

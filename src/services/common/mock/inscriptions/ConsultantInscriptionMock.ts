@@ -21,7 +21,7 @@ export class ConsultantInscriptionMock implements IMock {
         }
         switch (resource) {
             case "sg/consultant-inscription" :
-                mockObj = <T> new ConsultantInscription(0, resources["firstName"], resources["lastName"], new Department(resources["departmentId"], "TC"), resources["email"], resources["phoneNumber"], resources["outYear"], new Country(resources["nationalityId"], "France"), resources["address"]);
+                mockObj = <T> new ConsultantInscription(0, resources.firstName, resources.lastName, new Department(resources.departmentId, "TC"), resources.email, resources.phoneNumber, resources.outYear, new Country(resources.nationalityId, "France"), resources.address);
                 status = 201;
                 return new MockResponse(mockObj, status);
         }
@@ -32,11 +32,11 @@ export class ConsultantInscriptionMock implements IMock {
         let status = 500;
         switch (resource) {
             case "sg/consultant-inscription/1" :
-                mockObj = <T> new ConsultantInscription(1, resources["firstName"], resources["lastName"], new Department(resources["departmentId"], "TC"), resources["email"], resources["phoneNumber"], resources["outYear"], new Country(resources["nationalityId"], "France"), resources["address"]);
+                mockObj = <T> new ConsultantInscription(1, resources.firstName, resources.lastName, new Department(resources.departmentId, "TC"), resources.email, resources.phoneNumber, resources.outYear, new Country(resources.nationalityId, "France"), resources.address);
                 status = 200;
                 return new MockResponse(mockObj, status);
             case "sg/consultant-inscription/2" :
-                mockObj = <T> new ConsultantInscription(2, resources["firstName"], resources["lastName"], new Department(resources["departmentId"], "IF"), resources["email"], resources["phoneNumber"], resources["outYear"], new Country(resources["nationalityId"], "France"), resources["address"], [new Document(1, "Fiche d'inscription", true, false), new Document(2, "Pièce identité", false, true
+                mockObj = <T> new ConsultantInscription(2, resources.firstName, resources.lastName, new Department(resources.departmentId, "IF"), resources.email, resources.phoneNumber, resources.outYear, new Country(resources.nationalityId, "France"), resources.address, [new Document(1, "Fiche d'inscription", true, false), new Document(2, "Pièce identité", false, true
                 ), new Document(4, "PDF quelconque", false, true)]);
                 status = 200;
                 return new MockResponse(mockObj, status);

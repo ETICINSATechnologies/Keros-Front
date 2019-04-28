@@ -40,9 +40,9 @@ export class ConsultantInscriptionController {
                     if (err2) return next(err2);
                     if (err4) return next(err4);
                     const options = {
-                        inscription: inscription,
-                        departments: departments,
-                        countries: countries,
+                        inscription,
+                        departments,
+                        countries,
                         action: "view"
                     };
                     res.render("sg/inscription/consultants/viewInscription", options);
@@ -58,8 +58,8 @@ export class ConsultantInscriptionController {
                 if (err1) return next(err1);
                 if (err2) return next(err2);
                 const options = {
-                    departments: departments,
-                    countries: countries,
+                    departments,
+                    countries,
                     action: "create"
                 };
                 res.render("sg/inscription/consultants/viewInscription", options);
@@ -76,9 +76,9 @@ export class ConsultantInscriptionController {
                     if (err2) return next(err2);
                     if (err4) return next(err4);
                     const options = {
-                        inscription: inscription,
-                        departments: departments,
-                        countries: countries,
+                        inscription,
+                        departments,
+                        countries,
                         action: "update"
                     };
                     res.render("sg/inscription/consultants/viewInscription", options);
