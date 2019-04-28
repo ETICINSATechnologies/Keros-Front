@@ -36,7 +36,8 @@ export class ConsultantInscriptionMock implements IMock {
                 status = 200;
                 return new MockResponse(mockObj, status);
             case "sg/consultant-inscription/2" :
-                mockObj = <T> new ConsultantInscription(2, resources["firstName"], resources["lastName"], new Department(resources["departmentId"], "IF"), resources["email"], resources["phoneNumber"], resources["outYear"], new Country(resources["nationalityId"], "France"), resources["address"], [new Document(1, "Fiche d'inscription", true, false), new Document(2, "Pièce identité", false, false), new Document(4, "PDF quelconque", false, true)]);
+                mockObj = <T> new ConsultantInscription(2, resources["firstName"], resources["lastName"], new Department(resources["departmentId"], "IF"), resources["email"], resources["phoneNumber"], resources["outYear"], new Country(resources["nationalityId"], "France"), resources["address"], [new Document(1, "Fiche d'inscription", true, false), new Document(2, "Pièce identité", false, true
+                ), new Document(4, "PDF quelconque", false, true)]);
                 status = 200;
                 return new MockResponse(mockObj, status);
 
@@ -74,16 +75,16 @@ export class ConsultantInscriptionMock implements IMock {
         }
         switch (resource) {
             case "sg/consultant-inscription/1" :
-                mockObj = <T> new ConsultantInscription(1, "Michel", "Bienheureux", new Department(3, "GCU", "Génie Civil et Urbanisme"), "michel.bientavu@gmail.com", "0676287201", 2021, new Country(1, "France"), "12345678901234567890", new Address(34, "40 Bd d'Elrond", undefined, "83800", "Foncombe", new Country(45, "Terre du Milieu")));
+                mockObj = <T> new ConsultantInscription(1, "Michel", "Bienheureux", new Department(3, "GCU", "Génie Civil et Urbanisme"), "michel.bientavu@gmail.com", "0676287201", 2021, new Country(1, "France"), "12345678901234567890", new Address(34, "40 Bd d'Elrond", undefined, "83800", "Foncombe", new Country(45, "Terre du Milieu")), [new Document(1, "Fiche d'inscription", true, false), new Document(2, "Pièce identité", false, true), new Document(3, "Certificat de scolarité", false, true), new Document(4, "Relevé d'Identité Bancaire", false, true), new Document(5, "Titre de séjour", false, false)]);
                 status = 200;
                 return new MockResponse(mockObj, status);
             case "sg/consultant-inscription/2" :
-                mockObj = <T> new ConsultantInscription(2, "Gandalf", "Leblanc", new Department(1, "TC", "Télécommunications"), "gandalf.leblanc@magicien.com", "0823476212", 2023, new Country(3, "Maroc"), "12345678901234567890", new Address(12, "3 rue de Sauron", undefined, "69600", "Kazagdûm", new Country(46, "Mordor")), [new Document(1, "Fiche d'inscription", true, false), new Document(2, "Pièce identité", false, false), new Document(3, "PDF quelconque", false, true)]);
+                mockObj = <T> new ConsultantInscription(2, "Gandalf", "Leblanc", new Department(1, "TC", "Télécommunications"), "gandalf.leblanc@magicien.com", "0823476212", 2023, new Country(3, "Maroc"), "12345678901234567890", new Address(12, "3 rue de Sauron", undefined, "69600", "Kazagdûm", new Country(46, "Mordor")), [new Document(1, "Fiche d'inscription", true, false), new Document(2, "Pièce identité", false, true), new Document(3, "Certificat de scolarité", false, true), new Document(4, "Relevé d'Identité Bancaire", false, true), new Document(5, "Titre de séjour", false, true)]);
                 status = 200;
                 return new MockResponse(mockObj, status);
             case "sg/consultant-inscription" :
-                mockObj = <T> new Page(<T[]> [new ConsultantInscription(1, "Michel", "Bienheureux", new Department(3, "GCU", "Génie Civil et Urbanisme"), "michel.bientavu@gmail.com", "0676287201", 2021, new Country(1, "France"), "12345678901234567890", new Address(34, "40 Bd d'Elrond", undefined, "83800", "Foncombe", new Country(45, "Terre du Milieu"))),
-                        new ConsultantInscription(2, "Gandalf", "Leblanc", new Department(1, "TC", "Télécommunications"), "gandalf.leblanc@magicien.com", "0823476212", 2023, new Country(3, "Maroc"), "12345678901234567890", new Address(12, "3 rue de Sauron", undefined, "69600", "Kazagdûm", new Country(46, "Mordor")), [new Document(1, "Fiche d'inscription", true, false), new Document(2, "Pièce identité", false, false), new Document(3, "PDF quelconque", false, true)])],
+                mockObj = <T> new Page(<T[]> [new ConsultantInscription(1, "Michel", "Bienheureux", new Department(3, "GCU", "Génie Civil et Urbanisme"), "michel.bientavu@gmail.com", "0676287201", 2021, new Country(1, "France"), "12345678901234567890", new Address(34, "40 Bd d'Elrond", undefined, "83800", "Foncombe", new Country(45, "Terre du Milieu")), [new Document(1, "Fiche d'inscription", true, false), new Document(2, "Pièce identité", false, true), new Document(3, "Certificat de scolarité", false, true), new Document(4, "Relevé d'Identité Bancaire", false, true), new Document(5, "Titre de séjour", false, false)]),
+                        new ConsultantInscription(2, "Gandalf", "Leblanc", new Department(1, "TC", "Télécommunications"), "gandalf.leblanc@magicien.com", "0823476212", 2023, new Country(3, "Maroc"), "12345678901234567890", new Address(12, "3 rue de Sauron", undefined, "69600", "Kazagdûm", new Country(46, "Mordor")), [new Document(1, "Fiche d'inscription", true, false), new Document(2, "Pièce identité", false, true), new Document(3, "Certificat de scolarité", false, true), new Document(4, "Relevé d'Identité Bancaire", false, true), new Document(5, "Titre de séjour", false, true)])],
                     new Meta(0, 1, 2 , 25));
                 status = 200;
                 return new MockResponse(mockObj, status);
@@ -95,8 +96,8 @@ export class ConsultantInscriptionMock implements IMock {
         let status = 500;
         switch (resource) {
             case "sg/consultant-inscription" :
-                mockObj = <T[]> [new ConsultantInscription(1, "Michel", "Bienheureux", new Department(3, "GCU", "Génie Civil et Urbanisme"), "michel.bientavu@gmail.com", "0676287201", 2021, new Country(1, "France"), "12345678901234567890", new Address(34, "40 Bd d'Elrond", undefined, "83800", "Foncombe", new Country(45, "Terre du Milieu"))),
-                    new ConsultantInscription(2, "Gandalf", "Leblanc", new Department(1, "TC", "Télécommunications"), "gandalf.leblanc@magicien.com", "0823476212", 2023, new Country(3, "Maroc"), "12345678901234567890", new Address(12, "3 rue de Sauron", undefined, "69600", "Kazagdûm", new Country(46, "Mordor")), [new Document(1, "Fiche d'inscription", true, false), new Document(2, "Pièce identité", false, false), new Document(4, "PDF quelconque", false, true)])];
+                mockObj = <T[]> [new ConsultantInscription(1, "Michel", "Bienheureux", new Department(3, "GCU", "Génie Civil et Urbanisme"), "michel.bientavu@gmail.com", "0676287201", 2021, new Country(1, "France"), "12345678901234567890", new Address(34, "40 Bd d'Elrond", undefined, "83800", "Foncombe", new Country(45, "Terre du Milieu")), [new Document(1, "Fiche d'inscription", true, false), new Document(2, "Pièce identité", false, true), new Document(3, "Certificat de scolarité", false, true), new Document(4, "Relevé d'Identité Bancaire", false, true), new Document(5, "Titre de séjour", false, false)]),
+                    new ConsultantInscription(2, "Gandalf", "Leblanc", new Department(1, "TC", "Télécommunications"), "gandalf.leblanc@magicien.com", "0823476212", 2023, new Country(3, "Maroc"), "12345678901234567890", new Address(12, "3 rue de Sauron", undefined, "69600", "Kazagdûm", new Country(46, "Mordor")), [new Document(1, "Fiche d'inscription", true, false), new Document(2, "Pièce identité", false, true), new Document(3, "Certificat de scolarité", false, true), new Document(4, "Relevé d'Identité Bancaire", false, true), new Document(5, "Titre de séjour", false, true)])];
                 status = 200;
                 return new MockResponse(mockObj, status);
         }
