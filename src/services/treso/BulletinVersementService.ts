@@ -4,6 +4,7 @@ import { Page } from "../../models/core/Page";
 import * as winston from "winston";
 import { BulletinVersement } from "../../models/treso/BulletinVersement";
 import { BulletinVersementCreateRequest } from "../../models/treso/BulletinVersementCreateRequest";
+import { DocumentResponse } from "../../models/DocumentResponse";
 
 export class BulletinVersementService extends BaseService {
 
@@ -107,6 +108,23 @@ export class BulletinVersementService extends BaseService {
     ).catch(
       e => {
         callback(e);
+      }
+    );
+  }
+
+  static getBulletinDocument(id: number, callback: (err: any, result: DocumentResponse | null) => void): void {
+    this.rest.get<DocumentResponse>("treso/payment-slip/" + id + "/generateDocument", this.defaultHeaders()).then(
+      (res: IRestResponse<DocumentResponse>) => {
+        if (res.statusCode !== 200) {
+          winston.debug("Problème lors du chargement du document");
+          return callback(this.defaultError(res.statusCode), null);
+        }
+        winston.debug("Response : " + JSON.stringify(res));
+        callback(null, res.result);
+      }
+    ).catch(
+      e => {
+        callback(e, null);
       }
     );
   }
