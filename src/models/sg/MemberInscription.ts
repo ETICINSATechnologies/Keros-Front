@@ -4,6 +4,7 @@ import { Country } from "../core/Country";
 import { Pole } from "../core/Pole";
 import { Address } from "../core/Address";
 import { Document } from "../Document";
+import { Gender } from "../core/Gender";
 
 export class MemberInscription implements IStringable {
   constructor(
@@ -12,6 +13,8 @@ export class MemberInscription implements IStringable {
     private lastName ?: string,
     private department ?: Department,
     private email ?: string,
+    private gender ?: Gender,
+    private birthday ?: string,
     private phoneNumber ?: string,
     private outYear ?: number,
     private nationality ?: Country,
