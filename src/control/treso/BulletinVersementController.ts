@@ -11,6 +11,8 @@ import { BulletinVersement } from "../../models/treso/BulletinVersement";
 import { BulletinVersementCreateRequest } from "../../models/treso/BulletinVersementCreateRequest";
 import { MemberService } from "../../services/core/MemberService";
 import { Member } from "../../models/core/Member";
+import { DocumentResponse } from "../../models/DocumentResponse";
+import HttpError from "../../util/httpError";
 
 export class BulletinVersementController {
   public viewBulletinsVersement(req: Request, res: Response, next: NextFunction) {
@@ -182,6 +184,21 @@ export class BulletinVersementController {
         return next(err);
       }
       res.redirect("/treso/payment-slip");
+    });
+  }
+
+  public getDocument(req: Request, res: Response, next: NextFunction) {
+    const id = req.params.id;
+    winston.info("Getting bulletin doc for id " + id);
+    BulletinVersementService.getBulletinDocument(id, function (err, result: DocumentResponse | null) {
+      if (err) {
+        return next(err);
+      }
+      if (result && result.location) {
+        res.redirect(result.location);
+      } else {
+        return next(new HttpError("Error when loading document", 500));
+      }
     });
   }
 

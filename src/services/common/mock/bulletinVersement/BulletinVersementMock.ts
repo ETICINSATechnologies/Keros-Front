@@ -16,6 +16,7 @@ import { Member } from "../../../../models/core/Member";
 import { Page } from "../../../../models/core/Page";
 import { Meta } from "../../../../models/core/Meta";
 import { BulletinVersement } from "../../../../models/treso/BulletinVersement";
+import { DocumentResponse } from "../../../../models/DocumentResponse";
 
 
 export class BulletinVersementMock implements IMock {
@@ -66,6 +67,13 @@ export class BulletinVersementMock implements IMock {
   get<T>(resource: string, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;
     let status = 500;
+    if (resource.match(/generateDocument/)) {
+      if (resource.match(/1/)) {
+        mockObj = <T> new DocumentResponse("http://keros-api-dev.etic-insa.com/api/v1/core/document/a946092b-7387-4f42-bcd0-d4e43ccab89e");
+        status = 200;
+        return new MockResponse(mockObj, status);
+      }
+    }
     switch (resource) {
       case "treso/payment-slip/1":
         mockObj = <T> new BulletinVersement(1, "00001", 3, "Jean Foirfouille", "11251205428", new Address(2, "2 rue des Palourdes", "appt 65", "Villeurbanne", "69100", new Country(5, "France")), "jeanfoirfouille@laposte.net", new Study(2, "Création d'une billeterie", "Le site web est une billeterie en ligne pour le concert de Iz", new Field(3, "Réseau"), new Status(4, "Finie"), new Provenance(1, "Mail"), "2018-02-27", "2018-09-01", 20, 1000, 100, 500, 200, "2018-10-05", new Firm(2, "1111111", "La poissonerie des familles", new Address(2, "1204, rue des Acacias", "34, rue de Créqui", "69006", "Lyon", new Country(2, "Suisse")), new FirmType(4, "SARL")), [new Contact(1, "Jimmy", "Neutron", new Gender(3, "A"), undefined, "jimmy@test.com", "0450202122", "+33620547064", "Stagiaire"), new Contact(2, "José", "Bové", new Gender(4, "I"), undefined, "votezjosé@test.com", "0405060708", "+33711121314", "PDG")], [new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A")), new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"))], [new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A")), new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"))], [new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A")), new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H"))], false), "La poissonerie des familles", "Tom Dupont", true, false, "D’un montant de quatre mille quatre-vingt euros toutes taxes comprises (4080€ TTC), correspondant à la réalisation de 13 JEH", "2019-03-15", new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H")), true, "2019-03-08", new Member(2, "Pierre", "Henry", "phenry", new Gender(1, "H")), true, "2019-03-08", new Member(1, "Tom", "Dupont", "tdupont", new Gender(3, "A")));

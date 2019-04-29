@@ -22,6 +22,7 @@ export function bulletinVersementRouter(): Router {
   router.post("/postform", bulletinVersementController.postBulletinVersementForm);
   router.post("/:id(\\d+)/validate-ua", bulletinVersementController.validateUa);
   router.post("/:id(\\d+)/validate-perf", bulletinVersementController.validatePerf);
+  router.get("/:id(\\d+)/generateDocument", bulletinVersementController.getDocument);
 
   return router;
 }
