@@ -17,19 +17,19 @@ import { GenderService } from "../../services/core/GenderService";
 import { Gender } from "../../models/core/Gender";
 
 export class MemberInscriptionController {
-  public viewMemberInscriptions(req: Request, res: Response, next: NextFunction) {
-    MemberInscriptionService.getAllMemberInscriptions(function(err, page: Page<MemberInscription> | null) {
-      winston.info("Getting all member inscriptions");
-      if (err) {
-        return next(err);
-      }
-      const options = {
-        inscriptions: page,
-      };
+    public viewMemberInscriptions(req: Request, res: Response, next: NextFunction) {
+        MemberInscriptionService.getAllMemberInscriptions(function (err, page: Page<MemberInscription> | null) {
+            winston.info("Getting all member inscriptions");
+            if (err) {
+                return next(err);
+            }
+            const options = {
+                inscriptions: page,
+            };
 
-      res.render("sg/inscription/members/viewAll", options);
-    });
-  }
+            res.render("sg/inscription/members/viewAll", options);
+        });
+    }
 
   public createMemberInscription(req: Request, res: Response, next: NextFunction) {
     winston.info("Getting create member inscription form");
@@ -52,17 +52,17 @@ export class MemberInscriptionController {
           });
         });
       });
-    });
-  }
+        });
+    }
 
-  public deleteMemberInscription(req: Request, res: Response, next: NextFunction) {
-    const id = req.params.id;
-    winston.info("Delete inscription for id " + id);
-    MemberInscriptionService.delete(id, function(err) {
-      if (err) return next(err);
-      res.redirect("sg/membre-inscription");
-    });
-  }
+    public deleteMemberInscription(req: Request, res: Response, next: NextFunction) {
+        const id = req.params.id;
+        winston.info("Delete inscription for id " + id);
+        MemberInscriptionService.delete(id, function (err) {
+            if (err) return next(err);
+            res.redirect("/sg/membre-inscription");
+        });
+    }
 
   public viewMemberInscription(req: Request, res: Response, next: NextFunction) {
     const id = req.params.id;
@@ -90,7 +90,7 @@ export class MemberInscriptionController {
         });
       });
     });
-  }
+    }
 
   public updateMemberInscription(req: Request, res: Response, next: NextFunction) {
     const id = req.params.id;
@@ -117,11 +117,11 @@ export class MemberInscriptionController {
           });
         });
       });
-    });
-  }
+        });
+    }
 
-  public postMemberInscriptionForm(req: Request, res: Response, next: NextFunction) {
-    const id = parseInt(req.body.id);
+    public postMemberInscriptionForm(req: Request, res: Response, next: NextFunction) {
+        const id = parseInt(req.body.id);
 
     const inscriptionRequest = new MemberInscriptionCreateRequest();
     inscriptionRequest.firstName = req.body.firstName;
@@ -135,76 +135,76 @@ export class MemberInscriptionController {
     inscriptionRequest.nationalityId = parseInt(req.body.nationalityId);
     inscriptionRequest.wantedPoleId = parseInt(req.body.wantedPoleId);
 
-    const addressRequest = new AddressCreateRequest();
-    addressRequest.line1 = req.body.line1;
-    addressRequest.line2 = req.body.line2;
-    addressRequest.city = req.body.city;
-    addressRequest.postalCode = req.body.postalCode;
-    addressRequest.countryId = parseInt(req.body.countryId);
-    inscriptionRequest.address = addressRequest;
+        const addressRequest = new AddressCreateRequest();
+        addressRequest.line1 = req.body.line1;
+        addressRequest.line2 = req.body.line2;
+        addressRequest.city = req.body.city;
+        addressRequest.postalCode = req.body.postalCode;
+        addressRequest.countryId = parseInt(req.body.countryId);
+        inscriptionRequest.address = addressRequest;
 
-    if (id) {
-      MemberInscriptionService.update(id, inscriptionRequest, function (err) {
-        if (err) {
-          return next(err);
+        if (id) {
+            MemberInscriptionService.update(id, inscriptionRequest, function (err) {
+                if (err) {
+                    return next(err);
+                }
+                winston.info("Updated member inscription for id : " + id);
+                res.redirect("/sg/membre-inscription");
+            });
+        } else {
+            MemberInscriptionService.createMemberInscription(inscriptionRequest, function (err) {
+                if (err) {
+                    return next(err);
+                }
+                winston.info("Created a new member inscription");
+                res.redirect("/sg/membre-inscription");
+            });
         }
-        winston.info("Updated member inscription for id : " + id);
-        res.redirect("/sg/membre-inscription");
-      });
-    } else {
-      MemberInscriptionService.createMemberInscription(inscriptionRequest, function (err) {
-        if (err) {
-          return next(err);
-        }
-        winston.info("Created a new member inscription");
-        res.redirect("/sg/membre-inscription");
-      });
+
     }
 
-  }
+    public generateDocument(req: Request, res: Response, next: NextFunction) {
+        const id = req.params.id;
+        const documentTypeId = req.params.documentTypeId;
+        winston.info("Getting doc (of type " + documentTypeId + ") for id " + id);
+        MemberInscriptionService.generateDocument(id, documentTypeId, function (err, result: DocumentResponse | null) {
+            if (err) {
+                return next(err);
+            }
+            if (result && result.location) {
+                res.redirect(result.location);
+            } else {
+                return next(new HttpError("Error when loading document", 500));
+            }
+        });
+    }
 
-  public generateDocument(req: Request, res: Response, next: NextFunction) {
-    const id = req.params.id;
-    const documentTypeId = req.params.documentTypeId;
-    winston.info("Getting doc (of type " + documentTypeId + ") for id " + id);
-    MemberInscriptionService.generateDocument(id, documentTypeId, function (err, result: DocumentResponse | null) {
-      if (err) {
-        return next(err);
-      }
-      if (result && result.location) {
-        res.redirect(result.location);
-      } else {
-        return next(new HttpError("Error when loading document", 500));
-      }
-    });
-  }
+    public uploadDocument(req: Request, res: Response, next: NextFunction) {
+        const id = req.params.id;
+        const documentTypeId = req.params.documentTypeId;
+        winston.info("Uploading doc (of type " + documentTypeId + ") for id " + id);
+        MemberInscriptionService.uploadDocument(id, documentTypeId, function (err) {
+            if (err) {
+                return next(err);
+            }
+            winston.info("Uploaded doc (of type" + documentTypeId + ") for id " + id);
+            res.redirect("/sg/membre-inscription/" + id);
+        });
+    }
 
-  public uploadDocument(req: Request, res: Response, next: NextFunction) {
-    const id = req.params.id;
-    const documentTypeId = req.params.documentTypeId;
-    winston.info("Uploading doc (of type " + documentTypeId + ") for id " + id);
-    MemberInscriptionService.uploadDocument(id, documentTypeId, function (err) {
-      if (err) {
-        return next(err);
-      }
-      winston.info("Uploaded doc (of type" + documentTypeId + ") for id " + id);
-      res.redirect("/sg/membre-inscription/" + id);
-    });
-  }
-
-  public downloadDocument(req: Request, res: Response, next: NextFunction) {
-    const id = req.params.id;
-    const documentTypeId = req.params.documentTypeId;
-    winston.info("Downloading doc (of type " + documentTypeId + ") for id " + id);
-    MemberInscriptionService.downloadDocument(id, documentTypeId, function (err, result: DocumentResponse | null) {
-      if (err) {
-        return next(err);
-      }
-      if (result && result.location) {
-        res.redirect(result.location);
-      } else {
-        return next(new HttpError("Error when loading document", 500));
-      }
-    });
-  }
+    public downloadDocument(req: Request, res: Response, next: NextFunction) {
+        const id = req.params.id;
+        const documentTypeId = req.params.documentTypeId;
+        winston.info("Downloading doc (of type " + documentTypeId + ") for id " + id);
+        MemberInscriptionService.downloadDocument(id, documentTypeId, function (err, result: DocumentResponse | null) {
+            if (err) {
+                return next(err);
+            }
+            if (result && result.location) {
+                res.redirect(result.location);
+            } else {
+                return next(new HttpError("Error when loading document", 500));
+            }
+        });
+    }
 }

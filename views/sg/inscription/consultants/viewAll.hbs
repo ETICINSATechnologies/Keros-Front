@@ -1,0 +1,60 @@
+<body class="hold-transition skin-green fixed sidebar-mini">
+<div class="wrapper">
+    {{> template/header}}
+    {{> template/sidebar}}
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                Voir les inscriptions consultants
+            </h1>
+            {{> breadcrumb tab="RH" action="all" pathall="Inscriptions consultants,Voir les inscriptions consultants"}}
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-primary">
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="dataTables_wrapper form-inline dt-bootstrap">
+                                {{> template/itemPerPage meta=inscriptions.meta}}
+                                <table class="table table-bordered dataTable">
+                                    <tbody>
+                                    <tr>
+                                        <th>Nom<a href="#" id="name" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                                        <th>Prénom<a href="#" id="firstname" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                                        <th>Département<a href="#" id="departement" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                                        <th>Email<a href="#" id="email" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                                        <th>Voir</th>
+                                        <th>Modifier</th>
+                                    </tr>
+                                    {{#each inscriptions.content}}
+                                        <tr>
+                                            <td>{{lastName}}</td>
+                                            <td>{{firstName}}</td>
+                                            <td>{{department.label}}</td>
+                                            <td>{{email}}</td>
+                                            <td><a href="consultant-inscription/{{id}}" class="fa fa-eye fa-2x"></a></td>
+                                            <td><a href="consultant-inscription/update/{{id}}" class="fa fa-edit fa-2x"></a></td>
+                                        </tr>
+                                    {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            {{> template/pagination meta=inscriptions.meta}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="consultant-inscription/create" style="color: white;"><button type="button" class="btn btn-block btn-success btn-lg box">Nouvelle inscription</button></a>
+                </div>
+            </div>
+        </section>
+    </div>
+    {{> template/footer}}
+</div>
+{{> template/scripts}}
+</body>

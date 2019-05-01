@@ -5,7 +5,7 @@
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        {{#if member}}Fiche Inscription membre{{else}}Nouvelle Inscription membre{{/if}}
+        {{#if inscription}}Fiche Inscription membre{{else}}Nouvelle Inscription membre{{/if}}
       </h1>
       {{> breadcrumb action=action tab="RH" pathnew="Inscriptions membres,Nouvelle inscription membre" pathview=(concat "Inscriptions membres," (concat inscription.lastName (concat " " inscription.firstName))) pathedit=(concat "Inscriptions membres,Edition " (concat inscription.lastName (concat " " inscription.firstName))) }}
     </section>
