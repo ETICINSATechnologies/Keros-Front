@@ -3,6 +3,7 @@ import { Department } from "../core/Department";
 import { Country } from "../core/Country";
 import { Address } from "../core/Address";
 import { Document } from "../Document";
+import { Gender } from "../core/Gender";
 
 export class ConsultantInscription implements IStringable {
     constructor(
@@ -11,6 +12,8 @@ export class ConsultantInscription implements IStringable {
         private lastName ?: string,
         private department ?: Department,
         private email ?: string,
+        private gender ?: Gender,
+        private birthday ?: string,
         private phoneNumber ?: string,
         private outYear ?: number,
         private nationality ?: Country,

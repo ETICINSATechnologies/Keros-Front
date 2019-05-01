@@ -12,6 +12,8 @@ import HttpError from "../../util/httpError";
 import { AddressCreateRequest } from "../../models/core/AddressCreateRequest";
 import { ConsultantInscriptionCreateRequest } from "../../models/sg/ConsultantInscriptionCreateRequest";
 import { FileUploader } from "../../util/FileUploader";
+import { GenderService } from "../../services/core/GenderService";
+import { Gender } from "../../models/core/Gender";
 
 
 export class ConsultantInscriptionController {
@@ -33,19 +35,23 @@ export class ConsultantInscriptionController {
 
     viewConsultantInscription(req: Request, res: Response, next: NextFunction) {
         const id = req.params.id;
-        ConsultantInscriptionService.getConsultantInscription(id, function (err4, inscription: ConsultantInscription | null) {
-            DepartmentService.getAllDepartments(function (err1, departments: Department[] | null) {
-                CountryService.getAllCountries(function (err2, countries: Country[] | null) {
-                    if (err1) return next(err1);
-                    if (err2) return next(err2);
-                    if (err4) return next(err4);
-                    const options = {
-                        inscription,
-                        departments,
-                        countries,
-                        action: "view"
-                    };
-                    res.render("sg/inscription/consultants/viewInscription", options);
+        ConsultantInscriptionService.getConsultantInscription(id, function (err1, inscription: ConsultantInscription | null) {
+            DepartmentService.getAllDepartments(function (err2, departments: Department[] | null) {
+                CountryService.getAllCountries(function (err3, countries: Country[] | null) {
+                    GenderService.getAllGenders(function (err4, genders: Gender[] | null) {
+                        if (err1) return next(err1);
+                        if (err2) return next(err2);
+                        if (err3) return next(err3);
+                        if (err4) return next(err4);
+                        const options = {
+                            inscription,
+                            departments,
+                            countries,
+                            gender: genders,
+                            action: "view"
+                        };
+                        res.render("sg/inscription/consultants/viewInscription", options);
+                    });
                 });
             });
         });
@@ -55,33 +61,41 @@ export class ConsultantInscriptionController {
         winston.info("Getting create consultant inscription form");
         DepartmentService.getAllDepartments(function (err1, departments: Department[] | null) {
             CountryService.getAllCountries(function (err2, countries: Country[] | null) {
-                if (err1) return next(err1);
-                if (err2) return next(err2);
-                const options = {
-                    departments,
-                    countries,
-                    action: "create"
-                };
-                res.render("sg/inscription/consultants/viewInscription", options);
+                GenderService.getAllGenders(function (err3, genders: Gender[] | null) {
+                    if (err1) return next(err1);
+                    if (err2) return next(err2);
+                    if (err3) return next(err3);
+                    const options = {
+                        departments,
+                        countries,
+                        gender: genders,
+                        action: "create"
+                    };
+                    res.render("sg/inscription/consultants/viewInscription", options);
+                });
             });
         });
     }
 
     updateConsultantInscription(req: Request, res: Response, next: NextFunction) {
         const id = req.params.id;
-        ConsultantInscriptionService.getConsultantInscription(id, function (err4, inscription: ConsultantInscription | null) {
-            DepartmentService.getAllDepartments(function (err1, departments: Department[] | null) {
-                CountryService.getAllCountries(function (err2, countries: Country[] | null) {
-                    if (err1) return next(err1);
-                    if (err2) return next(err2);
-                    if (err4) return next(err4);
-                    const options = {
-                        inscription,
-                        departments,
-                        countries,
-                        action: "update"
-                    };
-                    res.render("sg/inscription/consultants/viewInscription", options);
+        ConsultantInscriptionService.getConsultantInscription(id, function (err1, inscription: ConsultantInscription | null) {
+            DepartmentService.getAllDepartments(function (err2, departments: Department[] | null) {
+                CountryService.getAllCountries(function (err3, countries: Country[] | null) {
+                    GenderService.getAllGenders(function (err4, genders: Gender[] | null) {
+                        if (err1) return next(err1);
+                        if (err2) return next(err2);
+                        if (err3) return next(err3);
+                        if (err4) return next(err4);
+                        const options = {
+                            inscription,
+                            departments,
+                            countries,
+                            gender: genders,
+                            action: "update"
+                        };
+                        res.render("sg/inscription/consultants/viewInscription", options);
+                    });
                 });
             });
         });
@@ -92,7 +106,7 @@ export class ConsultantInscriptionController {
         winston.info("Delete inscription for id " + id);
         ConsultantInscriptionService.delete(id, function (err) {
             if (err) return next(err);
-            res.redirect("sg/consultant-inscription");
+            res.redirect("/sg/consultant-inscription");
         });
     }
 
@@ -136,6 +150,8 @@ export class ConsultantInscriptionController {
         inscriptionRequest.lastName = req.body.lastName;
         inscriptionRequest.departmentId = parseInt(req.body.departmentId);
         inscriptionRequest.email = req.body.email;
+        inscriptionRequest.genderId = req.body.genderId;
+        inscriptionRequest.birthday = req.body.birthday;
         inscriptionRequest.phoneNumber = req.body.phoneNumber;
         inscriptionRequest.outYear = parseInt(req.body.outYear);
         inscriptionRequest.nationalityId = parseInt(req.body.nationalityId);

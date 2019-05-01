@@ -39,8 +39,20 @@
                                             {{/each}}
                                         </select>
                                     </div>
-                                    <div class="col-md-2"></div>
-                                    <div class="col-md-6 form-group">
+                                    <div class="col-md-4 form-group">
+                                        <label for="genderId">Sexe</label>
+                                        <select class="form-control" id="genderId" name="genderId" {{readonlyIf
+                                                (eq action "view")}} {{disabledIf (eq action "view")}}>
+                                            {{#each gender}}
+                                                <option value="{{id}}" {{selected id @root.inscription.gender.id}}>{{gender label}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                        <label for="birthday">Date de naissance</label>
+                                        <input type="date" class="form-control" id="birthday" name="birthday" value="{{inscription.birthday}}" required {{readonlyIf (eq action "view")}}>
+                                    </div>
+                                    <div class="col-md-12 form-group">
                                         <label for="socialSecurityNumber">Numéro de sécurité sociale</label>
                                         <input type="text" class="form-control" id="socialSecurityNumber" name="socialSecurityNumber" value="{{inscription.socialSecurityNumber}}" placeholder="Entrez le numéro de sécurité sociale" required {{readonlyIf (eq action "view")}}>
                                     </div>

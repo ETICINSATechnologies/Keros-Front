@@ -21,7 +21,7 @@ export function consultantInscriptionRouter(): Router {
     router.get("/delete/:id(\\d+)/", inscriptionController.deleteConsultantInscription);
     router.get("/:id(\\d+)/document/:documentTypeId(\\d+)/", inscriptionController.downloadDocument);
     router.get("/:id(\\d+)/document/:documentTypeId(\\d+)/generate", inscriptionController.generateDocument);
-    router.post("postform", inscriptionController.postConsultantInscriptionForm);
+    router.post("/postform", inscriptionController.postConsultantInscriptionForm);
     router.post("/:id(\\d+)/document/:documentTypeId(\\d+)/", inscriptionController.uploadDocument);
 
     return router;
