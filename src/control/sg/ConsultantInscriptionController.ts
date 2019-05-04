@@ -14,6 +14,8 @@ import { ConsultantInscriptionCreateRequest } from "../../models/sg/ConsultantIn
 import { FileUploader } from "../../util/FileUploader";
 import { GenderService } from "../../services/core/GenderService";
 import { Gender } from "../../models/core/Gender";
+import { UploadedFile } from "express-fileupload";
+import { UploadedDocument } from "../../models/UploadedDocument";
 
 
 export class ConsultantInscriptionController {
@@ -165,14 +167,13 @@ export class ConsultantInscriptionController {
         addressRequest.countryId = parseInt(req.body.countryId);
         inscriptionRequest.address = addressRequest;
 
-        if (req.files !== undefined) {
-            inscriptionRequest.documentIdentity = FileUploader.obtainFileBase64(req.files, "documentIdentity");
-            inscriptionRequest.documentResidencePermit = FileUploader.obtainFileBase64(req.files, "documentResidencePermit");
-            inscriptionRequest.documentRib = FileUploader.obtainFileBase64(req.files, "documentRib");
-            inscriptionRequest.documentScolarityCertificate = FileUploader.obtainFileBase64(req.files, "documentScolarityCertificate");
-            inscriptionRequest.documentVitaleCard = FileUploader.obtainFileBase64(req.files, "documentVitaleCard");
+        if (req.files) {
+            inscriptionRequest.documentIdentity = req.files.documentIdentity;
+            inscriptionRequest.documentResidencePermit = req.files.documentResidencePermit;
+            inscriptionRequest.documentRib = req.files.documentRib;
+            inscriptionRequest.documentScolarityCertificate = req.files.documentScolarityCertificate;
+            inscriptionRequest.documentVitaleCard = req.files.documentVitaleCard;
         }
-
         if (id) {
             ConsultantInscriptionService.update(id, inscriptionRequest, function (err) {
                 if (err) {
@@ -196,8 +197,12 @@ export class ConsultantInscriptionController {
     uploadDocument(req: Request, res: Response, next: NextFunction) {
         const id = req.params.id;
         const documentTypeId = req.params.documentTypeId;
+        const uploadedDocument = new UploadedDocument();
+        if (req.files) {
+            uploadedDocument.file = req.files.file;
+        }
         winston.info("Uploading doc (of type " + documentTypeId + ") for id " + id);
-        ConsultantInscriptionService.uploadDocument(id, documentTypeId, function (err) {
+        ConsultantInscriptionService.uploadDocument(id, documentTypeId, uploadedDocument, function (err) {
             if (err) {
                 return next(err);
             }

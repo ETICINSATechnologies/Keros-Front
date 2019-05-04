@@ -6,6 +6,7 @@ import { StudyCreateRequest } from "../../models/ua/StudyCreateRequest";
 import * as winston from "winston";
 import HttpError from "../../util/httpError";
 import { DocumentResponse } from "../../models/DocumentResponse";
+import { UploadedDocument } from "../../models/UploadedDocument";
 
 export class StudyService extends BaseService {
     static getStudy(id: number, callback: (err: any, result: Study | null) => void): void {
@@ -137,8 +138,8 @@ export class StudyService extends BaseService {
     );
   }
 
-  static uploadDocument(studyId: number, documentTypeId: number, callback: (err: any) => void): void {
-    this.rest.create<DocumentResponse>("ua/study/" + studyId + "/document/" + documentTypeId, this.defaultHeaders()).then(
+  static uploadDocument(studyId: number, documentTypeId: number, file: UploadedDocument, callback: (err: any) => void): void {
+    this.rest.create<DocumentResponse>("ua/study/" + studyId + "/document/" + documentTypeId, file, this.defaultHeaders()).then(
       (res: IRestResponse<DocumentResponse>) => {
         if (res.statusCode !== 200) {
           winston.debug("Problème lors du chargement du document");

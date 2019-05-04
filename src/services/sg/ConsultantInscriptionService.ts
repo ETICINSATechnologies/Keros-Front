@@ -5,6 +5,7 @@ import { ConsultantInscription } from "../../models/sg/ConsultantInscription";
 import { Page } from "../../models/core/Page";
 import { ConsultantInscriptionCreateRequest } from "../../models/sg/ConsultantInscriptionCreateRequest";
 import { DocumentResponse } from "../../models/DocumentResponse";
+import { UploadedDocument } from "../../models/UploadedDocument";
 
 export class ConsultantInscriptionService extends BaseService {
     static getConsultantInscription(id: number, callback: (err: any, result: ConsultantInscription | null) => void): void {
@@ -94,8 +95,8 @@ export class ConsultantInscriptionService extends BaseService {
         );
     }
 
-    static uploadDocument(inscriptionId: number, documentTypeId: number, callback: (err: any) => void): void {
-        this.rest.create<DocumentResponse>("sg/consultant-inscription/" + inscriptionId + "/document/" + documentTypeId, this.defaultHeaders()).then(
+    static uploadDocument(inscriptionId: number, documentTypeId: number, file: UploadedDocument, callback: (err: any) => void): void {
+        this.rest.create<DocumentResponse>("sg/consultant-inscription/" + inscriptionId + "/document/" + documentTypeId, file, this.defaultHeaders()).then(
             (res: IRestResponse<DocumentResponse>) => {
                 if (res.statusCode !== 200) {
                     winston.debug("Problème lors du chargement du document");

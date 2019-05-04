@@ -17,6 +17,7 @@ import { Provenance } from "../../models/ua/Provenance";
 import { Config } from "../../config/Config";
 import { DocumentResponse } from "../../models/DocumentResponse";
 import HttpError from "../../util/httpError";
+import { UploadedDocument } from "../../models/UploadedDocument";
 
 export class StudyController {
     public viewStudies(req: Request, res: Response, next: NextFunction) {
@@ -228,8 +229,12 @@ export class StudyController {
   public uploadDocument(req: Request, res: Response, next: NextFunction) {
     const id = req.params.id;
     const documentTypeId = req.params.documentTypeId;
+    const uploadedDocument = new UploadedDocument();
+    if (req.files) {
+      uploadedDocument.file = req.files.file;
+    }
     winston.info("Uploading doc (of type " + documentTypeId + ") for id " + id);
-    StudyService.uploadDocument(id, documentTypeId, function (err) {
+    StudyService.uploadDocument(id, documentTypeId, uploadedDocument, function (err) {
       if (err) {
         return next(err);
       }

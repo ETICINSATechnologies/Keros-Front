@@ -1,5 +1,6 @@
 import { IStringable } from "../interface/IStringable";
 import { AddressCreateRequest } from "../core/AddressCreateRequest";
+import { UploadedFile } from "express-fileupload";
 
 export class ConsultantInscriptionCreateRequest implements IStringable {
     constructor(
@@ -14,10 +15,10 @@ export class ConsultantInscriptionCreateRequest implements IStringable {
         public nationalityId ?: number,
         public socialSecurityNumber ?: string,
         public address ?: AddressCreateRequest,
-        public documentIdentity ?: string,
-        public documentScolarityCertificate ?: string,
-        public documentRib ?: string,
-        public documentVitaleCard ?: string,
-        public documentResidencePermit ?: string,
+        public documentIdentity ?: UploadedFile | UploadedFile[],
+        public documentScolarityCertificate ?: UploadedFile | UploadedFile[],
+        public documentRib ?: UploadedFile | UploadedFile[],
+        public documentVitaleCard ?: UploadedFile | UploadedFile[],
+        public documentResidencePermit ?: UploadedFile | UploadedFile[],
     ) {}
 }

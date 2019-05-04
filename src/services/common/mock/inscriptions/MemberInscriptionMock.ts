@@ -18,8 +18,10 @@ export class MemberInscriptionMock implements IMock {
     let mockObj: T | null = null;
     let status = 500;
     if (resource.match(/document/)) {
+      const file = resources.file;
+      mockObj = <T> new DocumentResponse(file.name);
       status = 200;
-      return new MockResponse(null, status);
+      return new MockResponse(mockObj, status);
     }
     switch (resource) {
       case "sg/membre-inscription" :

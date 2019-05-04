@@ -19,7 +19,7 @@
                                     Informations  {{#if inscription}}inscription consultant n°{{inscription.id}}{{/if}}
                                 </h3>
                             </div>
-                            <form role="form" method="post" action="/sg/consultant-inscription/postform">
+                            <form role="form" method="post" action="/sg/consultant-inscription/postform" enctype="multipart/form-data">
                                 {{#if inscription}}<input type="text" id="id" name="id" value="{{inscription.id}}" hidden>{{/if}}
                                 <div class="box-body row">
                                     <div class="col-md-6 form-group">
@@ -117,71 +117,71 @@
                                         </select>
                                     </div>
                                 </div>
-                                {{#if (ne action "create")}}
-                                    {{#if inscription}}
-                                        <div id="view-documents">
-                                            <h4 class="col-md-12 box-title">
-                                                Documents
-                                            </h4>
-                                            <div class="col-md-12">
-                                                <div class="panel panel-default">
-                                                    <a data-toggle="collapse" data-parent="#faq" href="#col-documents" aria-expanded="false"
-                                                       aria-controls="elemmailshots">
-                                                        <div class="panel-heading" role="tab" id="documents" style="background-color:#F5F5F5;">
-                                                            <h5 class="panel-title">
-                                                                Afficher
-                                                            </h5>
+                                {{#if (eq action "view")}}
+                                </form>
+                                    <div id="view-documents">
+                                        <h4 class="col-md-12 box-title">
+                                            Documents
+                                        </h4>
+                                        <div class="col-md-12">
+                                            <div class="panel panel-default">
+                                                <a data-toggle="collapse" data-parent="#faq" href="#col-documents" aria-expanded="false"
+                                                   aria-controls="elemmailshots">
+                                                    <div class="panel-heading" role="tab" id="documents" style="background-color:#F5F5F5;">
+                                                        <h5 class="panel-title">
+                                                            Afficher
+                                                        </h5>
+                                                    </div>
+                                                </a>
+                                                <div id="col-documents" class="panel-collapse collapse" role="tabpanel"
+                                                     aria-labelledby="documents">
+                                                    <div class="panel-body">
+                                                        <div class="col-md-3">
+                                                            <b>Titre du document</b>
                                                         </div>
-                                                    </a>
-                                                    <div id="col-documents" class="panel-collapse collapse" role="tabpanel"
-                                                         aria-labelledby="documents">
+                                                        <div class="col-md-3">
+                                                            <b>Publiposter</b>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <b>Upload VF</b>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <b>Download VF</b>
+                                                        </div>
+                                                    </div>
+                                                    {{#each inscription.documents}}
                                                         <div class="panel-body">
                                                             <div class="col-md-3">
-                                                                <b>Titre du document</b>
+                                                                {{name}}
                                                             </div>
                                                             <div class="col-md-3">
-                                                                <b>Publiposter</b>
+                                                                {{#if isTemplatable}}
+                                                                    <a href="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{id}}/generate" target="_blank">
+                                                                        <i style="font-size: 2em;" class="fa fa-download"></i>
+                                                                    </a>
+                                                                {{/if}}
                                                             </div>
                                                             <div class="col-md-3">
-                                                                <b>Upload VF</b>
+                                                                <form action="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{id}}" method="post" enctype="multipart/form-data">
+                                                                    <input type="file" name="file">
+                                                                    <button type="submit" formmethod="post" formaction="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{id}}" class="btn btn-primary btn-sm" style="margin-top: 5%">Submit</button>
+                                                                </form>
                                                             </div>
                                                             <div class="col-md-3">
-                                                                <b>Download VF</b>
+                                                                {{#if isUploaded}}
+                                                                    <a href="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{id}}" target="_blank">
+                                                                        <i style="font-size: 2em;" class="fa fa-download"></i>
+                                                                    </a>
+                                                                {{/if}}
                                                             </div>
                                                         </div>
-                                                        {{#each inscription.documents}}
-                                                            <div class="panel-body">
-                                                                <div class="col-md-3">
-                                                                    {{name}}
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    {{#if isTemplatable}}
-                                                                        <a href="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{id}}/generate" target="_blank">
-                                                                            <i style="font-size: 2em;" class="fa fa-download"></i>
-                                                                        </a>
-                                                                    {{/if}}
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <form action="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{id}}" method="post" enctype="multipart/form-data">
-                                                                        <input type="file" name="file">
-                                                                        <button type="submit" formmethod="post" formaction="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{id}}" class="btn btn-primary btn-sm" style="margin-top: 5%">Submit</button>
-                                                                    </form>
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    {{#if isUploaded}}
-                                                                        <a href="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{id}}" target="_blank">
-                                                                            <i style="font-size: 2em;" class="fa fa-download"></i>
-                                                                        </a>
-                                                                    {{/if}}
-                                                                </div>
-                                                            </div>
-                                                        {{/each}}
-                                                    </div>
+                                                    {{/each}}
+                                                  {{> fileAddition origin="/sg/consultant-inscription" id=inscription.id}}
                                                 </div>
                                             </div>
                                         </div>
-                                    {{/if}}
-                                {{else}}
+                                    </div>
+                                {{else if (eq action "create")}}
                                     <div id="view-documents">
                                         <h4 class="col-md-12 box-title">
                                             Documents
@@ -247,7 +247,9 @@
                                     <a href="/sg/consultant-inscription"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button></a>
                                     {{> formButtons action=action origin="/sg/consultant-inscription" id=inscription.id}}
                                 </div>
+                          {{#if (ne action "view")}}
                             </form>
+                          {{/if}}
                         </div>
                     </section>
                 </div>

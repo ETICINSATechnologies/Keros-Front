@@ -21,216 +21,216 @@
               </div>
               <form role="form" method="post" action="/ua/study/postform">
                 {{#if study}}<input type="text" id="id" name="id" value="{{study.id}}" hidden>{{/if}}
-                <div class="box-body row">
-                  <div class="col-md-6 form-group">
-                    <label for="name">Nom</label>
-                    <input type="text" class="form-control" id="name" name="name" value="{{study.name}}"
-                           placeholder="Entrez le nom de l'étude" {{readonlyIf (eq action "view")}}>
+                <div class="col-md-6 form-group">
+                  <label for="name">Nom</label>
+                  <input type="text" class="form-control" id="name" name="name" value="{{study.name}}"
+                         placeholder="Entrez le nom de l'étude" {{readonlyIf (eq action "view")}}>
+                </div>
+                <div class="col-md-6 form-group">
+                  <label for="firmId">Société</label>
+                  <select class="selectfirm" id="selectFirm" name="firmId" data-selected="{{study.firm.id}}" style="width:100%" {{#if (eq action "view")}}disabled{{/if}}>
+                    {{#if (ne action create)}}<option value="{{study.firm.id}}" >{{study.firm.name}}</option>{{/if}}
+                  </select>
+                </div>
+                <div class="col-md-6 form-group">
+                  <label for="fieldId">Secteur</label>
+                  <select class="form-control" id="fieldId" name="fieldId" {{#if (eq action "view")}}disabled{{/if}}>
+                    {{#each fields}}
+                      <option value="{{id}}" {{selected id @root.study.field.id}}>{{label}}</option>
+                    {{/each}}
+                  </select>
+                </div>
+                <div class="col-md-12 form-group">
+                  <label for="description">Description</label>
+                  <textarea rows="3" class="form-control" id="description" name="description" {{readonlyIf
+                          (eq action "view")}}
+                            placeholder="Entrez la description de l'étude">{{study.description}}</textarea>
+                </div>
+                <div class="col-md-6 form-group">
+                  <label for="statusId">Status</label>
+                  <select class="form-control" id="statusId" name="statusId" {{readonlyIf
+                          (eq action "view")}} {{disabledIf (eq action "view")}}>
+                    {{#each status}}
+                      <option value="{{id}}" {{selected id @root.study.status.id}}>{{label}}</option>
+                    {{/each}}
+                  </select>
+                </div>
+                <div class="col-md-6 form-group">
+                  <label for="provenanceId">Provenance</label>
+                  <select class="form-control" id="provenanceId" name="provenanceId" {{#if (eq action "view")}}disabled{{/if}}>
+                    <option></option>
+                    {{#each provenances}}
+                      <option value="{{id}}" {{selected id @root.study.provenance.id}}>{{label}}</option>
+                    {{/each}}
+                  </select>
+                </div>
+                <div class="col-md-12 form-group">
+                  <label for="confidential">
+                    <input type="checkbox" id="confidential" name="confidential"
+                      {{#if (eq action "view")}} disabled="disabled" {{/if}}
+                      {{#if study.confidential}} checked {{/if}}> Confidentiel
+                  </label>
+                </div>
+                <h4 class="col-md-12 box-title">
+                  Date
+                </h4>
+                <div class="col-md-4 form-group">
+                  <label for="signDate">Date de début</label>
+                  <input type="date" class="form-control" id="signDate" name="signDate"
+                         value="{{study.signDate}}" {{readonlyIf (eq action "view")}}>
+                </div>
+                <div class="col-md-4 form-group">
+                  <label for="endDate">Date de fin</label>
+                  <input type="date" class="form-control" id="endDate" name="endDate"
+                         value="{{study.endDate}}" {{readonlyIf (eq action "view")}}>
+                </div>
+                <div class="col-md-4 form-group">
+                  <label for="archivedDate">Date d'archivation</label>
+                  <input type="date" class="form-control" id="archivedDate" name="archivedDate"
+                         value="{{study.archivedDate}}" {{readonlyIf (eq action "view")}} >
+                </div>
+                <h4 class="col-md-12 box-title">
+                  Prix
+                </h4>
+                <div class="col-md-4 form-group">
+                  <label for="managementFee">Frais de gestion</label>
+                  <div class="input-group">
+                    <span class="input-group-addon" style="background-color: #DBE0E0; font-weight: bold;">€</span>
+                    <input type="number" class="form-control" id="managementFee" name="managementFee" step="0.01"
+                           min="0"
+                           value="{{study.managementFee}}" placeholder="Frais de gestion" {{readonlyIf
+                            (eq action "view")}}>
                   </div>
-                  <div class="col-md-6 form-group">
-                    <label for="firmId">Société</label>
-                    <select class="selectfirm" id="selectFirm" name="firmId" data-selected="{{study.firm.id}}" style="width:100%" {{#if (eq action "view")}}disabled{{/if}}>
-                      {{#if (ne action create)}}<option value="{{study.firm.id}}" >{{study.firm.name}}</option>{{/if}}
+                </div>
+                <div class="col-md-4 form-group">
+                  <label for="realizationFee">Frais de réalisation</label>
+                  <div class="input-group">
+                    <span class="input-group-addon" style="background-color: #DBE0E0; font-weight: bold;">€</span>
+                    <input type="number" class="form-control" id="realizationFee" name="realizationFee" step="0.01"
+                           min="0"
+                           value="{{study.realizationFee}}" placeholder="Frais de réalisation " {{readonlyIf
+                            (eq action "view")}}>
+                  </div>
+                </div>
+                <div class="col-md-4 form-group">
+                  <label for="rebilledFee">Frais de refacturation</label>
+                  <div class="input-group">
+                    <span class="input-group-addon" style="background-color: #DBE0E0; font-weight: bold;">€</span>
+                    <input type="number" class="form-control" id="rebilledFee" name="rebilledFee" step="0.01" min="0"
+                           value="{{study.rebilledFee}}" placeholder="Frais de refacturation" {{readonlyIf
+                            (eq action "view")}}>
+                  </div>
+                </div>
+                <div class="col-md-4 form-group">
+                  <label for="ecoparticipationFee">Frais d'écoparticipation</label>
+                  <div class="input-group">
+                    <span class="input-group-addon" style="background-color: #DBE0E0; font-weight: bold;">€</span>
+                    <input type="number" class="form-control" id="ecoparticipationFee" name="ecoparticipationFee"
+                           step="0.01" min="0"
+                           value="{{study.ecoparticipationFee}}" placeholder="Frais d'écoparticipation" {{readonlyIf
+                            (eq action "view")}}>
+                  </div>
+                </div>
+                <div class="col-md-4 form-group">
+                  <label for="outsourcingFee">Frais de sous traitance</label>
+                  <div class="input-group">
+                    <span class="input-group-addon" style="background-color: #DBE0E0; font-weight: bold;">€</span>
+                    <input type="number" class="form-control" id="outsourcingFee" name="outsourcingFee" step="0.01"
+                           min="0"
+                           value="{{study.outsourcingFee}}" placeholder="Frais de sous traitance" {{readonlyIf
+                            (eq action "view")}}>
+                  </div>
+                </div>
+
+                <h4 class="col-md-12 box-title">
+                  Personnel(s) Entreprise
+                </h4>
+
+                <div class="col-md-4 form-group">
+                  <label for="contactId1">Contact 1</label>
+                  <select class="selectcontacts required" style="width:100%" data-selected="{{study.contacts.0.id}}" name="contactId1" data-n="1" {{#if (eq action "view")}}disabled{{/if}}>
+                    {{#if (ne action "create")}}<option value="{{study.contacts.0.id}}" >{{study.contacts.0.firstName}} {{study.contacts.0.lastName}}</option>{{/if}}
+                  </select>
+                </div>
+                <div class="col-md-4 form-group">
+                  <label for="contactId2">Contact 2</label>
+                  <select class="selectcontacts" style="width:100%" data-selected="{{study.contacts.1.id}}" name="contactId2" data-n="2" {{#if (eq action "view")}}disabled{{/if}}>
+                    {{#if (ne action "create")}}<option value="{{study.contacts.1.id}}" >{{study.contacts.1.firstName}} {{study.contacts.1.lastName}}</option>{{/if}}
+                  </select>
+                </div>
+                <div class="col-md-4 form-group">
+                  <label for="contactId3">Contact 3</label>
+                  <div id="contactId3">
+                    <select class="selectcontacts" style="width:100%" data-selected="{{study.contacts.2.id}}" name="contactId3" data-n="3" {{#if (eq action "view")}}disabled{{/if}}>
+                      {{#if (ne action "create")}}<option value="{{study.contacts.2.id}}" >{{study.contacts.2.firstName}} {{study.contacts.2.lastName}}</option>{{/if}}
                     </select>
                   </div>
-                  <div class="col-md-6 form-group">
-                    <label for="fieldId">Secteur</label>
-                    <select class="form-control" id="fieldId" name="fieldId" {{#if (eq action "view")}}disabled{{/if}}>
-                      {{#each fields}}
-                        <option value="{{id}}" {{selected id @root.study.field.id}}>{{label}}</option>
+                </div>
+                <hr/>
+
+                <h4 class="col-md-12 box-title">
+                  Personnel(s) ETIC
+                </h4>
+
+                <div>
+                  <div class="col-md-4 form-group">
+                    <label for="leaderId1">Responsable 1</label>
+                    <select class="selectleaders" style="width:100%" data-selected="{{study.leaders.0.id}}" name="leaderId1" data-n="1" {{#if (eq action "view")}}disabled{{/if}}>
+                      {{#if (ne action "create")}}<option value="{{study.leaders.0.id}}" >{{study.leaders.0.firstName}} {{study.leaders.0.lastName}}</option>{{/if}}
+                    </select>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="leaderId2">Responsable 2</label>
+                    <select class="selectleaders" style="width:100%" data-selected="{{study.leaders.1.id}}" name="leaderId2"data-n="2" {{#if (eq action "view")}}disabled{{/if}}>
+                      {{#if (ne action "create")}}<option value="{{study.leaders.1.id}}" >{{study.leaders.1.firstName}} {{study.leaders.1.lastName}}</option>{{/if}}
+                    </select>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="leaderId3">Responsable 3</label>
+                    <select class="selectleaders" style="width:100%" data-selected="{{study.leaders.2.id}}" name="leaderId3"data-n="3" {{#if (eq action "view")}}disabled{{/if}}>
+                      {{#if (ne action "create")}}<option value="{{study.leaders.2.id}}" >{{study.leaders.2.firstName}} {{study.leaders.2.lastName}}</option>{{/if}}
+                    </select>
+                  </div>
+                </div>
+                <hr/>
+                <div class="col-md-4 form-group">
+                  <label for="consultantId1">Consultant 1</label>
+                  <select class="selectconsultants" style="width:100%" data-selected="{{study.consultants.0.id}}" name="consultantId1" data-n="1" {{#if (eq action "view")}}disabled{{/if}}>
+                    {{#if (ne action "create")}}<option value="{{study.consultants.0.id}}" >{{study.consultants.0.firstName}} {{study.consultants.0.lastName}}</option>{{/if}}
+                  </select>
+                </div>
+                <div class="col-md-4 form-group">
+                  <label for="consultantId2">Consultant 2</label>
+                  <select class="selectconsultants" style="width:100%" data-selected="{{study.consultants.1.id}}" name="consultantId2" data-n="2" {{#if (eq action "view")}}disabled{{/if}}>
+                    {{#if (ne action "create")}}<option value="{{study.consultants.1.id}}" >{{study.consultants.1.firstName}} {{study.consultants.1.lastName}}</option>{{/if}}
+                  </select>
+                </div>
+                <div class="col-md-4 form-group">
+                  <label for="consultantId3">Consultant(s) supp.</label>
+                  <select class="selectconsultants" multiple style="width:100%" data-selected="" name="consultantId3" data-n="3" {{#if (eq action "view")}}disabled{{/if}}>
+                    {{#if (ne action "create")}}
+                      {{#each (removeFromArray study.consultants 2)}}
+                        <option value="{{id}}" selected>{{firstName}} {{lastName}}</option>
                       {{/each}}
-                    </select>
-                  </div>
-                  <div class="col-md-12 form-group">
-                    <label for="description">Description</label>
-                    <textarea rows="3" class="form-control" id="description" name="description" {{readonlyIf
-                            (eq action "view")}}
-                              placeholder="Entrez la description de l'étude">{{study.description}}</textarea>
-                  </div>
-                  <div class="col-md-6 form-group">
-                    <label for="statusId">Status</label>
-                    <select class="form-control" id="statusId" name="statusId" {{readonlyIf
-                            (eq action "view")}} {{disabledIf (eq action "view")}}>
-                      {{#each status}}
-                        <option value="{{id}}" {{selected id @root.study.status.id}}>{{label}}</option>
-                      {{/each}}
-                    </select>
-                  </div>
-                  <div class="col-md-6 form-group">
-                    <label for="provenanceId">Provenance</label>
-                    <select class="form-control" id="provenanceId" name="provenanceId" {{#if (eq action "view")}}disabled{{/if}}>
-                      <option></option>
-                      {{#each provenances}}
-                        <option value="{{id}}" {{selected id @root.study.provenance.id}}>{{label}}</option>
-                      {{/each}}
-                    </select>
-                  </div>
-                  <div class="col-md-12 form-group">
-                    <label for="confidential">
-                      <input type="checkbox" id="confidential" name="confidential"
-                        {{#if (eq action "view")}} disabled="disabled" {{/if}}
-                        {{#if study.confidential}} checked {{/if}}> Confidentiel
-                    </label>
-                  </div>
-                  <h4 class="col-md-12 box-title">
-                    Date
-                  </h4>
-                  <div class="col-md-4 form-group">
-                    <label for="signDate">Date de début</label>
-                    <input type="date" class="form-control" id="signDate" name="signDate"
-                           value="{{study.signDate}}" {{readonlyIf (eq action "view")}}>
-                  </div>
-                  <div class="col-md-4 form-group">
-                    <label for="endDate">Date de fin</label>
-                    <input type="date" class="form-control" id="endDate" name="endDate"
-                           value="{{study.endDate}}" {{readonlyIf (eq action "view")}}>
-                  </div>
-                  <div class="col-md-4 form-group">
-                    <label for="archivedDate">Date d'archivation</label>
-                    <input type="date" class="form-control" id="archivedDate" name="archivedDate"
-                           value="{{study.archivedDate}}" {{readonlyIf (eq action "view")}} >
-                  </div>
-                  <h4 class="col-md-12 box-title">
-                    Prix
-                  </h4>
-                  <div class="col-md-4 form-group">
-                    <label for="managementFee">Frais de gestion</label>
-                    <div class="input-group">
-                      <span class="input-group-addon" style="background-color: #DBE0E0; font-weight: bold;">€</span>
-                      <input type="number" class="form-control" id="managementFee" name="managementFee" step="0.01"
-                             min="0"
-                             value="{{study.managementFee}}" placeholder="Frais de gestion" {{readonlyIf
-                              (eq action "view")}}>
-                    </div>
-                  </div>
-                  <div class="col-md-4 form-group">
-                    <label for="realizationFee">Frais de réalisation</label>
-                    <div class="input-group">
-                      <span class="input-group-addon" style="background-color: #DBE0E0; font-weight: bold;">€</span>
-                      <input type="number" class="form-control" id="realizationFee" name="realizationFee" step="0.01"
-                             min="0"
-                             value="{{study.realizationFee}}" placeholder="Frais de réalisation " {{readonlyIf
-                              (eq action "view")}}>
-                    </div>
-                  </div>
-                  <div class="col-md-4 form-group">
-                    <label for="rebilledFee">Frais de refacturation</label>
-                    <div class="input-group">
-                      <span class="input-group-addon" style="background-color: #DBE0E0; font-weight: bold;">€</span>
-                      <input type="number" class="form-control" id="rebilledFee" name="rebilledFee" step="0.01" min="0"
-                             value="{{study.rebilledFee}}" placeholder="Frais de refacturation" {{readonlyIf
-                              (eq action "view")}}>
-                    </div>
-                  </div>
-                  <div class="col-md-4 form-group">
-                    <label for="ecoparticipationFee">Frais d'écoparticipation</label>
-                    <div class="input-group">
-                      <span class="input-group-addon" style="background-color: #DBE0E0; font-weight: bold;">€</span>
-                      <input type="number" class="form-control" id="ecoparticipationFee" name="ecoparticipationFee"
-                             step="0.01" min="0"
-                             value="{{study.ecoparticipationFee}}" placeholder="Frais d'écoparticipation" {{readonlyIf
-                              (eq action "view")}}>
-                    </div>
-                  </div>
-                  <div class="col-md-4 form-group">
-                    <label for="outsourcingFee">Frais de sous traitance</label>
-                    <div class="input-group">
-                      <span class="input-group-addon" style="background-color: #DBE0E0; font-weight: bold;">€</span>
-                      <input type="number" class="form-control" id="outsourcingFee" name="outsourcingFee" step="0.01"
-                             min="0"
-                             value="{{study.outsourcingFee}}" placeholder="Frais de sous traitance" {{readonlyIf
-                              (eq action "view")}}>
-                    </div>
-                  </div>
-
-                  <h4 class="col-md-12 box-title">
-                    Personnel(s) Entreprise
-                  </h4>
-
-                  <div class="col-md-4">
-                    <label for="contactId1">Contact 1</label>
-                    <select class="selectcontacts required" style="width:100%" data-selected="{{study.contacts.0.id}}" name="contactId1" data-n="1" {{#if (eq action "view")}}disabled{{/if}}>
-                      {{#if (ne action "create")}}<option value="{{study.contacts.0.id}}" >{{study.contacts.0.firstName}} {{study.contacts.0.lastName}}</option>{{/if}}
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="contactId2">Contact 2</label>
-                    <select class="selectcontacts" style="width:100%" data-selected="{{study.contacts.1.id}}" name="contactId2" data-n="2" {{#if (eq action "view")}}disabled{{/if}}>
-                      {{#if (ne action "create")}}<option value="{{study.contacts.1.id}}" >{{study.contacts.1.firstName}} {{study.contacts.1.lastName}}</option>{{/if}}
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="contactId3">Contact 3</label>
-                    <div id="contactId3">
-                      <select class="selectcontacts" style="width:100%" data-selected="{{study.contacts.2.id}}" name="contactId3" data-n="3" {{#if (eq action "view")}}disabled{{/if}}>
-                        {{#if (ne action "create")}}<option value="{{study.contacts.2.id}}" >{{study.contacts.2.firstName}} {{study.contacts.2.lastName}}</option>{{/if}}
-                      </select>
-                    </div>
-                  </div>
-                  <hr/>
-
-                  <h4 class="col-md-12 box-title">
-                    Personnel(s) ETIC
-                  </h4>
-
-                  <div>
-                    <div class="col-md-4">
-                      <label for="leaderId1">Responsable 1</label>
-                      <select class="selectleaders" style="width:100%" data-selected="{{study.leaders.0.id}}" name="leaderId1" data-n="1" {{#if (eq action "view")}}disabled{{/if}}>
-                        {{#if (ne action "create")}}<option value="{{study.leaders.0.id}}" >{{study.leaders.0.firstName}} {{study.leaders.0.lastName}}</option>{{/if}}
-                      </select>
-                    </div>
-                    <div class="col-md-4">
-                      <label for="leaderId2">Responsable 2</label>
-                      <select class="selectleaders" style="width:100%" data-selected="{{study.leaders.1.id}}" name="leaderId2"data-n="2" {{#if (eq action "view")}}disabled{{/if}}>
-                        {{#if (ne action "create")}}<option value="{{study.leaders.1.id}}" >{{study.leaders.1.firstName}} {{study.leaders.1.lastName}}</option>{{/if}}
-                      </select>
-                    </div>
-                    <div class="col-md-4">
-                      <label for="leaderId3">Responsable 3</label>
-                      <select class="selectleaders" style="width:100%" data-selected="{{study.leaders.2.id}}" name="leaderId3"data-n="3" {{#if (eq action "view")}}disabled{{/if}}>
-                        {{#if (ne action "create")}}<option value="{{study.leaders.2.id}}" >{{study.leaders.2.firstName}} {{study.leaders.2.lastName}}</option>{{/if}}
-                      </select>
-                    </div>
-                  </div>
-                  <hr/>
-                  <div class="col-md-4">
-                    <label for="consultantId1">Consultant 1</label>
-                    <select class="selectconsultants" style="width:100%" data-selected="{{study.consultants.0.id}}" name="consultantId1" data-n="1" {{#if (eq action "view")}}disabled{{/if}}>
-                      {{#if (ne action "create")}}<option value="{{study.consultants.0.id}}" >{{study.consultants.0.firstName}} {{study.consultants.0.lastName}}</option>{{/if}}
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="consultantId2">Consultant 2</label>
-                    <select class="selectconsultants" style="width:100%" data-selected="{{study.consultants.1.id}}" name="consultantId2" data-n="2" {{#if (eq action "view")}}disabled{{/if}}>
-                      {{#if (ne action "create")}}<option value="{{study.consultants.1.id}}" >{{study.consultants.1.firstName}} {{study.consultants.1.lastName}}</option>{{/if}}
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="consultantId3">Consultant(s) supp.</label>
-                    <select class="selectconsultants" multiple style="width:100%" data-selected="" name="consultantId3" data-n="3" {{#if (eq action "view")}}disabled{{/if}}>
-                      {{#if (ne action "create")}}
-                        {{#each (removeFromArray study.consultants 2)}}
-                          <option value="{{id}}" selected>{{firstName}} {{lastName}}</option>
-                        {{/each}}
-                      {{/if}}
-                    </select>
-                  </div>
-                  <hr/>
-                  <div class="col-md-6">
-                    <label for="qualityManagerId1">Responsable qualité 1</label>
-                    <select class="selectqualityleaders" style="width:100%" data-selected="{{study.qualityManagers.0.id}}" name="qualityManagerId1" data-n="1" {{#if (eq action "view")}}disabled{{/if}}>
-                      {{#if (ne action "create")}}<option value="{{study.qualityManagers.0.id}}" >{{study.qualityManagers.0.firstName}} {{study.qualityManagers.0.lastName}}</option>{{/if}}
-                    </select>
-                  </div>
-                  <div class="col-md-6">
-                    <label for="qualityManagerId2">Responsable qualité 2</label>
-                      <select class="selectqualityleaders" style="width:100%" data-selected="{{study.qualityManagers.1.id}}" name="qualityManagerId2" data-n="2" {{#if (eq action "view")}}disabled{{/if}}>
-                        {{#if (ne action "create")}}<option value="{{study.qualityManagers.1.id}}" >{{study.qualityManagers.1.firstName}} {{study.qualityManagers.1.lastName}}</option>{{/if}}
-                      </select>
-                  </div>
-                  {{#if (eq action "view")}}
-                    {{#if (eq mailshots 1)}}
+                    {{/if}}
+                  </select>
+                </div>
+                <hr/>
+                <div class="col-md-6 form-group">
+                  <label for="qualityManagerId1">Responsable qualité 1</label>
+                  <select class="selectqualityleaders" style="width:100%" data-selected="{{study.qualityManagers.0.id}}" name="qualityManagerId1" data-n="1" {{#if (eq action "view")}}disabled{{/if}}>
+                    {{#if (ne action "create")}}<option value="{{study.qualityManagers.0.id}}" >{{study.qualityManagers.0.firstName}} {{study.qualityManagers.0.lastName}}</option>{{/if}}
+                  </select>
+                </div>
+                <div class="col-md-6 form-group">
+                  <label for="qualityManagerId2">Responsable qualité 2</label>
+                  <select class="selectqualityleaders" style="width:100%" data-selected="{{study.qualityManagers.1.id}}" name="qualityManagerId2" data-n="2" {{#if (eq action "view")}}disabled{{/if}}>
+                    {{#if (ne action "create")}}<option value="{{study.qualityManagers.1.id}}" >{{study.qualityManagers.1.firstName}} {{study.qualityManagers.1.lastName}}</option>{{/if}}
+                  </select>
+                </div>
+                {{#if (eq action "view")}}
+                  </form>
+                  {{#if (eq mailshots 1)}}
                       <div id="view-mailshots">
                         <h4 class="col-md-12 box-title">
                           Publipostage
@@ -288,13 +288,13 @@
                                   </div>
                                 </div>
                               {{/each}}
+                              {{> fileAddition origin="/ua/study" id=study.id}}
                             </div>
                           </div>
                         </div>
                       </div>
                     {{/if}}
                   {{/if}}
-                </div>
                 <div class="box-footer">
                   <a href="/ua/study">
                     <button type="button" class="btn btn-primary pull-left"><i class="fa fa-arrow-left"></i> Retour</button>
@@ -307,9 +307,11 @@
                   </div>
                   {{> formButtons action=action origin="/ua/study" id=study.id}}
                 </div>
-              </form>
+              {{#if (ne action "view")}}
+                </form>
+              {{/if}}
             </div>
-            <div class="popup col-sm-1" id="popup" style="display: none">
+            <div class="popup row" id="popup" style="display: none">
               {{#each study.consultants}}
                 <div>
                   <a href="/treso/payment-slip/create?studyId={{@root.study.id}}&consultantId={{id}}">

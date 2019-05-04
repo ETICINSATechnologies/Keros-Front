@@ -116,6 +116,7 @@ a:hover, a:active, a:focus {
     border-style: solid;
     border-radius: 6px;
     z-index: 200;
+    padding: 5px;
     box-shadow: 0 .3rem 1.25rem 0 rgba(0,0,0,.25);
 }
 

@@ -17,12 +17,20 @@ export class ConsultantInscriptionMock implements IMock {
         let mockObj: T | null = null;
         let status = 500;
         if (resource.match(/document/)) {
+            const file = resources.file;
+            mockObj = <T> new DocumentResponse(file.name);
             status = 200;
-            return new MockResponse(null, status);
+            return new MockResponse(mockObj, status);
         }
         switch (resource) {
             case "sg/consultant-inscription" :
-                mockObj = <T> new ConsultantInscription(0, resources.firstName, resources.lastName, new Department(resources.departmentId, "TC"), resources.email, new Gender(resources.genderId, "H"), resources.birthday, resources.phoneNumber, resources.outYear, new Country(resources.nationalityId, "France"), resources.address);
+                const file1 = resources.documentIdentity;
+                const file2 = resources.documentScolarityCertificate;
+                const file3 = resources.documentRib;
+                const file4 = resources.documentVitaleCard;
+                const file5 = resources.documentResidencePermit;
+
+                mockObj = <T> new ConsultantInscription(0, resources.firstName, resources.lastName, new Department(resources.departmentId, "TC"), resources.email, new Gender(resources.genderId, "H"), resources.birthday, resources.phoneNumber, resources.outYear, new Country(resources.nationalityId, "France"), resources.socialSecurityNumber, resources.address, [new Document(1, file1.name), new Document(2, file2.name), new Document(3, file3.name), new Document(4, file4.name), new Document(5, file5.name)]);
                 status = 201;
                 return new MockResponse(mockObj, status);
         }

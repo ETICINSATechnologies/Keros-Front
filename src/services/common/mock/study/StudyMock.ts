@@ -22,6 +22,12 @@ export class StudyMock implements IMock {
   create<T>(resource: string, resources: any, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;
     let status = 500;
+    if (resource.match(/document/)) {
+      const file = resources.file;
+      mockObj = <T> new DocumentResponse(file.name);
+      status = 200;
+      return new MockResponse(mockObj, status);
+    }
     switch (resource) {
       case "ua/study":
         const consultants: Member[] = [];
