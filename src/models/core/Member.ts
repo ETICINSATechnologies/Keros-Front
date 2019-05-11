@@ -1,4 +1,4 @@
-import { Gender } from "../core/Gender";
+import { Gender } from "./Gender";
 import { Department } from "./Department";
 import { Address } from "./Address";
 import { Position } from "./Position";
