@@ -20,6 +20,8 @@ export class MemberInscription implements IStringable {
     private nationality ?: Country,
     private wantedPole ?: Pole,
     private address ?: Address,
-    private documents ?: Document []
+    private documents ?: Document [],
+    private hasPaid ?: boolean,
+    private droitImage ?: boolean
   ) {}
 }

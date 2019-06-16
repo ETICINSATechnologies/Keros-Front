@@ -134,6 +134,8 @@ export class MemberInscriptionController {
     inscriptionRequest.outYear = parseInt(req.body.outYear);
     inscriptionRequest.nationalityId = parseInt(req.body.nationalityId);
     inscriptionRequest.wantedPoleId = parseInt(req.body.wantedPoleId);
+    inscriptionRequest.hasPaid = req.body.hasPaid;
+    inscriptionRequest.droitImage = req.body.droitImage;
 
         const addressRequest = new AddressCreateRequest();
         addressRequest.line1 = req.body.line1;

@@ -116,6 +116,12 @@
                                             {{/each}}
                                         </select>
                                     </div>
+                                    <div class="col-md-4 form-group">
+                                      <label for="droitImage">Droit à l'image </label>
+                                      <input type="checkbox" id="droitImage" name="droitImage"
+                                        {{#if (or (eq action "view") (ne true (isFromRH connectedUser.positions))(ne true (isAdmin connectedUser.positions)))}} disabled="disabled" {{/if}}
+                                        {{#if inscription.droitImage}} checked {{/if}}>
+                                    </div>
                                 </div>
                                 {{#if (ne action "create")}}
                                     {{#if inscription}}

@@ -13,6 +13,8 @@ export class MemberInscriptionCreateRequest implements IStringable {
     public outYear ?: number,
     public nationalityId ?: number,
     public wantedPoleId ?: number,
-    public address ?: AddressCreateRequest
+    public address ?: AddressCreateRequest,
+    public hasPaid ?: boolean,
+    public droitImage ?: boolean
   ) {}
 }

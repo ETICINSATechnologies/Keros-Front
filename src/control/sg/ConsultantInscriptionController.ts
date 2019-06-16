@@ -156,6 +156,7 @@ export class ConsultantInscriptionController {
         inscriptionRequest.outYear = parseInt(req.body.outYear);
         inscriptionRequest.nationalityId = parseInt(req.body.nationalityId);
         inscriptionRequest.socialSecurityNumber = req.body.socialSecurityNumber;
+        inscriptionRequest.droitImage = req.body.droitImage;
 
         const addressRequest = new AddressCreateRequest();
         addressRequest.line1 = req.body.line1;

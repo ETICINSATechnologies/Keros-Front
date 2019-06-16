@@ -19,6 +19,7 @@ export class ConsultantInscription implements IStringable {
         private nationality ?: Country,
         private socialSecurityNumber ?: string,
         private address ?: Address,
-        private documents ?: Document []
+        private documents ?: Document [],
+        private droitImage ?: boolean
     ) {}
 }
