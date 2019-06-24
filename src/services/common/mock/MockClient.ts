@@ -119,4 +119,8 @@ export class MockClient implements IClient {
     }
     return Promise.resolve(new MockResponse(null, 404));
   }
+
+  uploadStream<T>(verb: string, requestUrl: string, stream: NodeJS.ReadableStream, options?: IRequestOptions): Promise<IRestResponse<T>> {
+    return Promise.resolve(new MockResponse(null, 404));
+  }
 }

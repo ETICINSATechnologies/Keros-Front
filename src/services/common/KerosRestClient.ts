@@ -40,4 +40,9 @@ export class KerosRestClient implements IClient {
     winston.debug("UPDATE " + resource + " with body : " + JSON.stringify(resources));
     return this.restClient.replace<T>(resource, resources, options);
   }
+
+  uploadStream<T>(verb: string, requestUrl: string, stream: NodeJS.ReadableStream, options?: IRequestOptions): Promise<IRestResponse<T>> {
+    winston.debug("UPLOAD STREAM at " + requestUrl);
+    return this.restClient.uploadStream<T>(verb, requestUrl, stream, options);
+  }
 }

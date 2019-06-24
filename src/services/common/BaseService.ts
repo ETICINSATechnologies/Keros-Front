@@ -17,6 +17,8 @@ export interface IClient {
   create<T>(resource: string, resources: any, options?: IRequestOptions): Promise<IRestResponse<T>>;
 
   update<T>(resource: string, resources: any, options?: IRequestOptions): Promise<IRestResponse<T>>;
+
+  uploadStream<T>(verb: string, requestUrl: string, stream: NodeJS.ReadableStream, options?: IRequestOptions): Promise<IRestResponse<T>>;
 }
 
 export class BaseService {

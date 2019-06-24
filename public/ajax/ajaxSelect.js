@@ -210,3 +210,30 @@ function generateConsultantOptions(){
     });
   });
 }
+
+/**
+$("#addFileFormButton").click(function(e) {
+  let files = new FormData(); // you can consider this as 'data bag'
+  const form = $("#addFileForm");
+  files.append("file", $("#addFile")[0].files[0]);
+  const action = form.attr("action");
+  const url = 'http://pre-keros-api.etic-insa.com/api/v1/' + action;
+
+  $.ajax({
+    type: "POST",
+    url: url,
+    processData: false,
+    crossDomain: true,
+    mimeTypes: "multipart/form-data",
+    contentType: false,
+    data: files,
+    success: function(response) {
+      console.log(response);
+
+    },
+    error: function(err) {
+      console.log(err);
+    },
+  });
+});
+ */

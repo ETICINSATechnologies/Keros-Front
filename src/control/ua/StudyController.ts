@@ -17,7 +17,11 @@ import { Provenance } from "../../models/ua/Provenance";
 import { Config } from "../../config/Config";
 import { DocumentResponse } from "../../models/DocumentResponse";
 import HttpError from "../../util/httpError";
-import { UploadedDocument } from "../../models/UploadedDocument";
+import * as Busboy from "busboy";
+import * as FormData from "form-data";
+import { UploadedFile } from "express-fileupload";
+import { MemberInscriptionService } from "../../services/sg/MemberInscriptionService";
+// import { UploadedDocument } from "../../models/UploadedDocument";
 
 export class StudyController {
     public viewStudies(req: Request, res: Response, next: NextFunction) {
@@ -229,18 +233,81 @@ export class StudyController {
   public uploadDocument(req: Request, res: Response, next: NextFunction) {
     const id = req.params.id;
     const documentTypeId = req.params.documentTypeId;
-    const uploadedDocument = new UploadedDocument();
+
+
+
+    let path = "";
     if (req.files) {
-      uploadedDocument.file = req.files.file;
+      const file = <UploadedFile>req.files.file;
+      file.mv("/tmp/" + file.name, function (err: any) {
+        if (err) {
+          winston.debug(err);
+        }
+      });
+      path = "/tmp/" + file.name;
     }
     winston.info("Uploading doc (of type " + documentTypeId + ") for id " + id);
-    StudyService.uploadDocument(id, documentTypeId, uploadedDocument, function (err) {
+    StudyService.uploadDocument(id, documentTypeId, path, function (err) {
       if (err) {
         return next(err);
       }
       winston.info("Uploaded doc (of type" + documentTypeId + ") for id " + id);
       res.redirect("/ua/study/" + id);
     });
+
+    /**
+    winston.debug("Upload started");
+    // const uploadedDocument = new UploadedDocument();
+    /**if (req.files) {
+      uploadedDocument.file = req.files.file;
+    }
+    winston.debug("Files found ");
+    const uploadedDocument = new FormData();
+    const busboy = new Busboy({headers: req.headers});
+    busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
+      winston.debug('File [' + fieldname + ']: filename: ' + filename + ', encoding: ' + encoding + ', mimetype: ' + mimetype);
+      file.on('data', function(data) {
+        winston.debug('File [' + fieldname + '] got ' + data.length + ' bytes');
+      });
+      file.on('end', function() {
+        winston.debug('File [' + fieldname + '] Finished');
+        // const fileUploaded = new File(data, filename);
+        // uploadedDocument.append(filename, fileUploaded);
+        uploadedDocument.append("file", file, {
+          filename,
+          contentType: mimetype
+        });
+        /**
+         form.append('file', stdout, {
+          filename: 'unicycle.jpg', // ... or:
+          filepath: 'photos/toys/unicycle.jpg',
+          contentType: 'image/jpeg',
+          knownLength: 19806
+        });
+
+      });
+    });
+    busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated, encoding, mimetype) {
+      winston.debug('Field [' + fieldname + ']: value: ' + val);
+    });
+    busboy.on('finish', function() {
+      winston.debug('Done parsing form in controller!');
+      winston.info("Uploading doc (of type " + documentTypeId + ") for id " + id);
+
+      StudyService.uploadDocument(id, documentTypeId, uploadedDocument, function (err) {
+        if (err) {
+          return next(err);
+        }
+        winston.info("Uploaded doc (of type" + documentTypeId + ") for id " + id);
+        res.redirect("/ua/study/" + id);
+      });
+      //res.redirect("/ua/study/" + id);
+    });
+    winston.debug("Busboy created");
+    req.pipe(busboy);
+    winston.debug("Busboy launched");
+    */
+
   }
 
   public downloadDocument(req: Request, res: Response, next: NextFunction) {

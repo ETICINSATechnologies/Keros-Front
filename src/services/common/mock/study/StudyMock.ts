@@ -17,14 +17,35 @@ import { Address } from "../../../../models/core/Address";
 import { Country } from "../../../../models/core/Country";
 import { Document } from "../../../../models/Document";
 import { DocumentResponse } from "../../../../models/DocumentResponse";
+import * as Busboy from "busboy";
+import { StudyService } from "../../../ua/StudyService";
 
 export class StudyMock implements IMock {
   create<T>(resource: string, resources: any, options?: IRequestOptions): IRestResponse<T> | null {
     let mockObj: T | null = null;
     let status = 500;
     if (resource.match(/document/)) {
-      const file = resources.file;
-      mockObj = <T> new DocumentResponse(file.name);
+      // const file = resources.file;
+      // mockObj = <T> new DocumentResponse(file.name);
+      const busboy = new Busboy({headers: {'content-type': 'multipart/form-data; boundary=-----------------------------282241008715091'}});
+      busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
+        winston.debug('MockFile [' + fieldname + ']: filename: ' + filename + ', encoding: ' + encoding + ', mimetype: ' + mimetype);
+        file.on('data', function(data) {
+          winston.debug('MockFile [' + fieldname + '] got ' + data.length + ' bytes');
+        });
+        file.on('end', function() {
+          winston.debug('MockFile [' + fieldname + '] Finished');
+        });
+      });
+      busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated, encoding, mimetype) {
+        winston.debug('MockField [' + fieldname + ']: value: ' + val);
+      });
+      busboy.on('finish', function() {
+        winston.debug('Done parsing form in mock!');
+      });
+      winston.debug("MockBusboy created");
+      resources.pipe(busboy);
+      winston.debug("MockBusboy launched");
       status = 200;
       return new MockResponse(mockObj, status);
     }

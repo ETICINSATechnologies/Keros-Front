@@ -6,10 +6,15 @@ import { StudyCreateRequest } from "../../models/ua/StudyCreateRequest";
 import * as winston from "winston";
 import HttpError from "../../util/httpError";
 import { DocumentResponse } from "../../models/DocumentResponse";
+import * as FormData from "form-data";
 import { UploadedDocument } from "../../models/UploadedDocument";
+import * as httpContext from "express-http-context";
+import * as fs from "fs";
+import { Config } from "../../config/Config";
 
 export class StudyService extends BaseService {
     static getStudy(id: number, callback: (err: any, result: Study | null) => void): void {
+      winston.debug("HEADERS : " + JSON.stringify(this.defaultHeaders()));
         this.rest.get<Study>("ua/study/" + id, this.defaultHeaders()).then(
             (res: IRestResponse<Study>) => {
                 if (res.statusCode !== 200) {
@@ -138,8 +143,97 @@ export class StudyService extends BaseService {
     );
   }
 
-  static uploadDocument(studyId: number, documentTypeId: number, file: UploadedDocument, callback: (err: any) => void): void {
-    this.rest.create<DocumentResponse>("ua/study/" + studyId + "/document/" + documentTypeId, file, this.defaultHeaders()).then(
+  static uploadDocument(studyId: number, documentTypeId: number, path: string, callback: (err: any) => void): void {
+    /**
+     const formData = {
+      file: fs.createReadStream(path)
+    };
+     request.post({url: "http://pre-keros-api.etic-insa.com/api/v1/sg/membre-inscription/" + inscriptionId + "/document/" + documentTypeId, headers: {Authorization: httpContext.get("token")}, formData}, function optionalCallback(err, httpResponse, body) {
+      if (err) {
+        return console.error('upload failed:', err);
+      }
+      console.log(httpResponse);
+      console.log('Upload successful!  Server responded with:', body);
+      winston.debug("BODY : " + JSON.stringify(body));
+      callback(null);
+    });*/
+
+    const file = new FormData();
+
+    file.append("file", fs.createReadStream(path));
+
+    /**
+     const options = {
+      method: "POST",
+      body: file,
+      headers: {Authorization: httpContext.get("token")}
+    };
+
+     fetch("http://pre-keros-api.etic-insa.com/api/v1/sg/membre-inscription/" + inscriptionId + "/document/" + documentTypeId, options)
+     .then((response: any) => response.json())
+     .then((res: any) => {
+        if (res.statusCode !== 200) {
+          winston.debug("Problème lors du chargement du document");
+          return callback(this.defaultError(res.statusCode));
+        }
+        winston.debug("Response : " + JSON.stringify(res));
+        callback(null);
+      }).catch(
+     (e: any) => {
+          callback(e);
+        }
+     );
+
+    file.submit({
+      host: "pre-keros-api.etic-insa.com",
+      path: "/api/v1/sg/membre-inscription/" + inscriptionId + "/document/" + documentTypeId,
+      headers: {Authorization: httpContext.get("token")}
+    }, function(err, res) {
+      if (err) return callback(err);
+      if (res.statusCode !== 200) {
+        winston.debug("Problème lors du chargement du document");
+        return callback(new HttpError("Erreur de connection avec le back (Status: " + res.statusCode + ")", <number>res.statusCode));
+      }
+      winston.debug("Response : " + JSON.stringify(res));
+      callback(null);
+    });
+
+     this.rest.create<DocumentResponse>("sg/membre-inscription/" + inscriptionId + "/document/" + documentTypeId, file, this.defaultHeaders()).then(
+     (res: IRestResponse<DocumentResponse>) => {
+        if (res.statusCode !== 200) {
+          winston.debug("Problème lors du chargement du document");
+          return callback(this.defaultError(res.statusCode));
+        }
+        winston.debug("Response : " + JSON.stringify(res));
+        callback(null);
+      }
+     ).catch(
+     e => {
+        callback(e);
+      }
+     );*/
+    winston.debug("HEADERS : " + JSON.stringify(this.defaultHeaders()));
+    const headers = file.getHeaders();
+    const options = {additionalHeaders: {
+        "content-type": headers["content-type"],
+        "Authorization": httpContext.get("token")
+    }};
+    this.rest.uploadStream("POST", Config.getBackendBaseUrl() + "/ua/study/" + studyId + "/document/" + documentTypeId, file, options).then(
+        (res: IRestResponse<DocumentResponse>) => {
+          if (res.statusCode !== 200) {
+            winston.debug("Problème lors du chargement du document");
+            return callback(this.defaultError(res.statusCode));
+          }
+          winston.debug("Response : " + JSON.stringify(res));
+          callback(null);
+        }
+      ).catch(
+      e => {
+        callback(e);
+      }
+    );
+    /**
+    <DocumentResponse>("ua/study/" + studyId + "/document/" + documentTypeId, file, this.defaultHeaders()).then(
       (res: IRestResponse<DocumentResponse>) => {
         if (res.statusCode !== 200) {
           winston.debug("Problème lors du chargement du document");
@@ -153,6 +247,7 @@ export class StudyService extends BaseService {
         callback(e);
       }
     );
+    */
   }
 
   static downloadDocument(studyId: number, documentTypeId: number, callback: (err: any, result: DocumentResponse | null) => void): void {
