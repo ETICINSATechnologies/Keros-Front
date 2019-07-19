@@ -19,5 +19,6 @@ export class ConsultantInscriptionCreateRequest implements IStringable {
         public documentRib ?: string,
         public documentVitaleCard ?: string,
         public documentResidencePermit ?: string,
+        public droitImage ?: boolean
     ) {}
 }

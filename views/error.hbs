@@ -1,21 +1,42 @@
-<body>
-<div class="error-page">
-  <h2 class="headline text-red">{{ifExists error.status 500}}</h2>
+<body class="hold-transition skin-green fixed sidebar-mini">
+<div class="wrapper" style="background-color: white;">
+  <header class="main-header">
+    <!-- Logo -->
+    <a href="/" class="logo">
+      <!-- logo for regular state and mobile devices -->
+      <img class="logo-lg" src="../../../public/images/logo-keros-typo.png" alt="Keros Logo">
+    </a>
+    <nav class="navbar navbar-static-top">
+    </nav>
+  </header>
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+  <div class="error-page">
+    <h2 class="headline text-red">{{ifExists error.status 500}}</h2>
 
-  <div class="error-content">
-    <h3><i class="fa fa-warning text-red"></i>Une erreur est survenue.</h3>
+    <div class="error-content">
+      <h3><i class="fa fa-warning text-red"></i>Une erreur est survenue.</h3>
 
-    <p>
-      {{ifExists error.message "Erreur Interne"}}.
-      N'hésitez pas à contacter la DSI en créant un ticket sur la page <a href="/support">support</a>.
-    </p>
+      <p>
+        {{ifExists error.message "Erreur Interne"}}.
+        N'hésitez pas informer la DSI de toute erreur rencontrée via <a href="https://docs.google.com/spreadsheets/d/1z5-Nq3Hkn-Vc_lsFqxtLLdedXkdtHR45IdAsc0tvo5s/edit#gid=0">ce lien</a> vers un Google Sheet :
+      </p>
+      <p>
+        <a href="https://docs.google.com/spreadsheets/d/1z5-Nq3Hkn-Vc_lsFqxtLLdedXkdtHR45IdAsc0tvo5s/edit#gid=0">https://docs.google.com/spreadsheets/d/1z5-Nq3Hkn-Vc_lsFqxtLLdedXkdtHR45IdAsc0tvo5s/edit#gid=0</a>
+      </p>
 
-    {{#if error.stack}}
-      <pre>
-        {{error.stack}}
-      </pre>
-    {{/if}}
+      {{#if error.stack}}
+        <pre>
+          {{error.stack}}
+        </pre>
+      {{/if}}
 
+    </div>
   </div>
 </div>
+{{> template/footer}}
 </body>

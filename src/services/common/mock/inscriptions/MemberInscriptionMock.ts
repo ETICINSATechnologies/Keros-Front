@@ -23,7 +23,7 @@ export class MemberInscriptionMock implements IMock {
     }
     switch (resource) {
       case "sg/membre-inscription" :
-        mockObj = <T> new MemberInscription(0, resources.firstName, resources.lastName, new Department(resources.departmentId, "TC"), resources.email, new Gender(resources.genderId), resources.birthday, resources.phoneNumber, resources.outYear, new Country(resources.nationalityId, "France"), new Pole(resources.wantedPoleId, "SI", "Systèmes d'Informations"), resources.address);
+        mockObj = <T> new MemberInscription(0, resources.firstName, resources.lastName, new Department(resources.departmentId, "TC"), resources.email, new Gender(resources.genderId), resources.birthday, resources.phoneNumber, resources.outYear, new Country(resources.nationalityId, "France"), new Pole(resources.wantedPoleId, "SI", "Systèmes d'Informations"), resources.address, undefined, resources.hasPaid, resources.droitImage);
         status = 201;
         return new MockResponse(mockObj, status);
     }
@@ -34,11 +34,11 @@ export class MemberInscriptionMock implements IMock {
     let status = 500;
     switch (resource) {
       case "sg/membre-inscription/1" :
-        mockObj = <T> new MemberInscription(1, resources.firstName, resources.lastName, new Department(resources.departmentId, "TC"), resources.email, new Gender(resources.genderId), resources.birthday, resources.phoneNumber, resources.outYear, new Country(resources.nationalityId, "France"), new Pole(resources.wantedPoleId, "SI", "Systèmes d'Informations"), resources.address);
+        mockObj = <T> new MemberInscription(1, resources.firstName, resources.lastName, new Department(resources.departmentId, "TC"), resources.email, new Gender(resources.genderId), resources.birthday, resources.phoneNumber, resources.outYear, new Country(resources.nationalityId, "France"), new Pole(resources.wantedPoleId, "SI", "Systèmes d'Informations"), resources.address, undefined, resources.hasPaid, resources.droitImage);
         status = 200;
         return new MockResponse(mockObj, status);
       case "sg/membre-inscription/2" :
-        mockObj = <T> new MemberInscription(2, resources.firstName, resources.lastName, new Department(resources.departmentId, "IF"), resources.email, new Gender(resources.genderId), resources.birthday, resources.phoneNumber, resources.outYear, new Country(resources.nationalityId, "France"), new Pole(resources.wantedPoleId, "SI", "Systèmes d'Informations"), resources.address, [new Document(1, "Fiche d'inscription", true, false), new Document(2, "Pièce identité", false, false), new Document(4, "PDF quelconque", false, true)]);
+        mockObj = <T> new MemberInscription(2, resources.firstName, resources.lastName, new Department(resources.departmentId, "IF"), resources.email, new Gender(resources.genderId), resources.birthday, resources.phoneNumber, resources.outYear, new Country(resources.nationalityId, "France"), new Pole(resources.wantedPoleId, "SI", "Systèmes d'Informations"), resources.address, [new Document(1, "Fiche d'inscription", true, false), new Document(2, "Pièce identité", false, false), new Document(4, "PDF quelconque", false, true)], resources.hasPaid, resources.droitImage);
         status = 200;
         return new MockResponse(mockObj, status);
 
@@ -76,16 +76,16 @@ export class MemberInscriptionMock implements IMock {
     }
     switch (resource) {
       case "sg/membre-inscription/1" :
-        mockObj = <T> new MemberInscription(1, "Michel", "Bienheureux", new Department(3, "GCU", "Génie Civil et Urbanisme"), "michel.bientavu@gmail.com", new Gender(1, "H"), "1996-08-27", "0676287201", 2021, new Country(1, "France"), new Pole(2, "UA", "Unité d'affaires"), new Address(34, "40 Bd d'Elrond", undefined, "83800", "Foncombe", new Country(45, "Terre du Milieu")));
+        mockObj = <T> new MemberInscription(1, "Michel", "Bienheureux", new Department(3, "GCU", "Génie Civil et Urbanisme"), "michel.bientavu@gmail.com", new Gender(1, "H"), "1996-08-27", "0676287201", 2021, new Country(1, "France"), new Pole(2, "UA", "Unité d'affaires"), new Address(34, "40 Bd d'Elrond", undefined, "83800", "Foncombe", new Country(45, "Terre du Milieu")), undefined, true, true);
         status = 200;
         return new MockResponse(mockObj, status);
       case "sg/membre-inscription/2" :
-        mockObj = <T> new MemberInscription(2, "Gandalf", "Leblanc", new Department(1, "TC", "Télécommunications"), "gandalf.leblanc@magicien.com", new Gender(1, "H"), "1997-05-12", "0823476212", 2023, new Country(3, "Maroc"), new Pole(1, "SI", "Systèmes d'informations"), new Address(12, "3 rue de Sauron", undefined, "69600", "Kazagdûm", new Country(46, "Mordor")), [new Document(1, "Fiche d'inscription", true, false), new Document(2, "Pièce identité", false, false), new Document(3, "PDF quelconque", false, true)]);
+        mockObj = <T> new MemberInscription(2, "Gandalf", "Leblanc", new Department(1, "TC", "Télécommunications"), "gandalf.leblanc@magicien.com", new Gender(1, "H"), "1997-05-12", "0823476212", 2023, new Country(3, "Maroc"), new Pole(1, "SI", "Systèmes d'informations"), new Address(12, "3 rue de Sauron", undefined, "69600", "Kazagdûm", new Country(46, "Mordor")), [new Document(1, "Fiche d'inscription", true, false), new Document(2, "Pièce identité", false, false), new Document(3, "PDF quelconque", false, true)], false, false);
         status = 200;
         return new MockResponse(mockObj, status);
       case "sg/membre-inscription" :
-        mockObj = <T> new Page(<T[]> [new MemberInscription(1, "Michel", "Bienheureux", new Department(3, "GCU", "Génie Civil et Urbanisme"), "michel.bientavu@gmail.com", new Gender(1, "H"), "1996-08-27", "0676287201", 2021, new Country(1, "France"), new Pole(2, "UA", "Unité d'affaires"), new Address(34, "40 Bd d'Elrond", undefined, "83800", "Foncombe", new Country(45, "Terre du Milieu"))),
-          new MemberInscription(2, "Gandalf", "Leblanc", new Department(1, "TC", "Télécommunications"), "gandalf.leblanc@magicien.com", new Gender(1, "H"), "1997-05-12", "0823476212", 2023, new Country(3, "Maroc"), new Pole(1, "SI", "Systèmes d'informations"), new Address(12, "3 rue de Sauron", undefined, "69600", "Kazagdûm", new Country(46, "Mordor")), [new Document(1, "Fiche d'inscription", true, false), new Document(2, "Pièce identité", false, false), new Document(3, "PDF quelconque", false, true)])],
+        mockObj = <T> new Page(<T[]> [new MemberInscription(1, "Michel", "Bienheureux", new Department(3, "GCU", "Génie Civil et Urbanisme"), "michel.bientavu@gmail.com", new Gender(1, "H"), "1996-08-27", "0676287201", 2021, new Country(1, "France"), new Pole(2, "UA", "Unité d'affaires"), new Address(34, "40 Bd d'Elrond", undefined, "83800", "Foncombe", new Country(45, "Terre du Milieu")), undefined, true, true),
+          new MemberInscription(2, "Gandalf", "Leblanc", new Department(1, "TC", "Télécommunications"), "gandalf.leblanc@magicien.com", new Gender(1, "H"), "1997-05-12", "0823476212", 2023, new Country(3, "Maroc"), new Pole(1, "SI", "Systèmes d'informations"), new Address(12, "3 rue de Sauron", undefined, "69600", "Kazagdûm", new Country(46, "Mordor")), [new Document(1, "Fiche d'inscription", true, false), new Document(2, "Pièce identité", false, false), new Document(3, "PDF quelconque", false, true)], false, false)],
           new Meta(0, 1, 2 , 25));
         status = 200;
         return new MockResponse(mockObj, status);
@@ -97,8 +97,8 @@ export class MemberInscriptionMock implements IMock {
     let status = 500;
     switch (resource) {
       case "sg/membre-inscription" :
-        mockObj = <T[]> [new MemberInscription(1, "Michel", "Bienheureux", new Department(3, "GCU", "Génie Civil et Urbanisme"), "michel.bientavu@gmail.com", new Gender(1, "H"), "1996-08-27", "0676287201", 2021, new Country(1, "France"), new Pole(2, "UA", "Unité d'affaires"), new Address(34, "40 Bd d'Elrond", undefined, "83800", "Foncombe", new Country(45, "Terre du Milieu"))),
-          new MemberInscription(2, "Gandalf", "Leblanc", new Department(1, "TC", "Télécommunications"), "gandalf.leblanc@magicien.com", new Gender(1, "H"), "1997-05-12", "0823476212", 2023, new Country(3, "Maroc"), new Pole(1, "SI", "Systèmes d'informations"), new Address(12, "3 rue de Sauron", undefined, "69600", "Kazagdûm", new Country(46, "Mordor")), [new Document(1, "Fiche d'inscription", true, false), new Document(2, "Pièce identité", false, false), new Document(4, "PDF quelconque", false, true)])];
+        mockObj = <T[]> [new MemberInscription(1, "Michel", "Bienheureux", new Department(3, "GCU", "Génie Civil et Urbanisme"), "michel.bientavu@gmail.com", new Gender(1, "H"), "1996-08-27", "0676287201", 2021, new Country(1, "France"), new Pole(2, "UA", "Unité d'affaires"), new Address(34, "40 Bd d'Elrond", undefined, "83800", "Foncombe", new Country(45, "Terre du Milieu")), undefined, true, true),
+          new MemberInscription(2, "Gandalf", "Leblanc", new Department(1, "TC", "Télécommunications"), "gandalf.leblanc@magicien.com", new Gender(1, "H"), "1997-05-12", "0823476212", 2023, new Country(3, "Maroc"), new Pole(1, "SI", "Systèmes d'informations"), new Address(12, "3 rue de Sauron", undefined, "69600", "Kazagdûm", new Country(46, "Mordor")), [new Document(1, "Fiche d'inscription", true, false), new Document(2, "Pièce identité", false, false), new Document(4, "PDF quelconque", false, true)], false, false)];
         status = 200;
         return new MockResponse(mockObj, status);
     }
