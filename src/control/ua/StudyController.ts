@@ -28,14 +28,13 @@ export class StudyController {
             const options = {
                 studies: page,
             };
-
             res.render("ua/study/viewAll", options);
         });
     }
 
   public viewStudiesConnectedUser(req: Request, res: Response, next: NextFunction) {
     StudyService.getAllStudiesForConnectedUser(function (err, page: Page<Study> | null) {
-      winston.info("Getting all studies");
+        winston.info("Getting all studies");
       if (err) {
         return next(err);
       }
