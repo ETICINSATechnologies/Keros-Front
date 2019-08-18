@@ -5,7 +5,7 @@
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        {{#if study}}Fiche Etude{{else}}Nouvelle étude{{/if}} {{connectedUser.positions.[0].id}}
+        {{#if study}}Fiche Etude{{else}}Nouvelle étude{{/if}}
       </h1>
       {{> breadcrumb action=action tab="UA" pathnew="Etudes,Nouvelle étude" pathview=(concat "Etudes,Fiche n°" study.id) pathedit=(concat "Etudes,Edition fiche n°" study.id) }}
     </section>
