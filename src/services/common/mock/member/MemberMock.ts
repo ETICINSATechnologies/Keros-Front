@@ -18,7 +18,14 @@ export class MemberMock implements IMock {
     let status = 500;
     switch (resource) {
       case "core/member":
-        mockObj = <T>new Member(0, resources.lastName, resources.firstName, resources.username, new Gender(resources.genderId, "A"), resources.email, resources.birthday, new Department(resources.departmentId, "TC"), resources.schoolYear, resources.telephone, resources.address, [new Position(resources.positionIds[0], "Secretaire Général", 2015, true, new Pole(1, "RH", "Ressources Humaines")), new Position(resources.positionIds[1], "Président(e)", 2015, true, new Pole(1, "RH", "Ressources Humaines")), new Position(resources.positionIds[2], "Vice-Président(e)", 2015, true, new Pole(1, "RH", "Ressources Humaines"))]);
+        mockObj = <T>new Member(0, resources.lastName, resources.firstName, resources.username,
+            new Gender(resources.genderId, "A"), resources.email, resources.birthday, new Department(resources.departmentId, "TC"),
+            resources.schoolYear, resources.telephone, resources.address,
+            [new Position(resources.positionIds[0], "Secretaire Général", 2015, true,
+                new Pole(1, "RH", "Ressources Humaines")),
+              new Position(resources.positionIds[1], "Président(e)", 2015, true,
+                  new Pole(1, "RH", "Ressources Humaines")),
+              new Position(resources.positionIds[2], "Vice-Président(e)", 2015, true, new Pole(1, "RH", "Ressources Humaines"))]);
         status = 201;
         winston.debug("Member created : " + JSON.stringify(mockObj));
         return new MockResponse(mockObj, status);
@@ -61,7 +68,8 @@ export class MemberMock implements IMock {
             "Grilly",
             new Country(1, "France")),
           [new Position(22, "Secrétaire Général(e)", 2018, true, new Pole(6, "RH", "Ressources Humaines")),
-            new Position(20, "Responsable SI", 2018, true, new Pole(7, "SI", "Systèmes d'Information"))]
+            new Position(20, "Responsable SI", 2018, true, new Pole(7, "SI", "Systèmes d'Information")),
+            new Position(21, "Responsable UA", 2018, true, new Pole(9, "UA", "Unité d'affaires"))]
         );
         status = 200;
         return new MockResponse(mockObj, status);

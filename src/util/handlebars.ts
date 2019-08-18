@@ -176,6 +176,9 @@ export default handlebars({
         }
       }
       return newTab;
+    },
+    isRespUaOrRespQuality(positionId: number) {
+      return (positionId === 21 || positionId === 18);
     }
   }
 });
