@@ -177,8 +177,10 @@ export default handlebars({
       }
       return newTab;
     },
-    isRespUaOrRespQuality(positionId: number) {
-      return (positionId === 21 || positionId === 18);
+    isRespUaOrRespQuality(positions: Position[]) {
+      return positions.some(function(pos) {
+        return 21 === pos.id || 18 === pos.id;
+      });
     }
   }
 });

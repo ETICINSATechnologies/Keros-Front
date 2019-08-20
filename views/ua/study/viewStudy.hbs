@@ -231,7 +231,7 @@
                   </div>
                     {{#if (eq action "view")}}
                         {{#if (eq mailshots 1)}}
-                            {{#if (isRespUaOrRespQuality connectedUser.positions.[0].id)}}
+                            {{#if (isRespUaOrRespQuality connectedUser.positions)}}
                                 <div id="view-mailshots">
                                     <h4 class="col-md-12 box-title">
                                         Publipostage
