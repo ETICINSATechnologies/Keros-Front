@@ -45,7 +45,7 @@ export class ConsultantMock implements IMock {
         switch (resource) {
             case "core/consultant/me":
                 mockObj = <T>new Consultant(1,
-                    "Tom",
+                    "Tommy",
                     "Dupont",
                     "tdupont",
                     new Gender(3, "A"),

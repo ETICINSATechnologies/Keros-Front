@@ -16,7 +16,7 @@
           <section class="content">
             <div class="box box-primary">
 
-              <form role="form" method="post" action="/core/member/postform">
+              <form role="form" method="post" action="/core/consultant/postform">
                 {{#if connectedUser}}<input type="text" id="id" name="id" value="{{connectedUser.id}}" hidden>{{/if}}
                 <div class="box-body row">
                   <div class="col-md-6 form-group">
@@ -123,66 +123,10 @@
                       {{/each}}
                     </select>
                   </div>
-                  <h4 class="col-md-12 box-title">
-                    Fonction/Poste
-                  </h4>
-                  <div class="col-md-4 form-group">
-                    <label for="countryId">Fonction 1</label>
-                    <select class="form-control" id="positionId1" name="positionId1" required {{readonlyIf
-                            (eq action "view")}} {{disabledIf (eq action "view")}}>
-                      {{#each positions}}
-                        <option value="{{id}}" {{selected id @root.connectedUser.positions.0.id}}>{{label}} {{#if pole}}({{pole.label}}){{/if}}</option>
-                      {{/each}}
-                    </select>
-                    <label for="year">Année </label>
-                    <input type="number" min="1900" max="2099" step="1" class="form-control" id="yearPosition1"
-                           name="year" value="{{member.positions.0.year}}"
-                      {{readonlyIf (eq action "view")}}>
-                    <label for="isBoard">
-                      <input type="checkbox" id="isBoard1" name="isBoard"
-                        {{#if (eq action "view")}} disabled="disabled" {{/if}}
-                        {{#if member.positions.0.isBoard}}checked{{/if}}> Membre CA
-                    </label>
-                  </div>
-                  <div class="col-md-4 form-group">
-                    <label for="countryId">Fonction 2</label>
-                    <select class="form-control" id="positionId2" name="positionId2" {{readonlyIf
-                            (eq action "view")}} {{disabledIf (eq action "view")}}>
-                      <option></option>
-                      {{#each positions}}
-                        <option value="{{id}}" {{selected id @root.connectedUser.positions.1.id}}>{{label}} {{#if pole}}({{pole.label}}){{/if}}</option>
-                      {{/each}}
-                    </select>
-                    <label for="year">Année </label>
-                    <input type="number" min="1900" step="1" class="form-control" id="yearPosition2" name="year"
-                           value="{{member.positions.1.year}}" {{readonlyIf (eq action "view")}}>
-                    <label for="isBoard">
-                      <input type="checkbox" id="isBoard2" name="isBoard"
-                        {{#if (eq action "view")}} disabled="disabled" {{/if}}
-                        {{#if member.positions.1.isBoard}}checked{{/if}}> Membre CA
-                    </label>
-                  </div>
-                  <div class="col-md-4 form-group">
-                    <label for="countryId">Fonction 3</label>
-                    <select class="form-control" id="positionId3" name="positionId3" {{readonlyIf (eq action "view")}}>
-                      <option></option>
-                      {{#each positions}}
-                        <option value="{{id}}" {{selected id @root.connectedUser.positions.2.id}}>{{label}} {{#if pole}}({{pole.label}}){{/if}}</option>
-                      {{/each}}
-                    </select>
-                    <label for="year">Année </label>
-                    <input type="number" min="1900" step="1" class="form-control" id="yearPosition3" name="year"
-                           value="{{member.positions.2.year}}" {{readonlyIf (eq action "view")}}>
-                    <label for="isBoard">
-                      <input type="checkbox" id="isBoard3" name="isBoard"
-                        {{#if (eq action "view")}} disabled="disabled" {{/if}}
-                        {{#if member.positions.2.isBoard}}checked{{/if}}> Membre CA
-                    </label>
-                  </div>
                 </div>
                 <div class="box-footer">
                   <a href="/"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button></a>
-                  {{> formButtons action=action origin="/core/member/me" page="profilePage"}}
+                  {{> formButtons action=action origin="/core/consultant/me" page="profilePage"}}
                 </div>
               </form>
             </div>

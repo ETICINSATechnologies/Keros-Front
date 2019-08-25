@@ -4,6 +4,7 @@ import { AuthService } from "../../services/auth/AuthService";
 import { LoginRequest } from "../../models/auth/LoginRequest";
 import { LoginResponse } from "../../models/auth/LoginResponse";
 import { MemberService } from "../../services/core/MemberService";
+import { ConsultantService } from "../../services/core/ConsultantService";
 import { Member } from "../../models/core/Member";
 import * as httpContext from "express-http-context";
 import { Config } from "../../config/Config";
@@ -44,17 +45,44 @@ export class LoginController {
 
         const token = response.token;
         httpContext.set("token", token);
-        MemberService.getConnectedMember(function (err: any, response: Member | null) {
+        /*
+        ConsultantService.getConnectedConsultant(function (err: any, response: Member | null) {
           if (err) {
             return next(err);
           }
-
           if (Config.getEnv().toString() === "testing") {
             res.redirect("/");
           } else {
             res.cookie("connectedUser", JSON.stringify(response))
               .cookie("token", token)
               .redirect("/");
+          }
+        });
+        */
+        MemberService.getConnectedMember(function (err: any, response: Member | null) {
+          if (err) {
+            ConsultantService.getConnectedConsultant(function (err: any, response: Member | null) {
+              if (err) {
+                return next(err);
+              }
+              if (Config.getEnv().toString() === "testing") {
+                res.redirect("/");
+              } else {
+                res.cookie("connectedUser", JSON.stringify(response))
+                  .cookie("token", token)
+                  .redirect("/");
+              }
+            // return next(err);
+            });
+          }
+          else {
+            if (Config.getEnv().toString() === "testing") {
+              res.redirect("/");
+            } else {
+              res.cookie("connectedUser", JSON.stringify(response))
+                .cookie("token", token)
+                .redirect("/");
+            }
           }
         });
       }
