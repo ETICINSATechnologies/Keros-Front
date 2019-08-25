@@ -6,7 +6,7 @@
       <span class="pull-left fa fa-user fa-3x" style="color: #FEFEFE"></span>
       <div class="pull-left info">
         <p>{{connectedUser.username}}</p>
-        <p>{{connectedUser.positions.0.label}}</p>
+        <p>{{#if connectedUser.positions}}{{connectedUser.positions.0.label}}{{/if}}</p>
       </div>
     </div>
     <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -17,61 +17,63 @@
           <i class="fa fa-home"></i> <span>Accueil</span>
         </a>
       </li>
-      <!-- UA -->
-      {{#if (or (isFromUa connectedUser.positions) (isFromPrez connectedUser.positions) (isFromPerf connectedUser.positions) (isFromDevCo connectedUser.positions) (isAdmin connectedUser.positions))}}
-      <li class="treeview">
-        <a href="#">
-          <i class="fa fa-line-chart"></i> <span>Unité d'affaires</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
-        </a>
-        <ul class="treeview-menu">
-          <li><a href="/ua/study"><i class="fa fa-circle-o"></i> Études</a></li>
-          <li><a href="/ua/contact"><i class="fa fa-circle-o"></i> Contacts</a></li>
-          <li><a href="/ua/firm"><i class="fa fa-circle-o"></i> Sociétés</a></li>
-          </ul>
-      </li>
-      {{/if}}
-
-      <!-- RH -->
-      {{#if (or (isFromRH connectedUser.positions) (isFromPrez connectedUser.positions) (isAdmin connectedUser.positions))}}
-        <li class="treeview">
-        <a href="#">
-          <i class="fa fa-male"></i> <span>Ressources Humaines</span>
-          <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-        </a>
-        <ul class="treeview-menu">
-          <li><a href="/core/member"><i class="fa fa-circle-o"></i> Membres</a></li>
-          <li><a href="/core/member"><i class="fa fa-circle-o"></i> Consultants</a></li>
-          <li class="treeview">
-            <a href="#"><i class="fa fa-user-plus"></i> Inscriptions</a>
-            <ul class="treeview-menu">
-              <li><a href="/sg/membre-inscription"><i class="fa fa-clipboard"></i> Membres</a></li>
-              <li><a href="/sg/consultant-inscription"><i class="fa fa-clipboard"></i> Consultants</a></li>
-            </ul>
-          </li>
-
-        </ul>
-        </li>
-      {{/if}}
-
-      <!-- Treso -->
-      {{#if (or (isFromTreso connectedUser.positions) (isFromPerf connectedUser.positions) (isFromPrez connectedUser.positions) (isAdmin connectedUser.positions) (isRespUa connectedUser.positions) (isChadaff connectedUser.positions))}}
+      {{#if connectedUser.positions}}
+        <!-- UA -->
+        {{#if (or (isFromUa connectedUser.positions) (isFromPrez connectedUser.positions) (isFromPerf connectedUser.positions) (isFromDevCo connectedUser.positions) (isAdmin connectedUser.positions))}}
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-balance-scale"></i> <span>Trésorerie</span>
+            <i class="fa fa-line-chart"></i> <span>Unité d'affaires</span>
             <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="/treso/facture"><i class="fa fa-circle-o"></i> Factures</a></li>
-            <li><a href="/treso/payment-slip"><i class="fa fa-circle-o"></i> Bulletins de versements</a></li>
-          </ul>
+            <li><a href="/ua/study"><i class="fa fa-circle-o"></i> Études</a></li>
+            <li><a href="/ua/contact"><i class="fa fa-circle-o"></i> Contacts</a></li>
+            <li><a href="/ua/firm"><i class="fa fa-circle-o"></i> Sociétés</a></li>
+            </ul>
         </li>
+        {{/if}}
+
+        <!-- RH -->
+        {{#if (or (isFromRH connectedUser.positions) (isFromPrez connectedUser.positions) (isAdmin connectedUser.positions))}}
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-male"></i> <span>Ressources Humaines</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="/core/member"><i class="fa fa-circle-o"></i> Membres</a></li>
+            <li><a href="/core/consultant"><i class="fa fa-circle-o"></i> Consultants</a></li>
+            <li class="treeview">
+              <a href="#"><i class="fa fa-user-plus"></i> Inscriptions</a>
+              <ul class="treeview-menu">
+                <li><a href="/sg/membre-inscription"><i class="fa fa-clipboard"></i> Membres</a></li>
+                <li><a href="/sg/consultant-inscription"><i class="fa fa-clipboard"></i> Consultants</a></li>
+              </ul>
+            </li>
+
+          </ul>
+          </li>
+        {{/if}}
+
+        <!-- Treso -->
+        {{#if (or (isFromTreso connectedUser.positions) (isFromPerf connectedUser.positions) (isFromPrez connectedUser.positions) (isAdmin connectedUser.positions) (isRespUa connectedUser.positions) (isChadaff connectedUser.positions))}}
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-balance-scale"></i> <span>Trésorerie</span>
+              <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="/treso/facture"><i class="fa fa-circle-o"></i> Factures</a></li>
+              <li><a href="/treso/payment-slip"><i class="fa fa-circle-o"></i> Bulletins de versements</a></li>
+            </ul>
+          </li>
+        {{/if}}
       {{/if}}
 
       <!-- Support -->

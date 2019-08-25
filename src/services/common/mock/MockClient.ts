@@ -21,102 +21,104 @@ import { BulletinVersementMock } from "./bulletinVersement/BulletinVersementMock
 import { MemberInscriptionMock } from "./inscriptions/MemberInscriptionMock";
 import { PoleMock } from "./pole/PoleMock";
 import { ConsultantInscriptionMock } from "./inscriptions/ConsultantInscriptionMock";
+import { ConsultantMock } from "./consultant/ConsultantMock";
 
 const MOCKS: IMock[] = [
-  new AuthMock(),
-  new MemberMock(),
-  new FirmMock(),
-  new StudyMock(),
-  new DepartmentMock(),
-  new GenderMock(),
-  new AddressMock(),
-  new CountryMock(),
-  new PositionMock(),
-  new FirmTypeMock(),
-  new ContactMock(),
-  new StatusMock(),
-  new FieldMock(),
-  new ProvenanceMock(),
-  new FactureMock(),
-  new FactureTypeMock(),
-  new BulletinVersementMock(),
-  new MemberInscriptionMock(),
-  new ConsultantInscriptionMock(),
-  new PoleMock()
+    new AuthMock(),
+    new MemberMock(),
+    new ConsultantMock(),
+    new FirmMock(),
+    new StudyMock(),
+    new DepartmentMock(),
+    new GenderMock(),
+    new AddressMock(),
+    new CountryMock(),
+    new PositionMock(),
+    new FirmTypeMock(),
+    new ContactMock(),
+    new StatusMock(),
+    new FieldMock(),
+    new ProvenanceMock(),
+    new FactureMock(),
+    new FactureTypeMock(),
+    new BulletinVersementMock(),
+    new MemberInscriptionMock(),
+    new ConsultantInscriptionMock(),
+    new PoleMock()
 ];
 
 export class MockResponse<T> implements IRestResponse<T> {
-  constructor(
-    public result: T | null,
-    public statusCode: number
-  ) {
-  }
+    constructor(
+        public result: T | null,
+        public statusCode: number
+    ) {
+    }
 }
 
 export class MockClient implements IClient {
-  create<T>(resource: string, resources: any, options?: IRequestOptions): Promise<IRestResponse<T>> {
-    let mock: IMock;
-    for (mock of MOCKS) {
-      const response: IRestResponse<T> | null = mock.create<T>(resource, resources, options);
-      if (response) {
-        return Promise.resolve(response);
-      }
+    create<T>(resource: string, resources: any, options?: IRequestOptions): Promise<IRestResponse<T>> {
+        let mock: IMock;
+        for (mock of MOCKS) {
+            const response: IRestResponse<T> | null = mock.create<T>(resource, resources, options);
+            if (response) {
+                return Promise.resolve(response);
+            }
+        }
+        return Promise.resolve(new MockResponse(null, 404));
     }
-    return Promise.resolve(new MockResponse(null, 404));
-  }
 
-  del<T>(resource: string, options?: IRequestOptions): Promise<IRestResponse<T>> {
-    let mock: IMock;
-    for (mock of MOCKS) {
-      const response: IRestResponse<T> | null = mock.del<T>(resource, options);
-      if (response) {
-        return Promise.resolve(response);
-      }
+    del<T>(resource: string, options?: IRequestOptions): Promise<IRestResponse<T>> {
+        let mock: IMock;
+        for (mock of MOCKS) {
+            const response: IRestResponse<T> | null = mock.del<T>(resource, options);
+            if (response) {
+                return Promise.resolve(response);
+            }
+        }
+        return Promise.resolve(new MockResponse(null, 404));
     }
-    return Promise.resolve(new MockResponse(null, 404));
-  }
 
-  get<T>(resource: string, options?: IRequestOptions): Promise<IRestResponse<T>> {
-    let mock: IMock;
-    for (mock of MOCKS) {
-      const response: IRestResponse<T> | null = mock.get<T>(resource, options);
-      if (response) {
-        return Promise.resolve(response);
-      }
+    get<T>(resource: string, options?: IRequestOptions): Promise<IRestResponse<T>> {
+        let mock: IMock;
+        for (mock of MOCKS) {
+            const response: IRestResponse<T> | null = mock.get<T>(resource, options);
+            if (response) {
+                return Promise.resolve(response);
+            }
+        }
+        return Promise.resolve(new MockResponse(null, 404));
     }
-    return Promise.resolve(new MockResponse(null, 404));
-  }
 
-  getAll<T>(resource: string, options?: IRequestOptions): Promise<IRestResponse<T[]>> {
-    let mock: IMock;
-    for (mock of MOCKS) {
-      const response: IRestResponse<T[]> | null = mock.getAll<T>(resource, options);
-      if (response) {
-        return Promise.resolve(response);
-      }
+    getAll<T>(resource: string, options?: IRequestOptions): Promise<IRestResponse<T[]>> {
+        let mock: IMock;
+        for (mock of MOCKS) {
+            const response: IRestResponse<T[]> | null = mock.getAll<T>(resource, options);
+            if (response) {
+                return Promise.resolve(response);
+            }
+        }
+        return Promise.resolve(new MockResponse(null, 404));
     }
-    return Promise.resolve(new MockResponse(null, 404));
-  }
 
-  options<T>(requestUrl: string, options?: IRequestOptions): Promise<IRestResponse<T>> {
-    let mock: IMock;
-    for (mock of MOCKS) {
-      const response: IRestResponse<T> | null = mock.options<T>(requestUrl, options);
-      if (response) {
-        return Promise.resolve(response);
-      }
+    options<T>(requestUrl: string, options?: IRequestOptions): Promise<IRestResponse<T>> {
+        let mock: IMock;
+        for (mock of MOCKS) {
+            const response: IRestResponse<T> | null = mock.options<T>(requestUrl, options);
+            if (response) {
+                return Promise.resolve(response);
+            }
+        }
+        return Promise.resolve(new MockResponse(null, 404));
     }
-    return Promise.resolve(new MockResponse(null, 404));
-  }
 
-  update<T>(resource: string, resources: any, options?: IRequestOptions): Promise<IRestResponse<T>> {
-    let mock: IMock;
-    for (mock of MOCKS) {
-      const response: IRestResponse<T> | null = mock.update<T>(resource, resources, options);
-      if (response) {
-        return Promise.resolve(response);
-      }
+    update<T>(resource: string, resources: any, options?: IRequestOptions): Promise<IRestResponse<T>> {
+        let mock: IMock;
+        for (mock of MOCKS) {
+            const response: IRestResponse<T> | null = mock.update<T>(resource, resources, options);
+            if (response) {
+                return Promise.resolve(response);
+            }
+        }
+        return Promise.resolve(new MockResponse(null, 404));
     }
-    return Promise.resolve(new MockResponse(null, 404));
-  }
 }
