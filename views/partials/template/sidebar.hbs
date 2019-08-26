@@ -19,7 +19,6 @@
       </li>
       {{#if connectedUser.positions}}
         <!-- UA -->
-        {{#if (or (isFromUa connectedUser.positions) (isFromPrez connectedUser.positions) (isFromPerf connectedUser.positions) (isFromDevCo connectedUser.positions) (isAdmin connectedUser.positions))}}
         <li class="treeview">
           <a href="#">
             <i class="fa fa-line-chart"></i> <span>Unité d'affaires</span>
@@ -33,10 +32,8 @@
             <li><a href="/ua/firm"><i class="fa fa-circle-o"></i> Sociétés</a></li>
             </ul>
         </li>
-        {{/if}}
 
         <!-- RH -->
-        {{#if (or (isFromRH connectedUser.positions) (isFromPrez connectedUser.positions) (isAdmin connectedUser.positions))}}
           <li class="treeview">
           <a href="#">
             <i class="fa fa-male"></i> <span>Ressources Humaines</span>
@@ -57,10 +54,8 @@
 
           </ul>
           </li>
-        {{/if}}
 
         <!-- Treso -->
-        {{#if (or (isFromTreso connectedUser.positions) (isFromPerf connectedUser.positions) (isFromPrez connectedUser.positions) (isAdmin connectedUser.positions) (isRespUa connectedUser.positions) (isChadaff connectedUser.positions))}}
           <li class="treeview">
             <a href="#">
               <i class="fa fa-balance-scale"></i> <span>Trésorerie</span>
@@ -74,7 +69,6 @@
             </ul>
           </li>
         {{/if}}
-      {{/if}}
 
       <!-- Support -->
       <!--
