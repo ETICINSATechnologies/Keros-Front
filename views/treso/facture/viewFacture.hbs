@@ -29,7 +29,7 @@
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="type">Type de facture</label>
-                    <select class="form-control" id="typeId" name="typeId" {{readonlyIf (eq action "view")}}>
+                    <select class="form-control" id="typeId" name="type" {{readonlyIf (eq action "view")}}>
                       {{#each types}}
                         <option value="{{this}}" {{#if (eq label @root.facture.type.label)}}selected{{/if}}>{{typeToString this}}</option>
                       {{/each}}
