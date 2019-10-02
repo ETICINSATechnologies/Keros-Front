@@ -19,7 +19,7 @@
                                     Informations  {{#if inscription}}inscription consultant n°{{inscription.id}}{{/if}}
                                 </h3>
                             </div>
-                            <form role="form" method="post" action="/sg/consultant-inscription/postform">
+                            <form role="form" method="post" action="/sg/consultant-inscription/postform" enctype="multipart/form-data">
                                 {{#if inscription}}<input type="text" id="id" name="id" value="{{inscription.id}}" hidden>{{/if}}
                                 <div class="box-body row">
                                     <div class="col-md-6 form-group">

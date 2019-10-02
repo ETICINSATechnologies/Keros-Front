@@ -45,20 +45,6 @@ export class LoginController {
 
         const token = response.token;
         httpContext.set("token", token);
-        /*
-        ConsultantService.getConnectedConsultant(function (err: any, response: Member | null) {
-          if (err) {
-            return next(err);
-          }
-          if (Config.getEnv().toString() === "testing") {
-            res.redirect("/");
-          } else {
-            res.cookie("connectedUser", JSON.stringify(response))
-              .cookie("token", token)
-              .redirect("/");
-          }
-        });
-        */
         MemberService.getConnectedMember(function (err: any, response: Member | null) {
           if (err) {
             ConsultantService.getConnectedConsultant(function (err: any, response: Member | null) {
