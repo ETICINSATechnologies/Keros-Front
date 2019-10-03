@@ -23,6 +23,7 @@ export function memberInscriptionRouter(): Router {
   router.get("/:id(\\d+)/document/:documentTypeId(\\d+)/generate", inscriptionController.generateDocument);
   router.post("/postform", inscriptionController.postMemberInscriptionForm);
   router.post("/:id(\\d+)/document/:documentTypeId(\\d+)/", inscriptionController.uploadDocument);
+  router.post("/:id(\\d+)/validate", inscriptionController.validateMemberInscription);
 
   return router;
 }
