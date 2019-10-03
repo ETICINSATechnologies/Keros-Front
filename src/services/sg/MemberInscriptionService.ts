@@ -49,6 +49,21 @@ export class MemberInscriptionService extends BaseService {
     );
   }
 
+  static validateMemberInscription(id: number, memberInscriptionRequest: MemberInscriptionCreateRequest, callback: (err: any) => void): void {
+    this.rest.create<MemberInscription>("sg/membre-inscription/" + id + "/validate", memberInscriptionRequest, this.defaultHeaders()).then(
+      (res: IRestResponse<MemberInscription>) => {
+        if (res.statusCode !== 204) {
+          return callback(this.defaultError(res.statusCode));
+        }
+        winston.debug("headers : " + JSON.stringify(this.defaultHeaders()));
+        winston.debug("Response : " + JSON.stringify(res));
+        callback(null);
+      }
+    ).catch(
+      e => callback(e)
+    );
+  }
+
   static update(id: number, memberInscriptionRequest: MemberInscriptionCreateRequest, callback: (err: any, result: MemberInscription | null) => void): void {
     this.rest.update<MemberInscription>("sg/membre-inscription/" + id, memberInscriptionRequest, this.defaultHeaders()).then(
       (res: IRestResponse<MemberInscription>) => {
