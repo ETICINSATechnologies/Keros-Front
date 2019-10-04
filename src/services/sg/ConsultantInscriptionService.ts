@@ -5,6 +5,8 @@ import { ConsultantInscription } from "../../models/sg/ConsultantInscription";
 import { Page } from "../../models/core/Page";
 import { ConsultantInscriptionCreateRequest } from "../../models/sg/ConsultantInscriptionCreateRequest";
 import { DocumentResponse } from "../../models/DocumentResponse";
+import { MemberInscriptionCreateRequest } from "../../models/sg/MemberInscriptionCreateRequest";
+import { MemberInscription } from "../../models/sg/MemberInscription";
 
 export class ConsultantInscriptionService extends BaseService {
     static getConsultantInscription(id: number, callback: (err: any, result: ConsultantInscription | null) => void): void {
@@ -65,6 +67,20 @@ export class ConsultantInscriptionService extends BaseService {
 
     static delete(id: number, callback: (err: any) => void): void {
         this.rest.del<ConsultantInscription>("sg/consultant-inscription/" + id, this.defaultHeaders()).then(
+            (res: IRestResponse<ConsultantInscription>) => {
+                if (res.statusCode !== 204) {
+                    return callback(this.defaultError(res.statusCode));
+                }
+                winston.debug("Response : " + JSON.stringify(res));
+                callback(null);
+            }
+        ).catch(
+            e => callback(e)
+        );
+    }
+
+    static validateConsultantInscription(id: number, consultantInscriptionRequest: ConsultantInscriptionCreateRequest, callback: (err: any) => void): void {
+        this.rest.create<ConsultantInscription>("sg/consultant-inscription/" + id + "/validate", consultantInscriptionRequest, this.defaultHeaders()).then(
             (res: IRestResponse<ConsultantInscription>) => {
                 if (res.statusCode !== 204) {
                     return callback(this.defaultError(res.statusCode));
