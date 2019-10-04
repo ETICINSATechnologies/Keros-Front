@@ -55,7 +55,6 @@ export class MemberInscriptionService extends BaseService {
         if (res.statusCode !== 204) {
           return callback(this.defaultError(res.statusCode));
         }
-        winston.debug("headers : " + JSON.stringify(this.defaultHeaders()));
         winston.debug("Response : " + JSON.stringify(res));
         callback(null);
       }

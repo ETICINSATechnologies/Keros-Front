@@ -14,10 +14,11 @@ import { ConsultantInscriptionCreateRequest } from "../../models/sg/ConsultantIn
 import { FileUploader } from "../../util/FileUploader";
 import { GenderService } from "../../services/core/GenderService";
 import { Gender } from "../../models/core/Gender";
+import { MemberInscriptionCreateRequest } from "../../models/sg/MemberInscriptionCreateRequest";
+import { MemberInscriptionService } from "../../services/sg/MemberInscriptionService";
 
 
 export class ConsultantInscriptionController {
-
 
     viewConsultantInscriptions(req: Request, res: Response, next: NextFunction) {
         ConsultantInscriptionService.getAllConsultantInscriptions(function (err, page: Page<ConsultantInscription> | null) {
@@ -205,5 +206,47 @@ export class ConsultantInscriptionController {
             winston.info("Uploaded doc (of type" + documentTypeId + ") for id " + id);
             res.redirect("/sg/consultant-inscription/" + id);
         });
+    }
+
+    public validateConsultantInscription(req: Request, res: Response, next: NextFunction) {
+        const id = req.params.id;
+        const inscriptionRequest = new ConsultantInscriptionCreateRequest();
+        inscriptionRequest.firstName = req.body.firstName;
+        inscriptionRequest.lastName = req.body.lastName;
+        inscriptionRequest.departmentId = parseInt(req.body.departmentId);
+        inscriptionRequest.email = req.body.email;
+        inscriptionRequest.genderId = req.body.genderId;
+        inscriptionRequest.birthday = req.body.birthday;
+        inscriptionRequest.phoneNumber = req.body.phoneNumber;
+        inscriptionRequest.outYear = parseInt(req.body.outYear);
+        inscriptionRequest.nationalityId = parseInt(req.body.nationalityId);
+        inscriptionRequest.socialSecurityNumber = req.body.socialSecurityNumber;
+        inscriptionRequest.droitImage = req.body.droitImage;
+
+        const addressRequest = new AddressCreateRequest();
+        addressRequest.line1 = req.body.line1;
+        addressRequest.line2 = req.body.line2;
+        addressRequest.city = req.body.city;
+        addressRequest.postalCode = req.body.postalCode;
+        addressRequest.countryId = parseInt(req.body.countryId);
+        inscriptionRequest.address = addressRequest;
+
+        winston.info("request : " + JSON.stringify(req.files));
+        if (req.files !== null && req.files !== undefined) {
+            inscriptionRequest.documentIdentity = FileUploader.obtainFileBase64(req.files, "documentIdentity");
+            inscriptionRequest.documentResidencePermit = FileUploader.obtainFileBase64(req.files, "documentResidencePermit");
+            inscriptionRequest.documentRib = FileUploader.obtainFileBase64(req.files, "documentRib");
+            inscriptionRequest.documentScolarityCertificate = FileUploader.obtainFileBase64(req.files, "documentScolarityCertificate");
+            inscriptionRequest.documentVitaleCard = FileUploader.obtainFileBase64(req.files, "documentVitaleCard");
+        }
+        if (id) {
+            ConsultantInscriptionService.validateConsultantInscription(id, inscriptionRequest, function (err) {
+                if (err) {
+                    return next(err);
+                }
+                winston.info("Validated inscription " + id);
+                res.redirect("/sg/consultant-inscription");
+            });
+        }
     }
 }
