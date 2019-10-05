@@ -26,7 +26,7 @@ export class MemberController {
         members: page,
       };
       res.render("core/member/viewAll", options);
-    });
+    }, req.query);
   }
 
   public createMember(req: Request, res: Response, next: NextFunction) {

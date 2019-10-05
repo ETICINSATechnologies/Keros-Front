@@ -24,7 +24,7 @@ export class ConsultantController {
                 consultants: page,
             };
             res.render("core/consultant/viewAll", options);
-        });
+        }, req.query);
     }
 
     public createConsultant(req: Request, res: Response, next: NextFunction) {
