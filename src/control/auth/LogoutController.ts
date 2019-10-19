@@ -7,6 +7,7 @@ export class LogoutController {
    */
   public logout(req: Request, res: Response, next: NextFunction) {
     res.clearCookie("token");
+    res.clearCookie("connectedUser");
     res.redirect("/auth/login");
   }
 }
