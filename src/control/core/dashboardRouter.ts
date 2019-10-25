@@ -16,7 +16,7 @@ export function dashboardRouter(): Router {
 
   // router.get("/dashboard", indexController.getDashboard);
   // router.get("", indexController.getDashboard);
-  router.get("", indexController.viewStudiesOnDashboard);
+  router.get("/", indexController.viewStudiesOnDashboard);
   router.get("/dashboard", indexController.viewStudiesOnDashboard);
   return router;
 }
