@@ -20,7 +20,7 @@ import { factureRouter } from "./control/treso/factureRouter";
 import { bulletinVersementRouter } from "./control/treso/bulletinVersementRouter";
 import { memberInscriptionRouter } from "./control/sg/memberInscriptionRouter";
 import { consultantInscriptionRouter } from "./control/sg/consultantInscriptionRouter";
-import {queryStringify} from "./util/Helper";
+import { queryStringify } from "./util/Helper";
 
 /**
  * The Launcher - contains the express Application as well as methods to launch a server on that

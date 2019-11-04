@@ -5,7 +5,7 @@ import { MemberInscription } from "../../models/sg/MemberInscription";
 import { Page } from "../../models/core/Page";
 import { MemberInscriptionCreateRequest } from "../../models/sg/MemberInscriptionCreateRequest";
 import { DocumentResponse } from "../../models/DocumentResponse";
-import {queryStringify} from "../../util/Helper";
+import { queryStringify } from "../../util/Helper";
 
 export class MemberInscriptionService extends BaseService {
   static getMemberInscription(id: number, callback: (err: any, result: MemberInscription | null) => void): void {
