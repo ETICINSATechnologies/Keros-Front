@@ -86,7 +86,7 @@ export class Launcher {
         this.app.use(httpContext.middleware);
 
         this.app.use("/auth", authRouter());
-        this.app.use("/", dashboardRouter());
+        this.app.use("", dashboardRouter());
         this.app.use("/core", coreRouter());
         this.app.use("/ua/firm", firmRouter());
         this.app.use("/ua/study", studyRouter());
