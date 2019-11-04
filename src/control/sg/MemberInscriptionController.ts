@@ -28,7 +28,7 @@ export class MemberInscriptionController {
             };
 
             res.render("sg/inscription/members/viewAll", options);
-        });
+        }, req.query);
     }
 
   public createMemberInscription(req: Request, res: Response, next: NextFunction) {
