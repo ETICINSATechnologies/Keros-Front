@@ -8,9 +8,9 @@
         Voir les inscriptions membres
       </h1>
       {{#if (eq urlPath "/sg/membre-inscription")}}
-        <button type="button" class="btn btn-primary" onclick="location.href='{{origin}}/sg/membre-inscription?hasPaid=True'">Voir les inscriptions payées</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='{{origin}}/sg/membre-inscription?hasPaid=true'">Voir les inscriptions payées</button>
       {{/if}}
-      {{#if (eq urlPath "/sg/membre-inscription?hasPaid=True")}}
+      {{#if (eq urlPath "/sg/membre-inscription?hasPaid=true")}}
         <button type="button" class="btn btn-primary" onclick="location.href='{{origin}}/sg/membre-inscription'">Voir toutes les inscriptions</button>
       {{/if}}
       {{> breadcrumb tab="RH" action="all" pathall="Inscriptions membres,Voir les inscriptions membres"}}
