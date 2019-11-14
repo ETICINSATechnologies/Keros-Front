@@ -15,6 +15,8 @@ import { DocumentResponse } from "../../models/DocumentResponse";
 import HttpError from "../../util/httpError";
 import { GenderService } from "../../services/core/GenderService";
 import { Gender } from "../../models/core/Gender";
+import { MemberService } from "../../services/core/MemberService";
+import { Member } from "../../models/core/Member";
 
 export class MemberInscriptionController {
     public viewMemberInscriptions(req: Request, res: Response, next: NextFunction) {
@@ -28,30 +30,30 @@ export class MemberInscriptionController {
             };
 
             res.render("sg/inscription/members/viewAll", options);
-        });
+        }, req.query);
     }
 
-  public createMemberInscription(req: Request, res: Response, next: NextFunction) {
-    winston.info("Getting create member inscription form");
-    DepartmentService.getAllDepartments(function(err1, departments: Department[] | null) {
-      CountryService.getAllCountries(function(err2, countries: Country[] |  null) {
-        PoleService.getAllPoles(function(err3, poles: Pole[] | null) {
-          GenderService.getAllGenders(function(err4, genders: Gender[] | null) {
-            if (err1) return next(err1);
-            if (err2) return next(err2);
-            if (err3) return next(err3);
-            if (err4) return next(err4);
-            const options = {
-              departments,
-              countries,
-              gender: genders,
-              poles,
-              action: "create"
-            };
-            res.render("sg/inscription/members/viewInscription", options);
-          });
-        });
-      });
+    public createMemberInscription(req: Request, res: Response, next: NextFunction) {
+        winston.info("Getting create member inscription form");
+        DepartmentService.getAllDepartments(function (err1, departments: Department[] | null) {
+            CountryService.getAllCountries(function (err2, countries: Country[] | null) {
+                PoleService.getAllPoles(function (err3, poles: Pole[] | null) {
+                    GenderService.getAllGenders(function (err4, genders: Gender[] | null) {
+                        if (err1) return next(err1);
+                        if (err2) return next(err2);
+                        if (err3) return next(err3);
+                        if (err4) return next(err4);
+                        const options = {
+                            departments,
+                            countries,
+                            gender: genders,
+                            poles,
+                            action: "create"
+                        };
+                        res.render("sg/inscription/members/viewInscription", options);
+                    });
+                });
+            });
         });
     }
 
@@ -64,78 +66,78 @@ export class MemberInscriptionController {
         });
     }
 
-  public viewMemberInscription(req: Request, res: Response, next: NextFunction) {
-    const id = req.params.id;
-    MemberInscriptionService.getMemberInscription(id, function(err4, inscription: MemberInscription | null) {
-      DepartmentService.getAllDepartments(function(err1, departments: Department[] | null) {
-        CountryService.getAllCountries(function(err2, countries: Country[] |  null) {
-          PoleService.getAllPoles(function(err3, poles: Pole[] | null) {
-            GenderService.getAllGenders(function(err5, genders: Gender[] | null) {
-              if (err1) return next(err1);
-              if (err2) return next(err2);
-              if (err3) return next(err3);
-              if (err4) return next(err4);
-              if (err5) return next(err5);
-              const options = {
-                inscription,
-                departments,
-                countries,
-                gender: genders,
-                poles,
-                action: "view"
-              };
-              res.render("sg/inscription/members/viewInscription", options);
+    public viewMemberInscription(req: Request, res: Response, next: NextFunction) {
+        const id = req.params.id;
+        MemberInscriptionService.getMemberInscription(id, function (err4, inscription: MemberInscription | null) {
+            DepartmentService.getAllDepartments(function (err1, departments: Department[] | null) {
+                CountryService.getAllCountries(function (err2, countries: Country[] | null) {
+                    PoleService.getAllPoles(function (err3, poles: Pole[] | null) {
+                        GenderService.getAllGenders(function (err5, genders: Gender[] | null) {
+                            if (err1) return next(err1);
+                            if (err2) return next(err2);
+                            if (err3) return next(err3);
+                            if (err4) return next(err4);
+                            if (err5) return next(err5);
+                            const options = {
+                                inscription,
+                                departments,
+                                countries,
+                                gender: genders,
+                                poles,
+                                action: "view"
+                            };
+                            res.render("sg/inscription/members/viewInscription", options);
+                        });
+                    });
+                });
             });
-          });
         });
-      });
-    });
     }
 
-  public updateMemberInscription(req: Request, res: Response, next: NextFunction) {
-    const id = req.params.id;
-    MemberInscriptionService.getMemberInscription(id, function(err4, inscription: MemberInscription | null) {
-      DepartmentService.getAllDepartments(function(err1, departments: Department[] | null) {
-        CountryService.getAllCountries(function(err2, countries: Country[] |  null) {
-          PoleService.getAllPoles(function(err3, poles: Pole[] | null) {
-            GenderService.getAllGenders(function(err5, genders: Gender[] | null) {
-              if (err1) return next(err1);
-              if (err2) return next(err2);
-              if (err3) return next(err3);
-              if (err4) return next(err4);
-              if (err5) return next(err5);
-              const options = {
-                inscription,
-                departments,
-                countries,
-                gender: genders,
-                poles,
-                action: "update"
-              };
-              res.render("sg/inscription/members/viewInscription", options);
+    public updateMemberInscription(req: Request, res: Response, next: NextFunction) {
+        const id = req.params.id;
+        MemberInscriptionService.getMemberInscription(id, function (err4, inscription: MemberInscription | null) {
+            DepartmentService.getAllDepartments(function (err1, departments: Department[] | null) {
+                CountryService.getAllCountries(function (err2, countries: Country[] | null) {
+                    PoleService.getAllPoles(function (err3, poles: Pole[] | null) {
+                        GenderService.getAllGenders(function (err5, genders: Gender[] | null) {
+                            if (err1) return next(err1);
+                            if (err2) return next(err2);
+                            if (err3) return next(err3);
+                            if (err4) return next(err4);
+                            if (err5) return next(err5);
+                            const options = {
+                                inscription,
+                                departments,
+                                countries,
+                                gender: genders,
+                                poles,
+                                action: "update"
+                            };
+                            res.render("sg/inscription/members/viewInscription", options);
+                        });
+                    });
+                });
             });
-          });
-        });
-      });
         });
     }
 
     public postMemberInscriptionForm(req: Request, res: Response, next: NextFunction) {
         const id = parseInt(req.body.id);
 
-    const inscriptionRequest = new MemberInscriptionCreateRequest();
-    inscriptionRequest.firstName = req.body.firstName;
-    inscriptionRequest.lastName = req.body.lastName;
-    inscriptionRequest.departmentId = parseInt(req.body.departmentId);
-    inscriptionRequest.email = req.body.email;
-    inscriptionRequest.genderId = parseInt(req.body.genderId);
-    inscriptionRequest.birthday = req.body.birthday;
-    inscriptionRequest.phoneNumber = req.body.phoneNumber;
-    inscriptionRequest.outYear = parseInt(req.body.outYear);
-    inscriptionRequest.nationalityId = parseInt(req.body.nationalityId);
-    inscriptionRequest.wantedPoleId = parseInt(req.body.wantedPoleId);
-    inscriptionRequest.hasPaid = req.body.hasPaid;
-    inscriptionRequest.droitImage = req.body.droitImage;
+        const inscriptionRequest = new MemberInscriptionCreateRequest();
+        inscriptionRequest.firstName = req.body.firstName;
+        inscriptionRequest.lastName = req.body.lastName;
+        inscriptionRequest.departmentId = parseInt(req.body.departmentId);
+        inscriptionRequest.email = req.body.email;
+        inscriptionRequest.genderId = parseInt(req.body.genderId);
+        inscriptionRequest.birthday = req.body.birthday;
+        inscriptionRequest.phoneNumber = req.body.phoneNumber;
+        inscriptionRequest.outYear = parseInt(req.body.outYear);
+        inscriptionRequest.nationalityId = parseInt(req.body.nationalityId);
+        inscriptionRequest.wantedPoleId = parseInt(req.body.wantedPoleId);
+        inscriptionRequest.hasPaid = req.body.hasPaid;
+        inscriptionRequest.droitImage = req.body.droitImage;
 
         const addressRequest = new AddressCreateRequest();
         addressRequest.line1 = req.body.line1;
@@ -165,37 +167,37 @@ export class MemberInscriptionController {
     }
 
     public validateMemberInscription(req: Request, res: Response, next: NextFunction) {
-      const id = req.params.id;
-      const inscriptionRequest = new MemberInscriptionCreateRequest();
-      inscriptionRequest.firstName = req.body.firstName;
-      inscriptionRequest.lastName = req.body.lastName;
-      inscriptionRequest.departmentId = parseInt(req.body.departmentId);
-      inscriptionRequest.email = req.body.email;
-      inscriptionRequest.genderId = parseInt(req.body.genderId);
-      inscriptionRequest.birthday = req.body.birthday;
-      inscriptionRequest.phoneNumber = req.body.phoneNumber;
-      inscriptionRequest.outYear = parseInt(req.body.outYear);
-      inscriptionRequest.nationalityId = parseInt(req.body.nationalityId);
-      inscriptionRequest.wantedPoleId = parseInt(req.body.wantedPoleId);
-      inscriptionRequest.hasPaid = req.body.hasPaid;
-      inscriptionRequest.droitImage = req.body.droitImage;
+        const id = req.params.id;
+        const inscriptionRequest = new MemberInscriptionCreateRequest();
+        inscriptionRequest.firstName = req.body.firstName;
+        inscriptionRequest.lastName = req.body.lastName;
+        inscriptionRequest.departmentId = parseInt(req.body.departmentId);
+        inscriptionRequest.email = req.body.email;
+        inscriptionRequest.genderId = parseInt(req.body.genderId);
+        inscriptionRequest.birthday = req.body.birthday;
+        inscriptionRequest.phoneNumber = req.body.phoneNumber;
+        inscriptionRequest.outYear = parseInt(req.body.outYear);
+        inscriptionRequest.nationalityId = parseInt(req.body.nationalityId);
+        inscriptionRequest.wantedPoleId = parseInt(req.body.wantedPoleId);
+        inscriptionRequest.hasPaid = req.body.hasPaid;
+        inscriptionRequest.droitImage = req.body.droitImage;
 
-      const addressRequest = new AddressCreateRequest();
-      addressRequest.line1 = req.body.line1;
-      addressRequest.line2 = req.body.line2;
-      addressRequest.city = req.body.city;
-      addressRequest.postalCode = req.body.postalCode;
-      addressRequest.countryId = parseInt(req.body.countryId);
-      inscriptionRequest.address = addressRequest;
-      if (id) {
-        MemberInscriptionService.validateMemberInscription(id, inscriptionRequest, function (err) {
-          if (err) {
-            return next(err);
-          }
-          winston.info("Validated inscription " + id);
-          res.redirect("/sg/membre-inscription");
-        });
-      }
+        const addressRequest = new AddressCreateRequest();
+        addressRequest.line1 = req.body.line1;
+        addressRequest.line2 = req.body.line2;
+        addressRequest.city = req.body.city;
+        addressRequest.postalCode = req.body.postalCode;
+        addressRequest.countryId = parseInt(req.body.countryId);
+        inscriptionRequest.address = addressRequest;
+        if (id) {
+            MemberInscriptionService.validateMemberInscription(id, inscriptionRequest, function (err) {
+                if (err) {
+                    return next(err);
+                }
+                winston.info("Validated inscription " + id);
+                res.redirect("/sg/membre-inscription");
+            });
+        }
     }
 
     public generateDocument(req: Request, res: Response, next: NextFunction) {
@@ -242,4 +244,5 @@ export class MemberInscriptionController {
             }
         });
     }
+
 }
