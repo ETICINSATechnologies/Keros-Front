@@ -20,6 +20,7 @@ import { factureRouter } from "./control/treso/factureRouter";
 import { bulletinVersementRouter } from "./control/treso/bulletinVersementRouter";
 import { memberInscriptionRouter } from "./control/sg/memberInscriptionRouter";
 import { consultantInscriptionRouter } from "./control/sg/consultantInscriptionRouter";
+import { queryStringify } from "./util/Helper";
 
 /**
  * The Launcher - contains the express Application as well as methods to launch a server on that
@@ -84,6 +85,18 @@ export class Launcher {
         }));
 
         this.app.use(httpContext.middleware);
+
+        this.app.use(function (req, res, next) {
+            if (req.path.includes("/sg/membre-inscription")) {
+                if (queryStringify(req.query).length > 0) {
+                    res.locals.urlPath = req.path + "?" + queryStringify(req.query);
+                }
+                else {
+                    res.locals.urlPath = req.path;
+                }
+            }
+            next();
+        });
 
         this.app.use("/auth", authRouter());
         this.app.use("", dashboardRouter());
