@@ -22,6 +22,7 @@ export class MemberInscriptionService extends BaseService {
         );
     }
 
+
     static getAllMemberInscriptions(callback: (err: any, result: Page<MemberInscription> | null) => void, queryParams?: any): void {
         const queryString = queryStringify(queryParams);
         this.rest.get<Page<MemberInscription>>("sg/membre-inscription?" + queryString, this.defaultHeaders()).then(
@@ -36,6 +37,7 @@ export class MemberInscriptionService extends BaseService {
             e => callback(e, null)
         );
     }
+
 
     static createMemberInscription(memberInscriptionRequest: MemberInscriptionCreateRequest, callback: (err: any, result: MemberInscription | null) => void): void {
         this.rest.create<MemberInscription>("sg/membre-inscription", memberInscriptionRequest, this.defaultHeaders()).then(
