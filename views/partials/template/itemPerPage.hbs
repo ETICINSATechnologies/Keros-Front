@@ -12,7 +12,6 @@
         </select>
         entrées
       </label>
-        <a id="ref" href = ""+{{val}}>go</a>
     </div>
   </div>
 
@@ -28,6 +27,7 @@
 <script>
     function myFunction() {
         var val = document.getElementById("pageSize").value;
-        document.getElementById("ref").href = "?pageSize=" + val;
+        //document.getElementById("ref").href =
+        window.location ="?pageSize=" + val;
     }
 </script>
