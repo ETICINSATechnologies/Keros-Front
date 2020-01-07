@@ -50,6 +50,20 @@ export class MemberService extends BaseService {
     );
   }
 
+  static getAllMembersByOrder(callback: (err: any, result: Page<Member> | null) => void, order: string, queryParams?: any): void {
+        this.rest.get<Page<Member>>("core/member?orderBy=" + order, this.defaultHeaders()).then(
+            (res: IRestResponse<Page<Member>>) => {
+                if (res.statusCode !== 200) {
+                    return callback(this.defaultError(res.statusCode), null);
+                }
+                winston.debug("Response : " + JSON.stringify(res));
+                callback(null, res.result);
+            }
+        ).catch(
+            e => callback(e, null)
+        );
+    }
+
   static createMember(memberRequest: MemberCreateRequest, callback: (err: any, result: Member | null) => void): void {
     this.rest.create<Member>("core/member", memberRequest, this.defaultHeaders()).then(
       (res: IRestResponse<Member>) => {
