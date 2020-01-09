@@ -3,7 +3,7 @@
     <div class="dataTables_length">
       <label>
         Voir
-        <select name="list_length" class="form-control input-sm" id="pageSize" onchange="myFunction()">
+        <select name="list_length" class="form-control input-sm" id="pageSize" onchange="getSelectedPageSize()">
           <option value="" id="test" disabled selected>{{meta.itemsPerPage}}</option>
           <option value="10">10</option>
           <option value="25">25</option>
@@ -25,9 +25,8 @@
   </div>
 </div>
 <script>
-    function myFunction() {
+    function getSelectedPageSize() {
         var val = document.getElementById("pageSize").value;
-        //document.getElementById("ref").href =
         window.location ="?pageSize=" + val;
     }
 </script>
