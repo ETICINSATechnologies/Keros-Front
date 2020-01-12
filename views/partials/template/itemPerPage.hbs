@@ -10,10 +10,21 @@
           <option value="50">50</option>
           <option value="100">100</option>
         </select>
-        entrées
+         <span>
+           {{#if (eq urlPath "/sg/membre-inscription")}}
+             <button type="button" class="btn btn-primary" style="margin-left:10px"
+             onclick="location.href='{{origin}}/sg/membre-inscription?hasPaid=true'">Voir les inscriptions payées</button>
+           {{/if}}
+           {{#if (eq urlPath "/sg/membre-inscription?hasPaid=true")}}
+              <button type="button" class="btn btn-primary" style="margin-left:10px"
+              onclick="location.href='{{origin}}/sg/membre-inscription'">Voir toutes les inscriptions</button>
+           {{/if}}
+         </span>
       </label>
+
     </div>
   </div>
+
   <div class="col-sm-6">
     <div class="dataTables_filter">
       <label>
