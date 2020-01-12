@@ -22,14 +22,30 @@
                   <tr>
                     <th>
                         Nom d'utilisateur
-                        <a href="/core/member?orderBy=username" id="username-asc" class="fa fa-sort-alpha-asc"></a>
                         <a href="/core/member?orderBy=username&order=desc" id="username-desc" class="fa fa-sort-alpha-desc"></a>
+                        <a href="/core/member?orderBy=username" id="username-asc" class="fa fa-sort-alpha-asc"></a>
                     </th>
-                    <th>Nom<a href="#" id="name" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                    <th>Prénom<a href="#" id="firstname" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                    <th>Position(s)<a href="#" id="positionId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                    <th>Pole(s)<a href="#" class="fa fa-unsorted fa-pull-right"></a></th>
-                    <th>Email<a href="#" id="email" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                    <th>
+                        Nom
+                        <a href="/core/member?orderBy=lastName&order=desc" id="name-desc" class="fa fa-sort-alpha-desc"></a>
+                        <a href="/core/member?orderBy=lastName" id="name-asc" class="fa fa-sort-alpha-asc"></a>
+                    </th>
+                    <th>
+                        Prénom
+                        <a href="/core/member?orderBy=firstName&order=desc" id="firstname-desc" class="fa fa-sort-alpha-desc"></a>
+                        <a href="/core/member?orderBy=firstName" id="firstname-asc" class="fa fa-sort-alpha-asc"></a>
+                    </th>
+                    <th>
+                        Position(s)
+                    </th>
+                    <th>
+                        Pole(s)
+                    </th>
+                    <th>
+                        Email
+                        <a href="/core/member?orderBy=email&order=desc" id="email-asc" class="fa fa-sort-alpha-desc"></a>
+                        <a href="/core/member?orderBy=email" id="email-asc" class="fa fa-sort-alpha-asc"></a>
+                    </th>
                     <th>Voir</th>
                     <th>Modifier</th>
                   </tr>
