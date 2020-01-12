@@ -28,18 +28,6 @@ export class MemberController {
       res.render("core/member/viewAll", options);
     }, req.query);
   }
-  public viewMembersByUsername(order: string, req: Request, res: Response, next: NextFunction) {
-    MemberService.getAllMembersByOrder(function (err, page: Page<Member> | null) {
-      winston.info("Getting all members, order by username");
-      if (err) {
-        return next(err);
-      }
-      const options = {
-        members: page,
-      };
-      res.render("core/member/viewAll", options);
-    }, req.query, order);
-  }
 
   public createMember(req: Request, res: Response, next: NextFunction) {
     winston.info("Getting create member form");
