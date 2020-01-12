@@ -12,11 +12,11 @@
         </select>
          <span>
            {{#if (eq urlPath "/sg/membre-inscription")}}
-             <button type="button" class="btn btn-primary" style="margin-left:10px"
+             <button type="button" class="btn btn-primary" id="btn-inscription-paid"
              onclick="location.href='{{origin}}/sg/membre-inscription?hasPaid=true'">Voir les inscriptions payées</button>
            {{/if}}
            {{#if (eq urlPath "/sg/membre-inscription?hasPaid=true")}}
-              <button type="button" class="btn btn-primary" style="margin-left:10px"
+              <button type="button" class="btn btn-primary" id="btn-inscription-all"
               onclick="location.href='{{origin}}/sg/membre-inscription'">Voir toutes les inscriptions</button>
            {{/if}}
          </span>
