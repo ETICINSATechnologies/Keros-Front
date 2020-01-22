@@ -2,50 +2,15 @@
 <div class="wrapper">
   {{> template/header}}
   {{> template/sidebar}}
-  <div class="content-wrapper">
-    <section class="content-header">
-      <h1>
-        Voir les membres
-      </h1>
-      {{> breadcrumb tab="RH" action="all" pathall="Membres,Voir les membres"}}
-    </section>
-    <section class="content">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="box box-primary">
-            <!-- /.box-header -->
-            <div class="box-body">
-              <div class="dataTables_wrapper form-inline dt-bootstrap">
-                {{> template/itemPerPage meta=members.meta}}
-                <table class="table table-bordered dataTable">
-                  <tbody>
-                  <tr>
-                    <th>
-                        Nom d'utilisateur
-                        <a href="/core/member?orderBy=username&order=desc" id="username-desc" class="fa fa-sort-alpha-desc"></a>
-                        <a href="/core/member?orderBy=username" id="username-asc" class="fa fa-sort-alpha-asc"></a>
-                    </th>
-                    <th>
-                        Nom
-                        <a href="/core/member?orderBy=lastName&order=desc" id="name-desc" class="fa fa-sort-alpha-desc"></a>
-                        <a href="/core/member?orderBy=lastName" id="name-asc" class="fa fa-sort-alpha-asc"></a>
-                    </th>
-                    <th>
-                        Prénom
-                        <a href="/core/member?orderBy=firstName&order=desc" id="firstname-desc" class="fa fa-sort-alpha-desc"></a>
-                        <a href="/core/member?orderBy=firstName" id="firstname-asc" class="fa fa-sort-alpha-asc"></a>
-                    </th>
-                    <th>
-                        Position(s)
-                    </th>
-                    <th>
-                        Pole(s)
-                    </th>
-                    <th>
-                        Email
-                        <a href="/core/member?orderBy=email&order=desc" id="email-asc" class="fa fa-sort-alpha-desc"></a>
-                        <a href="/core/member?orderBy=email" id="email-asc" class="fa fa-sort-alpha-asc"></a>
-                    </th>
+  {{> template/infoCaption type="member"}}
+  {{> template/itemPerPage meta=member.meta}}
+  {{> template/infoColumnOrder type="member"}}
+                     <th>
+                            Position(s)
+                     </th>
+                     <th>
+                            Pôle(s)
+                     </th>
                     <th>Voir</th>
                     <th>Modifier</th>
                   </tr>
@@ -54,31 +19,13 @@
                       <td>{{username}}</td>
                       <td>{{lastName}}</td>
                       <td>{{firstName}}</td>
+                      <td>{{email}}</td>
                       <td>{{#each positions}}{{this.label}}<br/>{{/each}}</td>
                       <td>{{#each positions}}{{this.pole.label}}<br/>{{/each}}</td>
-                      <td>{{email}}</td>
                       <td><a href="member/{{id}}" class="fa fa-eye fa-2x"></a></td>
                       <td><a href="member/update/{{id}}" class="fa fa-edit fa-2x"></a></td>
                     </tr>
                   {{/each}}
                   </tbody>
                 </table>
-              </div>
-            </div>
-            <div class="box-footer">
-              {{> template/pagination meta=members.meta}}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-3">
-          <a href="member/create" style="color: white;"><button type="button" class="btn btn-block btn-success btn-lg box">Nouveau membre</button></a>
-        </div>
-      </div>
-    </section>
-  </div>
-  {{> template/footer}}
-</div>
-{{> template/scripts}}
-</body>
+  {{>template/infoFooter}}
