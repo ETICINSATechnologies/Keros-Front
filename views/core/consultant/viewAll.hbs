@@ -2,6 +2,13 @@
 <div class="wrapper">
   {{> template/header}}
   {{> template/sidebar}}
+    <div class="content-wrapper">
+      <section class="content-header">
+        <h1>
+          Voir les consultants
+        </h1>
+        {{> breadcrumb tab="RH" action="all" pathall="Consultants,Voir les consultants"}}
+      </section>
   {{> template/infoCaption type="consultant"}}
   {{> template/itemPerPage meta=consultant.meta}}
   {{> template/infoColumnOrder type="consultant"}}

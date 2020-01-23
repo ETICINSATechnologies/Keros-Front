@@ -2,6 +2,13 @@
 <div class="wrapper">
   {{> template/header}}
   {{> template/sidebar}}
+    <div class="content-wrapper">
+      <section class="content-header">
+        <h1>
+          Voir les membres
+        </h1>
+        {{> breadcrumb tab="RH" action="all" pathall="Membres,Voir les membres"}}
+      </section>
   {{> template/infoCaption type="member"}}
   {{> template/itemPerPage meta=member.meta}}
   {{> template/infoColumnOrder type="member"}}
