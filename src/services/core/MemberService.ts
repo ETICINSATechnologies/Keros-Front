@@ -49,7 +49,6 @@ export class MemberService extends BaseService {
       e => callback(e, null)
     );
   }
-
   static createMember(memberRequest: MemberCreateRequest, callback: (err: any, result: Member | null) => void): void {
     this.rest.create<Member>("core/member", memberRequest, this.defaultHeaders()).then(
       (res: IRestResponse<Member>) => {

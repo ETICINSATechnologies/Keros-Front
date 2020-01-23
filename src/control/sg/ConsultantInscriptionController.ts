@@ -31,7 +31,7 @@ export class ConsultantInscriptionController {
             };
 
             res.render("sg/inscription/consultants/viewAll", options);
-        });
+        }, req.query);
     }
 
     viewConsultantInscription(req: Request, res: Response, next: NextFunction) {
