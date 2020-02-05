@@ -7,6 +7,8 @@ import { Page } from "../../models/core/Page";
 import { MemberInscriptionCreateRequest } from "../../models/sg/MemberInscriptionCreateRequest";
 import { DocumentResponse } from "../../models/DocumentResponse";
 import { queryStringify } from "../../util/Helper";
+import {UploadedFile} from "express-fileupload";
+import {FileUploadedCreateRequest} from "../../models/FileUploadedCreateRequest";
 
 export class MemberInscriptionService extends BaseService {
     static getMemberInscription(id: number, callback: (err: any, result: MemberInscription | null) => void): void {
@@ -113,13 +115,14 @@ export class MemberInscriptionService extends BaseService {
         );
     }
 
-    static uploadDocument(inscriptionId: number, documentTypeId: number, file: any, callback: (err: any) => void): void {
+    static uploadDocument(inscriptionId: number, documentTypeId: number, file: UploadedFile, callback: (err: any) => void): void {
       const formData = new FormData();
-      formData.append("file", file, file.name);
+      formData.append("file", JSON.stringify(file), file.name);
+      // formData = { name : JSON.stringify(file)};
       winston.info("file before sending it: " + JSON.stringify(file));
       winston.info("formdata before sending it: " + JSON.stringify(formData));
-      /*this.rest.create<DocumentResponse>("sg/membre-inscription/" + inscriptionId + "/document/" + documentTypeId, file, this.defaultHeaders()).then(
-            (res: IRestResponse<DocumentResponse>) => {
+      /*this.rest.create<UploadedFile>("sg/membre-inscription/" + inscriptionId + "/document/" + documentTypeId, formData, this.defaultHeaders()).then(
+            (res: IRestResponse<UploadedFile>) => {
                 if (res.statusCode !== 200) {
                     winston.debug("Problème lors du chargement du document");
                     return callback(this.defaultError(res.statusCode));

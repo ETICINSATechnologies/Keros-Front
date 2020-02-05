@@ -17,6 +17,7 @@ import { GenderService } from "../../services/core/GenderService";
 import { Gender } from "../../models/core/Gender";
 import { MemberService } from "../../services/core/MemberService";
 import { Member } from "../../models/core/Member";
+import {UploadedFile} from "express-fileupload";
 
 export class MemberInscriptionController {
     public viewMemberInscriptions(req: Request, res: Response, next: NextFunction) {
@@ -223,7 +224,7 @@ export class MemberInscriptionController {
         if (req.files) {
             const file = req.files;
             winston.info("file : " + JSON.stringify(file));
-            MemberInscriptionService.uploadDocument(id, documentTypeId, file, function (err) {
+            MemberInscriptionService.uploadDocument(id, documentTypeId, <UploadedFile>file.file, function (err) {
                 if (err) {
                     return next(err);
                 }
