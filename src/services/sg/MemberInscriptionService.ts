@@ -1,6 +1,7 @@
 import { IRestResponse } from "typed-rest-client/RestClient";
 import { BaseService } from "../common/BaseService";
 import * as winston from "winston";
+import * as FormData from "form-data";
 import { MemberInscription } from "../../models/sg/MemberInscription";
 import { Page } from "../../models/core/Page";
 import { MemberInscriptionCreateRequest } from "../../models/sg/MemberInscriptionCreateRequest";
@@ -112,8 +113,12 @@ export class MemberInscriptionService extends BaseService {
         );
     }
 
-    static uploadDocument(inscriptionId: number, documentTypeId: number, callback: (err: any) => void): void {
-        this.rest.create<DocumentResponse>("sg/membre-inscription/" + inscriptionId + "/document/" + documentTypeId, this.defaultHeaders()).then(
+    static uploadDocument(inscriptionId: number, documentTypeId: number, file: any, callback: (err: any) => void): void {
+      const formData = new FormData();
+      formData.append("file", file, file.name);
+      winston.info("file before sending it: " + JSON.stringify(file));
+      winston.info("formdata before sending it: " + JSON.stringify(formData));
+      /*this.rest.create<DocumentResponse>("sg/membre-inscription/" + inscriptionId + "/document/" + documentTypeId, file, this.defaultHeaders()).then(
             (res: IRestResponse<DocumentResponse>) => {
                 if (res.statusCode !== 200) {
                     winston.debug("Problème lors du chargement du document");
@@ -126,7 +131,7 @@ export class MemberInscriptionService extends BaseService {
             e => {
                 callback(e);
             }
-        );
+        );*/
     }
 
     static downloadDocument(inscriptionId: number, documentTypeId: number, callback: (err: any, result: DocumentResponse | null) => void): void {

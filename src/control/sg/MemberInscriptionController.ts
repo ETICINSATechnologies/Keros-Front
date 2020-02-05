@@ -220,13 +220,17 @@ export class MemberInscriptionController {
         const id = req.params.id;
         const documentTypeId = req.params.documentTypeId;
         winston.info("Uploading doc (of type " + documentTypeId + ") for id " + id);
-        MemberInscriptionService.uploadDocument(id, documentTypeId, function (err) {
-            if (err) {
-                return next(err);
-            }
-            winston.info("Uploaded doc (of type" + documentTypeId + ") for id " + id);
-            res.redirect("/sg/membre-inscription/" + id);
-        });
+        if (req.files) {
+            const file = req.files;
+            winston.info("file : " + JSON.stringify(file));
+            MemberInscriptionService.uploadDocument(id, documentTypeId, file, function (err) {
+                if (err) {
+                    return next(err);
+                }
+                winston.info("Uploaded doc (of type" + documentTypeId + ") for id " + id);
+                res.redirect("/sg/membre-inscription/" + id);
+            });
+        }
     }
 
     public downloadDocument(req: Request, res: Response, next: NextFunction) {
