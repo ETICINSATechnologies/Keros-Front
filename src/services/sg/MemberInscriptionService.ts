@@ -8,6 +8,7 @@ import { MemberInscriptionCreateRequest } from "../../models/sg/MemberInscriptio
 import { DocumentResponse } from "../../models/DocumentResponse";
 import { queryStringify } from "../../util/Helper";
 import { UploadedFile } from "express-fileupload";
+import { Config } from "../../config/Config";
 
 export class MemberInscriptionService extends BaseService {
     static getMemberInscription(id: number, callback: (err: any, result: MemberInscription | null) => void): void {
@@ -116,11 +117,32 @@ export class MemberInscriptionService extends BaseService {
 
     static uploadDocument(inscriptionId: number, documentTypeId: number, file: UploadedFile, callback: (err: any) => void): void {
       const formData = new FormData();
-      formData.append("file", JSON.stringify(file), file.name);
+      formData.append("file", file.data.toString(), file.name);
+      //pb : transformer le file en ReadStream ou autre qui permette à formData de le lire
       // formData = { name : JSON.stringify(file)};
       winston.info("file before sending it: " + JSON.stringify(file));
       winston.info("formdata before sending it: " + JSON.stringify(formData));
-      // try fetch
+      winston.info("file data before sending it: " + file.data.toString());
+      winston.info("headers before sending it: " + JSON.stringify(this.defaultHeaders()));
+      const fetch = require("node-fetch");
+      const url = Config.getBackendBaseUrl() + "/sg/membre-inscription/" + inscriptionId + "/document/" + documentTypeId;
+      winston.info("url before sending it: " + url);
+      const headersToken = this.defaultHeaders().additionalHeaders;
+      if (headersToken && headersToken.Authorization) {
+          fetch(url, {
+              method: "POST",
+              headers: { Authorization: headersToken.Authorization },
+              body: formData
+          }).then((res: { status: number; message: string }) => {
+              winston.debug("Response : " + JSON.stringify(res));
+              winston.debug("code : " + JSON.stringify(res.status));
+              if (res.status !== 200) {
+                  winston.debug("Problème lors du chargement du document");
+                  return callback(this.defaultError(res.status));
+              }
+              callback(null);
+          });
+      }
       /*this.rest.create<UploadedFile>("sg/membre-inscription/" + inscriptionId + "/document/" + documentTypeId, formData, this.defaultHeaders()).then(
             (res: IRestResponse<UploadedFile>) => {
                 if (res.statusCode !== 200) {
