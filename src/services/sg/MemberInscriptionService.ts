@@ -7,8 +7,7 @@ import { Page } from "../../models/core/Page";
 import { MemberInscriptionCreateRequest } from "../../models/sg/MemberInscriptionCreateRequest";
 import { DocumentResponse } from "../../models/DocumentResponse";
 import { queryStringify } from "../../util/Helper";
-import {UploadedFile} from "express-fileupload";
-import {FileUploadedCreateRequest} from "../../models/FileUploadedCreateRequest";
+import { UploadedFile } from "express-fileupload";
 
 export class MemberInscriptionService extends BaseService {
     static getMemberInscription(id: number, callback: (err: any, result: MemberInscription | null) => void): void {
@@ -121,6 +120,7 @@ export class MemberInscriptionService extends BaseService {
       // formData = { name : JSON.stringify(file)};
       winston.info("file before sending it: " + JSON.stringify(file));
       winston.info("formdata before sending it: " + JSON.stringify(formData));
+      // try fetch
       /*this.rest.create<UploadedFile>("sg/membre-inscription/" + inscriptionId + "/document/" + documentTypeId, formData, this.defaultHeaders()).then(
             (res: IRestResponse<UploadedFile>) => {
                 if (res.statusCode !== 200) {
