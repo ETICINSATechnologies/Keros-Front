@@ -29,17 +29,6 @@
                                         <th>Modifier</th>
                                     </tr>
                                     {{#each inscriptions.content}}
-                                        {{#if (eq nationality.label "France")}}
-                                            <tr>
-                                                <td>{{lastName}}</td>
-                                                <td>{{firstName}}</td>
-                                                <td>{{department.label}}</td>
-                                                <td>{{email}}</td>
-                                                <td>{{nationality.label}}</td>
-                                                <td><a href="consultant-inscription/{{id}}" class="fa fa-eye fa-2x"></a></td>
-                                                <td><a href="consultant-inscription/update/{{id}}" class="fa fa-edit fa-2x"></a></td>
-                                            </tr>
-                                        {{else}}
                                             <tr style="background-color: #985f0d">
                                                 <td>{{lastName}}</td>
                                                 <td>{{firstName}}</td>
@@ -49,7 +38,6 @@
                                                 <td><a href="consultant-inscription/{{id}}" class="fa fa-eye fa-2x"></a></td>
                                                 <td><a href="consultant-inscription/update/{{id}}" class="fa fa-edit fa-2x"></a></td>
                                             </tr>
-                                        {{/if}}
                                     {{/each}}
                                     </tbody>
                                 </table>
