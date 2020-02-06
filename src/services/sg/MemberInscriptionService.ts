@@ -117,13 +117,29 @@ export class MemberInscriptionService extends BaseService {
 
     static uploadDocument(inscriptionId: number, documentTypeId: number, file: UploadedFile, callback: (err: any) => void): void {
       const formData = new FormData();
-      formData.append("file", file.data.toString(), file.name);
+      const fs = require("fs");
+      formData.append("file", fs.createReadStream(file.data), file.name);
+        // const bufDataFile = new Buffer(file.data, "utf-8");
+        let ab: ArrayBuffer = new ArrayBuffer(file.data.length);
+        let view = new Uint8Array(ab);
+        for (let i = 0; i < file.data.length; ++i) {
+            view[i] = file.data[i];
+        }
+
+        //const blob = new Blob([view]);
+        const { Readable } = require("stream");
+        const readableInstanceStream = new Readable({
+            read() {
+                this.push(file);
+                this.push(null);
+            }
+        });
+      formData.append("file", readableInstanceStream, file.name);
       //pb : transformer le file en ReadStream ou autre qui permette à formData de le lire
-      // formData = { name : JSON.stringify(file)};
       winston.info("file before sending it: " + JSON.stringify(file));
       winston.info("formdata before sending it: " + JSON.stringify(formData));
-      winston.info("file data before sending it: " + file.data.toString());
-      winston.info("headers before sending it: " + JSON.stringify(this.defaultHeaders()));
+      winston.info("readable data before sending it: " + JSON.stringify(readableInstanceStream));
+      winston.info("buffer size before sending it: " + file.data.length);
       const fetch = require("node-fetch");
       const url = Config.getBackendBaseUrl() + "/sg/membre-inscription/" + inscriptionId + "/document/" + documentTypeId;
       winston.info("url before sending it: " + url);
@@ -131,7 +147,7 @@ export class MemberInscriptionService extends BaseService {
       if (headersToken && headersToken.Authorization) {
           fetch(url, {
               method: "POST",
-              headers: { Authorization: headersToken.Authorization },
+              headers: {Authorization: headersToken.Authorization},
               body: formData
           }).then((res: { status: number; message: string }) => {
               winston.debug("Response : " + JSON.stringify(res));
