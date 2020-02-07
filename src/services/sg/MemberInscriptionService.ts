@@ -118,7 +118,8 @@ export class MemberInscriptionService extends BaseService {
     static uploadDocument(inscriptionId: number, documentTypeId: number, file: UploadedFile, callback: (err: any) => void): void {
       const formData = new FormData();
       const fs = require("fs");
-      formData.append("file", fs.createReadStream(file.data), file.name);
+      file.mv("./" + file.name).catch(e => winston.debug("move file failed" + e));
+      formData.append("file", fs.createReadStream("./" + file.name));
         // const bufDataFile = new Buffer(file.data, "utf-8");
         let ab: ArrayBuffer = new ArrayBuffer(file.data.length);
         let view = new Uint8Array(ab);
@@ -134,8 +135,9 @@ export class MemberInscriptionService extends BaseService {
                 this.push(null);
             }
         });
-      formData.append("file", readableInstanceStream, file.name);
+      //formData.append("file", readableInstanceStream, file.name);
       //pb : transformer le file en ReadStream ou autre qui permette à formData de le lire
+      // multer ? https://stackoverflow.com/questions/36202618/how-to-upload-file-using-multer-or-body-parser
       winston.info("file before sending it: " + JSON.stringify(file));
       winston.info("formdata before sending it: " + JSON.stringify(formData));
       winston.info("readable data before sending it: " + JSON.stringify(readableInstanceStream));
