@@ -17,7 +17,7 @@ import { GenderService } from "../../services/core/GenderService";
 import { Gender } from "../../models/core/Gender";
 import { MemberService } from "../../services/core/MemberService";
 import { Member } from "../../models/core/Member";
-import {UploadedFile} from "express-fileupload";
+import { UploadedFile } from "express-fileupload";
 
 export class MemberInscriptionController {
     public viewMemberInscriptions(req: Request, res: Response, next: NextFunction) {
