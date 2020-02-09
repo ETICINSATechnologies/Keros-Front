@@ -10,3 +10,19 @@ function editButtonPress() {
   $('.view-breadcrumb').hide();
   $('.edit-breadcrumb').show();
 }
+
+function fctSearch(){
+  address=document.getElementById("searching").value;
+  location.href='/core/member?search='+address
+}
+
+function callEnter(e){
+  address=document.getElementById("searching").value;
+  console.log(address)
+  if(e.keyCode === 13){
+    location.href='/core/member?search='+address
+
+  }
+  return false;
+}
+
