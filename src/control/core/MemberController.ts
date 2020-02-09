@@ -14,18 +14,22 @@ import { PositionService } from "../../services/core/PositionService";
 import { AddressCreateRequest } from "../../models/core/AddressCreateRequest";
 import * as httpContext from "express-http-context";
 import { PositionRequest } from "../../models/core/PositionRequest";
+import { PoleService } from "../../services/core/PoleService";
+import { Pole } from "../../models/core/Pole";
 
 export class MemberController {
   public viewMembers(req: Request, res: Response, next: NextFunction) {
-    MemberService.getAllMembers(function (err, page: Page<Member> | null) {
-      winston.info("Getting all members");
-      if (err) {
-        return next(err);
-      }
-      const options = {
-        members: page,
-      };
-      res.render("core/member/viewAll", options);
+    MemberService.getAllMembers(function (err1, page: Page<Member> | null) {
+      PoleService.getAllPoles(function(err2, polesdata: Pole[]|null) {
+        if (err1) return next(err1);
+        if (err2) return next(err2);
+        winston.info("Getting all members");
+        const options = {
+          members: page,
+          poles: polesdata
+        };
+        res.render("core/member/viewAll", options);
+      });
     }, req.query);
   }
 
