@@ -33,7 +33,9 @@
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="password">Mot de passe</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Entrez/Modifiez le mot de passe" {{requiredIfMissing connectedUser}} {{readonlyIf (eq action "view")}}>
+                    <input type="password" class="form-control" oninput = "validateFields()" id="password" name="password" placeholder="Entrez/Modifiez le mot de passe" {{requiredIfMissing connectedUser}} {{readonlyIf (eq action "view")}}>
+                    <input type="password" class="form-control" oninput = "validateFields()" id="password-confirm" name="password" placeholder="Confirmez le mot de passe" {{requiredIfMissing connectedUser}} {{readonlyIf (eq action "view")}}>
+                    <span id="password-error-msg" style="color:red"></span>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="genderId">Sexe</label>
