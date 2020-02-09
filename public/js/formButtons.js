@@ -12,8 +12,8 @@ function editButtonPress() {
 }
 
 function executeSearch(){
-  address=document.getElementById("searching").value;
-  location.href='/core/member?search='+address
+  searchInput=document.getElementById("searching").value;
+  location.href='/core/member?search='+searchInput
 }
 
 function callEnter(e){
