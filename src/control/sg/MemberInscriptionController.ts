@@ -232,6 +232,9 @@ export class MemberInscriptionController {
                 res.redirect("/sg/membre-inscription/" + id);
             });
         }
+        else {
+            winston.debug("no file found");
+        }
     }
 
     public downloadDocument(req: Request, res: Response, next: NextFunction) {
