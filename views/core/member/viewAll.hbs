@@ -16,13 +16,11 @@
                             Position(s)
                      </th>
                      <th>
-                            <select name="pets" id="pet-select">
-                            <option value="">--Choisir un pôle--</option>
-                            <option value="com">Com</option>
-                            <option value="perf">Perf</option>
-                            <option value="rh">RH</option>
-                            <option value="si">SI</option>
-                            <option value="ua">UA</option>
+                            <select name="poles" id="pole-select" onchange="self.location.href=options[selectedIndex].value">
+                            <option value="#">--Choisir un pôle--</option>
+                            {{#each poles}}
+                            <option value="member?poleId={{this.id}}">{{this.name}}</option>
+                            {{/each}}
 </select>
                      </th>
                     <th>Voir</th>
