@@ -2,30 +2,29 @@
 <div class="wrapper">
   {{> template/header}}
   {{> template/sidebar}}
-  <div class="content-wrapper">
-    <section class="content-header">
-      <h1>
-        Voir les membres
-      </h1>
-      {{> breadcrumb tab="RH" action="all" pathall="Membres,Voir les membres"}}
-    </section>
-    <section class="content">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="box box-primary">
-            <!-- /.box-header -->
-            <div class="box-body">
-              <div class="dataTables_wrapper form-inline dt-bootstrap">
-                {{> template/itemPerPage meta=members.meta}}
-                <table class="table table-bordered dataTable">
-                  <tbody>
-                  <tr>
-                    <th>Nom d'utilisateur <a href="#" id="username" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                    <th>Nom<a href="#" id="name" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                    <th>Prénom<a href="#" id="firstname" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                    <th>Position(s)<a href="#" id="positionId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                    <th>Pole(s)<a href="#" class="fa fa-unsorted fa-pull-right"></a></th>
-                    <th>Email<a href="#" id="email" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+    <div class="content-wrapper">
+      <section class="content-header">
+        <h1>
+          Voir les membres
+        </h1>
+        {{> breadcrumb tab="RH" action="all" pathall="Membres,Voir les membres"}}
+      </section>
+  {{> template/infoCaption type="member"}}
+  {{> template/itemPerPage meta=member.meta}}
+  {{> template/infoColumnOrder type="member"}}
+                     <th>
+                            Position(s)
+                     </th>
+                     <th>
+                            <select name="pets" id="pet-select">
+                            <option value="">--Choisir un pôle--</option>
+                            <option value="com">Com</option>
+                            <option value="perf">Perf</option>
+                            <option value="rh">RH</option>
+                            <option value="si">SI</option>
+                            <option value="ua">UA</option>
+</select>
+                     </th>
                     <th>Voir</th>
                     <th>Modifier</th>
                   </tr>
@@ -34,31 +33,13 @@
                       <td>{{username}}</td>
                       <td>{{lastName}}</td>
                       <td>{{firstName}}</td>
+                      <td>{{email}}</td>
                       <td>{{#each positions}}{{this.label}}<br/>{{/each}}</td>
                       <td>{{#each positions}}{{this.pole.label}}<br/>{{/each}}</td>
-                      <td>{{email}}</td>
                       <td><a href="member/{{id}}" class="fa fa-eye fa-2x"></a></td>
                       <td><a href="member/update/{{id}}" class="fa fa-edit fa-2x"></a></td>
                     </tr>
                   {{/each}}
                   </tbody>
                 </table>
-              </div>
-            </div>
-            <div class="box-footer">
-              {{> template/pagination meta=members.meta}}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-3">
-          <a href="member/create" style="color: white;"><button type="button" class="btn btn-block btn-success btn-lg box">Nouveau membre</button></a>
-        </div>
-      </div>
-    </section>
-  </div>
-  {{> template/footer}}
-</div>
-{{> template/scripts}}
-</body>
+  {{>template/infoFooter}}
