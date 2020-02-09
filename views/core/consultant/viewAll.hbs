@@ -2,28 +2,16 @@
 <div class="wrapper">
   {{> template/header}}
   {{> template/sidebar}}
-  <div class="content-wrapper">
-    <section class="content-header">
-      <h1>
-        Voir les consultants
-      </h1>
-      {{> breadcrumb tab="RH" action="all" pathall="Consultants,Voir les consultants"}}
-    </section>
-    <section class="content">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="box box-primary">
-            <!-- /.box-header -->
-            <div class="box-body">
-              <div class="dataTables_wrapper form-inline dt-bootstrap">
-                {{> template/itemPerPage meta=consultants.meta}}
-                <table class="table table-bordered dataTable">
-                  <tbody>
-                  <tr>
-                    <th>Nom d'utilisateur <a href="#" id="username" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                    <th>Nom<a href="#" id="name" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                    <th>Prénom<a href="#" id="firstname" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                    <th>Email<a href="#" id="email" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+    <div class="content-wrapper">
+      <section class="content-header">
+        <h1>
+          Voir les consultants
+        </h1>
+        {{> breadcrumb tab="RH" action="all" pathall="Consultants,Voir les consultants"}}
+      </section>
+  {{> template/infoCaption type="consultant"}}
+  {{> template/itemPerPage meta=consultant.meta}}
+  {{> template/infoColumnOrder type="consultant"}}
                     <th>Voir</th>
                     <th>Modifier</th>
                   </tr>
@@ -37,24 +25,4 @@
                       <td><a href="consultant/update/{{id}}" class="fa fa-edit fa-2x"></a></td>
                     </tr>
                   {{/each}}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div class="box-footer">
-              {{> template/pagination meta=consultants.meta}}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-3">
-          <a href="consultant/create" style="color: white;"><button type="button" class="btn btn-block btn-success btn-lg box">Nouveau consultant</button></a>
-        </div>
-      </div>
-    </section>
-  </div>
-  {{> template/footer}}
-</div>
-{{> template/scripts}}
-</body>
+ {{>template/infoFooter}}
