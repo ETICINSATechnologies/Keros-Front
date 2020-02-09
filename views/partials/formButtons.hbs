@@ -1,18 +1,6 @@
 <div id="view-buttons" class="form-buttons pull-right" {{#if (ne action "view")}}style="display: none"{{/if}}>
   {{#if (ne page "profilePage")}}
 
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title></title>
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
 <body>
 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" onclick=fct()>Supprimer</button>
 
@@ -40,11 +28,6 @@
     </div>
   </div>
 </div>
-
-
-
-</body>
-</html>
     <button type="button" class="btn btn-primary" onclick="location.href='{{origin}}/update/{{id}}'">Éditer</button>
   {{else}}
     <button type="button" class="btn btn-primary" onclick="location.href='{{origin}}/update'">Éditer</button>
