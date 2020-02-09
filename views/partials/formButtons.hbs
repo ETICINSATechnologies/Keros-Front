@@ -10,8 +10,35 @@
   {{#if (ne page "profilePage")}}
     <button type="button" class="btn btn-danger" onclick="location.href='{{origin}}/delete/{{id}}'">Supprimer</button>
   {{/if}}
-  <button type="submit" class="btn btn-primary">Valider</button>
+  <button id="validerbtn" type="submit" disabled="true" dis class="btn btn-primary">Valider</button>
 </div>
 <div id="create-buttons" class="form-buttons pull-right" {{#if (ne action "create")}}style="display: none"{{/if}}>
-  <button type="submit" class="btn btn-primary">Valider</button>
+  <button type="submit"  class="btn btn-primary">Valider</button>
+
+
+  <script type="text/javascript">
+  function validateFields()
+    {let mdpInput = document.getElementById("password").value;
+    let mdpInputConfirm =  document.getElementById("password-confirm").value;
+    let mdpInputMsg = document.getElementById("password-error-msg");
+    if (mdpInput.length < 8)
+     {
+      document.getElementById("validerbtn").disabled = true;
+
+      mdpInputMsg.innerHTML="Mot de passe inférieur à 8 caractères";
+     }
+    else if (mdpInput !== mdpInputConfirm)
+     {
+      document.getElementById("validerbtn").disabled = true;
+      mdpInputMsg.innerHTML="Veuillez saisir le même mot de passe ";
+     }
+    else
+     {
+      document.getElementById("validerbtn").disabled = false;
+      mdpInputMsg.innerHTML="";
+     }
+
+  }
+
+  </script>
 </div>
