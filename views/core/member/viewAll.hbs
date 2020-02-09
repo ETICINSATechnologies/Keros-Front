@@ -13,11 +13,20 @@
   {{> template/itemPerPage meta=member.meta}}
   {{> template/infoColumnOrder type="member"}}
                      <th>
-                            Position(s)
+
+                            <select name="positions" id="positions-select" onchange="self.location.href=options[selectedIndex].value"
+                             >
+                            <option value="#">Choisir un position</option>
+                            <option value="member">AFFICHER TOUS</option>
+                            {{#each positions}}
+                            <option value="member?positionId={{this.id}}">{{this.label}}</option>
+                            {{/each}}
+
                      </th>
                      <th>
                             <select name="poles" id="pole-select" onchange="self.location.href=options[selectedIndex].value">
-                            <option value="#">--Choisir un pôle--</option>
+                            <option value="#">Choisir un pôle</option>
+                            <option value="member">AFFICHER TOUS</option>
                             {{#each poles}}
                             <option value="member?poleId={{this.id}}">{{this.name}}</option>
                             {{/each}}
