@@ -224,7 +224,7 @@ export class MemberInscriptionController {
         if (req.files) {
             const file = req.files;
             winston.info("file : " + JSON.stringify(file));
-            MemberInscriptionService.uploadDocument(id, documentTypeId, <UploadedFile>file.file, function (err) {
+             MemberInscriptionService.uploadDocument(id, documentTypeId, <UploadedFile>file.file, function (err) {
                 if (err) {
                     return next(err);
                 }

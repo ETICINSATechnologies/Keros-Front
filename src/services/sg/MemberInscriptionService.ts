@@ -116,82 +116,47 @@ export class MemberInscriptionService extends BaseService {
         );
     }
 
-    static uploadDocument(inscriptionId: number, documentTypeId: number, file: UploadedFile, callback: (err: any) => void): void {
+    static uploadDocument(inscriptionId: number, documentTypeId: number, file: UploadedFile, callback: (err: any) => void) {
       const formData = new FormData();
       const fs = require("fs");
-      file.mv("./" + file.name).catch(e => winston.debug("move file failed" + e));
-      const readStreamFS: ReadableStream = fs.createReadStream("./" + file.name);
-      // formData.append("file", readStreamFS);
-      // formData.append("file", file);
-        // const bufDataFile = new Buffer(file.data, "utf-8");
-        const ab: ArrayBuffer = new ArrayBuffer(file.data.length);
-        const view: Uint8Array = new Uint8Array(ab);
-        for (let i = 0; i < file.data.length; ++i) {
-            view[i] = file.data[i];
-        }
-      winston.debug("buffer size before sending it: " + file.data.length);
-      // const blob = new Blob([view]);
-         const { Readable } = require("stream");
-        const readableInstanceStream = new Readable({
-            read() {
-                this.push(file.data);
-                this.push(null);
-            }
-        });
-      const streamifier = require("streamifier");
-      // const readStream: ReadableStream = streamifier.createReadStream(file.data).pipe(process.stdout);
-      const readStreamif: ReadableStream = streamifier.createReadStream(file.data); // augmenter limite data
+      file.mv("./" + file.name)
+          .then(value => {
+              uploadFile();
+          })
+          .catch(e => winston.debug("move file failed" + e));
+      // emlever multer
+      const uploadFile = async () => {
+           const readStreamFS: ReadableStream = fs.createReadStream("./" + file.name);
+          winston.debug("buffer size before sending it: " + file.data.length);
 
-      winston.info("readable stream fs before sending it: " + JSON.stringify(readStreamFS));
-      winston.info("readable stream ifier before sending it: " + JSON.stringify(readStreamif));
-      formData.append("file", readStreamif, file.name);
-      // pb : transformer le file en ReadStream ou autre qui permette à formData de le lire
-      // multer ? https://stackoverflow.com/questions/36202618/how-to-upload-file-using-multer-or-body-parser
-      winston.debug("file data before sending it: " + JSON.stringify(file.data));
-      winston.debug("formdata before sending it: " + JSON.stringify(formData));
-      const fetch = require("node-fetch");
-      const url = Config.getBackendBaseUrl() + "/sg/membre-inscription/" + inscriptionId + "/document/" + documentTypeId;
-      winston.debug("url before sending it: " + url);
-      const headersToken = this.defaultHeaders().additionalHeaders;
-      /*let contentlength = 0;
-      formData.getLength(function(err: any, length: number) {
-        contentlength = length;
-      });
-      winston.debug("content length before sending it: " + JSON.stringify(contentlength));*/
+          winston.info("readable stream fs before sending it: " + JSON.stringify(readStreamFS));
+          formData.append("file", readStreamFS, file.name);
+          winston.debug("file data before sending it: " + JSON.stringify(file.data));
+          winston.debug("formdata before sending it: " + JSON.stringify(formData));
+          const fetch = require("node-fetch");
+          const url = Config.getBackendBaseUrl() + "/sg/membre-inscription/" + inscriptionId + "/document/" + documentTypeId;
+          const headersToken = this.defaultHeaders().additionalHeaders;
 
-      if (headersToken && headersToken.Authorization) {
-          winston.debug("headers before sending it: " + JSON.stringify(headersToken));
-          fetch(url, {
-            method: "POST",
-            // headers: { "Authorization": headersToken.Authorization, "Content-Length": contentlength },
-            headers: this.defaultHeaders().additionalHeaders,
-            body: formData
-        }).
-          then((res: { status: number; message: string }) => {
-            winston.debug("Response : " + JSON.stringify(res));
-            winston.debug("code : " + JSON.stringify(res.status));
-            if (res.status !== 200) {
-              winston.debug("Problème lors du chargement du document");
-              return callback(this.defaultError(res.status));
-            }
-            callback(null);
-          });
+          if (headersToken && headersToken.Authorization) {
+              winston.debug("headers before sending it: " + JSON.stringify(headersToken));
+              await fetch(url, {
+                  method: "POST",
+                  headers: this.defaultHeaders().additionalHeaders,
+                  body: formData
+              }).
+              then((res: { status: number; message: string }) => {
+                  winston.debug("Response : " + JSON.stringify(res));
+                  winston.debug("code : " + JSON.stringify(res.status));
+                  fs.unlink("./" + file.name, () => {console.log("Deleted"); });
+                  if (res.status !== 200) {
+                      winston.debug("Problème lors du chargement du document");
+                      return callback(this.defaultError(res.status));
+                  }
+                  callback(null);
+              });
+          }
+      };
     }
-  }
-      /*this.rest.create<UploadedFile>("sg/membre-inscription/" + inscriptionId + "/document/" + documentTypeId, formData, this.defaultHeaders()).then(
-            (res: IRestResponse<UploadedFile>) => {
-                if (res.statusCode !== 200) {
-                    winston.debug("Problème lors du chargement du document");
-                    return callback(this.defaultError(res.statusCode));
-                }
-                winston.debug("Response : " + JSON.stringify(res));
-                callback(null);
-            }
-        ).catch(
-            e => {
-                callback(e);
-            }
-        );*/
 
     static downloadDocument(inscriptionId: number, documentTypeId: number, callback: (err: any, result: DocumentResponse | null) => void): void {
         this.rest.get<DocumentResponse>("sg/membre-inscription/" + inscriptionId + "/document/" + documentTypeId, this.defaultHeaders()).then(
