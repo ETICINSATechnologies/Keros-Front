@@ -13,9 +13,7 @@
   {{> template/itemPerPage meta=member.meta}}
   {{> template/infoColumnOrder type="member"}}
                      <th>
-
-                            <select name="positions" id="positions-select" onchange="self.location.href=options[selectedIndex].value"
-                             >
+                            <select name="positions" id="positions-select" onchange="self.location.href=options[selectedIndex].value">
                             <option value="#">Choisir un position</option>
                             <option value="member">AFFICHER TOUS</option>
                             {{#each positions}}

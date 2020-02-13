@@ -21,7 +21,7 @@ export class MemberController {
   public viewMembers(req: Request, res: Response, next: NextFunction) {
     MemberService.getAllMembers(function (err1, page: Page<Member> | null) {
       PoleService.getAllPoles(function(err2, polesdata: Pole[]|null) {
-        PositionService.getAllPositions(function(err3, positionsdata: Position[]|null){
+        PositionService.getAllPositions(function(err3, positionsdata: Position[]|null) {
           if (err1) return next(err1);
           if (err2) return next(err2);
           if (err3) return next(err3);
