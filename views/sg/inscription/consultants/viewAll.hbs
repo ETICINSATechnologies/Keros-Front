@@ -28,7 +28,7 @@
                                         <th>Voir</th>
                                         <th>Modifier</th>
                                     </tr>
-                                    {{#each inscriptions.content}}
+                                    {{#each inscriptions.content}}\
                                         <tr>
                                             <td>{{lastName}}</td>
                                             <td>{{firstName}}</td>
@@ -47,11 +47,6 @@
                             {{> template/pagination meta=inscriptions.meta}}
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3">
-                    <a href="consultant-inscription/create" style="color: white;"><button type="button" class="btn btn-block btn-success btn-lg box">Nouvelle inscription</button></a>
                 </div>
             </div>
         </section>

@@ -10,3 +10,16 @@ function editButtonPress() {
   $('.view-breadcrumb').hide();
   $('.edit-breadcrumb').show();
 }
+
+function executeSearch(){
+  searchInput=document.getElementById("searching").value;
+  location.href='/core/member?search='+searchInput
+}
+
+function callEnter(e){
+  if(e.keyCode === 13){
+    executeSearch()
+  }
+  return false;
+}
+
