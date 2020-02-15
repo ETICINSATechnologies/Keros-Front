@@ -181,6 +181,9 @@ export default handlebars({
       return positions.some(function(pos) {
         return 21 === pos.id || 18 === pos.id;
       });
+    },
+    substring(str: string, index: number) {
+      return str.substring(0, index);
     }
   }
 });
