@@ -89,7 +89,7 @@
                            value="{{inscription.address.line1}}" placeholder="Entrez l'adresse 1" required {{readonlyIf (eq action "view")}}>
                   </div>
                   <div class="col-md-12 form-group">
-                    <label for="line2">Ligne 2</label>
+                    <label for="line2">Ligne 2 {{action}}</label>
                     <input type="string" class="form-control" id="line2" name="line2"
                            value="{{inscription.address.line2}}" placeholder="Entrez l'adresse 2" {{readonlyIf (eq action "view")}}>
                   </div>
@@ -183,11 +183,14 @@
                                   {{/if}}
                                 </div>
                                 <div class="col-md-3">
-                                  <form action="/sg/membre-inscription/{{@root.inscription.id}}/document/{{id}}" method="post" enctype="multipart/form-data">
-                                    <input type="file" name="file">
-                                    <!--<button type="submit" formmethod="post" formaction="/sg/membre-inscription/{{@root.inscription.id}}/document/{{id}}" class="btn btn-primary btn-sm" style="margin-top: 5%">Submit</button>-->
-                                    <input type='submit' value='Upload' />
-                                  </form>
+                                    {{#if (eq @root.action "update")}}
+                                    <div>
+                                      <form action="/sg/membre-inscription/{{@root.inscription.id}}/document/{{id}}" method="post" enctype="multipart/form-data">
+                                        <input type="file" name="file">
+                                        <input type='submit' value='Upload'/>
+                                      </form>
+                                      </div>
+                                    {{/if}}
                                 </div>
                                 <div class="col-md-3">
                                   {{#if isUploaded}}

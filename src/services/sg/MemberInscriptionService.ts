@@ -117,45 +117,35 @@ export class MemberInscriptionService extends BaseService {
     }
 
     static uploadDocument(inscriptionId: number, documentTypeId: number, file: UploadedFile, callback: (err: any) => void) {
-      const formData = new FormData();
-      const fs = require("fs");
-      file.mv("./" + file.name)
-          .then(value => {
-              uploadFile();
-          })
-          .catch(e => winston.debug("move file failed" + e));
-      // emlever multer
-      const uploadFile = async () => {
-           const readStreamFS: ReadableStream = fs.createReadStream("./" + file.name);
-          winston.debug("buffer size before sending it: " + file.data.length);
+        const formData = new FormData();
+        const fs = require("fs");
+        file.mv("./" + file.name)
+            .then(value => {
+                uploadFile();
+            })
+            .catch(e => winston.debug("move file failed" + e));
+        // faire pareil pour consultantInscription
+        const uploadFile = async () => {
+            const readStreamFS: ReadableStream = fs.createReadStream("./" + file.name);
+            formData.append("file", readStreamFS, file.name);
+            const fetch = require("node-fetch");
+            const url = Config.getBackendBaseUrl() + "/sg/membre-inscription/" + inscriptionId + "/document/" + documentTypeId;
 
-          winston.info("readable stream fs before sending it: " + JSON.stringify(readStreamFS));
-          formData.append("file", readStreamFS, file.name);
-          winston.debug("file data before sending it: " + JSON.stringify(file.data));
-          winston.debug("formdata before sending it: " + JSON.stringify(formData));
-          const fetch = require("node-fetch");
-          const url = Config.getBackendBaseUrl() + "/sg/membre-inscription/" + inscriptionId + "/document/" + documentTypeId;
-          const headersToken = this.defaultHeaders().additionalHeaders;
-
-          if (headersToken && headersToken.Authorization) {
-              winston.debug("headers before sending it: " + JSON.stringify(headersToken));
-              await fetch(url, {
-                  method: "POST",
-                  headers: this.defaultHeaders().additionalHeaders,
-                  body: formData
-              }).
-              then((res: { status: number; message: string }) => {
-                  winston.debug("Response : " + JSON.stringify(res));
-                  winston.debug("code : " + JSON.stringify(res.status));
-                  fs.unlink("./" + file.name, () => {console.log("Deleted"); });
-                  if (res.status !== 200) {
-                      winston.debug("Problème lors du chargement du document");
-                      return callback(this.defaultError(res.status));
-                  }
-                  callback(null);
-              });
-          }
-      };
+            await fetch(url, {
+                method: "POST",
+                headers: this.defaultHeaders().additionalHeaders,
+                body: formData
+            }).then((res: { status: number; message: string }) => {
+                fs.unlink("./" + file.name, () => {
+                    winston.debug("tmp uploaded file deleted");
+                });
+                if (res.status !== 200) {
+                    winston.debug("Error while uploading file");
+                    return callback(this.defaultError(res.status));
+                }
+                callback(null);
+            });
+        };
     }
 
     static downloadDocument(inscriptionId: number, documentTypeId: number, callback: (err: any, result: DocumentResponse | null) => void): void {
