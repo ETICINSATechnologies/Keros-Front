@@ -3,23 +3,41 @@
     <div class="dataTables_length">
       <label>
         Voir
-        <select name="list_length" class="form-control input-sm" id="pageSize">
+        <select name="list_length" class="form-control input-sm" id="pageSize" onchange="getSelectedPageSize()">
           <option value="" id="test" disabled selected>{{meta.itemsPerPage}}</option>
           <option value="10">10</option>
           <option value="25">25</option>
           <option value="50">50</option>
           <option value="100">100</option>
         </select>
-        entrées
+         <span>
+           {{#if (eq urlPath "/sg/membre-inscription")}}
+             <button type="button" class="btn btn-primary" id="btn-inscription-paid"
+             onclick="location.href='{{origin}}/sg/membre-inscription?hasPaid=true'">Voir les inscriptions payées</button>
+           {{/if}}
+           {{#if (eq urlPath "/sg/membre-inscription?hasPaid=true")}}
+              <button type="button" class="btn btn-primary" id="btn-inscription-all"
+              onclick="location.href='{{origin}}/sg/membre-inscription'">Voir toutes les inscriptions</button>
+           {{/if}}
+         </span>
       </label>
+
     </div>
   </div>
+
+
   <div class="col-sm-6">
     <div class="dataTables_filter">
-      <label>
+      <label for="searching"></label>
         Rechercher:
-        <input type="search" class="form-control input-sm" id="searching" name="search">
-      </label>
+        <input type="search" class="form-control input-sm" id="searching" name="search" placeholder = "Prénom/Nom/Compagnie" onkeypress="callEnter(event)">
+        <button class="loupe" onClick="executeSearch()"><i class="fa fa-search"></i></button>
     </div>
   </div>
 </div>
+<script>
+    function getSelectedPageSize() {
+        var val = document.getElementById("pageSize").value;
+        window.location ="?pageSize=" + val;
+    }
+</script>

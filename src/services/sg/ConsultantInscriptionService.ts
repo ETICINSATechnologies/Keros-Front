@@ -7,6 +7,7 @@ import { ConsultantInscriptionCreateRequest } from "../../models/sg/ConsultantIn
 import { DocumentResponse } from "../../models/DocumentResponse";
 import { MemberInscriptionCreateRequest } from "../../models/sg/MemberInscriptionCreateRequest";
 import { MemberInscription } from "../../models/sg/MemberInscription";
+import { queryStringify } from "../../util/Helper";
 
 export class ConsultantInscriptionService extends BaseService {
     static getConsultantInscription(id: number, callback: (err: any, result: ConsultantInscription | null) => void): void {
@@ -23,8 +24,9 @@ export class ConsultantInscriptionService extends BaseService {
         );
     }
 
-    static getAllConsultantInscriptions(callback: (err: any, result: Page<ConsultantInscription> | null) => void): void {
-        this.rest.get<Page<ConsultantInscription>>("sg/consultant-inscription" , this.defaultHeaders()).then(
+    static getAllConsultantInscriptions(callback: (err: any, result: Page<ConsultantInscription> | null) => void, queryParams?: any): void {
+        const queryString = queryStringify(queryParams);
+        this.rest.get<Page<ConsultantInscription>>("sg/consultant-inscription?" + queryString , this.defaultHeaders()).then(
             (res: IRestResponse<Page<ConsultantInscription>>) => {
                 if (res.statusCode !== 200) {
                     return callback(this.defaultError(res.statusCode), null);
