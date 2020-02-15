@@ -14,18 +14,26 @@ import { PositionService } from "../../services/core/PositionService";
 import { AddressCreateRequest } from "../../models/core/AddressCreateRequest";
 import * as httpContext from "express-http-context";
 import { PositionRequest } from "../../models/core/PositionRequest";
+import { PoleService } from "../../services/core/PoleService";
+import { Pole } from "../../models/core/Pole";
 
 export class MemberController {
   public viewMembers(req: Request, res: Response, next: NextFunction) {
-    MemberService.getAllMembers(function (err, page: Page<Member> | null) {
-      winston.info("Getting all members");
-      if (err) {
-        return next(err);
-      }
-      const options = {
-        members: page,
-      };
-      res.render("core/member/viewAll", options);
+    MemberService.getAllMembers(function (err1, page: Page<Member> | null) {
+      PoleService.getAllPoles(function(err2, polesdata: Pole[]|null) {
+        PositionService.getAllPositions(function(err3, positionsdata: Position[]|null) {
+          if (err1) return next(err1);
+          if (err2) return next(err2);
+          if (err3) return next(err3);
+          winston.info("Getting all members");
+          const options = {
+            members: page,
+            poles: polesdata,
+            positions: positionsdata
+          };
+          res.render("core/member/viewAll", options);
+        });
+      });
     }, req.query);
   }
 
@@ -35,18 +43,22 @@ export class MemberController {
       GenderService.getAllGenders(function (err2, genders: Gender[] | null) {
         CountryService.getAllCountries(function (err3, countries: Country[] | null) {
           PositionService.getAllPositions(function (err4, positions: Position[] | null) {
-            if (err1) return next(err1);
-            if (err2) return next(err2);
-            if (err3) return next(err3);
-            if (err4) return next(err4);
-            const options = {
-              departments,
-              gender: genders,
-              countries,
-              positions,
-              action: "create"
-            };
-            res.render("core/member/viewMember", options);
+            PoleService.getAllPoles(function (err5, poles: Pole[] | null) {
+              if (err1) return next(err1);
+              if (err2) return next(err2);
+              if (err3) return next(err3);
+              if (err4) return next(err4);
+              if (err5) return next(err5);
+              const options = {
+                departments,
+                gender: genders,
+                countries,
+                positions,
+                poles,
+                action: "create"
+              };
+              res.render("core/member/viewMember", options);
+            });
           });
         });
       });
@@ -88,21 +100,25 @@ export class MemberController {
         GenderService.getAllGenders(function (err3, genders: Gender[] | null) {
           CountryService.getAllCountries(function (err4, countries: Country[] | null) {
             PositionService.getAllPositions(function (err5, positions: Position[] | null) {
-              if (err1) return next(err1);
-              if (err2) return next(err2);
-              if (err3) return next(err3);
-              if (err4) return next(err4);
-              if (err5) return next(err5);
-              const options = {
-                member,
-                departments,
-                gender: genders,
-                countries,
-                positions,
-                action: "update"
-              };
-              res.render("core/member/viewMember", options);
-            });
+              PoleService.getAllPoles(function (err6, poles: Pole[] | null) {
+                if (err1) return next(err1);
+                if (err2) return next(err2);
+                if (err3) return next(err3);
+                if (err4) return next(err4);
+                if (err5) return next(err5);
+                if (err6) return next(err6);
+                const options = {
+                  member,
+                  departments,
+                  gender: genders,
+                  countries,
+                  positions,
+                  poles,
+                  action: "update"
+                };
+                res.render("core/member/viewMember", options);
+              });
+             });
           });
         });
       });
@@ -211,21 +227,25 @@ export class MemberController {
         GenderService.getAllGenders(function (err3, genders: Gender[] | null) {
           CountryService.getAllCountries(function (err4, countries: Country[] | null) {
             PositionService.getAllPositions(function (err5, positions: Position[] | null) {
-              if (err1) return next(err1);
-              if (err2) return next(err2);
-              if (err3) return next(err3);
-              if (err4) return next(err4);
-              if (err5) return next(err5);
-              const options = {
-                member,
-                page: "profile",
-                departments,
-                gender: genders,
-                countries,
-                positions,
-                action: "update"
-              };
-              res.render("core/member/viewProfile", options);
+              PoleService.getAllPoles(function (err6, poles: Pole[] | null) {
+                if (err1) return next(err1);
+                if (err2) return next(err2);
+                if (err3) return next(err3);
+                if (err4) return next(err4);
+                if (err5) return next(err5);
+                if (err6) return next(err6);
+                const options = {
+                  member,
+                  page: "profile",
+                  departments,
+                  gender: genders,
+                  countries,
+                  positions,
+                  poles,
+                  action: "update"
+                };
+                res.render("core/member/viewProfile", options);
+              });
             });
           });
         });

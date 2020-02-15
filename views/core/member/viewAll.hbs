@@ -2,30 +2,33 @@
 <div class="wrapper">
   {{> template/header}}
   {{> template/sidebar}}
-  <div class="content-wrapper">
-    <section class="content-header">
-      <h1>
-        Voir les membres
-      </h1>
-      {{> breadcrumb tab="RH" action="all" pathall="Membres,Voir les membres"}}
-    </section>
-    <section class="content">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="box box-primary">
-            <!-- /.box-header -->
-            <div class="box-body">
-              <div class="dataTables_wrapper form-inline dt-bootstrap">
-                {{> template/itemPerPage meta=members.meta}}
-                <table class="table table-bordered dataTable">
-                  <tbody>
-                  <tr>
-                    <th>Nom d'utilisateur <a href="#" id="username" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                    <th>Nom<a href="#" id="name" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                    <th>Prénom<a href="#" id="firstname" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                    <th>Position(s)<a href="#" id="positionId" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                    <th>Pole(s)<a href="#" class="fa fa-unsorted fa-pull-right"></a></th>
-                    <th>Email<a href="#" id="email" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+    <div class="content-wrapper">
+      <section class="content-header">
+        <h1>
+          Voir les membres
+        </h1>
+        {{> breadcrumb tab="RH" action="all" pathall="Membres,Voir les membres"}}
+      </section>
+  {{> template/infoCaption type="member"}}
+  {{> template/itemPerPage meta=member.meta}}
+  {{> template/infoColumnOrder type="member"}}
+                     <th>
+                            <select name="positions" id="positions-select" onchange="self.location.href=options[selectedIndex].value">
+                            <option value="#">Choisir un position</option>
+                            <option value="member">AFFICHER TOUS</option>
+                            {{#each positions}}
+                            <option value="member?positionId={{this.id}}">{{this.label}}</option>
+                            {{/each}}
+                     </th>
+                     <th>
+                            <select name="poles" id="pole-select" onchange="self.location.href=options[selectedIndex].value">
+                            <option value="#">Choisir un pôle</option>
+                            <option value="member">AFFICHER TOUS</option>
+                            {{#each poles}}
+                            <option value="member?poleId={{this.id}}">{{this.name}}</option>
+                            {{/each}}
+                            </select>
+                     </th>
                     <th>Voir</th>
                     <th>Modifier</th>
                   </tr>
@@ -34,9 +37,9 @@
                       <td>{{username}}</td>
                       <td>{{lastName}}</td>
                       <td>{{firstName}}</td>
+                      <td>{{email}}</td>
                       <td>{{#each positions}}{{this.label}}<br/>{{/each}}</td>
                       <td>{{#each positions}}{{this.pole.label}}<br/>{{/each}}</td>
-                      <td>{{email}}</td>
                       <td><a href="member/{{id}}" class="fa fa-eye fa-2x"></a></td>
                       <td><a href="member/update/{{id}}" class="fa fa-edit fa-2x"></a></td>
                     </tr>
@@ -58,7 +61,7 @@
       </div>
     </section>
   </div>
-  {{> template/footer}}
+  {{>template/infoFooter}}
 </div>
 {{> template/scripts}}
 </body>
