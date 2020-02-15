@@ -46,4 +46,22 @@
                   {{/each}}
                   </tbody>
                 </table>
+              </div>
+            </div>
+            <div class="box-footer">
+              {{> template/pagination meta=members.meta}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <a href="member/create" style="color: white;"><button type="button" class="btn btn-block btn-success btn-lg box">Nouveau membre</button></a>
+        </div>
+      </div>
+    </section>
+  </div>
   {{>template/infoFooter}}
+</div>
+{{> template/scripts}}
+</body>
