@@ -9,7 +9,6 @@ import { DocumentResponse } from "../../models/DocumentResponse";
 import { queryStringify } from "../../util/Helper";
 import { UploadedFile } from "express-fileupload";
 import { Config } from "../../config/Config";
-import Length = Chai.Length;
 
 export class MemberInscriptionService extends BaseService {
     static getMemberInscription(id: number, callback: (err: any, result: MemberInscription | null) => void): void {
