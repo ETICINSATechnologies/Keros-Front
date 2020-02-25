@@ -81,7 +81,6 @@ export class Launcher {
         // mount file uploader middleware
         this.app.use(fileUpload({
             useTempFiles : false,
-            tempFileDir : "/tmp/",
             debug: true
         }));
 

@@ -119,14 +119,14 @@ export class MemberInscriptionService extends BaseService {
     static uploadDocument(inscriptionId: number, documentTypeId: number, file: UploadedFile, callback: (err: any) => void) {
         const formData = new FormData();
         const fs = require("fs");
-        file.mv("./" + file.name)
+        const filePath = "./";
+        file.mv(filePath + file.name)
             .then(value => {
                 uploadFile();
             })
-            .catch(e => winston.debug("move file failed" + e));
-        // faire pareil pour consultantInscription
+            .catch(e => winston.debug("Move file to local path failed" + e));
         const uploadFile = async () => {
-            const readStreamFS: ReadableStream = fs.createReadStream("./" + file.name);
+            const readStreamFS: ReadableStream = fs.createReadStream(filePath + file.name);
             formData.append("file", readStreamFS, file.name);
             const fetch = require("node-fetch");
             const url = Config.getBackendBaseUrl() + "/sg/membre-inscription/" + inscriptionId + "/document/" + documentTypeId;
@@ -136,8 +136,8 @@ export class MemberInscriptionService extends BaseService {
                 headers: this.defaultHeaders().additionalHeaders,
                 body: formData
             }).then((res: { status: number; message: string }) => {
-                fs.unlink("./" + file.name, () => {
-                    winston.debug("tmp uploaded file deleted");
+                fs.unlink(filePath + file.name, () => {
+                    winston.debug("Temporarily uploaded file deleted");
                 });
                 if (res.status !== 200) {
                     winston.debug("Error while uploading file");
