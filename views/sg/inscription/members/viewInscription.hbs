@@ -137,6 +137,7 @@
                       {{#if inscription.droitImage}} checked {{/if}}>
                   </div>
                 </div>
+                </form>
                 {{#if (ne action "create")}}
                   {{#if inscription}}
                     <div id="view-documents">
@@ -182,10 +183,14 @@
                                   {{/if}}
                                 </div>
                                 <div class="col-md-3">
-                                  <form action="/sg/membre-inscription/{{@root.inscription.id}}/document/{{id}}" method="post" enctype="multipart/form-data">
-                                    <input type="file" name="file">
-                                    <button type="submit" formmethod="post" formaction="/sg/membre-inscription/{{@root.inscription.id}}/document/{{id}}" class="btn btn-primary btn-sm" style="margin-top: 5%">Submit</button>
-                                  </form>
+                                    {{#if (eq @root.action "update")}}
+                                    <div>
+                                      <form action="/sg/membre-inscription/{{@root.inscription.id}}/document/{{id}}" method="post" enctype="multipart/form-data">
+                                        <input type="file" name="file">
+                                        <input type='submit' value='Upload'/>
+                                      </form>
+                                      </div>
+                                    {{/if}}
                                 </div>
                                 <div class="col-md-3">
                                   {{#if isUploaded}}
@@ -213,7 +218,7 @@
                     </div>
                   {{/if}}
                 </div>
-              </form>
+              <!--</form>-->
             </div>
           </section>
         </div>
