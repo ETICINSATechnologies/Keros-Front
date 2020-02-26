@@ -1,0 +1,25 @@
+<div class="panel-body" id="fileSelection" style="background-color: #f0f5f5;display: none";>
+  <div class="col-md-4">
+    <select class="selectdocumentid" id="selectDocumentId" style="width: 100%">
+      <option value="1">Carte d'identité</option>
+      <option value="2">Certificat de scolarité</option>
+      <option value="3">RIB</option>
+      <option value="4">Carte Vitale</option>
+      <option value="5">Titre de séjour</option>
+      <option value="6">Autre</option>
+    </select>
+  </div>
+  <form id="addFileForm" action="{{origin}}/{{id}}/document/" method="post" enctype="multipart/form-data">
+    <div class="col-md-4">
+      <input type="file" name="file">
+    </div>
+    <div class="col-md-4">
+      <button type="submit" id="addFileFormButton" class="btn btn-primary btn-sm" onclick="setActionAttribute()">Submit</button>
+    </div>
+  </form>
+</div>
+<div class="panel-body">
+  <div class="col-md-4">
+    <button type="button" class="btn btn-primary" onclick="showUploadElements()"><i class="fa fa-plus"> Ajouter un document</i></button>
+  </div>
+</div>

@@ -23,7 +23,7 @@
                                         <th>Nom<a href="#" id="name" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
                                         <th>Prénom<a href="#" id="firstname" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
                                         <th>Département<a href="#" id="departement" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                                        <th>Email<a href="#" id="email" class="fa fa-unsorted fa-pull-right select_filter"></a></th>                                        <th>Email<a href="#" id="email" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+                                        <th>Email<a href="#" id="email" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
                                         <th>Date d'inscription<a href="#" id="date-inscription" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
                                         <th>Voir</th>
                                         <th>Modifier</th>
@@ -35,6 +35,7 @@
                                                 <td>{{firstName}}</td>
                                                 <td>{{department.label}}</td>
                                                 <td>{{email}}</td>
+                                                <td>{{substring createdDate.date 10}}</td>
                                                 <td><a href="consultant-inscription/{{id}}" class="fa fa-eye fa-2x"></a></td>
                                                 <td><a href="consultant-inscription/update/{{id}}" class="fa fa-edit fa-2x"></a></td>
                                             </tr>
@@ -44,6 +45,7 @@
                                                 <td>{{firstName}}</td>
                                                 <td>{{department.label}}</td>
                                                 <td>{{email}}</td>
+                                                <td>{{substring createdDate.date 10}}</td>
                                                 <td><a href="consultant-inscription/{{id}}" class="fa fa-eye fa-2x"></a></td>
                                                 <td><a href="consultant-inscription/update/{{id}}" class="fa fa-edit fa-2x"></a></td>
                                             </tr>
