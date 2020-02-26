@@ -11,7 +11,11 @@
                   {{#each consultants.content}}
                     <tr>
                       <td>{{username}}</td>
-                      <td>{{lastName}}</td>
+                      {{#if (eq nationality.label "France")}}
+                      <td style="background-color: #b3e6cc">{{lastName}}</td>
+                      {{else}}
+                      <td >{{lastName}}</td>
+                      {{/if}}
                       <td>{{firstName}}</td>
                       <td>{{email}}</td>
                       <td><a href="consultant/{{id}}" class="fa fa-eye fa-2x"></a></td>
