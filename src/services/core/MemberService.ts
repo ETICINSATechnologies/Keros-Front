@@ -63,7 +63,6 @@ export class MemberService extends BaseService {
     );
   }
 
-  // TODO why doesn't this return member ?
   static update(memberId: number, memberRequest: MemberCreateRequest, callback: (err: any, result: Member | null) => void): void {
     this.rest.update<Member>("core/member/" + memberId, memberRequest, this.defaultHeaders()).then(
       (res: IRestResponse<Member>) => {

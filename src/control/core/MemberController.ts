@@ -134,7 +134,12 @@ export class MemberController {
     userRequest.lastName = req.body.lastName;
     userRequest.firstName = req.body.firstName;
     userRequest.username = req.body.username;
-    if (req.body.password) userRequest.password = req.body.password;
+    if (req.body.password) {
+      userRequest.password = req.body.password;
+    }
+    else {
+      delete userRequest.password;
+    }
     userRequest.genderId = parseInt(req.body.genderId);
     userRequest.email = req.body.email;
     userRequest.birthday = req.body.birthday;
@@ -169,6 +174,7 @@ export class MemberController {
     addressRequest.countryId = parseInt(req.body.countryId);
     userRequest.address = addressRequest;
 
+    winston.debug("postform controller : " + JSON.stringify(userRequest));
     if (userId) {
       MemberService.update(userId, userRequest, function (err1) {
         if (err1) {
