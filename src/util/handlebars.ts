@@ -149,6 +149,11 @@ export default handlebars({
         return 20 === pos.id;
       });
     },
+    isSG (positions: Position[]) {
+      return positions.some(function (pos) {
+        return 22 === pos.id;
+      });
+    },
     isChadaff (positions: Position[]) {
       return positions.some(function (pos) {
         return 3 === pos.id;

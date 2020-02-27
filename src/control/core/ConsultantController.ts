@@ -12,6 +12,7 @@ import { CountryService } from "../../services/core/CountryService";
 import { Country } from "../../models/core/Country";
 import { AddressCreateRequest } from "../../models/core/AddressCreateRequest";
 import * as httpContext from "express-http-context";
+import { isSG } from "../../util/Helper";
 
 export class ConsultantController {
     public viewConsultants(req: Request, res: Response, next: NextFunction) {
