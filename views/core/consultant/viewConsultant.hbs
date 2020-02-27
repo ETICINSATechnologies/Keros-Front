@@ -93,6 +93,13 @@
                       {{/if}}
                     </select>
                   </div>
+                  {{#if (eq true (isSG connectedUser.positions))}}
+                      <div class="col-md-4 form-group">
+                        <label for="socialSecurityNumber">Numéro de sécurité social</label>
+                        <input type="text" class="form-control" id="socialSecurityNumber" name="socialSecurityNumber" value="{{consultant.socialSecurityNumber}}"
+                         {{readonlyIf (eq action "view")}}>
+                      </div>
+                  {{/if}}
                   <h4 class="col-md-12 box-title">
                     Adresse
                   </h4>
@@ -125,7 +132,26 @@
                       {{/each}}
                     </select>
                   </div>
+                  <div class="col-md-4 form-group">
+                      <label for="droitImage">Droit à l'image </label>
+                      <input type="checkbox" id="droitImage" name="droitImage"
+                        {{#if (or (eq action "view") (ne true (isSG connectedUser.positions)))}} disabled="disabled" {{/if}}
+                        {{#if consultant.droitImage}} checked {{/if}}>
+                  </div>
+                    <div class="col-md-4 form-group">
+                        <label for="isApprentice">En apprentissage</label>
+                        <input type="checkbox" id="isApprentice" name="isApprentice"
+                        {{#if (or (eq action "view") (ne true (isSG connectedUser.positions)))}} disabled="disabled" {{/if}}
+                        {{#if consultant.isApprentice}} checked {{/if}}>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="isGraduate">Diplômé</label>
+                        <input type="checkbox" id="isGraduate" name="isGraduate"
+                        {{#if (or (eq action "view") (ne true (isSG connectedUser.positions)))}} disabled="disabled" {{/if}}
+                        {{#if consultant.isGraduate}} checked="checked" {{/if}}>
+                    </div>
                 </div>
+
                 <div class="box-footer">
                   <a href="/core/consultant"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button></a>
                   {{> formButtons action=action origin="/core/consultant" id=consultant.id}}

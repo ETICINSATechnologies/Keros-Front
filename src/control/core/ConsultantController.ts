@@ -12,6 +12,7 @@ import { CountryService } from "../../services/core/CountryService";
 import { Country } from "../../models/core/Country";
 import { AddressCreateRequest } from "../../models/core/AddressCreateRequest";
 import * as httpContext from "express-http-context";
+import { isSG } from "../../util/Helper";
 
 export class ConsultantController {
     public viewConsultants(req: Request, res: Response, next: NextFunction) {
@@ -111,6 +112,11 @@ export class ConsultantController {
         userRequest.departmentId = parseInt(req.body.departmentId);
         userRequest.schoolYear = parseInt(req.body.schoolYear);
         userRequest.telephone = req.body.telephone;
+        userRequest.nationalityId = req.body.countryId;
+        userRequest.socialSecurityNumber = req.body.socialSecurityNumber;
+        userRequest.isApprentice = req.body.isApprentice === "on";
+        userRequest.droitImage = req.body.isApprentice === "on"; // doesn't work because back doesn't update value
+        userRequest.isGraduate = req.body.isGraduate === "on";
 
         const addressRequest = new AddressCreateRequest();
         addressRequest.line1 = req.body.line1;

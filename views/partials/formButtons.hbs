@@ -14,16 +14,16 @@
         </button>
       </div>
       <div class="modal-body">
-        Etes-vous surs de vouloir supprimer ce compte?
+        Etes-vous sûr de vouloir supprimer ce compte?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
         <button type="button" class="btn btn-danger" onclick="deleteAccount();">Oui</button>
-        <SCRIPT>
+        <script>
             function deleteAccount(){
                 location.href='{{origin}}/delete/{{id}}'
             }
-        </SCRIPT>
+        </script>
       </div>
     </div>
   </div>
@@ -37,13 +37,13 @@
   {{#if (ne page "profilePage")}}
     <button type="button" class="btn btn-danger" onclick="location.href='{{origin}}/delete/{{id}}'">Supprimer</button>
   {{/if}}
-  <button id="validerbtn" type="submit" disabled="true" dis class="btn btn-primary">Valider</button>
+  <button id="validerbtn" type="submit" class="btn btn-primary">Valider</button>
 </div>
 <div id="create-buttons" class="form-buttons pull-right" {{#if (ne action "create")}}style="display: none"{{/if}}>
   <button type="submit"  class="btn btn-primary">Valider</button>
 
 
-  <script type="text/javascript">
+  <script>
   function validateFields()
     {let mdpInput = document.getElementById("password").value;
     let mdpInputConfirm =  document.getElementById("password-confirm").value;
@@ -64,7 +64,6 @@
       document.getElementById("validerbtn").disabled = false;
       mdpInputMsg.innerHTML="";
      }
-
   }
 
   </script>

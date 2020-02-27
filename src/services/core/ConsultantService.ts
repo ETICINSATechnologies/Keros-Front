@@ -4,11 +4,17 @@ import { BaseService } from "../common/BaseService";
 import { Page } from "../../models/core/Page";
 import { ConsultantCreateRequest } from "../../models/core/ConsultantCreateRequest";
 import * as winston from "winston";
-import { queryStringify } from "../../util/Helper";
+import { isSG, queryStringify } from "../../util/Helper";
+import * as httpContext from "express-http-context";
 
 export class ConsultantService extends BaseService {
     static getConsultant(id: number, callback: (err: any, result: Consultant | null) => void): void {
-        this.rest.get<Consultant>("core/consultant/" + id, this.defaultHeaders()).then(
+        const currentUserPositions = httpContext.get("connectedUser").positions;
+        let routePath = "core/consultant/" + id;
+        if (isSG(currentUserPositions)) {
+            routePath += "/protected";
+        }
+        this.rest.get<Consultant>(routePath, this.defaultHeaders()).then(
             (res: IRestResponse<Consultant>) => {
                 if (res.statusCode !== 200) {
                     return callback(this.defaultError(res.statusCode), null);
