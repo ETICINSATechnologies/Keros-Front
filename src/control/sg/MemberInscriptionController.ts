@@ -21,17 +21,22 @@ import { UploadedFile } from "express-fileupload";
 
 export class MemberInscriptionController {
     public viewMemberInscriptions(req: Request, res: Response, next: NextFunction) {
-        MemberInscriptionService.getAllMemberInscriptions(function (err, page: Page<MemberInscription> | null) {
-            winston.info("Getting all member inscriptions");
-            if (err) {
-                return next(err);
-            }
-            const options = {
-                inscriptions: page,
-            };
-
-            res.render("sg/inscription/members/viewAll", options);
-        }, req.query);
+        DepartmentService.getAllDepartments(function (err1, departments: Department[] | null) {
+            MemberInscriptionService.getAllMemberInscriptions(function (err2, page: Page<MemberInscription> | null) {
+                winston.info("Getting all member inscriptions");
+                if (err1) {
+                    return next(err1);
+                }
+                if (err2) {
+                    return next(err2);
+                }
+                const options = {
+                    inscriptions: page,
+                    departments
+                };
+                res.render("sg/inscription/members/viewAll", options);
+            }, req.query);
+        });
     }
 
     public createMemberInscription(req: Request, res: Response, next: NextFunction) {

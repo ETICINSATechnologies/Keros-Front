@@ -9,22 +9,11 @@
       </h1>
       {{> breadcrumb tab="RH" action="all" pathall="Inscriptions membres,Voir les inscriptions membres"}}
     </section>
-    <section class="content">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="box box-primary">
-            <!-- /.box-header -->
-            <div class="box-body">
-              <div class="dataTables_wrapper form-inline dt-bootstrap">
-                {{> template/itemPerPage meta=inscriptions.meta}}
-                <table class="table table-bordered dataTable">
-                  <tbody>
-                  <tr>
-                    <th>Nom<a href="#" id="name" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                    <th>Prénom<a href="#" id="firstname" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                    <th>Département<a href="#" id="departement" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
-                    <th>Pole souhaité<a href="#" id="wantedPole" class="fa fa-unsorted fa-pull-right"></a></th>
-                    <th>Email<a href="#" id="email" class="fa fa-unsorted fa-pull-right select_filter"></a></th>
+   {{> template/infoCaption type="member"}}
+   {{> template/itemPerPage meta=inscriptions.meta}}
+   {{> template/infoColumnOrder page="inscription"}}
+                    <th>Département</th>
+                    <th>Pole souhaité</th>
                     <th>Voir</th>
                     <th>Modifier</th>
                   </tr>
@@ -32,9 +21,10 @@
                     <tr>
                       <td>{{lastName}}</td>
                       <td>{{firstName}}</td>
+                      <td>{{email}}</td>
                       <td>{{department.label}}</td>
                       <td>{{wantedPole.label}}</td>
-                      <td>{{email}}</td>
+
                       <td><a href="membre-inscription/{{id}}" class="fa fa-eye fa-2x"></a></td>
                       <td><a href="membre-inscription/update/{{id}}" class="fa fa-edit fa-2x"></a></td>
                     </tr>
