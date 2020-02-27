@@ -36,6 +36,9 @@
 <div id="update-buttons" class="form-buttons pull-right" {{#if (ne action "update")}}style="display: none"{{/if}}>
   {{#if (ne page "profilePage")}}
     <button type="button" class="btn btn-danger" onclick="location.href='{{origin}}/delete/{{id}}'">Supprimer</button>
+    {{#if (eq page "memberPage")}}
+        <button type="button" class="btn btn-danger" onclick="updateAlumniStatus()">{{#if isAlumni}}Membre{{else}}Ancien{{/if}}</button>
+    {{/if}}
   {{/if}}
   <button id="validerbtn" type="submit" class="btn btn-primary">Valider</button>
 </div>
@@ -44,6 +47,13 @@
 
 
   <script>
+    function updateAlumniStatus() {
+    let isAlumni = document.getElementById("isAlumni").value;
+    if (!isAlumni) document.getElementById("isAlumni").value = "on";
+    else document.getElementById("isAlumni").value = "off";
+    document.getElementById("member-update-form").submit();
+    }
+
   function validateFields()
     {let mdpInput = document.getElementById("password").value;
     let mdpInputConfirm =  document.getElementById("password-confirm").value;

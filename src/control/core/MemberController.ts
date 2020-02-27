@@ -146,6 +146,8 @@ export class MemberController {
     userRequest.departmentId = parseInt(req.body.departmentId);
     userRequest.schoolYear = parseInt(req.body.schoolYear);
     userRequest.telephone = req.body.telephone;
+    winston.debug("is alumni : " + req.body.isAlumni);
+    userRequest.isAlumni = req.body.isAlumni === "on";
 
     const positionRequest1 = new PositionRequest();
     userRequest.positions = [];
