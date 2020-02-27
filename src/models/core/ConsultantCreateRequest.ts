@@ -12,6 +12,7 @@ export class ConsultantCreateRequest {
         public departmentId ?: number,
         public schoolYear ?: number,
         public telephone ?: string,
+        public nationalityId ?: number,
         public address ?: AddressCreateRequest
     ) {
     }
