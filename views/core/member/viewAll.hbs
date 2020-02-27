@@ -6,10 +6,21 @@
   {{> template/itemPerPage meta=member.meta}}
   {{> template/infoColumnOrder type="member"}}
                      <th>
-                            Position(s)
+                            <select name="positions" id="positions-select" onchange="self.location.href=options[selectedIndex].value">
+                            <option value="#">Choisir un position</option>
+                            <option value="member">AFFICHER TOUS</option>
+                            {{#each positions}}
+                            <option value="member?positionId={{this.id}}">{{this.label}}</option>
+                            {{/each}}
                      </th>
                      <th>
-                            Pôle(s)
+                            <select name="poles" id="pole-select" onchange="self.location.href=options[selectedIndex].value">
+                            <option value="#">Choisir un pôle</option>
+                            <option value="member">AFFICHER TOUS</option>
+                            {{#each poles}}
+                            <option value="member?poleId={{this.id}}">{{this.name}}</option>
+                            {{/each}}
+                            </select>
                      </th>
                     <th>Voir</th>
                     <th>Modifier</th>
@@ -28,4 +39,22 @@
                   {{/each}}
                   </tbody>
                 </table>
+              </div>
+            </div>
+            <div class="box-footer">
+              {{> template/pagination meta=members.meta}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <a href="member/create" style="color: white;"><button type="button" class="btn btn-block btn-success btn-lg box">Nouveau membre</button></a>
+        </div>
+      </div>
+    </section>
+  </div>
   {{>template/infoFooter}}
+</div>
+{{> template/scripts}}
+</body>

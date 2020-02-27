@@ -129,6 +129,13 @@
                     Fonction/Poste
                   </h4>
                   <div class="col-md-4 form-group">
+                    <label for="countryId">Pôle 1</label>
+                    <select class="form-control" id="poleId1" name="poleId1" required {{readonlyIf
+                            (eq action "view")}} {{disabledIf (eq action "view")}}>
+                      {{#each poles}}
+                        <option value="{{id}}" {{selected id @root.member.poles.0.id}}>{{label}} </option>
+                      {{/each}}
+                    </select>
                     <label for="countryId">Fonction 1</label>
                     <select class="form-control" id="positionId1" name="positionId1" required {{readonlyIf
                             (eq action "view")}} {{disabledIf (eq action "view")}}>
@@ -147,12 +154,19 @@
                     </label>
                   </div>
                   <div class="col-md-4 form-group">
+                    <label for="countryId">Pôle 2</label>
+                    <select class="form-control" id="poleId2" name="poleId2" required {{readonlyIf
+                            (eq action "view")}} {{disabledIf (eq action "view")}}>
+                      {{#each poles}}
+                        <option value="{{id}}" {{selected id @root.member.poles.0.id}}>{{label}} </option>
+                      {{/each}}
+                    </select>
                     <label for="countryId">Fonction 2</label>
                     <select class="form-control" id="positionId2" name="positionId2"{{readonlyIf
                             (eq action "view")}} {{disabledIf (eq action "view")}}>
                       <option></option>
                       {{#each positions}}
-                        <option value="{{id}}" {{selected id @root.member.positions.1.id}}>{{label}} {{#if pole}}({{pole.label}}){{/if}}</option>
+                        <option value="{{id}}" {{selected id @root.member.positions.1.id}}>{{label}} </option>
                       {{/each}}
                     </select>
                     <label for="year">Année </label>
@@ -165,12 +179,19 @@
                     </label>
                   </div>
                   <div class="col-md-4 form-group">
+                    <label for="countryId">Pôle 3</label>
+                    <select class="form-control" id="poleId3" name="poleId3" required {{readonlyIf
+                            (eq action "view")}} {{disabledIf (eq action "view")}}>
+                      {{#each poles}}
+                        <option value="{{id}}" {{selected id @root.member.poles.0.id}}>{{label}} </option>
+                      {{/each}}
+                    </select>
                     <label for="countryId">Fonction 3</label>
                     <select class="form-control" id="positionId3" name="positionId3" {{readonlyIf
                             (eq action "view")}} {{disabledIf (eq action "view")}}>
                       <option></option>
                       {{#each positions}}
-                        <option value="{{id}}" {{selected id @root.member.positions.2.id}}>{{label}} {{#if pole}}({{pole.label}}){{/if}}</option>
+                        <option value="{{id}}" {{selected id @root.member.positions.2.id}}>{{label}} </option>
                       {{/each}}
                     </select>
                     <label for="year">Année </label>

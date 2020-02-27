@@ -2,6 +2,13 @@
 <div class="wrapper">
   {{> template/header}}
   {{> template/sidebar}}
+    <div class="content-wrapper">
+      <section class="content-header">
+        <h1>
+          Voir les consultants
+        </h1>
+        {{> breadcrumb tab="RH" action="all" pathall="Consultants,Voir les consultants"}}
+      </section>
   {{> template/infoCaption type="consultant"}}
   {{> template/itemPerPage meta=consultant.meta}}
   {{> template/infoColumnOrder type="consultant"}}
@@ -9,6 +16,7 @@
                     <th>Modifier</th>
                   </tr>
                   {{#each consultants.content}}
+
                     <tr>
                       <td>{{username}}</td>
                       {{#if (eq nationality.label "France")}}
@@ -21,5 +29,26 @@
                       <td><a href="consultant/{{id}}" class="fa fa-eye fa-2x"></a></td>
                       <td><a href="consultant/update/{{id}}" class="fa fa-edit fa-2x"></a></td>
                     </tr>
+
                   {{/each}}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="box-footer">
+              {{> template/pagination meta=consultants.meta}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+            <a href="consultant/create" style="color: white;"><button type="button" class="btn btn-block btn-success btn-lg box">Nouveau consultant</button></a>
+        </div>
+      </div>
+    </section>
+  </div>
  {{>template/infoFooter}}
+</div>
+{{> template/scripts}}
+</body>

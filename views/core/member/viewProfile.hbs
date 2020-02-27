@@ -33,7 +33,9 @@
                   </div>
                   <div class="col-md-6 form-group">
                     <label for="password">Mot de passe</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Entrez/Modifiez le mot de passe" {{requiredIfMissing connectedUser}} {{readonlyIf (eq action "view")}}>
+                    <input type="password" class="form-control" oninput = "validateFields()" id="password" name="password" placeholder="Entrez/Modifiez le mot de passe" {{requiredIfMissing connectedUser}} {{readonlyIf (eq action "view")}}>
+                    <input type="password" class="form-control" oninput = "validateFields()" id="password-confirm" name="password" placeholder="Confirmez le mot de passe" {{requiredIfMissing connectedUser}} {{readonlyIf (eq action "view")}}>
+                    <span id="password-error-msg" style="color:red"></span>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="genderId">Sexe</label>
@@ -127,11 +129,18 @@
                     Fonction/Poste
                   </h4>
                   <div class="col-md-4 form-group">
+                    <label for="countryId">Pôle 1</label>
+                    <select class="form-control" id="poleId1" name="poleId1" required {{readonlyIf
+                            (eq action "view")}} {{disabledIf (eq action "view")}}>
+                      {{#each poles}}
+                        <option value="{{id}}" {{selected id @root.member.poles.0.id}}>{{label}} </option>
+                      {{/each}}
+                    </select>
                     <label for="countryId">Fonction 1</label>
                     <select class="form-control" id="positionId1" name="positionId1" required {{readonlyIf
                             (eq action "view")}} {{disabledIf (eq action "view")}}>
                       {{#each positions}}
-                        <option value="{{id}}" {{selected id @root.connectedUser.positions.0.id}}>{{label}} {{#if pole}}({{pole.label}}){{/if}}</option>
+                        <option value="{{id}}" {{selected id @root.connectedUser.positions.0.id}}>{{label}} </option>
                       {{/each}}
                     </select>
                     <label for="year">Année </label>
@@ -145,12 +154,19 @@
                     </label>
                   </div>
                   <div class="col-md-4 form-group">
+                    <label for="countryId">Pôle 2</label>
+                    <select class="form-control" id="poleId2" name="poleId2" required {{readonlyIf
+                            (eq action "view")}} {{disabledIf (eq action "view")}}>
+                      {{#each poles}}
+                        <option value="{{id}}" {{selected id @root.member.poles.0.id}}>{{label}} </option>
+                      {{/each}}
+                    </select>
                     <label for="countryId">Fonction 2</label>
                     <select class="form-control" id="positionId2" name="positionId2" {{readonlyIf
                             (eq action "view")}} {{disabledIf (eq action "view")}}>
                       <option></option>
                       {{#each positions}}
-                        <option value="{{id}}" {{selected id @root.connectedUser.positions.1.id}}>{{label}} {{#if pole}}({{pole.label}}){{/if}}</option>
+                        <option value="{{id}}" {{selected id @root.connectedUser.positions.1.id}}>{{label}} </option>
                       {{/each}}
                     </select>
                     <label for="year">Année </label>
@@ -163,11 +179,18 @@
                     </label>
                   </div>
                   <div class="col-md-4 form-group">
+                     <label for="countryId">Pôle 3</label>
+                     <select class="form-control" id="poleId3" name="poleId3" required {{readonlyIf
+                             (eq action "view")}} {{disabledIf (eq action "view")}}>
+                       {{#each poles}}
+                         <option value="{{id}}" {{selected id @root.member.poles.0.id}}>{{label}} </option>
+                       {{/each}}
+                     </select>
                     <label for="countryId">Fonction 3</label>
                     <select class="form-control" id="positionId3" name="positionId3" {{readonlyIf (eq action "view")}}>
                       <option></option>
                       {{#each positions}}
-                        <option value="{{id}}" {{selected id @root.connectedUser.positions.2.id}}>{{label}} {{#if pole}}({{pole.label}}){{/if}}</option>
+                        <option value="{{id}}" {{selected id @root.connectedUser.positions.2.id}}>{{label}} </option>
                       {{/each}}
                     </select>
                     <label for="year">Année </label>

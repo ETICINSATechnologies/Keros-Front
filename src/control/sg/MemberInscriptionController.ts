@@ -17,6 +17,7 @@ import { GenderService } from "../../services/core/GenderService";
 import { Gender } from "../../models/core/Gender";
 import { MemberService } from "../../services/core/MemberService";
 import { Member } from "../../models/core/Member";
+import { UploadedFile } from "express-fileupload";
 
 export class MemberInscriptionController {
     public viewMemberInscriptions(req: Request, res: Response, next: NextFunction) {
@@ -220,13 +221,19 @@ export class MemberInscriptionController {
         const id = req.params.id;
         const documentTypeId = req.params.documentTypeId;
         winston.info("Uploading doc (of type " + documentTypeId + ") for id " + id);
-        MemberInscriptionService.uploadDocument(id, documentTypeId, function (err) {
-            if (err) {
-                return next(err);
-            }
-            winston.info("Uploaded doc (of type" + documentTypeId + ") for id " + id);
-            res.redirect("/sg/membre-inscription/" + id);
-        });
+        if (req.files) {
+            const file = req.files;
+             MemberInscriptionService.uploadDocument(id, documentTypeId, <UploadedFile>file.file, function (err) {
+                if (err) {
+                    return next(err);
+                }
+                winston.info("Uploaded doc (of type" + documentTypeId + ") for id " + id);
+                res.redirect("/sg/membre-inscription/" + id);
+            });
+        }
+        else {
+            winston.debug("no file found");
+        }
     }
 
     public downloadDocument(req: Request, res: Response, next: NextFunction) {

@@ -137,6 +137,7 @@
                       {{#if inscription.droitImage}} checked {{/if}}>
                   </div>
                 </div>
+                </form>
                 {{#if (ne action "create")}}
                   {{#if inscription}}
                     <div id="view-documents">
@@ -182,10 +183,14 @@
                                   {{/if}}
                                 </div>
                                 <div class="col-md-3">
-                                  <form action="/sg/membre-inscription/{{@root.inscription.id}}/document/{{id}}" method="post" enctype="multipart/form-data">
-                                    <input type="file" name="file">
-                                    <button type="submit" formmethod="post" formaction="/sg/membre-inscription/{{@root.inscription.id}}/document/{{id}}" class="btn btn-primary btn-sm" style="margin-top: 5%">Submit</button>
-                                  </form>
+                                    {{#if (eq @root.action "update")}}
+                                    <div>
+                                      <form action="/sg/membre-inscription/{{@root.inscription.id}}/document/{{id}}" method="post" enctype="multipart/form-data">
+                                        <input type="file" name="file">
+                                        <input type='submit' value='Upload'/>
+                                      </form>
+                                      </div>
+                                    {{/if}}
                                 </div>
                                 <div class="col-md-3">
                                   {{#if isUploaded}}
@@ -196,6 +201,7 @@
                                 </div>
                               </div>
                             {{/each}}
+                            {{> fileAddition origin="/sg/membre-inscription" id=inscription.id}}
                           </div>
                         </div>
                       </div>
@@ -208,12 +214,12 @@
                   {{#if (eq action "view")}}
                     <div id="create-buttons" class="form-buttons pull-right">
                       <form role="form" action="/sg/membre-inscription/{{@root.inscription.id}}/validate" method="post">
-                        <button type="submit" formaction="/sg/membre-inscription/{{@root.inscription.id}}/validate" class="btn btn-primary btn-sm" style="margin-top: 5%">Valider inscription</button>
+                        <button type="submit" formaction="/sg/membre-inscription/{{@root.inscription.id}}/validate" class="btn btn-primary btn-sm" >Valider inscription</button>
                       </form>
                     </div>
                   {{/if}}
                 </div>
-              </form>
+              <!--</form>-->
             </div>
           </section>
         </div>
