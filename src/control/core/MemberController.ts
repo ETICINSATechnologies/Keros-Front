@@ -174,7 +174,6 @@ export class MemberController {
     addressRequest.countryId = parseInt(req.body.countryId);
     userRequest.address = addressRequest;
 
-    winston.debug("postform controller : " + JSON.stringify(userRequest));
     if (userId) {
       MemberService.update(userId, userRequest, function (err1) {
         if (err1) {
