@@ -135,9 +135,21 @@
                   <div class="col-md-4 form-group">
                       <label for="droitImage">Droit à l'image </label>
                       <input type="checkbox" id="droitImage" name="droitImage"
-                        {{#if (or (eq action "view") (ne true (isSG connectedUser.positions))(ne true (isAdmin connectedUser.positions)))}} disabled="disabled" {{/if}}
+                        {{#if (or (eq action "view") (ne true (isSG connectedUser.positions)))}} disabled="disabled" {{/if}}
                         {{#if consultant.droitImage}} checked {{/if}}>
                   </div>
+                    <div class="col-md-4 form-group">
+                        <label for="isApprentice">En apprentissage</label>
+                        <input type="checkbox" id="isApprentice" name="isApprentice"
+                        {{#if (or (eq action "view") (ne true (isSG connectedUser.positions)))}} disabled="disabled" {{/if}}
+                        {{#if consultant.isApprentice}} checked {{/if}}>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="isGraduate">Diplômé</label>
+                        <input type="checkbox" id="isGraduate" name="isGraduate"
+                        {{#if (or (eq action "view") (ne true (isSG connectedUser.positions)))}} disabled="disabled" {{/if}}
+                        {{#if consultant.isGraduate}} checked="checked" {{/if}}>
+                    </div>
                 </div>
 
                 <div class="box-footer">

@@ -13,8 +13,10 @@ export class ConsultantCreateRequest {
         public schoolYear ?: number,
         public telephone ?: string,
         public nationalityId ?: number,
-        public company ?: string,
         public droitImage ?: boolean,
+        public isApprentice ?: boolean,
+        public isGraduate ?: boolean,
+        public socialSecurityNumber ?: string,
         public address ?: AddressCreateRequest
     ) {
     }

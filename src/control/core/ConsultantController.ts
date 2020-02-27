@@ -113,7 +113,10 @@ export class ConsultantController {
         userRequest.schoolYear = parseInt(req.body.schoolYear);
         userRequest.telephone = req.body.telephone;
         userRequest.nationalityId = req.body.countryId;
-        userRequest.company = req.body.company;
+        userRequest.socialSecurityNumber = req.body.socialSecurityNumber;
+        userRequest.isApprentice = req.body.isApprentice === "on";
+        userRequest.droitImage = req.body.isApprentice === "on"; // doesn't work because back doesn't update value
+        userRequest.isGraduate = req.body.isGraduate === "on";
 
         const addressRequest = new AddressCreateRequest();
         addressRequest.line1 = req.body.line1;
@@ -122,7 +125,6 @@ export class ConsultantController {
         addressRequest.postalCode = req.body.postalCode;
         addressRequest.countryId = parseInt(req.body.countryId);
         userRequest.address = addressRequest;
-        //TODO : company, droitImage, isApprentice, socialSecurityNumber, isGraduate
 
         if (userId) {
             ConsultantService.update(userId, userRequest, function (err1) {
