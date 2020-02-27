@@ -19,7 +19,7 @@
                   Informations  {{#if member}}membre n°{{member.id}}{{/if}}
                 </h3>
               </div>
-              <form role="form" method="post" action="/core/member/postform">
+              <form role="form" method="post" action="/core/member/postform" id="member-update-form">
                 {{#if member}}<input type="text" id="id" name="id" value="{{member.id}}" hidden>{{/if}}
                 <div class="box-body row">
                   <div class="col-md-6 form-group">
@@ -202,11 +202,12 @@
                         {{#if (eq action "view")}} disabled="disabled" {{/if}}
                         {{#if member.positions.2.isBoard}}checked{{/if}}> Membre CA
                     </label>
+                    <input type="text" id="isAlumni" name="isAlumni" value="{{member.isAlumni}}">
                   </div>
                 </div>
                 <div class="box-footer">
                   <a href="/core/member"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button></a>
-                  {{> formButtons action=action origin="/core/member" id=member.id}}
+                  {{> formButtons action=action origin="/core/member" id=member.id page="memberPage" isAlumni=member.isAlumni}}
                 </div>
               </form>
             </div>

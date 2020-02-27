@@ -10,7 +10,11 @@
       </div>
       <div class="row">
         <div class="col-md-3">
+          {{#if (ne page "membersPage")}}
           <a href="consultant/create" style="color: white;"><button type="button" class="btn btn-block btn-success btn-lg box">Nouveau consultant</button></a>
+          {{else}}
+            <a href="member/create" style="color: white;"><button type="button" class="btn btn-block btn-success btn-lg box">Nouveau membre</button></a>
+          {{/if}}
         </div>
       </div>
     </section>

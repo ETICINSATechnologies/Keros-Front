@@ -19,6 +19,7 @@
                             {{#each positions}}
                             <option value="member?positionId={{this.id}}">{{this.label}}</option>
                             {{/each}}
+                            </select>
                      </th>
                      <th>
                             <select name="poles" id="pole-select" onchange="self.location.href=options[selectedIndex].value">
@@ -31,6 +32,7 @@
                      </th>
                     <th>Voir</th>
                     <th>Modifier</th>
+                    <th>Alumni</th>
                   </tr>
                   {{#each members.content}}
                     <tr>
@@ -42,26 +44,10 @@
                       <td>{{#each positions}}{{this.pole.label}}<br/>{{/each}}</td>
                       <td><a href="member/{{id}}" class="fa fa-eye fa-2x"></a></td>
                       <td><a href="member/update/{{id}}" class="fa fa-edit fa-2x"></a></td>
+                      <td><a href="member/update/{{id}}" class="fa fa-archive fa-2x"></a></td>
                     </tr>
                   {{/each}}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div class="box-footer">
-              {{> template/pagination meta=members.meta}}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-3">
-          <a href="member/create" style="color: white;"><button type="button" class="btn btn-block btn-success btn-lg box">Nouveau membre</button></a>
-        </div>
-      </div>
-    </section>
-  </div>
-  {{>template/infoFooter}}
+  {{>template/infoFooter page="membersPage"}}
 </div>
 {{> template/scripts}}
 </body>
