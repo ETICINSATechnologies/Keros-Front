@@ -147,7 +147,7 @@ export class MemberController {
     userRequest.schoolYear = parseInt(req.body.schoolYear);
     userRequest.telephone = req.body.telephone;
     winston.debug("is alumni : " + req.body.isAlumni);
-    userRequest.isAlumni = req.body.isAlumni === "on";
+    userRequest.isAlumni = req.body.isAlumni;
 
     const positionRequest1 = new PositionRequest();
     userRequest.positions = [];

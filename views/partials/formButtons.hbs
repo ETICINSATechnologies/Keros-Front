@@ -48,16 +48,9 @@
 
   <script>
     function updateAlumniStatus() {
-    let isAlumni = document.getElementById("isAlumni").checked;
-        console.log("alumni : " + isAlumni);
-    if (!isAlumni.checked) {
-      document.getElementById("isAlumni").checked = true;
-    }
-    else if (isAlumni.checked){
-    document.getElementById("isAlumni").checked = false;
-    }
-    console.log("new alumni : " + document.getElementById("isAlumni").checked);
-    document.getElementById("member-update-form").submit();
+      let isAlumni = document.getElementById("isAlumni").value === 'true';
+      document.getElementById("isAlumni").value = !isAlumni;
+      document.getElementById("member-update-form").submit();
     }
 
 
