@@ -13,6 +13,8 @@ export class ConsultantCreateRequest {
         public schoolYear ?: number,
         public telephone ?: string,
         public nationalityId ?: number,
+        public company ?: string,
+        public droitImage ?: boolean,
         public address ?: AddressCreateRequest
     ) {
     }

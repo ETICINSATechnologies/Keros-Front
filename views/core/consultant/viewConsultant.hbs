@@ -74,6 +74,11 @@
                     </select>
                   </div>
                   <div class="col-md-4 form-group">
+                    <label for="companyId">Entreprise</label>
+                    <input type="text" class="form-control" id="company" name="company" value="{{consultant.company}}"
+                    required {{readonlyIf (eq action "view")}}>
+                  </div>
+                  <div class="col-md-4 form-group">
                     <label for="schoolYear">Année scolaire</label>
                     <select class="form-control" id="schoolYear" name="schoolYear" {{readonlyIf
                             (eq action "view")}} {{disabledIf (eq action "view")}}>
