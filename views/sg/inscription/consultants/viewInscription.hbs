@@ -16,7 +16,7 @@
                         <div class="box box-primary">
                             <div class="box-header with-border">
                                 <h3 class="box-title">
-                                    Informations  {{#if inscription}}inscription consultant n°{{inscription.id}}{{/if}}
+                                    Informations lalala {{#if inscription}}inscription consultant n°{{inscription.id}}{{/if}}
                                 </h3>
                             </div>
                             <form role="form" method="post" action="/sg/consultant-inscription/postform" enctype="multipart/form-data">
@@ -144,10 +144,7 @@
                                                         <div class="panel-body">
                                                             <div class="col-md-3">
                                                                 <b>Titre du document</b>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <b>Publiposter</b>
-                                                            </div>
+                                                            </div>\
                                                             <div class="col-md-3">
                                                                 <b>Upload VF</b>
                                                             </div>
@@ -155,27 +152,34 @@
                                                                 <b>Download VF</b>
                                                             </div>
                                                         </div>
-                                                        {{#each inscription.documents}}
+                                                        {{#each inscription.isFileUploaded}}
                                                             <div class="panel-body">
                                                                 <div class="col-md-3">
-                                                                    {{name}}
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    {{#if isTemplatable}}
-                                                                        <a href="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{id}}/generate" target="_blank">
-                                                                            <i style="font-size: 2em;" class="fa fa-download"></i>
-                                                                        </a>
+                                                                    {{#if (eq @key "documentIdentity")}}
+                                                                        Carte d'identité
+                                                                    {{else if (eq @key "documentScolaryCertificate")}}
+                                                                        Certificat de scolarité
+                                                                    {{else if (eq @key "documentRIB")}}
+                                                                        RIB
+                                                                    {{else if (eq @key "documentVitaleCard")}}
+                                                                        Carte vitale
+                                                                    {{else if (eq @key "documentResidencePermit")}}
+                                                                        Titre de séjour
+                                                                    {{else if (eq @key "documentCVEC")}}
+                                                                        CVEC
+                                                                    {{else if (eq @key "documentRIB")}}
+                                                                        RIB
                                                                     {{/if}}
                                                                 </div>
                                                                 <div class="col-md-3">
-                                                                    <form action="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{id}}" method="post" enctype="multipart/form-data">
+                                                                    <form action="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{@key}}" method="post" enctype="multipart/form-data">
                                                                         <input type="file" name="file">
                                                                         <button type="submit" formmethod="post" formaction="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{id}}" class="btn btn-primary btn-sm" style="margin-top: 5%">Submit</button>
                                                                     </form>
                                                                 </div>
                                                                 <div class="col-md-3">
-                                                                    {{#if isUploaded}}
-                                                                        <a href="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{id}}" target="_blank">
+                                                                    {{#if this}}
+                                                                        <a href="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{@key}}" target="_blank">
                                                                             <i style="font-size: 2em;" class="fa fa-download"></i>
                                                                         </a>
                                                                     {{/if}}
@@ -187,67 +191,6 @@
                                             </div>
                                         </div>
                                     {{/if}}
-                                {{else}}
-                                    <div id="view-documents">
-                                        <h4 class="col-md-12 box-title">
-                                            Documents
-                                        </h4>
-                                        <div class="col-md-12">
-                                            <div class="panel panel-default">
-                                                <a data-toggle="collapse" data-parent="#faq" href="#col-documents" aria-expanded="false"
-                                                   aria-controls="elemmailshots">
-                                                    <div class="panel-heading" role="tab" id="documents" style="background-color:#F5F5F5;">
-                                                        <h5 class="panel-title">
-                                                            Afficher
-                                                        </h5>
-                                                    </div>
-                                                </a>
-                                                <div id="col-documents" class="panel-collapse collapse" role="tabpanel"
-                                                     aria-labelledby="documents">
-                                                    <div class="panel-body">
-                                                        <div class="col-md-6">
-                                                            <b>Titre du document</b>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <b>Upload VF</b>
-                                                        </div>
-                                                    </div>
-                                                    <div class="panel-body">
-                                                        <div class="col-md-6">
-                                                            Pièce d'identité
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <input type="file" name="documentIdentity" required>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            Certificat de scolarité de l'année en cours
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <input type="file" name="documentScolarityCertificate" required>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            Relevé d'Identité Bancaire
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <input type="file" name="documentRib" required>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            Carte vitale
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <input type="file" name="documentVitaleCard" required>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            Titre de séjour
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <input type="file" name="documentResidencePermit">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 {{/if}}
                                 <div class="box-footer">
                                     <a href="/sg/consultant-inscription"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button></a>
