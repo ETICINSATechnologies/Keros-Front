@@ -155,27 +155,29 @@
                                                         {{#each inscription.isFileUploaded}}
                                                             <div class="panel-body">
                                                                 <div class="col-md-3">
-                                                                    {{#if (eq @key "documentIdentity")}}
-                                                                        Carte d'identité
-                                                                    {{else if (eq @key "documentScolaryCertificate")}}
-                                                                        Certificat de scolarité
-                                                                    {{else if (eq @key "documentRIB")}}
-                                                                        RIB
-                                                                    {{else if (eq @key "documentVitaleCard")}}
-                                                                        Carte vitale
-                                                                    {{else if (eq @key "documentResidencePermit")}}
-                                                                        Titre de séjour
-                                                                    {{else if (eq @key "documentCVEC")}}
-                                                                        CVEC
-                                                                    {{else if (eq @key "documentRIB")}}
-                                                                        RIB
-                                                                    {{/if}}
+                                                                        {{#if (eq @key "documentIdentity")}}
+                                                                            Carte d'identité
+                                                                        {{else if (eq @key "documentScolaryCertificate")}}
+                                                                            Certificat de scolarité
+                                                                        {{else if (eq @key "documentRIB")}}
+                                                                            RIB
+                                                                        {{else if (eq @key "documentVitaleCard")}}
+                                                                            Carte vitale
+                                                                        {{else if (eq @key "documentResidencePermit")}}
+                                                                            Titre de séjour
+                                                                        {{else if (eq @key "documentCVEC")}}
+                                                                            CVEC
+                                                                        {{else if (eq @key "documentRIB")}}
+                                                                            RIB
+                                                                        {{/if}}
                                                                 </div>
                                                                 <div class="col-md-3">
-                                                                    <form action="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{@key}}" method="post" enctype="multipart/form-data">
-                                                                        <input type="file" name="file">
-                                                                        <button type="submit" formmethod="post" formaction="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{id}}" class="btn btn-primary btn-sm" style="margin-top: 5%">Submit</button>
-                                                                    </form>
+                                                                    {{#if (eq action "update")}}
+                                                                        <form action="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{@key}}" method="post" enctype="multipart/form-data">
+                                                                                <input type="file" name="file">
+                                                                                <button type="submit" formmethod="post" formaction="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{id}}" class="btn btn-primary btn-sm" style="margin-top: 5%">Submit</button>
+                                                                            </form>
+                                                                    {{/if}}
                                                                 </div>
                                                                 <div class="col-md-3">
                                                                     {{#if this}}
@@ -198,7 +200,7 @@
                                     {{#if (eq action "view")}}
                                         <div id="create-buttons" class="form-buttons pull-right">
                                           <form role="form" action="/sg/consultant-inscription/{{@root.inscription.id}}/validate" method="post">
-                                            <button type="submit" formaction="/sg/consultant-inscription/{{@root.inscription.id}}/validate" class="btn btn-primary btn-sm" style="margin-top: 5%">Valider inscription</button>
+                                            <button type="submit" formaction="/sg/consultant-inscription/{{@root.inscription.id}}/validate" class="btn btn-primary btn-sm"">Valider inscription</button>
                                           </form>
                                         </div>
                                     {{/if}}
