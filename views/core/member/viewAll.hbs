@@ -32,7 +32,6 @@
                      </th>
                     <th>Voir</th>
                     <th>Modifier</th>
-                    <th>Alumni</th>
                   </tr>
                   {{#each members.content}}
                     <tr>
@@ -44,7 +43,6 @@
                       <td>{{#each positions}}{{this.pole.label}}<br/>{{/each}}</td>
                       <td><a href="member/{{id}}" class="fa fa-eye fa-2x"></a></td>
                       <td><a href="member/update/{{id}}" class="fa fa-edit fa-2x"></a></td>
-                      <td><a href="member/update/{{id}}" class="fa fa-archive fa-2x"></a></td>
                     </tr>
                   {{/each}}
   {{>template/infoFooter page="membersPage"}}
