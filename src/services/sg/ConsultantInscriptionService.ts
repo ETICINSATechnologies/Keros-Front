@@ -129,9 +129,11 @@ export class ConsultantInscriptionService extends BaseService {
         );
     }
 
-    static downloadDocument(inscriptionId: number, documentTypeId: number, callback: (err: any, result: DocumentResponse | null) => void): void {
-        this.rest.get<DocumentResponse>("sg/consultant-inscription/" + inscriptionId + "/document/" + documentTypeId, this.defaultHeaders()).then(
-            (res: IRestResponse<DocumentResponse>) => {
+    static downloadDocument(inscriptionId: number, documentTypeId: number, callback: (err: any, result: string | null) => void): void {
+        this.rest.get<string>("sg/consultant-inscription/" + inscriptionId + "/document/" + documentTypeId, this.defaultHeaders()).then(
+            (res: IRestResponse<string>) => {
+                winston.debug("download doc result : " + JSON.stringify(res));
+                winston.debug("download doc result : " + res.result);
                 if (res.statusCode !== 200) {
                     winston.debug("Problème lors du chargement du document");
                     return callback(this.defaultError(res.statusCode), null);

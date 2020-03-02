@@ -16,6 +16,7 @@ import { GenderService } from "../../services/core/GenderService";
 import { Gender } from "../../models/core/Gender";
 import { MemberInscriptionCreateRequest } from "../../models/sg/MemberInscriptionCreateRequest";
 import { MemberInscriptionService } from "../../services/sg/MemberInscriptionService";
+import { Config } from "../../config/Config";
 
 
 export class ConsultantInscriptionController {
@@ -115,12 +116,12 @@ export class ConsultantInscriptionController {
         const id = req.params.id;
         const documentTypeId = req.params.documentTypeId;
         winston.info("Downloading doc (of type " + documentTypeId + ") for id " + id);
-        ConsultantInscriptionService.downloadDocument(id, documentTypeId, function (err, result: DocumentResponse | null) {
+        ConsultantInscriptionService.downloadDocument(id, documentTypeId, function (err, result: string | null) {
             if (err) {
                 return next(err);
             }
-            if (result && result.location) {
-                res.redirect(result.location);
+            if (result) {
+                res.redirect(result);
             } else {
                 return next(new HttpError("Error when loading document", 500));
             }

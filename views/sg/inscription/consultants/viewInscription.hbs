@@ -144,7 +144,7 @@
                                                         <div class="panel-body">
                                                             <div class="col-md-3">
                                                                 <b>Titre du document</b>
-                                                            </div>\
+                                                            </div>
                                                             <div class="col-md-3">
                                                                 <b>Upload VF</b>
                                                             </div>
@@ -172,11 +172,11 @@
                                                                         {{/if}}
                                                                 </div>
                                                                 <div class="col-md-3">
-                                                                    {{#if (eq action "update")}}
+                                                                    {{#if (eq @root.action "update")}}
                                                                         <form action="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{@key}}" method="post" enctype="multipart/form-data">
-                                                                                <input type="file" name="file">
-                                                                                <button type="submit" formmethod="post" formaction="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{id}}" class="btn btn-primary btn-sm" style="margin-top: 5%">Submit</button>
-                                                                            </form>
+                                                                            <input type="file" name="file">
+                                                                            <button type="submit" formmethod="post" formaction="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{@key}}" class="btn btn-primary btn-sm" style="margin-top: 5%">Submit</button>
+                                                                        </form>
                                                                     {{/if}}
                                                                 </div>
                                                                 <div class="col-md-3">
