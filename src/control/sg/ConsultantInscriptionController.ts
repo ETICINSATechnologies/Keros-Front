@@ -21,17 +21,22 @@ import { MemberInscriptionService } from "../../services/sg/MemberInscriptionSer
 export class ConsultantInscriptionController {
 
     viewConsultantInscriptions(req: Request, res: Response, next: NextFunction) {
-        ConsultantInscriptionService.getAllConsultantInscriptions(function (err, page: Page<ConsultantInscription> | null) {
-            winston.info("Getting all consultant inscriptions");
-            if (err) {
-                return next(err);
-            }
-            const options = {
-                inscriptions: page,
-            };
-
-            res.render("sg/inscription/consultants/viewAll", options);
-        }, req.query);
+        DepartmentService.getAllDepartments(function (err1, departments: Department[] | null) {
+            ConsultantInscriptionService.getAllConsultantInscriptions(function (err2, page: Page<ConsultantInscription> | null) {
+                winston.info("Getting all consultant inscriptions");
+                if (err1) {
+                    return next(err1);
+                }
+                if (err2) {
+                    return next(err2);
+                }
+                const options = {
+                    inscriptions: page,
+                    departments
+                };
+                res.render("sg/inscription/consultants/viewAll", options);
+            }, req.query);
+        });
     }
 
     viewConsultantInscription(req: Request, res: Response, next: NextFunction) {

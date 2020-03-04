@@ -1,24 +1,26 @@
                <table class="table table-bordered dataTable">
                   <tbody>
                   <tr>
+                    {{#if (ne page "inscription")}}
                     <th>
                         Nom d'utilisateur
-                        <a href="/core/{{type}}?orderBy=username&order=desc" id="username-desc" class="fa fa-sort-alpha-desc"></a>
-                        <a href="/core/{{type}}?orderBy=username" id="username-asc" class="fa fa-sort-alpha-asc"></a>
+                        <a href="?orderBy=username&order=desc" id="username-desc" class="fa fa-sort-alpha-desc"></a>
+                        <a href="?orderBy=username" id="username-asc" class="fa fa-sort-alpha-asc"></a>
                     </th>
+                    {{/if}}
                     <th>
                         Nom
-                        <a href="/core/{{type}}?orderBy=lastName&order=desc" id="name-desc" class="fa fa-sort-alpha-desc"></a>
-                        <a href="/core/{{type}}?orderBy=lastName" id="name-asc" class="fa fa-sort-alpha-asc"></a>
+                        <a href="?orderBy=lastName&order=desc" id="name-desc" class="fa fa-sort-alpha-desc"></a>
+                        <a href="?orderBy=lastName" id="name-asc" class="fa fa-sort-alpha-asc"></a>
                     </th>
                     <th>
                         Prénom
-                        <a href="/core/{{type}}?orderBy=firstName&order=desc" id="firstname-desc" class="fa fa-sort-alpha-desc"></a>
-                        <a href="/core/{{type}}?orderBy=firstName" id="firstname-asc" class="fa fa-sort-alpha-asc"></a>
+                        <a href="?orderBy=firstName&order=desc" id="firstname-desc" class="fa fa-sort-alpha-desc"></a>
+                        <a href="?orderBy=firstName" id="firstname-asc" class="fa fa-sort-alpha-asc"></a>
                     </th>
                     <th>
                         Email
-                        <a href="/core/{{type}}?orderBy=email&order=desc" id="email-asc" class="fa fa-sort-alpha-desc"></a>
-                        <a href="/core/{{type}}?orderBy=email" id="email-asc" class="fa fa-sort-alpha-asc"></a>
+                        <a href="?orderBy=email&order=desc" id="email-asc" class="fa fa-sort-alpha-desc"></a>
+                        <a href="?orderBy=email" id="email-asc" class="fa fa-sort-alpha-asc"></a>
                     </th>
 
