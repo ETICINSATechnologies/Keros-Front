@@ -130,26 +130,18 @@ export class ConsultantInscriptionService extends BaseService {
         );
     }
 
-    static downloadDocument(inscriptionId: number, documentTypeId: number, callback: (err: any, result: string | null) => void): void {
-        const downloadFile = async (res: IRestResponse<string>) => {
-            // @ts-ignore
-            const buf: Buffer = new Buffer(res.result.toString(), "binary");
-            winston.debug("download doc result : " + JSON.stringify(buf));
-            winston.debug("download doc result : " + buf.toString());
-            // essayer async read stream ou buffer
-            if (res.statusCode !== 200) {
-                winston.debug("Problème lors du chargement du document");
-                return callback(this.defaultError(res.statusCode), null);
+    static downloadDocument(inscriptionId: number, documentTypeId: number, callback: (err: any, options : {url : string, headers : Object}) => void): void {
+        const defaultHeaders = this.defaultHeaders();
+        let authToken : string  = 'null';
+        if (defaultHeaders.additionalHeaders) {
+            authToken = defaultHeaders.additionalHeaders.Authorization;
+        }
+        const options = {
+            url : Config.getBackendBaseUrl() + "/sg/consultant-inscription/" + inscriptionId + "/document/" + documentTypeId,
+            headers : {
+                'Authorization' : authToken
             }
-            winston.debug("Response : " + JSON.stringify(res));
-            callback(null, res.result);
-        };
-        this.rest.get<string>("sg/consultant-inscription/" + inscriptionId + "/document/" + documentTypeId, this.defaultHeaders()).then(
-            (res: IRestResponse<string>) => downloadFile(res)
-        ).catch(
-            e => {
-                callback(e, null);
-            }
-        );
+        }
+        callback(null, options);
     }
 }

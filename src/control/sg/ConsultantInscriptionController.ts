@@ -18,6 +18,7 @@ import { MemberInscriptionCreateRequest } from "../../models/sg/MemberInscriptio
 import { MemberInscriptionService } from "../../services/sg/MemberInscriptionService";
 import { Config } from "../../config/Config";
 
+const request = require('request');
 
 export class ConsultantInscriptionController {
 
@@ -116,12 +117,13 @@ export class ConsultantInscriptionController {
         const id = req.params.id;
         const documentTypeId = req.params.documentTypeId;
         winston.info("Downloading doc (of type " + documentTypeId + ") for id " + id);
-        ConsultantInscriptionService.downloadDocument(id, documentTypeId, function (err, result: string | null) {
+        ConsultantInscriptionService.downloadDocument(id, documentTypeId, function (err, options : {url : string, headers : Object}) {
             if (err) {
                 return next(err);
             }
-            if (result) {
-                res.redirect(result);
+            if (options) {
+                
+                request(options).pipe(res);
             } else {
                 return next(new HttpError("Error when loading document", 500));
             }
