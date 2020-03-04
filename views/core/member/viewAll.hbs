@@ -10,7 +10,7 @@
         {{> breadcrumb tab="RH" action="all" pathall="Membres,Voir les membres"}}
       </section>
   {{> template/infoCaption type="member"}}
-  {{> template/itemPerPage meta=member.meta}}
+  {{> template/itemPerPage meta=members.meta}}
   {{> template/infoColumnOrder}}
                      <th>
                             <select name="positions" id="positions-select" onchange="self.location.href=options[selectedIndex].value">
@@ -45,7 +45,5 @@
                       <td><a href="member/update/{{id}}" class="fa fa-edit fa-2x"></a></td>
                     </tr>
                   {{/each}}
-  {{>template/infoFooter page="membersPage"}}
-</div>
-{{> template/scripts}}
-</body>
+  {{>template/infoFooter page="membersPage" meta=members.meta}}
+<!--</div>-->

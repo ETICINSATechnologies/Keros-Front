@@ -1,9 +1,8 @@
-const currentYear = new Date().getFullYear();
-$('#yearPosition1').attr({"max": currentYear});
-$('#yearPosition2').attr({"max": currentYear});
-$('#yearPosition3').attr({"max": currentYear});
-
 try {
+  let currentYear = new Date().getFullYear();
+  $('#yearPosition1').attr({"max": currentYear});
+  $('#yearPosition2').attr({"max": currentYear});
+  $('#yearPosition3').attr({"max": currentYear});
   if ($('#yearPosition1').val().length === 0) {
     $('#yearPosition1').val(currentYear);
   }
