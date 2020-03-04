@@ -19,7 +19,7 @@ import { MemberInscriptionService } from "../../services/sg/MemberInscriptionSer
 import { Config } from "../../config/Config";
 import { UploadedFile } from "express-fileupload";
 
-const request = require('request');
+const request = require("request");
 
 export class ConsultantInscriptionController {
 
