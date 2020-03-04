@@ -17,6 +17,7 @@ import { Gender } from "../../models/core/Gender";
 import { MemberInscriptionCreateRequest } from "../../models/sg/MemberInscriptionCreateRequest";
 import { MemberInscriptionService } from "../../services/sg/MemberInscriptionService";
 import { Config } from "../../config/Config";
+import { UploadedFile } from "express-fileupload";
 
 const request = require('request');
 
@@ -117,12 +118,11 @@ export class ConsultantInscriptionController {
         const id = req.params.id;
         const documentTypeId = req.params.documentTypeId;
         winston.info("Downloading doc (of type " + documentTypeId + ") for id " + id);
-        ConsultantInscriptionService.downloadDocument(id, documentTypeId, function (err, options : {url : string, headers : Object}) {
+        ConsultantInscriptionService.downloadDocument(id, documentTypeId, function (err, options: {url: string, headers: Object}) {
             if (err) {
                 return next(err);
             }
             if (options) {
-                
                 request(options).pipe(res);
             } else {
                 return next(new HttpError("Error when loading document", 500));
@@ -202,13 +202,19 @@ export class ConsultantInscriptionController {
         const id = req.params.id;
         const documentTypeId = req.params.documentTypeId;
         winston.info("Uploading doc (of type " + documentTypeId + ") for id " + id);
-        ConsultantInscriptionService.uploadDocument(id, documentTypeId, function (err) {
-            if (err) {
-                return next(err);
-            }
-            winston.info("Uploaded doc (of type" + documentTypeId + ") for id " + id);
-            res.redirect("/sg/consultant-inscription/" + id);
-        });
+        if (req.files) {
+            const file = req.files;
+            ConsultantInscriptionService.uploadDocument(id, documentTypeId, <UploadedFile>file.file, function (err) {
+                if (err) {
+                    return next(err);
+                }
+                winston.info("Uploaded doc (of type" + documentTypeId + ") for id " + id);
+                res.redirect("/sg/consultant-inscription/" + id);
+            });
+        }
+        else {
+            winston.debug("no file to upload found");
+        }
     }
 
     public validateConsultantInscription(req: Request, res: Response, next: NextFunction) {
