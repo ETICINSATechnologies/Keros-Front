@@ -116,9 +116,9 @@ export class ConsultantInscriptionController {
 
     downloadDocument(req: Request, res: Response, next: NextFunction) {
         const id = req.params.id;
-        const documentTypeId = req.params.documentTypeId;
-        winston.info("Downloading doc (of type " + documentTypeId + ") for id " + id);
-        ConsultantInscriptionService.downloadDocument(id, documentTypeId, function (err, options: {url: string, headers: Object}) {
+        const documentTypeName = req.params.documentTypeName;
+        winston.info("Downloading doc (of type " + documentTypeName + ") for id " + id);
+        ConsultantInscriptionService.downloadDocument(id, documentTypeName, function (err, options: {url: string, headers: Object}) {
             if (err) {
                 return next(err);
             }
@@ -200,15 +200,15 @@ export class ConsultantInscriptionController {
 
     uploadDocument(req: Request, res: Response, next: NextFunction) {
         const id = req.params.id;
-        const documentTypeId = req.params.documentTypeId;
-        winston.info("Uploading doc (of type " + documentTypeId + ") for id " + id);
+        const documentTypeName = req.params.documentTypeName;
+        winston.info("Uploading doc (of type " + documentTypeName + ") for id " + id);
         if (req.files) {
             const file = req.files;
-            ConsultantInscriptionService.uploadDocument(id, documentTypeId, <UploadedFile>file.file, function (err) {
+            ConsultantInscriptionService.uploadDocument(id, documentTypeName, <UploadedFile>file.file, function (err) {
                 if (err) {
                     return next(err);
                 }
-                winston.info("Uploaded doc (of type" + documentTypeId + ") for id " + id);
+                winston.info("Uploaded doc (of type" + documentTypeName + ") for id " + id);
                 res.redirect("/sg/consultant-inscription/" + id);
             });
         }

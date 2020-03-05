@@ -19,10 +19,10 @@ export function consultantInscriptionRouter(): Router {
     router.get("/create", inscriptionController.createConsultantInscription);
     router.get("/update/:id(\\d+)/", inscriptionController.updateConsultantInscription);
     router.get("/delete/:id(\\d+)/", inscriptionController.deleteConsultantInscription);
-    router.get("/:id(\\d+)/document/:documentTypeId/", inscriptionController.downloadDocument);
+    router.get("/:id(\\d+)/document/:documentTypeName/", inscriptionController.downloadDocument);
     router.get("/:id(\\d+)/document/:documentTypeId(\\d+)/generate", inscriptionController.generateDocument);
     router.post("/postform", inscriptionController.postConsultantInscriptionForm);
-    router.post("/:id(\\d+)/document/:documentTypeId/", inscriptionController.uploadDocument);
+    router.post("/:id(\\d+)/document/:documentTypeName/", inscriptionController.uploadDocument);
     router.post("/:id(\\d+)/validate", inscriptionController.validateConsultantInscription);
 
     return router;
