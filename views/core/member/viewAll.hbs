@@ -1,4 +1,4 @@
-<body class="hold-transition skin-green fixed sidebar-mini">
+<body class="hold-transition skin-green fixed sidebar-mini" onload="selectIndex();">
 <div class="wrapper">
   {{> template/header}}
   {{> template/sidebar}}
@@ -13,7 +13,7 @@
   {{> template/itemPerPage meta=member.meta}}
   {{> template/infoColumnOrder}}
                      <th>
-                            <select name="positions" id="positions-select" onchange="self.location.href=options[selectedIndex].value">
+                            <select name="positions" id="positions-select" onchange="savePositionSelectIndex();">
                             <option value="#">Choisir un position</option>
                             <option value="member">AFFICHER TOUS</option>
                             {{#each positions}}
@@ -22,7 +22,7 @@
                             </select>
                      </th>
                      <th>
-                            <select name="poles" id="pole-select" onchange="self.location.href=options[selectedIndex].value">
+                            <select name="poles" id="pole-select" onchange="savePoleSelectIndex();">
                             <option value="#">Choisir un pôle</option>
                             <option value="member">AFFICHER TOUS</option>
                             {{#each poles}}
