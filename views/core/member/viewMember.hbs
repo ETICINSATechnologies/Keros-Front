@@ -36,8 +36,8 @@
                   </div>
                   <div class="col-md-6 form-group" {{#if (and (ne action "create") (ne member.id connectedUser.id))}}style = "display : none"{{/if}}>
                     <label for="password">Mot de passe</label>
-                      <input type="password" class="form-control" oninput = "validateFields()" id="password" name="password" value="" placeholder="Entrez/Modifiez le mot de passe" {{requiredIfMissing connectedUser}} {{readonlyIf (eq action "view")}}>
-                      <input type="password" class="form-control" oninput = "validateFields()" id="password-confirm" name="password_confirm" value="" placeholder="Confirmez le mot de passe" {{requiredIfMissing connectedUser}} {{readonlyIf (eq action "view")}}>
+                      <input type="password" class="form-control" oninput = "validateFields()" id="password" name="password" value="" placeholder="Entrez/Modifiez le mot de passe" {{requiredIfMissing (ne action "create")}} {{readonlyIf (eq action "view")}}>
+                      <input type="password" class="form-control" oninput = "validateFields()" id="password-confirm" name="password_confirm" value="" placeholder="Confirmez le mot de passe" {{requiredIfMissing (ne action "create")}} {{readonlyIf (eq action "view")}}>
                       <span id="password-error-msg" style="color:red"></span>
                   </div>
                   <div {{#if (and (ne action "create") (ne member.id connectedUser.id))}}class="col-md-6 form-group"{{else}}class="col-md-4 form-group"{{/if}}>
@@ -67,12 +67,12 @@
                            placeholder="Entrez le numéro de téléphone" {{readonlyIf (eq action "view")}}
                            pattern=".{8,16}"
                            oninvalid="this.setCustomValidity('Le numéro de téléphone doit contenir entre 8 et 16 chiffres')"
-                           oninput="this.setCustomValidity(' ')" onchange="this.setCustomValidity('')">
+                           oninput="this.setCustomValidity(' ')" onchange="this.setCustomValidity('')" required>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="departmentId">Département</label>
                     <select class="form-control" id="departmentId" name="departmentId" {{readonlyIf
-                            (eq action "view")}} {{disabledIf (eq action "view")}}>
+                            (eq action "view")}} {{disabledIf (eq action "view")}} required>
                       <option></option>
                       {{#each departments}}
                         <option value="{{id}}" {{selected id @root.member.department.id}}>{{label}}</option>
@@ -82,7 +82,7 @@
                   <div class="col-md-4 form-group">
                     <label for="schoolYear">Année scolaire</label>
                     <select class="form-control" id="schoolYear" name="schoolYear" {{readonlyIf
-                            (eq action "view")}} {{disabledIf (eq action "view")}}>
+                            (eq action "view")}} {{disabledIf (eq action "view")}} required>
                       {{#if member}}<option value="{{member.schoolYear}}" selected>{{member.schoolYear}}</option>
                       {{else}}<option selected></option>
                       {{/if}}
