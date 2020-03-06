@@ -142,6 +142,7 @@ export class MemberController {
     }
     userRequest.genderId = parseInt(req.body.genderId);
     userRequest.email = req.body.email;
+    userRequest.emailETIC = req.body.emailETIC;
     userRequest.birthday = req.body.birthday;
     userRequest.departmentId = parseInt(req.body.departmentId);
     userRequest.schoolYear = parseInt(req.body.schoolYear);

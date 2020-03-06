@@ -9,6 +9,7 @@ export class MemberCreateRequest {
     public password ?: string,
     public genderId ?: number,
     public email ?: string,
+    public emailETIC ?: string,
     public birthday ?: string,
     public departmentId ?: number,
     public schoolYear ?: number,
