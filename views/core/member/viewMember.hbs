@@ -36,7 +36,9 @@
                   </div>
                   <div class="col-md-6 form-group" {{#if (and (ne action "create") (ne member.id connectedUser.id))}}style = "display : none"{{/if}}>
                     <label for="password">Mot de passe</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Entrez/Modifiez le mot de passe" {{requiredIfMissing member}} {{readonlyIf (eq action "view")}}  >
+                      <input type="password" class="form-control" oninput = "validateFields()" id="password" name="password" value="" placeholder="Entrez/Modifiez le mot de passe" {{requiredIfMissing (ne action "create")}} {{readonlyIf (eq action "view")}}>
+                      <input type="password" class="form-control" oninput = "validateFields()" id="password-confirm" name="password_confirm" value="" placeholder="Confirmez le mot de passe" {{requiredIfMissing (ne action "create")}} {{readonlyIf (eq action "view")}}>
+                      <span id="password-error-msg" style="color:red"></span>
                   </div>
                   <div {{#if (and (ne action "create") (ne member.id connectedUser.id))}}class="col-md-6 form-group"{{else}}class="col-md-4 form-group"{{/if}}>
                     <label for="genderId">Sexe</label>
@@ -55,18 +57,22 @@
                     <label for="email">Email</label>
                     <input type="email" class="form-control" id="email" name="email" value="{{member.email}}" placeholder="Entrez l'adresse mail" required {{readonlyIf (eq action "view")}}>
                   </div>
+                    <div class="col-md-12 form-group">
+                    <label for="emailETIC">Email ETIC</label>
+                    <input type="email" class="form-control" id="email-etic" name="emailETIC" value="{{member.emailETIC}}" placeholder="Entrez l'adresse mail ETIC" {{readonlyIf (eq action "view")}}>
+                  </div>
                   <div class="col-md-4 form-group">
                     <label for="telephone">Téléphone</label>
                     <input type="text" class="form-control" id="telephone" name="telephone" value="{{member.telephone}}"
                            placeholder="Entrez le numéro de téléphone" {{readonlyIf (eq action "view")}}
                            pattern=".{8,16}"
                            oninvalid="this.setCustomValidity('Le numéro de téléphone doit contenir entre 8 et 16 chiffres')"
-                           oninput="this.setCustomValidity(' ')" onchange="this.setCustomValidity('')">
+                           oninput="this.setCustomValidity(' ')" onchange="this.setCustomValidity('')" required>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="departmentId">Département</label>
                     <select class="form-control" id="departmentId" name="departmentId" {{readonlyIf
-                            (eq action "view")}} {{disabledIf (eq action "view")}}>
+                            (eq action "view")}} {{disabledIf (eq action "view")}} required>
                       <option></option>
                       {{#each departments}}
                         <option value="{{id}}" {{selected id @root.member.department.id}}>{{label}}</option>
@@ -76,7 +82,7 @@
                   <div class="col-md-4 form-group">
                     <label for="schoolYear">Année scolaire</label>
                     <select class="form-control" id="schoolYear" name="schoolYear" {{readonlyIf
-                            (eq action "view")}} {{disabledIf (eq action "view")}}>
+                            (eq action "view")}} {{disabledIf (eq action "view")}} required>
                       {{#if member}}<option value="{{member.schoolYear}}" selected>{{member.schoolYear}}</option>
                       {{else}}<option selected></option>
                       {{/if}}
@@ -204,6 +210,11 @@
                     </label>
                     <input type="text" id="isAlumni" name="isAlumni" value="{{member.isAlumni}}" hidden>
                   </div>
+                    <div class="col-md-4 form-group">
+                        <label for="droitImage">Droit à l'image </label>
+                        <input type="checkbox" id="droitImage" name="droitImage"
+                        {{#if member.droitImage}} checked {{/if}}>
+                    </div>
                 </div>
                 <div class="box-footer">
                   <a href="/core/member"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button></a>

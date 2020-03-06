@@ -33,18 +33,20 @@
     <button type="button" class="btn btn-primary" onclick="location.href='{{origin}}/update'">Éditer</button>
   {{/if}}
 </div>
-<div id="update-buttons" class="form-buttons pull-right" {{#if (ne action "update")}}style="display: none"{{/if}}>
+{{#if (eq action "update")}}
+<div id="update-buttons" class="form-buttons pull-right">
   {{#if (ne page "profilePage")}}
     <button type="button" class="btn btn-danger" onclick="location.href='{{origin}}/delete/{{id}}'">Supprimer</button>
     {{#if (eq page "memberPage")}}
         <button type="button" class="btn btn-danger" onclick="updateAlumniStatus()">{{#if isAlumni}}Membre{{else}}Ancien{{/if}}</button>
     {{/if}}
   {{/if}}
-  <button id="validerbtn" type="submit" class="btn btn-primary">Valider</button>
+  <button type="submit" class="btn btn-primary confirm-button">Valider</button>
 </div>
+{{/if}}
 <div id="create-buttons" class="form-buttons pull-right" {{#if (ne action "create")}}style="display: none"{{/if}}>
-  <button type="submit"  class="btn btn-primary">Valider</button>
-
+  <button type="submit"  class="btn btn-primary confirm-button">Valider</button>
+</div>
 
   <script>
     function updateAlumniStatus() {
@@ -53,28 +55,27 @@
       document.getElementById("member-update-form").submit();
     }
 
-
   function validateFields()
     {let mdpInput = document.getElementById("password").value;
     let mdpInputConfirm =  document.getElementById("password-confirm").value;
     let mdpInputMsg = document.getElementById("password-error-msg");
+    let confirmButton = document.getElementsByClassName("confirm-button")[0];
+
     if (mdpInput.length < 8)
      {
-      document.getElementById("validerbtn").disabled = true;
-
-      mdpInputMsg.innerHTML="Mot de passe inférieur à 8 caractères";
+         confirmButton.disabled = true;
+        mdpInputMsg.innerHTML="Mot de passe inférieur à 8 caractères";
      }
     else if (mdpInput !== mdpInputConfirm)
      {
-      document.getElementById("validerbtn").disabled = true;
-      mdpInputMsg.innerHTML="Veuillez saisir le même mot de passe ";
+         confirmButton.disabled = true;
+        mdpInputMsg.innerHTML="Veuillez saisir le même mot de passe ";
      }
     else
      {
-      document.getElementById("validerbtn").disabled = false;
-      mdpInputMsg.innerHTML="";
+        confirmButton.disabled = false;
+        mdpInputMsg.innerHTML="";
      }
   }
 
   </script>
-</div>
