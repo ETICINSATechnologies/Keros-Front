@@ -36,7 +36,12 @@ export class ConsultantController {
                     if (err1) return next(err1);
                     if (err2) return next(err2);
                     if (err3) return next(err3);
+                    const documents = [
+                            "documentIdentity", "documentScolaryCertificate", "documentRIB", "documentVitaleCard",
+                            "documentResidencePermit", "documentCVEC", "documentRIB"
+                        ];
                     const options = {
+                        documents,
                         departments,
                         gender: genders,
                         countries,

@@ -150,6 +150,60 @@
                         {{#if (or (eq action "view") (ne true (isSG connectedUser.positions)))}} disabled="disabled" {{/if}}
                         {{#if consultant.isGraduate}} checked="checked" {{/if}}>
                     </div>
+                    {{#if (eq action "create")}}
+                        <div id="view-documents">
+                            <h4 class="col-md-12 box-title">
+                                Documents
+                            </h4>
+                            <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <a data-toggle="collapse" data-parent="#faq" href="#col-documents" aria-expanded="false"
+                                       aria-controls="elemmailshots">
+                                        <div class="panel-heading" role="tab" id="documents" style="background-color:#F5F5F5;">
+                                            <h5 class="panel-title">
+                                                Afficher
+                                            </h5>
+                                        </div>
+                                    </a>
+                                    <div id="col-documents" class="panel-collapse collapse" role="tabpanel"
+                                         aria-labelledby="documents">
+                                        <div class="panel-body">
+                                            <div class="col-md-3">
+                                                <b>Titre du document</b>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <b>Upload VF</b>
+                                            </div>
+                                        </div>
+                                        {{#each documents}}
+                                            <div class="panel-body">
+                                                <div class="col-md-3">
+                                                    {{#if (eq this "documentIdentity")}}
+                                                        Carte d'identité
+                                                    {{else if (eq this "documentScolaryCertificate")}}
+                                                        Certificat de scolarité
+                                                    {{else if (eq this "documentRIB")}}
+                                                        RIB
+                                                    {{else if (eq this "documentVitaleCard")}}
+                                                        Carte vitale
+                                                    {{else if (eq this "documentResidencePermit")}}
+                                                        Titre de séjour
+                                                    {{else if (eq this "documentCVEC")}}
+                                                        CVEC
+                                                    {{else if (eq this "documentRIB")}}
+                                                        RIB
+                                                    {{/if}}
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="file" name="file">
+                                                </div>
+                                            </div>
+                                        {{/each}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {{/if}}
                 </div>
 
                 <div class="box-footer">
