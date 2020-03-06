@@ -204,6 +204,11 @@
                     </label>
                     <input type="text" id="isAlumni" name="isAlumni" value="{{member.isAlumni}}" hidden>
                   </div>
+                    <div class="col-md-4 form-group">
+                        <label for="droitImage">Droit à l'image </label>
+                        <input type="checkbox" id="droitImage" name="droitImage"
+                        {{#if member.droitImage}} checked {{/if}}>
+                    </div>
                 </div>
                 <div class="box-footer">
                   <a href="/core/member"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button></a>

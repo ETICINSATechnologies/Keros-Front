@@ -115,7 +115,7 @@ export class ConsultantController {
         userRequest.nationalityId = req.body.countryId;
         userRequest.socialSecurityNumber = req.body.socialSecurityNumber;
         userRequest.isApprentice = req.body.isApprentice === "on";
-        userRequest.droitImage = req.body.isApprentice === "on"; // doesn't work because back doesn't update value
+        userRequest.droitImage = req.body.droitImage === "on"; // doesn't work because back doesn't update value
         userRequest.isGraduate = req.body.isGraduate === "on";
 
         const addressRequest = new AddressCreateRequest();

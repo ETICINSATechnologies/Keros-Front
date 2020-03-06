@@ -15,7 +15,8 @@ export class MemberCreateRequest {
     public telephone ?: string,
     public address ?: AddressCreateRequest,
     public positions ?: PositionRequest[],
-    public isAlumni ?: boolean
+    public isAlumni ?: boolean,
+    public droitImage ?: boolean
   ) {
   }
 
