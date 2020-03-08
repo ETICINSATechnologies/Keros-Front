@@ -74,10 +74,15 @@ export class ConsultantInscriptionController {
                     if (err1) return next(err1);
                     if (err2) return next(err2);
                     if (err3) return next(err3);
+                    const documents = [
+                        "documentIdentity", "documentScolaryCertificate", "documentRIB", "documentVitaleCard",
+                        "documentResidencePermit", "documentCVEC", "documentRIB"
+                    ];
                     const options = {
                         departments,
                         countries,
                         gender: genders,
+                        documents,
                         action: "create"
                     };
                     res.render("sg/inscription/consultants/viewInscription", options);
@@ -176,12 +181,15 @@ export class ConsultantInscriptionController {
         inscriptionRequest.address = addressRequest;
 
         if (req.files !== undefined) {
-            inscriptionRequest.documentIdentity = FileUploader.obtainFileBase64(req.files, "documentIdentity");
-            inscriptionRequest.documentResidencePermit = FileUploader.obtainFileBase64(req.files, "documentResidencePermit");
-            inscriptionRequest.documentRib = FileUploader.obtainFileBase64(req.files, "documentRib");
-            inscriptionRequest.documentScolarityCertificate = FileUploader.obtainFileBase64(req.files, "documentScolarityCertificate");
-            inscriptionRequest.documentVitaleCard = FileUploader.obtainFileBase64(req.files, "documentVitaleCard");
+            winston.debug("files : " + JSON.stringify(req.files));
+            inscriptionRequest.documentIdentity = <UploadedFile>req.files.documentIdentity;
+            inscriptionRequest.documentResidencePermit = <UploadedFile>req.files.documentResidencePermit;
+            inscriptionRequest.documentRIB = <UploadedFile>req.files.documentRIB;
+            inscriptionRequest.documentScolarityCertificate = <UploadedFile>req.files.documentScolarityCertificate;
+            inscriptionRequest.documentVitaleCard = <UploadedFile>req.files.documentVitaleCard;
+            inscriptionRequest.documentCVEC = <UploadedFile>req.files.documentCVEC;
         }
+        // PUT ne marchera plus à cause des set
 
         if (id) {
             ConsultantInscriptionService.update(id, inscriptionRequest, function (err) {
@@ -224,37 +232,8 @@ export class ConsultantInscriptionController {
 
     public validateConsultantInscription(req: Request, res: Response, next: NextFunction) {
         const id = req.params.id;
-        const inscriptionRequest = new ConsultantInscriptionCreateRequest();
-        inscriptionRequest.firstName = req.body.firstName;
-        inscriptionRequest.lastName = req.body.lastName;
-        inscriptionRequest.departmentId = parseInt(req.body.departmentId);
-        inscriptionRequest.email = req.body.email;
-        inscriptionRequest.genderId = req.body.genderId;
-        inscriptionRequest.birthday = req.body.birthday;
-        inscriptionRequest.phoneNumber = req.body.phoneNumber;
-        inscriptionRequest.outYear = parseInt(req.body.outYear);
-        inscriptionRequest.nationalityId = parseInt(req.body.nationalityId);
-        inscriptionRequest.socialSecurityNumber = req.body.socialSecurityNumber;
-        inscriptionRequest.droitImage = req.body.droitImage;
-
-        const addressRequest = new AddressCreateRequest();
-        addressRequest.line1 = req.body.line1;
-        addressRequest.line2 = req.body.line2;
-        addressRequest.city = req.body.city;
-        addressRequest.postalCode = req.body.postalCode;
-        addressRequest.countryId = parseInt(req.body.countryId);
-        inscriptionRequest.address = addressRequest;
-
-        winston.info("request : " + JSON.stringify(req.files));
-        if (req.files !== null && req.files !== undefined) {
-            inscriptionRequest.documentIdentity = FileUploader.obtainFileBase64(req.files, "documentIdentity");
-            inscriptionRequest.documentResidencePermit = FileUploader.obtainFileBase64(req.files, "documentResidencePermit");
-            inscriptionRequest.documentRib = FileUploader.obtainFileBase64(req.files, "documentRib");
-            inscriptionRequest.documentScolarityCertificate = FileUploader.obtainFileBase64(req.files, "documentScolarityCertificate");
-            inscriptionRequest.documentVitaleCard = FileUploader.obtainFileBase64(req.files, "documentVitaleCard");
-        }
         if (id) {
-            ConsultantInscriptionService.validateConsultantInscription(id, inscriptionRequest, function (err) {
+            ConsultantInscriptionService.validateConsultantInscription(id, function (err) {
                 if (err) {
                     return next(err);
                 }

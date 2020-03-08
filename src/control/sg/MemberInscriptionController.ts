@@ -174,29 +174,8 @@ export class MemberInscriptionController {
 
     public validateMemberInscription(req: Request, res: Response, next: NextFunction) {
         const id = req.params.id;
-        const inscriptionRequest = new MemberInscriptionCreateRequest();
-        inscriptionRequest.firstName = req.body.firstName;
-        inscriptionRequest.lastName = req.body.lastName;
-        inscriptionRequest.departmentId = parseInt(req.body.departmentId);
-        inscriptionRequest.email = req.body.email;
-        inscriptionRequest.genderId = parseInt(req.body.genderId);
-        inscriptionRequest.birthday = req.body.birthday;
-        inscriptionRequest.phoneNumber = req.body.phoneNumber;
-        inscriptionRequest.outYear = parseInt(req.body.outYear);
-        inscriptionRequest.nationalityId = parseInt(req.body.nationalityId);
-        inscriptionRequest.wantedPoleId = parseInt(req.body.wantedPoleId);
-        inscriptionRequest.hasPaid = req.body.hasPaid;
-        inscriptionRequest.droitImage = req.body.droitImage;
-
-        const addressRequest = new AddressCreateRequest();
-        addressRequest.line1 = req.body.line1;
-        addressRequest.line2 = req.body.line2;
-        addressRequest.city = req.body.city;
-        addressRequest.postalCode = req.body.postalCode;
-        addressRequest.countryId = parseInt(req.body.countryId);
-        inscriptionRequest.address = addressRequest;
         if (id) {
-            MemberInscriptionService.validateMemberInscription(id, inscriptionRequest, function (err) {
+            MemberInscriptionService.validateMemberInscription(id, function (err) {
                 if (err) {
                     return next(err);
                 }
