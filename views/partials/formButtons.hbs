@@ -31,7 +31,7 @@
 
       {{#if (eq page "memberPage")}}
       <body>
-      <button type="button" class="btn btn-danger" data-toggle="modal-Alumni" data_target="#update-Alumni-Status-validation"
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#update-Alumni-Status-validation"
       >{{#if isAlumni}}Membre{{else}}Ancien{{/if}}</button>
 
        <div class="modal fade" id="update-Alumni-Status-validation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -39,7 +39,7 @@
            <div class="modal-content">
              <div class="modal-header">
                <h5 class="modal-title" id="exampleModalLabel"> Attention !</h5>
-               <button type="button" class="close" data-dismiss="modal-Alumni" aria-label="Close">
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                  <span aria-hidden="true">&times;</span>
                </button>
              </div>
@@ -47,7 +47,7 @@
                Etes-vous sûr de vouloir modifier le status de cette personne?
              </div>
              <div class="modal-footer">
-               <button type="button" class="btn btn-secondary" data-dismiss="modal-Alumni">Non</button>
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
                <button type="button" class="btn btn-danger" onclick="updateAlumniStatus();">Oui</button>
                  <script>
                    function updateAlumniStatus(){
