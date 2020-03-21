@@ -2,6 +2,7 @@ import { BaseService } from "../common/BaseService";
 import { IRestResponse } from "typed-rest-client/RestClient";
 import { LoginRequest } from "../../models/auth/LoginRequest";
 import { LoginResponse } from "../../models/auth/LoginResponse";
+import { ForgetPasswordRequest } from "../../models/auth/ForgetPasswordRequest";
 import * as winston from "winston";
 
 

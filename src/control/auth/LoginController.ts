@@ -3,12 +3,14 @@ import * as winston from "winston";
 import { AuthService } from "../../services/auth/AuthService";
 import { LoginRequest } from "../../models/auth/LoginRequest";
 import { LoginResponse } from "../../models/auth/LoginResponse";
+import { ForgetPasswordRequest } from "../../models/auth/ForgetPasswordRequest";
 import { MemberService } from "../../services/core/MemberService";
 import { ConsultantService } from "../../services/core/ConsultantService";
 import { Member } from "../../models/core/Member";
 import * as httpContext from "express-http-context";
 import { Config } from "../../config/Config";
 import { Environment } from "../../config/Environment";
+import { ForgetPasswordService } from "../../services/auth/ForgetPasswordService";
 
 export class LoginController {
 
@@ -18,6 +20,13 @@ export class LoginController {
   public viewLoginForm(req: Request, res: Response, next: NextFunction) {
     winston.info("Getting login form");
     res.render("auth/login");
+  }
+  /**
+   * Display the forget password page to the user
+   */
+  public viewForgetPassword(req: Request, res: Response, next: NextFunction) {
+    winston.info("Getting forget password page");
+    res.render("auth/forgetPassword");
   }
 
   /**
@@ -71,6 +80,25 @@ export class LoginController {
             }
           }
         });
+      }
+    });
+  }
+
+
+  /**
+   * Try to send to the back forgetPassword request
+   */
+  public forgetPassword(req: Request, res: Response, next: NextFunction) {
+    const email = req.body.email;
+    const request = new ForgetPasswordRequest(email);
+    ForgetPasswordService.forgetPassword(request, function (err: any) {
+      if (err) {
+        return next(err);
+      } else {
+        const options = {
+          recu: true,
+        }
+        res.render("auth/forgetPassword", options);
       }
     });
   }
