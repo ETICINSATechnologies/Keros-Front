@@ -9,8 +9,8 @@ import { ConsultantService } from "../../services/core/ConsultantService";
 import { Member } from "../../models/core/Member";
 import * as httpContext from "express-http-context";
 import { Config } from "../../config/Config";
-import { Environment } from "../../config/Environment";
-import { ForgetPasswordService } from "../../services/auth/ForgetPasswordService";
+import { ResetPasswordRequest } from "../../models/auth/ResetPasswordRequest";
+
 
 export class LoginController {
 
@@ -27,6 +27,13 @@ export class LoginController {
   public viewForgetPassword(req: Request, res: Response, next: NextFunction) {
     winston.info("Getting forget password page");
     res.render("auth/forgetPassword");
+  }
+  /**
+   * Display the reset password page to the user
+   */
+  public viewResetPassword(req: Request, res: Response, next: NextFunction) {
+    winston.info("Getting reset password page");
+    res.render("auth/resetPassword");
   }
 
   /**
@@ -84,14 +91,13 @@ export class LoginController {
     });
   }
 
-
   /**
    * Try to send to the back forgetPassword request
    */
   public forgetPassword(req: Request, res: Response, next: NextFunction) {
     const email = req.body.email;
     const request = new ForgetPasswordRequest(email);
-    ForgetPasswordService.forgetPassword(request, function (err: any) {
+    AuthService.forgetPassword(request, function (err: any) {
       if (err) {
         return next(err);
       } else {
@@ -99,6 +105,27 @@ export class LoginController {
           recu: true,
         }
         res.render("auth/forgetPassword", options);
+      }
+    });
+  }
+
+  /**
+   * Try to send to the back forgetPassword request
+   */
+  public resetPassword(req: Request, res: Response, next: NextFunction) {
+    const password = req.body.password;
+    winston.debug("in reset password");
+    const token = req.query.token;
+    const request = new ResetPasswordRequest(password, token);
+    console.log(req.query);
+    // todo a enlever
+    winston.debug(`password ${password}`);
+    winston.debug(`token ${req.query}`);
+    AuthService.resetPassword(request, function (err: any) {
+      if (err) {
+        return next(err);
+      } else {
+        res.render("auth/reset-password");
       }
     });
   }

@@ -17,5 +17,7 @@ export function authRouter(): Router {
   router.get("/logout", logoutController.logout);
   router.get("/forgetPassword", loginController.viewForgetPassword);
   router.post("/forgetPassword", loginController.forgetPassword);
+  router.get("/reset-password", loginController.viewResetPassword);
+  router.post("/reset-password", loginController.resetPassword);
   return router;
 }
