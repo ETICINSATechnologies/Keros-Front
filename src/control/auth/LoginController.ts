@@ -36,7 +36,7 @@ export class LoginController {
     winston.debug(req.query.token);
     const options = {
       token: req.query.token,
-    }
+    };
     res.render("auth/resetPassword", options);
   }
 
@@ -107,7 +107,7 @@ export class LoginController {
       } else {
         const options = {
           recu: true,
-        }
+        };
         res.render("auth/forgetPassword", options);
       }
     });
