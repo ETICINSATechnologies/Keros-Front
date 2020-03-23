@@ -280,5 +280,4 @@ export class MemberController {
       res.send(page);
     }, queryParams);
   }
-
 }

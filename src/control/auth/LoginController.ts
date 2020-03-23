@@ -33,7 +33,11 @@ export class LoginController {
    */
   public viewResetPassword(req: Request, res: Response, next: NextFunction) {
     winston.info("Getting reset password page");
-    res.render("auth/resetPassword");
+    winston.debug(req.query.token);
+    const options = {
+      token: req.query.token,
+    }
+    res.render("auth/resetPassword", options);
   }
 
   /**
@@ -114,18 +118,13 @@ export class LoginController {
    */
   public resetPassword(req: Request, res: Response, next: NextFunction) {
     const password = req.body.password;
-    winston.debug("in reset password");
     const token = req.query.token;
     const request = new ResetPasswordRequest(password, token);
-    console.log(req.query);
-    // todo a enlever
-    winston.debug(`password ${password}`);
-    winston.debug(`token ${req.query}`);
     AuthService.resetPassword(request, function (err: any) {
       if (err) {
         return next(err);
       } else {
-        res.render("auth/reset-password");
+        res.render("auth/login");
       }
     });
   }
