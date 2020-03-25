@@ -182,14 +182,13 @@ export class ConsultantInscriptionController {
 
         if (req.files !== undefined) {
             winston.debug("files : " + JSON.stringify(req.files));
-            inscriptionRequest.documentIdentity = <UploadedFile>req.files.documentIdentity;
-            inscriptionRequest.documentResidencePermit = <UploadedFile>req.files.documentResidencePermit;
-            inscriptionRequest.documentRIB = <UploadedFile>req.files.documentRIB;
-            inscriptionRequest.documentScolarityCertificate = <UploadedFile>req.files.documentScolarityCertificate;
-            inscriptionRequest.documentVitaleCard = <UploadedFile>req.files.documentVitaleCard;
-            inscriptionRequest.documentCVEC = <UploadedFile>req.files.documentCVEC;
+            // inscriptionRequest.documentIdentity = <UploadedFile>req.files.documentIdentity;
+            // inscriptionRequest.documentResidencePermit = <UploadedFile>req.files.documentResidencePermit;
+            // inscriptionRequest.documentRIB = <UploadedFile>req.files.documentRIB;
+            // inscriptionRequest.documentScolarityCertificate = <UploadedFile>req.files.documentScolarityCertificate;
+            // inscriptionRequest.documentVitaleCard = <UploadedFile>req.files.documentVitaleCard;
+            // inscriptionRequest.documentCVEC = <UploadedFile>req.files.documentCVEC;
         }
-        // PUT ne marchera plus à cause des set
 
         if (id) {
             ConsultantInscriptionService.update(id, inscriptionRequest, function (err) {
