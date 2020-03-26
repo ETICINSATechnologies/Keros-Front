@@ -90,6 +90,11 @@ export class ConsultantInscriptionCreateRequest implements IStringable {
             this.formData.append("droitImage", value);
         }
     }
+    public addIsApprenticeToFormData(value: boolean) {
+        if (this.formData) {
+            this.formData.append("isApprentice", value);
+        }
+    }
     public fillFormData() {
         if (this.address) {
             this.addAddressToFormData(this.address);
@@ -111,6 +116,9 @@ export class ConsultantInscriptionCreateRequest implements IStringable {
         }
         if (this.genderId) {
             this.addGenderIdToFormData(this.genderId);
+        }
+        if (this.isApprentice) {
+            this.addIsApprenticeToFormData(this.isApprentice);
         }
         if (this.lastName) {
             this.addLastNameToFormData(this.lastName);
@@ -183,6 +191,7 @@ export class ConsultantInscriptionCreateRequest implements IStringable {
         public socialSecurityNumber ?: string,
         public address ?: AddressCreateRequest,
         public droitImage ?: boolean,
+        public isApprentice ?: boolean,
         public formData ?: FormData
     ) {
         this.formData = new FormData();

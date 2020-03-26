@@ -170,7 +170,8 @@ export class ConsultantInscriptionController {
         inscriptionRequest.outYear = parseInt(req.body.outYear);
         inscriptionRequest.nationalityId = parseInt(req.body.nationalityId);
         inscriptionRequest.socialSecurityNumber = req.body.socialSecurityNumber;
-        inscriptionRequest.droitImage = req.body.droitImage;
+        inscriptionRequest.droitImage = req.body.droitImage === "on";
+        inscriptionRequest.isApprentice = req.body.isApprentice === "on";
 
         const addressRequest = new AddressCreateRequest();
         addressRequest.line1 = req.body.line1;
