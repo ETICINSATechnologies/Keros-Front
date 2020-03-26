@@ -46,17 +46,17 @@
     }
 
     function exportMembersAsCSV(members) {
-      console.log(members);
       let formCsv = document.createElement("form");
       let idList = document.createElement("input");
-      idList.name = "idList[]";
+      idList.name = "idList";
       formCsv.method = "POST";
       formCsv.action = "/core/member/exportCSV";
       let idListArray = [];
       for (let i=0; i<members.length; i++) {
         idListArray.push(members[i].id);
       }
-      idList.value = idListArray;
+      idList.value = idListArray.toString();
+      console.log(idList.value);
       formCsv.appendChild(idList);
       document.body.appendChild(formCsv);
       HTMLFormElement.prototype.submit.call(formCsv);

@@ -37,5 +37,6 @@ export function coreRouter(): Router {
   router.get("/consultant/me/update", consultantController.updateProfile);
   router.get("/consultant/delete/:id(\\d+)/", consultantController.deleteConsultant);
   router.get("/consultant/json", consultantController.getJSONConsultants);
+  router.post("/consultant/exportCSV", consultantController.exportCSVConsultants);
   return router;
 }
