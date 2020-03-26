@@ -19,6 +19,9 @@
                   Informations {{#if inscription}}inscription consultant n°{{inscription.id}}{{/if}}
                 </h3>
               </div>
+              <form action="overidden-action" id="document-form"
+                    method="post" enctype="multipart/form-data">
+              </form>
               <form role="form" method="post" action="/sg/consultant-inscription/postform"
                     enctype="multipart/form-data">
                 {{#if inscription}}<input type="text" id="id" name="id" value="{{inscription.id}}" hidden>{{/if}}
@@ -189,14 +192,11 @@
                               </div>
                               <div class="col-md-3">
                                 {{#if (eq @root.action "update")}}
-                                  <form action="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{@key}}"
-                                        method="post" enctype="multipart/form-data">
-                                    <input type="file" name="file">
-                                    <button type="submit" formmethod="post"
-                                            formaction="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{@key}}"
-                                            class="btn btn-primary btn-sm" style="margin-top: 5%">Submit
-                                    </button>
-                                  </form>
+                                  <input type="file" name="file" form="document-form">
+                                  <button type="submit" formmethod="post" form="document-form"
+                                          formaction="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{@key}}"
+                                          class="btn btn-primary btn-sm" style="margin-top: 5%">Submit
+                                  </button>
                                 {{/if}}
                               </div>
                               <div class="col-md-3">
