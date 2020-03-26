@@ -20,6 +20,10 @@
               onclick="location.href='{{origin}}/sg/membre-inscription'">Voir toutes les inscriptions</button>
            {{/if}}
          </span>
+        {{#if (eq page "memberList")}}
+          <button type="button" class="btn btn-primary" id="btn-export-csv"
+                  onclick="exportMembersAsCSV({{json members}})">Exporter en CSV{{origin}}</button>
+        {{/if}}
       </label>
     </div>
   </div>
@@ -35,8 +39,26 @@
   </div>
 </div>
 <script>
+
     function getSelectedPageSize() {
         var val = document.getElementById("pageSize").value;
         window.location ="?pageSize=" + val;
+    }
+
+    function exportMembersAsCSV(members) {
+      console.log(members);
+      let formCsv = document.createElement("form");
+      let idList = document.createElement("input");
+      idList.name = "idList[]";
+      formCsv.method = "POST";
+      formCsv.action = "/core/member/exportCSV";
+      let idListArray = [];
+      for (let i=0; i<members.length; i++) {
+        idListArray.push(members[i].id);
+      }
+      idList.value = idListArray;
+      formCsv.appendChild(idList);
+      document.body.appendChild(formCsv);
+      HTMLFormElement.prototype.submit.call(formCsv);
     }
 </script>

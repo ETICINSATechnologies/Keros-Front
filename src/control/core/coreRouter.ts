@@ -25,6 +25,7 @@ export function coreRouter(): Router {
   router.get("/member/me/update", memberController.updateProfile);
   router.get("/member/delete/:id(\\d+)/", memberController.deleteMember);
   router.get("/member/json", memberController.getJSONMembers);
+  router.post("/member/exportCSV", memberController.exportCSVMembers);
 
   // consultants
   router.get("/consultant", consultantController.viewConsultants);
