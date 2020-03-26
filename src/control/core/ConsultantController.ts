@@ -231,8 +231,9 @@ export class ConsultantController {
         winston.info("Exporting consultants as CSV file");
         const createCSVRequest = new CreateCSVRequest();
         createCSVRequest.idList = [];
-        for (const id of req.body.idList) {
-            createCSVRequest.idList.push(parseInt(id));
+        const idListIntArray = req.body.idList.split(",").map(Number);
+        for (const id of idListIntArray) {
+            createCSVRequest.idList.push(id);
         }
         ConsultantService.exportCSVConsultants(createCSVRequest, function (err, result: DocumentResponse | null) {
             if (err) {

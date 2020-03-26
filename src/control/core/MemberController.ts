@@ -288,11 +288,9 @@ export class MemberController {
     winston.info("Exporting members as CSV file");
     const createCSVRequest = new CreateCSVRequest();
     createCSVRequest.idList = [];
-    winston.debug(JSON.stringify(req.body.idList));
     const idListIntArray = req.body.idList.split(",").map(Number);
     for (const id of idListIntArray) {
       createCSVRequest.idList.push(id);
-      winston.debug("added " + id);
     }
     MemberService.exportCSVMembers(createCSVRequest, function (err, result: DocumentResponse | null) {
       if (err) {
