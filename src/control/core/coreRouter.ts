@@ -25,6 +25,7 @@ export function coreRouter(): Router {
   router.get("/member/me/update", memberController.updateProfile);
   router.get("/member/delete/:id(\\d+)/", memberController.deleteMember);
   router.get("/member/json", memberController.getJSONMembers);
+  router.post("/member/exportCSV", memberController.exportCSVMembers);
 
   // consultants
   router.get("/consultant", consultantController.viewConsultants);
@@ -36,5 +37,6 @@ export function coreRouter(): Router {
   router.get("/consultant/me/update", consultantController.updateProfile);
   router.get("/consultant/delete/:id(\\d+)/", consultantController.deleteConsultant);
   router.get("/consultant/json", consultantController.getJSONConsultants);
+  router.post("/consultant/exportCSV", consultantController.exportCSVConsultants);
   return router;
 }

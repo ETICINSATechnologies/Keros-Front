@@ -5,12 +5,12 @@
     <div class="content-wrapper">
       <section class="content-header">
         <h1>
-          Voir les membres
+          Voir les membres {{origin}}
         </h1>
         {{> breadcrumb tab="RH" action="all" pathall="Membres,Voir les membres"}}
       </section>
   {{> template/infoCaption type="member"}}
-  {{> template/itemPerPage meta=members.meta}}
+  {{> template/itemPerPage meta=members.meta page="memberList" members=members.content}}
   {{> template/infoColumnOrder}}
                      <th>
                             <select name="positions" id="positions-select" onchange="savePositionSelectIndex();">

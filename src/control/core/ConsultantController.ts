@@ -13,6 +13,10 @@ import { Country } from "../../models/core/Country";
 import { AddressCreateRequest } from "../../models/core/AddressCreateRequest";
 import * as httpContext from "express-http-context";
 import { isSG } from "../../util/Helper";
+import {CreateCSVRequest} from "../../models/core/CreateCSVRequest";
+import {MemberService} from "../../services/core/MemberService";
+import {DocumentResponse} from "../../models/DocumentResponse";
+import HttpError from "../../util/httpError";
 
 export class ConsultantController {
     public viewConsultants(req: Request, res: Response, next: NextFunction) {
@@ -221,6 +225,26 @@ export class ConsultantController {
             if (err) return next(err);
             res.send(page);
         }, queryParams);
+    }
+
+    public exportCSVConsultants(req: Request, res: Response, next: NextFunction) {
+        winston.info("Exporting consultants as CSV file");
+        const createCSVRequest = new CreateCSVRequest();
+        createCSVRequest.idList = [];
+        const idListIntArray = req.body.idList.split(",").map(Number);
+        for (const id of idListIntArray) {
+            createCSVRequest.idList.push(id);
+        }
+        ConsultantService.exportCSVConsultants(createCSVRequest, function (err, result: DocumentResponse | null) {
+            if (err) {
+                return next(err);
+            }
+            if (result && result.location) {
+                res.redirect(result.location);
+            } else {
+                return next(new HttpError("Error when loading document", 500));
+            }
+        });
     }
 
 }
