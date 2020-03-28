@@ -133,7 +133,7 @@
               </div>
               -->
               <div class="pull-right">
-                {{#if connectedUser.positions}}<a href="/core/member/me" class="btn btn-default btn-flat">Mon Profil</a>
+                {{#if (or connectedUser.positions (eq connectedUser.positions.length 0))}}<a href="/core/member/me" class="btn btn-default btn-flat">Mon Profil</a>
                 {{else}} <a href="/core/consultant/me" class="btn btn-default btn-flat">Mon Profil</a>
                 {{/if}}
                 <a href="/auth/logout" class="btn btn-default btn-flat">Déconnecter</a>

@@ -14,7 +14,7 @@
   if ((({{meta.page}}+1) * {{meta.itemsPerPage}}) > {{meta.totalItems}}) {
     end = {{meta.totalItems}};
   }
-  let display = "Showing " + start + " to " + end + " of {{meta.totalItems}} entries";
+  let display = "Affichage des entrées " + start + " à " + end + " sur {{meta.totalItems}}";
   document.getElementById('entries').innerHTML = display;
 
   //LINKS MENU
