@@ -5,19 +5,23 @@
     <div class="content-wrapper">
       <section class="content-header">
         <h1>
-          Voir les membres {{origin}}
+          Voir les membres {{isAlumniParam urlPathWithQueries}}
         </h1>
         {{> breadcrumb tab="RH" action="all" pathall="Membres,Voir les membres"}}
       </section>
   {{> template/infoCaption type="member"}}
   {{> template/itemPerPage meta=members.meta page="memberList" members=members.content}}
-  {{> template/infoColumnOrder}}
+  {{> template/infoColumnOrder isAlumni=(isAlumniParam urlPathWithQueries)}}
                      <th>
                             <select name="positions" id="positions-select" onchange="savePositionSelectIndex();">
-                            <option value="#">Choisir un position</option>
+                            <option value="#">Choisir une position</option>
                             <option value="member">AFFICHER TOUS</option>
                             {{#each positions}}
-                            <option value="member?positionId={{this.id}}">{{this.label}}</option>
+                                {{#if (eq (isAlumniParam urlPathWithQueries) true)}}
+                                  <option value="member?isAlumni=true&positionId={{this.id}}">{{this.label}}</option>
+                                {{else}}
+                                  <option value="member?positionId={{this.id}}">{{this.label}}</option>
+                                {{/if}}
                             {{/each}}
                             </select>
                      </th>
@@ -26,7 +30,11 @@
                             <option value="#">Choisir un pôle</option>
                             <option value="member">AFFICHER TOUS</option>
                             {{#each poles}}
-                            <option value="member?poleId={{this.id}}">{{this.name}}</option>
+                                {{#if (eq (isAlumniParam urlPathWithQueries) true)}}
+                                  <option value="member?isAlumni=true&poleId={{this.id}}">{{this.name}}</option>
+                                {{else}}
+                                  <option value="member?poleId={{this.id}}">{{this.name}}</option>
+                                {{/if}}
                             {{/each}}
                             </select>
                      </th>

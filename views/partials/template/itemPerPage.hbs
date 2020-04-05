@@ -15,7 +15,7 @@
              <button type="button" class="btn btn-primary" id="btn-inscription-paid"
              onclick="location.href='/sg/membre-inscription?hasPaid=true'">Voir les inscriptions payées</button>
            {{/if}}
-           {{#if (eq urlPath "/sg/membre-inscription?hasPaid=true")}}
+           {{#if (eq urlPathWithQueries "/sg/membre-inscription?hasPaid=true")}}
               <button type="button" class="btn btn-primary" id="btn-inscription-all"
               onclick="location.href='/sg/membre-inscription'">Voir toutes les inscriptions</button>
            {{/if}}
