@@ -203,7 +203,7 @@
                                   <input type="file" name="file" form="document-form">
                                   <button type="submit" formmethod="post" form="document-form"
                                           formaction="/sg/consultant-inscription/{{@root.inscription.id}}/document/{{@key}}"
-                                          class="btn btn-primary btn-sm" style="margin-top: 5%">Submit
+                                          class="btn btn-primary btn-sm" style="margin-bottom: 5%">Submit
                                   </button>
                                 {{/if}}
                               </div>
@@ -256,14 +256,11 @@
                     <button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button>
                   </a>
                   {{> formButtons action=action origin="/sg/consultant-inscription" id=inscription.id}}
-                  {{#if (eq action "view")}}
+                  {{#if (ne action "view")}}
                     <div id="create-buttons" class="form-buttons pull-right">
-                      <form role="form" action="/sg/consultant-inscription/{{@root.inscription.id}}/validate"
-                            method="post">
-                        <button type="submit" formaction="/sg/consultant-inscription/{{@root.inscription.id}}/validate"
+                        <button type="submit" formmethod="post" form="document-form" formaction="/sg/consultant-inscription/{{@root.inscription.id}}/validate"
                                 class="btn btn-primary btn-sm">Valider inscription
                         </button>
-                      </form>
                     </div>
                   {{/if}}
                 </div>

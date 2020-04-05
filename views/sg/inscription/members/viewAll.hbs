@@ -29,19 +29,4 @@
                       <td><a href="membre-inscription/update/{{id}}" class="fa fa-edit fa-2x"></a></td>
                     </tr>
                   {{/each}}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div class="box-footer">
-              {{> template/pagination meta=inscriptions.meta}}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-  {{> template/footer}}
-</div>
-{{> template/scripts}}
-</body>
+    {{>template/infoFooter page="memberInscriptionsPage" meta=inscriptions.meta}}
