@@ -13,7 +13,7 @@ function editButtonPress() {
 
 function executeSearch(){
   searchInput=document.getElementById("searching").value;
-  location.href='/core/member?search='+searchInput
+  location.href='?search='+searchInput
 }
 
 function callEnter(e){
