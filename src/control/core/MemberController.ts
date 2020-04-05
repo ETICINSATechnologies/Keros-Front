@@ -16,10 +16,9 @@ import * as httpContext from "express-http-context";
 import { PositionRequest } from "../../models/core/PositionRequest";
 import { PoleService } from "../../services/core/PoleService";
 import { Pole } from "../../models/core/Pole";
-import {ConsultantInscriptionService} from "../../services/sg/ConsultantInscriptionService";
 import HttpError from "../../util/httpError";
-import {DocumentResponse} from "../../models/DocumentResponse";
-import {CreateCSVRequest} from "../../models/core/CreateCSVRequest";
+import { DocumentResponse } from "../../models/DocumentResponse";
+import { CreateCSVRequest } from "../../models/core/CreateCSVRequest";
 
 export class MemberController {
   public viewMembers(req: Request, res: Response, next: NextFunction) {

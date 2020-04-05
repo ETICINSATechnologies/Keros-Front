@@ -7,14 +7,20 @@ import { ConsultantInscriptionCreateRequest } from "../../models/sg/ConsultantIn
 import { DocumentResponse } from "../../models/DocumentResponse";
 import { MemberInscriptionCreateRequest } from "../../models/sg/MemberInscriptionCreateRequest";
 import { MemberInscription } from "../../models/sg/MemberInscription";
-import { queryStringify } from "../../util/Helper";
+import { isSG, queryStringify } from "../../util/Helper";
 import { Config } from "../../config/Config";
 import * as FormData from "form-data";
 import { UploadedFile } from "express-fileupload";
+import * as httpContext from "express-http-context";
 
 export class ConsultantInscriptionService extends BaseService {
     static getConsultantInscription(id: number, callback: (err: any, result: ConsultantInscription | null) => void): void {
-        this.rest.get<ConsultantInscription>("sg/consultant-inscription/" + id, this.defaultHeaders()).then(
+      const currentUserPositions = httpContext.get("connectedUser").positions;
+      let routePath = "sg/consultant-inscription/" + id;
+      if (isSG(currentUserPositions)) {
+        routePath += "/protected";
+      }
+        this.rest.get<ConsultantInscription>(routePath, this.defaultHeaders()).then(
             (res: IRestResponse<ConsultantInscription>) => {
                 if (res.statusCode !== 200) {
                     return callback(this.defaultError(res.statusCode), null);

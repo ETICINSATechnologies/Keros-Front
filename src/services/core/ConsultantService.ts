@@ -6,8 +6,8 @@ import { ConsultantCreateRequest } from "../../models/core/ConsultantCreateReque
 import * as winston from "winston";
 import { isSG, queryStringify } from "../../util/Helper";
 import * as httpContext from "express-http-context";
-import {CreateCSVRequest} from "../../models/core/CreateCSVRequest";
-import {DocumentResponse} from "../../models/DocumentResponse";
+import { CreateCSVRequest } from "../../models/core/CreateCSVRequest";
+import { DocumentResponse } from "../../models/DocumentResponse";
 
 export class ConsultantService extends BaseService {
     static getConsultant(id: number, callback: (err: any, result: Consultant | null) => void): void {

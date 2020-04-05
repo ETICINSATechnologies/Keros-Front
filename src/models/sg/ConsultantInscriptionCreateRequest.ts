@@ -3,7 +3,6 @@ import { AddressCreateRequest } from "../core/AddressCreateRequest";
 import { UploadedFile } from "express-fileupload";
 import * as winston from "winston";
 import * as FormData from "form-data";
-import {Config} from "../../config/Config";
 
 export class ConsultantInscriptionCreateRequest implements IStringable {
     public addFirstNameToFormData(value: string) {
