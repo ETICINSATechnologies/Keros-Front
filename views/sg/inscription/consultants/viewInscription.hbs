@@ -61,13 +61,15 @@
                     <input type="date" class="form-control" id="birthday" name="birthday"
                            value="{{inscription.birthday}}" required {{readonlyIf (eq action "view")}}>
                   </div>
-                  <div class="col-md-12 form-group">
-                    <label for="socialSecurityNumber">Numéro de sécurité sociale</label>
-                    <input type="text" class="form-control" id="socialSecurityNumber" name="socialSecurityNumber"
-                           value="{{inscription.socialSecurityNumber}}"
-                           placeholder="Entrez le numéro de sécurité sociale" required {{readonlyIf
-                      (eq action "view")}}>
-                  </div>
+                  {{#if (eq true (isSG connectedUser.positions))}}
+                    <div class="col-md-12 form-group">
+                      <label for="socialSecurityNumber">Numéro de sécurité sociale</label>
+                      <input type="text" class="form-control" id="socialSecurityNumber" name="socialSecurityNumber"
+                             value="{{inscription.socialSecurityNumber}}"
+                             placeholder="Entrez le numéro de sécurité sociale" required {{readonlyIf
+                        (eq action "view")}}>
+                    </div>
+                  {{/if}}
                   <div class="col-md-12 form-group">
                     <label for="email">Email</label>
                     <input type="email" class="form-control" id="email" name="email" value="{{inscription.email}}"
@@ -94,7 +96,7 @@
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="outYear">Année de fin d'études</label>
-                    <input type="number" min="2019" max="2030" step="1" class="form-control" id="outYear"
+                    <input type="number" min="2019" step="1" class="form-control" id="outYear"
                            name="outYear" value="{{inscription.outYear}}"
                       {{readonlyIf (eq action "view")}}>
                   </div>
@@ -256,7 +258,7 @@
                     <button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button>
                   </a>
                   {{> formButtons action=action origin="/sg/consultant-inscription" id=inscription.id}}
-                  {{#if (ne action "view")}}
+                  {{#if (eq action "view")}}
                     <div id="create-buttons" class="form-buttons pull-right">
                         <button type="submit" formmethod="post" form="document-form" formaction="/sg/consultant-inscription/{{@root.inscription.id}}/validate"
                                 class="btn btn-primary btn-sm">Valider inscription
