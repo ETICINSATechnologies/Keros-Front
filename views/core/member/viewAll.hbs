@@ -5,28 +5,29 @@
     <div class="content-wrapper">
       <section class="content-header">
         <h1>
-          Voir les membres {{origin}}
+          Voir les membres
         </h1>
         {{> breadcrumb tab="RH" action="all" pathall="Membres,Voir les membres"}}
       </section>
   {{> template/infoCaption type="member"}}
   {{> template/itemPerPage meta=members.meta page="memberList" members=members.content}}
-  {{> template/infoColumnOrder}}
+  {{> template/infoColumnOrder isAlumni=(isAlumniParam urlPathWithQueries)}}
                      <th>
                             <select name="positions" id="positions-select" onchange="savePositionSelectIndex();">
-                            <option value="#">Choisir un position</option>
-                            <option value="member">AFFICHER TOUS</option>
+                            <option value="#">Choisir une position</option>
+                            <option value="?isAlumni={{isAlumniParam urlPathWithQueries}}">AFFICHER TOUS</option>
                             {{#each positions}}
-                            <option value="member?positionId={{this.id}}">{{this.label}}</option>
+                              <option value="?isAlumni={{isAlumniParam @root.urlPathWithQueries}}&positionId={{this.id}}">{{this.label}}</option>
                             {{/each}}
                             </select>
                      </th>
                      <th>
                             <select name="poles" id="pole-select" onchange="savePoleSelectIndex();">
                             <option value="#">Choisir un pôle</option>
-                            <option value="member">AFFICHER TOUS</option>
+                            <option value="?isAlumni={{isAlumniParam urlPathWithQueries}}">AFFICHER TOUS</option>
                             {{#each poles}}
-                            <option value="member?poleId={{this.id}}">{{this.name}}</option>
+                              <option value="?isAlumni={{isAlumniParam @root.urlPathWithQueries}}&poleId={{this.id}}">{{this.name}}</option>
+                              <option value="?isAlumni={{isAlumniParam @root.urlPathWithQueries}}&poleId={{this.id}}">{{this.name}}</option>
                             {{/each}}
                             </select>
                      </th>

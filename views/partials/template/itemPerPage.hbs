@@ -4,7 +4,7 @@
       <label>
         Voir
         <select name="list_length" class="form-control input-sm" id="pageSize" onchange="getSelectedPageSize()">
-          <option value="" id="test" disabled selected>{{meta.itemsPerPage}}</option>
+          <option value="" disabled selected>{{meta.itemsPerPage}}</option>
           <option value="10">10</option>
           <option value="25">25</option>
           <option value="50">50</option>
@@ -15,7 +15,7 @@
              <button type="button" class="btn btn-primary" id="btn-inscription-paid"
              onclick="location.href='/sg/membre-inscription?hasPaid=true'">Voir les inscriptions payées</button>
            {{/if}}
-           {{#if (eq urlPath "/sg/membre-inscription?hasPaid=true")}}
+           {{#if (eq urlPathWithQueries "/sg/membre-inscription?hasPaid=true")}}
               <button type="button" class="btn btn-primary" id="btn-inscription-all"
               onclick="location.href='/sg/membre-inscription'">Voir toutes les inscriptions</button>
            {{/if}}

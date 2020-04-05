@@ -192,6 +192,9 @@ export default handlebars({
     },
     json(data: any) {
       return JSON.stringify(data);
+    },
+    isAlumniParam(urlPathWithQueries: string) {
+      return urlPathWithQueries && urlPathWithQueries.includes("isAlumni=true");
     }
   }
 });
