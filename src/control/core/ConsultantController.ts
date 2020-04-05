@@ -13,9 +13,8 @@ import { Country } from "../../models/core/Country";
 import { AddressCreateRequest } from "../../models/core/AddressCreateRequest";
 import * as httpContext from "express-http-context";
 import { isSG } from "../../util/Helper";
-import {CreateCSVRequest} from "../../models/core/CreateCSVRequest";
-import {MemberService} from "../../services/core/MemberService";
-import {DocumentResponse} from "../../models/DocumentResponse";
+import { CreateCSVRequest } from "../../models/core/CreateCSVRequest";
+import { DocumentResponse } from "../../models/DocumentResponse";
 import HttpError from "../../util/httpError";
 
 export class ConsultantController {

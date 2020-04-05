@@ -6,8 +6,7 @@ import { Page } from "../../models/core/Page";
 import { MemberCreateRequest } from "../../models/core/MemberCreateRequest";
 import * as winston from "winston";
 import { queryStringify } from "../../util/Helper";
-import {DocumentResponse} from "../../models/DocumentResponse";
-import {Config} from "../../config/Config";
+import { DocumentResponse } from "../../models/DocumentResponse";
 
 export class MemberService extends BaseService {
   static getMember(id: number, callback: (err: any, result: Member | null) => void): void {

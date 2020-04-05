@@ -7,7 +7,7 @@ import { ConsultantInscriptionCreateRequest } from "../../models/sg/ConsultantIn
 import { DocumentResponse } from "../../models/DocumentResponse";
 import { MemberInscriptionCreateRequest } from "../../models/sg/MemberInscriptionCreateRequest";
 import { MemberInscription } from "../../models/sg/MemberInscription";
-import {isSG, queryStringify} from "../../util/Helper";
+import { isSG, queryStringify } from "../../util/Helper";
 import { Config } from "../../config/Config";
 import * as FormData from "form-data";
 import { UploadedFile } from "express-fileupload";
