@@ -43,10 +43,11 @@
   {{/if}}
   <button type="submit" class="btn btn-primary confirm-button">Valider</button>
 </div>
+{{else if (eq action "create")}}
+    <div id="create-buttons" class="form-buttons pull-right">
+      <button type="submit"  class="btn btn-primary confirm-button">Valider</button>
+    </div>
 {{/if}}
-<div id="create-buttons" class="form-buttons pull-right" {{#if (ne action "create")}}style="display: none"{{/if}}>
-  <button type="submit"  class="btn btn-primary confirm-button">Valider</button>
-</div>
 
   <script>
     function updateAlumniStatus() {

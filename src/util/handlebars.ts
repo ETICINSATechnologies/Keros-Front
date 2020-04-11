@@ -189,6 +189,12 @@ export default handlebars({
     },
     substring(originalString: string, endIndex: number) {
       return originalString.substring(0, endIndex);
+    },
+    json(data: any) {
+      return JSON.stringify(data);
+    },
+    isAlumniParam(urlPathWithQueries: string) {
+      return urlPathWithQueries && urlPathWithQueries.includes("isAlumni=true");
     }
   }
 });

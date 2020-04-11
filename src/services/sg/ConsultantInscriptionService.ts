@@ -7,14 +7,20 @@ import { ConsultantInscriptionCreateRequest } from "../../models/sg/ConsultantIn
 import { DocumentResponse } from "../../models/DocumentResponse";
 import { MemberInscriptionCreateRequest } from "../../models/sg/MemberInscriptionCreateRequest";
 import { MemberInscription } from "../../models/sg/MemberInscription";
-import { queryStringify } from "../../util/Helper";
+import { isSG, queryStringify } from "../../util/Helper";
 import { Config } from "../../config/Config";
 import * as FormData from "form-data";
 import { UploadedFile } from "express-fileupload";
+import * as httpContext from "express-http-context";
 
 export class ConsultantInscriptionService extends BaseService {
     static getConsultantInscription(id: number, callback: (err: any, result: ConsultantInscription | null) => void): void {
-        this.rest.get<ConsultantInscription>("sg/consultant-inscription/" + id, this.defaultHeaders()).then(
+      const currentUserPositions = httpContext.get("connectedUser").positions;
+      let routePath = "sg/consultant-inscription/" + id;
+      if (isSG(currentUserPositions)) {
+        routePath += "/protected";
+      }
+        this.rest.get<ConsultantInscription>(routePath, this.defaultHeaders()).then(
             (res: IRestResponse<ConsultantInscription>) => {
                 if (res.statusCode !== 200) {
                     return callback(this.defaultError(res.statusCode), null);
@@ -43,17 +49,34 @@ export class ConsultantInscriptionService extends BaseService {
     }
 
     static createConsultantInscription(consultantInscriptionRequest: ConsultantInscriptionCreateRequest, callback: (err: any, result: ConsultantInscription | null) => void): void {
-        this.rest.create<ConsultantInscription>("sg/consultant-inscription", consultantInscriptionRequest, this.defaultHeaders()).then(
-            (res: IRestResponse<ConsultantInscription>) => {
-                if (res.statusCode !== 201) {
-                    return callback(this.defaultError(res.statusCode), null);
-                }
-                winston.debug("Response : " + JSON.stringify(res));
-                callback(null, res.result);
-            }
-        ).catch(
-            e => callback(e, null)
-        );
+      // const formData = new FormData();
+      // const fs = require("fs");
+      // const filePath = "./";
+      // file.mv(filePath + file.name)
+      //   .then(value => {
+      //     uploadFile();
+      //   })
+      //   .catch(e => winston.debug("Move file to local path failed" + e));
+      // const uploadFile = async () => {
+      //   const readStreamFS: ReadableStream = fs.createReadStream(filePath + file.name);
+      //   formData.append("file", readStreamFS, file.name);
+      //   const fetch = require("node-fetch");
+      //   const url = Config.getBackendBaseUrl() + "/sg/consultant-inscription/" + inscriptionId + "/document/" + documentTypeId;
+      //   await fetch(url, {
+      //     method: "POST",
+      //     headers: this.defaultHeaders().additionalHeaders,
+      //     body: formData
+      //   }).then((res: { status: number; message: string }) => {
+      //     fs.unlink(filePath + file.name, () => {
+      //       winston.debug("Temporarily uploaded file deleted");
+      //     });
+      //     if (res.status !== 201) {
+      //       winston.debug("Error while uploading file");
+      //       return callback(this.defaultError(res.status));
+      //     }
+      //     callback(null);
+      //   });
+      // };
     }
 
     static update(id: number, consultantInscriptionRequest: ConsultantInscriptionCreateRequest, callback: (err: any, result: ConsultantInscription | null) => void): void {
@@ -84,8 +107,8 @@ export class ConsultantInscriptionService extends BaseService {
         );
     }
 
-    static validateConsultantInscription(id: number, consultantInscriptionRequest: ConsultantInscriptionCreateRequest, callback: (err: any) => void): void {
-        this.rest.create<ConsultantInscription>("sg/consultant-inscription/" + id + "/validate", consultantInscriptionRequest, this.defaultHeaders()).then(
+    static validateConsultantInscription(id: number, callback: (err: any) => void): void {
+        this.rest.create<ConsultantInscription>("sg/consultant-inscription/" + id + "/validate", null, this.defaultHeaders()).then(
             (res: IRestResponse<ConsultantInscription>) => {
                 if (res.statusCode !== 204) {
                     return callback(this.defaultError(res.statusCode));

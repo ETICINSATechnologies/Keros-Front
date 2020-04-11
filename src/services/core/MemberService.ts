@@ -1,10 +1,12 @@
 import { IRestResponse } from "typed-rest-client/RestClient";
 import { Member } from "../../models/core/Member";
+import { CreateCSVRequest } from "../../models/core/CreateCSVRequest";
 import { BaseService } from "../common/BaseService";
 import { Page } from "../../models/core/Page";
 import { MemberCreateRequest } from "../../models/core/MemberCreateRequest";
 import * as winston from "winston";
 import { queryStringify } from "../../util/Helper";
+import { DocumentResponse } from "../../models/DocumentResponse";
 
 export class MemberService extends BaseService {
   static getMember(id: number, callback: (err: any, result: Member | null) => void): void {
@@ -88,6 +90,20 @@ export class MemberService extends BaseService {
       }
     ).catch(
       e => callback(e)
+    );
+  }
+
+  static exportCSVMembers(createCSVRequest: CreateCSVRequest, callback: (err: any, result: DocumentResponse | null) => void): void {
+    this.rest.create<DocumentResponse>("core/member/export", createCSVRequest, this.defaultHeaders()).then(
+      (res: IRestResponse<DocumentResponse>) => {
+        if (res.statusCode !== 200) {
+          return callback(this.defaultError(res.statusCode), null);
+        }
+        winston.debug("Response : " + JSON.stringify(res));
+        callback(null, res.result);
+      }
+    ).catch(
+      e => callback(e, null)
     );
   }
 }

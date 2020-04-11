@@ -65,7 +65,9 @@ export class LoginController {
 
         const token = response.token;
         httpContext.set("token", token);
+        winston.info("Getting connected user");
         MemberService.getConnectedMember(function (err: any, response: Member | null) {
+          winston.debug("Getting connected member");
           if (err) {
             ConsultantService.getConnectedConsultant(function (err: any, response: Member | null) {
               if (err) {

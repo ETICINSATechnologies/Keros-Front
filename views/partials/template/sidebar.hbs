@@ -44,16 +44,18 @@
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="/core/member"><i class="fa fa-circle-o"></i> Membres</a></li>
-            <li><a href="/core/consultant"><i class="fa fa-circle-o"></i> Consultants</a></li>
-            <li class="treeview">
+            <li><a href="/core/member?isAlumni=false"><i class="fa fa-circle-o"></i> Membres</a></li>
+            {{#if (isSG connectedUser.positions)}}
+              <li><a href="/core/consultant"><i class="fa fa-circle-o"></i> Consultants</a></li>
+              <li class="treeview">
               <a href="#"><i class="fa fa-user-plus"></i> Inscriptions</a>
               <ul class="treeview-menu">
                 <li><a href="/sg/membre-inscription?hasPaid=true"><i class="fa fa-clipboard"></i> Membres</a></li>
                 <li><a href="/sg/consultant-inscription"><i class="fa fa-clipboard"></i> Consultants</a></li>
               </ul>
             </li>
-
+            {{/if}}
+            <li><a href="/core/member?isAlumni=true"><i class="fa fa-circle-o"></i> Anciens</a></li>
           </ul>
           </li>
 

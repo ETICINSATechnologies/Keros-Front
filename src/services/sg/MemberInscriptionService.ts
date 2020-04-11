@@ -56,8 +56,8 @@ export class MemberInscriptionService extends BaseService {
         );
     }
 
-    static validateMemberInscription(id: number, memberInscriptionRequest: MemberInscriptionCreateRequest, callback: (err: any) => void): void {
-        this.rest.create<MemberInscription>("sg/membre-inscription/" + id + "/validate", memberInscriptionRequest, this.defaultHeaders()).then(
+    static validateMemberInscription(id: number, callback: (err: any) => void): void {
+        this.rest.create<MemberInscription>("sg/membre-inscription/" + id + "/validate", null, this.defaultHeaders()).then(
             (res: IRestResponse<MemberInscription>) => {
                 if (res.statusCode !== 204) {
                     return callback(this.defaultError(res.statusCode));

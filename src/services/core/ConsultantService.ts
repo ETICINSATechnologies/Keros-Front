@@ -6,6 +6,8 @@ import { ConsultantCreateRequest } from "../../models/core/ConsultantCreateReque
 import * as winston from "winston";
 import { isSG, queryStringify } from "../../util/Helper";
 import * as httpContext from "express-http-context";
+import { CreateCSVRequest } from "../../models/core/CreateCSVRequest";
+import { DocumentResponse } from "../../models/DocumentResponse";
 
 export class ConsultantService extends BaseService {
     static getConsultant(id: number, callback: (err: any, result: Consultant | null) => void): void {
@@ -98,4 +100,18 @@ export class ConsultantService extends BaseService {
             e => callback(e)
         );
     }
+
+  static exportCSVConsultants(createCSVRequest: CreateCSVRequest, callback: (err: any, result: DocumentResponse | null) => void): void {
+    this.rest.create<DocumentResponse>("core/consultant/export", createCSVRequest, this.defaultHeaders()).then(
+      (res: IRestResponse<DocumentResponse>) => {
+        if (res.statusCode !== 200) {
+          return callback(this.defaultError(res.statusCode), null);
+        }
+        winston.debug("Response : " + JSON.stringify(res));
+        callback(null, res.result);
+      }
+    ).catch(
+      e => callback(e, null)
+    );
+  }
 }

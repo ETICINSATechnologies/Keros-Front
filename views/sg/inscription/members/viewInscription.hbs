@@ -19,6 +19,9 @@
                   Informations  {{#if inscription}}inscription membre n°{{inscription.id}}{{/if}}
                 </h3>
               </div>
+              <form action="overidden-action" id="document-form"
+                    method="post" enctype="multipart/form-data">
+              </form>
               <form role="form" method="post" action="/sg/membre-inscription/postform">
                 {{#if inscription}}<input type="text" id="id" name="id" value="{{inscription.id}}" hidden>{{/if}}
                 <div class="box-body row">
@@ -60,7 +63,7 @@
                     <label for="phoneNumber">Téléphone</label>
                     <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" value="{{inscription.phoneNumber}}"
                            placeholder="Entrez le numéro de téléphone" {{readonlyIf (eq action "view")}}
-                           pattern=".{8,16}"
+                           pattern=".{8,16}" {{#if (eq action "create")}} required {{/if}}
                            oninvalid="this.setCustomValidity('Le numéro de téléphone doit contenir entre 8 et 16 chiffres')"
                            oninput="this.setCustomValidity(' ')" onchange="this.setCustomValidity('')">
                   </div>
@@ -127,17 +130,14 @@
                   <div class="col-md-4 form-group">
                     <label for="hasPaid">A payé </label>
                     <input type="checkbox" id="hasPaid" name="hasPaid"
-{{!{{#if (or (eq action "view") (ne true (isFromRH connectedUser.positions))(ne true (isAdmin connectedUser.positions)))}} {{!disabled="disabled" {{/if}}
                       {{#if inscription.hasPaid}} checked {{/if}}>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="droitImage">Droit à l'image </label>
                     <input type="checkbox" id="droitImage" name="droitImage"
-{{!{{#if (or (eq action "view") (ne true (isFromRH connectedUser.positions))(ne true (isAdmin connectedUser.positions)))}} {{!disabled="disabled" {{/if}}
                       {{#if inscription.droitImage}} checked {{/if}}>
                   </div>
                 </div>
-                </form>
                 {{#if (ne action "create")}}
                   {{#if inscription}}
                     <div id="view-documents">
@@ -185,11 +185,11 @@
                                 <div class="col-md-3">
                                     {{#if (eq @root.action "update")}}
                                     <div>
-                                      <form action="/sg/membre-inscription/{{@root.inscription.id}}/document/{{id}}" method="post" enctype="multipart/form-data">
-                                        <input type="file" name="file">
-                                        <input type='submit' value='Upload'/>
-                                      </form>
-                                      </div>
+                                      <input type="file" name="file" form="document-form">
+                                      <button type="submit" formmethod="post" form="document-form"
+                                              formaction="/sg/membre-inscription/{{@root.inscription.id}}/document/{{id}}"
+                                              class="btn btn-primary btn-sm" style="margin-bottom: 5%">Submit
+                                      </button>
                                     {{/if}}
                                 </div>
                                 <div class="col-md-3">
@@ -213,13 +213,12 @@
                   {{> formButtons action=action origin="/sg/membre-inscription" id=inscription.id}}
                   {{#if (eq action "view")}}
                     <div id="create-buttons" class="form-buttons pull-right">
-                      <form role="form" action="/sg/membre-inscription/{{@root.inscription.id}}/validate" method="post">
-                        <button type="submit" formaction="/sg/membre-inscription/{{@root.inscription.id}}/validate" class="btn btn-primary btn-sm" >Valider inscription</button>
-                      </form>
+                      <button type="submit" formmethod="post" form="document-form" formaction="/sg/membre-inscription/{{@root.inscription.id}}/validate" class="btn btn-primary btn-sm" >Valider inscription</button>
                     </div>
                   {{/if}}
                 </div>
-              <!--</form>-->
+              </div>
+              </form>
             </div>
           </section>
         </div>

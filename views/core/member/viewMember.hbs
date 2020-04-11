@@ -144,7 +144,7 @@
                     </select>
                     <label for="countryId">Fonction 1</label>
                     <select class="form-control" id="positionId1" name="positionId1" required {{readonlyIf
-                            (eq action "view")}} {{disabledIf (eq action "view")}}>
+                            (eq action "view")}} {{disabledIf (or (eq action "view") (eq (isSG connectedUser.positions) false))}}>
                       {{#each positions}}
                         <option value="{{id}}" {{selected id @root.member.positions.0.id}}>{{label}} {{#if pole}}({{pole.label}}){{/if}}</option>
                       {{/each}}
@@ -169,7 +169,7 @@
                     </select>
                     <label for="countryId">Fonction 2</label>
                     <select class="form-control" id="positionId2" name="positionId2"{{readonlyIf
-                            (eq action "view")}} {{disabledIf (eq action "view")}}>
+                            (eq action "view")}} {{disabledIf (or (eq action "view") (eq (isSG connectedUser.positions) false))}}>
                       <option></option>
                       {{#each positions}}
                         <option value="{{id}}" {{selected id @root.member.positions.1.id}}>{{label}} </option>
@@ -194,7 +194,7 @@
                     </select>
                     <label for="countryId">Fonction 3</label>
                     <select class="form-control" id="positionId3" name="positionId3" {{readonlyIf
-                            (eq action "view")}} {{disabledIf (eq action "view")}}>
+                            (eq action "view")}} {{disabledIf (or (eq action "view") (eq (isSG connectedUser.positions) false))}}>
                       <option></option>
                       {{#each positions}}
                         <option value="{{id}}" {{selected id @root.member.positions.2.id}}>{{label}} </option>

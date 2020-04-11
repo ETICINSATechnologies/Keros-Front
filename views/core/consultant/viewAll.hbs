@@ -10,7 +10,7 @@
         {{> breadcrumb tab="RH" action="all" pathall="Consultants,Voir les consultants"}}
       </section>
   {{> template/infoCaption type="consultant"}}
-  {{> template/itemPerPage meta=consultants.meta}}
+  {{> template/itemPerPage meta=consultants.meta page="consultantList" consultants=consultants.content}}
   {{> template/infoColumnOrder}}
                     <th>Voir</th>
                     <th>Modifier</th>
@@ -36,4 +36,4 @@
                           </tr>
                       {{/if}}
                   {{/each}}
-        {{>template/infoFooter meta=consultants.meta}}
+        {{>template/infoFooter page="consultantsPage" meta=consultants.meta}}

@@ -16,12 +16,15 @@ import * as httpContext from "express-http-context";
 import { PositionRequest } from "../../models/core/PositionRequest";
 import { PoleService } from "../../services/core/PoleService";
 import { Pole } from "../../models/core/Pole";
+import HttpError from "../../util/httpError";
+import { DocumentResponse } from "../../models/DocumentResponse";
+import { CreateCSVRequest } from "../../models/core/CreateCSVRequest";
 
 export class MemberController {
   public viewMembers(req: Request, res: Response, next: NextFunction) {
     MemberService.getAllMembers(function (err1, page: Page<Member> | null) {
-      PoleService.getAllPoles(function(err2, polesdata: Pole[]|null) {
-        PositionService.getAllPositions(function(err3, positionsdata: Position[]|null) {
+      PoleService.getAllPoles(function (err2, polesdata: Pole[] | null) {
+        PositionService.getAllPositions(function (err3, positionsdata: Position[] | null) {
           if (err1) return next(err1);
           if (err2) return next(err2);
           if (err3) return next(err3);
@@ -118,7 +121,7 @@ export class MemberController {
                 };
                 res.render("core/member/viewMember", options);
               });
-             });
+            });
           });
         });
       });
@@ -136,8 +139,7 @@ export class MemberController {
     userRequest.username = req.body.username;
     if (req.body.password) {
       userRequest.password = req.body.password;
-    }
-    else {
+    } else {
       delete userRequest.password;
     }
     userRequest.genderId = parseInt(req.body.genderId);
@@ -274,10 +276,30 @@ export class MemberController {
 
   public getJSONMembers(req: Request, res: Response, next: NextFunction) {
     const queryParams = req.query;
-    MemberService.getAllMembers(function(err, page: Page<Member> | null) {
+    MemberService.getAllMembers(function (err, page: Page<Member> | null) {
       winston.debug("Getting JSON members with specified parameters : " + JSON.stringify(queryParams));
       if (err) return next(err);
       res.send(page);
     }, queryParams);
+  }
+
+  public exportCSVMembers(req: Request, res: Response, next: NextFunction) {
+    winston.info("Exporting members as CSV file");
+    const createCSVRequest = new CreateCSVRequest();
+    createCSVRequest.idList = [];
+    const idListIntArray = req.body.idList.split(",").map(Number);
+    for (const id of idListIntArray) {
+      createCSVRequest.idList.push(id);
+    }
+    MemberService.exportCSVMembers(createCSVRequest, function (err, result: DocumentResponse | null) {
+      if (err) {
+        return next(err);
+      }
+      if (result && result.location) {
+        res.redirect(result.location);
+      } else {
+        return next(new HttpError("Error when loading document", 500));
+      }
+    });
   }
 }
