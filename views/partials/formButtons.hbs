@@ -1,60 +1,86 @@
 <div id="view-buttons" class="form-buttons pull-right" {{#if (ne action "view")}}style="display: none"{{/if}}>
   {{#if (ne page "profilePage")}}
 
-<body>
-<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" onclick=fct()>Supprimer</button>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"> Attention !</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Etes-vous sûr de vouloir supprimer ce compte?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
-        <button type="button" class="btn btn-danger" onclick="deleteAccount();">Oui</button>
-        <script>
-            function deleteAccount(){
-                location.href='{{origin}}/delete/{{id}}'
-            }
-        </script>
-      </div>
-    </div>
-  </div>
-</div>
     <button type="button" class="btn btn-primary" onclick="location.href='{{origin}}/update/{{id}}'">Éditer</button>
   {{else}}
     <button type="button" class="btn btn-primary" onclick="location.href='{{origin}}/update'">Éditer</button>
   {{/if}}
 </div>
+
 {{#if (eq action "update")}}
 <div id="update-buttons" class="form-buttons pull-right">
   {{#if (ne page "profilePage")}}
-    <button type="button" class="btn btn-danger" onclick="location.href='{{origin}}/delete/{{id}}'">Supprimer</button>
-    {{#if (eq page "memberPage")}}
-        <button type="button" class="btn btn-danger" onclick="updateAlumniStatus()">{{#if isAlumni}}Membre{{else}}Ancien{{/if}}</button>
-    {{/if}}
+  <body>
+  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" onclick=fct()>Supprimer</button>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"> Attention !</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Etes-vous sûr de vouloir supprimer ce compte?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+          <button type="button" class="btn btn-danger" onclick="deleteAccount();">Oui</button>
+          <script>
+              function deleteAccount(){
+                  location.href='{{origin}}/delete/{{id}}'
+              }
+          </script>
+        </div>
+      </div>
+    </div>
+  </div>
+
+        {{#if (eq page "memberPage")}}
+        <body>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#update-Alumni-Status-validation"
+        >{{#if isAlumni}}Membre{{else}}Ancien{{/if}}</button>
+
+         <div class="modal fade" id="update-Alumni-Status-validation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+           <div class="modal-dialog" role="document">
+             <div class="modal-content">
+               <div class="modal-header">
+                 <h5 class="modal-title" id="exampleModalLabel"> Attention !</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+                 </button>
+               </div>
+               <div class="modal-body">
+                 Etes-vous sûr de vouloir modifier le status de cette personne?
+               </div>
+               <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                 <button type="button" class="btn btn-danger" onclick="updateAlumniStatus();">Oui</button>
+                   <script>
+                     function updateAlumniStatus(){
+                       let isAlumni = document.getElementById("isAlumni").value === 'true';
+                       document.getElementById("isAlumni").value = !isAlumni;
+                       document.getElementById("member-update-form").submit();
+                     }
+                   </script>
+               </div>
+             </div>
+           </div>
+         </div>
+         {{/if}}
+
   {{/if}}
   <button type="submit" class="btn btn-primary confirm-button">Valider</button>
 </div>
-{{else if (eq action "create")}}
-    <div id="create-buttons" class="form-buttons pull-right">
-      <button type="submit"  class="btn btn-primary confirm-button">Valider</button>
-    </div>
 {{/if}}
+<div id="create-buttons" class="form-buttons pull-right" {{#if (ne action "create")}}style="display: none"{{/if}}>
+  <button type="submit"  class="btn btn-primary confirm-button">Valider</button>
+</div>
 
   <script>
-    function updateAlumniStatus() {
-      let isAlumni = document.getElementById("isAlumni").value === 'true';
-      document.getElementById("isAlumni").value = !isAlumni;
-      document.getElementById("member-update-form").submit();
-    }
 
   function validateFields()
     {let mdpInput = document.getElementById("password").value;
