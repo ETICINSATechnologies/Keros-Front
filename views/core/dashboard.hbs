@@ -23,66 +23,7 @@
         </div>
       </div>
     </section>
-  </div>
-<section class="content">
-      <div class="row row-flex">
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <div class="bg-aqua">
-              <i class="fa fa-files-o fa-3x fa-align-center" style="padding: 10px"></i>
-            </div>
-            <div class="" style="text-align: center;">
-              <h4 class="box-title text-center">Etudes en cours</h4>
-              <p class="info-box-number text-center" style="font-size: 600%; font-weight: normal">{{nbOngoingStudies}}</p>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-
-        <div class="col-md-4">
-          <div class="box box-primary">
-            <div class="box-header">
-              <h3 class="box-title">Vos études</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <table class="table table-bordered">
-                {{#each studies.content}}
-                  {{#if (eq status.id 1)}}
-                  {{#if (lt @index 2)}}
-
-                  <tr>
-                    <td>
-                      <div>
-                        <a href="/ua/study/{{id}}"><b>{{ifExists name '<i>Aucun</i>'}}</b></a>
-                        <p class="text-muted">
-                          {{#if (gt description.length 100)}}{{maxLength description 100}}
-                          {{else}}{{description}}{{/if}}
-                        </p>
-                      </div>
-                    </td>
-                  </tr>
-                  {{/if}}
-                {{/if}}
-                {{/each}}
-                <tr>
-                  <td>
-                    <a href="/ua/study/me"><p class="text-center" style="font-size: medium">Toutes mes études</p></a>
-                  </td>
-                </tr>
-              </table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-
-        </div>
-      </div>
-
-    </section>
-
+  </div
   {{> template/footer}}
 </div>
 {{> template/scripts}}
