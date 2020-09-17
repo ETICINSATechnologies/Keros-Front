@@ -3,12 +3,14 @@ import * as winston from "winston";
 import { AuthService } from "../../services/auth/AuthService";
 import { LoginRequest } from "../../models/auth/LoginRequest";
 import { LoginResponse } from "../../models/auth/LoginResponse";
+import { ForgetPasswordRequest } from "../../models/auth/ForgetPasswordRequest";
 import { MemberService } from "../../services/core/MemberService";
 import { ConsultantService } from "../../services/core/ConsultantService";
 import { Member } from "../../models/core/Member";
 import * as httpContext from "express-http-context";
 import { Config } from "../../config/Config";
-import { Environment } from "../../config/Environment";
+import { ResetPasswordRequest } from "../../models/auth/ResetPasswordRequest";
+
 
 export class LoginController {
 
@@ -18,6 +20,24 @@ export class LoginController {
   public viewLoginForm(req: Request, res: Response, next: NextFunction) {
     winston.info("Getting login form");
     res.render("auth/login");
+  }
+  /**
+   * Display the forget password page to the user
+   */
+  public viewForgetPassword(req: Request, res: Response, next: NextFunction) {
+    winston.info("Getting forget password page");
+    res.render("auth/forgetPassword");
+  }
+  /**
+   * Display the reset password page to the user
+   */
+  public viewResetPassword(req: Request, res: Response, next: NextFunction) {
+    winston.info("Getting reset password page");
+    winston.debug(req.query.token);
+    const options = {
+      token: req.query.token,
+    };
+    res.render("auth/resetPassword", options);
   }
 
   /**
@@ -73,6 +93,40 @@ export class LoginController {
             }
           }
         });
+      }
+    });
+  }
+
+  /**
+   * Try to send to the back forgetPassword request
+   */
+  public forgetPassword(req: Request, res: Response, next: NextFunction) {
+    const email = req.body.email;
+    const request = new ForgetPasswordRequest(email);
+    AuthService.forgetPassword(request, function (err: any) {
+      if (err) {
+        return next(err);
+      } else {
+        const options = {
+          recu: true,
+        };
+        res.render("auth/forgetPassword", options);
+      }
+    });
+  }
+
+  /**
+   * Try to send to the back forgetPassword request
+   */
+  public resetPassword(req: Request, res: Response, next: NextFunction) {
+    const password = req.body.password;
+    const token = req.query.token;
+    const request = new ResetPasswordRequest(password, token);
+    AuthService.resetPassword(request, function (err: any) {
+      if (err) {
+        return next(err);
+      } else {
+        res.render("auth/login");
       }
     });
   }
