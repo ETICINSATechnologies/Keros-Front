@@ -4,5 +4,7 @@
   "clientBaseUrl": "http://localhost:8080",
   "backendBaseUrl": "https://pre-keros-api.etic-insa.com/api/v1",
   "useMock": false,
-  "logLevel": "debug"
+  "logLevel": "debug",
+  "stripeApiPK": "pk_test_UWQd9XAAsaeHLxDD6lQe7lVX",
+  "subscriptionFeeProductId": "sku_HEzuOFHM8WByb8"
 }

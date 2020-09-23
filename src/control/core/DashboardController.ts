@@ -24,4 +24,12 @@ export class DashboardController {
     });
   }
 
+  public paymentSuccesful(req: Request, res: Response, next: NextFunction) {
+    res.render("core/paymentSuccessful");
+  }
+
+  public paymentCancelled(req: Request, res: Response, next: NextFunction) {
+    res.render("core/paymentCancelled");
+  }
+
 }

@@ -7,4 +7,6 @@ export interface IConfig {
   readonly backendBaseUrl: string;
   readonly useMock: boolean;
   readonly logLevel: string;
+  readonly stripeApiPK: string;
+  readonly subscriptionFeeProductId: string;
 }

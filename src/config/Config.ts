@@ -61,4 +61,12 @@ export class Config {
   public static getUseMock(): boolean {
     return this.activeConfig.useMock;
   }
+
+  public static getStripeApiPK(): string {
+    return this.activeConfig.stripeApiPK;
+  }
+
+  public static getSubscriptionFeeProductId(): string {
+    return this.activeConfig.subscriptionFeeProductId;
+  }
 }
