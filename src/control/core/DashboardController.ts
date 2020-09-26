@@ -4,11 +4,17 @@ import { StudyService } from "../../services/ua/StudyService";
 import { Page } from "../../models/core/Page";
 import { Study } from "../../models/ua/Study";
 import * as httpContext from "express-http-context";
+import { MemberService } from "../../services/core/MemberService";
 
 export class DashboardController {
   public getDashboard(req: Request, res: Response, next: NextFunction) {
-    winston.debug("Getting dashboard");
-    res.render("core/dashboard");
+    MemberService.getConnectedMember(function (err, connectedMember) {
+      const options = {
+        connectedMember
+      };
+      winston.debug("Getting dashboard");
+      res.render("core/dashboard", options);
+    });
   }
 
   public viewStudiesOnDashboard(req: Request, res: Response, next: NextFunction) {
@@ -20,8 +26,16 @@ export class DashboardController {
         studies: page,
         nbOngoingStudies : nbStudies,
       };
-      res.render("core/dashboardStudies", options);
+      res.render("core/dashboard", options);
     });
+  }
+
+  public paymentSuccesful(req: Request, res: Response, next: NextFunction) {
+    res.render("core/paymentSuccessful");
+  }
+
+  public paymentCancelled(req: Request, res: Response, next: NextFunction) {
+    res.render("core/paymentCancelled");
   }
 
 }

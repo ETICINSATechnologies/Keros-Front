@@ -1,3 +1,4 @@
+<script src="https://js.stripe.com/v3/"></script>
 <body class="hold-transition skin-green fixed sidebar-mini">
 <div class="wrapper">
   {{> template/header}}
@@ -17,10 +18,22 @@
             <div class="box-body">
               <a href="/ua/study/me" style="color: white;">Bienvenue sur Keros !</a>
               Utilisez le menu à gauche pour naviguer, et déconnectez vous en cliquant sur votre nom en haut à droite, suivi de "Déconnecter"
-
             </div>
           </div>
         </div>
+          {{#unless (isRepaymentDue connectedMember.dateRepayment.date)}}
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <div class="bg-aqua">
+                        <i class="fa fa-exclamation-triangle fa-3x fa-align-center" style="padding: 10px"></i>
+                    </div>
+                    <div class="" style="text-align: center;">
+                        <h4 class="box-title text-center">Renouvellement de l'inscription nécessaire</h4>
+                        <button class="btn btn-primary" onclick="payment('{{connectedUser.id}}', '{{connectedUser.email}}');">Payer la cotisation</button>
+                    </div>
+                </div>
+            </div>
+          {{/unless}}
       </div>
     </section>
   </div
@@ -28,3 +41,19 @@
 </div>
 {{> template/scripts}}
 </body>
+
+<script>
+    function payment(memberId, memberEmail) {
+        const stripe = window.Stripe("{{getStripeApiPK}}");
+        stripe.redirectToCheckout({
+            items: [{ sku : "{{getSubscriptionFeeProductId}}", quantity: 1 }],
+            successUrl: window.location.origin + "/paymentSuccessful",
+            cancelUrl: window.location.origin + "/paymentCancelled",
+            clientReferenceId: memberId.toString(),
+            customerEmail: memberEmail
+        })
+        .then(function (result) {
+            result.error.message = "Error while redirecting to payment page";
+        });
+    }
+</script>

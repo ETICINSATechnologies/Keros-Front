@@ -14,9 +14,9 @@ export function dashboardRouter(): Router {
   const router: Router = Router();
   secureRouter(router);
 
-  // router.get("/dashboard", indexController.getDashboard);
-  // router.get("", indexController.getDashboard);
   router.get("", indexController.getDashboard);
   router.get("/dashboard", indexController.getDashboard);
+  router.get("/paymentSuccessful", indexController.paymentSuccesful);
+  router.get("/paymentCancelled", indexController.paymentCancelled);
   return router;
 }
