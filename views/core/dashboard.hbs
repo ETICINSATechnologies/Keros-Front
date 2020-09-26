@@ -44,18 +44,16 @@
 
 <script>
     function payment(memberId, memberEmail) {
-        const stripe = window.Stripe("pk_test_UWQd9XAAsaeHLxDD6lQe7lVX");
-        stripe
-                .redirectToCheckout({
-                    items: [{ sku : "sku_HEzuOFHM8WByb8", quantity: 1 }],
-                    successUrl: "http://localhost:8080/paymentSuccessful",
-                    cancelUrl: "http://localhost:8080/paymentCancelled",
-                    clientReferenceId: memberId.toString(),
-                    customerEmail: memberEmail
-                })
-                .then(function (result) {
-                    result.error.message = "Il y avait une erreur dans la redirection vers le paiement";
-
-                });
+        const stripe = window.Stripe("{{getStripeApiPK}}");
+        stripe.redirectToCheckout({
+            items: [{ sku : "{{getSubscriptionFeeProductId}}", quantity: 1 }],
+            successUrl: window.location.origin + "/paymentSuccessful",
+            cancelUrl: window.location.origin + "/paymentCancelled",
+            clientReferenceId: memberId.toString(),
+            customerEmail: memberEmail
+        })
+        .then(function (result) {
+            result.error.message = "Error while redirecting to payment page";
+        });
     }
 </script>

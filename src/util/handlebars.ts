@@ -4,6 +4,7 @@ import { labelToName } from "./handlebars/genderHelper";
 import { typeToName } from "./handlebars/factureTypeHelper";
 import { IStringable } from "../models/interface/IStringable";
 import { Position } from "../models/core/Position";
+import { Config } from "../config/Config";
 
 /**
  * Handlebars configuration using the express-handlebars constructor
@@ -208,6 +209,12 @@ export default handlebars({
       }
       const repaymentDueDate = new Date(currentSchoolYear + "-09-01")
       return dateToCheck > repaymentDueDate;
+    },
+    getStripeApiPK() {
+      return Config.getStripeApiPK();
+    },
+    getSubscriptionFeeProductId() {
+      return Config.getSubscriptionFeeProductId();
     }
   }
 });
