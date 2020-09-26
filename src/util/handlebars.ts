@@ -195,6 +195,19 @@ export default handlebars({
     },
     isAlumniParam(urlPathWithQueries: string) {
       return urlPathWithQueries && urlPathWithQueries.includes("isAlumni=true");
+    },
+    isRepaymentDue(dateInput: string) {
+      const dateToCheck = new Date(dateInput.substring(0, 9));
+      const currentDate = new Date();
+      let currentSchoolYear;
+      if (currentDate.getMonth() >= 9 ) {
+        currentSchoolYear = currentDate.getFullYear();
+      }
+      else {
+        currentSchoolYear = currentDate.getFullYear() - 1;
+      }
+      const repaymentDueDate = new Date(currentSchoolYear + "-09-01")
+      return dateToCheck > repaymentDueDate;
     }
   }
 });
