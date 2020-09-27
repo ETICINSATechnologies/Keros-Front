@@ -198,6 +198,7 @@ export default handlebars({
       return urlPathWithQueries && urlPathWithQueries.includes("isAlumni=true");
     },
     isRepaymentDue(dateInput: string) {
+      if (!dateInput) return true;
       const dateToCheck = new Date(dateInput.substring(0, 10));
       const currentDate = new Date();
       const repaymentDueDate = new Date(dateToCheck);
