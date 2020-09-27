@@ -198,17 +198,11 @@ export default handlebars({
       return urlPathWithQueries && urlPathWithQueries.includes("isAlumni=true");
     },
     isRepaymentDue(dateInput: string) {
-      const dateToCheck = new Date(dateInput.substring(0, 9));
+      const dateToCheck = new Date(dateInput.substring(0, 10));
       const currentDate = new Date();
-      let currentSchoolYear;
-      if (currentDate.getMonth() >= 9) {
-        currentSchoolYear = currentDate.getFullYear();
-      }
-      else {
-        currentSchoolYear = currentDate.getFullYear() - 1;
-      }
-      const repaymentDueDate = new Date(currentSchoolYear + "-09-01");
-      return dateToCheck > repaymentDueDate;
+      const repaymentDueDate = new Date(dateToCheck);
+      repaymentDueDate.setFullYear(dateToCheck.getFullYear() + 1);
+      return currentDate >= repaymentDueDate;
     },
     getStripeApiPK() {
       return Config.getStripeApiPK();

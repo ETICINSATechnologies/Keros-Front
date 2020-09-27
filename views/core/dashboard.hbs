@@ -21,7 +21,7 @@
             </div>
           </div>
         </div>
-          {{#unless (isRepaymentDue connectedMember.dateRepayment.date)}}
+          {{#if (isRepaymentDue connectedMember.dateRepayment.date)}}
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box">
                     <div class="bg-aqua">
@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </div>
-          {{/unless}}
+          {{/if}}
       </div>
     </section>
   </div
