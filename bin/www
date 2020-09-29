@@ -1,7 +1,0 @@
-#!/usr/bin/env node
-"use strict";
-const http = require("http");
-const launcherImport = require("../dist/src/launcher");
-
-const launcher = launcherImport.Launcher.bootstrap();
-launcher.startServer();

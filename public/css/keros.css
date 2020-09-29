@@ -1,0 +1,13 @@
+.keros-gradient {
+	background: linear-gradient(to right bottom, #005360, #167173, #3b907f, #67ad86, #9bca8b) !important;
+}
+
+.btn {
+	background-color: #3b907f;
+	border-color: #3b907f;
+}
+
+.btn:hover, .btn:focus, .btn:active {
+	background-color: #167173 !important;
+	border-color: #167173 !important;
+}

@@ -1,8 +1,0 @@
-{
-  "env": "local",
-  "httpPort": 80,
-  "clientBaseUrl": "http://localhost:8080",
-  "backendBaseUrl": "http://host.docker.internal:8000/api/v1",
-  "useMock": false,
-  "logLevel": "debug"
-}

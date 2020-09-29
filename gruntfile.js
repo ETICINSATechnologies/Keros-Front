@@ -1,74 +1,66 @@
 module.exports = function(grunt) {
-  "use strict";
+	grunt.initConfig({
+		pkg: grunt.file.readJSON('package.json'),
 
-  grunt.initConfig({
-    // Compile typescrupt by following the tsconfig.json configuration
-    ts: {
-      default : {
-        tsconfig: './tsconfig.json'
-      }
-    },
+		// TypeScript compilation using tsconfig.json
+		ts: {
+			default: {
+				tsconfig: 'tsconfig.json'
+			}
+		},
+		
+		// TSLint
+		tslint: {
+			options: {
+				configuration: 'tslint.yml',
+				project: 'tsconfig.json',
+				force: false,
+				fix: false
+			},
+			all: {
+				src: ['**/*.ts', '!node_modules/**/*.ts']		
+			}
+		},
+		
+		watch: {
+			scripts: {
+				files: ['**/*.ts', '!node_modules/**/*.ts'],
+				tasks: ['newer:tslint:all', 'ts'],
+				options: {
+					spawn: false
+				}
+			}
+		},
 
-    // Compile the Less files to less and place in dist directory
-    less: {
-      compile: {
-        options: {
-          compress: true,
-          yuicompress: true,
-          optimization: 2
-        },
-        files: [
-          {
-            expand: true,
-            cwd: 'public/less/',
-            src: ["**/*.less"],
-            dest: 'dist/public/css',
-            ext: '.css'
-          }
-        ]
-      }
-    },
+		nodemon: {
+			dev: {
+				script: 'dist/index.js'
+			},
+			options: {
+				ignore: ['node_modules/**', 'gruntfile.js'],
+				env: {
+					PORT: '8080'
+				}
+			}
+		},
 
-    // Copy all static files (i.e. that don't need compiling) to the dist directory
-    sync: {
-      syncViews: {
-        files: [
-          { cwd: './views', src: '**/*', dest: './dist/views' }
-        ]
-      },
-      syncPublic: {
-        files: [
-          { cwd: './public', src: ['**/*', '!**/less/**'], dest: './dist/public' }
-        ]
-      }
-    },
+		concurrent: {
+			watchers: {
+				tasks: ['nodemon', 'watch'],
+				options: {
+					logConcurrentOutput: true
+				}
+			}
+		}
+	});
 
-    // Watch for any changes to TS, Less, or static files and apply necessary changes to dist
-    watch: {
-      ts: {
-        files: ["src/**/*.ts", "test/**/*.ts"],
-        tasks: ["ts"]
-      },
-      static: {
-        files: ["views/**/*", "public/**/*", '!**/*.less'],
-        tasks: ["sync"]
-      },
-      less: {
-        files: ["public/less/**/*.less"],
-        tasks: ["less"]
-      }
-    }
-  });
+	grunt.loadNpmTasks('grunt-ts');
+	grunt.loadNpmTasks('grunt-tslint');
+	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-nodemon');
+	grunt.loadNpmTasks('grunt-concurrent');
+	grunt.loadNpmTasks('grunt-newer');
 
-  grunt.loadNpmTasks("grunt-sync");
-  grunt.loadNpmTasks("grunt-contrib-less");
-  grunt.loadNpmTasks("grunt-contrib-watch");
-  grunt.loadNpmTasks("grunt-ts");
-
-  grunt.registerTask("default", [
-    "ts",
-    "sync",
-    "less"
-  ]);
-
-};
+	grunt.registerTask('serve', ['concurrent:watchers']);
+	grunt.registerTask('default', ['tslint:all', 'ts']);
+}

@@ -1,63 +1,75 @@
-<body class="hold-transition login-page">
-<div class="login-box">
-  <div class="login-logo">
-    <b>Keros</b>
-  </div>
-  <!-- /.login-logo -->
-  <div class="login-box-body">
-    <p class="login-box-msg">Connectez-vous pour commencer à travailler</p>
-
-    <form action="/auth/login" method="post">
-      <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Nom d'utilisateur" name="username"
-               required
-               style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: pointer;">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Mot de passe" name="password"
-               minlength="8" required
-               oninvalid="this.setCustomValidity('Le mot de passe doit contenir au moins 8 caractères')"
-               oninput="this.setCustomValidity(' ')" onchange="this.setCustomValidity('')"
-               style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;"/>
-          {{#if (eq error 401)}}
-          <div class="alert alert-danger alert-dismissible fade in">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Connexion echouée !
-          </div>
-          {{/if}}
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-      </div>
-      <div class="row">
-<!--        <div class="col-xs-8">-->
-<!--          <div class="checkbox icheck">-->
-<!--            <label>-->
-<!--              <input type="checkbox" name="rememberUser">-->
-<!--              Se souvenir de moi-->
-<!--            </label>-->
-<!--          </div>-->
-<!--        </div>-->
-        <!-- /.col -->
-        <div class="col-xs-4">
-          <button type="submit" id="signin-button" class="btn btn-primary">Connexion</button>
-        </div>
-        <!-- /.col -->
-      </div>
-    </form>
-
-<!--    <a href="/TODO">J'ai oublié mon mot de passe</a><br>-->
-
-  </div>
-  <!-- /.login-box-body -->
-</div>
-{{> template/scripts}}
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square',
-      radioClass: 'iradio_square',
-      increaseArea: '20%' /* optional */
-    });
-  });
-</script>
+<body class="hold-transition login-page keros-gradient">
+	<div class="login-box">
+  	<div class="login-logo">
+    	<img src="/public/images/logo-keros-typo.png" class="w-100">
+  	</div>
+  	<div class="card">
+    	<div class="card-body login-card-body">
+      	<p class="login-box-msg text-sm">Connectez-vous pour commencer à travailler</p>
+      	<form action="/auth/login" method="post">
+        	<div class="input-group mb-3">
+          	<input 
+							type="text" 
+							class="form-control" 
+							placeholder="Nom d'utilisateur" 
+							name="username"
+							required
+						>
+          	<div class="input-group-append">
+            	<div class="input-group-text">
+              	<span class="fas fa-user"></span>
+            	</div>
+          	</div>
+        	</div>
+        	<div class="input-group mb-3">
+          	<input 
+							type="password" 
+							class="form-control" 
+							placeholder="Mot de passe" 
+							name="password"
+							minlength="8"
+							required
+							oninvalid="this.setCustomValidity('Le mot de passe doit contenir au moins 8 caractères')"
+							oninput="this.setCustomValidity('')"
+							onchange="this.setCustomValidity('')"
+						>
+          	<div class="input-group-append">
+            	<div class="input-group-text">
+              	<span class="fas fa-lock"></span>
+            	</div>
+          	</div>
+        	</div>
+        	<div class="row">
+          	<!--
+						<div class="col-8">
+            	<div class="icheck-primary">
+              	<input type="checkbox" id="remember">
+              	<label for="remember">
+                	Remember Me
+              	</label>
+            	</div>
+          	</div>
+						-->
+         		<div class="col">
+            	<button type="submit" class="btn btn-primary btn-block">Se Connecter</button>
+          	</div>
+        	</div>
+      	</form>
+				<!--
+      	<p class="mb-1">
+        	<a href="forgot-password.html">I forgot my password</a>
+      	</p>
+				-->
+    	</div>
+  	</div>
+		{{#if unauthorized}}
+		<div class="alert alert-danger" role="alert">
+			Mauvaise authentification
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		{{/if}}
+	</div>
+	{{> scripts}}
 </body>
