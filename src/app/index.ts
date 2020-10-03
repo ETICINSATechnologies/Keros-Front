@@ -11,6 +11,7 @@ import { HttpClient, errorHandler } from "../utils";
 import { Config, HBS_CONFIG } from "../config";
 
 import * as authModule from "./auth";
+import * as coreModule from "./core";
 
 export class App {
 	public readonly app: Application;
@@ -49,6 +50,7 @@ export class App {
 		this.app.use(cookieParser("156daf75-d51b-4918-a1b5-e158126b0cbd"));
 
 		authModule.initRoutes(this.app);
+		coreModule.initRoutes(this.app);
 
 		this.app.use(errorHandler);
 	}

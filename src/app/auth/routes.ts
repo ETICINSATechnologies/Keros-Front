@@ -7,9 +7,12 @@ export function initRoutes(app: Application) {
 	winston.debug("Initializing authentication routes");
 	const authRouter = Router();
 
-	authRouter.get("/login", AuthController.viewLoginPage);
-	authRouter.post("/login", AuthController.login);
+	authRouter.route("/login")
+		.get(AuthController.viewLoginPage)
+		.post(AuthController.login);
 
-	authRouter.post("/logout", AuthController.logout);
+	authRouter.route("/logout")
+		.get(AuthController.logout);
+
 	app.use("/auth", authRouter);
 }

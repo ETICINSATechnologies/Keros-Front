@@ -1,0 +1,200 @@
+<body class="hold-transition sidebar-mini accent-olive">
+	<div class="wrapper">
+		{{> navbar}}
+		{{> sidebar}}
+		<div class="content-wrapper">
+			<div class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1 class="m-0 text-dark">Mon Profil</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-7">
+							<div class="card card-olive">
+								<div class="card-header">
+									<h3 class="card-title">Informations Générales</h3>
+								</div>
+								<div class="card-body">
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label for="lastName">Nom</label>
+												<input type="text" class="form-control" id="lastName" name="lastName">
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label for="firstName">Prénom</label>
+												<input type="text" class="form-control" id="firstName" name="firstName">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-2">
+											<div class="form-group">
+												<label for="genderId">Sexe</label>
+												<select class="form-control" id="genderId" name="genderId">
+													{{#each genders}}
+														<option value="{{id}}">{{gender label}}</option>
+													{{/each}}
+												</select>
+											</div>
+										</div>
+										<div class="col-sm-4">
+											<div class="form-group">
+												<label for="birthday">Date de Naissance</label>
+												<input type="date" class="form-control" id="birthday">
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label for="telephone">Téléphone</label>
+												<input type="text" class="form-control" id="telephone" name="telephone">
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="email">Email</label>
+										<input type="email" class="form-control" id="email" name="email">
+									</div>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col-md-6">
+									<div class="card card-info">
+										<div class="card-header">
+											<h3 class="card-title">Formation</h3>
+										</div>
+										<div class="card-body">
+											<div class="row">
+												<div class="col-md-4">
+													<div class="form-group">
+														<label for="schoolYear">Année Scolaire</label>
+														<input type="number" class="form-control" id="schoolYear" name="schoolYear" min=1 max=8>
+													</div>
+												</div>
+												<div class="col-md-8">
+													<div class="form-group">
+														<label for="departmentId">Département</label>
+														<select class="form-control" id="departmentId" name="departmentId">
+															{{#each departments}}
+																<option value="{{id}}">{{label}}</option>
+															{{/each}}
+														</select>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="card card-danger">
+										<div class="card-header">
+											<h3 class="card-title">Authentification</h3>
+										</div>
+										<div class="card-body">
+											<div class="form-group">
+												<label for="username">Nom d'utilisateur</label>
+												<input type="text" class="form-control" id="username" name="username">
+											</div>
+											<div class="form-group">
+												<label for="password">Mot de Passe</label>
+												<input type="password" class="form-control" id="password" name="password">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6">	
+									<div class="card card-warning">
+										<div class="card-header">
+											<h3 class="card-title">Adresse</h3>
+										</div>
+										<div class="card-body">
+											<div class="form-group">
+												<label for="line1">Ligne 1</label>
+												<input type="string" class="form-control" id="line1" name="line1">
+											</div>
+											<div class="form-group">
+												<label for="line2">Ligne 2</label>
+												<input type="string" class="form-control" id="line2" name="line2">
+											</div>
+											<div class="row">
+												<div class="col-sm-6">
+													<div class="form-group">
+														<label for="postalCode">Code postal</label>
+														<input type="number" class="form-control" id="postalCode" name="postalCode">
+													</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="form-group">
+														<label for="city">Ville</label>
+														<input type="string" class="form-control" id="city" name="city">
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="countryId">Pays</label>
+												<select class="form-control" id="countryId" name="countryId">
+													{{#each countries}}
+														<option value="id">{{label}}</option>
+													{{/each}}
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-5">
+							<div class="card card-primary">
+								<div class="card-header">
+									<h3 class="card-title">Fonction / Poste</h3>
+								</div>
+								<div class="card-body">
+									{{#each connectedUser.positions}}
+										<div class="form-group">
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox">
+												<label class="form-check-label">CA</label>
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-md-4">
+												<label for="poleId{{@index}}">Pôle</label>
+												<select class="form-control" id="poleId{{@index}}" name="poleId{{@index}}">
+													{{#each @root.poles}}
+														<option value="{{id}}">{{label}}</option>
+													{{/each}}
+												</select>
+											</div>
+											<div class="form-group col-md-4">
+												<label for="positionId{{@index}}">Fonction</label>
+												<select class="form-control" id="positionId{{@index}}" name="positionId{{@index}}">
+													{{#each @root.positions}}
+														<option value="{{id}}">{{label}}</option>
+													{{/each}}
+												</select>
+											</div>
+											<div class="form-group col-md-4">
+												<label for="yearPosition{{@index}}">Année</label>
+												<input type="number" class="form-control" id="yearPosition{{@index}}">
+											</div>
+										</div>
+										<hr></hr>
+									{{/each}}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{> scripts}}
+</body>

@@ -9,35 +9,19 @@ import { AuthService } from "./services";
 import { LoginRequest, LoginResponse } from "./models";
 
 export class AuthController {
-	public static viewLoginPage(req: Request, res: Response, next: NextFunction) {
+	static viewLoginPage(req: Request, res: Response, next: NextFunction) {
 		winston.info("Getting login page");
 		res.render("auth/login");
 	}
 
-	public static login(req: Request, res: Response, next: NextFunction) {
-		AuthService.login({
+	static async login(req: Request, res: Response, next: NextFunction) {
+		let token;
+
+		await AuthService.login({
 			username: req.body.username,
 			password: req.body.password
-		}).then(async (lres: LoginResponse) => {
-			const token = lres.token;
-			const cMember = await MemberService.getConnectedMember().catch(
-				(err: HttpError) => {
-					if (err.status !== 404) {
-						throw err;
-					}
-					return;
-				}
-			);
-			const cConsultant = await ConsultantService.getConnectedConsultant().catch(
-				(err: HttpError) => {
-					if (err.status !== 404) {
-						throw err;
-					}
-					return;
-				}
-			);
-			const cUser = cMember || cConsultant;
-			res.cookie("connectedUser", JSON.stringify(cUser)).cookie("token", token).redirect("/");
+		}).then((lres: LoginResponse) => {
+			token = lres.token;
 		}).catch((err: HttpError) => {
 			if (err.status === 401) {
 				res.status(err.status).render("auth/login", { unauthorized: true });
@@ -45,11 +29,36 @@ export class AuthController {
 				next(err);
 			}
 		});
+
+		const cMember = await MemberService.getCurrent().catch(
+			(err: HttpError) => {
+				if (err.status !== 404) {
+					next(err);
+				}
+				return;
+			}
+		);
+		const cConsultant = await ConsultantService.getCurrent().catch(
+			(err: HttpError) => {
+				if (err.status !== 404) {
+					next(err);
+				}
+				return;
+			}
+		);
+		const cUser = cMember || cConsultant;
+
+		res
+			.cookie("connectedUser", JSON.stringify(cUser))
+			.cookie("token", token)
+			.cookie("isMember", Boolean(cMember))
+			.redirect("/");
 	}
 
-	public static logout(req: Request, res: Response, next: NextFunction) {
+	static logout(req: Request, res: Response, next: NextFunction) {
 		res.clearCookie("token");
 		res.clearCookie("connectedUser");
+		res.clearCookie("isMember");
 		res.redirect("/auth/login");
 	}
 }
