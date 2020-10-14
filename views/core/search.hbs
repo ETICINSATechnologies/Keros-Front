@@ -1,0 +1,65 @@
+<body class="hold-transition sidebar-mini accent-olive">
+	<div class="wrapper">
+		{{> navbar}}
+		{{> sidebar}}
+		<div class="content-wrapper">
+			<div class="content-header">
+				<div class="container-fluid">
+					<div clas="row mb-2">
+						<div class="col-sm-6">
+							<h1 class="m-0 text-dark">
+								{{#if (isSubstring route '/search/members')}}
+									Membres
+								{{else if (isSubstring route '/search/consultants')}}
+									Consultants
+								{{else}}
+									Anciens
+								{{/if}}
+							</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="content">
+				<div class="container-fluid">
+					<div class="card">
+						<div class="card-header d-flex">
+							{{#if (isSubstring route '/search/members')}}
+								<a class="btn bg-olive text-light">Ajouter un membre</a>
+								<form class="d-inline-block mx-2 mr-auto">
+									<button class="btn btn-primary">Exporter en CSV</button>
+								</form>
+							{{else if (isSubstring route '/search/consultants')}}
+
+							{{else}}
+
+							{{/if}}
+							<div class="btn-group btn-group-toggle" data-toggle="buttons">
+								<label class="btn btn-outline-info active">
+									<input type="radio" name="12" id="12" checked>12
+								</label>
+								<label class="btn btn-outline-info">
+									<input type="radio" name="25" id="25">25
+								</label>
+								<label class="btn btn-outline-info">
+									<input type="radio" name="50" id="50">50
+								</label>
+								<label class="btn btn-outline-info">
+									<input type="radio" name="100" id="100">100
+								</label>
+							</div>
+						</div>
+						<div class="card-body">
+							<div class="container-fluid">
+								<div id="result-table"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{> footer}}
+	</div>
+	{{> scripts}}
+</body>

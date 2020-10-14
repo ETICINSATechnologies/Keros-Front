@@ -2,12 +2,38 @@
 	<div class="wrapper">
 		{{> navbar}}
 		{{> sidebar}}
-		<div class="content-wrapper">
+		<form class="content-wrapper" method="post">
+			<input type="text" id="id" name="id" value="{{connectedUser.id}}" hidden>
 			<div class="content-header">
 				<div class="container-fluid">
 					<div class="row mb-2">
 						<div class="col-sm-6">
-							<h1 class="m-0 text-dark">Mon Profil</h1>
+							<h1 class="m-0 text-dark d-inline-block align-middle">
+								Mon Profil
+							</h1>
+							{{#if modify}}
+								<div class="btn-group mx-2" role="group">
+									<button
+										type="submit"
+										class="btn bg-olive text-light d-inline-block align-middle"
+									>
+										Valider
+									</button>
+									<a
+										class="btn btn-danger text-light d-inline-block align-middle"
+										href="/profile/me"
+									>
+										Annuler
+									</a>
+								</div>
+							{{else}}
+								<a 
+									class="btn bg-olive text-light d-inline-block align-middle mx-2"
+									href="/profile/me/modify"
+								>
+									Modifier
+								</a>
+							{{/if}}
 						</div>
 					</div>
 				</div>
@@ -26,13 +52,29 @@
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label for="lastName">Nom</label>
-												<input type="text" class="form-control" id="lastName" name="lastName">
+												<input
+													type="text"
+													class="form-control"
+													id="lastName"
+													name="lastName"
+													required
+													value="{{connectedUser.lastName}}"
+													{{#unless modify}}disabled{{/unless}}
+												>
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label for="firstName">Prénom</label>
-												<input type="text" class="form-control" id="firstName" name="firstName">
+												<input
+													type="text" 
+													class="form-control"
+													id="firstName"
+													name="firstName"
+													required
+													value="{{connectedUser.firstName}}"
+													{{#unless modify}}disabled{{/unless}}
+												>
 											</div>
 										</div>
 									</div>
@@ -40,9 +82,19 @@
 										<div class="col-sm-2">
 											<div class="form-group">
 												<label for="genderId">Sexe</label>
-												<select class="form-control" id="genderId" name="genderId">
+												<select
+													class="form-control"
+													id="genderId"
+													name="genderId"
+													{{#unless modify}}disabled{{/unless}}
+												>
 													{{#each genders}}
-														<option value="{{id}}">{{gender label}}</option>
+														<option 
+															value="{{id}}" 
+															{{#if (eq id ../connectedUser.gender.id)}}selected{{/if}}
+														>
+															{{gender label}}
+														</option>
 													{{/each}}
 												</select>
 											</div>
@@ -50,19 +102,60 @@
 										<div class="col-sm-4">
 											<div class="form-group">
 												<label for="birthday">Date de Naissance</label>
-												<input type="date" class="form-control" id="birthday">
+												<input 
+													type="date" 
+													class="form-control" 
+													id="birthday"
+													name="birthday"
+													required
+													value="{{connectedUser.birthday}}"
+													{{#unless modify}}disabled{{/unless}}
+												>
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label for="telephone">Téléphone</label>
-												<input type="text" class="form-control" id="telephone" name="telephone">
+												<input
+													type="text"
+													class="form-control"
+													id="telephone"
+													name="telephone"
+													required
+													value="{{connectedUser.telephone}}"
+													{{#unless modify}}disabled{{/unless}}
+												>
 											</div>
 										</div>
 									</div>
-									<div class="form-group">
-										<label for="email">Email</label>
-										<input type="email" class="form-control" id="email" name="email">
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label for="email">Email</label>
+												<input
+													type="email"
+													class="form-control"
+													id="email"
+													name="email"
+													required
+													value="{{connectedUser.email}}"
+													{{#unless modify}}disabled{{/unless}}
+												>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label for="emailETIC">Email ETIC</label>
+												<input
+													type="email"
+													class="form-control"
+													id="emailETIC"
+													name="emailETIC"
+													value="{{connectedUser.emailETIC}}"
+													{{#unless modify}}disabled{{/unless}}
+												>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -78,15 +171,33 @@
 												<div class="col-md-4">
 													<div class="form-group">
 														<label for="schoolYear">Année Scolaire</label>
-														<input type="number" class="form-control" id="schoolYear" name="schoolYear" min=1 max=8>
+														<input 
+															type="number" 
+															class="form-control" 
+															id="schoolYear" 
+															name="schoolYear" 
+															min=1 
+															max=8
+															required
+															value="{{connectedUser.schoolYear}}"
+															{{#unless modify}}disabled{{/unless}}
+														>
 													</div>
 												</div>
 												<div class="col-md-8">
 													<div class="form-group">
 														<label for="departmentId">Département</label>
-														<select class="form-control" id="departmentId" name="departmentId">
+														<select 
+															class="form-control" 
+															id="departmentId" 
+															name="departmentId"
+															{{#unless modify}}disabled{{/unless}}
+														>
 															{{#each departments}}
-																<option value="{{id}}">{{label}}</option>
+																<option 
+																	value="{{id}}"
+																	{{#if (eq id ../connectedUser.department.id)}}selected{{/if}}
+																>{{name}}</option>
 															{{/each}}
 														</select>
 													</div>
@@ -101,12 +212,37 @@
 										<div class="card-body">
 											<div class="form-group">
 												<label for="username">Nom d'utilisateur</label>
-												<input type="text" class="form-control" id="username" name="username">
+												<input 
+													type="text" 
+													class="form-control" 
+													id="username" 
+													name="username"
+													required
+													value="{{connectedUser.username}}"
+													{{#unless modify}}disabled{{/unless}}
+												>
 											</div>
 											<div class="form-group">
 												<label for="password">Mot de Passe</label>
-												<input type="password" class="form-control" id="password" name="password">
+												<input 
+													type="password"
+													class="form-control"
+													id="password"
+													name="password"
+													{{#unless modify}}disabled{{/unless}}
+												>
 											</div>
+											{{#if modify}}
+												<div class="form-group">
+													<label for="password_confirm">Confirmez le Mot de Passe</label>
+													<input
+														type="password"
+														class="form-control"
+														id="password_confirm"
+														name="password_confirm"
+													>
+												</div>
+											{{/if}}
 										</div>
 									</div>
 								</div>
@@ -118,31 +254,73 @@
 										<div class="card-body">
 											<div class="form-group">
 												<label for="line1">Ligne 1</label>
-												<input type="string" class="form-control" id="line1" name="line1">
+												<input
+													type="string"
+													class="form-control"
+													id="line1"
+													name="address[line1]"
+													required
+													value="{{connectedUser.address.line1}}"
+													{{#unless modify}}disabled{{/unless}}
+												>
 											</div>
 											<div class="form-group">
 												<label for="line2">Ligne 2</label>
-												<input type="string" class="form-control" id="line2" name="line2">
+												<input
+													type="string"
+													class="form-control"
+													id="line2"
+													name="address[line2]"
+													value="{{connectedUser.address.line2}}"
+													{{#unless modify}}disabled{{/unless}}
+												>
 											</div>
 											<div class="row">
 												<div class="col-sm-6">
 													<div class="form-group">
 														<label for="postalCode">Code postal</label>
-														<input type="number" class="form-control" id="postalCode" name="postalCode">
+														<input 
+															type="number"
+															class="form-control"
+															id="postalCode"
+															name="address[postalCode]"
+															required
+															value="{{connectedUser.address.postalCode}}"
+															{{#unless modify}}disabled{{/unless}}
+														>
 													</div>
 												</div>
 												<div class="col-sm-6">
 													<div class="form-group">
 														<label for="city">Ville</label>
-														<input type="string" class="form-control" id="city" name="city">
+														<input 
+															type="string"
+															class="form-control"
+															id="city"
+															name="address[city]"
+															required
+															value="{{connectedUser.address.city}}"
+															{{#unless modify}}disabled{{/unless}}
+														>
 													</div>
 												</div>
 											</div>
 											<div class="form-group">
 												<label for="countryId">Pays</label>
-												<select class="form-control" id="countryId" name="countryId">
+												<select
+													class="form-control"
+													id="countryId"
+													name="address[countryId]"
+													required
+													{{#unless modify}}disabled{{/unless}}
+												>
 													{{#each countries}}
-														<option value="id">{{label}}</option>
+														<option 
+															value="{{id}}" 
+															{{#if (eq id ../connectedUser.address.country.id)}}selected{{/if}}
+														>
+															{{label}}
+														</option>
 													{{/each}}
 												</select>
 											</div>
@@ -151,6 +329,7 @@
 								</div>
 							</div>
 						</div>
+
 						<div class="col-md-5">
 							<div class="card card-primary">
 								<div class="card-header">
@@ -160,30 +339,53 @@
 									{{#each connectedUser.positions}}
 										<div class="form-group">
 											<div class="form-check">
-												<input class="form-check-input" type="checkbox">
-												<label class="form-check-label">CA</label>
+												<input 
+													class="form-check-input"
+													type="checkbox"
+													name="positions[{{@index}}][isBoard]"
+													{{#if isBoard}}checked{{/if}}
+													{{#unless ../modify}}disabled{{/unless}}	
+												>
+												<label class="form-check-label">Conseil d'Administration</label>
 											</div>
 										</div>
 										<div class="row">
-											<div class="form-group col-md-4">
+											<div class="form-group col-md-5">
 												<label for="poleId{{@index}}">Pôle</label>
-												<select class="form-control" id="poleId{{@index}}" name="poleId{{@index}}">
-													{{#each @root.poles}}
-														<option value="{{id}}">{{label}}</option>
+												<select 
+													class="form-control" 
+													id="poleId{{@index}}"
+													name="positions[{{@index}}][poleId]"
+													{{#unless ../modify}}disabled{{/unless}}
+												>
+													{{#each ../poles}}
+														<option value="{{id}}" {{#if (eq id ../pole.id)}}selected{{/if}}>{{name}}</option>
 													{{/each}}
 												</select>
 											</div>
-											<div class="form-group col-md-4">
+											<div class="form-group col-md-5">
 												<label for="positionId{{@index}}">Fonction</label>
-												<select class="form-control" id="positionId{{@index}}" name="positionId{{@index}}">
-													{{#each @root.positions}}
-														<option value="{{id}}">{{label}}</option>
+												<select
+													class="form-control"
+													id="positionId{{@index}}"
+													name="positions[{{@index}}][id]"
+													{{#unless ../modify}}disabled{{/unless}}	
+												>
+													{{#each ../positions}}
+														<option value="{{id}}" {{#if (eq id ../id)}}selected{{/if}}>{{label}}</option>
 													{{/each}}
 												</select>
 											</div>
-											<div class="form-group col-md-4">
+											<div class="form-group col-md-2">
 												<label for="yearPosition{{@index}}">Année</label>
-												<input type="number" class="form-control" id="yearPosition{{@index}}">
+												<input
+													type="number"
+													class="form-control"
+													id="yearPosition{{@index}}"
+													name="positions[{{@index}}][year]"
+													value="{{year}}"
+													{{#unless ../modify}}disabled{{/unless}}
+												>
 											</div>
 										</div>
 										<hr></hr>
@@ -191,10 +393,12 @@
 								</div>
 							</div>
 						</div>
+
 					</div>
 				</div>
 			</div>
-		</div>
+		</form>
+		{{> footer}}
 	</div>
 	{{> scripts}}
 </body>

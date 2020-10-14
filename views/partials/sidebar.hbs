@@ -39,17 +39,20 @@
 				<li class="nav-item">
 					<a 
 						href="/profile/me" 
-						class="nav-link {{#if (eq route '/profile/me')}}active{{/if}}"
+						class="nav-link {{#if (isSubstring route '/profile/me')}}active{{/if}}"
 					>
 						<i class="nav-icon fas fa-id-card"></i>
 						<p>Mon Profil</p>
 					</a>
 				</li>
 				<li class="nav-header">
-					Ressources Humaines
+					Rechercher
 				</li>
 				<li class="nav-item">
-					<a href="" class="nav-link">
+					<a
+						href="/search/members"
+						class="nav-link {{#if (isSubstring route '/search/members')}}active{{/if}}"
+					>
 						<i class="nav-icon fas fa-users"></i>
 						<p>Membres</p>
 					</a>
@@ -65,6 +68,9 @@
 						<i class="nav-icon fas fa-user-graduate"></i>
 						<p>Anciens</p>
 					</a>
+				</li>
+				<li class="nav-header">
+					Ressources Humaines
 				</li>
 				<li class="nav-item">
 					<a href="#" class="nav-link">

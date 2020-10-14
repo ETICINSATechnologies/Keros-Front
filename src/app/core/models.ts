@@ -65,3 +65,30 @@ export interface Position {
 	isBoard?: boolean;
 	pole?: Pole;
 }
+
+export interface MemberRequest {
+	lastName?: string;
+	firstName?: string;
+	genderId?: number;
+	telephone?: string;
+	email?: string;
+	emailETIC?: string;
+	schoolYear?: number;
+	departmentId?: number;
+	username?: string;
+	password?: string;
+	address?: Address;
+	positions?: Position[];
+	isAlumni?: boolean;
+	droitImage?: boolean;
+}
+
+export interface MemberQueryResponse {
+	content: Member[];
+	meta: {
+		page: number;
+		totalPages: number;
+		totalItems: number;
+		itemsPerPage: number;
+	};
+}

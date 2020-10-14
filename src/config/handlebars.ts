@@ -6,8 +6,8 @@ export const HBS_CONFIG = {
 	layoutsDir: path.join(__dirname, "../../views/layouts"),
 	partialsDir: path.join(__dirname, "../../views/partials"),
 	helpers: {
-		eq (v1: any, v2: any) {
-			return v1 === v2;
+		eq (a: any, b: any) {
+			return a === b;
 		},
 		gender (code: any) {
 			let label;
@@ -26,6 +26,9 @@ export const HBS_CONFIG = {
 					break;
 			}
 			return label;
+		},
+		isSubstring (a: any, b: any) {
+			return a.indexOf(b) !== -1;
 		}
 	}
 };

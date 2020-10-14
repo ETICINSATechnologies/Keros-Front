@@ -11,7 +11,9 @@ import {
 	Pole,
 	Position,
 	Consultant,
-	Member
+	Member,
+	MemberRequest,
+	MemberQueryResponse
 } from "./models";
 
 export class AddressService extends BaseService {
@@ -32,7 +34,6 @@ export class CountryService extends BaseService {
 	static getAll(): Promise<Country[]> {
 		if (Date.now() < CountryService.cacheExpires) {
 			winston.debug("Loaded countries from cache");
-			winston.debug(`Response : ${JSON.stringify(CountryService.cacheValues, null, 2)}`);
 			return new Promise<Country[]>((resolve, reject) => resolve(CountryService.cacheValues));
 		}
 
@@ -54,7 +55,6 @@ export class GenderService extends BaseService {
 	static getAll(): Promise<Gender[]> {
 		if (Date.now() < GenderService.cacheExpires) {
 			winston.debug("Loaded genders from cache");
-			winston.debug(`Response : ${JSON.stringify(GenderService.cacheValues, null, 2)}`);
 			return new Promise<Gender[]>((resolve, reject) => resolve(GenderService.cacheValues));
 		}
 
@@ -76,7 +76,6 @@ export class DepartmentService extends BaseService {
 	static getAll(): Promise<Department[]> {
 		if (Date.now() < DepartmentService.cacheExpires) {
 			winston.debug("Loaded departments from cache");
-			winston.debug(`Response : ${JSON.stringify(DepartmentService.cacheValues, null, 2)}`);
 			return new Promise<Department[]>((resolve, reject) => resolve(DepartmentService.cacheValues));
 		}
 
@@ -97,8 +96,7 @@ export class PoleService extends BaseService {
 
 	static getAll(): Promise<Pole[]> {
 		if (Date.now() < PoleService.cacheExpires) {
-			winston.debug("Loaded countries from cache");
-			winston.debug(`Response : ${JSON.stringify(PoleService.cacheValues, null, 2)}`);
+			winston.debug("Loaded poles from cache");
 			return new Promise<Pole[]>((resolve, reject) => resolve(PoleService.cacheValues));
 		}
 
@@ -119,8 +117,7 @@ export class PositionService extends BaseService {
 
 	static getAll(): Promise<Position[]> {
 		if (Date.now() < PositionService.cacheExpires) {
-			winston.debug("Loaded countries from cache");
-			winston.debug(`Response : ${JSON.stringify(PositionService.cacheValues, null, 2)}`);
+			winston.debug("Loaded positions from cache");
 			return new Promise<Position[]>((resolve, reject) => resolve(PositionService.cacheValues));
 		}
 
@@ -145,8 +142,35 @@ export class MemberService extends BaseService {
 		);
 	}
 
+	static getAll(params?: object) {
+		return this.api.keros.get<MemberQueryResponse>("core/member", { params }).then(
+			(res: HttpResponse<MemberQueryResponse>) => {
+				winston.debug(`Response : ${JSON.stringify(res.data, null, 2)}`);
+				return res.data;
+			}
+		);
+	}
+
 	static getCurrent(): Promise<Member> {
 		return this.api.keros.get<Member>("core/member/me").then(
+			(res: HttpResponse<Member>) => {
+				winston.debug(`Response : ${JSON.stringify(res.data, null, 2)}`);
+				return res.data;
+			}
+		);
+	}
+
+	static updateCurrent(req: MemberRequest): Promise<Member> {
+		return this.api.keros.put<Member>(`core/member/me`, req).then(
+			(res: HttpResponse<Member>) => {
+				winston.debug(`Response : ${JSON.stringify(res.data, null, 2)}`);
+				return res.data;
+			}
+		);
+	}
+
+	static update(id: number, req: MemberRequest): Promise<Member> {
+		return this.api.keros.post<Member>(`core/member/${id}`, req).then(
 			(res: HttpResponse<Member>) => {
 				winston.debug(`Response : ${JSON.stringify(res.data, null, 2)}`);
 				return res.data;

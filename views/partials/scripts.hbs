@@ -1,3 +1,14 @@
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/adminlte.min.js"></script>
+
+{{#if (isSubstring route 'search')}}
+	<script src="/jsgrid/jsgrid.min.js"></script>
+	{{#if (isSubstring route 'members')}}
+	<script src="/public/js/member-search.js"></script>
+	{{else if (isSubstring route 'consultants')}}
+
+	{{else if (isSubstring route 'alumni')}}
+
+	{{/if}}
+{{/if}}

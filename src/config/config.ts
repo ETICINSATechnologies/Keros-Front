@@ -1,5 +1,6 @@
 import winston from "winston";
 
+import { configureLogger } from "./logger";
 import { Environment } from "./environment";
 
 export class Config {
@@ -30,16 +31,7 @@ export class Config {
 				break;
 		}
 
-		winston.configure({
-			level: this.activeConfig.logLevel,
-			transports: [
-				new winston.transports.Console(),
-				new winston.transports.File({
-					filename: __dirname + "/../../logs/app.log",
-					maxsize: 2048
-				})
-			]
-		});
+		configureLogger(this.activeConfig.logLevel);
 
 		winston.info("Running configuration in " + this.env + " environment");
 	}

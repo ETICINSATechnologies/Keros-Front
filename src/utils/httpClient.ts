@@ -17,6 +17,10 @@ export class HttpClient {
 		this.restClient = axios.create({ baseURL });
 	}
 
+	getDefaultHeader(key: string) {
+		return this.restClient.defaults.headers.common[key];
+	}
+
 	setDefaultHeader(key: string, value: string) {
 		this.restClient.defaults.headers.common[key] = value;
 	}
@@ -34,6 +38,16 @@ export class HttpClient {
 	post<T>(resource: string, body: object, options?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
 		winston.debug(`POST ${resource} with : \n ${JSON.stringify(body, null, 2)}`);
 		return this.restClient.post<T>(resource, body, options).catch((err: AxiosError) => {
+			if (err.response) {
+				throw new HttpError(err.response.status, err.response.data.message);
+			}
+			throw new HttpError(500, "Unexpected Error");
+		});
+	}
+
+	put<T>(resource: string, body: object, options?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+		winston.debug(`PUT ${resource} with : \n ${JSON.stringify(body, null, 2)}`);
+		return this.restClient.put<T>(resource, body, options).catch((err: AxiosError) => {
 			if (err.response) {
 				throw new HttpError(err.response.status, err.response.data.message);
 			}

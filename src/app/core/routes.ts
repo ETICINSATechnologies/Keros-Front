@@ -9,10 +9,20 @@ export function initRoutes(app: Application) {
 	const coreRouter = Router();
 
 	coreRouter.route("/")
-		.get(isConnected, CoreController.getDashboard);
-	
-	coreRouter.route("/profile/me")
-		.get(isConnected, CoreController.getConnectedProfile);
+		.get(CoreController.getDashboard);
 
-	app.use("", coreRouter);
+	coreRouter.route("/profile/me")
+		.get(CoreController.getConnectedProfile);
+
+	coreRouter.route("/profile/me/modify")
+		.get(CoreController.enableModifyProfile)
+		.post(CoreController.modifyProfile);
+
+	coreRouter.route("/search/members")
+		.get(CoreController.getSearchPage);
+
+	coreRouter.route("/data/:entity")
+		.get(CoreController.getData);
+
+	app.use("", isConnected, coreRouter);
 }
