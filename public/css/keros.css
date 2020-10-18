@@ -6,3 +6,12 @@
 .jsgrid-grid-body {
 	overflow: auto;
 }
+
+.jsgrid-hover {
+  cursor: pointer;
+}
+
+.jsgrid-hover > .jsgrid-cell {
+  background: #8febc3;
+  border-color: #8febc3;
+}

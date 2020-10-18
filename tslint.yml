@@ -19,8 +19,8 @@ rules:
         - ignore-same-line
     indent:
         - true
-        - tabs
-        - 4
+        - spaces
+        - 2
     interface-name:
         - false
     interface-over-type-literal: true

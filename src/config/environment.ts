@@ -1,6 +1,6 @@
 export enum Environment {
-	mock,
-	testing,
-	local,
-	staging
+  mock,
+  testing,
+  local,
+  staging
 }

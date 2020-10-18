@@ -1,5 +1,4 @@
 $(document).ready(async function(){
-
 	const positions = await $.ajax({
 		type: "GET",
 		url: "/data/positions"
@@ -75,9 +74,6 @@ $(document).ready(async function(){
     pagerFormat: "Pages: {first} {prev} {pages} {next} {last}    {pageIndex} de {pageCount}",
 
     selectedRowClass: "jsgrid-hover",
-    rowClick: function(args) {
-      window.open(`/profile/${args.item.id}`);
-    },
 
 		fields,
 
@@ -85,7 +81,7 @@ $(document).ready(async function(){
 			loadData: function(filter) {
 				return $.ajax({
 					type: "GET",
-					url: "/data/members",
+					url: "/data/alumni",
 					data: removeFalsy(filter)
 				});
 			}

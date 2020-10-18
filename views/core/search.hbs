@@ -12,7 +12,7 @@
 									Membres
 								{{else if (isSubstring route '/search/consultants')}}
 									Consultants
-								{{else}}
+								{{else if (isSubstring route '/search/alumni')}}
 									Anciens
 								{{/if}}
 							</h1>
@@ -31,22 +31,27 @@
 									<button class="btn btn-primary">Exporter en CSV</button>
 								</form>
 							{{else if (isSubstring route '/search/consultants')}}
-
-							{{else}}
-
+								<a class="btn bg-olive text-light">Ajouter un consultant</a>
+								<form class="d-inline-block mx-2 mr-auto">
+									<button class="btn btn-primary">Exporter en CSV</button>
+								</form>
+							{{else if (isSubstring route '/search/alumni')}}
+								<form class="d-inline-block mx-2 mr-auto">
+									<button class="btn btn-primary">Exporter en CSV</button>
+								</form>
 							{{/if}}
 							<div class="btn-group btn-group-toggle" data-toggle="buttons">
 								<label class="btn btn-outline-info active">
-									<input type="radio" name="12" id="12" checked>12
+									<input type="radio" name="pageSize" value="12" checked>12
 								</label>
 								<label class="btn btn-outline-info">
-									<input type="radio" name="25" id="25">25
+									<input type="radio" name="pageSize" value="25">25
 								</label>
 								<label class="btn btn-outline-info">
-									<input type="radio" name="50" id="50">50
+									<input type="radio" name="pageSize" value="50">50
 								</label>
 								<label class="btn btn-outline-info">
-									<input type="radio" name="100" id="100">100
+									<input type="radio" name="pageSize" value="100">100
 								</label>
 							</div>
 						</div>

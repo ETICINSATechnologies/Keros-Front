@@ -1,15 +1,4 @@
 $(document).ready(async function(){
-
-	const positions = await $.ajax({
-		type: "GET",
-		url: "/data/positions"
-	});
-
-	const poles = await $.ajax({
-		type: "GET",
-		url: "/data/poles"
-	});
-
 	var fields = [
 		{
 			name: "username",
@@ -32,28 +21,6 @@ $(document).ready(async function(){
 			name: "email",
 			title: "Email",
 			cellRenderer: escapeCell
-		},
-		{
-			name: "positionId",
-			title: "Position",
-			type: "select",
-			items: [
-				{ id: 0, label: "" },
-				...positions
-			],
-			valueField: "id",
-			textField: "label"
-		},
-		{
-			name: "poleId",
-			title: "Pôle",
-			type: "select",
-			items: [
-				{ id: 0, name: "" },
-				...poles
-			],
-			valueField: "id",
-			textField: "name"
 		}
 	];
 
@@ -75,9 +42,6 @@ $(document).ready(async function(){
     pagerFormat: "Pages: {first} {prev} {pages} {next} {last}    {pageIndex} de {pageCount}",
 
     selectedRowClass: "jsgrid-hover",
-    rowClick: function(args) {
-      window.open(`/profile/${args.item.id}`);
-    },
 
 		fields,
 
@@ -85,7 +49,7 @@ $(document).ready(async function(){
 			loadData: function(filter) {
 				return $.ajax({
 					type: "GET",
-					url: "/data/members",
+					url: "/data/consultants",
 					data: removeFalsy(filter)
 				});
 			}
