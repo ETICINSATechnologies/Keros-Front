@@ -53,7 +53,12 @@ $(document).ready(async function(){
 			],
 			valueField: "id",
 			textField: "name"
-		}
+		},
+    {
+      name: "company",
+      title: "Entreprise",
+      type: "text"
+    }
 	];
 
 	$("#result-table").jsGrid({
@@ -74,6 +79,9 @@ $(document).ready(async function(){
     pagerFormat: "Pages: {first} {prev} {pages} {next} {last}    {pageIndex} de {pageCount}",
 
     selectedRowClass: "jsgrid-hover",
+    rowClick: function(args) {
+      window.open(`/profile/alumni/${args.item.id}`);
+    },
 
 		fields,
 

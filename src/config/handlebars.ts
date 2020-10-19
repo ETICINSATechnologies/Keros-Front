@@ -27,7 +27,7 @@ export const HBS_CONFIG = {
       }
       return label;
     },
-    isSubstring (a: any, b: any) {
+    substr (a: any, b: any) {
       return a.indexOf(b) !== -1;
     }
   }

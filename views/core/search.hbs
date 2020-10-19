@@ -8,11 +8,11 @@
 					<div clas="row mb-2">
 						<div class="col-sm-6">
 							<h1 class="m-0 text-dark">
-								{{#if (isSubstring route '/search/members')}}
+								{{#if (substr route '/search/members')}}
 									Membres
-								{{else if (isSubstring route '/search/consultants')}}
+								{{else if (substr route '/search/consultants')}}
 									Consultants
-								{{else if (isSubstring route '/search/alumni')}}
+								{{else if (substr route '/search/alumni')}}
 									Anciens
 								{{/if}}
 							</h1>
@@ -20,22 +20,21 @@
 					</div>
 				</div>
 			</div>
-
 			<div class="content">
 				<div class="container-fluid">
 					<div class="card">
 						<div class="card-header d-flex">
-							{{#if (isSubstring route '/search/members')}}
+							{{#if (substr route '/search/members')}}
 								<a class="btn bg-olive text-light">Ajouter un membre</a>
 								<form class="d-inline-block mx-2 mr-auto">
 									<button class="btn btn-primary">Exporter en CSV</button>
 								</form>
-							{{else if (isSubstring route '/search/consultants')}}
+							{{else if (substr route '/search/consultants')}}
 								<a class="btn bg-olive text-light">Ajouter un consultant</a>
 								<form class="d-inline-block mx-2 mr-auto">
 									<button class="btn btn-primary">Exporter en CSV</button>
 								</form>
-							{{else if (isSubstring route '/search/alumni')}}
+							{{else if (substr route '/search/alumni')}}
 								<form class="d-inline-block mx-2 mr-auto">
 									<button class="btn btn-primary">Exporter en CSV</button>
 								</form>

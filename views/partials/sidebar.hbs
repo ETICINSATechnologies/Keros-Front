@@ -38,8 +38,10 @@
 				</li>
 				<li class="nav-item">
 					<a 
-						href="/profile/me" 
-						class="nav-link {{#if (isSubstring route '/profile/me')}}active{{/if}}"
+            href="/profile/me" 
+            class="nav-link
+              {{#if (eq route '/profile/me')}}active{{/if}}
+              {{#if (eq route '/profile/me/modify')}}active{{/if}}"
 					>
 						<i class="nav-icon fas fa-id-card"></i>
 						<p>Mon Profil</p>
@@ -51,20 +53,26 @@
 				<li class="nav-item">
 					<a
 						href="/search/members"
-						class="nav-link {{#if (isSubstring route '/search/members')}}active{{/if}}"
+						class="nav-link {{#if (substr route '/search/members')}}active{{/if}}"
 					>
 						<i class="nav-icon fas fa-users"></i>
 						<p>Membres</p>
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="/search/consultants" class="nav-link {{#if (isSubstring route '/search/consultants')}}active{{/if}}">
+					<a
+            href="/search/consultants"
+            class="nav-link {{#if (substr route '/search/consultants')}}active{{/if}}"
+          >
 						<i class="nav-icon fas fa-briefcase"></i>
 						<p>Consultants</p>
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="/search/alumni" class="nav-link {{#if (isSubstring route '/search/alumni')}}active{{/if}}">
+					<a
+            href="/search/alumni"
+            class="nav-link {{#if (substr route '/search/alumni')}}active{{/if}}"
+          >
 						<i class="nav-icon fas fa-user-graduate"></i>
 						<p>Anciens</p>
 					</a>

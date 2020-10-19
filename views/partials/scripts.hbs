@@ -3,13 +3,13 @@
 <script src="/js/adminlte.min.js"></script>
 <script src="/public/js/utils.js"></script>
 
-{{#if (isSubstring route 'search')}}
+{{#if (substr route 'search')}}
 	<script src="/jsgrid/jsgrid.min.js"></script>
-	{{#if (isSubstring route 'members')}}
+	{{#if (substr route 'members')}}
 	<script src="/public/js/member-search.js"></script>
-	{{else if (isSubstring route 'consultants')}}
+	{{else if (substr route 'consultants')}}
 	<script src="/public/js/consultant-search.js"></script>
-	{{else if (isSubstring route 'alumni')}}
+	{{else if (substr route 'alumni')}}
 	<script src="/public/js/alumni-search.js"></script>
 	{{/if}}
 {{/if}}

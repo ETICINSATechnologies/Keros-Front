@@ -76,7 +76,7 @@ $(document).ready(async function(){
 
     selectedRowClass: "jsgrid-hover",
     rowClick: function(args) {
-      window.open(`/profile/${args.item.id}`);
+      window.open(`/profile/members/${args.item.id}`);
     },
 
 		fields,

@@ -12,87 +12,109 @@ import {
   PositionService,
   PoleService
 } from "./services";
+import { deserializeTableData } from "./helpers";
 
 export class CoreController {
   static getDashboard(req: Request, res: Response, next: NextFunction) {
     winston.verbose("Getting dashboard");
     const connectedUser = JSON.parse(req.cookies.connectedUser);
+    const isMember = req.cookies.isMember;
+
     res.render("core/dashboard", {
+      route: req.originalUrl,
       connectedUser,
-      route: req.originalUrl
+      isMember
     });
   }
 
-  static getConnectedProfile(req: Request, res: Response, next: NextFunction) {
-    winston.verbose("Getting connected profile");
+  static async getProfile(req: Request, res: Response, next: NextFunction) {
+    winston.verbose("Getting profile");
     const connectedUser = JSON.parse(req.cookies.connectedUser);
     const isMember = req.cookies.isMember;
 
-    Promise.all([
-      DepartmentService.getAll(),
-      GenderService.getAll(),
-      CountryService.getAll(),
-      PositionService.getAll(),
-      PoleService.getAll()
-    ]).then(([
+    let viewedUser;
+    if (!req.params.id) {
+      viewedUser = connectedUser;
+    } else if (connectedUser.id === parseInt(req.params.id)) {
+      return res.redirect(`/profile/me`);
+    } else {
+      const id = parseInt(req.params.id);
+      switch (req.params.entity) {
+        case "consultants":
+          viewedUser = await ConsultantService.get(id);
+          break;
+        default:
+          viewedUser = await MemberService.get(id);
+          break;
+      }
+    }
+
+    const departments = await DepartmentService.getAll();
+    const genders = await GenderService.getAll();
+    const countries = await CountryService.getAll();
+    const positions = await PositionService.getAll();
+    const poles = await PoleService.getAll();
+
+    res.render("core/profile", {
+      route: req.originalUrl,
+      connectedUser,
+      isMember,
+      viewedUser,
+      entity: req.params.entity,
       departments,
       genders,
       countries,
       positions,
-      poles
-    ]) => {
-      res.render("core/profile", {
-        connectedUser,
-        route: req.originalUrl,
-        isMember,
-        departments,
-        genders,
-        countries,
-        positions,
-        poles,
-        modify: false
-      });
+      poles,
+      modify: false
     });
   }
 
-  static getProfile(req: Request, res: Response, next: NextFunction) {
-
-  }
-
-  static enableModifyProfile(req: Request, res: Response, next: NextFunction) {
-    winston.verbose("Enabling modification on connected profile");
+  static async enableModifyProfile(req: Request, res: Response, next: NextFunction) {
+    winston.verbose("Enabling modification on profile");
     const connectedUser = JSON.parse(req.cookies.connectedUser);
     const isMember = req.cookies.isMember;
 
-    Promise.all([
-      DepartmentService.getAll(),
-      GenderService.getAll(),
-      CountryService.getAll(),
-      PositionService.getAll(),
-      PoleService.getAll()
-    ]).then(([
+    let viewedUser;
+    if (req.originalUrl === "/profile/me/modify") {
+      viewedUser = connectedUser;
+    } else if (connectedUser.id === parseInt(req.params.id)) {
+      return res.redirect(`/profile/${req.params.entity}/me`);
+    } else {
+      const id = parseInt(req.params.id);
+      switch (req.params.entity) {
+        case "consultants":
+          viewedUser = await ConsultantService.get(id);
+          break;
+        default:
+          viewedUser = await MemberService.get(id);
+          break;
+      }
+    }
+
+    const departments = await DepartmentService.getAll();
+    const genders = await GenderService.getAll();
+    const countries = await CountryService.getAll();
+    const positions = await PositionService.getAll();
+    const poles = await PoleService.getAll();
+
+    res.render("core/profile", {
+      route: req.originalUrl,
+      connectedUser,
+      isMember,
+      viewedUser,
+      entity: req.params.entity,
       departments,
       genders,
       countries,
       positions,
-      poles
-    ]) => {
-      res.render("core/profile", {
-        connectedUser,
-        route: req.originalUrl,
-        isMember,
-        departments,
-        genders,
-        countries,
-        positions,
-        poles,
-        modify: true
-      });
+      poles,
+      modify: true
     });
   }
 
-  static async modifyProfile(req: Request, res: Response, next: NextFunction) {
-    winston.verbose("Modifying profile");
+  static async modifyCurrentProfile(req: Request, res: Response, next: NextFunction) {
+    winston.verbose("Modifying connected profile");
     const connectedUser = JSON.parse(req.cookies.connectedUser);
     const isMember = req.cookies.isMember;
 
@@ -100,15 +122,54 @@ export class CoreController {
       delete req.body.password;
     }
 
-    if (connectedUser.id === parseInt(req.body.id)) {
-      delete req.body.id;
-      const address = {
-        ...req.body.address,
-        postalCode: parseInt(req.body.address.postalCode),
-        countryId: parseInt(req.body.address.countryId)
-      };
+    delete req.body.id;
+    const address = {
+      ...req.body.address,
+      postalCode: parseInt(req.body.address.postalCode),
+      countryId: parseInt(req.body.address.countryId)
+    };
 
-      if (isMember) {
+    if (isMember) {
+      const positions = [];
+      for (const position of req.body.positions) {
+        const updatedPosition = {
+          id: parseInt(position.id),
+          poleId: parseInt(position.poleId),
+          year: parseInt(position.year),
+          isBoard: Boolean(position.isBoard)
+        };
+        positions.push(updatedPosition);
+      }
+      const updatedUser = await MemberService.updateCurrent({
+        ...req.body,
+        genderId: parseInt(req.body.genderId),
+        departmentId: parseInt(req.body.departmentId),
+        schoolYear: parseInt(req.body.schoolYear),
+        address,
+        positions
+      });
+      res.cookie("connectedUser", JSON.stringify(updatedUser));
+    }
+    res.redirect(`/profile/me`);
+  }
+
+  static async modifyProfile(req: Request, res: Response, next: NextFunction) {
+    winston.verbose("Modifying profile");
+
+    if (!req.body.password) {
+      delete req.body.password;
+    }
+
+    const address = {
+      ...req.body.address,
+      postalCode: parseInt(req.body.address.postalCode),
+      countryId: parseInt(req.body.address.countryId)
+    };
+
+    switch (req.params.entity) {
+      case "consultants":
+        break;
+      default:
         const positions = [];
         for (const position of req.body.positions) {
           const updatedPosition = {
@@ -119,105 +180,73 @@ export class CoreController {
           };
           positions.push(updatedPosition);
         }
-        const updatedUser = await MemberService.updateCurrent({
-          ...req.body,
-          genderId: parseInt(req.body.genderId),
-          departmentId: parseInt(req.body.departmentId),
-          schoolYear: parseInt(req.body.schoolYear),
-          address,
-          positions
-        });
-        res.cookie("connectedUser", JSON.stringify(updatedUser));
-      }
-      res.redirect("/profile/me");
+        const updatedUser = await MemberService.update(
+          parseInt(req.params.id),
+          {
+            ...req.body,
+            genderId: parseInt(req.body.genderId),
+            departmentId: parseInt(req.body.departmentId),
+            schoolYear: parseInt(req.body.schoolYear),
+            address,
+            positions
+          }
+        );
+        break;
     }
+    res.redirect(`/profile/${req.params.entity}/${req.params.id}`);
   }
 
   static async getSearchPage(req: Request, res: Response, next: NextFunction) {
     winston.verbose(`Getting search page for ${req.params.entity}`);
-
     const connectedUser = JSON.parse(req.cookies.connectedUser);
+    const isMember = req.cookies.isMember;
+
     res.render("core/search", {
+      route: req.originalUrl,
       connectedUser,
-      route: req.originalUrl
+      isMember
     });
   }
 
   static async getData(req: Request, res: Response, next: NextFunction) {
     winston.verbose(`Getting ${req.params.entity} data`);
 
+    let queryRes;
     switch (req.params.entity) {
       case "members":
         if (req.query) {
-          const queryRes = await MemberService.getAll({
+          queryRes = await MemberService.getAll({
             ...req.query,
             pageNumber: req.query.pageIndex ? Number(req.query.pageIndex) - 1 : 0,
             isAlumni: false
           });
-          const data = queryRes.content.map((member: Member) => {
-            const positionId = member.positions && member.positions[0] ?
-              member.positions[0].id : null;
-            const poleId = member.positions && member.positions[0] && member.positions[0].pole ?
-              member.positions[0].pole.id : null;
-            return {
-              id: member.id,
-              username: member.username,
-              lastName: member.lastName,
-              firstName: member.firstName,
-              email: member.email,
-              positionId,
-              poleId
-            };
-          });
           res.json({
-            data,
+            data: deserializeTableData(queryRes.content, req.params.entity),
             itemsCount: queryRes.meta.totalItems
           });
         }
         break;
       case "consultants":
         if (req.query) {
-          const queryRes = await ConsultantService.getAll({
+          queryRes = await ConsultantService.getAll({
             ...req.query,
             pageNumber: req.query.pageIndex ? Number(req.query.pageIndex) - 1 : 0
           });
-          const data = queryRes.content.map((member: Member) => {
-            return {
-              username: member.username,
-              lastName: member.lastName,
-              firstName: member.firstName,
-              email: member.email
-            };
-          });
           res.json({
-            data,
+            data: deserializeTableData(queryRes.content, req.params.entity),
             itemsCount: queryRes.meta.totalItems
           });
         }
         break;
       case "alumni":
         if (req.query) {
-          const queryRes = await MemberService.getAll({
+          queryRes = await MemberService.getAll({
             ...req.query,
             pageNumber: req.query.pageIndex ? Number(req.query.pageIndex) - 1 : 0,
             isAlumni: true
           });
-          const data = queryRes.content.map((member: Member) => {
-            const positionId = member.positions && member.positions[0] ?
-              member.positions[0].id : null;
-            const poleId = member.positions && member.positions[0] && member.positions[0].pole ?
-              member.positions[0].pole.id : null;
-            return {
-              username: member.username,
-              lastName: member.lastName,
-              firstName: member.firstName,
-              email: member.email,
-              positionId,
-              poleId
-            };
-          });
           res.json({
-            data,
+            data: deserializeTableData(queryRes.content, req.params.entity),
             itemsCount: queryRes.meta.totalItems
           });
         }

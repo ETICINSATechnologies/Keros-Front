@@ -1,0 +1,43 @@
+<div class="card card-info">
+	<div class="card-header">
+		<h3 class="card-title">Formation</h3>
+	</div>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group">
+					<label for="schoolYear">Année Scolaire</label>
+					<input 
+						type="number" 
+						class="form-control" 
+						id="schoolYear" 
+						name="schoolYear" 
+						min=1 
+						max=8
+						required
+						value="{{viewedUser.schoolYear}}"
+						{{#unless modify}}disabled{{/unless}}
+					>
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div class="form-group">
+					<label for="departmentId">Département</label>
+					<select 
+						class="form-control" 
+						id="departmentId" 
+						name="departmentId"
+						{{#unless modify}}disabled{{/unless}}
+					>
+						{{#each departments}}
+							<option 
+								value="{{id}}"
+								{{#if (eq id ../viewedUser.department.id)}}selected{{/if}}
+							>{{name}}</option>
+						{{/each}}
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

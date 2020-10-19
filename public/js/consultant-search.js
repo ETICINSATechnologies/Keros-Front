@@ -21,7 +21,12 @@ $(document).ready(async function(){
 			name: "email",
 			title: "Email",
 			cellRenderer: escapeCell
-		}
+		},
+    {
+      name: "isEu",
+      title: "Européen",
+      type: "checkbox"
+    }
 	];
 
 	$("#result-table").jsGrid({
@@ -42,6 +47,9 @@ $(document).ready(async function(){
     pagerFormat: "Pages: {first} {prev} {pages} {next} {last}    {pageIndex} de {pageCount}",
 
     selectedRowClass: "jsgrid-hover",
+    rowClick: function(args) {
+      window.open(`/profile/consultants/${args.item.id}`);
+    },
 
 		fields,
 
