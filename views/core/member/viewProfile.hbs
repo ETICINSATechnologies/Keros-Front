@@ -130,8 +130,7 @@
                   </h4>
                   <div class="col-md-4 form-group">
                     <label for="countryId">Pôle 1</label>
-                    <select class="form-control" id="poleId1" name="poleId1" required {{readonlyIf
-                            (eq action "view")}} {{disabledIf (eq action "view")}}>
+                    <select class="form-control" id="poleId1" name="poleId1" disabled>
                       {{#each poles}}
                         <option value="{{id}}" {{selected id @root.connectedUser.positions.0.poleId}}>{{label}} </option>
                       {{/each}}
@@ -155,8 +154,7 @@
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="countryId">Pôle 2</label>
-                    <select class="form-control" id="poleId2" name="poleId2" required {{readonlyIf
-                            (eq action "view")}} {{disabledIf (eq action "view")}}>
+                    <select class="form-control" id="poleId2" name="poleId2" disabled>
                       {{#each poles}}
                         <option value="{{id}}" {{selected id @root.connectedUser.positions.1.poleId}}>{{label}} </option>
                       {{/each}}
@@ -180,8 +178,7 @@
                   </div>
                   <div class="col-md-4 form-group">
                      <label for="countryId">Pôle 3</label>
-                     <select class="form-control" id="poleId3" name="poleId3" required {{readonlyIf
-                             (eq action "view")}} {{disabledIf (eq action "view")}}>
+                     <select class="form-control" id="poleId3" name="poleId3" disabled>
                        {{#each poles}}
                          <option value="{{id}}" {{selected id @root.connectedUser.positions.2.poleId}}>{{label}} </option>
                        {{/each}}
