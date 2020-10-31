@@ -8,13 +8,7 @@
 					<div clas="row mb-2">
 						<div class="col-sm-6">
 							<h1 class="m-0 text-dark">
-								{{#if (substr route '/search/members')}}
-									Membres
-								{{else if (substr route '/search/consultants')}}
-									Consultants
-								{{else if (substr route '/search/alumni')}}
-									Anciens
-								{{/if}}
+                {{title}}
 							</h1>
 						</div>
 					</div>
@@ -23,22 +17,22 @@
 			<div class="content">
 				<div class="container-fluid">
 					<div class="card">
-						<div class="card-header d-flex">
-							{{#if (substr route '/search/members')}}
-								<a class="btn bg-olive text-light">Ajouter un membre</a>
-								<form class="d-inline-block mx-2 mr-auto">
-									<button class="btn btn-primary">Exporter en CSV</button>
-								</form>
-							{{else if (substr route '/search/consultants')}}
-								<a class="btn bg-olive text-light">Ajouter un consultant</a>
-								<form class="d-inline-block mx-2 mr-auto">
-									<button class="btn btn-primary">Exporter en CSV</button>
-								</form>
-							{{else if (substr route '/search/alumni')}}
-								<form class="d-inline-block mx-2 mr-auto">
-									<button class="btn btn-primary">Exporter en CSV</button>
-								</form>
-							{{/if}}
+            <div class="card-header d-flex">
+              <div class="mr-auto">
+							  {{#if addRoute}}
+                  <a
+                    class="btn bg-olive text-light"
+                    href="{{addRoute}}"  
+                  >
+                    Ajouter
+                  </a>
+							  {{/if}}
+							  {{#if exportRoute}}
+							  	<form class="d-inline-block mx-2">
+							  		<button class="btn btn-primary">Exporter</button>
+							  	</form>
+							  {{/if}}
+              </div>
 							<div class="btn-group btn-group-toggle" data-toggle="buttons">
 								<label class="btn btn-outline-info active">
 									<input type="radio" name="pageSize" value="12" checked>12
@@ -66,4 +60,20 @@
 		{{> footer}}
 	</div>
 	{{> scripts}}
+  <script src="/jsgrid/jsgrid.min.js"></script>
+  {{#if (substr route 'search')}}
+  	{{#if (substr route 'members')}}
+  	  <script src="/public/js/member-search.js"></script>
+  	{{else if (substr route 'consultants')}}
+  	  <script src="/public/js/consultant-search.js"></script>
+  	{{else if (substr route 'alumni')}}
+  	  <script src="/public/js/alumni-search.js"></script>
+  	{{/if}}
+  {{else if (substr route 'registrations')}}
+    {{#if (substr route 'members')}}
+      <script src="/public/js/member-registration.js"></script>
+    {{else if (substr route 'consultants')}}
+      <script src="/public/js/consultant-registration.js"></script>
+    {{/if}}
+  {{/if}}
 </body>

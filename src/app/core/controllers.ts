@@ -53,7 +53,6 @@ export class CoreController {
     const genders = await GenderService.getAll();
     const countries = await CountryService.getAll();
     const positions = await PositionService.getAll();
-    const poles = await PoleService.getAll();
 
     res.render("core/profile", {
       route: req.originalUrl,
@@ -65,7 +64,6 @@ export class CoreController {
       genders,
       countries,
       positions,
-      poles,
       modify: false
     });
   }
@@ -96,7 +94,6 @@ export class CoreController {
     const genders = await GenderService.getAll();
     const countries = await CountryService.getAll();
     const positions = await PositionService.getAll();
-    const poles = await PoleService.getAll();
 
     res.render("core/profile", {
       route: req.originalUrl,
@@ -108,7 +105,6 @@ export class CoreController {
       genders,
       countries,
       positions,
-      poles,
       modify: true
     });
   }
@@ -200,22 +196,41 @@ export class CoreController {
     winston.verbose(`Getting search page for ${req.params.entity}`);
     const connectedUser = JSON.parse(req.cookies.connectedUser);
     const isMember = req.cookies.isMember;
+    let title, addRoute, exportRoute;
 
-    res.render("core/search", {
+    switch (req.params.entity) {
+      case "members":
+        title = "Membres";
+        addRoute = "/search/members/add";
+        break;
+      case "consultants":
+        title = "Consultants";
+        addRoute = "/search/consultants/add";
+        break;
+      case "alumni":
+        title = "Anciens";
+        break;
+      default:
+        break;
+    }
+
+    res.render("common/search", {
       route: req.originalUrl,
       connectedUser,
-      isMember
+      isMember,
+      title,
+      addRoute,
+      exportRoute
     });
   }
 
   static async getData(req: Request, res: Response, next: NextFunction) {
     winston.verbose(`Getting ${req.params.entity} data`);
 
-    let queryRes;
     switch (req.params.entity) {
       case "members":
         if (req.query) {
-          queryRes = await MemberService.getAll({
+          const queryRes = await MemberService.getAll({
             ...req.query,
             pageNumber: req.query.pageIndex ? Number(req.query.pageIndex) - 1 : 0,
             isAlumni: false
@@ -228,7 +243,7 @@ export class CoreController {
         break;
       case "consultants":
         if (req.query) {
-          queryRes = await ConsultantService.getAll({
+          const queryRes = await ConsultantService.getAll({
             ...req.query,
             pageNumber: req.query.pageIndex ? Number(req.query.pageIndex) - 1 : 0
           });
@@ -240,7 +255,7 @@ export class CoreController {
         break;
       case "alumni":
         if (req.query) {
-          queryRes = await MemberService.getAll({
+          const queryRes = await MemberService.getAll({
             ...req.query,
             pageNumber: req.query.pageIndex ? Number(req.query.pageIndex) - 1 : 0,
             isAlumni: true
@@ -258,6 +273,10 @@ export class CoreController {
       case "poles":
         const poles = await PoleService.getAll();
         res.json(poles);
+        break;
+      case "departments":
+        const departments = await DepartmentService.getAll();
+        res.json(departments);
         break;
       default:
         break;

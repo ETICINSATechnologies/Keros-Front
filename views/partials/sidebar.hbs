@@ -80,8 +80,8 @@
 				<li class="nav-header">
 					Ressources Humaines
 				</li>
-				<li class="nav-item">
-					<a href="#" class="nav-link">
+				<li class="nav-item {{#if (substr route '/sg/registrations')}}menu-open{{/if}}">
+          <a href="#" class="nav-link {{#if (substr route '/sg/registrations')}}active{{/if}}">
 						<i class="nav-icon fas fa-user-plus"></i>
 						<p>
 							Inscriptions
@@ -90,13 +90,19 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="" class="nav-link">
+              <a
+                href="/sg/registrations/members"
+                class="nav-link {{#if (substr route '/sg/registrations/members')}}active{{/if}}"
+              >
 								<i class="nav-icon far fa-circle"></i>
 								<p>Membres</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="" class="nav-link">
+							<a
+                href="/sg/registrations/consultants"
+                class="nav-link {{#if (substr route '/sg/registrations/consultants')}}active{{/if}}"
+              >
 								<i class="nav-icon far fa-circle"></i>
 								<p>Consultants</p>
 							</a>

@@ -13,6 +13,7 @@ import { Config, HBS_CONFIG } from "../config";
 import { BaseService } from "./common/services";
 import * as authModule from "./auth";
 import * as coreModule from "./core";
+import * as secretaryModule from "./sg";
 
 export class App {
   public readonly app: Application;
@@ -61,6 +62,7 @@ export class App {
 
     authModule.initRoutes(this.app);
     coreModule.initRoutes(this.app);
+    secretaryModule.initRoutes(this.app);
 
     this.app.use(errorHandler);
   }
