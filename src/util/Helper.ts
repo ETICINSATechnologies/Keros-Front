@@ -1,5 +1,4 @@
 import { Position } from "../models/core/Position";
-// import { Config } from "../config/Config";
 
 export function queryStringify(data: any) {
   const ret = [];
@@ -9,9 +8,9 @@ export function queryStringify(data: any) {
   return ret.join("&");
 }
 
-export function isSG(positions: Position[]) {
+export function isSGorRespHR(positions: Position[]) {
   return positions.some(function (pos: Position) {
-    return 22 === pos.id;
+    return 22 === pos.id || 19 === pos.id;
   });
 }
 

@@ -136,15 +136,14 @@
                   </h4>
                   <div class="col-md-4 form-group">
                     <label for="countryId">Pôle 1</label>
-                    <select class="form-control" id="poleId1" name="poleId1" required {{readonlyIf
-                            (eq action "view")}} {{disabledIf (eq action "view")}}>
+                    <select class="form-control" id="poleId1" name="poleId1" disabled>
                       {{#each poles}}
                         <option value="{{id}}" {{selected id @root.member.positions.0.pole.id}}>{{name}} </option>
                       {{/each}}
                     </select>
                     <label for="countryId">Fonction 1</label>
                     <select class="form-control" id="positionId1" name="positionId1" required {{readonlyIf
-                            (eq action "view")}} {{disabledIf (or (eq action "view") (eq (isSG connectedUser.positions) false))}}>
+                            (eq action "view")}} {{disabledIf (or (eq action "view") (eq (isSGorRespHR connectedUser.positions) false))}}>
                       {{#each positions}}
                         <option value="{{id}}" {{selected id @root.member.positions.0.id}}>{{label}} {{#if pole}}({{pole.label}}){{/if}}</option>
                       {{/each}}
@@ -161,15 +160,14 @@
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="countryId">Pôle 2</label>
-                    <select class="form-control" id="poleId2" name="poleId2" required {{readonlyIf
-                            (eq action "view")}} {{disabledIf (eq action "view")}}>
+                    <select class="form-control" id="poleId2" name="poleId2" disabled>
                       {{#each poles}}
                         <option value="{{id}}" {{selected id @root.member.positions.1.pole.id}}>{{name}} </option>
                       {{/each}}
                     </select>
                     <label for="countryId">Fonction 2</label>
                     <select class="form-control" id="positionId2" name="positionId2"{{readonlyIf
-                            (eq action "view")}} {{disabledIf (or (eq action "view") (eq (isSG connectedUser.positions) false))}}>
+                            (eq action "view")}} {{disabledIf (or (eq action "view") (eq (isSGorRespHR connectedUser.positions) false))}}>
                       <option></option>
                       {{#each positions}}
                         <option value="{{id}}" {{selected id @root.member.positions.1.id}}>{{label}} </option>
@@ -186,15 +184,14 @@
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="countryId">Pôle 3</label>
-                    <select class="form-control" id="poleId3" name="poleId3" required {{readonlyIf
-                            (eq action "view")}} {{disabledIf (eq action "view")}}>
+                    <select class="form-control" id="poleId3" name="poleId3" disabled>
                       {{#each poles}}
                         <option value="{{id}}" {{selected id @root.member.positions.2.pole.id}}>{{name}} </option>
                       {{/each}}
                     </select>
                     <label for="countryId">Fonction 3</label>
                     <select class="form-control" id="positionId3" name="positionId3" {{readonlyIf
-                            (eq action "view")}} {{disabledIf (or (eq action "view") (eq (isSG connectedUser.positions) false))}}>
+                            (eq action "view")}} {{disabledIf (or (eq action "view") (eq (isSGorRespHR connectedUser.positions) false))}}>
                       <option></option>
                       {{#each positions}}
                         <option value="{{id}}" {{selected id @root.member.positions.2.id}}>{{label}} </option>

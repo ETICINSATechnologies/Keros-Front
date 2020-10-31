@@ -61,7 +61,7 @@
                     <input type="date" class="form-control" id="birthday" name="birthday"
                            value="{{inscription.birthday}}" required {{readonlyIf (eq action "view")}}>
                   </div>
-                  {{#if (eq true (isSG connectedUser.positions))}}
+                  {{#if (eq true (isSGorRespHR connectedUser.positions))}}
                     <div class="col-md-12 form-group">
                       <label for="socialSecurityNumber">Numéro de sécurité sociale</label>
                       <input type="text" class="form-control" id="socialSecurityNumber" name="socialSecurityNumber"
@@ -140,7 +140,7 @@
                     <label for="droitImage">Droit à l'image </label>
                     <input type="checkbox" id="droitImage" name="droitImage"
                       {{#if
-                        (or (eq action "view") (and (ne true (isSG connectedUser.positions))(ne true (isAdmin connectedUser.positions))))}}
+                        (or (eq action "view") (and (ne true (isSGorRespHR connectedUser.positions))(ne true (isAdmin connectedUser.positions))))}}
                            disabled="disabled" {{/if}}
                       {{#if inscription.droitImage}} checked {{/if}}>
                   </div>
@@ -148,7 +148,7 @@
                     <label for="isApprentice">En apprentissage</label>
                     <input type="checkbox" id="isApprentice" name="isApprentice"
                       {{#if
-                        (or (eq action "view") (and (ne true (isSG connectedUser.positions))(ne true (isAdmin connectedUser.positions))))}}
+                        (or (eq action "view") (and (ne true (isSGorRespHR connectedUser.positions))(ne true (isAdmin connectedUser.positions))))}}
                            disabled="disabled" {{/if}}
                       {{#if inscription.isApprentice}} checked {{/if}}>
                   </div>

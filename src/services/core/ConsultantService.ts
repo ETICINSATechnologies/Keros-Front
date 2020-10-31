@@ -4,7 +4,7 @@ import { BaseService } from "../common/BaseService";
 import { Page } from "../../models/core/Page";
 import { ConsultantCreateRequest } from "../../models/core/ConsultantCreateRequest";
 import * as winston from "winston";
-import { isSG, queryStringify } from "../../util/Helper";
+import { isSGorRespHR, queryStringify } from "../../util/Helper";
 import * as httpContext from "express-http-context";
 import { CreateCSVRequest } from "../../models/core/CreateCSVRequest";
 import { DocumentResponse } from "../../models/DocumentResponse";
@@ -13,7 +13,7 @@ export class ConsultantService extends BaseService {
     static getConsultant(id: number, callback: (err: any, result: Consultant | null) => void): void {
         const currentUserPositions = httpContext.get("connectedUser").positions;
         let routePath = "core/consultant/" + id;
-        if (isSG(currentUserPositions)) {
+        if (isSGorRespHR(currentUserPositions)) {
             routePath += "/protected";
         }
         this.rest.get<Consultant>(routePath, this.defaultHeaders()).then(

@@ -150,9 +150,9 @@ export default handlebars({
         return 20 === pos.id;
       });
     },
-    isSG (positions: Position[]) {
+    isSGorRespHR (positions: Position[]) {
       return positions.some(function (pos) {
-        return 22 === pos.id;
+        return 22 === pos.id || 19 === pos.id;
       });
     },
     isChadaff (positions: Position[]) {

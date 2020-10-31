@@ -12,7 +12,7 @@ import { CountryService } from "../../services/core/CountryService";
 import { Country } from "../../models/core/Country";
 import { AddressCreateRequest } from "../../models/core/AddressCreateRequest";
 import * as httpContext from "express-http-context";
-import { isSG } from "../../util/Helper";
+import { isSGorRespHR } from "../../util/Helper";
 import { CreateCSVRequest } from "../../models/core/CreateCSVRequest";
 import { DocumentResponse } from "../../models/DocumentResponse";
 import HttpError from "../../util/httpError";
