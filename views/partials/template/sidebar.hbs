@@ -17,7 +17,7 @@
           <i class="fa fa-home"></i> <span>Accueil</span>
         </a>
       </li>
-      {{#if connectedUser.positions}}
+      {{#if (isSGorRespHR connectedUser.positions)}}
         <!-- UA -->
         <!--
         <li class="treeview">
@@ -45,7 +45,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="/core/member?isAlumni=false"><i class="fa fa-circle-o"></i> Membres</a></li>
-            {{#if (isSG connectedUser.positions)}}
+            {{#if (isSGorRespHR connectedUser.positions)}}
               <li><a href="/core/consultant"><i class="fa fa-circle-o"></i> Consultants</a></li>
               <li class="treeview">
               <a href="#"><i class="fa fa-user-plus"></i> Inscriptions</a>

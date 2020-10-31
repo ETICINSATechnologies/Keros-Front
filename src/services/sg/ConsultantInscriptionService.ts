@@ -7,7 +7,7 @@ import { ConsultantInscriptionCreateRequest } from "../../models/sg/ConsultantIn
 import { DocumentResponse } from "../../models/DocumentResponse";
 import { MemberInscriptionCreateRequest } from "../../models/sg/MemberInscriptionCreateRequest";
 import { MemberInscription } from "../../models/sg/MemberInscription";
-import { isSG, queryStringify } from "../../util/Helper";
+import { isSGorRespHR, queryStringify } from "../../util/Helper";
 import { Config } from "../../config/Config";
 import * as FormData from "form-data";
 import { UploadedFile } from "express-fileupload";
@@ -17,7 +17,7 @@ export class ConsultantInscriptionService extends BaseService {
     static getConsultantInscription(id: number, callback: (err: any, result: ConsultantInscription | null) => void): void {
       const currentUserPositions = httpContext.get("connectedUser").positions;
       let routePath = "sg/consultant-inscription/" + id;
-      if (isSG(currentUserPositions)) {
+      if (isSGorRespHR(currentUserPositions)) {
         routePath += "/protected";
       }
         this.rest.get<ConsultantInscription>(routePath, this.defaultHeaders()).then(
