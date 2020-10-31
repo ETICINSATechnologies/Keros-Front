@@ -130,10 +130,9 @@
                   </h4>
                   <div class="col-md-4 form-group">
                     <label for="countryId">Pôle 1</label>
-                    <select class="form-control" id="poleId1" name="poleId1" required {{readonlyIf
-                            (eq action "view")}} {{disabledIf (eq action "view")}}>
+                    <select class="form-control" id="poleId1" name="poleId1" disabled>
                       {{#each poles}}
-                        <option value="{{id}}" {{selected id @root.member.poles.0.id}}>{{label}} </option>
+                        <option value="{{id}}" {{selected id @root.connectedUser.positions.0.pole.id}}>{{name}}</option>
                       {{/each}}
                     </select>
                     <label for="countryId">Fonction 1</label>
@@ -155,10 +154,9 @@
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="countryId">Pôle 2</label>
-                    <select class="form-control" id="poleId2" name="poleId2" required {{readonlyIf
-                            (eq action "view")}} {{disabledIf (eq action "view")}}>
+                    <select class="form-control" id="poleId2" name="poleId2" disabled>
                       {{#each poles}}
-                        <option value="{{id}}" {{selected id @root.member.poles.1.id}}>{{label}} </option>
+                        <option value="{{id}}" {{selected id @root.connectedUser.positions.1.pole.id}}>{{name}}</option>
                       {{/each}}
                     </select>
                     <label for="countryId">Fonction 2</label>
@@ -180,10 +178,9 @@
                   </div>
                   <div class="col-md-4 form-group">
                      <label for="countryId">Pôle 3</label>
-                     <select class="form-control" id="poleId3" name="poleId3" required {{readonlyIf
-                             (eq action "view")}} {{disabledIf (eq action "view")}}>
+                     <select class="form-control" id="poleId3" name="poleId3" disabled>
                        {{#each poles}}
-                         <option value="{{id}}" {{selected id @root.member.poles.2.id}}>{{label}} </option>
+                         <option value="{{id}}" {{selected id @root.connectedUser.positions.2.pole.id}}>{{name}} </option>
                        {{/each}}
                      </select>
                     <label for="countryId">Fonction 3</label>
