@@ -17,7 +17,7 @@ function escapeHTML(s, noEscapeQuotes) {
 	});
 }
 
-var escapeCell = function(value, item) {
+function escapeCell(value, item) {
 	return $("<td>").append(escapeHTML(value));
 }
 
