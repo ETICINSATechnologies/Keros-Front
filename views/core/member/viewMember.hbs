@@ -139,7 +139,7 @@
                     <select class="form-control" id="poleId1" name="poleId1" required {{readonlyIf
                             (eq action "view")}} {{disabledIf (eq action "view")}}>
                       {{#each poles}}
-                        <option value="{{id}}" {{selected id @root.member.positions.0.poleId}}>{{label}} </option>
+                        <option value="{{id}}" {{selected id @root.member.positions.0.pole.id}}>{{name}} </option>
                       {{/each}}
                     </select>
                     <label for="countryId">Fonction 1</label>
@@ -164,7 +164,7 @@
                     <select class="form-control" id="poleId2" name="poleId2" required {{readonlyIf
                             (eq action "view")}} {{disabledIf (eq action "view")}}>
                       {{#each poles}}
-                        <option value="{{id}}" {{selected id @root.member.positions.1.poleId}}>{{label}} </option>
+                        <option value="{{id}}" {{selected id @root.member.positions.1.pole.id}}>{{name}} </option>
                       {{/each}}
                     </select>
                     <label for="countryId">Fonction 2</label>
@@ -189,7 +189,7 @@
                     <select class="form-control" id="poleId3" name="poleId3" required {{readonlyIf
                             (eq action "view")}} {{disabledIf (eq action "view")}}>
                       {{#each poles}}
-                        <option value="{{id}}" {{selected id @root.member.positions.2.poleId}}>{{label}} </option>
+                        <option value="{{id}}" {{selected id @root.member.positions.2.pole.id}}>{{name}} </option>
                       {{/each}}
                     </select>
                     <label for="countryId">Fonction 3</label>

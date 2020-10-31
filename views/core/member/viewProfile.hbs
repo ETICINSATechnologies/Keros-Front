@@ -132,7 +132,7 @@
                     <label for="countryId">Pôle 1</label>
                     <select class="form-control" id="poleId1" name="poleId1" disabled>
                       {{#each poles}}
-                        <option value="{{id}}" {{selected id @root.connectedUser.positions.0.poleId}}>{{label}} </option>
+                        <option value="{{id}}" {{selected id @root.connectedUser.positions.0.pole.id}}>{{name}}</option>
                       {{/each}}
                     </select>
                     <label for="countryId">Fonction 1</label>
@@ -156,7 +156,7 @@
                     <label for="countryId">Pôle 2</label>
                     <select class="form-control" id="poleId2" name="poleId2" disabled>
                       {{#each poles}}
-                        <option value="{{id}}" {{selected id @root.connectedUser.positions.1.poleId}}>{{label}} </option>
+                        <option value="{{id}}" {{selected id @root.connectedUser.positions.1.pole.id}}>{{name}}</option>
                       {{/each}}
                     </select>
                     <label for="countryId">Fonction 2</label>
@@ -180,7 +180,7 @@
                      <label for="countryId">Pôle 3</label>
                      <select class="form-control" id="poleId3" name="poleId3" disabled>
                        {{#each poles}}
-                         <option value="{{id}}" {{selected id @root.connectedUser.positions.2.poleId}}>{{label}} </option>
+                         <option value="{{id}}" {{selected id @root.connectedUser.positions.2.pole.id}}>{{name}} </option>
                        {{/each}}
                      </select>
                     <label for="countryId">Fonction 3</label>
