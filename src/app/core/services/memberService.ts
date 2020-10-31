@@ -1,9 +1,14 @@
 import winston from "winston";
 
 import { BaseService } from "../../common/services";
-import { HttpResponse, HttpError } from "../../common/models";
+import {
+  HttpResponse,
+  HttpError,
+  DocumentResponse,
+  SearchResponse
+} from "../../common/models";
 
-import { Member, MemberRequest, SearchResponse } from "../models";
+import { Member, MemberRequest } from "../models";
 
 export class MemberService extends BaseService {
   static get(id: number): Promise<Member> {
@@ -45,6 +50,15 @@ export class MemberService extends BaseService {
   static update(id: number, req: MemberRequest): Promise<Member> {
     return this.api.keros.put<Member>(`core/member/${id}`, req).then(
       (res: HttpResponse<Member>) => {
+        winston.debug(`Response : ${JSON.stringify(res.data, null, 2)}`);
+        return res.data;
+      }
+    );
+  }
+
+  static exportCSV(idList: number[]): Promise<DocumentResponse> {
+    return this.api.keros.post<DocumentResponse>("core/member/export", { idList }).then(
+      (res: HttpResponse<DocumentResponse>) => {
         winston.debug(`Response : ${JSON.stringify(res.data, null, 2)}`);
         return res.data;
       }

@@ -1,5 +1,5 @@
 <body class="hold-transition sidebar-mini accent-olive">
-	<div class="wrapper">
+  <div class="wrapper">
 		{{> navbar}}
 		{{> sidebar}}
 		<form class="content-wrapper" method="post">
@@ -50,29 +50,55 @@
 					</div>
 				</div>
 			</div>
-			<div class="content">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-md-7">
-              {{> info-box/general}}
-							<div class="row">
-								<div class="col-md-6">
-                  {{> info-box/education}}
-                  {{> info-box/authentication}}
-							  </div>
-								<div class="col-md-6">
-                  {{> info-box/address}}
-								</div>
-							</div>
-						</div>
-						<div class="col-md-5">
-              {{> info-box/position}}
-						</div>
-          </div>
-				</div>
-			</div>
-		</form>
-		{{> footer}}
-	</div>
-	{{> scripts}}
+
+      {{#if (eq entity "consultants")}}
+        <div class="content">
+  				<div class="container-fluid">
+  					<div class="row">
+  						<div class="col-md-7">
+                {{> info-box/general}}
+  							<div class="row">
+  								<div class="col-md-6">
+                    {{> info-box/authentication}}
+  							  </div>
+  								<div class="col-md-6">
+                    {{> info-box/address}}
+  								</div>
+                </div>
+  						</div>
+  						<div class="col-md-5">
+                {{> info-box/education}}
+                {{> info-box/rights}}
+  						</div>
+            </div>
+  				</div>
+  			</div>
+      {{else}}
+  			<div class="content">
+  				<div class="container-fluid">
+  					<div class="row">
+  						<div class="col-md-7">
+                {{> info-box/general}}
+  							<div class="row">
+  								<div class="col-md-6">
+                    {{> info-box/education}}
+                    {{> info-box/authentication}}
+  							  </div>
+  								<div class="col-md-6">
+                    {{> info-box/address}}
+  								</div>
+                </div>
+  						</div>
+  						<div class="col-md-5">
+                {{> info-box/position}}
+                {{> info-box/rights}}
+  						</div>
+            </div>
+  				</div>
+  			</div>
+      {{/if}}
+    </form>
+    {{> footer}}
+  </div>
+  {{> scripts}}
 </body>

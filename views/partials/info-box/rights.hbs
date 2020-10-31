@@ -1,0 +1,21 @@
+<div class="card card-secondary">
+  <div class="card-header">
+      <h3 class="card-title">Droits</h3>
+  </div>
+  <div class="card-body">
+    <div class="form-group">
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          name="droitImage"
+          {{#if viewedUser.droitImage}}checked{{/if}}
+          {{#unless modify}}disabled{{/unless}}
+        >
+        <label class="form-check-label">
+          Droits à l'utilisation des images
+        </label>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,9 +1,14 @@
 import winston from "winston";
 
 import { BaseService } from "../../common/services";
-import { HttpResponse, HttpError } from "../../common/models";
+import {
+  HttpResponse,
+  HttpError,
+  DocumentResponse,
+  SearchResponse
+} from "../../common/models";
 
-import { Consultant, ConsultantRequest, SearchResponse } from "../models";
+import { Consultant, ConsultantRequest } from "../models";
 
 export class ConsultantService extends BaseService {
   static get(id: number): Promise<Consultant> {

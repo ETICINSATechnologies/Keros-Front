@@ -265,6 +265,6 @@ export class CoreController {
   }
 
   static async exportToCSV(req: Request, res: Response, next: NextFunction) {
-    winston.verbose(`Exporting ${req.params.entity} to CSV file`);
+    winston.verbose(`Exporting ${req.params.entity} as CSV file`);
   }
 }
