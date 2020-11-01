@@ -200,6 +200,16 @@
                         {{#if member.positions.2.isBoard}}checked{{/if}}> Membre CA
                     </label>
                   </div>
+
+                    <div class="col-md-4 form-group">
+                        <label for="droitImage">Droit à l'image </label>
+                        <input type="checkbox" id="droitImage" name="droitImage"
+                            {{#if member.droitImage}} checked {{/if}}
+                            {{disabledIf (or (eq action "view") (eq (isSGorRespHR connectedUser.positions) false))}}>
+                        <label for="isAlumni">Ancien</label>
+                        <input type="checkbox" id="isAlumni" name="isAlumni" {{#if member.isAlumni}} checked {{/if}}
+                            {{disabledIf (or (eq action "view") (eq (isSGorRespHR connectedUser.positions) false))}}>
+                    </div>
                 </div>
                 <div class="box-footer">
                   <a href="/"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button></a>

@@ -154,7 +154,7 @@ export class MemberController {
     userRequest.schoolYear = parseInt(req.body.schoolYear);
     userRequest.telephone = req.body.telephone;
     userRequest.isAlumni = req.body.isAlumni;
-    userRequest.droitImage = req.body.droitImage === "on";
+    userRequest.droitImage = req.body.droitImage;
 
     const positionRequest1 = new PositionRequest();
     userRequest.positions = [];
@@ -183,19 +183,23 @@ export class MemberController {
     addressRequest.countryId = parseInt(req.body.countryId);
     userRequest.address = addressRequest;
 
-    if (userId) {
+    if (userId === currentUserId) {
+      MemberService.updateConnectedMember(userRequest, function(err) {
+        if (err) {
+          return next(err);
+        }
+        MemberService.getConnectedMember(function (err2, member) {
+          res.cookie("connectedUser", JSON.stringify(member))
+              .redirect("/core/member/me");
+        });
+      });
+    }
+    else if (userId) {
       MemberService.update(userId, userRequest, function (err1) {
         if (err1) {
           return next(err1);
         }
-        if (userId === currentUserId) {
-          MemberService.getConnectedMember(function (err2, member) {
-            res.cookie("connectedUser", JSON.stringify(member))
-              .redirect("/core/member/me");
-          });
-        } else {
-          res.redirect("/core/member");
-        }
+        res.redirect("/core/member");
       });
     } else {
       MemberService.createMember(userRequest, function (err1) {

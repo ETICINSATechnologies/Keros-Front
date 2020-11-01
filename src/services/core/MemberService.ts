@@ -79,6 +79,20 @@ export class MemberService extends BaseService {
     );
   }
 
+    static updateConnectedMember(memberRequest: MemberCreateRequest, callback: (err: any, result: Member | null) => void): void {
+        this.rest.update<Member>("core/member/me", memberRequest, this.defaultHeaders()).then(
+            (res: IRestResponse<Member>) => {
+                if (res.statusCode !== 200) {
+                    return callback(this.defaultError(res.statusCode), null);
+                }
+                winston.debug("Response : " + JSON.stringify(res));
+                callback(null, res.result);
+            }
+        ).catch(
+            e => callback(e, null)
+        );
+    }
+
   static delete(memberId: number, callback: (err: any) => void): void {
     this.rest.del<Member>("core/member/" + memberId, this.defaultHeaders()).then(
       (res: IRestResponse<Member>) => {
