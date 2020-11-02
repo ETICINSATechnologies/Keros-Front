@@ -153,8 +153,8 @@ export class MemberController {
     userRequest.departmentId = parseInt(req.body.departmentId);
     userRequest.schoolYear = parseInt(req.body.schoolYear);
     userRequest.telephone = req.body.telephone;
-    userRequest.isAlumni = req.body.isAlumni;
-    userRequest.droitImage = req.body.droitImage;
+    userRequest.isAlumni = req.body.isAlumni === "on";
+    userRequest.droitImage = req.body.droitImage === "on";
 
     const positionRequest1 = new PositionRequest();
     userRequest.positions = [];

@@ -205,7 +205,8 @@
                         {{#if (eq action "view")}} disabled="disabled" {{/if}}
                         {{#if member.positions.2.isBoard}}checked{{/if}}> Membre CA
                     </label>
-                    <input type="text" id="isAlumni" name="isAlumni" value="{{member.isAlumni}}" hidden>
+                      <input type="checkbox" id="isAlumni" name="isAlumni" {{#if member.isAlumni}} checked {{/if}}
+                          {{disabledIf (or (eq action "view") (eq (isSGorRespHR connectedUser.positions) false))}} hidden>
                   </div>
                     <div class="col-md-4 form-group">
                         <label for="droitImage">Droit à l'image </label>

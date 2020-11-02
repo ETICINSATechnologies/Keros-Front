@@ -206,9 +206,8 @@
                         <input type="checkbox" id="droitImage" name="droitImage"
                             {{#if member.droitImage}} checked {{/if}}
                             {{disabledIf (or (eq action "view") (eq (isSGorRespHR connectedUser.positions) false))}}>
-                        <label for="isAlumni">Ancien</label>
                         <input type="checkbox" id="isAlumni" name="isAlumni" {{#if member.isAlumni}} checked {{/if}}
-                            {{disabledIf (or (eq action "view") (eq (isSGorRespHR connectedUser.positions) false))}}>
+                            {{disabledIf (or (eq action "view") (eq (isSGorRespHR connectedUser.positions) false))}} hidden>
                     </div>
                 </div>
                 <div class="box-footer">
