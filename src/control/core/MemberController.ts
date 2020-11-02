@@ -199,14 +199,14 @@ export class MemberController {
         if (err1) {
           return next(err1);
         }
-        res.redirect("/core/member");
+        res.redirect("/core/member?isAlumni=false");
       });
     } else {
       MemberService.createMember(userRequest, function (err1) {
         if (err1) {
           return next(err1);
         }
-        res.redirect("/core/member");
+        res.redirect("/core/member?isAlumni=false");
       });
     }
   }
@@ -282,7 +282,7 @@ export class MemberController {
       if (err) {
         return next(err);
       }
-      res.redirect("/core/member");
+      res.redirect("/core/member?isAlumni=false");
     });
   }
 
