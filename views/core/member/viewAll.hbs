@@ -5,9 +5,14 @@
     <div class="content-wrapper">
       <section class="content-header">
         <h1>
-          Voir les membres
+          Voir les {{#if (isAlumniParam urlPathWithQueries)}} anciens {{else}} membres {{/if}}
         </h1>
-        {{> breadcrumb tab="RH" action="all" pathall="Membres,Voir les membres"}}
+        {{#if (isAlumniParam urlPathWithQueries)}}
+            {{> breadcrumb tab="RH" action="all" pathall="Anciens,Voir les anciens"}}
+        {{else}}
+            {{> breadcrumb tab="RH" action="all" pathall="Membres,Voir les membres"}}
+        {{/if}}
+
       </section>
   {{> template/infoCaption type="member"}}
   {{> template/itemPerPage meta=members.meta page="memberList" members=members.content}}
