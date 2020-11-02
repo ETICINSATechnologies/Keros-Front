@@ -170,7 +170,7 @@
                             (eq action "view")}} {{disabledIf (or (eq action "view") (eq (isSGorRespHR connectedUser.positions) false))}}>
                       <option></option>
                       {{#each positions}}
-                        <option value="{{id}}" {{selected id @root.member.positions.1.id}}>{{label}} </option>
+                        <option value="{{id}}" {{selected id @root.member.positions.1.id}}>{{label}} {{#if pole}}({{pole.label}}){{/if}}</option>
                       {{/each}}
                     </select>
                     <label for="year">Année </label>
@@ -194,7 +194,7 @@
                             (eq action "view")}} {{disabledIf (or (eq action "view") (eq (isSGorRespHR connectedUser.positions) false))}}>
                       <option></option>
                       {{#each positions}}
-                        <option value="{{id}}" {{selected id @root.member.positions.2.id}}>{{label}} </option>
+                        <option value="{{id}}" {{selected id @root.member.positions.2.id}}>{{label}} {{#if pole}}({{pole.label}}){{/if}}</option>
                       {{/each}}
                     </select>
                     <label for="year">Année </label>
