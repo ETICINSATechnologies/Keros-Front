@@ -61,8 +61,8 @@
                  <button type="button" class="btn btn-danger" onclick="updateAlumniStatus();">Oui</button>
                    <script>
                      function updateAlumniStatus(){
-                       let isAlumni = document.getElementById("isAlumni").value === 'true';
-                       document.getElementById("isAlumni").value = !isAlumni;
+                       let isAlumni = document.getElementById("isAlumni").checked;
+                       document.getElementById("isAlumni").checked = !isAlumni;
                        document.getElementById("member-update-form").submit();
                      }
                    </script>
