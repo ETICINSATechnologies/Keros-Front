@@ -137,9 +137,10 @@
                     </select>
                     <label for="countryId">Fonction 1</label>
                     <select class="form-control" id="positionId1" name="positionId1" required {{readonlyIf
-                            (eq action "view")}} {{disabledIf (or (eq action "view") (eq (isSGorRespHR connectedUser.positions) false))}}>
+                            (eq action "view")}} {{disabledIf (eq action "view")}}>
                       {{#each positions}}
-                        <option value="{{id}}" {{selected id @root.connectedUser.positions.0.id}}>{{label}} </option>
+                          <option {{#if (and (ne @root.connectedUser.positions.0.id id)(eq (isSGorRespHR @root.connectedUser.positions) false))}}disabled{{/if}}
+                                  value="{{id}}" {{selected id @root.connectedUser.positions.0.id}}>{{label}} </option>
                       {{/each}}
                     </select>
                     <label for="year">Année </label>
@@ -161,10 +162,11 @@
                     </select>
                     <label for="countryId">Fonction 2</label>
                     <select class="form-control" id="positionId2" name="positionId2" {{readonlyIf
-                            (eq action "view")}} {{disabledIf (or (eq action "view") (eq (isSGorRespHR connectedUser.positions) false))}}>
+                            (eq action "view")}} {{disabledIf (eq action "view")}}>
                       <option></option>
                       {{#each positions}}
-                        <option value="{{id}}" {{selected id @root.connectedUser.positions.1.id}}>{{label}} </option>
+                        <option {{#if (and (ne @root.connectedUser.positions.1.id id)(eq (isSGorRespHR @root.connectedUser.positions) false))}}disabled{{/if}}
+                                value="{{id}}" {{selected id @root.connectedUser.positions.1.id}}>{{label}} </option>
                       {{/each}}
                     </select>
                     <label for="year">Année </label>
@@ -185,10 +187,11 @@
                      </select>
                     <label for="countryId">Fonction 3</label>
                     <select class="form-control" id="positionId3" name="positionId3" {{readonlyIf (eq action "view")}}
-                      {{disabledIf (or (eq action "view") (eq (isSGorRespHR connectedUser.positions) false))}}>
+                      {{disabledIf (eq action "view")}}>
                       <option></option>
                       {{#each positions}}
-                        <option value="{{id}}" {{selected id @root.connectedUser.positions.2.id}}>{{label}} </option>
+                        <option {{#if (and (ne @root.connectedUser.positions.2.id id)(eq (isSGorRespHR @root.connectedUser.positions) false))}}disabled{{/if}}
+                                value="{{id}}" {{selected id @root.connectedUser.positions.2.id}}>{{label}} </option>
                       {{/each}}
                     </select>
                     <label for="year">Année </label>
