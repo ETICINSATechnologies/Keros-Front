@@ -19,6 +19,7 @@ import { Pole } from "../../models/core/Pole";
 import HttpError from "../../util/httpError";
 import { DocumentResponse } from "../../models/DocumentResponse";
 import { CreateCSVRequest } from "../../models/core/CreateCSVRequest";
+import { isSGorRespHR } from "../../util/Helper";
 
 export class MemberController {
   public viewMembers(req: Request, res: Response, next: NextFunction) {
@@ -136,6 +137,7 @@ export class MemberController {
     const userId = parseInt(req.body.id);
 
     const currentUserId = httpContext.get("connectedUser").id;
+    const currentUserPositions = httpContext.get("connectedUser").positions;
 
     const userRequest = new MemberCreateRequest();
     userRequest.lastName = req.body.lastName;
@@ -153,8 +155,6 @@ export class MemberController {
     userRequest.departmentId = parseInt(req.body.departmentId);
     userRequest.schoolYear = parseInt(req.body.schoolYear);
     userRequest.telephone = req.body.telephone;
-    userRequest.isAlumni = req.body.isAlumni === "on";
-    userRequest.droitImage = req.body.droitImage === "on";
 
     const positionRequest1 = new PositionRequest();
     userRequest.positions = [];
@@ -174,6 +174,11 @@ export class MemberController {
     positionRequest3.year = parseInt(req.body.yearPosition3);
     positionRequest3.isBoard = req.body.isBoard3;
     if (positionRequest3 && positionRequest3.id && userRequest.positions) userRequest.positions.push(positionRequest3);
+
+    if (isSGorRespHR(currentUserPositions)) {
+      userRequest.isAlumni = req.body.isAlumni === "on";
+      userRequest.droitImage = req.body.droitImage === "on";
+    }
 
     const addressRequest = new AddressCreateRequest();
     addressRequest.line1 = req.body.line1;
