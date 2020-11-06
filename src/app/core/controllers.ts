@@ -12,7 +12,7 @@ import {
   PositionService,
   PoleService
 } from "./services";
-import { deserializeTableData } from "./helpers";
+import { formatTableData, formatFormFields } from "./helpers";
 
 export class CoreController {
   static getDashboard(req: Request, res: Response, next: NextFunction) {
@@ -27,26 +27,37 @@ export class CoreController {
     });
   }
 
-  static async getProfile(req: Request, res: Response, next: NextFunction) {
-    winston.verbose("Getting profile");
+  static async getProfilePage(req: Request, res: Response, next: NextFunction) {
+    winston.verbose("Getting profile page");
+
     const connectedUser = JSON.parse(req.cookies.connectedUser);
     const isMember = req.cookies.isMember;
 
-    let viewedUser;
-    if (!req.params.id) {
-      viewedUser = connectedUser;
+    let viewed, entity, title;
+    if (req.originalUrl.includes("/profile/me/")) {
+      viewed = connectedUser;
+      entity = isMember ? "members" : "consultants";
+      title = "Mon Profil";
     } else if (connectedUser.id === parseInt(req.params.id)) {
-      return res.redirect(`/profile/me`);
-    } else {
+      return res.redirect(`/profile/me/${req.params.action}`);
+    } else if (["view", "modify"].includes(req.params.action)){
       const id = parseInt(req.params.id);
-      switch (req.params.entity) {
+      title = `Profil Utilisateur #${id}`;
+      entity = req.params.entity;
+      switch (entity) {
         case "consultants":
-          viewedUser = await ConsultantService.get(id);
+          viewed = await ConsultantService.get(id);
+          break;
+        case "members":
+        case "alumni":
+          viewed = await MemberService.get(id);
           break;
         default:
-          viewedUser = await MemberService.get(id);
           break;
       }
+    } else {
+      title = "Nouvel Utilisateur";
+      entity = req.params.entity;
     }
 
     const departments = await DepartmentService.getAll();
@@ -58,145 +69,61 @@ export class CoreController {
       route: req.originalUrl,
       connectedUser,
       isMember,
-      viewedUser,
-      entity: req.params.entity,
+      viewed,
+      title,
+      entity,
       departments,
       genders,
       countries,
       positions,
-      modify: false
+      action: req.params.action
     });
-  }
-
-  static async enableModifyProfile(req: Request, res: Response, next: NextFunction) {
-    winston.verbose("Enabling modification on profile");
-    const connectedUser = JSON.parse(req.cookies.connectedUser);
-    const isMember = req.cookies.isMember;
-
-    let viewedUser;
-    if (req.originalUrl === "/profile/me/modify") {
-      viewedUser = connectedUser;
-    } else if (connectedUser.id === parseInt(req.params.id)) {
-      return res.redirect(`/profile/${req.params.entity}/me`);
-    } else {
-      const id = parseInt(req.params.id);
-      switch (req.params.entity) {
-        case "consultants":
-          viewedUser = await ConsultantService.get(id);
-          break;
-        default:
-          viewedUser = await MemberService.get(id);
-          break;
-      }
-    }
-
-    const departments = await DepartmentService.getAll();
-    const genders = await GenderService.getAll();
-    const countries = await CountryService.getAll();
-    const positions = await PositionService.getAll();
-
-    res.render("core/profile", {
-      route: req.originalUrl,
-      connectedUser,
-      isMember,
-      viewedUser,
-      entity: req.params.entity,
-      departments,
-      genders,
-      countries,
-      positions,
-      modify: true
-    });
-  }
-
-  static async modifyCurrentProfile(req: Request, res: Response, next: NextFunction) {
-    winston.verbose("Modifying connected profile");
-    const connectedUser = JSON.parse(req.cookies.connectedUser);
-    const isMember = req.cookies.isMember;
-
-    if (!req.body.password) {
-      delete req.body.password;
-    }
-
-    delete req.body.id;
-    const address = {
-      ...req.body.address,
-      postalCode: parseInt(req.body.address.postalCode),
-      countryId: parseInt(req.body.address.countryId)
-    };
-
-    if (isMember) {
-      const positions = [];
-      for (const position of req.body.positions) {
-        const updatedPosition = {
-          id: parseInt(position.id),
-          poleId: parseInt(position.poleId),
-          year: parseInt(position.year),
-          isBoard: Boolean(position.isBoard)
-        };
-        positions.push(updatedPosition);
-      }
-      const updatedUser = await MemberService.updateCurrent({
-        ...req.body,
-        genderId: parseInt(req.body.genderId),
-        departmentId: parseInt(req.body.departmentId),
-        schoolYear: parseInt(req.body.schoolYear),
-        address,
-        positions
-      });
-      res.cookie("connectedUser", JSON.stringify(updatedUser));
-    }
-    res.redirect(`/profile/me`);
   }
 
   static async modifyProfile(req: Request, res: Response, next: NextFunction) {
     winston.verbose("Modifying profile");
 
-    if (!req.body.password) {
-      delete req.body.password;
-    }
+    let updatedUser;
+    if (req.params.id) {
+      const id = parseInt(req.params.id);
+      const form = formatFormFields(req.body, req.params.entity);
 
-    const address = {
-      ...req.body.address,
-      postalCode: parseInt(req.body.address.postalCode),
-      countryId: parseInt(req.body.address.countryId)
-    };
+      switch (req.params.entity) {
+        case "consultants":
+          updatedUser = await ConsultantService.update(id, form);
+          break;
+        case "members":
+        case "alumni":
+          updatedUser = await MemberService.update(id, form);
+          break;
+        default:
+          break;
+      }
 
-    switch (req.params.entity) {
-      case "consultants":
-        break;
-      default:
-        const positions = [];
-        for (const position of req.body.positions) {
-          const updatedPosition = {
-            id: parseInt(position.id),
-            poleId: parseInt(position.poleId),
-            year: parseInt(position.year),
-            isBoard: Boolean(position.isBoard)
-          };
-          positions.push(updatedPosition);
-        }
-        const updatedUser = await MemberService.update(
-          parseInt(req.params.id),
-          {
-            ...req.body,
-            genderId: parseInt(req.body.genderId),
-            departmentId: parseInt(req.body.departmentId),
-            schoolYear: parseInt(req.body.schoolYear),
-            address,
-            positions
-          }
-        );
-        break;
+      res.redirect(`/profile/${req.params.entity}/${req.params.id}/view`);
+    } else {
+      const connectedUser = JSON.parse(req.cookies.connectedUser);
+      const isMember = req.cookies.isMember;
+      if (isMember) {
+        updatedUser = await MemberService.updateCurrent(formatFormFields(req.body, "members"));
+      } else {
+        updatedUser = await ConsultantService.updateCurrent(formatFormFields(req.body, "consultants"));
+      }
+
+      res
+        .cookie("connectedUser", JSON.stringify(updatedUser))
+        .redirect(`/profile/me/view`);
     }
-    res.redirect(`/profile/${req.params.entity}/${req.params.id}`);
+  }
+
+  static async addProfile(req: Request, res: Response, next: NextFunction) {
   }
 
   static async getSearchPage(req: Request, res: Response, next: NextFunction) {
     winston.verbose(`Getting search page for ${req.params.entity}`);
     const connectedUser = JSON.parse(req.cookies.connectedUser);
     const isMember = req.cookies.isMember;
-    let title, addRoute, exportRoute;
+    let title, addRoute;
 
     switch (req.params.entity) {
       case "members":
@@ -220,70 +147,71 @@ export class CoreController {
       isMember,
       title,
       addRoute,
-      exportRoute
+      enableExport: true
     });
   }
 
   static async getData(req: Request, res: Response, next: NextFunction) {
     winston.verbose(`Getting ${req.params.entity} data`);
 
+    let response;
     switch (req.params.entity) {
       case "members":
-        if (req.query) {
-          const queryRes = await MemberService.getAll({
-            ...req.query,
-            pageNumber: req.query.pageIndex ? Number(req.query.pageIndex) - 1 : 0,
-            isAlumni: false
-          });
-          res.json({
-            data: deserializeTableData(queryRes.content, req.params.entity),
-            itemsCount: queryRes.meta.totalItems
-          });
-        }
-        break;
       case "consultants":
-        if (req.query) {
-          const queryRes = await ConsultantService.getAll({
-            ...req.query,
-            pageNumber: req.query.pageIndex ? Number(req.query.pageIndex) - 1 : 0
-          });
-          res.json({
-            data: deserializeTableData(queryRes.content, req.params.entity),
-            itemsCount: queryRes.meta.totalItems
-          });
-        }
-        break;
       case "alumni":
         if (req.query) {
-          const queryRes = await MemberService.getAll({
-            ...req.query,
-            pageNumber: req.query.pageIndex ? Number(req.query.pageIndex) - 1 : 0,
-            isAlumni: true
-          });
-          res.json({
-            data: deserializeTableData(queryRes.content, req.params.entity),
+          const pageNumber = req.query.pageIndex ? Number(req.query.pageIndex) - 1 : 0;
+          let queryRes;
+          if (req.params.entity === "consultants") {
+            queryRes = await ConsultantService.getAll({
+              ...req.query,
+              pageNumber
+            });
+          } else {
+            queryRes = await MemberService.getAll({
+              ...req.query,
+              pageNumber,
+              isAlumni: req.params.entity === "alumni"
+            });
+          }
+          response = {
+            data: formatTableData(queryRes.content, req.params.entity),
             itemsCount: queryRes.meta.totalItems
-          });
+          };
         }
         break;
       case "positions":
-        const positions = await PositionService.getAll();
-        res.json(positions);
+        response = await PositionService.getAll();
         break;
       case "poles":
-        const poles = await PoleService.getAll();
-        res.json(poles);
+        response = await PoleService.getAll();
         break;
       case "departments":
-        const departments = await DepartmentService.getAll();
-        res.json(departments);
+        response = await DepartmentService.getAll();
         break;
       default:
         break;
     }
+
+    res.json(response);
   }
 
   static async exportToCSV(req: Request, res: Response, next: NextFunction) {
     winston.verbose(`Exporting ${req.params.entity} as CSV file`);
+
+    let csvPath;
+    switch (req.params.entity) {
+      case "consultants":
+        csvPath = await ConsultantService.exportCSV(req.body.idList);
+        break;
+      case "members":
+      case "alumni":
+        csvPath = await MemberService.exportCSV(req.body.idList);
+        break;
+      default:
+        break;
+    }
+
+    res.json(csvPath);
   }
 }

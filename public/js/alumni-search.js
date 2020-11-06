@@ -80,7 +80,7 @@ $(document).ready(async function(){
 
     selectedRowClass: "jsgrid-hover",
     rowClick: function(args) {
-      window.open(`/profile/alumni/${args.item.id}`);
+      window.open(`/profile/alumni/${args.item.id}/view`);
     },
 
 		fields,
@@ -98,5 +98,19 @@ $(document).ready(async function(){
 
   $("input[type='radio'][name='pageSize']").click(function() {
     $("#result-table").jsGrid("option", "pageSize", $(this).val());
+  });
+
+  $("button[name='export']").click(function() {
+    var idList = $("#result-table").jsGrid("option", "data").map((row) => {
+      return row.id;
+    });
+    $.ajax({
+      type: "POST",
+      url: "/export/members",
+      data: { idList },
+      success: function(res) {
+        window.location.href = res.location;
+      }
+    });
   });
 });

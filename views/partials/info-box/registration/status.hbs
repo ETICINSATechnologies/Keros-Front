@@ -1,0 +1,25 @@
+<div class="card card-danger">
+	<div class="card-header">
+		<h3 class="card-title">Statut</h3>
+	</div>
+	<div class="card-body">
+    <div class="form-group">
+      <div class="d-flex">
+        <span class="mr-auto p-2 font-weight-bold">Inscrit le</span>
+        <span class="p-2">{{date viewed.createdDate.date}}</span>
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          name="hasPaid"
+          {{#if viewed.hasPaid}}checked{{/if}}
+          disabled
+        >
+        <label class="form-check-label">
+          Frais d'inscription réglé
+        </label>
+      </div>
+    </div>
+	</div>
+</div>

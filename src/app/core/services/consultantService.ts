@@ -38,6 +38,15 @@ export class ConsultantService extends BaseService {
     );
   }
 
+  static update(id: number, req: ConsultantRequest): Promise<Consultant> {
+    return this.api.keros.put<Consultant>(`core/consultant/${id}`, req).then(
+      (res: HttpResponse<Consultant>) => {
+        winston.debug(`Response : ${JSON.stringify(res.data, null, 2)}`);
+        return res.data;
+      }
+    );
+  }
+
   static updateCurrent(req: ConsultantRequest): Promise<Consultant> {
     return this.api.keros.put<Consultant>("core/consultant/me", req).then(
       (res: HttpResponse<Consultant>) => {
@@ -47,9 +56,9 @@ export class ConsultantService extends BaseService {
     );
   }
 
-  static update(id: number, req: ConsultantRequest): Promise<Consultant> {
-    return this.api.keros.put<Consultant>("core/consultant/me", req).then(
-      (res: HttpResponse<Consultant>) => {
+  static exportCSV(idList: number[]): Promise<DocumentResponse> {
+    return this.api.keros.post<DocumentResponse>("core/consultant/export", { idList }).then(
+      (res: HttpResponse<DocumentResponse>) => {
         winston.debug(`Response : ${JSON.stringify(res.data, null, 2)}`);
         return res.data;
       }

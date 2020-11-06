@@ -9,6 +9,12 @@ export const HBS_CONFIG = {
     eq (a: any, b: any) {
       return a === b;
     },
+    and () {
+      return Array.prototype.slice.call(arguments, 0, -1).every(Boolean);
+    },
+    or () {
+      return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
+    },
     gender (code: any) {
       let label;
       switch (code) {
@@ -28,7 +34,14 @@ export const HBS_CONFIG = {
       return label;
     },
     substr (a: any, b: any) {
-      return a.indexOf(b) !== -1;
+      return a.includes(b);
+    },
+    date (a: string) {
+      return new Date(a).toLocaleDateString("fr-FR", {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      });
     }
   }
 };

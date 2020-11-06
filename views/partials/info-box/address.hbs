@@ -11,7 +11,7 @@
 				id="line1"
 				name="address[line1]"
 				required
-				value="{{viewedUser.address.line1}}"
+				value="{{viewed.address.line1}}"
 				{{#unless modify}}disabled{{/unless}}
 			>
 		</div>
@@ -22,7 +22,7 @@
 				class="form-control"
 				id="line2"
 				name="address[line2]"
-				value="{{viewedUser.address.line2}}"
+				value="{{viewed.address.line2}}"
 				{{#unless modify}}disabled{{/unless}}
 			>
 		</div>
@@ -36,7 +36,7 @@
 						id="postalCode"
 						name="address[postalCode]"
 						required
-						value="{{viewedUser.address.postalCode}}"
+						value="{{viewed.address.postalCode}}"
 						{{#unless modify}}disabled{{/unless}}
 					>
 				</div>
@@ -50,7 +50,7 @@
 						id="city"
 						name="address[city]"
 						required
-						value="{{viewedUser.address.city}}"
+						value="{{viewed.address.city}}"
 						{{#unless modify}}disabled{{/unless}}
 					>
 				</div>
@@ -59,7 +59,7 @@
 		<div class="form-group">
 			<label for="countryId">Pays</label>
 			<select
-				class="form-control"
+				class="form-control custom-select"
 				id="countryId"
 				name="address[countryId]"
 				required
@@ -68,7 +68,7 @@
 				{{#each countries}}
 					<option
 						value="{{id}}"
-						{{#if (eq id ../viewedUser.address.country.id)}}selected{{/if}}
+						{{#if (eq id ../viewed.address.country.id)}}selected{{/if}}
 					>
 						{{label}}
 					</option>

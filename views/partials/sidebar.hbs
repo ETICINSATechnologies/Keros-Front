@@ -38,77 +38,22 @@
 				</li>
 				<li class="nav-item">
 					<a 
-            href="/profile/me" 
-            class="nav-link
-              {{#if (eq route '/profile/me')}}active{{/if}}
-              {{#if (eq route '/profile/me/modify')}}active{{/if}}"
+            href="/profile/me/view" 
+            {{#if (or
+              (eq route '/profile/me/view')
+              (eq route '/profile/me/modify')
+            )}}
+              class="nav-link active"
+            {{else}}
+              class="nav-link"
+            {{/if}}
 					>
 						<i class="nav-icon fas fa-id-card"></i>
 						<p>Mon Profil</p>
 					</a>
 				</li>
-				<li class="nav-header">
-					Rechercher
-				</li>
-				<li class="nav-item">
-					<a
-						href="/search/members"
-						class="nav-link {{#if (substr route '/search/members')}}active{{/if}}"
-					>
-						<i class="nav-icon fas fa-users"></i>
-						<p>Membres</p>
-					</a>
-				</li>
-				<li class="nav-item">
-					<a
-            href="/search/consultants"
-            class="nav-link {{#if (substr route '/search/consultants')}}active{{/if}}"
-          >
-						<i class="nav-icon fas fa-briefcase"></i>
-						<p>Consultants</p>
-					</a>
-				</li>
-				<li class="nav-item">
-					<a
-            href="/search/alumni"
-            class="nav-link {{#if (substr route '/search/alumni')}}active{{/if}}"
-          >
-						<i class="nav-icon fas fa-user-graduate"></i>
-						<p>Anciens</p>
-					</a>
-				</li>
-				<li class="nav-header">
-					Ressources Humaines
-				</li>
-				<li class="nav-item {{#if (substr route '/sg/registrations')}}menu-open{{/if}}">
-          <a href="#" class="nav-link {{#if (substr route '/sg/registrations')}}active{{/if}}">
-						<i class="nav-icon fas fa-user-plus"></i>
-						<p>
-							Inscriptions
-							<i class="right fas fa-angle-left"></i>
-						</p>
-					</a>
-					<ul class="nav nav-treeview">
-						<li class="nav-item">
-              <a
-                href="/sg/registrations/members"
-                class="nav-link {{#if (substr route '/sg/registrations/members')}}active{{/if}}"
-              >
-								<i class="nav-icon far fa-circle"></i>
-								<p>Membres</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a
-                href="/sg/registrations/consultants"
-                class="nav-link {{#if (substr route '/sg/registrations/consultants')}}active{{/if}}"
-              >
-								<i class="nav-icon far fa-circle"></i>
-								<p>Consultants</p>
-							</a>
-						</li>
-					</ul>
-				</li>
+        {{> tabs/search}}
+        {{> tabs/sg}}
 				<li class="nav-header"></li>
 				<li class="nav-item">
 					<a href="/auth/logout" class="nav-link">

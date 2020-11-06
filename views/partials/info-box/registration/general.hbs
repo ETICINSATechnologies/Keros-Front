@@ -13,7 +13,7 @@
 						id="lastName"
 						name="lastName"
 						required
-						value="{{viewedUser.lastName}}"
+						value="{{viewed.lastName}}"
 						{{#unless modify}}disabled{{/unless}}
 					>
 				</div>
@@ -27,7 +27,7 @@
 						id="firstName"
 						name="firstName"
 						required
-						value="{{viewedUser.firstName}}"
+						value="{{viewed.firstName}}"
 						{{#unless modify}}disabled{{/unless}}
 					>
 				</div>
@@ -38,7 +38,7 @@
 				<div class="form-group">
 					<label for="genderId">Sexe</label>
 					<select
-						class="form-control"
+						class="form-control custom-select"
 						id="genderId"
 						name="genderId"
 						{{#unless modify}}disabled{{/unless}}
@@ -46,7 +46,7 @@
 						{{#each genders}}
 							<option
 								value="{{id}}"
-								{{#if (eq id ../viewedUser.gender.id)}}selected{{/if}}
+								{{#if (eq id ../viewed.gender.id)}}selected{{/if}}
 							>
 								{{gender label}}
 							</option>
@@ -63,10 +63,47 @@
 						id="birthday"
 						name="birthday"
 						required
-						value="{{viewedUser.birthday}}"
+						value="{{viewed.birthday}}"
 						{{#unless modify}}disabled{{/unless}}
 					>
 				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input
+						type="email"
+						class="form-control"
+						id="email"
+						name="email"
+						required
+						value="{{viewed.email}}"
+						{{#unless modify}}disabled{{/unless}}
+					>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+    		<div class="form-group">
+    			<label for="nationalityId">Pays d'Origine</label>
+    			<select
+    				class="form-control custom-select"
+    				id="nationalityId"
+    				name="nationality[id]"
+    				required
+    				{{#unless modify}}disabled{{/unless}}
+    			>
+    				{{#each countries}}
+    					<option
+    						value="{{id}}"
+    						{{#if (eq id ../viewed.nationality.id)}}selected{{/if}}
+    					>
+    						{{label}}
+    					</option>
+    				{{/each}}
+    			</select>
+    		</div>
 			</div>
 			<div class="col-sm-6">
 				<div class="form-group">
@@ -77,36 +114,7 @@
 						id="telephone"
 						name="telephone"
 						required
-						value="{{viewedUser.telephone}}"
-						{{#unless modify}}disabled{{/unless}}
-					>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-6">
-				<div class="form-group">
-					<label for="email">Email</label>
-					<input
-						type="email"
-						class="form-control"
-						id="email"
-						name="email"
-						required
-						value="{{viewedUser.email}}"
-						{{#unless modify}}disabled{{/unless}}
-					>
-				</div>
-			</div>
-			<div class="col-sm-6">
-				<div class="form-group">
-					<label for="emailETIC">Email ETIC</label>
-					<input
-						type="email"
-						class="form-control"
-						id="emailETIC"
-						name="emailETIC"
-						value="{{viewedUser.emailETIC}}"
+						value="{{viewed.phoneNumber}}"
 						{{#unless modify}}disabled{{/unless}}
 					>
 				</div>

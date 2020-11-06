@@ -1,6 +1,6 @@
 import { Member, Consultant } from "./models";
 
-export function deserializeTableData(data: (Member | Consultant)[], entity: string) {
+export function formatTableData(data: (Member | Consultant)[], entity: string) {
   switch (entity) {
     case "members":
       return data.map((member: Member) => {
@@ -49,4 +49,60 @@ export function deserializeTableData(data: (Member | Consultant)[], entity: stri
     default:
       break;
   }
+}
+
+export function formatFormFields(data: any, entity: string) {
+  const address = {
+    ...data.address,
+    postalCode: parseInt(data.address.postalCode),
+    countryId: parseInt(data.address.countryId)
+  };
+  const genderId = parseInt(data.genderId);
+  const departmentId = parseInt(data.departmentId);
+  const schoolYear = parseInt(data.schoolYear);
+  const droitImage = data.droitImage === "on";
+
+  let formatted = {
+    ...data,
+    address,
+    genderId,
+    departmentId,
+    schoolYear,
+    droitImage
+  };
+
+  if (!formatted.password) {
+    delete formatted.password;
+  }
+
+  switch (entity) {
+    case "consultants":
+      formatted = {
+        ...formatted,
+        isApprentice: data.isApprentice === "on",
+        isGraduate: data.isGraduate === "on"
+      };
+      break;
+    case "members":
+    case "alumni":
+      const positions = [];
+      for (const position of data.positions) {
+        const updatedPosition = {
+          id: parseInt(position.id),
+          poleId: parseInt(position.poleId),
+          year: parseInt(position.year),
+          isBoard: Boolean(position.isBoard)
+        };
+        positions.push(updatedPosition);
+      }
+      formatted = {
+        ...formatted,
+        positions
+      };
+      break;
+    default:
+      break;
+  }
+
+  return formatted;
 }

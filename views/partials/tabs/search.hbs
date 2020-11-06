@@ -1,0 +1,51 @@
+<li class="nav-header">
+	Rechercher
+</li>
+<li class="nav-item">
+	<a
+		href="/search/members"
+    {{#if (or
+      (substr route '/search/members')
+      (substr route '/profile/members')
+    )}}
+      class="nav-link active"
+    {{else}}
+      class="nav-link"
+    {{/if}}
+	>
+		<i class="nav-icon fas fa-users"></i>
+		<p>Membres</p>
+	</a>
+</li>
+<li class="nav-item">
+	<a
+    href="/search/consultants"
+    {{#if (or
+      (substr route '/search/consultants')
+      (substr route '/profile/consultants')
+    )}}
+      class="nav-link active"
+    {{else}}
+      class="nav-link"
+    {{/if}}
+  >
+		<i class="nav-icon fas fa-briefcase"></i>
+		<p>Consultants</p>
+	</a>
+</li>
+<li class="nav-item">
+	<a
+    href="/search/alumni"
+    {{#if (or
+      (substr route '/search/alumni')
+      (substr route '/profile/alumni')
+    )}}
+      class="nav-link active"
+    {{else}}
+      class="nav-link"
+    {{/if}}
+  >
+		<i class="nav-icon fas fa-user-graduate"></i>
+		<p>Anciens</p>
+	</a>
+</li>

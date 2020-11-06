@@ -3,14 +3,15 @@
 		{{> navbar}}
 		{{> sidebar}}
 		<form class="content-wrapper" method="post">
+			<input type="text" id="id" name="id" value="{{viewed.id}}" hidden>
 			<div class="content-header">
 				<div class="container-fluid">
 					<div class="row mb-2">
 						<div class="col-sm-6">
 							<h1 class="m-0 text-dark d-inline-block align-middle">
-                {{title}}
+                Fiche d'Inscription #{{viewed.id}}
 							</h1>
-							{{#if (eq action 'modify')}}
+							{{#if modify}}
 								<div class="btn-group mx-2" role="group">
 									<button
 										type="submit"
@@ -20,11 +21,6 @@
 									</button>
 									<a
 										class="btn btn-danger text-light d-inline-block align-middle"
-                    {{#if (eq connectedUser.id viewed.id)}}
-                      href="/profile/me/view"
-                    {{else}}
-                      href="/profile/{{entity}}/{{viewed.id}}/view"
-                    {{/if}}
 									>
 										Annuler
 									</a>
@@ -32,11 +28,6 @@
 							{{else}}
 								<a
 									class="btn bg-olive text-light d-inline-block align-middle mx-2"
-                  {{#if (eq connectedUser.id viewed.id)}}
-                    href="/profile/me/modify"
-                  {{else}}
-                    href="/profile/{{entity}}/{{viewed.id}}/modify"
-                  {{/if}}
 								>
 									Modifier
 								</a>
@@ -51,10 +42,9 @@
   				<div class="container-fluid">
   					<div class="row">
   						<div class="col-md-7">
-                {{> info-box/profile/general}}
+                {{> info-box/registration/general}}
   							<div class="row">
   								<div class="col-md-6">
-                    {{> info-box/profile/authentication}}
   							  </div>
   								<div class="col-md-6">
                     {{> info-box/address}}
@@ -62,7 +52,7 @@
                 </div>
   						</div>
   						<div class="col-md-5">
-                {{> info-box/profile/education}}
+                {{> info-box/registration/education}}
                 {{> info-box/rights}}
   						</div>
             </div>
@@ -73,11 +63,10 @@
   				<div class="container-fluid">
   					<div class="row">
   						<div class="col-md-7">
-                {{> info-box/profile/general}}
+                {{> info-box/registration/general}}
   							<div class="row">
   								<div class="col-md-6">
-                    {{> info-box/profile/education}}
-                    {{> info-box/profile/authentication}}
+                    {{> info-box/registration/documents}}
   							  </div>
   								<div class="col-md-6">
                     {{> info-box/address}}
@@ -85,8 +74,10 @@
                 </div>
   						</div>
   						<div class="col-md-5">
-                {{> info-box/profile/position}}
+                {{> info-box/registration/education}}
+                {{> info-box/registration/pole}}
                 {{> info-box/rights}}
+                {{> info-box/registration/status}}
   						</div>
             </div>
   				</div>

@@ -1,0 +1,27 @@
+<div class="card card-primary">
+	<div class="card-header">
+		<h3 class="card-title">Pôle</h3>
+	</div>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+					<label for="wantedPoleId">Pôle souhaité</label>
+					<select
+						class="form-control custom-select"
+						id="wantedPoleId"
+						name="wantedPoleId"
+						{{#unless modify}}disabled{{/unless}}
+					>
+						{{#each poles}}
+							<option
+								value="{{id}}"
+								{{#if (eq id ../viewed.wantedPole.id)}}selected{{/if}}
+							>{{name}}</option>
+						{{/each}}
+					</select>
+				</div>
+      </div>
+    </div>
+  </div>
+</div>

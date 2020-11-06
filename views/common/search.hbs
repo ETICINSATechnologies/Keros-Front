@@ -27,10 +27,8 @@
                     Ajouter
                   </a>
 							  {{/if}}
-							  {{#if exportRoute}}
-							  	<form class="d-inline-block mx-2">
-							  		<button class="btn btn-primary">Exporter</button>
-							  	</form>
+							  {{#if enableExport}}
+							  	<button class="btn btn-primary" name="export">Exporter</button>
 							  {{/if}}
               </div>
 							<div class="btn-group btn-group-toggle" data-toggle="buttons">
