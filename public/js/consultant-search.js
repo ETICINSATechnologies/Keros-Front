@@ -1,45 +1,45 @@
 $(document).ready(async function(){
-	var fields = [
-		{
-			name: "username",
-			title: "Nom d'Utilisateur",
-			cellRenderer: escapeCell
-		},
-		{
-			name: "lastName",
-			title: "Nom",
-			type: "text",
-			cellRenderer: escapeCell
-		},
-		{
-			name: "firstName",
-			title: "Prénom",
-			type: "text",
-			cellRenderer: escapeCell
-		},
-		{
-			name: "email",
-			title: "Email",
-			cellRenderer: escapeCell
-		},
+  var fields = [
+    {
+      name: "username",
+      title: "Nom d'Utilisateur",
+      cellRenderer: escapeCell
+    },
+    {
+      name: "lastName",
+      title: "Nom",
+      type: "text",
+      cellRenderer: escapeCell
+    },
+    {
+      name: "firstName",
+      title: "Prénom",
+      type: "text",
+      cellRenderer: escapeCell
+    },
+    {
+      name: "email",
+      title: "Email",
+      cellRenderer: escapeCell
+    },
     {
       name: "isEu",
       title: "Européen",
       type: "checkbox"
     }
-	];
+  ];
 
-	$("#result-table").jsGrid({
-		width: "100%",
-		filtering: true,
-		sorting: true,
+  $("#result-table").jsGrid({
+    width: "100%",
+    filtering: true,
+    sorting: true,
 
-		paging: true,
-		pageLoading: true,
-		autoload: true,
+    paging: true,
+    pageLoading: true,
+    autoload: true,
 
-		pageSize: 12,
-		pageButtonCount: 5,
+    pageSize: 12,
+    pageButtonCount: 5,
     pagePrevText: "<",
     pageNextText: ">",
     pageFirstText: "<<",
@@ -51,18 +51,18 @@ $(document).ready(async function(){
       window.open(`/profile/consultants/${args.item.id}/view`);
     },
 
-		fields,
+    fields,
 
-		controller: {
-			loadData: function(filter) {
-				return $.ajax({
-					type: "GET",
-					url: "/data/consultants",
-					data: removeFalsy(filter)
-				});
-			}
-		}
-	});
+    controller: {
+      loadData: function(filter) {
+        return $.ajax({
+          type: "GET",
+          url: "/data/consultants",
+          data: removeFalsy(filter)
+        });
+      }
+    }
+  });
 
   $("input[type='radio'][name='pageSize']").click(function() {
     $("#result-table").jsGrid("option", "pageSize", $(this).val());

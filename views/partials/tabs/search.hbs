@@ -1,9 +1,9 @@
 <li class="nav-header">
-	Rechercher
+  Rechercher
 </li>
 <li class="nav-item">
-	<a
-		href="/search/members"
+  <a
+    href="/search/members"
     {{#if (or
       (substr route '/search/members')
       (substr route '/profile/members')
@@ -12,13 +12,13 @@
     {{else}}
       class="nav-link"
     {{/if}}
-	>
-		<i class="nav-icon fas fa-users"></i>
-		<p>Membres</p>
-	</a>
+  >
+    <i class="nav-icon fas fa-users"></i>
+    <p>Membres</p>
+  </a>
 </li>
 <li class="nav-item">
-	<a
+  <a
     href="/search/consultants"
     {{#if (or
       (substr route '/search/consultants')
@@ -29,12 +29,12 @@
       class="nav-link"
     {{/if}}
   >
-		<i class="nav-icon fas fa-briefcase"></i>
-		<p>Consultants</p>
-	</a>
+    <i class="nav-icon fas fa-briefcase"></i>
+    <p>Consultants</p>
+  </a>
 </li>
 <li class="nav-item">
-	<a
+  <a
     href="/search/alumni"
     {{#if (or
       (substr route '/search/alumni')
@@ -45,7 +45,7 @@
       class="nav-link"
     {{/if}}
   >
-		<i class="nav-icon fas fa-user-graduate"></i>
-		<p>Anciens</p>
-	</a>
+    <i class="nav-icon fas fa-user-graduate"></i>
+    <p>Anciens</p>
+  </a>
 </li>

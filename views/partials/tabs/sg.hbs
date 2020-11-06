@@ -1,5 +1,5 @@
 <li class="nav-header">
-	Ressources Humaines
+  Ressources Humaines
 </li>
 <li
   {{#if (substr route '/sg/registrations')}}
@@ -16,14 +16,14 @@
       class="nav-link"
     {{/if}}
   >
-		<i class="nav-icon fas fa-user-plus"></i>
-		<p>
-			Inscriptions
-			<i class="right fas fa-angle-left"></i>
-		</p>
-	</a>
-	<ul class="nav nav-treeview">
-		<li class="nav-item">
+    <i class="nav-icon fas fa-user-plus"></i>
+    <p>
+      Inscriptions
+      <i class="right fas fa-angle-left"></i>
+    </p>
+  </a>
+  <ul class="nav nav-treeview">
+    <li class="nav-item">
       <a
         href="/sg/registrations/members"
         {{#if (substr route '/sg/registrations/members')}}
@@ -32,12 +32,12 @@
           class="nav-link"
         {{/if}}
       >
-				<i class="nav-icon far fa-circle"></i>
-				<p>Membres</p>
-			</a>
-		</li>
-		<li class="nav-item">
-			<a
+        <i class="nav-icon far fa-circle"></i>
+        <p>Membres</p>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a
         href="/sg/registrations/consultants"
         {{#if (substr route '/sg/registrations/consultants')}}
           class="nav-link active"
@@ -45,9 +45,9 @@
           class="nav-link"
         {{/if}}
       >
-				<i class="nav-icon far fa-circle"></i>
-				<p>Consultants</p>
-			</a>
-		</li>
-	</ul>
+        <i class="nav-icon far fa-circle"></i>
+        <p>Consultants</p>
+      </a>
+    </li>
+  </ul>
 </li>

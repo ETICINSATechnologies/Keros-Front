@@ -1,87 +1,87 @@
 <body class="hold-transition sidebar-mini accent-olive">
   <div class="wrapper">
-		{{> navbar}}
-		{{> sidebar}}
-		<form class="content-wrapper" method="post">
-			<input type="text" id="id" name="id" value="{{viewed.id}}" hidden>
-			<div class="content-header">
-				<div class="container-fluid">
-					<div class="row mb-2">
-						<div class="col-sm-6">
-							<h1 class="m-0 text-dark d-inline-block align-middle">
+    {{> navbar}}
+    {{> sidebar}}
+    <form class="content-wrapper" method="post">
+      <input type="text" id="id" name="id" value="{{viewed.id}}" hidden>
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark d-inline-block align-middle">
                 Fiche d'Inscription #{{viewed.id}}
-							</h1>
-							{{#if modify}}
-								<div class="btn-group mx-2" role="group">
-									<button
-										type="submit"
-										class="btn bg-olive text-light d-inline-block align-middle"
-									>
-										Valider
-									</button>
-									<a
-										class="btn btn-danger text-light d-inline-block align-middle"
-									>
-										Annuler
-									</a>
-								</div>
-							{{else}}
-								<a
-									class="btn bg-olive text-light d-inline-block align-middle mx-2"
-								>
-									Modifier
-								</a>
-							{{/if}}
-						</div>
-					</div>
-				</div>
-			</div>
+              </h1>
+              {{#if modify}}
+                <div class="btn-group mx-2" role="group">
+                  <button
+                    type="submit"
+                    class="btn bg-olive text-light d-inline-block align-middle"
+                  >
+                    Valider
+                  </button>
+                  <a
+                    class="btn btn-danger text-light d-inline-block align-middle"
+                  >
+                    Annuler
+                  </a>
+                </div>
+              {{else}}
+                <a
+                  class="btn bg-olive text-light d-inline-block align-middle mx-2"
+                >
+                  Modifier
+                </a>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+      </div>
 
       {{#if (eq entity "consultants")}}
         <div class="content">
-  				<div class="container-fluid">
-  					<div class="row">
-  						<div class="col-md-7">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-7">
                 {{> info-box/registration/general}}
-  							<div class="row">
-  								<div class="col-md-6">
-  							  </div>
-  								<div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6">
+                  </div>
+                  <div class="col-md-6">
                     {{> info-box/address}}
-  								</div>
+                  </div>
                 </div>
-  						</div>
-  						<div class="col-md-5">
+              </div>
+              <div class="col-md-5">
                 {{> info-box/registration/education}}
                 {{> info-box/rights}}
-  						</div>
+              </div>
             </div>
-  				</div>
-  			</div>
+          </div>
+        </div>
       {{else}}
-  			<div class="content">
-  				<div class="container-fluid">
-  					<div class="row">
-  						<div class="col-md-7">
+        <div class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-7">
                 {{> info-box/registration/general}}
-  							<div class="row">
-  								<div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6">
                     {{> info-box/registration/documents}}
-  							  </div>
-  								<div class="col-md-6">
+                  </div>
+                  <div class="col-md-6">
                     {{> info-box/address}}
-  								</div>
+                  </div>
                 </div>
-  						</div>
-  						<div class="col-md-5">
+              </div>
+              <div class="col-md-5">
                 {{> info-box/registration/education}}
                 {{> info-box/registration/pole}}
                 {{> info-box/rights}}
                 {{> info-box/registration/status}}
-  						</div>
+              </div>
             </div>
-  				</div>
-  			</div>
+          </div>
+        </div>
       {{/if}}
     </form>
     {{> footer}}

@@ -1,79 +1,79 @@
 <div class="card card-warning">
-	<div class="card-header">
-		<h3 class="card-title">Adresse</h3>
-	</div>
-	<div class="card-body">
-		<div class="form-group">
-			<label for="line1">Ligne 1</label>
-			<input
-				type="string"
-				class="form-control"
-				id="line1"
-				name="address[line1]"
-				required
-				value="{{viewed.address.line1}}"
-				{{#unless modify}}disabled{{/unless}}
-			>
-		</div>
-		<div class="form-group">
-			<label for="line2">Ligne 2</label>
-			<input
-				type="string"
-				class="form-control"
-				id="line2"
-				name="address[line2]"
-				value="{{viewed.address.line2}}"
-				{{#unless modify}}disabled{{/unless}}
-			>
-		</div>
-		<div class="row">
-			<div class="col-sm-6">
-				<div class="form-group">
-					<label for="postalCode">Code postal</label>
-					<input
-						type="number"
-						class="form-control"
-						id="postalCode"
-						name="address[postalCode]"
-						required
-						value="{{viewed.address.postalCode}}"
-						{{#unless modify}}disabled{{/unless}}
-					>
-				</div>
-			</div>
-			<div class="col-sm-6">
-				<div class="form-group">
-					<label for="city">Ville</label>
-					<input
-						type="string"
-						class="form-control"
-						id="city"
-						name="address[city]"
-						required
-						value="{{viewed.address.city}}"
-						{{#unless modify}}disabled{{/unless}}
-					>
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="countryId">Pays</label>
-			<select
-				class="form-control custom-select"
-				id="countryId"
-				name="address[countryId]"
-				required
-				{{#unless modify}}disabled{{/unless}}
-			>
-				{{#each countries}}
-					<option
-						value="{{id}}"
-						{{#if (eq id ../viewed.address.country.id)}}selected{{/if}}
-					>
-						{{label}}
-					</option>
-				{{/each}}
-			</select>
-		</div>
+  <div class="card-header">
+    <h3 class="card-title">Adresse</h3>
+  </div>
+  <div class="card-body">
+    <div class="form-group">
+      <label for="line1">Ligne 1</label>
+      <input
+        type="string"
+        class="form-control"
+        id="line1"
+        name="address[line1]"
+        required
+        value="{{viewed.address.line1}}"
+        {{#unless modify}}disabled{{/unless}}
+      >
+    </div>
+    <div class="form-group">
+      <label for="line2">Ligne 2</label>
+      <input
+        type="string"
+        class="form-control"
+        id="line2"
+        name="address[line2]"
+        value="{{viewed.address.line2}}"
+        {{#unless modify}}disabled{{/unless}}
+      >
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="postalCode">Code postal</label>
+          <input
+            type="number"
+            class="form-control"
+            id="postalCode"
+            name="address[postalCode]"
+            required
+            value="{{viewed.address.postalCode}}"
+            {{#unless modify}}disabled{{/unless}}
+          >
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="city">Ville</label>
+          <input
+            type="string"
+            class="form-control"
+            id="city"
+            name="address[city]"
+            required
+            value="{{viewed.address.city}}"
+            {{#unless modify}}disabled{{/unless}}
+          >
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="countryId">Pays</label>
+      <select
+        class="form-control custom-select"
+        id="countryId"
+        name="address[countryId]"
+        required
+        {{#unless modify}}disabled{{/unless}}
+      >
+        {{#each countries}}
+          <option
+            value="{{id}}"
+            {{#if (eq id ../viewed.address.country.id)}}selected{{/if}}
+          >
+            {{label}}
+          </option>
+        {{/each}}
+      </select>
+    </div>
   </div>
 </div>

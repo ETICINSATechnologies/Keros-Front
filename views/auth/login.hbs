@@ -1,75 +1,75 @@
 <body class="hold-transition login-page keros-gradient accent-olive">
-	<div class="login-box">
-  	<div class="login-logo">
-    	<img src="/public/images/logo-keros-typo.png" class="w-100">
-  	</div>
-  	<div class="card">
-    	<div class="card-body login-card-body">
-      	<p class="login-box-msg text-sm">Connectez-vous pour commencer à travailler</p>
-      	<form action="/auth/login" method="post">
-        	<div class="input-group mb-3">
-          	<input 
-							type="text" 
-							class="form-control" 
-							placeholder="Nom d'utilisateur" 
-							name="username"
-							required
-						>
-          	<div class="input-group-append">
-            	<div class="input-group-text">
-              	<span class="fas fa-user"></span>
-            	</div>
-          	</div>
-        	</div>
-        	<div class="input-group mb-3">
-          	<input 
-							type="password" 
-							class="form-control" 
-							placeholder="Mot de passe" 
-							name="password"
-							minlength="8"
-							required
-							oninvalid="this.setCustomValidity('Le mot de passe doit contenir au moins 8 caractères')"
-							oninput="this.setCustomValidity('')"
-							onchange="this.setCustomValidity('')"
-						>
-          	<div class="input-group-append">
-            	<div class="input-group-text">
-              	<span class="fas fa-lock"></span>
-            	</div>
-          	</div>
-        	</div>
-        	<div class="row">
-          	<!--
-						<div class="col-8">
-            	<div class="icheck-primary">
-              	<input type="checkbox" id="remember">
-              	<label for="remember">
-                	Remember Me
-              	</label>
-            	</div>
-          	</div>
-						-->
-         		<div class="col">
-            	<button type="submit" class="btn bg-olive btn-block">Se Connecter</button>
-          	</div>
-        	</div>
-      	</form>
-				<!--
-      	<p class="mb-1">
-        	<a href="forgot-password.html">I forgot my password</a>
-      	</p>
-				-->
-    	</div>
-  	</div>
-		{{#if unauthorized}}
-		<div class="alert alert-danger" role="alert">
-			Mauvaise authentification
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
-		{{/if}}
-	</div>
-	{{> scripts}}
+  <div class="login-box">
+    <div class="login-logo">
+      <img src="/public/images/logo-keros-typo.png" class="w-100">
+    </div>
+    <div class="card">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg text-sm">Connectez-vous pour commencer à travailler</p>
+        <form action="/auth/login" method="post">
+          <div class="input-group mb-3">
+            <input 
+              type="text" 
+              class="form-control" 
+              placeholder="Nom d'utilisateur" 
+              name="username"
+              required
+            >
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input 
+              type="password" 
+              class="form-control" 
+              placeholder="Mot de passe" 
+              name="password"
+              minlength="8"
+              required
+              oninvalid="this.setCustomValidity('Le mot de passe doit contenir au moins 8 caractères')"
+              oninput="this.setCustomValidity('')"
+              onchange="this.setCustomValidity('')"
+            >
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <!--
+            <div class="col-8">
+              <div class="icheck-primary">
+                <input type="checkbox" id="remember">
+                <label for="remember">
+                  Remember Me
+                </label>
+              </div>
+            </div>
+            -->
+            <div class="col">
+              <button type="submit" class="btn bg-olive btn-block">Se Connecter</button>
+            </div>
+          </div>
+        </form>
+        <!--
+        <p class="mb-1">
+          <a href="forgot-password.html">I forgot my password</a>
+        </p>
+        -->
+      </div>
+    </div>
+    {{#if unauthorized}}
+    <div class="alert alert-danger" role="alert">
+      Mauvaise authentification
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {{/if}}
+  </div>
+  {{> scripts}}
 </body>

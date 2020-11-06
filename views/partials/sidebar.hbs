@@ -1,43 +1,43 @@
 <aside class="main-sidebar sidebar-dark-olive elevation-4">
-	<a href="/" class="brand-link logo-switch">
-		<img
-			src="/public/images/logo-keros-carre.png" 
-			class="brand-image-xl logo-xs h-75"
-		>
-		<img
-			src="/public/images/logo-keros-typo.png"
-			class="brand-image-xl logo-xl h-75 mt-1 mx-5"
-		>
-	</a>
-	<div class="sidebar">
-		<div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
-			<div class="image">
-				<img src="/public/images/user-avatar.png" class="img-circle elevation-2">
-			</div>
-			<div class="info ml-2">
-				<p class="text-light p-0 m-0">
-					{{connectedUser.firstName}} {{connectedUser.lastName}}
-				</p>
-			</div>
-		</div>
-		<nav class="mt-2">
-			<ul
-				class="nav nav-pills nav-sidebar nav-child-indent flex-column" 
-				data-widget="treeview" 
-				role="menu" 
-				data-accordion="false"
-			>
-				<li class="nav-item">
-					<a 
-						href="/" 
-						class="nav-link {{#if (eq route '/')}}active{{/if}}"
-					>
-						<i class="nav-icon fas fa-tachometer-alt"></i>
-						<p>Tableau de Bord</p>
-					</a>
-				</li>
-				<li class="nav-item">
-					<a 
+  <a href="/" class="brand-link logo-switch">
+    <img
+      src="/public/images/logo-keros-carre.png" 
+      class="brand-image-xl logo-xs h-75"
+    >
+    <img
+      src="/public/images/logo-keros-typo.png"
+      class="brand-image-xl logo-xl h-75 mt-1 mx-5"
+    >
+  </a>
+  <div class="sidebar">
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
+      <div class="image">
+        <img src="/public/images/user-avatar.png" class="img-circle elevation-2">
+      </div>
+      <div class="info ml-2">
+        <p class="text-light p-0 m-0">
+          {{connectedUser.firstName}} {{connectedUser.lastName}}
+        </p>
+      </div>
+    </div>
+    <nav class="mt-2">
+      <ul
+        class="nav nav-pills nav-sidebar nav-child-indent flex-column" 
+        data-widget="treeview" 
+        role="menu" 
+        data-accordion="false"
+      >
+        <li class="nav-item">
+          <a 
+            href="/" 
+            class="nav-link {{#if (eq route '/')}}active{{/if}}"
+          >
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>Tableau de Bord</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a 
             href="/profile/me/view" 
             {{#if (or
               (eq route '/profile/me/view')
@@ -47,21 +47,21 @@
             {{else}}
               class="nav-link"
             {{/if}}
-					>
-						<i class="nav-icon fas fa-id-card"></i>
-						<p>Mon Profil</p>
-					</a>
-				</li>
+          >
+            <i class="nav-icon fas fa-id-card"></i>
+            <p>Mon Profil</p>
+          </a>
+        </li>
         {{> tabs/search}}
         {{> tabs/sg}}
-				<li class="nav-header"></li>
-				<li class="nav-item">
-					<a href="/auth/logout" class="nav-link">
-						<i class="nav-icon fas fa-door-open"></i>
-						<p>Déconnexion</p>
-					</a>
-				</li>
-			</ul>
-		</nav>
-	</div>
+        <li class="nav-header"></li>
+        <li class="nav-item">
+          <a href="/auth/logout" class="nav-link">
+            <i class="nav-icon fas fa-door-open"></i>
+            <p>Déconnexion</p>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
 </aside>

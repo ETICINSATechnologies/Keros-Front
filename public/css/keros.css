@@ -1,10 +1,10 @@
 .keros-gradient {
-	background: linear-gradient(to right bottom, #005360, #167173, #3b907f, #67ad86, #9bca8b) !important;
+  background: linear-gradient(to right bottom, #005360, #167173, #3b907f, #67ad86, #9bca8b) !important;
 }
 
 .jsgrid-grid-header,
 .jsgrid-grid-body {
-	overflow: auto;
+  overflow: auto;
 }
 
 .jsgrid-hover {

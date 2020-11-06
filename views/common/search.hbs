@@ -1,72 +1,72 @@
 <body class="hold-transition sidebar-mini accent-olive">
-	<div class="wrapper">
-		{{> navbar}}
-		{{> sidebar}}
-		<div class="content-wrapper">
-			<div class="content-header">
-				<div class="container-fluid">
-					<div clas="row mb-2">
-						<div class="col-sm-6">
-							<h1 class="m-0 text-dark">
+  <div class="wrapper">
+    {{> navbar}}
+    {{> sidebar}}
+    <div class="content-wrapper">
+      <div class="content-header">
+        <div class="container-fluid">
+          <div clas="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark">
                 {{title}}
-							</h1>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="content">
-				<div class="container-fluid">
-					<div class="card">
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="container-fluid">
+          <div class="card">
             <div class="card-header d-flex">
               <div class="mr-auto">
-							  {{#if addRoute}}
+                {{#if addRoute}}
                   <a
                     class="btn bg-olive text-light"
                     href="{{addRoute}}"  
                   >
                     Ajouter
                   </a>
-							  {{/if}}
-							  {{#if enableExport}}
-							  	<button class="btn btn-primary" name="export">Exporter</button>
-							  {{/if}}
+                {{/if}}
+                {{#if enableExport}}
+                  <button class="btn btn-primary" name="export">Exporter</button>
+                {{/if}}
               </div>
-							<div class="btn-group btn-group-toggle" data-toggle="buttons">
-								<label class="btn btn-outline-info active">
-									<input type="radio" name="pageSize" value="12" checked>12
-								</label>
-								<label class="btn btn-outline-info">
-									<input type="radio" name="pageSize" value="25">25
-								</label>
-								<label class="btn btn-outline-info">
-									<input type="radio" name="pageSize" value="50">50
-								</label>
-								<label class="btn btn-outline-info">
-									<input type="radio" name="pageSize" value="100">100
-								</label>
-							</div>
-						</div>
-						<div class="card-body">
-							<div class="container-fluid">
-								<div id="result-table"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		{{> footer}}
-	</div>
-	{{> scripts}}
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-outline-info active">
+                  <input type="radio" name="pageSize" value="12" checked>12
+                </label>
+                <label class="btn btn-outline-info">
+                  <input type="radio" name="pageSize" value="25">25
+                </label>
+                <label class="btn btn-outline-info">
+                  <input type="radio" name="pageSize" value="50">50
+                </label>
+                <label class="btn btn-outline-info">
+                  <input type="radio" name="pageSize" value="100">100
+                </label>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container-fluid">
+                <div id="result-table"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{> footer}}
+  </div>
+  {{> scripts}}
   <script src="/jsgrid/jsgrid.min.js"></script>
   {{#if (substr route 'search')}}
-  	{{#if (substr route 'members')}}
-  	  <script src="/public/js/member-search.js"></script>
-  	{{else if (substr route 'consultants')}}
-  	  <script src="/public/js/consultant-search.js"></script>
-  	{{else if (substr route 'alumni')}}
-  	  <script src="/public/js/alumni-search.js"></script>
-  	{{/if}}
+    {{#if (substr route 'members')}}
+      <script src="/public/js/member-search.js"></script>
+    {{else if (substr route 'consultants')}}
+      <script src="/public/js/consultant-search.js"></script>
+    {{else if (substr route 'alumni')}}
+      <script src="/public/js/alumni-search.js"></script>
+    {{/if}}
   {{else if (substr route 'registrations')}}
     {{#if (substr route 'members')}}
       <script src="/public/js/member-registration.js"></script>
