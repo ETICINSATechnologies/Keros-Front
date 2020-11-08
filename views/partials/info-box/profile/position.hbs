@@ -11,7 +11,7 @@
             type="checkbox"
             name="positions[{{@index}}][isBoard]"
             {{#if isBoard}}checked{{/if}}
-            {{#unless ../modify}}disabled{{/unless}}
+            {{#if (eq ../action 'view')}}disabled{{/if}}
           >
           <label class="form-check-label">Conseil d'Administration</label>
         </div>
@@ -21,7 +21,7 @@
           <label for="poleId{{@index}}">Pôle</label>
           <input
             class="form-control"
-            {{#unless ../modify}}value="{{pole.name}}"{{/unless}}
+            {{#if (eq ../action 'view')}}value="{{pole.name}}"{{/if}}
             disabled
           >
         </div>
@@ -31,7 +31,7 @@
             class="form-control custom-select"
             id="positionId{{@index}}"
             name="positions[{{@index}}][id]"
-            {{#unless ../modify}}disabled{{/unless}}
+            {{#if (eq ../action 'view')}}disabled{{/if}}
           >
             {{#each ../positions}}
               <option value="{{id}}" {{#if (eq id ../id)}}selected{{/if}}>{{label}}</option>
@@ -46,12 +46,48 @@
             id="yearPosition{{@index}}"
             name="positions[{{@index}}][year]"
             value="{{year}}"
-            {{#unless ../modify}}disabled{{/unless}}
+            {{#if (eq ../action 'view')}}disabled{{/if}}
           >
         </div>
       </div>
       <hr></hr>
     {{/each}}
+
+    {{#unless (eq action 'view')}}
+      <div id="added-positions"></div>
+
+      <div class="row">
+        <div class="form-group col-md-7">
+          <label for="position">Fonction</label>
+          <select
+            class="form-control custom-select"
+            id="addPosition"
+          >
+            {{#each positions}}
+              <option value="{{id}}">{{label}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <div class="form-group col-md-5">
+          <label for="addYear">Année</label>
+          <input
+            type="number"
+            class="form-control"
+            id="addYear"
+          >
+        </div>
+      </div>
+      <button
+        type="button"
+        class="btn btn-outline-primary w-100"
+        onclick="addPositionFields();"
+      >
+        <i class="fas fa-user-plus mx-2"></i>
+        Ajouter une position
+      </button>
+      <hr></hr>
+    {{/unless}}
+
     {{#if (eq entity "alumni")}}
       <div class="form-group">
         <label for="company">Entreprise</label>
@@ -61,7 +97,7 @@
           id="company"
           name="company"
           value="{{viewedUser.company}}"
-          {{#unless modify}}disabled{{/unless}}
+          {{#if (eq action 'view')}}disabled{{/if}}
         >
       </div>
     {{/if}}

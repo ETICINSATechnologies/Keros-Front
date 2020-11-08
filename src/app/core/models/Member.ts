@@ -17,6 +17,7 @@ export interface Member {
   address?: Address;
   positions?: Position[];
   company?: string;
+  isAlumni?: boolean;
 }
 
 export interface MemberRequest {

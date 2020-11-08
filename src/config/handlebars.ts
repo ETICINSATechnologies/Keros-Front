@@ -9,6 +9,9 @@ export const HBS_CONFIG = {
     eq (a: any, b: any) {
       return a === b;
     },
+    not (a: any, b: any) {
+      return a !== b;
+    },
     and () {
       return Array.prototype.slice.call(arguments, 0, -1).every(Boolean);
     },

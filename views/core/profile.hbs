@@ -2,7 +2,7 @@
   <div class="wrapper">
     {{> navbar}}
     {{> sidebar}}
-    <form class="content-wrapper" method="post">
+    <form id="profile-form" class="content-wrapper" method="post">
       <div class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
@@ -10,37 +10,7 @@
               <h1 class="m-0 text-dark d-inline-block align-middle">
                 {{title}}
               </h1>
-              {{#if (eq action 'modify')}}
-                <div class="btn-group mx-2" role="group">
-                  <button
-                    type="submit"
-                    class="btn bg-olive text-light d-inline-block align-middle"
-                  >
-                    Valider
-                  </button>
-                  <a
-                    class="btn btn-danger text-light d-inline-block align-middle"
-                    {{#if (eq connectedUser.id viewed.id)}}
-                      href="/profile/me/view"
-                    {{else}}
-                      href="/profile/{{entity}}/{{viewed.id}}/view"
-                    {{/if}}
-                  >
-                    Annuler
-                  </a>
-                </div>
-              {{else}}
-                <a
-                  class="btn bg-olive text-light d-inline-block align-middle mx-2"
-                  {{#if (eq connectedUser.id viewed.id)}}
-                    href="/profile/me/modify"
-                  {{else}}
-                    href="/profile/{{entity}}/{{viewed.id}}/modify"
-                  {{/if}}
-                >
-                  Modifier
-                </a>
-              {{/if}}
+              {{> info-box/profile/buttons}}
             </div>
           </div>
         </div>
@@ -96,4 +66,5 @@
     {{> footer}}
   </div>
   {{> scripts}}
+  <script src="/public/js/profile-modify.js"></script>
 </body>

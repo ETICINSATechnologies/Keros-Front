@@ -16,11 +16,10 @@ export class DepartmentService extends BaseService {
     }
 
     return this.api.keros.get<Department[]>("core/department").then(
-      (res: HttpResponse<Department[]>) => {
-        winston.debug(`Response : ${JSON.stringify(res.data, null, 2)}`);
-        DepartmentService.cacheValues = res.data;
+      (res: Department[]) => {
+        DepartmentService.cacheValues = res;
         DepartmentService.cacheExpires = Date.now() + (6 * 3600 * 1000);
-        return res.data;
+        return res;
       }
     );
   }

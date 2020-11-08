@@ -6,17 +6,15 @@
     <div class="row">
       <div class="col-md-5">
         <div class="form-group">
-          <label for="schoolYear">Année de fin d'études</label>
+          <label for="outYear">Année de fin d'études</label>
           <input
             type="number"
             class="form-control"
-            id="schoolYear"
-            name="schoolYear"
-            min=1
-            max=8
+            id="outYear"
+            name="outYear"
             required
             value="{{viewed.outYear}}"
-            {{#unless modify}}disabled{{/unless}}
+            {{#if (eq action 'view')}}disabled{{/if}}
           >
         </div>
       </div>
@@ -27,7 +25,7 @@
             class="form-control custom-select"
             id="departmentId"
             name="departmentId"
-            {{#unless modify}}disabled{{/unless}}
+            {{#if (eq action 'view')}}disabled{{/if}}
           >
             {{#each departments}}
               <option
@@ -47,24 +45,10 @@
             type="checkbox"
             name="isApprentice"
             {{#if viewed.isApprentice}}checked{{/if}}
-            {{#unless modify}}disabled{{/unless}}
+            {{#if (eq action 'view')}}disabled{{/if}}
           >
           <label class="form-check-label">
             Formation en apprentissage
-          </label>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            name="isGraduate"
-            {{#if viewed.isGraduate}}checked{{/if}}
-            {{#unless modify}}disabled{{/unless}}
-          >
-          <label class="form-check-label">
-            Dîplomé
           </label>
         </div>
       </div>

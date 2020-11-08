@@ -12,7 +12,7 @@
         name="address[line1]"
         required
         value="{{viewed.address.line1}}"
-        {{#unless modify}}disabled{{/unless}}
+        {{#if (eq action 'view')}}disabled{{/if}}
       >
     </div>
     <div class="form-group">
@@ -23,7 +23,7 @@
         id="line2"
         name="address[line2]"
         value="{{viewed.address.line2}}"
-        {{#unless modify}}disabled{{/unless}}
+        {{#if (eq action 'view')}}disabled{{/if}}
       >
     </div>
     <div class="row">
@@ -37,7 +37,7 @@
             name="address[postalCode]"
             required
             value="{{viewed.address.postalCode}}"
-            {{#unless modify}}disabled{{/unless}}
+            {{#if (eq action 'view')}}disabled{{/if}}
           >
         </div>
       </div>
@@ -51,7 +51,7 @@
             name="address[city]"
             required
             value="{{viewed.address.city}}"
-            {{#unless modify}}disabled{{/unless}}
+            {{#if (eq action 'view')}}disabled{{/if}}
           >
         </div>
       </div>
@@ -63,7 +63,7 @@
         id="countryId"
         name="address[countryId]"
         required
-        {{#unless modify}}disabled{{/unless}}
+        {{#if (eq action 'view')}}disabled{{/if}}
       >
         {{#each countries}}
           <option

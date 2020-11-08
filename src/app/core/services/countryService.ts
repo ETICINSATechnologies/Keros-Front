@@ -16,11 +16,10 @@ export class CountryService extends BaseService {
     }
 
     return this.api.keros.get<Country[]>("core/country").then(
-      (res: HttpResponse<Country[]>) => {
-        winston.debug(`Response : ${JSON.stringify(res.data, null, 2)}`);
-        CountryService.cacheValues = res.data;
+      (res: Country[]) => {
+        CountryService.cacheValues = res;
         CountryService.cacheExpires = Date.now() + (6 * 3600 * 1000);
-        return res.data;
+        return res;
       }
     );
   }

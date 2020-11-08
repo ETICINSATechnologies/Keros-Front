@@ -3,7 +3,6 @@
     {{> navbar}}
     {{> sidebar}}
     <form class="content-wrapper" method="post">
-      <input type="text" id="id" name="id" value="{{viewed.id}}" hidden>
       <div class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
@@ -11,27 +10,7 @@
               <h1 class="m-0 text-dark d-inline-block align-middle">
                 Fiche d'Inscription #{{viewed.id}}
               </h1>
-              {{#if modify}}
-                <div class="btn-group mx-2" role="group">
-                  <button
-                    type="submit"
-                    class="btn bg-olive text-light d-inline-block align-middle"
-                  >
-                    Valider
-                  </button>
-                  <a
-                    class="btn btn-danger text-light d-inline-block align-middle"
-                  >
-                    Annuler
-                  </a>
-                </div>
-              {{else}}
-                <a
-                  class="btn bg-olive text-light d-inline-block align-middle mx-2"
-                >
-                  Modifier
-                </a>
-              {{/if}}
+              {{> info-box/registration/buttons}}
             </div>
           </div>
         </div>

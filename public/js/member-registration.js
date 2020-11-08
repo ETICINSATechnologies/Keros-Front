@@ -52,7 +52,7 @@ $(document).ready(async function(){
 
     selectedRowClass: "jsgrid-hover",
     rowClick: function(args) {
-      window.open(`/sg/registrations/members/${args.item.id}`);
+      window.open(`/sg/registrations/members/${args.item.id}/view`);
     },
 
     fields,

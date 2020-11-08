@@ -1,0 +1,33 @@
+{{#if (eq action "modify")}}
+  <div class="btn-group ml-2 mr-1" role="group">
+    <button
+      type="submit"
+      class="btn bg-olive text-light d-inline-block align-middle"
+    >
+      <i class="fas fa-check-circle"></i>
+    </button>
+    <a
+      class="btn btn-danger text-light d-inline-block align-middle"
+      href="/sg/registrations/{{entity}}/{{viewed.id}}/view"
+    >
+      <i class="fas fa-times-circle"></i>
+    </a>
+  </div>
+  {{#if deleteRoute}}
+    {{> modals/delete}}
+  {{/if}}
+{{else}}
+  <a
+    class="btn bg-olive text-light d-inline-block align-middle ml-2 mr-1"
+    href="/sg/registrations/{{entity}}/{{viewed.id}}/modify"
+  >
+    <i class="fas fa-user-edit"></i>
+  </a>
+  <button
+    type="submit"
+    class="btn btn-success text-light d-inline-block align-middle mx-1"
+    formaction="/sg/registrations/{{entity}}/{{viewed.id}}/validate"
+  >
+    <i class="fas fa-user-check"></i>
+  </a>
+{{/if}}

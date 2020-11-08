@@ -14,7 +14,7 @@
             name="lastName"
             required
             value="{{viewed.lastName}}"
-            {{#unless modify}}disabled{{/unless}}
+            {{#if (eq action 'view')}}disabled{{/if}}
           >
         </div>
       </div>
@@ -28,7 +28,7 @@
             name="firstName"
             required
             value="{{viewed.firstName}}"
-            {{#unless modify}}disabled{{/unless}}
+            {{#if (eq action 'view')}}disabled{{/if}}
           >
         </div>
       </div>
@@ -41,7 +41,7 @@
             class="form-control custom-select"
             id="genderId"
             name="genderId"
-            {{#unless modify}}disabled{{/unless}}
+            {{#if (eq action 'view')}}disabled{{/if}}
           >
             {{#each genders}}
               <option
@@ -64,7 +64,7 @@
             name="birthday"
             required
             value="{{viewed.birthday}}"
-            {{#unless modify}}disabled{{/unless}}
+            {{#if (eq action 'view')}}disabled{{/if}}
           >
         </div>
       </div>
@@ -78,7 +78,7 @@
             name="email"
             required
             value="{{viewed.email}}"
-            {{#unless modify}}disabled{{/unless}}
+            {{#if (eq action 'view')}}disabled{{/if}}
           >
         </div>
       </div>
@@ -90,9 +90,9 @@
           <select
             class="form-control custom-select"
             id="nationalityId"
-            name="nationality[id]"
+            name="nationalityId"
             required
-            {{#unless modify}}disabled{{/unless}}
+            {{#if (eq action 'view')}}disabled{{/if}}
           >
             {{#each countries}}
               <option
@@ -107,18 +107,31 @@
       </div>
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="telephone">Téléphone</label>
+          <label for="phoneNumber">Téléphone</label>
           <input
             type="text"
             class="form-control"
-            id="telephone"
-            name="telephone"
+            id="phoneNumber"
+            name="phoneNumber"
             required
             value="{{viewed.phoneNumber}}"
-            {{#unless modify}}disabled{{/unless}}
+            {{#if (eq action 'view')}}disabled{{/if}}
           >
         </div>
       </div>
     </div>
+    {{#if (eq entity "consultants")}}
+      <div class="form-group">
+        <label for="socialSecurityNumber">Numéro de Sécurite Sociale</label>
+        <input
+          type="string"
+          class="form-control"
+          id="socialSecurityNumber"
+          name="socialSecurityNumber"
+          value="{{viewed.socialSecurityNumber}}"
+          {{#if (eq action 'view')}}disabled{{/if}}
+        >
+      </div>
+    {{/if}}
   </div>
 </div>

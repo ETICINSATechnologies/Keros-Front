@@ -3,6 +3,7 @@ import {
   Department,
   Country,
   Address,
+  AddressRequest,
   Gender
 } from "../../core/models";
 
@@ -21,4 +22,21 @@ export interface ConsultantRegistration {
   address?: Address;
   droitImage?: boolean;
   createdDate?: Timestamp;
+  isApprentice?: boolean;
+}
+
+export interface ConsultantRegistrationRequest {
+  firstName?: string;
+  lastName?: string;
+  department?: Department;
+  email?: string;
+  gender?: Gender;
+  birthday?: string;
+  phoneNumber?: string;
+  outYear?: number;
+  nationalityId?: number;
+  socialSecurityNumber?: string;
+  address?: AddressRequest;
+  droitImage?: boolean;
+  isApprentice?: boolean;
 }

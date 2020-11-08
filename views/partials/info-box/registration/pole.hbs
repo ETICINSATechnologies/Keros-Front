@@ -11,7 +11,7 @@
             class="form-control custom-select"
             id="wantedPoleId"
             name="wantedPoleId"
-            {{#unless modify}}disabled{{/unless}}
+            {{#if (eq action 'view')}}disabled{{/if}}
           >
             {{#each poles}}
               <option

@@ -16,11 +16,10 @@ export class PositionService extends BaseService {
     }
 
     return this.api.keros.get<Position[]>("core/position").then(
-      (res: HttpResponse<Position[]>) => {
-        winston.debug(`Response : ${JSON.stringify(res.data, null, 2)}`);
-        PositionService.cacheValues = res.data;
+      (res: Position[]) => {
+        PositionService.cacheValues = res;
         PositionService.cacheExpires = Date.now() + (6 * 3600 * 1000);
-        return res.data;
+        return res;
       }
     );
   }

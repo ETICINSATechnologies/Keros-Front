@@ -1,6 +1,6 @@
 import { MemberRegistration, ConsultantRegistration } from "./models";
 
-export function deserializeTableData(data: (MemberRegistration | ConsultantRegistration)[], entity: string) {
+export function formatTableData(data: (MemberRegistration | ConsultantRegistration)[], entity: string) {
   switch (entity) {
     case "members":
       return data.map((memberReg: MemberRegistration) => {
@@ -36,4 +36,47 @@ export function deserializeTableData(data: (MemberRegistration | ConsultantRegis
     default:
       break;
   }
+}
+
+export function formatFormFields(data: any, entity: string) {
+  const address = {
+    ...data.address,
+    postalCode: parseInt(data.address.postalCode, 10),
+    countryId: parseInt(data.address.countryId, 10)
+  };
+  const genderId = parseInt(data.genderId, 10);
+  const departmentId = parseInt(data.departmentId, 10);
+  const outYear = parseInt(data.outYear, 10);
+  const nationalityId = parseInt(data.nationalityId, 10);
+  const droitImage = data.droitImage === "on";
+
+  let formatted = {
+    ...data,
+    address,
+    genderId,
+    departmentId,
+    nationalityId,
+    outYear,
+    droitImage
+  };
+
+  switch (entity) {
+    case "consultants":
+      formatted = {
+        ...formatted,
+        isApprentice: data.isApprentice === "on"
+      };
+      break;
+    case "members":
+      formatted = {
+        ...formatted,
+        hasPaid: data.hasPaid === "on",
+        wantedPoleId: parseInt(data.wantedPoleId, 10)
+      };
+      break;
+    default:
+      break;
+  }
+
+  return formatted;
 }

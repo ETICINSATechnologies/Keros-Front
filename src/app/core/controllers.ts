@@ -33,20 +33,27 @@ export class CoreController {
     const connectedUser = JSON.parse(req.cookies.connectedUser);
     const isMember = req.cookies.isMember;
 
-    let viewed, entity, title;
+    let viewed;
+    let entity;
+    let title;
+    let action;
+    let deleteRoute;
     if (req.originalUrl.includes("/profile/me/")) {
       viewed = connectedUser;
       entity = isMember ? "members" : "consultants";
       title = "Mon Profil";
-    } else if (connectedUser.id === parseInt(req.params.id)) {
+      action = req.params.action;
+    } else if (connectedUser.id === parseInt(req.params.id, 10)) {
       return res.redirect(`/profile/me/${req.params.action}`);
-    } else if (["view", "modify"].includes(req.params.action)){
-      const id = parseInt(req.params.id);
+    } else if (["view", "modify"].includes(req.params.action)) {
+      const id = parseInt(req.params.id, 10);
       title = `Profil Utilisateur #${id}`;
       entity = req.params.entity;
+      action = req.params.action;
+      deleteRoute = `/profile/${entity}/${id}/delete`;
       switch (entity) {
         case "consultants":
-          viewed = await ConsultantService.get(id);
+          viewed = await ConsultantService.getProtected(id);
           break;
         case "members":
         case "alumni":
@@ -58,6 +65,7 @@ export class CoreController {
     } else {
       title = "Nouvel Utilisateur";
       entity = req.params.entity;
+      action = "add";
     }
 
     const departments = await DepartmentService.getAll();
@@ -76,39 +84,42 @@ export class CoreController {
       genders,
       countries,
       positions,
-      action: req.params.action
+      action,
+      deleteRoute
     });
   }
 
   static async modifyProfile(req: Request, res: Response, next: NextFunction) {
     winston.verbose("Modifying profile");
 
-    let updatedUser;
     if (req.params.id) {
-      const id = parseInt(req.params.id);
+      const id = parseInt(req.params.id, 10);
       const form = formatFormFields(req.body, req.params.entity);
 
-      switch (req.params.entity) {
+      let updatedUser;
+      let entity = req.params.entity;
+      switch (entity) {
         case "consultants":
           updatedUser = await ConsultantService.update(id, form);
           break;
         case "members":
         case "alumni":
           updatedUser = await MemberService.update(id, form);
+          // handles redirection when alumni status toggled
+          entity = updatedUser.isAlumni ? "alumni" : "members";
           break;
         default:
           break;
       }
 
-      res.redirect(`/profile/${req.params.entity}/${req.params.id}/view`);
+      res.redirect(`/profile/${entity}/${req.params.id}/view`);
     } else {
       const connectedUser = JSON.parse(req.cookies.connectedUser);
       const isMember = req.cookies.isMember;
-      if (isMember) {
-        updatedUser = await MemberService.updateCurrent(formatFormFields(req.body, "members"));
-      } else {
-        updatedUser = await ConsultantService.updateCurrent(formatFormFields(req.body, "consultants"));
-      }
+
+      const updatedUser = isMember ?
+        await MemberService.updateCurrent(formatFormFields(req.body, "members")) :
+        await ConsultantService.updateCurrent(formatFormFields(req.body, "consultants"));
 
       res
         .cookie("connectedUser", JSON.stringify(updatedUser))
@@ -117,14 +128,52 @@ export class CoreController {
   }
 
   static async addProfile(req: Request, res: Response, next: NextFunction) {
+    winston.verbose("Adding new user");
+
+    const form = formatFormFields(req.body, req.params.entity);
+
+    let newUser;
+    switch (req.params.entity) {
+      case "consultants":
+        newUser = await ConsultantService.create(form);
+        res.redirect(`/profile/consultants/${newUser.id}/view`);
+        break;
+      case "members":
+        newUser = await MemberService.create(form);
+        res.redirect(`/profile/members/${newUser.id}/view`);
+        break;
+      default:
+        break;
+    }
+  }
+
+  static async deleteProfile(req: Request, res: Response, next: NextFunction) {
+    winston.verbose(`Deleting user with ID ${req.params.id}`);
+
+    const id = parseInt(req.params.id, 10);
+
+    switch (req.params.entity) {
+      case "consultants":
+        await ConsultantService.delete(id);
+        break;
+      case "members":
+      case "alumni":
+        await MemberService.delete(id);
+        break;
+      default:
+        break;
+    }
+
+    res.redirect(`/search/${req.params.entity}`);
   }
 
   static async getSearchPage(req: Request, res: Response, next: NextFunction) {
     winston.verbose(`Getting search page for ${req.params.entity}`);
     const connectedUser = JSON.parse(req.cookies.connectedUser);
     const isMember = req.cookies.isMember;
-    let title, addRoute;
 
+    let title;
+    let addRoute;
     switch (req.params.entity) {
       case "members":
         title = "Membres";

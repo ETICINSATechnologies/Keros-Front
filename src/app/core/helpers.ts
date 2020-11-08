@@ -54,12 +54,12 @@ export function formatTableData(data: (Member | Consultant)[], entity: string) {
 export function formatFormFields(data: any, entity: string) {
   const address = {
     ...data.address,
-    postalCode: parseInt(data.address.postalCode),
-    countryId: parseInt(data.address.countryId)
+    postalCode: parseInt(data.address.postalCode, 10),
+    countryId: parseInt(data.address.countryId, 10)
   };
-  const genderId = parseInt(data.genderId);
-  const departmentId = parseInt(data.departmentId);
-  const schoolYear = parseInt(data.schoolYear);
+  const genderId = parseInt(data.genderId, 10);
+  const departmentId = parseInt(data.departmentId, 10);
+  const schoolYear = parseInt(data.schoolYear, 10);
   const droitImage = data.droitImage === "on";
 
   let formatted = {
@@ -85,15 +85,22 @@ export function formatFormFields(data: any, entity: string) {
       break;
     case "members":
     case "alumni":
+      if (formatted.isAlumni) {
+        // if is currently member, then toggle to alumni, vice versa
+        formatted.isAlumni = entity === "members";
+      }
+
       const positions = [];
-      for (const position of data.positions) {
-        const updatedPosition = {
-          id: parseInt(position.id),
-          poleId: parseInt(position.poleId),
-          year: parseInt(position.year),
-          isBoard: Boolean(position.isBoard)
-        };
-        positions.push(updatedPosition);
+      if (data.positions) {
+        for (const position of data.positions) {
+          const updatedPosition = {
+            id: parseInt(position.id, 10),
+            poleId: parseInt(position.poleId, 10),
+            year: parseInt(position.year, 10),
+            isBoard: Boolean(position.isBoard)
+          };
+          positions.push(updatedPosition);
+        }
       }
       formatted = {
         ...formatted,

@@ -1,0 +1,44 @@
+{{#if (eq action 'modify')}}
+  <div class="btn-group mx-2" role="group">
+    <button
+      type="submit"
+      class="btn bg-olive text-light d-inline-block align-middle"
+    >
+      <i class="fas fa-check-circle"></i>
+    </button>
+    <a
+      class="btn btn-danger text-light d-inline-block align-middle"
+      {{#if (eq connectedUser.id viewed.id)}}
+        href="/profile/me/view"
+      {{else}}
+        href="/profile/{{entity}}/{{viewed.id}}/view"
+      {{/if}}
+    >
+      <i class="fas fa-times-circle"></i>
+    </a>
+  </div>
+  {{#if deleteRoute}}
+    {{> modals/delete}}
+  {{/if}}
+  {{#if (eq entity "members")}}
+    {{> modals/alumni}}
+  {{/if}}
+{{else if (eq action 'view')}}
+  <a
+    class="btn bg-olive text-light d-inline-block align-middle ml-3 mr-1"
+    {{#if (eq connectedUser.id viewed.id)}}
+      href="/profile/me/modify"
+    {{else}}
+      href="/profile/{{entity}}/{{viewed.id}}/modify"
+    {{/if}}
+  >
+    <i class="fas fa-user-edit"></i>
+  </a>
+{{else if (eq action 'add')}}
+  <button
+    type="button"
+    class="btn bg-olive text-light d-inline-block align-middle mx-2"
+  >
+    Ajouter
+  </button>
+{{/if}}

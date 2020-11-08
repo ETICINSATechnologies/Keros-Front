@@ -10,7 +10,7 @@
           type="checkbox"
           name="droitImage"
           {{#if viewed.droitImage}}checked{{/if}}
-          {{#unless modify}}disabled{{/unless}}
+          {{#if (eq action 'view')}}disabled{{/if}}
         >
         <label class="form-check-label">
           Droit à l'utilisation des images

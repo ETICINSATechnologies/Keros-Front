@@ -12,7 +12,7 @@
         name="username"
         required
         value="{{viewed.username}}"
-        {{#unless modify}}disabled{{/unless}}
+        {{#if (eq action 'view')}}disabled{{/if}}
       >
     </div>
     <div class="form-group">
@@ -22,10 +22,13 @@
         class="form-control"
         id="password"
         name="password"
-        {{#unless modify}}disabled{{/unless}}
+        {{#if (eq action 'view')}}disabled{{/if}}
       >
     </div>
-    {{#if modify}}
+    {{#if (or
+      (eq action 'modify')
+      (eq action 'add')
+    )}}
       <div class="form-group">
         <label for="password_confirm">Confirmez le Mot de Passe</label>
         <input

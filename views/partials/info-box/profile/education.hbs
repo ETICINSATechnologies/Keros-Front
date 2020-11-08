@@ -16,7 +16,7 @@
             max=8
             required
             value="{{viewed.schoolYear}}"
-            {{#unless modify}}disabled{{/unless}}
+            {{#if (eq action 'view')}}disabled{{/if}}
           >
         </div>
       </div>
@@ -27,7 +27,7 @@
             class="form-control custom-select"
             id="departmentId"
             name="departmentId"
-            {{#unless modify}}disabled{{/unless}}
+            {{#if (eq action 'view')}}disabled{{/if}}
           >
             {{#each departments}}
               <option
@@ -47,7 +47,7 @@
             type="checkbox"
             name="isApprentice"
             {{#if viewed.isApprentice}}checked{{/if}}
-            {{#unless modify}}disabled{{/unless}}
+            {{#if (eq action 'view')}}disabled{{/if}}
           >
           <label class="form-check-label">
             Formation en apprentissage
@@ -61,7 +61,7 @@
             type="checkbox"
             name="isGraduate"
             {{#if viewed.isGraduate}}checked{{/if}}
-            {{#unless modify}}disabled{{/unless}}
+            {{#if (eq action 'view')}}disabled{{/if}}
           >
           <label class="form-check-label">
             Dîplomé
