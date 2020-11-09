@@ -15,3 +15,11 @@
   background: #8febc3;
   border-color: #8febc3;
 }
+
+.custom-file-input {
+  cursor: pointer;
+}
+
+.custom-file-input ~ .custom-file-label::after {
+  content: "Parcourir" !important;
+}

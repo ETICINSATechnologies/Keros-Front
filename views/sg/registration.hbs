@@ -2,7 +2,10 @@
   <div class="wrapper">
     {{> navbar}}
     {{> sidebar}}
-    <form class="content-wrapper" method="post">
+    <form
+      class="content-wrapper"
+      method="post"
+    >
       <div class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
@@ -24,6 +27,7 @@
                 {{> info-box/registration/general}}
                 <div class="row">
                   <div class="col-md-6">
+                    {{> info-box/registration/education}}
                   </div>
                   <div class="col-md-6">
                     {{> info-box/address}}
@@ -31,7 +35,7 @@
                 </div>
               </div>
               <div class="col-md-5">
-                {{> info-box/registration/education}}
+                {{> info-box/registration/documents}}
                 {{> info-box/rights}}
               </div>
             </div>
@@ -45,7 +49,8 @@
                 {{> info-box/registration/general}}
                 <div class="row">
                   <div class="col-md-6">
-                    {{> info-box/registration/documents}}
+                    {{> info-box/registration/education}}
+                    {{> info-box/registration/pole}}
                   </div>
                   <div class="col-md-6">
                     {{> info-box/address}}
@@ -53,8 +58,7 @@
                 </div>
               </div>
               <div class="col-md-5">
-                {{> info-box/registration/education}}
-                {{> info-box/registration/pole}}
+                {{> info-box/registration/documents}}
                 {{> info-box/rights}}
                 {{> info-box/registration/status}}
               </div>

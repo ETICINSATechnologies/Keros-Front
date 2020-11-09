@@ -1,5 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import winston from "winston";
+import FormData from "form-data";
+import { Readable } from "stream";
 
 import { HttpError } from "../common/models";
 
@@ -87,7 +89,7 @@ export class SecretaryController {
 
     res.redirect(`/sg/registrations/${req.params.entity}`);
   }
-  
+
   static async validateRegistration(req: Request, res: Response, next: NextFunction) {
     winston.verbose(`Validating registration with ID ${req.params.id}`);
 
@@ -161,6 +163,61 @@ export class SecretaryController {
           data: formatTableData(queryRes.content, req.params.entity),
           itemsCount: queryRes.meta.totalItems
         });
+        break;
+      default:
+        break;
+    }
+  }
+
+  static async uploadDocument(req: Request, res: Response, next: NextFunction) {
+    winston.verbose(`Uploading document with ID ${req.params.doc} of registration with ID ${req.params.id}`);
+
+    const id = parseInt(req.params.id, 10);
+    const doc = parseInt(req.params.doc, 10);
+
+    const data = new FormData();
+    winston.verbose(req.file.buffer.keys());
+
+    switch (req.params.entity) {
+      case "consultants":
+        break;
+      case "members":
+        await MemberRegistrationService.uploadDocument(id, doc, data);
+        break;
+      default:
+        break;
+    }
+
+    res.redirect(`/sg/reistrations/${req.params.entity}`);
+  }
+
+  static async downloadDocument(req: Request, res: Response, next: NextFunction) {
+    winston.verbose(`Getting document with ID ${req.params.doc} of registration with ID ${req.params.id}`);
+
+    const id = parseInt(req.params.id, 10);
+
+    let doc;
+    let response;
+    switch (`${req.params.entity}-${req.params.action}`) {
+      case "consultants-download":
+        doc = req.params.doc;
+        response = await ConsultantRegistrationService.getDocument(id, doc);
+        res.redirect(response.location);
+        break;
+      case "consultants-template":
+        doc = req.params.doc;
+        response = await ConsultantRegistrationService.getDocument(id, doc);
+        res.redirect(response.location);
+        break;
+      case "members-download":
+        doc = parseInt(req.params.doc, 10);
+        response = await MemberRegistrationService.getDocument(id, doc);
+        res.redirect(response.location);
+        break;
+      case "members-template":
+        doc = parseInt(req.params.doc, 10);
+        response = await MemberRegistrationService.getTemplate(id, doc);
+        res.redirect(response.location);
         break;
       default:
         break;

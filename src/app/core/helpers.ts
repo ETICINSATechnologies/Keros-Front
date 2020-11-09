@@ -95,13 +95,25 @@ export function formatFormFields(data: any, entity: string) {
         for (const position of data.positions) {
           const updatedPosition = {
             id: parseInt(position.id, 10),
-            poleId: parseInt(position.poleId, 10),
             year: parseInt(position.year, 10),
             isBoard: Boolean(position.isBoard)
           };
           positions.push(updatedPosition);
         }
       }
+
+      if (data.positionToAdd) {
+        for (const year of Object.keys(data.positionToAdd)) {
+          const addedPosition = {
+            id: parseInt(data.positionToAdd[year], 10),
+            year: parseInt(year, 10),
+            isBoard: false
+          };
+          positions.push(addedPosition);
+        }
+        delete data.positionsToAdd;
+      }
+
       formatted = {
         ...formatted,
         positions

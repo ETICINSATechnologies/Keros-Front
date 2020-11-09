@@ -1,7 +1,12 @@
 import winston from "winston";
 
 import { BaseService } from "../../common/services";
-import { HttpResponse, HttpError, SearchResponse } from "../../common/models";
+import {
+  HttpResponse,
+  HttpError,
+  SearchResponse,
+  DocumentResponse
+} from "../../common/models";
 
 import { ConsultantRegistration, ConsultantRegistrationRequest } from "../models";
 
@@ -32,5 +37,13 @@ export class ConsultantRegistrationService extends BaseService {
 
   static validate(id: number): Promise<void> {
     return this.api.keros.post<void>(`sg/consultant-inscription/${id}/validate`, {});
+  }
+
+  static getTemplate(id: number, doc: string): Promise<DocumentResponse> {
+    return this.api.keros.get<DocumentResponse>(`sg/consultant-inscription/${id}/document/${doc}/generate`);
+  }
+
+  static getDocument(id: number, doc: string): Promise<DocumentResponse> {
+    return this.api.keros.get<DocumentResponse>(`sg/consultant-inscription/${id}/document/${doc}`);
   }
 }

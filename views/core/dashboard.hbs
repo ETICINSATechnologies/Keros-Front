@@ -12,6 +12,16 @@
           </div>
         </div>
       </div>
+
+      <div class="content">
+        <div class="container-fluid">
+          {{#if isMember}}
+            <div class="col-lg-3 col-6">
+              {{> dashboard/payment}}
+            </div>
+          {{/if}}
+        </div>
+      </div>
     </div>
     {{> footer}}
   </div>

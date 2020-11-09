@@ -7,7 +7,7 @@ export interface Timestamp {
 }
 
 export interface DocumentResponse {
-  location?: string;
+  location: string;
 }
 
 export interface SearchResponse<T> {

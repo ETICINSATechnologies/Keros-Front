@@ -33,7 +33,7 @@ export class HttpClient {
       });
   }
 
-  post<T>(resource: string, body: object, options?: AxiosRequestConfig): Promise<T> {
+  post<T>(resource: string, body: any, options?: AxiosRequestConfig): Promise<T> {
     winston.debug(`POST ${resource} with : \n ${JSON.stringify(body, null, 2)}`);
     return this.restClient.post<T>(resource, body, options)
       .then((res: AxiosResponse<T>) => {

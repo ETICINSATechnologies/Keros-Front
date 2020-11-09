@@ -7,6 +7,8 @@ import {
   Gender
 } from "../../core/models";
 
+import { Document } from "./Document";
+
 export interface MemberRegistration {
   id?: number;
   firstName?: string;
@@ -22,6 +24,7 @@ export interface MemberRegistration {
   address?: Address;
   hasPaid?: boolean;
   droitImage?: boolean;
+  documents?: Document[];
 }
 
 export interface MemberRegistrationRequest {

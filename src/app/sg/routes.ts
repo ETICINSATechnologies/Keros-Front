@@ -1,4 +1,5 @@
 import winston from "winston";
+import multer from "multer";
 import { Application, Router } from "express";
 
 import { SecretaryController } from "./controllers";
@@ -21,6 +22,11 @@ export function initRoutes(app: Application) {
     .get(SecretaryController.deleteRegistration);
   secretaryRouter.route(`/registrations/:entity(${entities})/:id/validate`)
     .post(SecretaryController.validateRegistration);
+
+  secretaryRouter.route(`/registrations/:entity(${entities})/:id/documents/:doc`)
+    .post(multer().single("file"), SecretaryController.uploadDocument);
+  secretaryRouter.route(`/registrations/:entity(${entities})/:id/documents/:doc/:action(template|download)`)
+    .get(SecretaryController.downloadDocument);
 
   secretaryRouter.route(`/data/:entity(${entities})`)
     .get(SecretaryController.getData);

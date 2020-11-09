@@ -9,7 +9,7 @@ export const HBS_CONFIG = {
     eq (a: any, b: any) {
       return a === b;
     },
-    not (a: any, b: any) {
+    ne (a: any, b: any) {
       return a !== b;
     },
     and () {
@@ -45,6 +45,9 @@ export const HBS_CONFIG = {
         month: "long",
         year: "numeric"
       });
+    },
+    afterToday (a: string) {
+      return new Date(a) < new Date(Date.now());
     }
   }
 };
