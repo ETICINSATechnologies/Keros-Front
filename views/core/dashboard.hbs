@@ -21,19 +21,22 @@
             </div>
           </div>
         </div>
-          {{#if (isRepaymentDue connectedMember.dateRepayment.date)}}
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box">
                     <div class="bg-aqua">
                         <i class="fa fa-exclamation-triangle fa-3x fa-align-center" style="padding: 10px"></i>
                     </div>
-                    <div class="" style="text-align: center;">
-                        <h4 class="box-title text-center">Renouvellement de l'inscription nécessaire</h4>
-                        <button class="btn btn-primary" onclick="payment('{{connectedUser.id}}', '{{connectedUser.email}}');">Payer la cotisation</button>
+                    <div style="text-align: center;">
+                        <h4 class="box-title text-center">Renouvellement de l'inscription</h4>
+                        <div>Date de la dernière inscription : {{ substring connectedMember.dateRepayment.date 10 }}</div>
+                        {{#if (isRepaymentDue connectedMember.dateRepayment.date)}}
+                            <button style="margin-top: 5px; margin-bottom: 5px;" class="btn btn-primary" onclick="payment('{{connectedUser.id}}', '{{connectedUser.email}}');">Payer la cotisation</button>
+                        {{else}}
+                            <p> Pas de renouvellement à effectuer !</p>
+                        {{/if}}
                     </div>
                 </div>
             </div>
-          {{/if}}
       </div>
     </section>
   </div
