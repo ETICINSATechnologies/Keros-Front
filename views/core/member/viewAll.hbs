@@ -5,7 +5,7 @@
     <div class="content-wrapper">
       <section class="content-header">
         <h1>
-          Voir les {{#if (isAlumniParam urlPathWithQueries)}} anciens {{else}} membres {{/if}}
+          Voir les{{#if (isAlumniParam urlPathWithQueries)}} anciens {{else}} membres {{/if}}
         </h1>
         {{#if (isAlumniParam urlPathWithQueries)}}
             {{> breadcrumb tab="RH" action="all" pathall="Anciens,Voir les anciens"}}
