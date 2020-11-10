@@ -45,6 +45,10 @@ export class MemberRegistrationService extends BaseService {
   }
 
   static uploadDocument(id: number, doc: number, data: FormData) {
-    return this.api.keros.post<void>(`sg/membre-inscription/${id}/document/${doc}`, data);
+    return this.api.keros.post<void>(`sg/membre-inscription/${id}/document/${doc}`, data, {
+      headers: {
+        "Content-Type": `multipart/form-data; boundary=${data.getBoundary()}`
+      }
+    });
   }
 }

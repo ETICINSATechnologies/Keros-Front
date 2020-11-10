@@ -1,14 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 import winston from "winston";
-import FormData from "form-data";
-import { Readable } from "stream";
 
 import { HttpError } from "../common/models";
 
 import { DepartmentService, GenderService, CountryService, PoleService } from "../core/services";
 
 import { MemberRegistrationService, ConsultantRegistrationService } from "./services";
-import { formatTableData, formatFormFields } from "./helpers";
+import { prepareFilePayload, formatTableData, formatFormFields } from "./helpers";
 
 export class SecretaryController {
   static async getRegistration(req: Request, res: Response, next: NextFunction) {
@@ -174,9 +172,7 @@ export class SecretaryController {
 
     const id = parseInt(req.params.id, 10);
     const doc = parseInt(req.params.doc, 10);
-
-    const data = new FormData();
-    winston.verbose(req.file.buffer.keys());
+    const data = prepareFilePayload(req.file);
 
     switch (req.params.entity) {
       case "consultants":
@@ -188,7 +184,7 @@ export class SecretaryController {
         break;
     }
 
-    res.redirect(`/sg/reistrations/${req.params.entity}`);
+    res.redirect(`/sg/registrations/${req.params.entity}/${id}/view`);
   }
 
   static async downloadDocument(req: Request, res: Response, next: NextFunction) {

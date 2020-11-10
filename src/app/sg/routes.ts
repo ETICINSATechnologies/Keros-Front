@@ -5,6 +5,7 @@ import { Application, Router } from "express";
 import { SecretaryController } from "./controllers";
 import { isSecretary } from "../../utils";
 
+const upload = multer({ dest: "./" });
 const entities = ["members", "consultants"].join("|");
 
 export function initRoutes(app: Application) {
@@ -24,7 +25,7 @@ export function initRoutes(app: Application) {
     .post(SecretaryController.validateRegistration);
 
   secretaryRouter.route(`/registrations/:entity(${entities})/:id/documents/:doc`)
-    .post(multer().single("file"), SecretaryController.uploadDocument);
+    .post(upload.single("file"), SecretaryController.uploadDocument);
   secretaryRouter.route(`/registrations/:entity(${entities})/:id/documents/:doc/:action(template|download)`)
     .get(SecretaryController.downloadDocument);
 

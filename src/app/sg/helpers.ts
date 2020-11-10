@@ -1,4 +1,25 @@
+import fs from "fs";
+import winston from "winston";
+import FormData from "form-data";
 import { MemberRegistration, ConsultantRegistration } from "./models";
+
+export function prepareFilePayload(file: any) {
+  const filePath = `${file.destination}${file.filename}`;
+  const data = new FormData();
+  const stream = fs.createReadStream(filePath);
+
+  stream.on("end", function() {
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        throw new Error(); // throw something better
+      }
+      winston.debug("File deleted");
+    });
+  });
+
+  data.append("file", stream);
+  return data;
+}
 
 export function formatTableData(data: (MemberRegistration | ConsultantRegistration)[], entity: string) {
   switch (entity) {

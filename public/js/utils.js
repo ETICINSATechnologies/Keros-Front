@@ -89,7 +89,10 @@ function uploadFile(id, doc, entity) {
     enctype: 'multipart/form-data',
     processData: false,
     contentType: false,
-    data
+    data,
+    success: function() {
+      window.location.reload();
+    }
   });
 }
 // end File input helpers
