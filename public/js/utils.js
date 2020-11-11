@@ -1,7 +1,7 @@
 // Helper functions
 // General helpers
 function deleteElement(id) {
-  $(`[id='${id}'`).remove();
+  $(`[id="${id}"`).remove();
 }
 // end General helpers
 
