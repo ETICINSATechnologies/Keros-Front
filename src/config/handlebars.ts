@@ -48,6 +48,9 @@ export const HBS_CONFIG = {
     },
     afterToday (a: string) {
       return new Date(a) < new Date(Date.now());
+    },
+    currentYear() {
+      return new Date().getFullYear();
     }
   }
 };
