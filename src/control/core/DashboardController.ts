@@ -9,11 +9,14 @@ import { MemberService } from "../../services/core/MemberService";
 export class DashboardController {
   public getDashboard(req: Request, res: Response, next: NextFunction) {
     MemberService.getConnectedMember(function (err, connectedMember) {
-      const options = {
-        connectedMember
-      };
-      winston.debug("Getting dashboard");
-      res.render("core/dashboard", options);
+      MemberService.getAllMembers(function (err, members) {
+        const options = {
+          connectedMember,
+          members
+        };
+        winston.debug("Getting dashboard");
+        res.render("core/dashboard", options);
+      }, {hasPaidMemberFees: true, pageSize: 100});
     });
   }
 

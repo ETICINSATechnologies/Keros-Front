@@ -37,6 +37,23 @@
                     </div>
                 </div>
             </div>
+          {{#if (eq (isSGorRespHR connectedUser.positions) true)}}
+              <div class="col-md-4 col-sm-6 col-xs-12">
+                  <div class="info-box">
+                      <div class="bg-red" style="text-align: center">
+                          <i class="fa fa-exclamation-triangle fa-3x fa-align-center" style="padding: 10px; font-size: 24px;">
+                              Cotisation à payer pour :
+                          </i>
+                      </div>
+                      <div style="text-align: center;">
+                          <div> Prénom Nom : dernier paiement de cotisation</div>
+                          {{#each members.content}}
+                              <div style="color: orangered">{{this.firstName}} {{this.lastName}} : {{ substring this.dateRepayment.date 10}}</div>
+                          {{/each}}
+                      </div>
+                  </div>
+              </div>
+          {{/if}}
       </div>
     </section>
   </div
