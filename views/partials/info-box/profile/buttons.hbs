@@ -20,10 +20,11 @@
   {{#if deleteRoute}}
     {{> modals/delete}}
   {{/if}}
+
   {{#if (eq entity "members")}}
     {{> modals/alumni}}
   {{else if (eq entity "alumni")}}
-      {{> modals/member}}
+    {{> modals/member}}
   {{/if}}
 {{else if (eq action 'view')}}
   <a
