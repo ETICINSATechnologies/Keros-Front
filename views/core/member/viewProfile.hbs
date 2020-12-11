@@ -203,7 +203,6 @@
                         {{#if member.positions.2.isBoard}}checked{{/if}}> Membre CA
                     </label>
                   </div>
-
                     <div class="col-md-4 form-group">
                         <label for="droitImage">Droit à l'image </label>
                         <input type="checkbox" id="droitImage" name="droitImage"
@@ -211,6 +210,10 @@
                             {{disabledIf (or (eq action "view") (eq (isSGorRespHR connectedUser.positions) false))}}>
                         <input type="checkbox" id="isAlumni" name="isAlumni" {{#if member.isAlumni}} checked {{/if}}
                             {{disabledIf (or (eq action "view") (eq (isSGorRespHR connectedUser.positions) false))}} hidden>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="lastPaymentDate">Dernière date de paiement de la cotisation : </label>
+                        <span>{{ substring connectedUser.dateRepayment.date 10 }}</span>
                     </div>
                 </div>
                 <div class="box-footer">
