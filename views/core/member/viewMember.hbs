@@ -213,6 +213,12 @@
                         <input type="checkbox" id="droitImage" name="droitImage"
                         {{#if member.droitImage}} checked {{/if}}>
                     </div>
+                  {{#if (eq (isSGorRespHR connectedUser.positions) true) }}
+                    <div class="col-md-4 form-group">
+                        <label for="lastPaymentDate">Dernière date de paiement de la cotisation : </label>
+                        <span>{{ substring member.dateRepayment.date 10 }}</span>
+                    </div>
+                    {{/if}}
                 </div>
                 <div class="box-footer">
                   <a href="/core/member"><button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Retour</button></a>
