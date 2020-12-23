@@ -39,7 +39,7 @@ export class App {
     this.app.use("/css", express.static(path.join(__dirname, "../../node_modules/admin-lte/dist/css")));
 
     this.app.use("/fontawesome", express.static(path.join(__dirname, "../../node_modules/@fortawesome/fontawesome-free")));
-    this.app.use("/jsgrid", express.static(path.join(__dirname, "../../node_modules/admin-lte/plugins/jsgrid")));
+    this.app.use("/jsgrid", express.static(path.join(__dirname, "../../node_modules/jsgrid/dist")));
 
     this.app.engine(".hbs", exphbs(HBS_CONFIG));
     this.app.set("view engine", "hbs");
@@ -51,7 +51,7 @@ export class App {
 
     this.app.use(cookieParser("156daf75-d51b-4918-a1b5-e158126b0cbd"));
 
-    this.app.use((req: Request, res: Response, next: NextFunction) => {
+    this.app.use((req: Request, _res: Response, next: NextFunction) => {
       if (req.cookies.token && !BaseService.api.keros.getDefaultHeader("Authorization")) {
         winston.info("Setting authorization token found in cookie");
         BaseService.api.keros.setDefaultHeader("Authorization", req.cookies.token);
