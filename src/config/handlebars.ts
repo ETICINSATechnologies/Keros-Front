@@ -5,20 +5,22 @@ export const HBS_CONFIG = {
   defaultLayout: "main",
   layoutsDir: path.join(__dirname, "../../views/layouts"),
   partialsDir: path.join(__dirname, "../../views/partials"),
+
+  /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types */
   helpers: {
-    eq (a: any, b: any) {
+    eq (a: any, b: any): boolean {
       return a === b;
     },
-    ne (a: any, b: any) {
+    ne (a: any, b: any): boolean {
       return a !== b;
     },
-    and () {
-      return Array.prototype.slice.call(arguments, 0, -1).every(Boolean);
+    and (...args: any[]): boolean {
+      return Array.prototype.slice.call(args, 0, -1).every(Boolean);
     },
-    or () {
-      return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
+    or (...args: any[]): boolean {
+      return Array.prototype.slice.call(args, 0, -1).some(Boolean);
     },
-    gender (code: any) {
+    gender (code: any): string {
       let label;
       switch (code) {
         case "H":
@@ -36,21 +38,22 @@ export const HBS_CONFIG = {
       }
       return label;
     },
-    substr (a: any, b: any) {
+    substr (a: any, b: any): string {
       return a.includes(b);
     },
-    date (a: string) {
+    date (a: string): string {
       return new Date(a).toLocaleDateString("fr-FR", {
         day: "numeric",
         month: "long",
         year: "numeric"
       });
     },
-    afterToday (a: string) {
+    afterToday (a: string): boolean {
       return new Date(a) < new Date(Date.now());
     },
-    currentYear() {
+    currentYear(): number {
       return new Date().getFullYear();
     }
+  /* eslint-enable @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types */
   }
 };

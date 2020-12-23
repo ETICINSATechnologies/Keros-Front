@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
 import winston from "winston";
 
-import { HttpResponse, HttpError } from "./httpPayload";
+import { HttpError } from "./httpPayload";
 
 export class HttpClient {
   private restClient: AxiosInstance;
@@ -10,15 +10,16 @@ export class HttpClient {
     this.restClient = axios.create({ baseURL });
   }
 
-  getDefaultHeader(key: string) {
+  getDefaultHeader(key: string): string {
     return this.restClient.defaults.headers.common[key];
   }
 
-  setDefaultHeader(key: string, value: string) {
+  setDefaultHeader(key: string, value: string): void {
     this.restClient.defaults.headers.common[key] = value;
   }
 
-  get<T>(resource: string, options?: AxiosRequestConfig): Promise<T> {
+  /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types */
+  async get<T>(resource: string, options?: AxiosRequestConfig): Promise<T> {
     winston.debug(`GET ${resource}`);
     return this.restClient.get<T>(resource, options)
       .then((res: AxiosResponse<T>) => {
@@ -33,7 +34,7 @@ export class HttpClient {
       });
   }
 
-  post<T>(resource: string, body: any, options?: AxiosRequestConfig): Promise<T> {
+  async post<T>(resource: string, body: any, options?: AxiosRequestConfig): Promise<T> {
     winston.debug(`POST ${resource} with : \n ${JSON.stringify(body, null, 2)}`);
     return this.restClient.post<T>(resource, body, options)
       .then((res: AxiosResponse<T>) => {
@@ -48,7 +49,7 @@ export class HttpClient {
       });
   }
 
-  put<T>(resource: string, body: object, options?: AxiosRequestConfig): Promise<T> {
+  async put<T>(resource: string, body: any, options?: AxiosRequestConfig): Promise<T> {
     winston.debug(`PUT ${resource} with : \n ${JSON.stringify(body, null, 2)}`);
     return this.restClient.put<T>(resource, body, options)
       .then((res: AxiosResponse<T>) => {
@@ -63,7 +64,7 @@ export class HttpClient {
       });
   }
 
-  delete<T>(resource: string, options?: AxiosRequestConfig): Promise<T> {
+  async delete<T>(resource: string, options?: AxiosRequestConfig): Promise<T> {
     winston.debug(`DELETE ${resource}`);
     return this.restClient.delete<T>(resource, options)
       .then((res: AxiosResponse<T>) => {
@@ -77,4 +78,5 @@ export class HttpClient {
         throw new HttpError(500, "Unexpected Error");
       });
   }
+  /* eslint-enable @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types */
 }

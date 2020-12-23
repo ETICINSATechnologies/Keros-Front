@@ -7,7 +7,7 @@ import { isConnected, isSecretary } from "../../utils";
 const entities = ["members", "consultants", "alumni"].join("|");
 const data = `${entities}|${["positions", "poles", "departments"].join("|")}`;
 
-export function initRoutes(app: Application) {
+export function initRoutes(app: Application): void {
   winston.debug("Initializing core routes");
   const coreRouter = Router();
 

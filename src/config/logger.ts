@@ -7,7 +7,7 @@ const logFormat = format.printf(({ level, message, timestamp }) => {
   );
 });
 
-export const configureLogger = (level: string) => {
+export function configureLogger(level: string): void {
   winston.configure({
     level,
     format: format.combine(
@@ -23,4 +23,4 @@ export const configureLogger = (level: string) => {
       })
     ]
   });
-};
+}

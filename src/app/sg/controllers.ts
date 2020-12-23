@@ -1,15 +1,14 @@
 import { Request, Response, NextFunction } from "express";
 import winston from "winston";
 
-import { HttpError } from "../common/models";
-
 import { DepartmentService, GenderService, CountryService, PoleService } from "../core/services";
 
+import { MemberRegistrationRequest, ConsultantRegistrationRequest } from "./models";
 import { MemberRegistrationService, ConsultantRegistrationService } from "./services";
 import { prepareFilePayload, formatTableData, formatFormFields } from "./helpers";
 
 export class SecretaryController {
-  static async getRegistration(req: Request, res: Response, next: NextFunction) {
+  static async getRegistration(req: Request, res: Response, _next: NextFunction): Promise<void> {
     winston.verbose(`Getting registration ID ${req.params.id} of ${req.params.entity}`);
     const connectedUser = JSON.parse(req.cookies.connectedUser);
     const isMember = req.cookies.isMember;
@@ -48,20 +47,23 @@ export class SecretaryController {
     });
   }
 
-  static async modifyRegistration(req: Request, res: Response, next: NextFunction) {
+  static async modifyRegistration(req: Request, res: Response, _next: NextFunction): Promise<void> {
     winston.verbose(`Modifying registration with ID ${req.params.id}`);
 
     const id = parseInt(req.params.id, 10);
     const form = formatFormFields(req.body, req.params.entity);
 
-    let updatedRegistration;
     switch (req.params.entity) {
-      case "consultants":
-        updatedRegistration = await ConsultantRegistrationService.update(id, form);
+      case "consultants": {
+        const cForm = form as ConsultantRegistrationRequest;
+        await ConsultantRegistrationService.update(id, cForm);
         break;
-      case "members":
-        updatedRegistration = await MemberRegistrationService.update(id, form);
+      }
+      case "members": {
+        const mForm = form as MemberRegistrationRequest;
+        await MemberRegistrationService.update(id, mForm);
         break;
+      }
       default:
         break;
     }
@@ -69,7 +71,7 @@ export class SecretaryController {
     res.redirect(`/sg/registrations/${req.params.entity}/${req.params.id}/view`);
   }
 
-  static async deleteRegistration(req: Request, res: Response, next: NextFunction) {
+  static async deleteRegistration(req: Request, res: Response, _next: NextFunction): Promise<void> {
     winston.verbose(`Deleting registration with ID ${req.params.id}`);
 
     const id = parseInt(req.params.id, 10);
@@ -88,7 +90,7 @@ export class SecretaryController {
     res.redirect(`/sg/registrations/${req.params.entity}`);
   }
 
-  static async validateRegistration(req: Request, res: Response, next: NextFunction) {
+  static async validateRegistration(req: Request, res: Response, _next: NextFunction): Promise<void> {
     winston.verbose(`Validating registration with ID ${req.params.id}`);
 
     const id = parseInt(req.params.id, 10);
@@ -107,7 +109,7 @@ export class SecretaryController {
     res.redirect(`/sg/registrations/${req.params.entity}`);
   }
 
-  static async getSearchPage(req: Request, res: Response, next: NextFunction) {
+  static async getSearchPage(req: Request, res: Response, _next: NextFunction): Promise<void> {
     winston.verbose(`Getting search page for ${req.params.entity}`);
     const connectedUser = JSON.parse(req.cookies.connectedUser);
     const isMember = req.cookies.isMember;
@@ -136,7 +138,7 @@ export class SecretaryController {
     });
   }
 
-  static async getData(req: Request, res: Response, next: NextFunction) {
+  static async getData(req: Request, res: Response, _next: NextFunction): Promise<void> {
     winston.verbose(`Getting registrations of ${req.params.entity}`);
 
     const pageNumber = req.query.pageIndex ? Number(req.query.pageIndex) - 1 : 0;
@@ -167,12 +169,12 @@ export class SecretaryController {
     }
   }
 
-  static async uploadDocument(req: Request, res: Response, next: NextFunction) {
+  static async uploadDocument(req: Request, res: Response, _next: NextFunction): Promise<void> {
     winston.verbose(`Uploading document with ID ${req.params.doc} of registration with ID ${req.params.id}`);
 
     const id = parseInt(req.params.id, 10);
     const doc = parseInt(req.params.doc, 10);
-    const data = prepareFilePayload(req.file);
+    const data = prepareFilePayload(`${req.file.destination}${req.file.filename}`);
 
     switch (req.params.entity) {
       case "consultants":
@@ -187,7 +189,7 @@ export class SecretaryController {
     res.redirect(`/sg/registrations/${req.params.entity}/${id}/view`);
   }
 
-  static async downloadDocument(req: Request, res: Response, next: NextFunction) {
+  static async downloadDocument(req: Request, res: Response, _next: NextFunction): Promise<void> {
     winston.verbose(`Getting document with ID ${req.params.doc} of registration with ID ${req.params.id}`);
 
     const id = parseInt(req.params.id, 10);

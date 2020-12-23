@@ -1,12 +1,5 @@
-import winston from "winston";
-
 import { BaseService } from "../../common/services";
-import {
-  HttpResponse,
-  HttpError,
-  SearchResponse,
-  DocumentResponse
-} from "../../common/models";
+import { SearchResponse, DocumentResponse } from "../../common/models";
 
 import { ConsultantRegistration, ConsultantRegistrationRequest } from "../models";
 
@@ -15,15 +8,17 @@ export class ConsultantRegistrationService extends BaseService {
     return this.api.keros.get<ConsultantRegistration>(`sg/consultant-inscription/${id}`);
   }
 
-  static getAll(params?: object): Promise<SearchResponse<ConsultantRegistration>> {
+  /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types */
+  static getAll(params?: {[key: string]: any}): Promise<SearchResponse<ConsultantRegistration>> {
     return this.api.keros.get<SearchResponse<ConsultantRegistration>>("sg/consultant-inscription", { params });
   }
+  /* eslint-enable @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types */
 
   static getProtected(id: number): Promise<ConsultantRegistration> {
     return this.api.keros.get<ConsultantRegistration>(`sg/consultant-inscription/${id}/protected`);
   }
 
-  static create(id: number, req: ConsultantRegistrationRequest): Promise<ConsultantRegistration> {
+  static create(req: ConsultantRegistrationRequest): Promise<ConsultantRegistration> {
     return this.api.keros.post<ConsultantRegistration>("sg/consultant-inscription/", req);
   }
 

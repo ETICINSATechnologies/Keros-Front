@@ -7,7 +7,7 @@ import winston from "winston";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 
-import { HttpClient, errorHandler } from "../utils";
+import { errorHandler } from "../utils";
 import { Config, HBS_CONFIG } from "../config";
 
 import { BaseService } from "./common/services";
@@ -28,7 +28,7 @@ export class App {
     this.configureApplication();
   }
 
-  private configureApplication() {
+  private configureApplication(): void {
     this.app.use("/public", express.static(path.join(__dirname, "../../public")));
 
     this.app.use("/js", express.static(path.join(__dirname, "../../node_modules/jquery/dist")));
@@ -66,7 +66,7 @@ export class App {
     this.app.use(errorHandler);
   }
 
-  public startServer() {
+  public startServer(): void {
     const httpServer = http.createServer(this.app);
     httpServer.listen(Config.httpPort, function() {
       winston.info(`Listening for requests on port ${Config.httpPort}`);

@@ -1,49 +1,44 @@
-import winston from "winston";
-
 import { BaseService } from "../../common/services";
-import {
-  HttpResponse,
-  HttpError,
-  DocumentResponse,
-  SearchResponse
-} from "../../common/models";
+import { DocumentResponse, SearchResponse } from "../../common/models";
 
 import { Consultant, ConsultantRequest } from "../models";
 
 export class ConsultantService extends BaseService {
-  static get(id: number): Promise<Consultant> {
+  static async get(id: number): Promise<Consultant> {
     return this.api.keros.get<Consultant>(`core/consultant/${id}`);
   }
 
-  static getAll(params?: object): Promise<SearchResponse<Consultant>> {
+  /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types */
+  static async getAll(params?: {[key: string]: any}): Promise<SearchResponse<Consultant>> {
     return this.api.keros.get<SearchResponse<Consultant>>("core/consultant", { params });
   }
+  /* eslint-enable @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types */
 
-  static getCurrent(): Promise<Consultant> {
+  static async getCurrent(): Promise<Consultant> {
     return this.api.keros.get<Consultant>("core/consultant/me");
   }
 
-  static getProtected(id: number): Promise<Consultant> {
+  static async getProtected(id: number): Promise<Consultant> {
     return this.api.keros.get<Consultant>(`core/consultant/${id}/protected`);
   }
 
-  static update(id: number, req: ConsultantRequest): Promise<Consultant> {
+  static async update(id: number, req: ConsultantRequest): Promise<Consultant> {
     return this.api.keros.put<Consultant>(`core/consultant/${id}`, req);
   }
 
-  static updateCurrent(req: ConsultantRequest): Promise<Consultant> {
+  static async updateCurrent(req: ConsultantRequest): Promise<Consultant> {
     return this.api.keros.put<Consultant>("core/consultant/me", req);
   }
 
-  static create(req: ConsultantRequest): Promise<Consultant> {
+  static async create(req: ConsultantRequest): Promise<Consultant> {
     return this.api.keros.post<Consultant>("core/consultant", req);
   }
 
-  static delete(id: number): Promise<boolean> {
+  static async delete(id: number): Promise<boolean> {
     return this.api.keros.delete<boolean>(`core/consultant/${id}`);
   }
 
-  static exportCSV(idList: number[]): Promise<DocumentResponse> {
+  static async exportCSV(idList: number[]): Promise<DocumentResponse> {
     return this.api.keros.post<DocumentResponse>("core/consultant/export", { idList });
   }
 }

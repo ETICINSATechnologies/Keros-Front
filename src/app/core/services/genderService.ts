@@ -1,7 +1,6 @@
 import winston from "winston";
 
 import { BaseService } from "../../common/services";
-import { HttpResponse, HttpError } from "../../common/models";
 
 import { Gender } from "../models";
 
@@ -9,10 +8,10 @@ export class GenderService extends BaseService {
   private static cacheValues: Gender[];
   private static cacheExpires = 0;
 
-  static getAll(): Promise<Gender[]> {
+  static async getAll(): Promise<Gender[]> {
     if (Date.now() < GenderService.cacheExpires) {
       winston.debug("Loaded genders from cache");
-      return new Promise<Gender[]>((resolve, reject) => resolve(GenderService.cacheValues));
+      return new Promise<Gender[]>((resolve, _reject) => resolve(GenderService.cacheValues));
     }
 
     return this.api.keros.get<Gender[]>("core/gender").then(

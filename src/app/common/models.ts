@@ -1,4 +1,9 @@
+import { HttpClient } from "../../utils";
 export { HttpResponse, HttpError } from "../../utils";
+
+export interface RestAPICollection {
+  [key: string]: HttpClient
+}
 
 export interface Timestamp {
   date: string;

@@ -1,17 +1,25 @@
 import fs from "fs";
 import winston from "winston";
 import FormData from "form-data";
-import { MemberRegistration, ConsultantRegistration } from "./models";
+import {
+  MemberRegistration,
+  MemberRegistrationForm,
+  MemberRegistrationSearchData,
+  MemberRegistrationRequest,
+  ConsultantRegistration,
+  ConsultantRegistrationForm,
+  ConsultantRegistrationSearchData,
+  ConsultantRegistrationRequest
+} from "./models";
 
-export function prepareFilePayload(file: any) {
-  const filePath = `${file.destination}${file.filename}`;
+export function prepareFilePayload(filePath: string): FormData {
   const data = new FormData();
   const stream = fs.createReadStream(filePath);
 
   stream.on("end", function() {
     fs.unlink(filePath, (err) => {
       if (err) {
-        throw new Error(); // throw something better
+        throw new Error(); // TODO : throw something better
       }
       winston.debug("File deleted");
     });
@@ -21,10 +29,10 @@ export function prepareFilePayload(file: any) {
   return data;
 }
 
-export function formatTableData(data: (MemberRegistration | ConsultantRegistration)[], entity: string) {
+export function formatTableData(data: (MemberRegistration | ConsultantRegistration)[], entity: string): (MemberRegistrationSearchData | ConsultantRegistrationSearchData)[] | void {
   switch (entity) {
     case "members":
-      return data.map((memberReg: MemberRegistration) => {
+      return (data as MemberRegistration[]).map((memberReg: MemberRegistration) => {
         const department = memberReg.department ? memberReg.department.name : "";
         const wantedPole = memberReg.wantedPole ? memberReg.wantedPole.name : "";
         return {
@@ -38,7 +46,7 @@ export function formatTableData(data: (MemberRegistration | ConsultantRegistrati
         };
       });
     case "consultants":
-      return data.map((consultantReg: ConsultantRegistration) => {
+      return (data as ConsultantRegistration[]).map((consultantReg: ConsultantRegistration) => {
         const department = consultantReg.department ? consultantReg.department.name : "";
         const createdDate = consultantReg.createdDate ? consultantReg.createdDate.date : "";
         return {
@@ -55,11 +63,12 @@ export function formatTableData(data: (MemberRegistration | ConsultantRegistrati
         };
       });
     default:
+      // TODO : throw error
       break;
   }
 }
 
-export function formatFormFields(data: any, entity: string) {
+export function formatFormFields(data: MemberRegistrationForm | ConsultantRegistrationForm, entity: string): MemberRegistrationRequest | ConsultantRegistrationRequest | void {
   const address = {
     ...data.address,
     postalCode: parseInt(data.address.postalCode, 10),
@@ -71,30 +80,37 @@ export function formatFormFields(data: any, entity: string) {
   const nationalityId = parseInt(data.nationalityId, 10);
   const droitImage = data.droitImage === "on";
 
-  let formatted = {
-    ...data,
-    address,
-    genderId,
-    departmentId,
-    nationalityId,
-    outYear,
-    droitImage
-  };
-
+  let formatted;
   switch (entity) {
-    case "consultants":
+    case "consultants": {
+      const cData = data as ConsultantRegistrationForm;
       formatted = {
-        ...formatted,
-        isApprentice: data.isApprentice === "on"
+        ...cData,
+        address,
+        genderId,
+        departmentId,
+        nationalityId,
+        outYear,
+        droitImage,
+        isApprentice: cData.isApprentice === "on"
       };
       break;
-    case "members":
+    }
+    case "members": {
+      const mData = data as MemberRegistrationForm;
       formatted = {
-        ...formatted,
-        hasPaid: data.hasPaid === "on",
-        wantedPoleId: parseInt(data.wantedPoleId, 10)
+        ...mData,
+        address,
+        genderId,
+        departmentId,
+        nationalityId,
+        outYear,
+        droitImage,
+        hasPaid: mData.hasPaid === "on",
+        wantedPoleId: parseInt(mData.wantedPoleId, 10)
       };
       break;
+    }
     default:
       break;
   }

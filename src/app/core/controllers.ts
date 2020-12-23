@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from "express";
 import winston from "winston";
 
 import { HttpError } from "../common/models";
-import { Member, MemberRequest } from "./models";
 import {
   MemberService,
   ConsultantService,
@@ -12,10 +11,11 @@ import {
   PositionService,
   PoleService
 } from "./services";
+import { MemberRequest, ConsultantRequest } from "./models";
 import { formatTableData, formatFormFields } from "./helpers";
 
 export class CoreController {
-  static getDashboard(req: Request, res: Response, next: NextFunction) {
+  static getDashboard(req: Request, res: Response, _next: NextFunction): void {
     winston.verbose("Getting dashboard");
     const connectedUser = JSON.parse(req.cookies.connectedUser);
     const isMember = req.cookies.isMember;
@@ -27,7 +27,7 @@ export class CoreController {
     });
   }
 
-  static async getProfilePage(req: Request, res: Response, next: NextFunction) {
+  static async getProfilePage(req: Request, res: Response, next: NextFunction): Promise<void> {
     winston.verbose("Getting profile page");
 
     const connectedUser = JSON.parse(req.cookies.connectedUser);
@@ -53,11 +53,14 @@ export class CoreController {
       deleteRoute = `/profile/${entity}/${id}/delete`;
       switch (entity) {
         case "consultants":
-          viewed = await ConsultantService.getProtected(id);
+          viewed = await ConsultantService.getProtected(id).catch((err: HttpError) => {
+            next(err);
+            return;
+          });
           break;
         case "members":
         case "alumni":
-          viewed = await MemberService.get(id);
+          viewed = await MemberService.get(id).catch(err => next(err));
           break;
         default:
           break;
@@ -68,10 +71,10 @@ export class CoreController {
       action = "add";
     }
 
-    const departments = await DepartmentService.getAll();
-    const genders = await GenderService.getAll();
-    const countries = await CountryService.getAll();
-    const positions = await PositionService.getAll();
+    const departments = await DepartmentService.getAll().catch(err => next(err));
+    const genders = await GenderService.getAll().catch(err => next(err));
+    const countries = await CountryService.getAll().catch(err => next(err));
+    const positions = await PositionService.getAll().catch(err => next(err));
 
     res.render("core/profile", {
       route: req.originalUrl,
@@ -89,7 +92,7 @@ export class CoreController {
     });
   }
 
-  static async modifyProfile(req: Request, res: Response, next: NextFunction) {
+  static async modifyProfile(req: Request, res: Response, next: NextFunction): Promise<void> {
     winston.verbose("Modifying profile");
 
     if (req.params.id) {
@@ -99,55 +102,62 @@ export class CoreController {
       let updatedUser;
       let entity = req.params.entity;
       switch (entity) {
-        case "consultants":
-          updatedUser = await ConsultantService.update(id, form);
+        case "consultants": {
+          const cForm = form as ConsultantRequest;
+          updatedUser = await ConsultantService.update(id, cForm).catch(err => next(err));
           break;
+        }
         case "members":
-        case "alumni":
-          updatedUser = await MemberService.update(id, form);
+        case "alumni": {
+          const mForm = form as MemberRequest;
+          updatedUser = await MemberService.update(id, mForm).catch(err => next(err));
           // handles redirection when alumni status toggled
-          entity = updatedUser.isAlumni ? "alumni" : "members";
+          entity = updatedUser && updatedUser.isAlumni ? "alumni" : "members";
           break;
+        }
         default:
           break;
       }
 
       res.redirect(`/profile/${entity}/${req.params.id}/view`);
     } else {
-      const connectedUser = JSON.parse(req.cookies.connectedUser);
       const isMember = req.cookies.isMember;
 
       const updatedUser = isMember ?
-        await MemberService.updateCurrent(formatFormFields(req.body, "members")) :
-        await ConsultantService.updateCurrent(formatFormFields(req.body, "consultants"));
+        await MemberService.updateCurrent(formatFormFields(req.body, "members") as MemberRequest) :
+        await ConsultantService.updateCurrent(formatFormFields(req.body, "consultants") as ConsultantRequest);
 
       res
         .cookie("connectedUser", JSON.stringify(updatedUser))
-        .redirect(`/profile/me/view`);
+        .redirect("/profile/me/view");
     }
   }
 
-  static async addProfile(req: Request, res: Response, next: NextFunction) {
+  static async addProfile(req: Request, res: Response, _next: NextFunction): Promise<void> {
     winston.verbose("Adding new user");
 
     const form = formatFormFields(req.body, req.params.entity);
 
     let newUser;
     switch (req.params.entity) {
-      case "consultants":
-        newUser = await ConsultantService.create(form);
+      case "consultants": {
+        const cForm = form as ConsultantRequest;
+        newUser = await ConsultantService.create(cForm);
         res.redirect(`/profile/consultants/${newUser.id}/view`);
         break;
-      case "members":
-        newUser = await MemberService.create(form);
+      }
+      case "members": {
+        const mForm = form as MemberRequest;
+        newUser = await MemberService.create(mForm);
         res.redirect(`/profile/members/${newUser.id}/view`);
         break;
+      }
       default:
         break;
     }
   }
 
-  static async deleteProfile(req: Request, res: Response, next: NextFunction) {
+  static async deleteProfile(req: Request, res: Response, _next: NextFunction): Promise<void> {
     winston.verbose(`Deleting user with ID ${req.params.id}`);
 
     const id = parseInt(req.params.id, 10);
@@ -167,7 +177,7 @@ export class CoreController {
     res.redirect(`/search/${req.params.entity}`);
   }
 
-  static async getSearchPage(req: Request, res: Response, next: NextFunction) {
+  static async getSearchPage(req: Request, res: Response, _next: NextFunction): Promise<void> {
     winston.verbose(`Getting search page for ${req.params.entity}`);
     const connectedUser = JSON.parse(req.cookies.connectedUser);
     const isMember = req.cookies.isMember;
@@ -200,7 +210,7 @@ export class CoreController {
     });
   }
 
-  static async getData(req: Request, res: Response, next: NextFunction) {
+  static async getData(req: Request, res: Response, _next: NextFunction): Promise<void> {
     winston.verbose(`Getting ${req.params.entity} data`);
 
     let response;
@@ -245,7 +255,7 @@ export class CoreController {
     res.json(response);
   }
 
-  static async exportToCSV(req: Request, res: Response, next: NextFunction) {
+  static async exportToCSV(req: Request, res: Response, _next: NextFunction): Promise<void> {
     winston.verbose(`Exporting ${req.params.entity} as CSV file`);
 
     let csvPath;

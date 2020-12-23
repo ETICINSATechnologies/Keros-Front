@@ -8,6 +8,12 @@ export interface Position {
   pole?: Pole;
 }
 
+export interface PositionForm {
+  id: string;
+  year: string;
+  isBoard?: string;
+}
+
 export interface PositionRequest {
   id?: number;
   year?: number;

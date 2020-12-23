@@ -13,7 +13,7 @@ export class Config {
     readonly logLevel: string;
   };
 
-  public static bootstrap() {
+  public static bootstrap(): void {
     if (this.activeConfig) {
       return;
     }

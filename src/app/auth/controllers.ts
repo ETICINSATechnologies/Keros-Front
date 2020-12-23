@@ -9,19 +9,22 @@ import { AuthService } from "./services";
 import { LoginRequest, LoginResponse } from "./models";
 
 export class AuthController {
-  static viewLoginPage(req: Request, res: Response, next: NextFunction) {
+  static viewLoginPage(req: Request, res: Response, _next: NextFunction): void {
     winston.verbose("Getting login page");
     res.render("auth/login", {
       route: req.originalUrl
     });
   }
 
-  static login(req: Request, res: Response, next: NextFunction) {
+  static login(req: Request, res: Response, next: NextFunction): void {
     winston.verbose("Getting authorization");
-    AuthService.login({
+
+    const lreq: LoginRequest = {
       username: req.body.username,
       password: req.body.password
-    }).then(async (lres: LoginResponse) => {
+    };
+
+    AuthService.login(lreq).then(async (lres: LoginResponse) => {
       const cMember = await MemberService.getCurrent().catch(
         (err: HttpError) => {
           if (err.status !== 404) {
@@ -57,7 +60,9 @@ export class AuthController {
     });
   }
 
-  static logout(req: Request, res: Response, next: NextFunction) {
+  static logout(_req: Request, res: Response, _next: NextFunction): void {
+    winston.verbose("Signing out");
+
     res.clearCookie("token");
     res.clearCookie("connectedUser");
     res.clearCookie("isMember");

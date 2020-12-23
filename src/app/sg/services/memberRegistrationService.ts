@@ -1,13 +1,7 @@
-import winston from "winston";
 import FormData from "form-data";
 
 import { BaseService } from "../../common/services";
-import {
-  HttpResponse,
-  HttpError,
-  SearchResponse,
-  DocumentResponse
-} from "../../common/models";
+import { SearchResponse, DocumentResponse } from "../../common/models";
 
 import { MemberRegistration, MemberRegistrationRequest } from "../models";
 
@@ -16,11 +10,13 @@ export class MemberRegistrationService extends BaseService {
     return this.api.keros.get<MemberRegistration>(`sg/membre-inscription/${id}`);
   }
 
-  static getAll(params?: object): Promise<SearchResponse<MemberRegistration>> {
+  /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types */
+  static getAll(params?: {[key: string]: any}): Promise<SearchResponse<MemberRegistration>> {
     return this.api.keros.get<SearchResponse<MemberRegistration>>("sg/membre-inscription", { params });
   }
+  /* eslint-enable @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types */
 
-  static create(id: number, req: MemberRegistrationRequest): Promise<MemberRegistration> {
+  static create(req: MemberRegistrationRequest): Promise<MemberRegistration> {
     return this.api.keros.post<MemberRegistration>("sg/membre-inscription/", req);
   }
 
@@ -44,7 +40,7 @@ export class MemberRegistrationService extends BaseService {
     return this.api.keros.get<DocumentResponse>(`sg/membre-inscription/${id}/document/${doc}`);
   }
 
-  static uploadDocument(id: number, doc: number, data: FormData) {
+  static uploadDocument(id: number, doc: number, data: FormData): Promise<void> {
     return this.api.keros.post<void>(`sg/membre-inscription/${id}/document/${doc}`, data, {
       headers: {
         "Content-Type": `multipart/form-data; boundary=${data.getBoundary()}`

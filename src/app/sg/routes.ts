@@ -8,7 +8,7 @@ import { isSecretary } from "../../utils";
 const upload = multer({ dest: "./" });
 const entities = ["members", "consultants"].join("|");
 
-export function initRoutes(app: Application) {
+export function initRoutes(app: Application): void {
   winston.debug("Initializing secretary routes");
   const secretaryRouter = Router();
 

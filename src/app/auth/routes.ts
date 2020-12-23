@@ -3,7 +3,7 @@ import { Application, Router } from "express";
 
 import { AuthController } from "./controllers";
 
-export function initRoutes(app: Application) {
+export function initRoutes(app: Application): void {
   winston.debug("Initializing authentication routes");
   const authRouter = Router();
 
