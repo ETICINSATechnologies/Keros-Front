@@ -1,4 +1,4 @@
-$(document).ready(async function(){
+$(async function() {
   var fields = [
     {
       name: "username",
@@ -23,9 +23,10 @@ $(document).ready(async function(){
       cellRenderer: escapeCell
     },
     {
-      name: "isEu",
-      title: "Européen",
-      type: "checkbox"
+      name: "isFrench",
+      title: "Français",
+      type: "checkbox",
+      sorting: false
     }
   ];
 
@@ -55,6 +56,7 @@ $(document).ready(async function(){
 
     controller: {
       loadData: function(filter) {
+        console.log(filter);
         return $.ajax({
           type: "GET",
           url: "/data/consultants",
@@ -64,11 +66,11 @@ $(document).ready(async function(){
     }
   });
 
-  $("input[type='radio'][name='pageSize']").click(function() {
+  $("input[type='radio'][name='pageSize']").on("click", function() {
     $("#result-table").jsGrid("option", "pageSize", $(this).val());
   });
 
-  $("button[name='export']").click(function() {
+  $("button[name='export']").on("click", function() {
     var idList = $("#result-table").jsGrid("option", "data").map((row) => {
       return row.id;
     });

@@ -1,4 +1,4 @@
-$(document).ready(async function(){
+$(async function() {
   const positions = await $.ajax({
     type: "GET",
     url: "/data/positions"
@@ -41,7 +41,8 @@ $(document).ready(async function(){
         ...positions
       ],
       valueField: "id",
-      textField: "label"
+      textField: "label",
+      sorting: false
     },
     {
       name: "poleId",
@@ -52,12 +53,14 @@ $(document).ready(async function(){
         ...poles
       ],
       valueField: "id",
-      textField: "name"
+      textField: "name",
+      sorting: false
     },
     {
       name: "company",
       title: "Entreprise",
-      type: "text"
+      type: "text",
+      sorting: false
     }
   ];
 
@@ -96,11 +99,11 @@ $(document).ready(async function(){
     }
   });
 
-  $("input[type='radio'][name='pageSize']").click(function() {
+  $("input[type='radio'][name='pageSize']").on("click", function() {
     $("#result-table").jsGrid("option", "pageSize", $(this).val());
   });
 
-  $("button[name='export']").click(function() {
+  $("button[name='export']").on("click", function() {
     var idList = $("#result-table").jsGrid("option", "data").map((row) => {
       return row.id;
     });

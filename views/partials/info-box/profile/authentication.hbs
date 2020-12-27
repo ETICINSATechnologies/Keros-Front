@@ -5,10 +5,10 @@
   <div class="card-body">
     <div class="form-group">
       <label for="username">Nom d'utilisateur</label>
-      <input 
-        type="text" 
-        class="form-control" 
-        id="username" 
+      <input
+        type="text"
+        class="form-control"
+        id="username"
         name="username"
         required
         value="{{viewed.username}}"
@@ -17,11 +17,12 @@
     </div>
     <div class="form-group">
       <label for="password">Mot de Passe</label>
-      <input 
+      <input
         type="password"
         class="form-control"
         id="password"
         name="password"
+        oninput="validateFields('password', 'password_confirm', 'Le mot de passe ne correspond pas')"
         {{#if (eq action 'view')}}disabled{{/if}}
       >
     </div>
@@ -36,6 +37,7 @@
           class="form-control"
           id="password_confirm"
           name="password_confirm"
+          oninput="validateFields('password', 'password_confirm', 'Le mot de passe ne correspond pas')"
         >
       </div>
     {{/if}}

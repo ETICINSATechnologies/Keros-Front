@@ -19,7 +19,7 @@ export function formatTableData(data: (Member | Consultant)[], entity: string): 
           lastName: consultant.lastName,
           firstName: consultant.firstName,
           email: consultant.email,
-          isEu: consultant.nationality ? consultant.nationality.isEu : false
+          isFrench: consultant.nationality.label === "France"
         };
       });
     case "members":

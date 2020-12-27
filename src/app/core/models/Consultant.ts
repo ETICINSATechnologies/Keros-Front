@@ -16,7 +16,7 @@ export interface Consultant {
   username: string;
   address: Address;
   droitImage: boolean;
-  nationality?: Nationality;
+  nationality: Nationality;
   isApprentice?: boolean;
   isGraduate?: boolean;
   socialSecurityNumber?: string;
@@ -61,7 +61,7 @@ export interface ConsultantRequest {
   password?: string;
   address: AddressRequest;
   droitImage: boolean;
-  nationalityId?: number;
+  nationalityId: number;
   isApprentice?: boolean;
   isGraduate?: boolean;
   socialSecurityNumber?: string;

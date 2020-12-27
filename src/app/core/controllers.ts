@@ -220,17 +220,24 @@ export class CoreController {
       case "alumni":
         if (req.query) {
           const pageNumber = req.query.pageIndex ? Number(req.query.pageIndex) - 1 : 0;
+          const order = req.query.sortOrder;
+          const orderBy = req.query.sortField;
+
           let queryRes;
           if (req.params.entity === "consultants") {
             queryRes = await ConsultantService.getAll({
               ...req.query,
-              pageNumber
+              pageNumber,
+              order,
+              orderBy
             });
           } else {
             queryRes = await MemberService.getAll({
               ...req.query,
               pageNumber,
-              isAlumni: req.params.entity === "alumni"
+              isAlumni: req.params.entity === "alumni",
+              order,
+              orderBy
             });
           }
           response = {

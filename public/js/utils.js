@@ -76,7 +76,7 @@ function removeFalsy(object) {
 
 // File input helpers
 function triggerFileInput() {
-  $(this).next("input[type=file]").click();
+  $(this).next("input[type=file]").trigger("click");
 }
 
 function uploadFile(id, doc, entity) {
@@ -96,3 +96,17 @@ function uploadFile(id, doc, entity) {
   });
 }
 // end File input helpers
+
+// Form helpers
+function validateFields(id1, id2, message) {
+  if ($(`#${id1}`).val() === $(`#${id2}`).val()) {
+    $(`#${id2}`).removeClass("is-invalid");
+    $(`#${id2}`).addClass("is-valid");
+    $(`#${id2}`)[0].setCustomValidity("");
+  } else {
+    $(`#${id2}`).removeClass("is-valid");
+    $(`#${id2}`).addClass("is-invalid");
+    $(`#${id2}`)[0].setCustomValidity(message);
+  }
+}
+// end Form helpers
