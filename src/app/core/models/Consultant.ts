@@ -45,7 +45,7 @@ export interface ConsultantSearchData {
   lastName: string;
   firstName: string;
   email: string;
-  isEu: boolean;
+  isFrench: boolean;
 }
 
 export interface ConsultantRequest {

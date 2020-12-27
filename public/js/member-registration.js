@@ -1,4 +1,4 @@
-$(document).ready(async function(){
+$(async function(){
   var fields = [
     {
       name: "lastName",
@@ -25,11 +25,6 @@ $(document).ready(async function(){
     {
       name: "wantedPole",
       title: "Pôle souhaité",
-    },
-    {
-      name: "hasPaid",
-      title: "Payé",
-      type: "checkbox"
     }
   ];
 
@@ -68,7 +63,7 @@ $(document).ready(async function(){
     }
   });
 
-  $("input[type='radio'][name='pageSize']").click(function() {
+  $("input[type='radio'][name='pageSize']").on("click", function() {
     $("#result-table").jsGrid("option", "pageSize", $(this).val());
   });
 });

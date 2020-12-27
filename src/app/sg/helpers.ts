@@ -41,8 +41,7 @@ export function formatTableData(data: (MemberRegistration | ConsultantRegistrati
           firstName: memberReg.firstName,
           email: memberReg.email,
           department,
-          wantedPole,
-          hasPaid: memberReg.hasPaid
+          wantedPole
         };
       });
     case "consultants":

@@ -142,12 +142,17 @@ export class SecretaryController {
     winston.verbose(`Getting registrations of ${req.params.entity}`);
 
     const pageNumber = req.query.pageIndex ? Number(req.query.pageIndex) - 1 : 0;
+    const order = req.query.sortOrder;
+    const orderBy = req.query.sortField;
+
     let queryRes;
     switch (req.params.entity) {
       case "consultants":
         queryRes = await ConsultantRegistrationService.getAll({
           ...req.query,
-          pageNumber
+          pageNumber,
+          order,
+          orderBy
         });
         res.json({
           data: formatTableData(queryRes.content, req.params.entity),
@@ -157,7 +162,9 @@ export class SecretaryController {
       case "members":
         queryRes = await MemberRegistrationService.getAll({
           ...req.query,
-          pageNumber
+          pageNumber,
+          order,
+          orderBy
         });
         res.json({
           data: formatTableData(queryRes.content, req.params.entity),

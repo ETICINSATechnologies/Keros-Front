@@ -1,4 +1,4 @@
-$(document).ready(async function(){
+$(async function(){
   var fields = [
     {
       name: "lastName",
@@ -25,7 +25,8 @@ $(document).ready(async function(){
     {
       name: "createdDate",
       title: "Date d'Inscription",
-      cellRenderer: escapeCell
+      cellRenderer: escapeCell,
+      sorting: false
     }
   ];
 
@@ -64,7 +65,7 @@ $(document).ready(async function(){
     }
   });
 
-  $("input[type='radio'][name='pageSize']").click(function() {
+  $("input[type='radio'][name='pageSize']").on("click", function() {
     $("#result-table").jsGrid("option", "pageSize", $(this).val());
   });
 });

@@ -51,7 +51,6 @@ export interface MemberRegistrationSearchData {
   email: string;
   department: string;
   wantedPole: string;
-  hasPaid: boolean;
 }
 
 export interface MemberRegistrationRequest {
