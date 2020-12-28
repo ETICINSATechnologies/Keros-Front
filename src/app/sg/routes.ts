@@ -3,7 +3,7 @@ import multer from "multer";
 import { Application, Router } from "express";
 
 import { SecretaryController } from "./controllers";
-import { isSecretary } from "../../utils";
+import { hasHRCredentials } from "../../utils";
 
 const upload = multer({ dest: "./" });
 const entities = ["members", "consultants"].join("|");
@@ -35,5 +35,5 @@ export function initRoutes(app: Application): void {
   secretaryRouter.route(`/data/:entity(${entities})`)
     .get(SecretaryController.getData);
 
-  app.use("/sg", isSecretary, secretaryRouter);
+  app.use("/sg", hasHRCredentials, secretaryRouter);
 }

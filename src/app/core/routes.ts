@@ -2,7 +2,7 @@ import winston from "winston";
 import { Application, Router } from "express";
 
 import { CoreController } from "./controllers";
-import { isConnected, isSecretary } from "../../utils";
+import { isConnected, hasHRCredentials } from "../../utils";
 
 const entities = ["members", "consultants", "alumni"].join("|");
 const data = `${entities}|${["positions", "poles", "departments"].join("|")}`;
@@ -20,22 +20,22 @@ export function initRoutes(app: Application): void {
     .post(CoreController.modifyProfile);
 
   coreRouter.route(`/profile/:entity(${entities})/:id/:action(view|modify)`)
-    .get(isSecretary, CoreController.getProfilePage);
+    .get(hasHRCredentials, CoreController.getProfilePage);
   coreRouter.route(`/profile/:entity(${entities})/:id/modify`)
-    .post(isSecretary, CoreController.modifyProfile);
+    .post(hasHRCredentials, CoreController.modifyProfile);
   coreRouter.route(`/profile/:entity(${entities})/:id/delete`)
-    .get(isSecretary, CoreController.deleteProfile);
+    .get(hasHRCredentials, CoreController.deleteProfile);
 
   coreRouter.route(`/search/:entity(${entities})`)
-    .get(isSecretary, CoreController.getSearchPage);
+    .get(hasHRCredentials, CoreController.getSearchPage);
   coreRouter.route(`/search/:entity(${entities})/add`)
-    .get(isSecretary, CoreController.getProfilePage)
-    .post(isSecretary, CoreController.addProfile);
+    .get(hasHRCredentials, CoreController.getProfilePage)
+    .post(hasHRCredentials, CoreController.addProfile);
 
   coreRouter.route(`/data/:entity(${data})`)
     .get(CoreController.getData);
   coreRouter.route(`/export/:entity(${entities})`)
-    .post(isSecretary, CoreController.exportToCSV);
+    .post(hasHRCredentials, CoreController.exportToCSV);
 
   app.use("", isConnected, coreRouter);
 }
