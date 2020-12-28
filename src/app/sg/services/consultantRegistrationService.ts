@@ -19,7 +19,7 @@ export class ConsultantRegistrationService extends BaseService {
   }
 
   static create(req: ConsultantRegistrationRequest): Promise<ConsultantRegistration> {
-    return this.api.keros.post<ConsultantRegistration>("sg/consultant-inscription/", req);
+    return this.api.keros.post<ConsultantRegistration>("sg/consultant-inscription", req);
   }
 
   static update(id: number, req: ConsultantRegistrationRequest): Promise<ConsultantRegistration> {

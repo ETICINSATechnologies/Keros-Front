@@ -14,9 +14,12 @@ export function initRoutes(app: Application): void {
 
   secretaryRouter.route(`/registrations/:entity(${entities})`)
     .get(SecretaryController.getSearchPage);
+  secretaryRouter.route(`/registrations/:entity(${entities})/add`)
+    .get(SecretaryController.getRegistrationPage)
+    .post(SecretaryController.addRegistration);
 
   secretaryRouter.route(`/registrations/:entity(${entities})/:id/:action(view|modify)`)
-    .get(SecretaryController.getRegistration);
+    .get(SecretaryController.getRegistrationPage);
   secretaryRouter.route(`/registrations/:entity(${entities})/:id/modify`)
     .post(SecretaryController.modifyRegistration);
   secretaryRouter.route(`/registrations/:entity(${entities})/:id/delete`)

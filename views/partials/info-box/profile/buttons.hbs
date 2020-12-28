@@ -38,10 +38,18 @@
     <i class="fas fa-user-edit"></i>
   </a>
 {{else if (eq action 'add')}}
-  <button
-    type="button"
-    class="btn bg-olive text-light d-inline-block align-middle mx-2"
-  >
-    Ajouter
-  </button>
+  <div class="btn-group mx-2" role="group">
+    <button
+      type="submit"
+      class="btn bg-olive text-light d-inline-block align-middle"
+    >
+      <i class="fas fa-check-circle"></i>
+    </button>
+    <a
+      class="btn btn-danger text-light d-inline-block align-middle"
+      href="/search/{{entity}}"
+    >
+      <i class="fas fa-times-circle"></i>
+    </a>
+  </div>
 {{/if}}

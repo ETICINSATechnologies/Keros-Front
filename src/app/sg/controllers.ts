@@ -8,7 +8,7 @@ import { MemberRegistrationService, ConsultantRegistrationService } from "./serv
 import { prepareFilePayload, formatTableData, formatFormFields } from "./helpers";
 
 export class SecretaryController {
-  static async getRegistration(req: Request, res: Response, _next: NextFunction): Promise<void> {
+  static async getRegistrationPage(req: Request, res: Response, _next: NextFunction): Promise<void> {
     winston.verbose(`Getting registration ID ${req.params.id} of ${req.params.entity}`);
     const connectedUser = JSON.parse(req.cookies.connectedUser);
     const isMember = req.cookies.isMember;
@@ -16,15 +16,24 @@ export class SecretaryController {
     const id = parseInt(req.params.id, 10);
 
     let viewed;
-    switch (req.params.entity) {
-      case "consultants":
-        viewed = await ConsultantRegistrationService.getProtected(id);
-        break;
-      case "members":
-        viewed = await MemberRegistrationService.get(id);
-        break;
-      default:
-        break;
+    let title;
+    let action;
+    if (["view", "modify"].includes(req.params.action)) {
+      title = `Fiche d'Inscription #${id}`;
+      action = req.params.action;
+      switch (req.params.entity) {
+        case "consultants":
+          viewed = await ConsultantRegistrationService.getProtected(id);
+          break;
+        case "members":
+          viewed = await MemberRegistrationService.get(id);
+          break;
+        default:
+          break;
+      }
+    } else {
+      title = "Nouvelle Inscription";
+      action = "add";
     }
 
     const departments = await DepartmentService.getAll();
@@ -37,13 +46,14 @@ export class SecretaryController {
       connectedUser,
       isMember,
       viewed,
+      title,
       departments,
       genders,
       countries,
       poles,
       deleteRoute : `/sg/registrations/${req.params.entity}/${id}/delete`,
       entity: req.params.entity,
-      action: req.params.action
+      action
     });
   }
 
@@ -69,6 +79,30 @@ export class SecretaryController {
     }
 
     res.redirect(`/sg/registrations/${req.params.entity}/${req.params.id}/view`);
+  }
+
+  static async addRegistration(req: Request, res: Response, _next: NextFunction): Promise<void> {
+    winston.verbose("Adding new registration");
+
+    const form = formatFormFields(req.body, req.params.entity);
+
+    let newRegistration;
+    switch (req.params.entity) {
+      case "consultants": {
+        const cForm = form as ConsultantRegistrationRequest;
+        newRegistration = await ConsultantRegistrationService.create(cForm);
+        res.redirect(`/sg/registrations/consultants/${newRegistration.id}/view`);
+        break;
+      }
+      case "members": {
+        const mForm = form as MemberRegistrationRequest;
+        newRegistration = await MemberRegistrationService.create(mForm);
+        res.redirect(`/sg/registrations/members/${newRegistration.id}/view`);
+        break;
+      }
+      default:
+        break;
+    }
   }
 
   static async deleteRegistration(req: Request, res: Response, _next: NextFunction): Promise<void> {

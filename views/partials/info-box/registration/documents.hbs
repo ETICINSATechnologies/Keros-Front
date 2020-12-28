@@ -12,7 +12,10 @@
               class="btn btn-app mx-0"
               formmethod="get"
               formaction="/sg/registrations/{{../entity}}/{{../viewed.id}}/documents/{{id}}/template"
-              {{#unless isTemplatable}}disabled{{/unless}}
+              {{#unless (and
+                (eq ../action 'view')
+                isTemplatable)
+              }}disabled{{/unless}}
             >
               <i class="fas fa-file-alt"></i>
               Template
@@ -21,6 +24,7 @@
               type="button"
               class="btn btn-app mx-0"
               onclick="triggerFileInput.bind(this)()"
+              {{#unless (eq ../action 'view')}}disabled{{/unless}}
             >
               <i class="fas fa-file-upload"></i>
               Upload
@@ -34,7 +38,10 @@
               class="btn btn-app mx-0"
               formmethod="get"
               formaction="/sg/registrations/{{../entity}}/{{../viewed.id}}/documents/{{id}}/download"
-              {{#unless isUploaded}}disabled{{/unless}}
+              {{#unless (and
+                (eq ../action 'view')
+                isUploaded)
+              }}disabled{{/unless}}
             >
               <i class="fas fa-file-download"></i>
               Download
@@ -64,6 +71,7 @@
             <button
               class="btn btn-app mx-0"
               onclick="triggerFileInput.bind(this)()"
+              {{#unless (eq ../action 'view')}}disabled{{/unless}}
             >
               <i class="fas fa-file-upload"></i>
               Upload
@@ -73,7 +81,10 @@
               class="btn btn-app mx-0"
               formmethod="get"
               formaction="/sg/registrations/{{../entity}}/{{../viewed.id}}/documents/{{@key}}/download"
-              {{#unless this}}disabled{{/unless}}
+              {{#unless (and
+                (eq ../action 'view')
+                this)
+              }}disabled{{/unless}}
             >
               <i class="fas fa-file-download"></i>
               Download

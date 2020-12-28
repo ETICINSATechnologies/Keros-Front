@@ -17,7 +17,7 @@ export class MemberRegistrationService extends BaseService {
   /* eslint-enable @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types */
 
   static create(req: MemberRegistrationRequest): Promise<MemberRegistration> {
-    return this.api.keros.post<MemberRegistration>("sg/membre-inscription/", req);
+    return this.api.keros.post<MemberRegistration>("sg/membre-inscription", req);
   }
 
   static update(id: number, req: MemberRegistrationRequest): Promise<MemberRegistration> {
