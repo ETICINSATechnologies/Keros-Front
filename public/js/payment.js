@@ -9,5 +9,7 @@ function payMembershipFee(clientReferenceId, customerEmail, apiKey, productId) {
     customerEmail,
     successUrl: `${window.location.origin}`,
     cancelUrl: `${window.location.origin}`
+  }).then(() => {
+    toastr.error("Une erreur est survenue. Veuillez réessayer plus tard.", "Erreur!");
   });
 }

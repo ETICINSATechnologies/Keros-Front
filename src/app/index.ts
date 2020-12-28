@@ -34,9 +34,11 @@ export class App {
     this.app.use("/js", express.static(path.join(__dirname, "../../node_modules/jquery/dist")));
     this.app.use("/js", express.static(path.join(__dirname, "../../node_modules/bootstrap/dist/js")));
     this.app.use("/js", express.static(path.join(__dirname, "../../node_modules/admin-lte/dist/js")));
+    this.app.use("/js", express.static(path.join(__dirname, "../../node_modules/toastr/build")));
 
     this.app.use("/css", express.static(path.join(__dirname, "../../node_modules/bootstrap/dist/css")));
     this.app.use("/css", express.static(path.join(__dirname, "../../node_modules/admin-lte/dist/css")));
+    this.app.use("/css", express.static(path.join(__dirname, "../../node_modules/toastr/build")));
 
     this.app.use("/fontawesome", express.static(path.join(__dirname, "../../node_modules/@fortawesome/fontawesome-free")));
     this.app.use("/jsgrid", express.static(path.join(__dirname, "../../node_modules/jsgrid/dist")));
