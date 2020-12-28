@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-olive elevation-4">
   <a href="/" class="brand-link logo-switch">
     <img
-      src="/public/images/logo-keros-carre.png" 
+      src="/public/images/logo-keros-carre.png"
       class="brand-image-xl logo-xs h-75"
     >
     <img
@@ -22,14 +22,14 @@
     </div>
     <nav class="mt-2">
       <ul
-        class="nav nav-pills nav-sidebar nav-child-indent flex-column" 
-        data-widget="treeview" 
-        role="menu" 
+        class="nav nav-pills nav-sidebar nav-child-indent flex-column"
+        data-widget="treeview"
+        role="menu"
         data-accordion="false"
       >
         <li class="nav-item">
-          <a 
-            href="/" 
+          <a
+            href="/"
             class="nav-link {{#if (eq route '/')}}active{{/if}}"
           >
             <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -37,8 +37,8 @@
           </a>
         </li>
         <li class="nav-item">
-          <a 
-            href="/profile/me/view" 
+          <a
+            href="/profile/me/view"
             {{#if (or
               (eq route '/profile/me/view')
               (eq route '/profile/me/modify')
@@ -52,8 +52,13 @@
             <p>Mon Profil</p>
           </a>
         </li>
-        {{> tabs/search}}
-        {{> tabs/sg}}
+        {{#if (or
+          (is connectedUser "Secretary")
+          (is connectedUser "HR Manager"))
+        }}
+          {{> tabs/search}}
+          {{> tabs/sg}}
+        {{/if}}
         <li class="nav-header"></li>
         <li class="nav-item">
           <a href="/auth/logout" class="nav-link">

@@ -53,6 +53,16 @@ export const HBS_CONFIG = {
     },
     currentYear(): number {
       return new Date().getFullYear();
+    },
+    is(user: any, role: string): boolean {
+      switch (role) {
+        case "Secretary":
+          return user.positions.some((pos: any) => pos.id === 22);
+        case "HR Manager":
+          return user.positions.some((pos: any) => pos.id === 19);
+        default:
+          return false;
+      }
     }
   /* eslint-enable @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types */
   }

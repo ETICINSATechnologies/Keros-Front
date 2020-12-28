@@ -20,22 +20,22 @@ export function initRoutes(app: Application): void {
     .post(CoreController.modifyProfile);
 
   coreRouter.route(`/profile/:entity(${entities})/:id/:action(view|modify)`)
-    .get(CoreController.getProfilePage);
+    .get(isSecretary, CoreController.getProfilePage);
   coreRouter.route(`/profile/:entity(${entities})/:id/modify`)
-    .post(CoreController.modifyProfile);
+    .post(isSecretary, CoreController.modifyProfile);
   coreRouter.route(`/profile/:entity(${entities})/:id/delete`)
     .get(isSecretary, CoreController.deleteProfile);
 
   coreRouter.route(`/search/:entity(${entities})`)
-    .get(CoreController.getSearchPage);
+    .get(isSecretary, CoreController.getSearchPage);
   coreRouter.route(`/search/:entity(${entities})/add`)
-    .get(CoreController.getProfilePage)
+    .get(isSecretary, CoreController.getProfilePage)
     .post(isSecretary, CoreController.addProfile);
 
   coreRouter.route(`/data/:entity(${data})`)
     .get(CoreController.getData);
   coreRouter.route(`/export/:entity(${entities})`)
-    .post(CoreController.exportToCSV);
+    .post(isSecretary, CoreController.exportToCSV);
 
   app.use("", isConnected, coreRouter);
 }
