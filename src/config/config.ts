@@ -11,6 +11,8 @@ export class Config {
     readonly backendBaseUrl: string;
     readonly useMock: boolean;
     readonly logLevel: string;
+    readonly stripeAPIKey: string;
+    readonly membershipFeeProductID: string;
   };
 
   public static bootstrap(): void {
@@ -54,6 +56,14 @@ export class Config {
 
   public static get useMock(): boolean {
     return this.activeConfig.useMock;
+  }
+
+  public static get stripeAPIKey(): string {
+    return this.activeConfig.stripeAPIKey;
+  }
+
+  public static get membershipFeeProductID(): string {
+    return this.activeConfig.membershipFeeProductID;
   }
 }
 

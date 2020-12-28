@@ -1,5 +1,7 @@
-import { Request, Response, NextFunction } from "express"; import winston from "winston";
+import { Request, Response, NextFunction } from "express";
+import winston from "winston";
 
+import { Config } from "../../config";
 import { HttpError } from "../common/models";
 import {
   MemberService,
@@ -19,10 +21,16 @@ export class CoreController {
     const connectedUser = JSON.parse(req.cookies.connectedUser);
     const isMember = req.cookies.isMember;
 
+    const paymentDetails = {
+      stripeAPIKey: Config.stripeAPIKey,
+      membershipFeeProductID: Config.membershipFeeProductID
+    };
+
     res.render("core/dashboard", {
       route: req.originalUrl,
       connectedUser,
-      isMember
+      isMember,
+      paymentDetails
     });
   }
 

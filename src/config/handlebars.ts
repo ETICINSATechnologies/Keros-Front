@@ -48,7 +48,7 @@ export const HBS_CONFIG = {
         year: "numeric"
       });
     },
-    afterToday (a: string): boolean {
+    beforeToday (a: string): boolean {
       return new Date(a) < new Date(Date.now());
     },
     currentYear(): number {

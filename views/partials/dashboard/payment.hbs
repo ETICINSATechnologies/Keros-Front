@@ -1,4 +1,4 @@
-{{#if (afterToday connectedUser.dateRepayment.date)}}
+{{#if (beforeToday connectedUser.dateRepayment.date)}}
   <div class="small-box bg-danger">
     <div class="inner px-4">
       <h3>Attention</h3>
@@ -11,7 +11,15 @@
     <div class="icon">
       <i class="fas fa-exclamation px-4"></i>
     </div>
-    <a class="small-box-footer" href="">
+    <a
+      class="small-box-footer"
+      onclick="payMembershipFee(
+        '{{connectedUser.id}}',
+        '{{connectedUser.email}}',
+        '{{paymentDetails.stripeAPIKey}}',
+        '{{paymentDetails.membershipFeeProductID}}'
+      )"
+    >
       Payer la cotisation
       <i class="fas fa-arrow-circle-right px-2"></i>
     </a>
@@ -34,3 +42,6 @@
     </div>
   </div>
 {{/if}}
+
+<script src="https://js.stripe.com/v3/"></script>
+<script src="/public/js/payment.js"></script>
