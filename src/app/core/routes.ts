@@ -1,41 +1,46 @@
 import winston from "winston";
 import { Application, Router } from "express";
 
+import { secureController } from "../common/helpers";
+
 import { CoreController } from "./controllers";
 import { isConnected, hasHRCredentials } from "../../utils";
 
 const entities = ["members", "consultants", "alumni"].join("|");
 const data = `${entities}|${["positions", "poles", "departments"].join("|")}`;
 
+
 export function initRoutes(app: Application): void {
   winston.debug("Initializing core routes");
   const coreRouter = Router();
 
+  const secureCoreController = secureController(CoreController);
+
   coreRouter.route("/")
-    .get(CoreController.getDashboard);
+    .get(secureCoreController.getDashboard);
 
   coreRouter.route("/profile/me/:action(view|modify)")
-    .get(CoreController.getProfilePage);
+    .get(secureCoreController.getProfilePage);
   coreRouter.route("/profile/me/modify")
-    .post(CoreController.modifyProfile);
+    .post(secureCoreController.modifyProfile);
 
   coreRouter.route(`/profile/:entity(${entities})/:id/:action(view|modify)`)
-    .get(hasHRCredentials, CoreController.getProfilePage);
+    .get(hasHRCredentials, secureCoreController.getProfilePage);
   coreRouter.route(`/profile/:entity(${entities})/:id/modify`)
-    .post(hasHRCredentials, CoreController.modifyProfile);
+    .post(hasHRCredentials, secureCoreController.modifyProfile);
   coreRouter.route(`/profile/:entity(${entities})/:id/delete`)
-    .get(hasHRCredentials, CoreController.deleteProfile);
+    .get(hasHRCredentials, secureCoreController.deleteProfile);
 
   coreRouter.route(`/search/:entity(${entities})`)
-    .get(hasHRCredentials, CoreController.getSearchPage);
+    .get(hasHRCredentials, secureCoreController.getSearchPage);
   coreRouter.route(`/search/:entity(${entities})/add`)
-    .get(hasHRCredentials, CoreController.getProfilePage)
-    .post(hasHRCredentials, CoreController.addProfile);
+    .get(hasHRCredentials, secureCoreController.getProfilePage)
+    .post(hasHRCredentials, secureCoreController.addProfile);
 
   coreRouter.route(`/data/:entity(${data})`)
-    .get(CoreController.getData);
+    .get(secureCoreController.getData);
   coreRouter.route(`/export/:entity(${entities})`)
-    .post(hasHRCredentials, CoreController.exportToCSV);
+    .post(hasHRCredentials, secureCoreController.exportToCSV);
 
   app.use("", isConnected, coreRouter);
 }

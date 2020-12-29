@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from "express";
 import winston from "winston";
 
 import { Config } from "../../config";
-import { HttpError } from "../common/models";
 import {
   MemberService,
   ConsultantService,
@@ -34,9 +33,8 @@ export class CoreController {
     });
   }
 
-  static async getProfilePage(req: Request, res: Response, next: NextFunction): Promise<void> {
+  static async getProfilePage(req: Request, res: Response, _next: NextFunction): Promise<void> {
     winston.verbose("Getting profile page");
-
     const connectedUser = JSON.parse(req.cookies.connectedUser);
     const isMember = req.cookies.isMember;
 
@@ -60,14 +58,11 @@ export class CoreController {
       deleteRoute = `/profile/${entity}/${id}/delete`;
       switch (entity) {
         case "consultants":
-          viewed = await ConsultantService.getProtected(id).catch((err: HttpError) => {
-            next(err);
-            return;
-          });
+          viewed = await ConsultantService.getProtected(id);
           break;
         case "members":
         case "alumni":
-          viewed = await MemberService.get(id).catch(err => next(err));
+          viewed = await MemberService.get(id);
           break;
         default:
           break;
@@ -78,10 +73,10 @@ export class CoreController {
       action = "add";
     }
 
-    const departments = await DepartmentService.getAll().catch(err => next(err));
-    const genders = await GenderService.getAll().catch(err => next(err));
-    const countries = await CountryService.getAll().catch(err => next(err));
-    const positions = await PositionService.getAll().catch(err => next(err));
+    const departments = await DepartmentService.getAll();
+    const genders = await GenderService.getAll();
+    const countries = await CountryService.getAll();
+    const positions = await PositionService.getAll();
 
     res.render("core/profile", {
       route: req.originalUrl,
