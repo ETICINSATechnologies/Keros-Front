@@ -1,11 +1,11 @@
-{{#if (beforeToday connectedUser.dateRepayment.date)}}
+{{#if (beforeToday (addYear connectedUser.dateRepayment.date 1))}}
   <div class="small-box bg-danger">
     <div class="inner px-4">
       <h3>Attention</h3>
       <p class="mb-1">Repaiement de cotisation nécessaire</p>
       <p>
-      <strong>Date de la dernière inscription :</strong>
-      {{ date connectedUser.dateRepayment.date }}
+      <strong>Date de repaiement :</strong>
+      {{ date (addYear connectedUser.dateRepayment.date 1) }}
       </p>
     </div>
     <div class="icon">
@@ -31,8 +31,8 @@
       <h3>Cotisation Payée</h3>
       <p class="mb-1">Vous avez réglé votre frais de cotisation</p>
       <p>
-      <strong>Date de la dernière inscription :</strong>
-      {{ date connectedUser.dateRepayment.date }}
+      <strong>Date de repaiement :</strong>
+      {{ date (addYear connectedUser.dateRepayment.date 1) }}
       </p>
     </div>
     <div class="icon">

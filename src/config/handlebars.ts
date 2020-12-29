@@ -54,6 +54,14 @@ export const HBS_CONFIG = {
     currentYear(): number {
       return new Date().getFullYear();
     },
+    addYear(a: string, b: number): string {
+      const d = new Date(a);
+      return new Date(
+        d.getFullYear() + b,
+        d.getMonth(),
+        d.getDate()
+      ).toString();
+    },
     is(user: any, role: string): boolean {
       switch (role) {
         case "Secretary":
