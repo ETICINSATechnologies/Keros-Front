@@ -23,7 +23,7 @@ $(async function() {
       cellRenderer: escapeCell
     },
     {
-      name: "isFrench",
+      name: "isFr",
       title: "Français",
       type: "checkbox",
       sorting: false
