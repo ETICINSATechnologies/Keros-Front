@@ -15,11 +15,21 @@
 
       <div class="content">
         <div class="container-fluid">
-          {{#if isMember}}
-            <div class="col-lg-3 col-6">
-              {{> dashboard/payment}}
-            </div>
-          {{/if}}
+          <div class="row">
+            {{#if isMember}}
+              <div class="col-lg-3 col-6">
+                {{> dashboard/membership-fee}}
+              </div>
+              {{#if (or
+                (is connectedUser "Secretary")
+                (is connectedUser "HR Manager"))
+              }}
+                <div class="col-lg-3 col-6">
+                  {{> dashboard/payments-due}}
+                </div>
+              {{/if}}
+            {{/if}}
+          </div>
         </div>
       </div>
     </div>

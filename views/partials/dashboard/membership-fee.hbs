@@ -2,11 +2,7 @@
   <div class="small-box bg-danger">
     <div class="inner px-4">
       <h3>Attention</h3>
-      <p class="mb-1">Repaiement de cotisation nécessaire</p>
-      <p>
-      <strong>Date de repaiement :</strong>
-      {{ date (addYear connectedUser.dateRepayment.date 1) }}
-      </p>
+      <p>Repaiement de cotisation nécessaire</p>
     </div>
     <div class="icon">
       <i class="fas fa-exclamation px-4"></i>
@@ -29,17 +25,14 @@
   <div class="small-box bg-success">
     <div class="inner px-4">
       <h3>Cotisation Payée</h3>
-      <p class="mb-1">Vous avez réglé votre frais de cotisation</p>
-      <p>
-      <strong>Date de repaiement :</strong>
-      {{ date (addYear connectedUser.dateRepayment.date 1) }}
-      </p>
+      <p>Vous avez réglé votre frais de cotisation</p>
     </div>
     <div class="icon">
       <i class="fas fa-check px-2"></i>
     </div>
     <div class="small-box-footer">
-      L'inscription renouvelé
+      <strong>Date de repaiement :</strong>
+      {{ date (addYear connectedUser.dateRepayment.date 1) }}
     </div>
   </div>
 {{/if}}

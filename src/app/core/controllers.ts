@@ -15,7 +15,7 @@ import { MemberRequest, ConsultantRequest } from "./models";
 import { formatTableData, formatFormFields } from "./helpers";
 
 export class CoreController {
-  static getDashboard(req: Request, res: Response, _next: NextFunction): void {
+  static async getDashboard(req: Request, res: Response, _next: NextFunction): Promise<void> {
     winston.verbose("Getting dashboard");
     const connectedUser = JSON.parse(req.cookies.connectedUser);
     const isMember = req.cookies.isMember;
@@ -25,11 +25,16 @@ export class CoreController {
       membershipFeeProductID: Config.membershipFeeProductID
     };
 
+    const mActive = await MemberService.getAll({ isAlumni: false });
+    const mUnpaid = await MemberService.getAll({ hasPaidMemberFees: false });
+
     res.render("core/dashboard", {
       route: req.originalUrl,
       connectedUser,
       isMember,
-      paymentDetails
+      paymentDetails,
+      totalMembers: mActive.meta.totalItems,
+      membersWithUnpaidFees: mUnpaid.meta.totalItems
     });
   }
 
