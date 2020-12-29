@@ -165,6 +165,12 @@
           </div>
         </div>
       </div>
+      {{#if (eq entity "members")}}
+        <div>
+          <label>Date du dernier paiement de la cotisation : </label>
+          <span class="mx-2">{{ date connectedUser.dateRepayment.date }}</span>
+        </div>
+      {{/if}}
     {{/if}}
   </div>
 </div>

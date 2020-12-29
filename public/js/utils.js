@@ -59,7 +59,7 @@ function escapeHTML(s, noEscapeQuotes) {
   });
 }
 
-function escapeCell(value, item) {
+function escapeCell(value, _item) {
   return $("<td>").append(escapeHTML(value));
 }
 
