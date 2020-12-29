@@ -56,11 +56,10 @@ $(async function() {
 
     controller: {
       loadData: function(filter) {
-        console.log(filter);
         return $.ajax({
           type: "GET",
           url: "/data/consultants",
-          data: removeFalsy(filter)
+          data: filter
         });
       }
     }
