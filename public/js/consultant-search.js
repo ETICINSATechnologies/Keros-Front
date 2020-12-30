@@ -59,7 +59,7 @@ $(async function() {
         return $.ajax({
           type: "GET",
           url: "/data/consultants",
-          data: filter
+          data: removeFalsyExceptFalse(filter)
         });
       }
     }

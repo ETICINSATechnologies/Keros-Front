@@ -93,7 +93,7 @@ $(async function() {
         return $.ajax({
           type: "GET",
           url: "/data/alumni",
-          data: removeFalsy(filter)
+          data: removeFalsyExceptFalse(filter)
         });
       }
     }

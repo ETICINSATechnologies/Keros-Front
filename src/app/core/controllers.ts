@@ -247,6 +247,7 @@ export class CoreController {
               orderBy
             });
           }
+          winston.debug(req.query.hasPaidMemberFees);
           response = {
             data: formatTableData(queryRes.content, req.params.entity),
             itemsCount: queryRes.meta.totalItems

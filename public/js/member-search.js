@@ -1,5 +1,4 @@
-$(async function(){
-
+$(async function() {
   const positions = await $.ajax({
     type: "GET",
     url: "/data/positions"
@@ -56,6 +55,11 @@ $(async function(){
       valueField: "id",
       textField: "name",
       sorting: false
+    },
+    {
+      name: "hasPaidMemberFees",
+      title: "Cotisation Payée",
+      type: "checkbox"
     }
   ];
 
@@ -81,14 +85,14 @@ $(async function(){
       window.open(`/profile/members/${args.item.id}/view`);
     },
 
-    fields,
+    fields: setDefaultFilterValues(fields, window.location.search),
 
     controller: {
       loadData: function(filter) {
         return $.ajax({
           type: "GET",
           url: "/data/members",
-          data: removeFalsy(filter)
+          data: removeFalsyExceptFalse(filter)
         });
       }
     }

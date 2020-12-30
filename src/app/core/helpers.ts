@@ -29,6 +29,14 @@ export function formatTableData(data: (Member | Consultant)[], entity: string): 
           member.positions[0].id : undefined;
         const poleId = member.positions && member.positions[0] &&
           member.positions[0].pole ? member.positions[0].pole.id : undefined;
+        
+        const datePaid = new Date(member.dateRepayment.date);
+        const dateToRepay = new Date(
+          datePaid.getFullYear() + 1,
+          datePaid.getMonth(),
+          datePaid.getDate()
+        );
+
         return {
           id: member.id,
           username: member.username,
@@ -37,6 +45,7 @@ export function formatTableData(data: (Member | Consultant)[], entity: string): 
           email: member.email,
           positionId,
           poleId,
+          hasPaidMemberFees: dateToRepay > new Date(),
           company: member.company
         };
       });

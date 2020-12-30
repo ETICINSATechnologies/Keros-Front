@@ -63,14 +63,50 @@ function escapeCell(value, _item) {
   return $("<td>").append(escapeHTML(value));
 }
 
-function removeFalsy(object) {
+function removeFalsyExceptFalse(object) {
   var newObject = {};
   Object.keys(object).forEach(function (key) {
-    if (object[key]) {
+    if (!(object[key] === undefined || object[key] === "" || object[key] === 0)) {
       newObject[key] = object[key];
     }
   });
   return newObject;
+}
+
+function generateFilterTemplate(defaultValue, type) {
+  switch (type) {
+    case "checkbox":
+      if (defaultValue === "true") {
+        return function() {
+          const $filterControl = jsGrid.fields.checkbox.prototype.filterTemplate.call(this);
+          return $filterControl.prop({
+            indeterminate: false,
+            checked: true
+          });
+        }
+      } else {
+        return function() {
+          const $filterControl = jsGrid.fields.checkbox.prototype.filterTemplate.call(this);
+          return $filterControl.prop({
+            indeterminate: false,
+            checked: false
+          });
+        }
+      }
+  }
+}
+
+function setDefaultFilterValues(fields, queryString) {
+  const query = new URLSearchParams(queryString);
+  return fields.map((field) => {
+    if (query.has(field.name) && query.get(field.name)) {
+      return {
+        ...field,
+        filterTemplate: generateFilterTemplate(query.get(field.name), field.type)
+      };
+    }
+    return field;
+  });
 }
 // end JSGrid helpers
 

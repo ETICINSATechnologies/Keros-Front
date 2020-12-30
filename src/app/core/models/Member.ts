@@ -1,3 +1,5 @@
+import { Timestamp } from "../../common/models";
+
 import { Gender } from "./Gender";
 import { Department } from "./Department";
 import { Address, AddressForm, AddressRequest } from "./Address";
@@ -20,6 +22,7 @@ export interface Member {
   company?: string;
   isAlumni: boolean;
   droitImage: boolean;
+  dateRepayment: Timestamp;
 }
 
 export interface MemberForm {
