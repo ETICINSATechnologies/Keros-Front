@@ -1,3 +1,42 @@
-<div>
-  <b>whut</b>
-</div>
+<body class="hold-transition sidebar-collapse accent-olive">
+  <nav class="navbar navbar-olive navbar-dark">
+    <a href="/">
+      <img
+        class="m-2"
+        height="50"
+        src="/public/images/logo-keros-typo.png"
+      >
+    </a>
+  </nav>
+  <div class="content">
+    <div class="error-page mt-5 pt-5">
+      <h2 class="headline text-danger">
+        {{ error.status }}
+      </h2>
+      <div class="error-content">
+        <h2 class="text-center text-danger text-bold">
+          <i class="fas fa-exclamation-triangle mx-3"></i>
+          ERREUR
+          <i class="fas fa-exclamation-triangle mx-3"></i>
+        </h2>
+        <br>
+        <p>
+          {{#if (eq error.status 400)}}
+            Requête mal formé, veuillez revérifier votre requếte.
+          {{else if (eq error.status 401)}}
+            Vous n'avez pas assez de droits pour effectuer cette action.
+          {{else if (eq error.status 404)}}
+            La ressource recherchée n'est pas disponible.
+          {{else}}
+            Une erreur inattendue est survenue.<br>
+            Veuillez réessayer plus tard.
+          {{/if}}
+        </p>
+      </div>
+      <div class="mt-5">
+        <h4 class="text-olive">Informations du serveur : </h4>
+        <pre>{{ error.stack }}</pre>
+      </div>
+    </div>
+  </div>
+</body>
