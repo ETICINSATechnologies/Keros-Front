@@ -16,7 +16,7 @@ export class DashboardController {
         };
         winston.debug("Getting dashboard");
         res.render("core/dashboard", options);
-      }, {hasPaidMemberFees: false, pageSize: 100});
+      }, {hasPaidMemberFees: false, isAlumni: false, pageSize: 100});
     });
   }
 

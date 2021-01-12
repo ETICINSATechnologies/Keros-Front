@@ -31,6 +31,6 @@ export function getCookie(resp: supertest.Response, cookieName: string): string 
 export function defaultCookies(): string {
   return [
     "token=testToken",
-    'connectedUser={"id":1,"username":"username","firstName":"Conor","lastName":"Breeze","gender":{"id":1,"label":"H"},"email":"fake.mail@fake.com","birthday":"1975-12-25","department":{"id":1,"label":"BB","name":"Biochimie et Biotechnologies"},"schoolYear":3,"telephone":"+332541254","address":{"id":2,"line1":"11 Baker street","line2":"appt 501","postalCode":6930,"city":"dublin","country":{"id":2,"label":"Afrique du Sud"}},"positions":[{"id":3,"label":"ChargÃ© d\'affaires","pole":{"id":10,"label":"UA","name":"UnitÃ© d\'affaires"}}]}'
+    'connectedUser={"id":1,"username":"username","firstName":"Conor","lastName":"Breeze","gender":{"id":1,"label":"H"},"email":"fake.mail@fake.com","birthday":"1975-12-25","department":{"id":1,"label":"BB","name":"Biochimie et Biotechnologies"},"schoolYear":3,"telephone":"+332541254","address":{"id":2,"line1":"11 Baker street","line2":"appt 501","postalCode":6930,"city":"dublin","country":{"id":2,"label":"Afrique du Sud"}},"positions":[{"id":3,"label":"ChargÃ© d\'affaires","pole":{"id":10,"label":"UA","name":"UnitÃ© d\'affaires"}}], "dateRepayment":{"date":"2019-09-01 00:00:00.000000","timezone_type":3,"timezone":"UTC"}}'
   ].join("; ");
 }
