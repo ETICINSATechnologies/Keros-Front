@@ -4,6 +4,9 @@
   "description": "Frontend of the Keros ERP for internal use by ETIC INSA Technologies",
   "main": "index.js",
   "scripts": {
+    "start": "node dist/index.js",
+    "build": "grunt",
+    "dev": "grunt serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,7 +21,7 @@
   "homepage": "https://github.com/ETICINSATechnologies/Keros-Front#readme",
   "dependencies": {
     "admin-lte": "^3.0.5",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.5.3",
     "cookie-parser": "^1.4.5",

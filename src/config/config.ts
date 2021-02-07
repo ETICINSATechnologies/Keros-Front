@@ -22,12 +22,6 @@ export class Config {
 
     const nodeEnv = process.env.NODE_ENV;
     switch (nodeEnv) {
-      case "mock":
-        this.activeConfig = require("../../.deploy/mock-config.json");
-        break;
-      case "testing":
-        this.activeConfig = require("../../.deploy/testing-config.json");
-        break;
       default:
         this.activeConfig = require("../../config.json");
         break;
