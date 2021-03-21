@@ -17,8 +17,19 @@ import { formatTableData, formatFormFields } from "./helpers";
 export class CoreController {
   static async getDashboard(req: Request, res: Response, _next: NextFunction): Promise<void> {
     winston.verbose("Getting dashboard");
-    const connectedUser = JSON.parse(req.cookies.connectedUser);
+
+    let connectedUser = JSON.parse(req.cookies.connectedUser);
     const isMember = req.cookies.isMember;
+
+    if (req.query) {
+      if (req.query.refresh === "true") {
+        connectedUser = isMember ?
+          await MemberService.getCurrent() :
+          await ConsultantService.getCurrent();
+
+        res.cookie("connectedUser", JSON.stringify(connectedUser));
+      }
+    }
 
     const paymentDetails = {
       stripeAPIKey: Config.stripeAPIKey,
@@ -26,7 +37,10 @@ export class CoreController {
     };
 
     const mActive = await MemberService.getAll({ isAlumni: false });
-    const mUnpaid = await MemberService.getAll({ hasPaidMemberFees: false });
+    const mUnpaid = await MemberService.getAll({
+      isAlumni: false,
+      hasPaidMemberFees: false
+    });
 
     res.render("core/dashboard", {
       route: req.originalUrl,

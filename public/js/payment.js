@@ -7,7 +7,7 @@ function payMembershipFee(clientReferenceId, customerEmail, apiKey, productId) {
     }],
     clientReferenceId,
     customerEmail,
-    successUrl: `${window.location.origin}`,
+    successUrl: `${window.location.origin}?refresh=true`,
     cancelUrl: `${window.location.origin}`
   }).then(() => {
     toastr.error("Une erreur est survenue. Veuillez réessayer plus tard.", "Erreur!");
