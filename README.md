@@ -50,5 +50,20 @@ This project uses :
 
 ## Project Structure
 
+This project uses a module-based structure. What this essentially means is that each part of the project is divided into individual modules, where each module provides an extension to the features provided by the `core` module. This allows each part of the project to be intuitively separated. Each module systematically has the following files :
+* `models.ts` - contains the type or interface definition of the objects in the corresponding module
+* `services.ts` - contains the business logic behind the features of the module
+* `controller.ts` - code to bridge the model and its corresponding view, handles request reception and response rendering
+* `helpers.ts` - utility functions to keep code clean
+* `index.ts` - entry point of the module, serves as the interface of the module to the outside
+* `routes.ts` - route definition of the corresponding module
+
+Available modules :
+* `auth` - handles authentication (logging in, logging out, session handling, etc...)
+* `common` - an abstract module to inherit from
+* `core` - module for the basic functionalities, concerning members and consultants.
+* `sg` - module which handles secretarial functions
+
+The documentation for each module will be specified in their respective directories. The extension of each functionality corresponding to different units will require the creation of a new module corresponding to the unit (`ua`, `treso`, etc...).
 
 Please see the [Nuclino](https://app.nuclino.com/ETIC-INSA-Technologies/Keros) for information
