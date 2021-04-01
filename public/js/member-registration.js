@@ -57,7 +57,7 @@ $(async function(){
         return $.ajax({
           type: "GET",
           url: "/sg/data/members",
-          data: removeFalsy(filter)
+          data: removeFalsyExceptFalse(filter)
         });
       }
     }
